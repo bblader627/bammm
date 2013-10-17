@@ -58,10 +58,7 @@ public:
 	 * Post-Condition-
 	 *
 	 *PlayerController will be calling switchState
-	 *Game loop will be calling PlayerController.update
-	 *G
 	 */
-
 	void switchState(State oldState, State newState)
 	{
 
