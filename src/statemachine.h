@@ -57,9 +57,15 @@ public:
 	 * Pre-Condition-
 	 * Post-Condition-
 	 *
-	 *Game loop will be calling switchState?
+	 *PlayerController will be calling switchState
+	 *Game loop will be calling PlayerController.update
+	 *G
 	 */
-	void switchState(State oldState, State newState);
+
+	void switchState(State oldState, State newState)
+	{
+
+	}
 
 	void addState(State newState)
 	{
