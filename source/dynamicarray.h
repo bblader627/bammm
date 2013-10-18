@@ -1,16 +1,8 @@
 /*
- * CS585
+ * DynamicArray.h
  *
- * Team MMA
- * 	Alvaro Home
- * 	Matt Konstantinou
- * 	Michael Abramo
- *
- * Description:
- * 	Array template header file.
- *
- * Last Modified: Michael Abramo
- *
+ *  Created on: Oct 4, 2013
+ *			Author: mwitkows
  */
 
 #ifndef DYNAMICARRAY_H_
@@ -40,7 +32,7 @@ namespace triforce
     class DynamicArray
     {
         private:
-            T** _array;
+            T* _array;
             uint _size;
             uint _capacity;
 
@@ -54,17 +46,16 @@ namespace triforce
             DynamicArray(uint capacity);
             uint getSize();
             uint getCapacity();
-            T& operator[](uint index);
-            bool add(T& element);
-            //bool add(T element);
-            void add(uint index, T& element);
-            T& remove(uint index);
+            T operator[](uint index);
+            bool add(T element);
+            void add(uint index, T element);
+            T remove(uint index);
             void clear();
             string toString();
             uint getMemoryUsage();
             virtual ~DynamicArray();
-            T& get(uint index);
-            void set(uint index, T& value);
+            T get(uint index);
+            void set(uint index, T value);
             int indexOf(T element);
             void ensureCapacity(uint min);
             bool contains(T element);
@@ -78,7 +69,7 @@ namespace triforce
     DynamicArray<T>::DynamicArray()
     {
         _capacity = 10;
-        _array = new T*[_capacity];
+        _array = new T[_capacity];
         _size = 0;
     }
 
@@ -95,7 +86,7 @@ namespace triforce
 
         if(capacity > 0)
         {
-            _array = new T*[_capacity];
+            _array = new T[_capacity];
         }
         else
         {
@@ -131,7 +122,7 @@ namespace triforce
      * @returns A reference to the element at the specified index.
      */
      template <class T>
-     T& DynamicArray<T>::operator[](uint index)
+     T DynamicArray<T>::operator[](uint index)
      {
         if(_array == NULL)
         {
@@ -145,7 +136,7 @@ namespace triforce
             assert(0);
         }
 
-        return *_array[index];
+        return _array[index];
      }
 
     /**
@@ -155,7 +146,7 @@ namespace triforce
      * @returns Returns if the element was added successfully.
      */
     template<class T>
-    bool DynamicArray<T>::add(T& element)
+    bool DynamicArray<T>::add(T element)
     {
         if(_array == NULL)
         {
@@ -168,7 +159,7 @@ namespace triforce
             increaseCapacity(_capacity * 2);
         }
 
-        _array[_size] = &element;
+        _array[_size] = element;
         _size++;
 
         return true;
@@ -201,7 +192,7 @@ namespace triforce
      * @param element The element to be inserted.
      */
     template<class T>
-    void DynamicArray<T>::add(uint index, T& element)
+    void DynamicArray<T>::add(uint index, T element)
     {
         if(_array == NULL)
         {
@@ -221,7 +212,7 @@ namespace triforce
         else if(index < _size)
         {
             shiftElementsRight(index);
-            _array[index] = &element;
+            _array[index] = element;
             _size++;
         }
         else
@@ -239,10 +230,8 @@ namespace triforce
      * @throws Throws an error when the array is null or when the index is out of bounds.
      */
     template<class T>
-    T& DynamicArray<T>::remove(uint index)
+    T DynamicArray<T>::remove(uint index)
     {
-        T* removedElement = NULL;
-
         if(_array == NULL)
         {
             errorMsg("Array is null.");
@@ -254,13 +243,11 @@ namespace triforce
             errorMsg("Index out of bounds.");
             assert(0);
         }
-
-        removedElement = _array[index];
+        T removedElement = _array[index];
         shiftElementsLeft(index);
         _size--;
-        _array[_size] = NULL;
 
-        return *(removedElement);
+        return removedElement;
     }
 
     /**
@@ -289,8 +276,11 @@ namespace triforce
     template<class T>
     void DynamicArray<T>::increaseCapacity(uint newCapacity)
     {
-        T** tempArray = new T*[newCapacity];
-        memcpy(tempArray, _array, sizeof(_array[0]) * _size);
+        T* tempArray = new T[newCapacity];
+        for(uint i = 0; i < _size; i++)
+        {
+            tempArray[i] = _array[i];
+        }
         _capacity = newCapacity;
         delete[] _array;
         _array = tempArray;
@@ -303,8 +293,11 @@ namespace triforce
     template<class T>
     void DynamicArray<T>::shiftElementsLeft(uint emptySpot)
     {
-        uint diff = _size - emptySpot - 1;
-        memcpy(&(_array[emptySpot]), &(_array[emptySpot + 1]), sizeof(_array[0]) * diff);
+        //uint diff = _size - emptySpot - 1;
+        for(uint i = emptySpot; i < _size - 1; i++)
+        {
+            _array[i] = _array[i+1];
+        }
     }
 
     /**
@@ -314,8 +307,10 @@ namespace triforce
     template<class T>
     void DynamicArray<T>::shiftElementsRight(uint newItem)
     {
-        uint diff = _size - newItem;
-        memcpy(&(_array[newItem + 1]), &(_array[newItem]), sizeof(_array[0]) * diff);
+        for(uint i = _size; i > newItem; i--)
+        {
+            _array[i] = _array[i-1];
+        }
     }
 
     /**
@@ -337,11 +332,11 @@ namespace triforce
         {
             if(i != _size - 1)
             {
-                output = output + to_string(*(_array[i])) + ", ";
+                output = output + to_string((_array[i])) + ", ";
             }
             else
             {
-                output = output + to_string(*(_array[i]));
+                output = output + to_string((_array[i]));
             }
         }
 
@@ -366,7 +361,7 @@ namespace triforce
      * @throws Throws an error when index is out of bounds or when array is null.
      */
     template<class T>
-    T& DynamicArray<T>::get(uint index)
+    T DynamicArray<T>::get(uint index)
     {
         if(_array == NULL)
         {
@@ -380,7 +375,7 @@ namespace triforce
             assert(0);
         }
 
-        return *(_array[index]);
+        return _array[index];
     }
 
     /**
@@ -390,7 +385,7 @@ namespace triforce
      * @throws Throws an error when the array is null or when the index is out of bounds.
      */
     template<class T>
-    void DynamicArray<T>::set(uint index, T& value)
+    void DynamicArray<T>::set(uint index, T value)
     {
         if(_array == NULL)
         {
@@ -404,7 +399,7 @@ namespace triforce
             assert(0);
         }
 
-        _array[index] = &value;
+        _array[index] = value;
     }
 
     /**
@@ -423,7 +418,7 @@ namespace triforce
 
         for(uint i = 0; i < _size; i++)
         {
-            if(element == *(_array[i]))
+            if(element == _array[i])
             {
                 return i;
             }
@@ -466,14 +461,14 @@ namespace triforce
 
         for(uint i = 0; i < _size; i++)
         {
-            if(element == *(_array[i]))
+            if(element == _array[i])
             {
                 return true;
             }
         }
         return false;
     }
-
+    
     /**
      * @brief Copies the array over to a new array with capacity of _size.
      */
@@ -497,9 +492,12 @@ namespace triforce
             return;
         }
 
-        T** newArray = new T*[_size];
+        T* newArray = new T[_size];
         _capacity = _size;
-        memcpy(newArray, _array, sizeof(_array[0]) * _size);
+        for(uint i = 0; i < _size; i++)
+        {
+            newArray[i] = _array[i];
+        }
         delete[] _array;
         _array = newArray;
     }
