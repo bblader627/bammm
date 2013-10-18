@@ -20,7 +20,7 @@
 #endif
 
 #include <iostream>
-#include "array.h"
+#include "dynamicarray.h"
 #include "state.h"
 
 #ifndef NULL
@@ -69,6 +69,6 @@ public:
 		currentStates->push_back(newState);
 	}
 private:
-	Array<State>* currentStates;
+	DynamicArray<State>* currentStates;
 
 }

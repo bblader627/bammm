@@ -18,7 +18,7 @@
 
 
 #include <iostream>
-#include "array.h"
+#include "dynamicarray.h"
 using namespace std;
 
 #ifndef NULL
@@ -30,7 +30,7 @@ using namespace std;
 template<typename T> class Grid3d
 {
 	private:
-		Array<T> grid;
+		DynamicArray<T> grid;
 		int width;
 		int length;
 		int height;
