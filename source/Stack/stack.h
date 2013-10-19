@@ -13,7 +13,7 @@
 namespace bammm
 {
 	/**
-	 * @brief A stack datastructure where only the top element can be
+	 * @brief A stack data structure where only the top element can be
 	 * seen, or removed. This uses DynamicArray as its base.
 	 *
 	 */
