@@ -28,9 +28,9 @@ namespace bammm
 		public:
 			Stack();
 			bool isEmpty();
-			T& peek();
-			T& pop();
-			T& push(T& element);
+			T peek();
+			T pop();
+			T push(T element);
 			uint getSize();
 			string toString();
 			~Stack();
@@ -67,7 +67,7 @@ namespace bammm
 	 * @returns Returns the top element of the stack.
 	 */
 	template<class T>
-	T& Stack<T>::peek()
+	T Stack<T>::peek()
 	{
 		if (_stack->getSize() == 0)
 		{
@@ -84,7 +84,7 @@ namespace bammm
 	 * @throws Asserts an error when there is nothing to be removed.
 	 */
 	template<class T>
-	T& Stack<T>::pop()
+	T Stack<T>::pop()
 	{
 		if (_stack->getSize() == 0)
 		{
@@ -100,7 +100,7 @@ namespace bammm
 	 * @returns Returns the added element.
 	 */
 	template<class T>
-	T& Stack<T>::push(T& element)
+	T Stack<T>::push(T element)
 	{
 		_stack->add(element);
 		return element;
