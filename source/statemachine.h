@@ -23,6 +23,7 @@
 #include "array.h"
 #include "state.h"
 
+
 #ifndef NULL
 #define NULL (void *)0
 #endif
@@ -47,7 +48,7 @@ public:
 		for(int i = 0; i < currentStates->size(); i++)
 		{
 			State * thisState = currentStates[i];
-			thisState -> setup();
+			thisState -> tick(time(NULL));
 		}
 	}
 
@@ -64,10 +65,19 @@ public:
 
 	}
 
+	/*
+	 * addState
+	 * Pre-Condition-
+	 * Post-Condition-
+	 *
+	 * Called from a Controller
+	 * Adds currently running states to array
+	 */
 	void addState(State newState)
 	{
 		currentStates->push_back(newState);
 	}
+
 private:
 	Array<State>* currentStates;
 

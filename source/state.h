@@ -37,8 +37,13 @@ public:
 	{
 		//Check actor's performableActions?
 		//Get actor's details
+		//Set values to begin state?
 	}
-	void tick(float dTime);
+	void tick(float dTime)
+	{
+		//Update
+		//If updating calls for a state change, create IStateCallback and call IStateCallback.onTransition
+	}
 	void breakDown();
 	void registerTransitionCallback(IStateCallback callback);
 private:
