@@ -28,9 +28,9 @@ namespace bammm
 		public:
 			Queue();
 			bool isEmpty();
-			T& peek();
-			T& remove();
-			T& add(T& element);
+			T peek();
+			T remove();
+			T add(T element);
 			uint getSize();
 			string toString();
 			~Queue();
@@ -67,7 +67,7 @@ namespace bammm
 	 * @returns Returns the first element of the queue.
 	 */
 	template<class T>
-	T& Queue<T>::peek()
+	T Queue<T>::peek()
 	{
 		if (_queue->getSize() == 0)
 		{
@@ -84,7 +84,7 @@ namespace bammm
 	 * @throws Asserts an error when there is nothing to be removed.
 	 */
 	template<class T>
-	T& Queue<T>::remove()
+	T Queue<T>::remove()
 	{
 		if (_queue->getSize() == 0)
 		{
@@ -100,7 +100,7 @@ namespace bammm
 	 * @returns Returns the added element.
 	 */
 	template<class T>
-	T& Queue<T>::add(T& element)
+	T Queue<T>::add(T element)
 	{
 		_queue->add(element);
 		return element;
