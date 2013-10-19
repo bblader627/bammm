@@ -62,7 +62,7 @@ public:
 	 */
 	void switchState(State oldState, State newState)
 	{
-
+        
 	}
 
 	/*
@@ -77,6 +77,19 @@ public:
 	{
 		currentStates->push_back(newState);
 	}
+
+    /**
+     * getCurrentStates
+     * Pre-Condition-
+     * Post-Condition-
+     *
+     * Called from Controller
+     * Returns currently running states
+     */
+    DynamicArray<State> getCurrentStates()
+    {
+        return currentStates;
+    }
 
 private:
 	DynamicArray<State>* currentStates;
