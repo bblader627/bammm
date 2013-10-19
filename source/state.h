@@ -18,7 +18,7 @@
 #endif
 
 #include <iostream>
-#include "array.h"
+#include "dynamicarray.h"
 #include "IStateCallback.h"
 
 

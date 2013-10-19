@@ -16,7 +16,7 @@
 #define STACK_H_
 
 #include <iostream>
-#include "array.h"
+#include "dynamicarray.h"
 
 #ifndef NULL
 #define NULL (void *)0
@@ -28,12 +28,12 @@ template<typename T> class Stack
 {
 
 private:
-	Array<T> * stack;
+	DynamicArray<T> * stack;
 public:
 	Stack<T>()
 	{
 		//Create new array of size and capacity 1
-		stack = new Array<T>(0);
+		stack = new DynamicArray<T>(0);
 	}
 
 	bool isEmpty()

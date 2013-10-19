@@ -20,7 +20,7 @@
 #endif
 
 #include <iostream>
-#include "array.h"
+#include "dynamicarray.h"
 #include "state.h"
 
 
@@ -79,6 +79,6 @@ public:
 	}
 
 private:
-	Array<State>* currentStates;
+	DynamicArray<State>* currentStates;
 
 }
