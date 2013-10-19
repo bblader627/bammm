@@ -5,9 +5,11 @@
  * 	Alvaro Home
  * 	Matt Konstantinou
  * 	Michael Abramo
+ *	Matt Witkowski
+ *	Bradley Crusco
  *
  * Description:
- * State header file.
+ * Drinking state header file.
  *
  * Last Modified: Matthew Konstantinou
  *
@@ -21,7 +23,6 @@
 #include "dynamicarray.h"
 #include "IStateCallback.h"
 
-
 #ifndef NULL
 #define NULL (void *)0
 #endif
@@ -31,21 +32,38 @@ using namespace std;
 class State
 {
 public:
+
 	State();
 
-	void setup()
-	{
-		//Check actor's performableActions?
-		//Get actor's details
-		//Set values to begin state?
-	}
-	void tick(float dTime)
-	{
-		//Update
-		//If updating calls for a state change, create IStateCallback and call IStateCallback.onTransition
-	}
+	/*
+	 * setup
+	 * Pre-Condition- no parameters
+	 * Post-Condition- no return value
+	 *
+	 * Sets actor values for beginning the state
+	 */
+	void setup();
+
+	/*
+	 * breakDown
+	 * Pre-Condition- no parameters
+	 * Post-Condition- no return value
+	 *
+	 * Returns Actor to old state
+	 */
 	void breakDown();
-	void registerTransitionCallback(IStateCallback callback);
+
+	/*
+	 * tick
+	 *
+	 * Pre-Condition- time as recorded since beginning state
+	 * Post-Condition- no return value
+	 *
+	 * Process state updates based on passed time
+	 */
+	void tick(float dTime);
+
+	//void registerTransitionCallback(IStateCallback callback);
 private:
 	//Actor actor;
 };
