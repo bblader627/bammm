@@ -186,10 +186,14 @@ namespace bammm
 	template<class T>
 	void HashMap<T>::removeAll()
 	{
-		DynamicArray<string> setOfKeys = *(this->getAllKeys());
-		for (int i = 0; i <= _numberOfNodes; i++)
+		if (_numberOfNodes != 0)
 		{
-			this->remove(setOfKeys.get(i));
+			DynamicArray<string>* setOfKeys;
+			setOfKeys = this->getAllKeys();
+			for (int i = 0; i <= _numberOfNodes; i++)
+			{
+				remove(setOfKeys->get(i));
+			}
 		}
 	}
 
