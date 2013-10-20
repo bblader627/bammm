@@ -7,7 +7,7 @@
  * 	Michael Abramo
  *
  * Description:
- * 	Vector3d Header Class
+ * 	Vector3D Header Class
  *
  * Last Modified: Alvaro Home
  *
@@ -25,7 +25,7 @@ using namespace std;
 #define NULL (void *)0
 #endif
 
-class Vector3d
+class Vector3D
 {
 	private:
 		float x;
@@ -34,18 +34,18 @@ class Vector3d
 
 	public:
 		//Constant Variables
-		const Vector3d UP;
-		const Vector3d DOWN;
-		const Vector3d LEFT;
-		const Vector3d RIGHT;
-		const Vector3d ZERO;
+		const Vector3D UP;
+		const Vector3D DOWN;
+		const Vector3D LEFT;
+		const Vector3D RIGHT;
+		const Vector3D ZERO;
 
 		//Constructors		
-		Vector3d();
-		Vector3d(float x, float y, float z);
+		Vector3D();
+		Vector3D(float x, float y, float z);
 
 		//Destructor
-		~Vector3d();
+		~Vector3D();
 
 		//Operator Overloads
 		/*
@@ -53,37 +53,37 @@ class Vector3d
 		 @Pre-Condition-Takes a vector
 		 @Post-Condition- compares the equality of the vectors
 		 */
-		bool operator==(const Vector3d *vect);
+		bool operator==(const Vector3D *vect);
 		/*
 		 Overload !=
 		 @Pre-Condition-Takes a vector
 		 @Post-Condition- compares the equality of the vectors
 		 */
-		bool operator!=(const Vector3d *vect);
+		bool operator!=(const Vector3D *vect);
 		/*
 		 Overload +
 		 @Pre-Condition-Takes a vector
 		 @Post-Condition- adds two vectors
 		 */
-		bool operator+(const Vector3d *vect);
+		bool operator+(const Vector3D *vect);
 		/*
 		 Overload +=
 		 @Pre-Condition-Takes a vector
 		 @Post-Condition- adds two vectors together stores it in original
 		 */
-		bool operator+=(const Vector3d *vect);
+		bool operator+=(const Vector3D *vect);
 		/*
 		 Overload -
 		 @Pre-Condition-Takes a vector
 		 @Post-Condition- subtracts two vectors
 		 */
-		bool operator-(const Vector3d *vect);
+		bool operator-(const Vector3D *vect);
 		/*
 		 Overload -=
 		 @Pre-Condition-Takes a vector
 		 @Post-Condition- subtracts two vectors together stores it in original
 		 */
-		bool operator-=(const Vector3d *vect);
+		bool operator-=(const Vector3D *vect);
 
 		//Functions
 		/*
@@ -150,7 +150,7 @@ class Vector3d
 		 Dot Product
 		 A*B = Ax*Bx + Ay*By + Az*Bz
 		 */
-		float dotProduct(Vector3d *vect);
+		float dotProduct(Vector3D *vect);
 		/*
 		 divideVector
 		 @Pre-Condition- Takes in scalar value
@@ -176,7 +176,7 @@ class Vector3d
 		 Cross Product
 		 AxB = [(Ay * Bz) - (Az - By), (Ax * Bz) - (Az - Bx), (Ax * By) - (Ay -Bx)]
 		 */
-		Vector3d* crossProduct(Vector3d *vect);
+		Vector3D* crossProduct(Vector3D *vect);
 
 		/*
 		 toString
