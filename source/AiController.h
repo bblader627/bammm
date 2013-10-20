@@ -14,12 +14,6 @@ namespace bammm
             Hashmap<string, State>* _states;
             Actor* _actor;
             StateMachine* _stateMachine;
-            DrinkState* drinkState;
-            MineState* mineState;
-            SingState* singState;
-            BrawlState* brawlState;
-            SleepState* sleepState;
-            IdleState* idleState;
 
         public:
             AiController(Actor actor);
@@ -39,19 +33,19 @@ namespace bammm
         _stateMachine = new StateMachine();
         _actor = actor;
         
-        drinkState = new DrinkState;
-        mineState = new MineState;
-        singState = new SingState;
-        brawlState = new BrawlState;
-        sleepState = new SleepState;
-        idleState = new IdleState;
+        DrinkState drinkState;
+        MineState mineState;
+        SingState singState;
+        BrawlState brawlState;
+        SleepState sleepState;
+        IdleState idleState;
 
-        _states.add("drink", *drinkState);
-        _states.add("mine", *mineState);
-        _states.add("sing", *singState);
-        _states.add("brawl", *brawlState);
-        _states.add("sleep", *sleepState);
-        _states.add("idle", *idleState);
+        _states.add("drink", drinkState);
+        _states.add("mine", mineState);
+        _states.add("sing", singState);
+        _states.add("brawl", brawlState);
+        _states.add("sleep", sleepState);
+        _states.add("idle", idleState);
     }
 
 
@@ -105,11 +99,5 @@ namespace bammm
     {
         delete _states;
         delete _stateMachine;
-        delete drinkState;
-        delete mineState;
-        delete singState;
-        delete brawlState;
-        delete sleepState;
-        delete idleState;
     }
 }
