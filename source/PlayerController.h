@@ -1,5 +1,5 @@
 #include "state.h"
-#include "hashmap.h"
+#include "resources/hashmap.h"
 #include "actor.h"
 #include <string>
 #include "statemachine.h"
@@ -30,19 +30,19 @@ namespace bammm
         _stateMachine = new StateMachine();
         _actor = actor;
 
-    DrinkState drinkState;
-    MineState mineState;
-    SingState singState;
-    BrawlState brawlState;
-    SleepState sleepState;
-    IdleState idleState;
+		DrinkState drinkState;
+		MineState mineState;
+		SingState singState;
+		BrawlState brawlState;
+		SleepState sleepState;
+		IdleState idleState;
 
-    _states.add("drink", drinkState);
-    _states.add("mine", mineState);
-    _states.add("sing", singState);
-    _states.add("brawl", brawlState);
-    _states.add("sleep", sleepState);
-    _states.add("idle", idleState);
+		_states.add("drink", drinkState);
+		_states.add("mine", mineState);
+		_states.add("sing", singState);
+		_states.add("brawl", brawlState);
+		_states.add("sleep", sleepState);
+		_states.add("idle", idleState);
     }
 
 

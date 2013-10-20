@@ -150,7 +150,7 @@ class Actor
 		*/
 		void reduceStamina(float amount)
 		{
-			staminahBar += amount;
+			staminaBar += amount;
 		}
 
 
