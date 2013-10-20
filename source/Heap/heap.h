@@ -31,8 +31,8 @@ namespace bammm
         public:
             Heap();
             Heap(bool isMax);
-            void add(T& element);
-            T& remove();
+            void add(T element);
+            T remove();
             uint getSize();
             bool isEmpty();
             string toString();
@@ -83,7 +83,7 @@ namespace bammm
             if(_heap->get(parent) < _heap->get(index))
             {
                 //Swap them
-                T& temp = _heap->get(parent);
+                T temp = _heap->get(parent);
                 _heap->set(parent, _heap->get(index));
                 _heap->set(index, temp);
             
@@ -97,7 +97,7 @@ namespace bammm
             if(_heap->get(parent) > _heap->get(index))
             {
                 //Swap them
-                T& temp = _heap->get(parent);
+                T temp = _heap->get(parent);
                 _heap->set(parent, _heap->get(index));
                 _heap->set(index, temp);
             
@@ -112,7 +112,7 @@ namespace bammm
      * @params element The element to be added.
      */
     template <class T>
-    void Heap<T>::add(T& element)
+    void Heap<T>::add(T element)
     {
         _heap->add(element);
         adjustParent(_heap->getSize() - 1); 
@@ -124,7 +124,7 @@ namespace bammm
      * @throws Asserts an error when removing from empty heap.
      */
     template <class T>
-    T& Heap<T>::remove()
+    T Heap<T>::remove()
     {
         if(getSize() <= 0)
         {
@@ -132,7 +132,7 @@ namespace bammm
             assert(0);
         }
 
-        T& removed = _heap->get(0);
+        T removed = _heap->get(0);
         _heap->set(0, _heap->get(_heap->getSize() - 1));
         _heap->remove(_heap->getSize() - 1);
         adjustChild(0);
@@ -195,7 +195,7 @@ namespace bammm
                 }
             }
         }
-        T& temp = _heap->get(chosenChild);
+        T temp = _heap->get(chosenChild);
         _heap->set(chosenChild, _heap->get(index));
         _heap->set(index, temp);
         adjustChild(chosenChild);
