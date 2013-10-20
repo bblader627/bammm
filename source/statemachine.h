@@ -20,7 +20,7 @@
 #endif
 
 #include <iostream>
-#include "dynamicarray.h"
+#include "DynamicArray/dynamicarray.h"
 #include "state.h"
 
 
@@ -29,6 +29,7 @@
 #endif
 
 using namespace std;
+
 
 class StateMachine
 {
@@ -63,13 +64,9 @@ public:
 	 */
 	void switchState(State * currentState, State * newState)
 	{
-<<<<<<< HEAD
 		currentState->breakdown();
-		currentState = &newState;
+		currentState = newState;
 		currentState->setup();
-=======
-        
->>>>>>> 0d3a62168f14f8d7727326ff32604d8857bc83fc
 	}
 
 	/*
@@ -99,6 +96,6 @@ public:
     }
 
 private:
-	DynamicArray<State>* currentStates;
+	DynamicArray<State> * currentStates;
 
-}
+};
