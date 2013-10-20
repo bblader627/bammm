@@ -36,11 +36,11 @@ namespace bammm
 
 		public:
 			//Constant Variables
-			const Vector3D UP;
-			const Vector3D DOWN;
-			const Vector3D LEFT;
-			const Vector3D RIGHT;
-			const Vector3D ZERO;
+			const Vector3D *UP;
+			const Vector3D *DOWN;
+			const Vector3D *LEFT;
+			const Vector3D *RIGHT;
+			const Vector3D *ZERO;
 
 			Vector3D();
 			Vector3D(float x, float y, float z);

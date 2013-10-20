@@ -8,7 +8,7 @@
 #ifndef STACK_H_
 #define STACK_H_
 
-#include "../DynamicArray/dynamicarray.h"
+#include "dynamicarray.h"
 
 namespace bammm
 {

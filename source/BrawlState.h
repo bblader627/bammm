@@ -22,8 +22,9 @@ namespace bammm
     {
     }
 
-    void BrawlState::setup()
+    void BrawlState::setup(Actor* a)
     {
+        actor = a;
     }
 
     void BrawlState::breakDown()

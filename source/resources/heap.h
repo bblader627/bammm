@@ -8,7 +8,7 @@
 #ifndef HEAP_H_
 #define HEAP_H_
 
-#include "../DynamicArray/dynamicarray.h"
+#include "dynamicarray.h"
 
 #ifndef UINT
 #define UINT

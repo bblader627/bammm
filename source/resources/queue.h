@@ -8,7 +8,7 @@
 #ifndef QUEUE_H_
 #define QUEUE_H_
 
-#include "../DynamicArray/dynamicarray.h"
+#include "dynamicarray.h"
 
 namespace bammm
 {

@@ -21,7 +21,7 @@
 
 #include <iostream>
 #include "resources/dynamicarray.h"
-#include "resources/state.h"
+#include "state.h"
 
 
 #ifndef NULL

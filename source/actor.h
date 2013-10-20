@@ -15,7 +15,7 @@
 
 #include <iostream>
 #include "resources/vector3d.h"
-using namespace std;
+using namespace bammm;
 
 class Actor
 {
@@ -23,8 +23,8 @@ class Actor
 	private:
 		float rotation;
 		string name;
-		Vector3D velocity;
-		Vector3D location;
+		Vector3D *velocity;
+		Vector3D *location;
 		float healthBar;
 		float staminaBar;
 	public:
@@ -73,11 +73,21 @@ class Actor
 		/*
 			getVelocity
 			@Pre-Condition- takes no arguments
-			@Post-Condition- returns velocity
+			@Post-Condition- returns velocity vector representation
 		*/
-		inline float getVelocity()
+		inline string getVelocity()
 		{
-			return velocity;
+			return velocity->toString();
+		}
+
+		/*
+			getLocation
+			@Pre-Condition- takes no arguments
+			@Post-Condition- returns velocity vector representation
+		*/
+		inline string getLocation()
+		{
+			return location->toString();
 		}
 		/*
 			getHealth

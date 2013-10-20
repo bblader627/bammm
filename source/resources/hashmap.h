@@ -11,7 +11,7 @@
 #define HASHMAP_H_
 
 #include "hashnode.h"
-#include "../DynamicArray/dynamicarray.h"
+#include "dynamicarray.h"
 #include <string>
 
 #define DEFAULT_MAPSIZE 1000
