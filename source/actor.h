@@ -24,6 +24,8 @@ class Actor
 		float rotation;
 		string name;
 		float velocity;
+		float healthBar;
+		float staminaBar;
 	public:
 		//Constructors
 		
@@ -64,6 +66,54 @@ class Actor
 		{
 			return velocity;
 		}
+		/*
+			getHealth
+			@Pre-Condition- takes no arguments
+			@Post-Condition- returns healthBar
+		*/
+		inline float getHealth()
+		{
+			return healthBar;
+		}
+		/*
+			getStamina
+			@Pre-Condition- takes no arguments
+			@Post-Condition- returns healthBar
+		*/
+		inline float getStamina()
+		{
+			return staminahBar;
+		}
+		/*
+			setRotation
+			@Pre-Condition- takes no arguments
+			@Post-Condition- returns rotation
+		*/
+		void setRotation(float myRotation)
+		{
+			rotation = MyRotation;
+		}
+
+		/*
+			setName
+			@Pre-Condition- takes no arguments
+			@Post-Condition- returns name
+		*/
+		void setName(string myName)
+		{
+			name = myName;
+		}
+
+		/*
+			setVelocity
+			@Pre-Condition- takes no arguments
+			@Post-Condition- returns velocity
+		*/
+		void setVelocity(float myVelocity)
+		{
+			velocity = myVelocity;
+		}
+
 
 		
 };
