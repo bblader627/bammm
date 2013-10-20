@@ -29,6 +29,7 @@
 #endif
 
 using namespace std;
+using namespace bammm;
 
 
 class StateMachine
@@ -46,11 +47,11 @@ public:
 	 */
 	void tick(float dTime)
 	{
-		for(int i = 0; i < currentStates->size(); i++)
+		for(int i = 0; i < currentStates->getSize(); i++)
 		{
-			State * thisState = currentStates[i];
+			State thisState = currentStates->get(i);
 
-			thisState -> tick(time(NULL));
+			thisState.tick(time(NULL));
 		}
 	}
 
@@ -79,7 +80,7 @@ public:
 	 */
 	void addState(State newState)
 	{
-		currentStates->push_back(newState);
+		currentStates->add(newState);
 	}
 
     /**
@@ -92,7 +93,7 @@ public:
      */
     DynamicArray<State> getCurrentStates()
     {
-        return currentStates;
+        return *currentStates;
     }
 
 private:
