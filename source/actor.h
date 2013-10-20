@@ -13,6 +13,9 @@
  *
  */
 
+#include <iostream>
+
+using namespace std;
 
 class Actor
 {
@@ -20,13 +23,13 @@ class Actor
 	private:
 		float rotation;
 		string name;
-		float velocity
+		float velocity;
 	public:
 		//Constructors
 		
-		Actor(string name)
+		Actor(string myName)
 		{
-			this.name = name;
+			name = myName;
 			rotation = 0;
 			velocity = 0;
 		}
@@ -37,25 +40,27 @@ class Actor
 			@Pre-Condition- takes no arguments
 			@Post-Condition- returns rotation
 		*/
-		inline  float rotation()
+		inline float getRotation()
 		{
 			return rotation;
 		}
+
 		/*
 			name
 			@Pre-Condition- takes no arguments
 			@Post-Condition- returns name
 		*/
-		inline string name()
+		inline string getName()
 		{
 			return name;
 		}
+
 		/*
 			velocity
 			@Pre-Condition- takes no arguments
 			@Post-Condition- returns velocity
 		*/
-		inline float velocity()
+		inline float getVelocity()
 		{
 			return velocity;
 		}
