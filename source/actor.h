@@ -108,20 +108,20 @@ class Actor
 			name = myName;
 		}
 		/*
-			addHealth
+			increaseHealth
 			@Pre-Condition- Takes an float amount 
 			@Post-Condition- Increases health by said amount
 		*/
-		void addHealth(float amount)
+		void increaseHealth(float amount)
 		{
 			healthBar += amount;
 		}
 		/*
-			addStamina
+			increaseStamina
 			@Pre-Condition- Takes an float amount 
 			@Post-Condition- Increases stamina by said amount
 		*/
-		void addStamina(float amount)
+		void increaseStamina(float amount)
 		{
 			staminaBar += amount;
 		}
