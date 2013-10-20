@@ -26,6 +26,7 @@ namespace bammm
             void intialize();
             void update();
             uint counter = 0;
+            ~AiController();
     };
 
     AiController::AiController()
@@ -98,5 +99,17 @@ namespace bammm
 
         stateMachine->switchState(stateMachine->getCurrentState(), 
                                  _states->get(newState));
+    }
+
+    AiController::~AiController()
+    {
+        delete _states;
+        delete _stateMachine;
+        delete drinkState;
+        delete mineState;
+        delete singState;
+        delete brawlState;
+        delete sleepState;
+        delete idleState;
     }
 }
