@@ -37,11 +37,11 @@ class Vector3d
 
 	public:
 		//Constant Variables
-		const Vector3d *UP; 
-		const Vector3d *DOWN;
-		const Vector3d *LEFT;
-		const Vector3d *RIGHT;
-		const Vector3d *ZERO;
+		const Vector3d UP; 
+		const Vector3d DOWN;
+		const Vector3d LEFT;
+		const Vector3d RIGHT;
+		const Vector3d ZERO;
 
 
 		//Constructors		
@@ -88,31 +88,6 @@ class Vector3d
 			@Post-Condition- subtracts two vectors together stores it in original
 		*/
 		bool operator-=(const Vector3d *vect);
-		/*
-			Overload *
-			@Pre-Condition-Takes a scalar value
-			@Post-Condition- multiply vector by scalar value
-		*/
-		bool operator*(const float n);
-		/*
-			Overload *=
-			@Pre-Condition-Takes a scalar value
-			@Post-Condition- multiplies vector by scalar value ands stores in original
-		*/
-		bool operator*=(const float n);
-		/*
-			Overload /
-			@Pre-Condition-Takes a scalar value
-			@Post-Condition- divides vector by scalar value
-		*/
-		bool operator/(const float n);
-		/*
-			Overload /=
-			@Pre-Condition-Takes a scalar value
-			@Post-Condition- divides vector by scalar value ands stores in original
-		*/
-		bool operator/=(const float n);
-		
 		
 		//Functions
 		/*
@@ -138,36 +113,40 @@ class Vector3d
 			@Post-Condition- Returns nothing but sets x,y,z components to new values
 		*/
 		void set(float a,float b,float c);
-
 		/*
-			sqrMagnitude
-			@Pre-Condition-Takes no arguments
-			@Post-Condition- returns sqaured length of vector
-			|a| = sx^2 + y^2 + z^2
-		*/	
-		float sqrMagnitude();
-
-		/*
-			getX
-			@Pre-Condition- no parameters
-			@Post-Conidtion- returns X component of vector
+			Accessors/Mutators
+			Easier than using set and get Functions 
+			Vector require multiple acces to these variables.
 		*/
-		float getX();
+		inline float x() const
+		{
+		 return _x;
+		}
 
-		/*
-			getX
-			@Pre-Condition- no parameters
-			@Post-Conidtion- returns X component of vector
-		*/
-		float getY();
+		inline float y() const
+		{
+		 return _y;
+		}
 
-		/*
-			getX
-			@Pre-Condition- no parameters
-			@Post-Conidtion- returns Z component of vector
-		*/
-		float getZ();
+		inline float z() const
+		{
+		 return _z;
+		}
 
+		inline float& x()
+		{
+		 return _x;
+		}
+
+		inline float& y()
+		{
+		 return _y;
+		}
+
+		inline float& z()
+		{
+		 return _z;
+		}
 		/*
 			dotProduct
 			@Pre-Condition-Takes a Vector and will perform a Dot Product
@@ -176,39 +155,6 @@ class Vector3d
 				A*B = Ax*Bx + Ay*By + Az*Bz
 		*/
 		float dotProduct(Vector3d *vect);
-
-		/*
-			addVector
-			@Pre-Condition- Takes a Vector and adds them together
-			@Post-Condition- returns a vector representing their sum
-			Vector Sum
-				A+B = [Ax+Bx,Ay+By,Az+Bz]
-		*/
-		Vector3d* addVector(Vector3d *vect);
-
-		/*
-			subtractVector
-			@Pre-Condition- Takes a Vector and subtracts them together
-			@Post-Condition- returns a vector representing their difference
-			Vector Subtraction
-				A-B = [Ax-Bx,Ay-By,Az-Bz]
-		*/
-		Vector3d* subtractVector(Vector3d *vect);
-
-		/*
-			add
-			@Pre-Condition- Receives a vector to add
-			@Post-Condition- Will add vect to the source vector
-		*/
-		void add(Vector3d *vect);
-
-		/*
-			subtract
-			@Pre-Condition- Receives a vector to add
-			@Post-Condition- Will add vect to the source vector
-		*/
-		void subtract(Vector3d *vect);
-
 		/*
 			divideVector
 			@Pre-Condition- Takes in scalar value
