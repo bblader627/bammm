@@ -14,7 +14,7 @@
  */
 
 #include <iostream>
-
+#include "vector3d.h"
 using namespace std;
 
 class Actor
@@ -23,7 +23,8 @@ class Actor
 	private:
 		float rotation;
 		string name;
-		float velocity;
+		Vector3D velocity;
+		Vector3D location;
 		float healthBar;
 		float staminaBar;
 	public:
@@ -33,12 +34,24 @@ class Actor
 		{
 			name = myName;
 			rotation = 0;
-			velocity = 0;
+			velocity = new Vector3D();
+			location = new Vector3D();
+			healthBar = 100;
+			staminaBar = 50;
+		}
+		Actor(string myName,float health,float stamina)
+		{
+			name = myName;
+			rotation = 0;
+			velocity = new Vector3D();
+			location = new Vector3D();
+			healthBar = health;
+			staminaBar = stamina;
 		}
 
 		//Functions
 		/*
-			rotation
+			getRotation
 			@Pre-Condition- takes no arguments
 			@Post-Condition- returns rotation
 		*/
@@ -48,7 +61,7 @@ class Actor
 		}
 
 		/*
-			name
+			getName
 			@Pre-Condition- takes no arguments
 			@Post-Condition- returns name
 		*/
@@ -58,7 +71,7 @@ class Actor
 		}
 
 		/*
-			velocity
+			getVelocity
 			@Pre-Condition- takes no arguments
 			@Post-Condition- returns velocity
 		*/
@@ -78,7 +91,7 @@ class Actor
 		/*
 			getStamina
 			@Pre-Condition- takes no arguments
-			@Post-Condition- returns healthBar
+			@Post-Condition- returns staminaBar
 		*/
 		inline float getStamina()
 		{
@@ -103,15 +116,41 @@ class Actor
 		{
 			name = myName;
 		}
-
 		/*
-			setVelocity
-			@Pre-Condition- takes no arguments
-			@Post-Condition- returns velocity
+			increaseHealth
+			@Pre-Condition- Takes an float amount 
+			@Post-Condition- Increases health by said amount
 		*/
-		void setVelocity(float myVelocity)
+		void increaseHealth(float amount)
 		{
-			velocity = myVelocity;
+			healthBar += amount;
+		}
+		/*
+			increaseStamina
+			@Pre-Condition- Takes an float amount 
+			@Post-Condition- Increases stamina by said amount
+		*/
+		void increaseStamina(float amount)
+		{
+			staminaBar += amount;
+		}
+		/*
+			reduceHealth
+			@Pre-Condition- Takes an float amount 
+			@Post-Condition- Decreases health by said amount
+		*/
+		void reduceHealth(float amount)
+		{
+			healthBar -= amount;
+		}
+		/*
+			reduceHealth
+			@Pre-Condition- Takes an float amount 
+			@Post-Condition- Decreases stamina by said amount
+		*/
+		void reduceStamina(float amount)
+		{
+			staminahBar += amount;
 		}
 
 
