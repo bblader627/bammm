@@ -48,6 +48,7 @@ public:
 		for(int i = 0; i < currentStates->size(); i++)
 		{
 			State * thisState = currentStates[i];
+
 			thisState -> tick(time(NULL));
 		}
 	}
@@ -60,9 +61,11 @@ public:
 	 *
 	 *PlayerController will be calling switchState
 	 */
-	void switchState(State oldState, State newState)
+	void switchState(State * currentState, State * newState)
 	{
-
+		currentState->breakdown();
+		currentState = &newState;
+		currentState->setup();
 	}
 
 	/*
