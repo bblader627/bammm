@@ -1,5 +1,5 @@
 #include "state.h"
-#include "hashmap.h"
+#include "resources/hashmap.h"
 #include "actor.h"
 #include <string>
 #include "statemachine.h"

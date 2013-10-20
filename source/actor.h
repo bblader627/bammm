@@ -14,7 +14,7 @@
  */
 
 #include <iostream>
-#include "vector3d.h"
+#include "resources/vector3d.h"
 using namespace std;
 
 class Actor

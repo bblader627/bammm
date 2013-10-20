@@ -20,8 +20,8 @@
 #endif
 
 #include <iostream>
-#include "DynamicArray/dynamicarray.h"
-#include "state.h"
+#include "resources/dynamicarray.h"
+#include "resources/state.h"
 
 
 #ifndef NULL

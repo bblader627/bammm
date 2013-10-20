@@ -20,7 +20,7 @@
 #endif
 
 #include <iostream>
-#include "DynamicArray/dynamicarray.h"
+#include "resources/dynamicarray.h"
 #include "IStateCallback.h"
 #include "actor.h"
 
