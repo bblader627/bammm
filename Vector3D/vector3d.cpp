@@ -13,7 +13,7 @@
  *
  */
 
-#include "vector3D.h"
+#include "vector3d.h"
 
 namespace bammm
 {
