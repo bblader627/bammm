@@ -40,7 +40,6 @@ namespace bammm
         {
             cout << "The dwarf finishes his drink. 
             \"There's nothin' like a Dwarveren Ale from Ironforge.\"" << "\n";
-            breakDown();
         }
         else
         {
