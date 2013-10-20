@@ -66,5 +66,5 @@ public:
 
 	//void registerTransitionCallback(IStateCallback callback);
 private:
-	Actor actor;
+	Actor* actor;
 };
