@@ -39,6 +39,15 @@ class Actor
 			healthBar = 100;
 			staminaBar = 50;
 		}
+		Actor(string myName,float health,float stamina)
+		{
+			name = myName;
+			rotation = 0;
+			velocity = new Vector3d();
+			location = new Vector3d();
+			healthBar = health;
+			staminaBar = stamina;
+		}
 
 		//Functions
 		/*
