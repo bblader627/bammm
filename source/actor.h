@@ -82,7 +82,7 @@ class Actor
 		*/
 		inline float getStamina()
 		{
-			return staminahBar;
+			return staminaBar;
 		}
 		/*
 			setRotation
@@ -91,7 +91,7 @@ class Actor
 		*/
 		void setRotation(float myRotation)
 		{
-			rotation = MyRotation;
+			rotation = myRotation;
 		}
 
 		/*
