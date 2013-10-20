@@ -27,8 +27,6 @@ const Vector3D Vector3D::ZERO = {0, 0, 0};
 
 
 //constructors
-
-//creates a zero vector
 Vector3d::Vector3d()
 {
 	//private variables
@@ -36,8 +34,6 @@ Vector3d::Vector3d()
 	y = 0;
 	z = 0;
 }
-
-//Creates a vector with determined values
 Vector3d::Vector3d(float x float y, float z)
 {
 	//private variables
@@ -46,15 +42,13 @@ Vector3d::Vector3d(float x float y, float z)
 	this.z = z;
 }
 
-
+//functions
 void Vector3d::set(float x, float y, float z)
 {
 	this.x = x;
 	this.y = y;
 	this.z = z;
-}
-
-	
+}	
 void Vector3d::normalize()
 {
 	float normal = magnitude();
@@ -62,26 +56,18 @@ void Vector3d::normalize()
 	y = y / normal;
 	z = z / normal;
 }
-
-
 float Vector3d::magnitude()
 {
 	return sqrt( (x * x) + (y * y) + (z * z));
-}
-
-	
+}	
 float Vector3d::sqrMagnitude()
 {
 	return (x * x) + (y * y) + (z * z);
 }
-
-
-float Vector3d::dotProduct(Vector3d *vect)
+float Vector3d::dotProduct(Vector3d &vect)
 {
-	return (x*vect->getX()) + (y*vect->getY()) + (z*vect->getZ());
+	return (x*vect.x()) + (y*vect.y()) + (z*vect.z());
 }
-
-
 void Vector3d::divideVector(int n)
 {
 	x = x / n;
@@ -89,26 +75,18 @@ void Vector3d::divideVector(int n)
 	z = z / n;
 	
 }
-
-
 void Vector3d::multiplyVector(int n)
 {
 	x = x * n;
 	y = y * n;
 	z = z * n;		
 }
-
-
-Vector3d* Vector3d::crossProduct(Vector3d *vect)
+Vector3d* Vector3d::crossProduct(Vector3d &vect)
 {
-	Vector3d *temp;
+	 return Vector3d( (y * vect.z()) - (z - vect.y()), (x * vect.z()) - (z - vect.x()), (x * vect.y()) - (y - vect.x()));
 
-	temp = new Vector3d( (y * vect->getZ()) - (z - vect->getY()), (x * vect->getZ()) - (z - vect->getX()), (x * vect->getY()) - (y - vect->getX()));
-
-	return temp;		
+		
 }
-
-
 string Vector3d::toString()
 {
 	string output;
@@ -122,6 +100,44 @@ string Vector3d::toString()
 	return output;
 }
 
+//Operator Overloads
+bool Vector3d::operator==(const Vector3d &vect)
+{
+	if( (x == vect.x()) && (y == vect.y()) && (z == vect.z()) )
+		return true;
+	else
+		return false;
+}
+
+
+Vector3d Vector3d::operator!=(const Vector3d &vect)
+{
+	if( (x == vect.x()) && (y == vect.y()) && (z == vect.z()) )
+		return false;
+	else
+		return true;
+}
+Vector3d Vector3d::operator+(const Vector3d &vect)
+{
+	return Vector3D(x + vect.x(), y + vect.y(), z + vect.z());
+}
+
+Vector3d Vector3d::operator+=(const Vector3d &vect)
+{
+	x += vect.x();
+	y += vect.y();
+	z += vect.z();
+}
+Vector3d Vector3d::operator-(const Vector3d &vect)
+{
+	return Vector3D(x - vect.x(), y - vect.y(), z - vect.z());
+}
+Vector3d Vector3d::operator-=(const Vector3d &vect)
+{
+	x -= vect.x();
+	y -= vect.y();
+	z -= vect.z();
+}		
 
 	
 
