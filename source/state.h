@@ -20,8 +20,9 @@
 #endif
 
 #include <iostream>
-#include "dynamicarray.h"
+#include "DynamicArray/dynamicarray.h"
 #include "IStateCallback.h"
+#include "actor.h"
 
 #ifndef NULL
 #define NULL (void *)0
@@ -51,7 +52,7 @@ public:
 	 *
 	 * Returns Actor to old state
 	 */
-	void breakDown();
+	void breakdown();
 
 	/*
 	 * tick
@@ -65,5 +66,5 @@ public:
 
 	//void registerTransitionCallback(IStateCallback callback);
 private:
-	//Actor actor;
+	Actor actor;
 };

@@ -20,7 +20,7 @@
 #endif
 
 #include <iostream>
-#include "dynamicarray.h"
+#include "DynamicArray/dynamicarray.h"
 #include "state.h"
 
 
@@ -29,6 +29,7 @@
 #endif
 
 using namespace std;
+
 
 class StateMachine
 {
@@ -48,6 +49,7 @@ public:
 		for(int i = 0; i < currentStates->size(); i++)
 		{
 			State * thisState = currentStates[i];
+
 			thisState -> tick(time(NULL));
 		}
 	}
@@ -60,9 +62,11 @@ public:
 	 *
 	 *PlayerController will be calling switchState
 	 */
-	void switchState(State oldState, State newState)
+	void switchState(State * currentState, State * newState)
 	{
-
+		currentState->breakdown();
+		currentState = newState;
+		currentState->setup();
 	}
 
 	/*
@@ -78,7 +82,20 @@ public:
 		currentStates->push_back(newState);
 	}
 
-private:
-	DynamicArray<State>* currentStates;
+    /**
+     * getCurrentStates
+     * Pre-Condition-
+     * Post-Condition-
+     *
+     * Called from Controller
+     * Returns currently running states
+     */
+    DynamicArray<State> getCurrentStates()
+    {
+        return currentStates;
+    }
 
-}
+private:
+	DynamicArray<State> * currentStates;
+
+};
