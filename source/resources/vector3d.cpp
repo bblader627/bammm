@@ -14,25 +14,28 @@
  */
 
 #include "vector3d.h"
+using namespace std;
 
 namespace bammm
 {
-	const Vector3D Vector3D::UP =
-	{ 0, 1, 0 };
-	const Vector3D Vector3D::DOWN =
-	{ 0, -1, 0 };
-	const Vector3D Vector3D::LEFT =
-	{ -1, 0, };
-	const Vector3D Vector3D::RIGHT =
-	{ 1, 0, 0 };
-	const Vector3D Vector3D::ZERO =
-	{ 0, 0, 0 };
+
 
 	Vector3D::Vector3D()
 	{
 		_x = 0;
 		_y = 0;
 		_z = 0;
+/*
+		const Vector3D Vector3D::UP =
+		{ 0, 1, 0 };
+		const Vector3D Vector3D::DOWN =
+		{ 0, -1, 0 };
+		const Vector3D Vector3D::LEFT =
+		{ -1, 0, };
+		const Vector3D Vector3D::RIGHT =
+		{ 1, 0, 0 };
+		const Vector3D Vector3D::ZERO =
+		{ 0, 0, 0 };*/
 	}
 
 	Vector3D::Vector3D(float x, float y, float z)
@@ -40,6 +43,17 @@ namespace bammm
 		_x = x;
 		_y = y;
 		_z = z;
+/*
+		const Vector3D Vector3D::UP =
+		{ 0, 1, 0 };
+		const Vector3D Vector3D::DOWN =
+		{ 0, -1, 0 };
+		const Vector3D Vector3D::LEFT =
+		{ -1, 0, };
+		const Vector3D Vector3D::RIGHT =
+		{ 1, 0, 0 };
+		const Vector3D Vector3D::ZERO =
+		{ 0, 0, 0 };*/
 	}
 
 	/**
@@ -79,7 +93,12 @@ namespace bammm
 	{
 		return sqrt((_x * _x) + (_y * _y) + (_z * _z));
 	}
-
+	/*
+		sqrMagnitude
+		@Pre-Condition-Takes no arguments
+		@Post-Condition- returns sqaured length of vector
+		|a| = sx^2 + y^2 + z^2
+	*/	
 	float Vector3D::sqrMagnitude()
 	{
 		return (_x * _x) + (_y * _y) + (_z * _z);
@@ -132,7 +151,7 @@ namespace bammm
 	 Cross Product
 	 AxB = [(Ay * Bz) - (Az - By), (Ax * Bz) - (Az - Bx), (Ax * By) - (Ay -Bx)]
 	 */
-	Vector3D* Vector3D::crossProduct(Vector3D &vector)
+	Vector3D Vector3D::crossProduct(Vector3D &vector)
 	{
 		return Vector3D((_y * vector.z()) - (_z - vector.y()),
 				(_x * vector.z()) - (_z - vector.x()),
@@ -147,15 +166,8 @@ namespace bammm
 	 */
 	string Vector3D::toString()
 	{
-		string output;
-		output.append("<");
-		//output.append(output.to_string(x));
-		output.append(",");
-		//output.append(output.to_string(y));
-		output.append(",");
-		//output.append(output.to_string(z));
-		output.append(">");
-		return output;
+		//return "<" + std::to_string(_x) + " " + std::to_string(_y) + " " + std::to_string(_z) + ">";
+		return "This should be a Vector <x,y,z>";
 	}
 
 	/**
@@ -180,7 +192,7 @@ namespace bammm
 	 @Pre-Condition-Takes a vector
 	 @Post-Condition- compares the equality of the vectors
 	 */
-	Vector3D Vector3D::operator!=(const Vector3D &vector)
+	bool Vector3D::operator!=(const Vector3D &vector)
 	{
 		if ((_x == vector.x()) && (_y == vector.y()) && (_z == vector.z()))
 		{
@@ -207,7 +219,7 @@ namespace bammm
 	 @Pre-Condition-Takes a vector
 	 @Post-Condition- adds two vectors together stores it in original
 	 */
-	Vector3D Vector3D::operator+=(const Vector3D &vector)
+	Vector3D& Vector3D::operator+=(const Vector3D &vector)
 	{
 		_x += vector.x();
 		_y += vector.y();
@@ -229,7 +241,7 @@ namespace bammm
 	 @Pre-Condition-Takes a vector
 	 @Post-Condition- subtracts two vectors together stores it in original
 	 */
-	Vector3D Vector3D::operator-=(const Vector3D &vector)
+	Vector3D& Vector3D::operator-=(const Vector3D &vector)
 	{
 		_x -= vector.x();
 		_y -= vector.y();

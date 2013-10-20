@@ -36,11 +36,11 @@ namespace bammm
 
 		public:
 			//Constant Variables
-			const Vector3D *UP;
-			const Vector3D *DOWN;
-			const Vector3D *LEFT;
-			const Vector3D *RIGHT;
-			const Vector3D *ZERO;
+			/*static const Vector3D *UP;
+			static const Vector3D *DOWN;
+			static const Vector3D *LEFT;
+			static const Vector3D *RIGHT;
+			static const Vector3D *ZERO;*/
 
 			Vector3D();
 			Vector3D(float x, float y, float z);
@@ -48,18 +48,19 @@ namespace bammm
 			void set(float a, float b, float c);
 			void normalize();
 			float magnitude();
-			float dotProduct(Vector3D *vector);
+			float sqrMagnitude();
+			float dotProduct(Vector3D &vector);
 			void divideVector(int n);
 			void multiplyVector(int n);
-			Vector3D* crossProduct(Vector3D *vector);
+			Vector3D crossProduct(Vector3D &vector);
 			string toString();
 
-			bool operator==(const Vector3D *vector);
-			bool operator!=(const Vector3D *vector);
-			bool operator+(const Vector3D *vector);
-			bool operator+=(const Vector3D *vector);
-			bool operator-(const Vector3D *vector);
-			bool operator-=(const Vector3D *vector);
+			bool operator==(const Vector3D &vector);
+			bool operator!=(const Vector3D &vector);
+			Vector3D operator+(const Vector3D &vector);
+			Vector3D& operator+=(const Vector3D &vector);
+			Vector3D operator-(const Vector3D &vector);
+			Vector3D& operator-=(const Vector3D &vector);
 
 			inline float x() const
 			{
