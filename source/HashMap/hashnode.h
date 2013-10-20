@@ -1,5 +1,5 @@
 /**
- * @file hashNode.h
+ * @file hashnode.h
  * @class HashNode
  * @brief A class for storying the key and value pairs for our hash table.
  * @author: Bradley Crusco

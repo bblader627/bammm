@@ -1,5 +1,5 @@
 /**
- * @file hashMap.h
+ * @file hashmap.h
  * @class HashMap
  * @brief A class that implements a HashMap (a.k.a. Hash Table). Allows us to store and retrieve items using a key.
  * Uses a string as its key type.
@@ -10,7 +10,7 @@
 #ifndef HASHMAP_H_
 #define HASHMAP_H_
 
-#include "hashNode.h"
+#include "hashnode.h"
 #include "../DynamicArray/dynamicarray.h"
 #include <string>
 

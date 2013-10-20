@@ -1,11 +1,11 @@
 /*
- * hashMap+Tests.cpp
+ * hashmap+tests.cpp
  *
  *  Created on: Oct 15, 2013
  *      Author: bradley
  */
 
-#include "hashMap+Tests.h"
+#include "hashmap+tests.h"
 
 namespace bammm
 {

@@ -1,5 +1,5 @@
 /*
- * HashMap+Tests.h
+ * ashap+tests.h
  *
  *  Created on: Oct 15, 2013
  *      Author: bradley
@@ -8,7 +8,7 @@
 #ifndef HASHMAP_TESTS_H_
 #define HASHMAP_TESTS_H_
 
-#include "hashMap.h"
+#include "hashmap.h"
 #include "TestSuite/testSuite.h"
 
 namespace bammm
