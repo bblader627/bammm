@@ -16,7 +16,8 @@ namespace bammm
             void tick(float dTime);
 
         private:
-            uint stoutSize;
+            static const uint stoutSize = 5;
+            uint stoutLife;
     };
 
     DrinkState::DrinkState()
@@ -25,7 +26,7 @@ namespace bammm
 
     void DrinkState::setup()
     {
-        stoutSize = 5;
+        stoutLife = stoutSize;
     }
 
     void DrinkState::breakDown()
@@ -34,7 +35,17 @@ namespace bammm
 
     void DrinkState::tick(float dTime)
     {
-        
+        stoutLife--;
+        if(stoutLife < 1)
+        {
+            cout << "The dwarf finishes his drink. 
+            \"There's nothin' like a Dwarveren Ale from Ironforge.\"" << "\n";
+            breakDown();
+        }
+        else
+        {
+            cout << "The dwarf takes a sip of the Dwarven Ale." << "\n";
+        }
     }
 }
 
