@@ -23,8 +23,8 @@ class Actor
 	private:
 		float rotation;
 		string name;
-		Vector3d velocity;
-		Vector3d location;
+		Vector3D velocity;
+		Vector3D location;
 		float healthBar;
 		float staminaBar;
 	public:
@@ -34,8 +34,8 @@ class Actor
 		{
 			name = myName;
 			rotation = 0;
-			velocity = new Vector3d();
-			location = new Vector3d();
+			velocity = new Vector3D();
+			location = new Vector3D();
 			healthBar = 100;
 			staminaBar = 50;
 		}
@@ -43,8 +43,8 @@ class Actor
 		{
 			name = myName;
 			rotation = 0;
-			velocity = new Vector3d();
-			location = new Vector3d();
+			velocity = new Vector3D();
+			location = new Vector3D();
 			healthBar = health;
 			staminaBar = stamina;
 		}

@@ -28,9 +28,9 @@ using namespace std;
 class Vector3D
 {
 	private:
-		float x;
-		float y;
-		float z;
+		float _x;
+		float _y;
+		float _z;
 
 	public:
 		//Constant Variables
