@@ -209,9 +209,7 @@ namespace bammm
 			HashNode<T>* temporary = hashMap[i];
 			while (temporary != NULL)
 			{
-				string* temporaryKey = new string();
-				*temporaryKey = temporary->getKey();
-				keys->add(*temporaryKey);
+				keys->add(temporary->getKey());
 				temporary = &(temporary->getNextNode());
 			}
 		}
