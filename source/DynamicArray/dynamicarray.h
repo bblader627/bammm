@@ -23,7 +23,7 @@ typedef unsigned int uint;
 #define NULL ((void*)0)
 #endif
 
-namespace triforce
+namespace bammm
 {
     /**
      * @brief An array that auto expands by doubling in size when

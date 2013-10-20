@@ -51,7 +51,7 @@ public:
 	 *
 	 * Returns Actor to old state
 	 */
-	void breakDown();
+	void breakdown();
 
 	/*
 	 * tick

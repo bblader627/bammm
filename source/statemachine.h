@@ -63,9 +63,13 @@ public:
 	 */
 	void switchState(State * currentState, State * newState)
 	{
+<<<<<<< HEAD
 		currentState->breakdown();
 		currentState = &newState;
 		currentState->setup();
+=======
+        
+>>>>>>> 0d3a62168f14f8d7727326ff32604d8857bc83fc
 	}
 
 	/*
@@ -80,6 +84,19 @@ public:
 	{
 		currentStates->push_back(newState);
 	}
+
+    /**
+     * getCurrentStates
+     * Pre-Condition-
+     * Post-Condition-
+     *
+     * Called from Controller
+     * Returns currently running states
+     */
+    DynamicArray<State> getCurrentStates()
+    {
+        return currentStates;
+    }
 
 private:
 	DynamicArray<State>* currentStates;

@@ -18,13 +18,14 @@
 #endif
 
 #include <iostream>
-#include "state.h"
+//#include "state.h"
+
 using namespace std;
 
-class IStateCallback: public IStateCallback
+class IStateCallback
 {
 public:
 	//In (State.)registerTransitionCallback, pass "IStateCallback.onTransition(oldState, newState)" with function in that file?
-	virtual void onTransition(State oldState, State newState);
-	virtual ~IStateCallback();
+	//virtual void onTransition(State oldState, State newState);
+	//virtual ~IStateCallback();
 };
