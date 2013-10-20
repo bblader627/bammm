@@ -14,7 +14,7 @@
  */
 
 #include <iostream>
-
+#include "vector3d.h"
 using namespace std;
 
 class Actor
@@ -23,7 +23,8 @@ class Actor
 	private:
 		float rotation;
 		string name;
-		float velocity;
+		Vector3d velocity;
+		Vector3d location;
 		float healthBar;
 		float staminaBar;
 	public:
@@ -33,12 +34,15 @@ class Actor
 		{
 			name = myName;
 			rotation = 0;
-			velocity = 0;
+			velocity = new Vector3d();
+			location = new Vector3d();
+			healthBar = 100;
+			staminaBar = 50;
 		}
 
 		//Functions
 		/*
-			rotation
+			getRotation
 			@Pre-Condition- takes no arguments
 			@Post-Condition- returns rotation
 		*/
@@ -48,7 +52,7 @@ class Actor
 		}
 
 		/*
-			name
+			getName
 			@Pre-Condition- takes no arguments
 			@Post-Condition- returns name
 		*/
@@ -58,7 +62,7 @@ class Actor
 		}
 
 		/*
-			velocity
+			getVelocity
 			@Pre-Condition- takes no arguments
 			@Post-Condition- returns velocity
 		*/
@@ -78,7 +82,7 @@ class Actor
 		/*
 			getStamina
 			@Pre-Condition- takes no arguments
-			@Post-Condition- returns healthBar
+			@Post-Condition- returns staminaBar
 		*/
 		inline float getStamina()
 		{
@@ -103,15 +107,41 @@ class Actor
 		{
 			name = myName;
 		}
-
 		/*
-			setVelocity
-			@Pre-Condition- takes no arguments
-			@Post-Condition- returns velocity
+			addHealth
+			@Pre-Condition- Takes an float amount 
+			@Post-Condition- Increases health by said amount
 		*/
-		void setVelocity(float myVelocity)
+		void addHealth(float amount)
 		{
-			velocity = myVelocity;
+			healthBar += amount;
+		}
+		/*
+			addStamina
+			@Pre-Condition- Takes an float amount 
+			@Post-Condition- Increases stamina by said amount
+		*/
+		void addStamina(float amount)
+		{
+			staminaBar += amount;
+		}
+		/*
+			reduceHealth
+			@Pre-Condition- Takes an float amount 
+			@Post-Condition- Decreases health by said amount
+		*/
+		void reduceHealth(float amount)
+		{
+			healthBar -= amount;
+		}
+		/*
+			reduceHealth
+			@Pre-Condition- Takes an float amount 
+			@Post-Condition- Decreases stamina by said amount
+		*/
+		void reduceStamina(float amount)
+		{
+			staminahBar += amount;
 		}
 
 
