@@ -31,6 +31,9 @@ int main()
 
 		switch (choice)
 		{
+			case 0:
+				playGame == false;
+				break;
 			case 1:
 				controller->input("mine");
 				break;
@@ -48,6 +51,10 @@ int main()
 				break;
 		}
 	}
+
+	cout << "Thanks for playing!" << endl;
+	string waitfortext;
+	cin >> waitfortext;
 
 	//provide option for state change
 
@@ -67,6 +74,7 @@ void printWelcome()
 void printOptions()
 {
 	cout << "Select an activity for your dwarf:" << endl;
+	cout << "0. Quit" << endl;
 	cout << "1. Mine gold" << endl;
 	cout << "2. Drink ale" << endl;
 	cout << "3. Sing a song" << endl;
