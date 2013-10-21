@@ -65,7 +65,10 @@ public:
 	 */
 	void switchState(State * currentState, State * newState)
 	{
-		currentState->breakdown();
+        if(currentState != NULL)
+        {
+		    currentState->breakdown();
+        }
 		currentState = newState;
 		currentState->setup();
 	}
