@@ -19,23 +19,22 @@ using namespace std;
 namespace bammm
 {
 
-
 	Vector3D::Vector3D()
 	{
 		_x = 0;
 		_y = 0;
 		_z = 0;
-/*
-		const Vector3D Vector3D::UP =
-		{ 0, 1, 0 };
-		const Vector3D Vector3D::DOWN =
-		{ 0, -1, 0 };
-		const Vector3D Vector3D::LEFT =
-		{ -1, 0, };
-		const Vector3D Vector3D::RIGHT =
-		{ 1, 0, 0 };
-		const Vector3D Vector3D::ZERO =
-		{ 0, 0, 0 };*/
+		/*
+		 const Vector3D Vector3D::UP =
+		 { 0, 1, 0 };
+		 const Vector3D Vector3D::DOWN =
+		 { 0, -1, 0 };
+		 const Vector3D Vector3D::LEFT =
+		 { -1, 0, };
+		 const Vector3D Vector3D::RIGHT =
+		 { 1, 0, 0 };
+		 const Vector3D Vector3D::ZERO =
+		 { 0, 0, 0 };*/
 	}
 
 	Vector3D::Vector3D(float x, float y, float z)
@@ -43,17 +42,17 @@ namespace bammm
 		_x = x;
 		_y = y;
 		_z = z;
-/*
-		const Vector3D Vector3D::UP =
-		{ 0, 1, 0 };
-		const Vector3D Vector3D::DOWN =
-		{ 0, -1, 0 };
-		const Vector3D Vector3D::LEFT =
-		{ -1, 0, };
-		const Vector3D Vector3D::RIGHT =
-		{ 1, 0, 0 };
-		const Vector3D Vector3D::ZERO =
-		{ 0, 0, 0 };*/
+		/*
+		 const Vector3D Vector3D::UP =
+		 { 0, 1, 0 };
+		 const Vector3D Vector3D::DOWN =
+		 { 0, -1, 0 };
+		 const Vector3D Vector3D::LEFT =
+		 { -1, 0, };
+		 const Vector3D Vector3D::RIGHT =
+		 { 1, 0, 0 };
+		 const Vector3D Vector3D::ZERO =
+		 { 0, 0, 0 };*/
 	}
 
 	/**
@@ -94,11 +93,11 @@ namespace bammm
 		return sqrt((_x * _x) + (_y * _y) + (_z * _z));
 	}
 	/*
-		sqrMagnitude
-		@Pre-Condition-Takes no arguments
-		@Post-Condition- returns sqaured length of vector
-		|a| = sx^2 + y^2 + z^2
-	*/	
+	 sqrMagnitude
+	 @Pre-Condition-Takes no arguments
+	 @Post-Condition- returns sqaured length of vector
+	 |a| = sx^2 + y^2 + z^2
+	 */
 	float Vector3D::sqrMagnitude()
 	{
 		return (_x * _x) + (_y * _y) + (_z * _z);
@@ -166,8 +165,8 @@ namespace bammm
 	 */
 	string Vector3D::toString()
 	{
-		//return "<" + std::to_string(_x) + " " + std::to_string(_y) + " " + std::to_string(_z) + ">";
-		return "This should be a Vector <x,y,z>";
+		return "<" + std::to_string(_x) + " " + std::to_string(_y) + " "
+				+ std::to_string(_z) + ">";
 	}
 
 	/**
@@ -224,6 +223,7 @@ namespace bammm
 		_x += vector.x();
 		_y += vector.y();
 		_z += vector.z();
+		return *this;
 	}
 
 	/**
@@ -246,5 +246,6 @@ namespace bammm
 		_x -= vector.x();
 		_y -= vector.y();
 		_z -= vector.z();
+		return *this;
 	}
 }
