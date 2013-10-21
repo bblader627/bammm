@@ -11,7 +11,7 @@ typedef unsigned int UINT
 
 namespace bammm
 {
-    class MineState : State
+    class MineState : public State
     {
         public:
             MineState();

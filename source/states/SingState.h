@@ -11,25 +11,27 @@ typedef unsigned int UINT
 
 namespace bammm
 {
-    class SingState : State
+    class SingState : public State
     {
         public:
             SingState();
-            void setup();
+            void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
 
         private:
-            int singPercentage = 75;
-            int singLine = 0;
+            const static int singPercentage = 75;
+            int singLine;
     };
 
     SingState::SingState()
     {
     }
 
-    void SingState::setup()
+    void SingState::setup(Actor* actor)
     {
+        _actor = actor;
+        singLine = 0;
     }
 
     void SingState::breakDown()
@@ -40,7 +42,7 @@ namespace bammm
     {
         int random = rand() % 100 + 1;
         
-        cout << "The dwarf begins to sing. "
+        cout << "The dwarf begins to sing. ";
         if(random <= singPercentage)
         {
             cout << "\"Far over the misty mountains cold...\"";

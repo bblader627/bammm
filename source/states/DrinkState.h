@@ -9,7 +9,7 @@ typedef unsigned int UINT
 
 namespace bammm
 {
-    class DrinkState : State
+    class DrinkState : public State
     {
         public:
             DrinkState();

@@ -10,7 +10,7 @@ typedef unsigned int UINT
 
 namespace bammm
 {
-    class SleepState : State
+    class SleepState : public State
     {
         public:
             SleepState();
@@ -23,13 +23,13 @@ namespace bammm
             int timeSlept;
     };
 
-    SleepState::SleepState(Actor* actor)
+    SleepState::SleepState()
     {
-        _actor = actor;
     }
 
-    void SleepState::setup()
+    void SleepState::setup(Actor* actor)
     {
+        _actor = actor;
         timeSlept = 0;
     }
 

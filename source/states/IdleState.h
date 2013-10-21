@@ -10,11 +10,11 @@ typedef unsigned int UINT
 
 namespace bammm
 {
-    class IdleState : State
+    class IdleState : public State
     {
         public:
             IdleState();
-            void setup();
+            void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
 
