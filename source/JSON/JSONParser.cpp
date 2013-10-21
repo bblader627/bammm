@@ -26,7 +26,7 @@ bool JSONParser::parseFile(string filename)
 
 	ifstream input;
 	char current;
-	bool isValue;
+	bool isValue = false;
 	int isArray = 0;
 	JSON *currentNode = NULL;
 	JSON *parentNode = NULL;
