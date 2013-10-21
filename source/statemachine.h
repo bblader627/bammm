@@ -69,7 +69,7 @@ public:
 		    currentState->breakdown();
         }
 		currentState = newState;
-		currentState->setup();
+		currentState->setup(_actor);
 	}
 
 	/*
@@ -100,6 +100,7 @@ public:
 
 private:
 	DynamicArray<State> * currentStates;
+    Actor* _actor;
 
 };
 #endif

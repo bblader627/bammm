@@ -15,12 +15,12 @@ namespace bammm
     {
         public:
             MineState();
-            void setup();
+            void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
 
         private:
-            int successChance = 30;
+            const static int successChance = 30;
     };
 
     MineState::MineState()
