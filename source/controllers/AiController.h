@@ -14,7 +14,7 @@ namespace bammm
             AiController();
             void update();
             uint counter = 0;
-            ~AiController();
+            virtual ~AiController();
     };
 
     AiController::AiController()
@@ -32,12 +32,12 @@ namespace bammm
         SleepState sleepState;
         IdleState idleState;
 
-        _states.add("drink", drinkState);
-        _states.add("mine", mineState);
-        _states.add("sing", singState);
-        _states.add("brawl", brawlState);
-        _states.add("sleep", sleepState);
-        _states.add("idle", idleState);
+        _states->add("drink", drinkState);
+        _states->add("mine", mineState);
+        _states->add("sing", singState);
+        _states->add("brawl", brawlState);
+        _states->add("sleep", sleepState);
+        _states->add("idle", idleState);
     }
 
 
@@ -87,7 +87,7 @@ namespace bammm
                                  _states->get(newState));
     }
 
-    virtual AiController::~AiController()
+    AiController::~AiController()
     {
     }
 }

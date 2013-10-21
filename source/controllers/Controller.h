@@ -2,6 +2,12 @@
 #define CONTROLLER_H_
 
 #include "../states/state.h"
+#include "../states/IdleState.h"
+#include "../states/DrinkState.h"
+#include "../states/BrawlState.h"
+#include "../states/SleepState.h"
+#include "../states/SingState.h"
+#include "../states/MineState.h"
 #include "../resources/hashmap.h"
 #include "../actors/actor.h"
 #include <string>
@@ -20,7 +26,7 @@ namespace bammm
 
         public:
             void intialize(Actor* actor);
-            ~Controller();
+            virtual ~Controller();
     };
 
     Controller::Controller()
@@ -34,7 +40,7 @@ namespace bammm
         _actor = actor;
     }
 
-    virtual Controller::~Controller()
+    Controller::~Controller()
     {
         delete _states;
         delete _stateMachine;
