@@ -36,63 +36,77 @@ namespace bammm
 			int height;
 
 		public:
-			//Constructors
-
-			//Creates an grid
-			Grid3d<T>()
-			{
-				width = 0;
-				length = 0;
-				height = 0;
-				grid = new DynamicArray<T>();
-			}
-			//creates a Grid with  size
-			Grid3d<T>(int w, int l, int h)
-			{
-				width = w;
-				length = l;
-				height = h;
-				grid = new DynamicArray<T>(width * length * height);
-			}
-
-			//destructor
-			~Grid3d<T>()
-			{
-				delete grid;
-			}
-
-			//Functions
+			Grid3d<T>();
+			Grid3d<T>(int w, int l, int h);
+			~Grid3d<T>();
 			/*
 			 access
 			 @Pre-Condition- takes in x,y,z  point system
 			 @Post-Condition- will return the value in that point system
 			 */
-			T* access(int x, int y, int z)
-			{
-				return grid->at(x + (y * width) + (z * width * height));
-			}
-
+			T* access(int x, int y, int z);
 			/*
 			 insert
 			 @Pre-Condition- Takes in xyz coordinate and and object to insert
 			 @Post-Condition- Inserts object into the grid space
 			 */
-			void insert(int x, int y, int z, T &obj)
-			{
-				int pos = x + (y * width) + (z * width * height);
-				grid->insert(pos, obj);
-			}
-
+			void insert(int x, int y, int z, T &obj);
 			/*
 			 remove
 			 @Pre-Condition- Takes in xyz coordinate
 			 @Post-Condition- Removes object specified by the coordinates
 			 */
-			void remove(int x, int y, int z)
-			{
-				int pos = x + (y * width) + (z * width * height);
-				grid->erase(pos);
-			}
+			void remove(int x, int y, int z);
 
 	};
+
+
+	//Creates an grid
+	template<class T>
+	Grid3d::Grid3d<T>()
+	{
+		width = 0;
+		length = 0;
+		height = 0;
+		grid = new DynamicArray<T>();
+	}
+	//creates a Grid with  size
+	template<class T>
+	Grid3d::Grid3d<T>(int w, int l, int h)
+	{
+		width = w;
+		length = l;
+		height = h;
+		grid = new DynamicArray<T>(width * length * height);
+	}
+
+	//destructor
+	template<class T>
+	Grid3d::~Grid3d<T>()
+	{
+		delete grid;
+	}
+
+
+	template<class T>
+	T* Grid3d::access(int x, int y, int z)
+	{
+		return grid->at(x + (y * width) + (z * width * height));
+	}
+
+
+	template<class T>
+	void Grid3d::insert(int x, int y, int z, T &obj)
+	{
+		int pos = x + (y * width) + (z * width * height);
+		grid->insert(pos, obj);
+	}
+
+
+	template<class T>
+	void Grid3d::remove(int x, int y, int z)
+	{
+		int pos = x + (y * width) + (z * width * height);
+		grid->erase(pos);
+	}
 }
