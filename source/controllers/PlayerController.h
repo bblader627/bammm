@@ -44,7 +44,7 @@ namespace bammm
 
     void PlayerController::input(DynamicArray<string> multiInput)
     {
-        //State temp1 = _states->getValue(multiInput.get(0));
+       // State temp1 = _states->getValue(multiInput.get(0));
         //State temp2 = _stateMachine->getCurrentStates().get(0);
        // State* newState = &temp1;
        // State* oldState = &temp2;
