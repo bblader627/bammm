@@ -11,7 +11,7 @@
 #include "../resources/hashmap.h"
 #include "../actors/actor.h"
 #include <string>
-#include "../statemachine.h"
+#include "../states/statemachine.h"
 
 using namespace std;
 
