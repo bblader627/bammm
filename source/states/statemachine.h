@@ -19,8 +19,8 @@
 #define STATEMACHINE_H_
 
 #include <iostream>
-#include "resources/dynamicarray.h"
-#include "states/state.h"
+#include "../resources/dynamicarray.h"
+#include "state.h"
 
 
 #ifndef NULL

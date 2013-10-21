@@ -17,9 +17,7 @@
 #define ISTATECALLBACK_H_
 
 #include <iostream>
-#include "states/state.h"
-
-using namespace std;
+#include "state.h"
 
 namespace bammm
 {
