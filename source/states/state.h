@@ -34,7 +34,6 @@ namespace bammm
     class State
     {
         public:
-
 	    State();
 
 	    /*

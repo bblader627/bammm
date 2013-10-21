@@ -11,8 +11,8 @@ typedef unsigned int UINT;
 
 namespace bammm
 {
-    class MineState : State
-	{
+    class MineState : public State
+    {
 		private:
 			int successChance;
 
@@ -21,7 +21,6 @@ namespace bammm
             void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
-
     };
 
     MineState::MineState()

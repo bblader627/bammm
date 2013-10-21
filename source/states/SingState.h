@@ -11,25 +11,27 @@ typedef unsigned int UINT;
 
 namespace bammm
 {
-    class SingState : State
+    class SingState : public State
     {
         public:
             SingState();
-            void setup();
+            void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
 
         private:
-            int singPercentage = 75;
-            int singLine = 0;
+            const static int singPercentage = 75;
+            int singLine;
     };
 
     SingState::SingState()
     {
     }
 
-    void SingState::setup()
+    void SingState::setup(Actor* actor)
     {
+        _actor = actor;
+        singLine = 0;
     	cout << "The dwarf begins to sing. "
     }
 
@@ -41,7 +43,6 @@ namespace bammm
     {
         _actor->reduceStamina(1);
         cout << "The dwarf is singing the song of it's people. ";
-        
     }
 }
 #endif

@@ -10,7 +10,7 @@ typedef unsigned int UINT
 
 namespace bammm
 {
-    class BrawlState : State
+    class BrawlState : public State
     {
         public:
             BrawlState();

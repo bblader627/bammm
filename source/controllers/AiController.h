@@ -6,15 +6,16 @@ using namespace std;
 
 namespace bammm
 {
-    class AiController : Controller
+    class AiController : public Controller
     {
         private:
 
         public:
             AiController();
             void update();
-            uint counter = 0;
-            ~AiController();
+            uint counter;
+            void initialize(Actor* actor);
+            virtual ~AiController();
     };
 
     AiController::AiController()
@@ -24,6 +25,7 @@ namespace bammm
     void AiController::initialize(Actor* actor)
     {
         _actor = actor;
+        counter = 0;
         
         DrinkState drinkState;
         MineState mineState;
@@ -32,12 +34,12 @@ namespace bammm
         SleepState sleepState;
         IdleState idleState;
 
-        _states.add("drink", drinkState);
-        _states.add("mine", mineState);
-        _states.add("sing", singState);
-        _states.add("brawl", brawlState);
-        _states.add("sleep", sleepState);
-        _states.add("idle", idleState);
+        _states->add("drink", drinkState);
+        _states->add("mine", mineState);
+        _states->add("sing", singState);
+        _states->add("brawl", brawlState);
+        _states->add("sleep", sleepState);
+        _states->add("idle", idleState);
     }
 
 
@@ -82,12 +84,12 @@ namespace bammm
                 counter = 2;
             }
         }
-
-        stateMachine->switchState(stateMachine->getCurrentState(), 
-                                 _states->get(newState));
+        //State* oldState = stateMachine->getCurrentState().get(0);
+        //State* newAddState = _states->getValue(newState);
+        //stateMachine->switchState(oldState, newAddState);
     }
 
-    virtual AiController::~AiController()
+    AiController::~AiController()
     {
     }
 }

@@ -17,7 +17,6 @@
 
 #ifndef STATEMACHINE_H_
 #define STATEMACHINE_H_
-#endif
 
 #include <iostream>
 #include "resources/dynamicarray.h"
@@ -47,7 +46,7 @@ public:
 	 */
 	void tick(float dTime)
 	{
-		for(int i = 0; i < currentStates->getSize(); i++)
+		for(int i = 0; i < (int) currentStates->getSize(); i++)
 		{
 			State thisState = currentStates->get(i);
 
@@ -70,7 +69,7 @@ public:
 		    currentState->breakdown();
         }
 		currentState = newState;
-		currentState->setup();
+		currentState->setup(_actor);
 	}
 
 	/*
@@ -101,5 +100,7 @@ public:
 
 private:
 	DynamicArray<State> * currentStates;
+    Actor* _actor;
 
 };
+#endif

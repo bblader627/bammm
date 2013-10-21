@@ -13,9 +13,8 @@
  *
  */
 
-#ifndef HEAP_H_
-#define HEAP_H_
-#endif
+#ifndef ISTATECALLBACK_H_
+#define ISTATECALLBACK_H_
 
 #include <iostream>
 #include "states/state.h"
@@ -32,8 +31,10 @@ class IStateCallback
 		{
 			currentState->breakdown();
 			currentState = newState;
-			currentState->setup();
+		    currentState->setup();
 		}
 
-		//virtual ~IStateCallback();
+		virtual ~IStateCallback();
 };
+
+#endif
