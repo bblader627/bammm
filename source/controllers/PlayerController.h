@@ -1,8 +1,8 @@
-#include "state.h"
+#include "../states/state.h"
 #include "resources/hashmap.h"
-#include "actor.h"
+#include "../actors/actor.h"
 #include <string>
-#include "statemachine.h"
+#include "../statemachine.h"
 
 using namespace std;
 

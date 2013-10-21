@@ -14,7 +14,7 @@
  */
 
 #include <iostream>
-#include "resources/vector3d.h"
+#include "../resources/vector3d.h"
 using namespace bammm;
 
 class Actor

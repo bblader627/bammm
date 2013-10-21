@@ -20,9 +20,9 @@
 #endif
 
 #include <iostream>
-#include "resources/dynamicarray.h"
-#include "IStateCallback.h"
-#include "actor.h"
+#include "../resources/dynamicarray.h"
+#include "../IStateCallback.h"
+#include "../actors/actor.h"
 
 #ifndef NULL
 #define NULL (void *)0
