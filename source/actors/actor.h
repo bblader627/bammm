@@ -116,6 +116,24 @@ class Actor
 			return staminaBar;
 		}
 		/*
+			getAttack
+			@Pre-Condition- takes no arguments
+			@Post-Condition- returns healthBar
+		*/
+		inline int getAttack()
+		{
+			return attack;
+		}
+		/*
+			getDefense
+			@Pre-Condition- takes no arguments
+			@Post-Condition- returns defense
+		*/
+		inline int getDefense()
+		{
+			return defense;
+		}
+		/*
 			setRotation
 			@Pre-Condition- takes no arguments
 			@Post-Condition- returns rotation
