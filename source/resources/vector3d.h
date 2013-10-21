@@ -279,8 +279,15 @@ namespace bammm
 
 	string Vector3D::toString()
 	{
-		return "<" + std::to_string(_x) + " " + std::to_string(_y) + " "
-				+ std::to_string(_z) + ">";
+		string output;
+		output.append("<");
+		output.append(output.to_string(x));
+		output.append(",");
+		output.append(output.to_string(y));
+		output.append(",");
+		output.append(output.to_string(z));
+		output.append(">");
+		return output;
 	}
 
 
