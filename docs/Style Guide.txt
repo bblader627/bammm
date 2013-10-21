@@ -7,7 +7,6 @@ BAMMM STYLE GUIDE
 •	We will use doc style comments (starting with /** and ending with */) at the top of each class and the top of each function. For the classes, we will use the parameters: @file, @class, @brief, @author, and @version. For the functions we will use: @brief, @param, @return.
 •	All comments should be a combination of /* ended by */. We will not use // comments.
 
-
 Alvaro edits
 
 Filenames should be lower case while classes should begin uppercase
