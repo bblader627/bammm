@@ -6,14 +6,14 @@
  */
 
 #include "JSONParser.h"
+#include "../resources/dynamicarray.h"
 
 using namespace std;
 using namespace bammm;
 
-
 void JSONParser::addRoot(JSON & newNode)
 {
-	root.add(newNode.getName(), newNode);
+	rootMap.add(newNode.getName(), newNode);
 }
 
 void JSONParser::addChild(JSON & rootNode, JSON & newNode)
@@ -26,6 +26,10 @@ bool JSONParser::parseFile(string filename)
 
 	ifstream input;
 	char current;
+	bool isValue;
+	int isArray = 0;
+	JSON *currentNode = NULL;
+	JSON *parentNode = NULL;
 	string name = "";
 	string value = "";
 
@@ -40,38 +44,80 @@ bool JSONParser::parseFile(string filename)
 
 	while (!input.eof())
 	{
+
 		current = (char) input.get();
 
-		if (current == '{')
+		switch (current)
 		{
-			//create object to be stored in structure
-		}
-		else if (current == '"')
-		{
-			current = input.get();
 
-			while (current != '"')
-			{
-				current = (char) input.get();
-				name += current;
-			}
+			case '[':
+				isValue = false;
+				isArray++;
+				break;
 
-			while (!input.eof())
-			{
-				current = (char) input.get();
+			case '{':
+				isValue = false;
+				parentNode = currentNode;
+				currentNode = new JSON();
+				currentNode->setParent(*parentNode);
+				parentNode->addChild(*currentNode);
+				break;
 
-				if (current == ':')
+			case '"':
+
+				if (currentNode == NULL)
 				{
-					while (!input.eof())
-					{
-
-					}
+					cout << "Error reading in JSON object" << endl;
+					return false;
 				}
-			}
 
+				current = (char) input.get();
+				while (!input.eof() && current != '"')
+				{
+					if (isValue == false)
+					{
+						name += current;
+					}
+					else
+					{
+						value += current;
+					}
+					current = (char) input.get();
+				}
+
+				if (isValue == false)
+				{
+					currentNode->setName(name);
+				}
+				else
+				{
+					currentNode->setValue(current);
+				}
+				break;
+
+			case ':':
+				isValue = true;
+				break;
+
+			case ',':
+				isValue = false;
+				break;
+
+			case ']':
+				isArray--;
+				break;
+
+			case '}':
+				currentNode = parentNode;
+				*parentNode = parentNode->getParent();
+				break;
+
+			default:
+				break;
 		}
+
+		continue;
 	}
 
 	return true;
-
 }

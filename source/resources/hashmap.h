@@ -44,6 +44,8 @@ namespace bammm
 			DynamicArray<string>* getAllKeys();
 			DynamicArray<T>* getAllValues();
 			T getValue(string key);
+			void printBucket(int index);
+			void printTable();
 	};
 
 	/**
@@ -316,6 +318,9 @@ namespace bammm
 		return abs(hash % _mapSize);
 	}
 
+	/*
+	 * @brief: Return the entire node that has the corresponding key
+	 */
 	template<class T>
 	HashNode<T>* HashMap<T>::getNode(string key)
 	{

@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "resources/dynamicarray.h"
-#include "resources/hashmap.h"
+#include "../resources/dynamicarray.h"
+#include "../resources/hashmap.h"
 
 #ifndef NULL
 #define NULL (void *) 0
@@ -64,12 +64,7 @@ namespace bammm
 
 		private:
 
-			/*
-			 * hashmap of JSON roots
-			 * JSON obj "linked lists"
-			 */
-
-			HashMap<JSON> root;
+			HashMap<JSON> rootMap;
 
 			void addRoot(JSON&);
 			void addChild(JSON&, JSON&);
