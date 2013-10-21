@@ -1,3 +1,6 @@
+#ifndef PLAYERCONTROLLER_H_
+#define PLAYERCONTROLLER_H_
+
 #include "Controller.h"
 using namespace std;
 
@@ -50,3 +53,4 @@ namespace bammm
     {
     }
 }
+#endif
