@@ -33,12 +33,12 @@ namespace bammm
     Controller::Controller()
     {
         _states = new HashMap<State>();
-        _stateMachine = new StateMachine();
     }
 
     void Controller::initialize(Actor* actor)
     {
         _actor = actor;
+        _stateMachine = new StateMachine(_actor);
     }
 
     Controller::~Controller()
