@@ -58,11 +58,9 @@ namespace bammm
 
     void PlayerController::input(string command)
     {
-    	State temp1 = _states->getValue(command);
-    	State temp2 = _stateMachine->getCurrentStates().get(0);
-    	State* newState = &temp1;
-    	State* oldState = &temp2;
-    	_stateMachine->switchState(oldState, newState);
+        DynamicArray<string> passValue;
+        passValue.add(command);
+        input(passValue);    
     }
 
     PlayerController::~PlayerController()
