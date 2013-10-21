@@ -30,41 +30,44 @@
 
 using namespace std;
 
-class State
+namespace bammm
 {
-public:
+    class State
+    {
+        public:
 
-	State();
+	    State();
 
-	/*
-	 * setup
-	 * Pre-Condition- no parameters
-	 * Post-Condition- no return value
-	 *
-	 * Sets actor values for beginning the state
-	 */
-	void setup();
+	    /*
+	    * setup
+	    * Pre-Condition- no parameters
+	    * Post-Condition- no return value
+	    *
+	    * Sets actor values for beginning the state
+	    */
+	    void setup(Actor* actor);
 
-	/*
-	 * breakDown
-	 * Pre-Condition- no parameters
-	 * Post-Condition- no return value
-	 *
-	 * Returns Actor to old state
-	 */
-	void breakdown();
+	    /*
+	    * breakDown
+	    * Pre-Condition- no parameters
+	    * Post-Condition- no return value
+	    *
+	    * Returns Actor to old state
+	    */
+	    void breakdown();
 
-	/*
-	 * tick
-	 *
-	 * Pre-Condition- time as recorded since beginning state
-	 * Post-Condition- no return value
-	 *
-	 * Process state updates based on passed time
-	 */
-	void tick(float dTime);
+	    /*
+	    * tick
+	    *
+	    * Pre-Condition- time as recorded since beginning state
+	    * Post-Condition- no return value
+	    *
+	    * Process state updates based on passed time
+	    */
+	    void tick(float dTime);
 
-	//void registerTransitionCallback(IStateCallback callback);
-private:
-	Actor* actor;
-};
+	    //void registerTransitionCallback(IStateCallback callback);
+    private:
+	    Actor* actor;
+    };
+}

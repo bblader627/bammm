@@ -11,7 +11,7 @@ namespace bammm
     {
         public:
             DrinkState();
-            void setup();
+            void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
 
@@ -24,8 +24,9 @@ namespace bammm
     {
     }
 
-    void DrinkState::setup()
+    void DrinkState::setup(Actor* actor)
     {
+        _actor = actor;
         stoutLife = stoutSize;
     }
 

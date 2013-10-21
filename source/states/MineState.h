@@ -24,9 +24,9 @@ namespace bammm
     {
     }
 
-    void MineState::setup()
+    void MineState::setup(Actor* actor)
     {
-        stoutLife = stoutSize;
+        _actor = actor;
     }
 
     void MineState::breakDown()

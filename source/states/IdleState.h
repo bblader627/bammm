@@ -22,9 +22,9 @@ namespace bammm
     {
     }
 
-    void IdleState::setup()
+    void IdleState::setup(Actor* actor)
     {
-        stoutLife = stoutSize;
+        _actor = actor;
     }
 
     void IdleState::breakDown()
