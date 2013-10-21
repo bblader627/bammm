@@ -3,6 +3,11 @@
 
 #include "Controller.h"
 #include "../states/statemachine.h"
+
+#ifndef NULL
+#define NULL ((void *)0)
+#endif
+
 using namespace std;
 using namespace bammm;
 
@@ -37,7 +42,7 @@ namespace bammm
 
         //_actor begins in idleState
         _stateMachine->addState(idleState);
-        _stateMachine->switchState(NULL, idleState);
+        _stateMachine->switchState(NULL, &idleState);
 
         _states->add("drink", drinkState);
         _states->add("mine", mineState);
