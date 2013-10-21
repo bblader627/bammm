@@ -10,7 +10,6 @@ namespace bammm
 {
     class PlayerController : public Controller
     {
-
         public:
             void input(DynamicArray<string> command);
             void input(string command);
@@ -37,7 +36,7 @@ namespace bammm
         IdleState idleState;
 
         //_actor begins in idleState
-        _statemachine->addState(idleState);
+        _stateMachine->addState(idleState);
 
         _states->add("drink", drinkState);
         _states->add("mine", mineState);
@@ -57,7 +56,7 @@ namespace bammm
 		_stateMachine->switchState(oldState, newState);
     }
 
-    void input(string command)
+    void PlayerController::input(string command)
     {
     	State temp1 = _states->getValue(command);
     	State temp2 = _stateMachine->getCurrentStates().get(0);
