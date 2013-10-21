@@ -26,25 +26,20 @@ namespace bammm
 
         public:
             Controller();
-            void initialize(Actor* actor);
+            void setup(Actor* actor);
             virtual ~Controller();
     };
 
     Controller::Controller()
     {
-        _states = new HashMap<State>();
     }
 
-    void Controller::initialize(Actor* actor)
+    void Controller::setup(Actor* actor)
     {
-        _actor = actor;
-        _stateMachine = new StateMachine(_actor);
     }
 
     Controller::~Controller()
     {
-        delete _states;
-        delete _stateMachine;
     }
 }
 #endif

@@ -33,7 +33,6 @@ namespace bammm
 {
     class State
     {
-
 		protected:
 			Actor* _actor;
 
@@ -77,7 +76,6 @@ namespace bammm
 			{
 				callback->onTransition();
 			}
-
     };
 }
 #endif

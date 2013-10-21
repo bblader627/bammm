@@ -10,14 +10,12 @@ namespace bammm
 {
     class PlayerController : public Controller
     {
-        private:
-            StateMachine* _statemachine;
 
         public:
             void input(DynamicArray<string> command);
             void input(string command);
             PlayerController();
-            void initialize(Actor* actor);
+            void setup(Actor* actor);
             virtual ~PlayerController();
     };
 
@@ -25,11 +23,11 @@ namespace bammm
     {
     }
 
-    void PlayerController::initialize(Actor* actor)
+    void PlayerController::setup(Actor* actor)
     {
         _actor = actor;
-
-        _statemachine = new StateMachine(_actor);
+        _states = new HashMap<State>();
+        _stateMachine = new StateMachine(_actor);
 
         DrinkState drinkState;
         MineState mineState;
@@ -70,6 +68,8 @@ namespace bammm
 
     PlayerController::~PlayerController()
     {
+        delete _states;
+        delete _stateMachine;
     }
 }
 #endif

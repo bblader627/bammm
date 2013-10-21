@@ -22,6 +22,8 @@
 #include "../resources/dynamicarray.h"
 #include "state.h"
 
+#include "../states/state.h"
+
 
 #ifndef NULL
 #define NULL (void *)0

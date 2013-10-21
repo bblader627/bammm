@@ -1,7 +1,7 @@
 #ifndef AICONTROLLER_H_
 #define AI_CONTROLLER_H_
-
 #include "Controller.h"
+#include "../statemachine.h"
 using namespace std;
 
 namespace bammm
@@ -9,12 +9,12 @@ namespace bammm
     class AiController : public Controller
     {
         private:
+            uint counter;
 
         public:
             AiController();
             void update();
-            uint counter;
-            void initialize(Actor* actor);
+            void setup(Actor* actor);
             virtual ~AiController();
     };
 
@@ -22,11 +22,13 @@ namespace bammm
     {
     }
 
-    void AiController::initialize(Actor* actor)
+    void AiController::setup(Actor* actor)
     {
+        _stateMachine = new StateMachine(actor);
+        _states = new State();
         _actor = actor;
         counter = 0;
-        
+
         DrinkState drinkState;
         MineState mineState;
         SingState singState;
@@ -46,7 +48,12 @@ namespace bammm
     void AiController::update()
     {
         string newState;
-        int random;
+        DynamicArray<State> currentStates = stateMachine->getCurrentStates();
+
+        if(currentStates.size() > 1 && currentStates.get(0) != _states->getValue("idle"))
+        {
+            return;
+        }
 
         if(counter == 0)
         {
@@ -65,7 +72,7 @@ namespace bammm
         }
         else if(counter == 3)
         {
-            random = rand() % 100 + 1;
+            int random = rand() % 100 + 1;
             if(random <= 33)
             {
                 newState = "sleep";
@@ -84,13 +91,17 @@ namespace bammm
                 counter = 2;
             }
         }
-        //State* oldState = stateMachine->getCurrentState().get(0);
-        //State* newAddState = _states->getValue(newState);
-        //stateMachine->switchState(oldState, newAddState);
+        State tempState1 = stateMachine->getCurrentState().get(0);
+        State tempState2 = _states->getValue(newState);
+        State* oldState = &tempState1
+        State* newAddState = &tempState2;
+        stateMachine->switchState(oldState, newAddState);
     }
 
     AiController::~AiController()
     {
+        delete _states;
+        delete _stateMachine;
     }
 }
 #endif
