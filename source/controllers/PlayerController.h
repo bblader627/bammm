@@ -12,6 +12,7 @@ namespace bammm
     {
         private:
             StateMachine* _statemachine;
+
         public:
             void input(DynamicArray<string> command);
             PlayerController();
@@ -47,11 +48,11 @@ namespace bammm
 
     void PlayerController::input(DynamicArray<string> multiInput)
     {
-        //State temp1 = _states->getValue(multiInput.get(0));
-        //State temp2 = _stateMachine->getCurrentStates().get(0);
-       // State* newState = &temp1;
-       // State* oldState = &temp2;
-       // _stateMachine->switchState(oldState, newState);
+		State temp1 = _states->getValue(multiInput.get(0));
+		State temp2 = _stateMachine->getCurrentStates().get(0);
+		State* newState = &temp1;
+		State* oldState = &temp2;
+		_stateMachine->switchState(oldState, newState);
     }
 
     PlayerController::~PlayerController()

@@ -271,7 +271,9 @@ namespace bammm
 			temporary = &(temporary->getNextNode());
 		}
 
-		return (T) NULL;
+		T *ret = NULL;
+		return *ret;
+		//return (T) NULL;
 	}
 
 	/**
