@@ -110,3 +110,5 @@ namespace bammm
 		grid->erase(pos);
 	}
 }
+
+#endif
