@@ -27,10 +27,17 @@ class Actor
 		string name;
 		Vector3D *velocity;
 		Vector3D *location;
+<<<<<<< HEAD
+		float healthBar;
+		float staminaBar;
+		float MAX_HEALTH;
+		float MAX_STAMINA;
+=======
 		int healthBar;
 		int staminaBar;
 		int attack;
 		int defense;
+>>>>>>> 0b7d9477a8cb4984ab808addc4f97e0296eb5a49
 	public:
 		//Constructors
 		
@@ -40,17 +47,36 @@ class Actor
 			rotation = 0;
 			velocity = new Vector3D();
 			location = new Vector3D();
+
+		
+		
+		
+		
+			MAX_HEALTH = 100;
+			MAX_STAMINA = 50;
+			healthBar = MAX_HEALTH;
+			staminaBar = MAX_STAMINA;
 			healthBar = 100;
 			staminaBar = 50;
 			attack = 4;
 			defense = 2;
 		}
+		
 		Actor(string myName,int health,int stamina,int atck, int def)
 		{
 			name = myName;
 			rotation = 0;
 			velocity = new Vector3D();
 			location = new Vector3D();
+
+
+			
+			
+			
+			MAX_HEALTH = health;
+			MAX_STAMINA = stamina;
+			healthBar = MAX_HEALTH;
+			staminaBar = MAX_STAMINA;
 			healthBar = health;
 			staminaBar = stamina;
 			attack = atck;
@@ -106,6 +132,7 @@ class Actor
 		{
 			return healthBar;
 		}
+		
 		/*
 			getStamina
 			@Pre-Condition- takes no arguments
@@ -159,7 +186,15 @@ class Actor
 		*/
 		void increaseHealth(int amount)
 		{
-			healthBar += amount;
+			if (healthBar>=MAX_HEALTH)
+			{
+				healthBar = MAX_HEALTH;
+				return;
+			}
+			else
+			{
+				healthBar += amount;
+			}
 		}
 		/*
 			increaseStamina
@@ -168,7 +203,15 @@ class Actor
 		*/
 		void increaseStamina(int amount)
 		{
-			staminaBar += amount;
+			if (staminaBar>=MAX_STAMINA)
+			{
+				staminaBar = MAX_STAMINA;
+				return;
+			}
+			else
+			{
+				staminaBar += amount;
+			}
 		}
 		/*
 			reduceHealth
@@ -177,7 +220,15 @@ class Actor
 		*/
 		void reduceHealth(int amount)
 		{
-			healthBar -= amount;
+			if (healthBar > 0)
+			{
+				healthBar -= amount;
+			}
+			else
+			{
+				healthBar = 0;
+				return;
+			}
 		}
 		/*
 			reduceHealth
@@ -186,10 +237,34 @@ class Actor
 		*/
 		void reduceStamina(int amount)
 		{
-			staminaBar += amount;
+			if (staminaBar > 0)
+			{
+				staminaBar -= amount;
+			}
+			else
+			{
+				staminaBar = 0;
+				return;
+			}
 		}
 
-
+		/*
+		 	isFullyRested
+		 	@Pre-Condition- no parameters
+		 	@Post-Condition- returns true if healthBar and staminaBar are equal to MAX_HEALTH and MAX_STAMINA
+		 					 returns false otherwise;
+		 */
+		boolean isFullyRested()
+		{
+			if (healthBar == MAX_HEALTH && staminaBar == MAX_STAMINA)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 		
 };
 #endif

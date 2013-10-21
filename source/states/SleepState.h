@@ -1,20 +1,23 @@
 #ifndef SLEEPSTATE_H_
 #define SLEEPSTATE_H_
 
+#include <iostream>
 #include "state.h"
 
 #ifndef UINT
 #define UINT
-typedef unsigned int UINT
+typedef unsigned int UINT;
 #endif
+
+using namespace std;
 
 namespace bammm
 {
     class SleepState : State
     {
         public:
-            SleepState();
-            void setup(Actor* actor);
+            SleepState(Actor* actor);
+            void setup();
             void breakDown();
             void tick(float dTime);
 
@@ -40,6 +43,10 @@ namespace bammm
     void SleepState::tick(float dTime)
     {
         string output = "";
+
+        _actor->increaseHealth(2);
+        _actor->increaseStamina(2);
+
         if(timeSlept < hoursToSleep)
         {
             if(timeSlept == 0)
