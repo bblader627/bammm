@@ -20,7 +20,7 @@
 
 #include <iostream>
 #include "../resources/dynamicarray.h"
-#include "../IStateCallback.h"
+#include "../states/IStateCallback.h"
 #include "../actors/actor.h"
 
 #ifndef NULL
