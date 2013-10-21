@@ -8,7 +8,7 @@
  *	Matt Witkowski	
  *   Bradley Crusco
  * Description:
- * Actor header file.
+ * PlayerController header file.
  *
  * Last Modified: Matt Witkowski
  *

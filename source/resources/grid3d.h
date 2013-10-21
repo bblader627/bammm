@@ -1,18 +1,18 @@
 /*
  * CS585
  *
- * Team MMA
- *      Alvaro Home
- *      Matt Konstantino
- *      Michael Abramo
- *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski	
+ *   Bradley Crusco
  * Description:
- *      my_grid3d Header File
+ * Grid3d header file.
  *
  * Last Modified: Alvaro Home
  *
  */
-
 #ifndef GRID3D_H_
 #define GRID3D_H_
 

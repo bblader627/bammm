@@ -1,10 +1,18 @@
 /*
- * DynamicArray.h
+ * CS585
  *
- *  Created on: Oct 4, 2013
- *			Author: mwitkows
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski	
+ *   Bradley Crusco
+ * Description:
+ * DynamicArray header file.
+ *
+ * Last Modified: Matt Witkowski
+ *
  */
-
 #ifndef DYNAMICARRAY_H_
 #define DYNAMICARRAY_H_
 

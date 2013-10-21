@@ -1,10 +1,18 @@
 /*
- * stack.h
+ * CS585
  *
- *  Created on: Oct 12, 2013
- *          Author: mwitkows
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski	
+ *   Bradley Crusco
+ * Description:
+ * Stack header file.
+ *
+ * Last Modified: Matt Witkowski
+ *
  */
-
 #ifndef STACK_H_
 #define STACK_H_
 
