@@ -27,17 +27,15 @@ class Actor
 		string name;
 		Vector3D *velocity;
 		Vector3D *location;
-<<<<<<< HEAD
+
 		float healthBar;
 		float staminaBar;
 		float MAX_HEALTH;
 		float MAX_STAMINA;
-=======
-		int healthBar;
-		int staminaBar;
+
 		int attack;
 		int defense;
->>>>>>> 0b7d9477a8cb4984ab808addc4f97e0296eb5a49
+
 	public:
 		//Constructors
 		
@@ -47,10 +45,6 @@ class Actor
 			rotation = 0;
 			velocity = new Vector3D();
 			location = new Vector3D();
-
-		
-		
-		
 		
 			MAX_HEALTH = 100;
 			MAX_STAMINA = 50;
@@ -68,10 +62,6 @@ class Actor
 			rotation = 0;
 			velocity = new Vector3D();
 			location = new Vector3D();
-
-
-			
-			
 			
 			MAX_HEALTH = health;
 			MAX_STAMINA = stamina;
@@ -254,7 +244,7 @@ class Actor
 		 	@Post-Condition- returns true if healthBar and staminaBar are equal to MAX_HEALTH and MAX_STAMINA
 		 					 returns false otherwise;
 		 */
-		boolean isFullyRested()
+		bool isFullyRested()
 		{
 			if (healthBar == MAX_HEALTH && staminaBar == MAX_STAMINA)
 			{
