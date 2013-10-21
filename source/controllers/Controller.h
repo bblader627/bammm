@@ -26,7 +26,7 @@ namespace bammm
 
         public:
             Controller();
-            void initialize(Actor* actor);
+            void setup(Actor* actor);
             virtual ~Controller();
     };
 
@@ -34,7 +34,7 @@ namespace bammm
     {
     }
 
-    void Controller::initialize(Actor* actor)
+    void Controller::setup(Actor* actor)
     {
     }
 

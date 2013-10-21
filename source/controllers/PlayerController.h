@@ -14,7 +14,7 @@ namespace bammm
         public:
             void input(DynamicArray<string> command);
             PlayerController();
-            void initialize(Actor* actor);
+            void setup(Actor* actor);
             virtual ~PlayerController();
     };
 
@@ -22,7 +22,7 @@ namespace bammm
     {
     }
 
-    void PlayerController::initialize(Actor* actor)
+    void PlayerController::setup(Actor* actor)
     {
         _actor = actor;
         _states = new HashMap<State>();
