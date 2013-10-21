@@ -33,74 +33,79 @@ using namespace bammm;
 
 class StateMachine
 {
-public:
-	StateMachine();
-
-	/*
-	 * tick
-	 * Pre-Condition-
-	 * Post-Condition-
-	 *
-	 * Calls currentStates[i].setup() on every state in the array
-	 * setup() updates states
-	 */
-	void tick(float dTime)
-	{
-		for(int i = 0; i < (int) currentStates->getSize(); i++)
+	private:
+		DynamicArray<State> * currentStates;
+		Actor* _actor;
+	public:
+		/*
+		 * Default Constructor
+		 */
+		StateMachine(Actor* actor)
 		{
-			State thisState = currentStates->get(i);
-
-			thisState.tick(time(NULL));
+			_actor = actor;
 		}
-	}
 
-	/*
-	 * switchState
-	 *
-	 * Pre-Condition-
-	 * Post-Condition-
-	 *
-	 *PlayerController will be calling switchState
-	 */
-	void switchState(State * currentState, State * newState)
-	{
-        if(currentState != NULL)
-        {
-		    currentState->breakdown();
-        }
-		currentState = newState;
-		currentState->setup(_actor);
-	}
+		/*
+		 * tick
+		 * Pre-Condition-
+		 * Post-Condition-
+		 *
+		 * Calls currentStates[i].setup() on every state in the array
+		 * setup() updates states
+		 */
+		void tick(float dTime)
+		{
+			for(int i = 0; i < (int) currentStates->getSize(); i++)
+			{
+				State thisState = currentStates->get(i);
 
-	/*
-	 * addState
-	 * Pre-Condition-
-	 * Post-Condition-
-	 *
-	 * Called from a Controller
-	 * Adds currently running states to array
-	 */
-	void addState(State newState)
-	{
-		currentStates->add(newState);
-	}
+				thisState.tick(time(NULL));
+			}
+		}
 
-    /**
-     * getCurrentStates
-     * Pre-Condition-
-     * Post-Condition-
-     *
-     * Called from Controller
-     * Returns currently running states
-     */
-    DynamicArray<State> getCurrentStates()
-    {
-        return *currentStates;
-    }
+		/*
+		 * switchState
+		 *
+		 * Pre-Condition-
+		 * Post-Condition-
+		 *
+		 *PlayerController will be calling switchState
+		 */
+		void switchState(State * currentState, State * newState)
+		{
+			if(currentState != NULL)
+			{
+				currentState->breakdown();
+			}
+			currentState = newState;
+			currentState->setup(_actor);
+		}
 
-private:
-	DynamicArray<State> * currentStates;
-    Actor* _actor;
+		/*
+		 * addState
+		 * Pre-Condition-
+		 * Post-Condition-
+		 *
+		 * Called from a Controller
+		 * Adds currently running states to array
+		 */
+		void addState(State newState)
+		{
+			currentStates->add(newState);
+		}
+
+		/**
+		 * getCurrentStates
+		 * Pre-Condition-
+		 * Post-Condition-
+		 *
+		 * Called from Controller
+		 * Returns currently running states
+		 */
+		DynamicArray<State> getCurrentStates()
+		{
+			return *currentStates;
+		}
 
 };
 #endif
