@@ -18,12 +18,11 @@ int main()
 	PlayerController* controller = new PlayerController();
 	controller->initialize(bob);
 
+	//start dwarf in IDLE			note - this will occur in initialize once statemachine is functional
 
-//start dwarf in IDLE			note - this will occur in initialize once statemachine is functional
+	//provide option for state change
 
-//provide option for state change
-
-//tick
+	//tick
 
 	return 0;
 }

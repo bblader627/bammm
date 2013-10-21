@@ -20,7 +20,7 @@
 
 #include <iostream>
 #include "../resources/dynamicarray.h"
-//#include "../IStateCallback.h"
+#include "../IStateCallback.h"
 #include "../actors/actor.h"
 
 #ifndef NULL
@@ -68,6 +68,11 @@ namespace bammm
 			*/
 			void tick(float dTime);
 
+			/*
+			 * registerTransitionCallback
+			 * Pre-Condition- accepts pointer to IStateCallback
+			 * Post-Condition- calls onTransition to swap states in callback
+			 */
 			void registerTransitionCallback(IStateCallback* callback)
 			{
 				callback->onTransition();
