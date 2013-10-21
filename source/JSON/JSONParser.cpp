@@ -11,113 +11,160 @@
 using namespace std;
 using namespace bammm;
 
-void JSONParser::addRoot(JSON & newNode)
-{
-	rootMap.add(newNode.getName(), newNode);
-}
-
-void JSONParser::addChild(JSON & rootNode, JSON & newNode)
-{
-	rootNode.addChild(newNode);
-}
-
-bool JSONParser::parseFile(string filename)
+namespace bammm
 {
 
-	ifstream input;
-	char current;
-	bool isValue = false;
-	int isArray = 0;
-	JSON *currentNode = NULL;
-	JSON *parentNode = NULL;
-	string name = "";
-	string value = "";
-
-	input.open(filename.c_str());
-
-	if (!input.is_open())
+	void JSONParser::addRoot(JSON & newNode)
 	{
-		cout << "Failed to open file: " << filename << " does not exist."
-				<< endl;
-		return false;
+		rootMap.add(newNode.getName(), newNode);
 	}
 
-	while (!input.eof())
+	void JSONParser::addChild(JSON & rootNode, JSON & newNode)
+	{
+		rootNode.addChild(newNode);
+	}
+
+	bool JSONParser::parseFile(string filename)
 	{
 
-		current = (char) input.get();
+		ifstream input;
+		char current;
+		bool isValue = false;
+		int isArray = 0;
+		JSON *currentNode = NULL;
+		JSON *parentNode = NULL;
+		string name = "";
+		string value = "";
 
-		switch (current)
+		input.open(filename.c_str());
+
+		if (!input.is_open())
+		{
+			cout << "Failed to open file: " << filename << " does not exist."
+					<< endl;
+			return false;
+		}
+
+		while (!input.eof())
 		{
 
-			case '[':
-				isValue = false;
-				isArray++;
-				break;
+			current = (char) input.get();
 
-			case '{':
-				isValue = false;
-				parentNode = currentNode;
-				currentNode = new JSON();
-				currentNode->setParent(*parentNode);
-				parentNode->addChild(*currentNode);
-				break;
+			switch (current)
+			{
 
-			case '"':
+				case '[':
+					isValue = false;
+					isArray++;
+					break;
 
-				if (currentNode == NULL)
-				{
-					cout << "Error reading in JSON object" << endl;
-					return false;
-				}
+				case '{':
+					isValue = false;
+					parentNode = currentNode;
+					currentNode = new JSON();
+					currentNode->setParent(*parentNode);
+					parentNode->addChild(*currentNode);
+					break;
 
-				current = (char) input.get();
-				while (!input.eof() && current != '"')
-				{
+				case '"':
+
+					if (currentNode == NULL)
+					{
+						cout << "Error reading in JSON object" << endl;
+						return false;
+					}
+
+					current = (char) input.get();
+					while (!input.eof() && current != '"')
+					{
+						if (isValue == false)
+						{
+							name += current;
+						}
+						else
+						{
+							value += current;
+						}
+						current = (char) input.get();
+					}
+
 					if (isValue == false)
 					{
-						name += current;
+						currentNode->setName(name);
 					}
 					else
 					{
-						value += current;
+						currentNode->setValue(current);
+						currentNode->setType(JSON_STRING);
 					}
-					current = (char) input.get();
-				}
+					break;
 
-				if (isValue == false)
-				{
-					currentNode->setName(name);
-				}
-				else
-				{
-					currentNode->setValue(current);
-				}
-				break;
+				case ':':
+					isValue = true;
 
-			case ':':
-				isValue = true;
-				break;
+					while (input.peek() == ' ' || isdigit(input.peek())
+							|| input.peek == 't' || input.peek() == 'f')
+					{
 
-			case ',':
-				isValue = false;
-				break;
+						current = (char) input.get();
 
-			case ']':
-				isArray--;
-				break;
+						if (isdigit(current))
+						{
+							while (isdigit(current))
+							{
+								value += current;
+								current = (char) input.get();
+							}
+							currentNode->setValue(value);
+							currentNode->setType(JSON_INT);
+							break;
+						}
+						else if (current == 't' || current == 'f')
+						{
+							while (isalpha(current))
+							{
+								value += current;
+								current = (char) input.get();
+							}
+							if (value == "false" || value == "true")
+							{
+								currentNode->setValue(value);
+								currentNode->setType(JSON_BOOL);
+								break;
+							}
+							else
+							{
+								cout
+										<< "Error parsing BOOLEAN value in JSON file."
+										<< endl;
+								return 1;
+							}
+						}
 
-			case '}':
-				currentNode = parentNode;
-				*parentNode = parentNode->getParent();
-				break;
+					}
 
-			default:
-				break;
+					break;
+
+				case ',':
+					isValue = false;
+					break;
+
+				case ']':
+					isArray--;
+					break;
+
+				case '}':
+					currentNode = parentNode;
+					*parentNode = parentNode->getParent();
+					break;
+
+				default:
+					break;
+			}
+
+			continue;
 		}
 
-		continue;
+		return true;
 	}
-
-	return true;
 }
