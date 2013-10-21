@@ -1,7 +1,7 @@
 #ifndef AICONTROLLER_H_
 #define AI_CONTROLLER_H_
-
 #include "Controller.h"
+#include "../statemachine.h"
 using namespace std;
 
 namespace bammm
@@ -26,7 +26,7 @@ namespace bammm
     {
         _actor = actor;
         counter = 0;
-        
+
         DrinkState drinkState;
         MineState mineState;
         SingState singState;
@@ -46,7 +46,13 @@ namespace bammm
     void AiController::update()
     {
         string newState;
+        DynamicArray<State> currentStates = stateMachine->getCurrentStates();
         int random;
+
+        if(currentStates.size() > 1 && currentStates.get(0) != _states->getValue("idle"))
+        {
+            return;
+        }
 
         if(counter == 0)
         {

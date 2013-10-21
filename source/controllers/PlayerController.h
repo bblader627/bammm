@@ -27,7 +27,6 @@ namespace bammm
     void PlayerController::initialize(Actor* actor)
     {
         _actor = actor;
-
         _statemachine = new StateMachine(_actor);
 
         DrinkState drinkState;
