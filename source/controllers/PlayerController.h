@@ -6,7 +6,7 @@ using namespace std;
 
 namespace bammm
 {
-    class PlayerController : Controller
+    class PlayerController : public Controller
     {
         private:
             
@@ -43,7 +43,7 @@ namespace bammm
 
     void PlayerController::input(DynamicArray<string> multiInput)
     {
-        //State* newState = &_states->get(multiInput.get(0));
+        //State* newState = &_states->getValue(multiInput.get(0));
         //State* oldState = &_stateMachine->getCurrentStates().get(0);
         //_stateMachine->switchState(oldState, newState);
     }
