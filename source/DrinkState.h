@@ -38,8 +38,7 @@ namespace bammm
         stoutLife--;
         if(stoutLife < 1)
         {
-            cout << "The dwarf finishes his drink. 
-            \"There's nothin' like a Dwarveren Ale from Ironforge.\"" << "\n";
+            cout << "The dwarf finishes his drink. \"There's nothin' like a Dwarveren Ale from Ironforge.\"" << "\n";
         }
         else
         {
