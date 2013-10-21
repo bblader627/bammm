@@ -1,23 +1,28 @@
 #include <iostream>
+#include "actors/actor.h"
+#include "controllers/PlayerController.h"
 //#include "JSON/JSONParser.h"
-#include "IStateCallback.h"
+//#include "IStateCallback.h"
 
 using namespace bammm;
+using namespace std;
+
+void printWelcome();
 
 int main()
 {
-
-//print welcome
 	printWelcome();
-//allow player to create dwarf or automatically create one
 
-//create controllers
+	Actor* bob = new Actor("Bob");
 
-//start dwarf in IDLE
+	PlayerController* controller = new PlayerController();
+	controller->initialize(bob);
 
-//provide option for state change
+	//start dwarf in IDLE			note - this will occur in initialize once statemachine is functional
 
-//tick
+	//provide option for state change
+
+	//tick
 
 	return 0;
 }
@@ -26,9 +31,7 @@ void printWelcome()
 {
 	cout << "================================================" << endl;
 	cout << "Welcome to BAMMM -  Alpha v0.1" << endl;
-	cout
-			<< "Creators: Alvaro Home - Matthew Konstantinou - Matthew Witkowski - Bradley Crusco - Michael Abramo"
-			<< endl;
+	cout << "Creators: Alvaro Home - Matthew Konstantinou - Matthew Witkowski - Bradley Crusco - Michael Abramo" << endl;
 	cout << "================================================" << endl;
 }
 
