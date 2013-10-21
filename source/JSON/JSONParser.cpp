@@ -10,6 +10,7 @@
 using namespace std;
 using namespace bammm;
 
+
 void JSONParser::addRoot(JSON & newNode)
 {
 	root.add(newNode.getName(), newNode);
@@ -41,11 +42,7 @@ bool JSONParser::parseFile(string filename)
 	{
 		current = (char) input.get();
 
-		if (current == '[')
-		{
-
-		}
-		else if (current == '{')
+		if (current == '{')
 		{
 			//create object to be stored in structure
 		}

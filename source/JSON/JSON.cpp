@@ -160,6 +160,7 @@ namespace bammm
 			val >> newValue;
 			this->value = val.str();
 			return true;
+
 		}
 	}
 
