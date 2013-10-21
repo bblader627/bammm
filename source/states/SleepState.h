@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include "state.h"
+#include "../IStateCallback.h"
+#include "IdleState.h"
 
 #ifndef UINT
 #define UINT
@@ -16,8 +18,8 @@ namespace bammm
     class SleepState : public State
     {
         public:
-            SleepState(Actor* actor);
-            void setup();
+            SleepState();
+            void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
 
@@ -26,14 +28,13 @@ namespace bammm
             int timeSlept;
     };
 
-    SleepState::SleepState(Actor* actor)
+    SleepState::SleepState()
     {
-    	_actor = actor;
     }
 
-    void SleepState::setup()
+    void SleepState::setup(Actor* actor)
     {
-
+    	_actor = actor;
         timeSlept = 0;
     }
 
@@ -47,6 +48,11 @@ namespace bammm
 
         _actor->increaseHealth(2);
         _actor->increaseStamina(2);
+
+        if (_actor->isFullyRested())
+        {
+        	registerTransitionCallback(new IStateCallback(this, new IdleState(), _actor));
+        }
 
         if(timeSlept < hoursToSleep)
         {

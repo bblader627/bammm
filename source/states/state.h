@@ -20,7 +20,7 @@
 
 #include <iostream>
 #include "../resources/dynamicarray.h"
-#include "../IStateCallback.h"
+//#include "../IStateCallback.h"
 #include "../actors/actor.h"
 
 #ifndef NULL
@@ -33,40 +33,46 @@ namespace bammm
 {
     class State
     {
+
+		protected:
+			Actor* _actor;
+
         public:
-	    State();
+			State();
 
-	    /*
-	    * setup
-	    * Pre-Condition- no parameters
-	    * Post-Condition- no return value
-	    *
-	    * Sets actor's necessary attributes for beginning a state
-	    */
-	    void setup();
+			/*
+			* setup
+			* Pre-Condition- no parameters
+			* Post-Condition- no return value
+			*
+			* Sets actor's necessary attributes for beginning a state
+			*/
+			void setup(Actor* actor);
 
-	    /*
-	    * breakDown
-	    * Pre-Condition- no parameters
-	    * Post-Condition- no return value
-	    *
-	    * Returns Actor to old state
-	    */
-	    void breakdown();
+			/*
+			* breakDown
+			* Pre-Condition- no parameters
+			* Post-Condition- no return value
+			*
+			* Returns Actor to old state
+			*/
+			void breakdown();
 
-	    /*
-	    * tick
-	    *
-	    * Pre-Condition- time as recorded since beginning state
-	    * Post-Condition- no return value
-	    *
-	    * Process state updates based on passed time
-	    */
-	    void tick(float dTime);
+			/*
+			* tick
+			*
+			* Pre-Condition- time as recorded since beginning state
+			* Post-Condition- no return value
+			*
+			* Process state updates based on passed time
+			*/
+			void tick(float dTime);
 
-	    //void registerTransitionCallback(IStateCallback callback);
-    protected:
-	    Actor* _actor;
+			void registerTransitionCallback(IStateCallback* callback)
+			{
+				callback->onTransition();
+			}
+
     };
 }
 #endif

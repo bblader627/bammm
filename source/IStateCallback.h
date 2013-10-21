@@ -20,24 +20,29 @@
 #include "states/state.h"
 
 using namespace std;
-//using namespace bammm;
 
 namespace bammm
 {
 
 	class IStateCallback
 	{
+		private:
+			State* currentState;
+			State* newState;
+			Actor* _actor;
 		public:
-			//In (State.)registerTransitionCallback, pass "IStateCallback.onTransition(oldState, newState)" with function in that file?
-
-			/*virtual void onTransition(State* currentState, State* newState)
-			 {
-			 currentState->breakdown();
-			 currentState = newState;
-			 currentState->setup();
-			 }
-
-			 virtual ~IStateCallback();*/
+			IStateCallback(State* current, State* next, Actor* actor)
+			{
+				currentState = current;
+				newState = next;
+				_actor = actor;
+			}
+			void onTransition()
+			{
+				currentState->breakdown();
+				currentState = newState;
+				currentState->setup(_actor);
+			}
 	};
 
 }

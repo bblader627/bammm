@@ -13,8 +13,8 @@ namespace bammm
     class BrawlState : public State
     {
         public:
-            BrawlState(Actor* actor);
-            void setup();
+            BrawlState();
+            void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
 
@@ -23,12 +23,12 @@ namespace bammm
 
     BrawlState::BrawlState()
     {
-    	_actor = actor;
+
     }
 
-    void BrawlState::setup()
+    void BrawlState::setup(Actor* actor)
     {
-
+    	_actor = actor;
     }
 
     void BrawlState::breakDown()
