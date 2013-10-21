@@ -10,8 +10,6 @@ namespace bammm
 {
     class PlayerController : public Controller
     {
-        private:
-            StateMachine* _statemachine;
 
         public:
             void input(DynamicArray<string> command);
@@ -27,6 +25,7 @@ namespace bammm
     void PlayerController::initialize(Actor* actor)
     {
         _actor = actor;
+        _states = new HashMap<State>();
         _statemachine = new StateMachine(_actor);
 
         DrinkState drinkState;

@@ -9,11 +9,11 @@ namespace bammm
     class AiController : public Controller
     {
         private:
+            uint counter;
 
         public:
             AiController();
             void update();
-            uint counter;
             void initialize(Actor* actor);
             virtual ~AiController();
     };
@@ -24,6 +24,8 @@ namespace bammm
 
     void AiController::initialize(Actor* actor)
     {
+        _stateMachine = new StateMachine(actor);
+        _states = new State();
         _actor = actor;
         counter = 0;
 
@@ -47,7 +49,6 @@ namespace bammm
     {
         string newState;
         DynamicArray<State> currentStates = stateMachine->getCurrentStates();
-        int random;
 
         if(currentStates.size() > 1 && currentStates.get(0) != _states->getValue("idle"))
         {
@@ -71,7 +72,7 @@ namespace bammm
         }
         else if(counter == 3)
         {
-            random = rand() % 100 + 1;
+            int random = rand() % 100 + 1;
             if(random <= 33)
             {
                 newState = "sleep";
@@ -90,9 +91,11 @@ namespace bammm
                 counter = 2;
             }
         }
-        //State* oldState = stateMachine->getCurrentState().get(0);
-        //State* newAddState = _states->getValue(newState);
-        //stateMachine->switchState(oldState, newAddState);
+        State tempState1 = stateMachine->getCurrentState().get(0);
+        State tempState2 = _states->getValue(newState);
+        State* oldState = &tempState1
+        State* newAddState = &tempState2;
+        stateMachine->switchState(oldState, newAddState);
     }
 
     AiController::~AiController()
