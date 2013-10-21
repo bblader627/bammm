@@ -27,10 +27,17 @@ class Actor
 		string name;
 		Vector3D *velocity;
 		Vector3D *location;
+<<<<<<< HEAD
 		float healthBar;
 		float staminaBar;
 		float MAX_HEALTH;
 		float MAX_STAMINA;
+=======
+		int healthBar;
+		int staminaBar;
+		int attack;
+		int defense;
+>>>>>>> 0b7d9477a8cb4984ab808addc4f97e0296eb5a49
 	public:
 		//Constructors
 		
@@ -41,22 +48,39 @@ class Actor
 			velocity = new Vector3D();
 			location = new Vector3D();
 
+		
+		
+		
+		
 			MAX_HEALTH = 100;
 			MAX_STAMINA = 50;
 			healthBar = MAX_HEALTH;
 			staminaBar = MAX_STAMINA;
+			healthBar = 100;
+			staminaBar = 50;
+			attack = 4;
+			defense = 2;
 		}
-		Actor(string myName,float health,float stamina)
+		
+		Actor(string myName,int health,int stamina,int atck, int def)
 		{
 			name = myName;
 			rotation = 0;
 			velocity = new Vector3D();
 			location = new Vector3D();
 
+
+			
+			
+			
 			MAX_HEALTH = health;
 			MAX_STAMINA = stamina;
 			healthBar = MAX_HEALTH;
 			staminaBar = MAX_STAMINA;
+			healthBar = health;
+			staminaBar = stamina;
+			attack = atck;
+			defense = def;
 		}
 
 		//Functions
@@ -104,18 +128,37 @@ class Actor
 			@Pre-Condition- takes no arguments
 			@Post-Condition- returns healthBar
 		*/
-		inline float getHealth()
+		inline int getHealth()
 		{
 			return healthBar;
 		}
+		
 		/*
 			getStamina
 			@Pre-Condition- takes no arguments
 			@Post-Condition- returns staminaBar
 		*/
-		inline float getStamina()
+		inline int getStamina()
 		{
 			return staminaBar;
+		}
+		/*
+			getAttack
+			@Pre-Condition- takes no arguments
+			@Post-Condition- returns healthBar
+		*/
+		inline int getAttack()
+		{
+			return attack;
+		}
+		/*
+			getDefense
+			@Pre-Condition- takes no arguments
+			@Post-Condition- returns defense
+		*/
+		inline int getDefense()
+		{
+			return defense;
 		}
 		/*
 			setRotation
@@ -141,7 +184,7 @@ class Actor
 			@Pre-Condition- Takes an float amount 
 			@Post-Condition- Increases health by said amount
 		*/
-		void increaseHealth(float amount)
+		void increaseHealth(int amount)
 		{
 			if (healthBar>=MAX_HEALTH)
 			{
@@ -158,7 +201,7 @@ class Actor
 			@Pre-Condition- Takes an float amount 
 			@Post-Condition- Increases stamina by said amount
 		*/
-		void increaseStamina(float amount)
+		void increaseStamina(int amount)
 		{
 			if (staminaBar>=MAX_STAMINA)
 			{
@@ -175,7 +218,7 @@ class Actor
 			@Pre-Condition- Takes an float amount 
 			@Post-Condition- Decreases health by said amount
 		*/
-		void reduceHealth(float amount)
+		void reduceHealth(int amount)
 		{
 			if (healthBar > 0)
 			{
@@ -192,7 +235,7 @@ class Actor
 			@Pre-Condition- Takes an float amount 
 			@Post-Condition- Decreases stamina by said amount
 		*/
-		void reduceStamina(float amount)
+		void reduceStamina(int amount)
 		{
 			if (staminaBar > 0)
 			{
