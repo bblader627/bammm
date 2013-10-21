@@ -25,18 +25,18 @@ namespace bammm
 	{
 
 		private:
-			float rotation;
-			string name;
+			float _rotation;
+			string _name;
 			Vector3D *velocity;
 			Vector3D *location;
 
-			int healthBar;
-			int staminaBar;
+			int _healthBar;
+			int _staminaBar;
 			int MAX_HEALTH;
 			int MAX_STAMINA;
 
-			int attack;
-			int defense;
+			int _attack;
+			int _defense;
 
 		public:
 			//Constructors
@@ -90,12 +90,12 @@ namespace bammm
 
 			inline float getRotation()
 			{
-				return rotation;
+				return _rotation;
 			}
 
 			inline string getName()
 			{
-				return name;
+				return _name;
 			}
 
 			inline string getVelocity()
@@ -110,22 +110,22 @@ namespace bammm
 
 			inline int getHealth()
 			{
-				return healthBar;
+				return _healthBar;
 			}
 
 			inline int getStamina()
 			{
-				return staminaBar;
+				return _staminaBar;
 			}
 
 			inline int getAttack()
 			{
-				return attack;
+				return _attack;
 			}
 
 			inline int getDefense()
 			{
-				return defense;
+				return _defense;
 			}
 
 
@@ -134,87 +134,87 @@ namespace bammm
 
 	Actor::Actor(string myName)
 	{
-		name = myName;
-		rotation = 0;
+		_name = myName;
+		_rotation = 0;
 		velocity = new Vector3D();
 		location = new Vector3D();
 
 		MAX_HEALTH = 100;
 		MAX_STAMINA = 50;
-		healthBar = MAX_HEALTH;
-		staminaBar = MAX_STAMINA;
-		healthBar = 100;
-		staminaBar = 50;
-		attack = 4;
-		defense = 2;
+		_healthBar = MAX_HEALTH;
+		_staminaBar = MAX_STAMINA;
+		_healthBar = 100;
+		_staminaBar = 50;
+		_attack = 4;
+		_defense = 2;
 	}
 
 	Actor::Actor(string myName,int health,int stamina,int atck, int def)
 	{
-		name = myName;
-		rotation = 0;
+		_name = myName;
+		_rotation = 0;
 		velocity = new Vector3D();
 		location = new Vector3D();
 	
 		MAX_HEALTH = health;
 		MAX_STAMINA = stamina;
-		healthBar = MAX_HEALTH;
-		staminaBar = MAX_STAMINA;
-		healthBar = health;
-		staminaBar = stamina;
-		attack = atck;
-		defense = def;
+		_healthBar = MAX_HEALTH;
+		_staminaBar = MAX_STAMINA;
+		_healthBar = health;
+		_staminaBar = stamina;
+		_attack = atck;
+		_defense = def;
 	}
 
 	void Actor::setRotation(float myRotation)
 	{
-		rotation = myRotation;
+		_rotation = myRotation;
 	}
 
 
 	void Actor::setName(string myName)
 	{
-		name = myName;
+		_name = myName;
 	}
 
 
 	void Actor::increaseHealth(int amount)
 	{
-		if (healthBar>=MAX_HEALTH)
+		if (_healthBar>=MAX_HEALTH)
 		{
-			healthBar = MAX_HEALTH;
+			_healthBar = MAX_HEALTH;
 			return;
 		}
 		else
 		{
-			healthBar += amount;
+			_healthBar += amount;
 		}
 	}
 
 
 	void Actor::increaseStamina(int amount)
 	{
-		if (staminaBar>=MAX_STAMINA)
+		if (_staminaBar>=MAX_STAMINA)
 		{
-			staminaBar = MAX_STAMINA;
+			_staminaBar = MAX_STAMINA;
 			return;
 		}
 		else
 		{
-			staminaBar += amount;
+			_staminaBar += amount;
 		}
 	}
 
 
 	void Actor::reduceHealth(int amount)
 	{
-		if (healthBar > 0)
+		if (_healthBar > 0)
 		{
-			healthBar -= amount;
+			_healthBar -= amount;
 		}
 		else
 		{
-			healthBar = 0;
+			_healthBar = 0;
 			return;
 		}
 	}
@@ -222,13 +222,13 @@ namespace bammm
 
 	void Actor::reduceStamina(int amount)
 	{
-		if (staminaBar > 0)
+		if (_staminaBar > 0)
 		{
-			staminaBar -= amount;
+			_staminaBar -= amount;
 		}
 		else
 		{
-			staminaBar = 0;
+			_staminaBar = 0;
 			return;
 		}
 	}
@@ -236,7 +236,7 @@ namespace bammm
 
 	bool Actor::isFullyRested()
 	{
-		if (healthBar == MAX_HEALTH && staminaBar == MAX_STAMINA)
+		if (_healthBar == MAX_HEALTH && _staminaBar == MAX_STAMINA)
 		{
 			return true;
 		}
