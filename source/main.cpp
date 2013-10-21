@@ -8,7 +8,7 @@ int main()
 {
 
 //print welcome
-
+	printWelcome();
 //allow player to create dwarf or automatically create one
 
 //create controllers
