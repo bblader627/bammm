@@ -20,7 +20,7 @@
 
 #include <iostream>
 #include "../resources/dynamicarray.h"
-#include "../IStateCallback.h"
+#include "../states/IStateCallback.h"
 #include "../actors/actor.h"
 
 #ifndef NULL
@@ -33,7 +33,6 @@ namespace bammm
 {
     class State
     {
-
 		protected:
 			Actor* _actor;
 
@@ -77,7 +76,6 @@ namespace bammm
 			{
 				callback->onTransition();
 			}
-
     };
 }
 #endif

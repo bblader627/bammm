@@ -11,7 +11,7 @@
 #include "../resources/hashmap.h"
 #include "../actors/actor.h"
 #include <string>
-#include "../statemachine.h"
+#include "../states/statemachine.h"
 
 using namespace std;
 
@@ -33,12 +33,12 @@ namespace bammm
     Controller::Controller()
     {
         _states = new HashMap<State>();
-        _stateMachine = new StateMachine();
     }
 
     void Controller::initialize(Actor* actor)
     {
         _actor = actor;
+        _stateMachine = new StateMachine(_actor);
     }
 
     Controller::~Controller()

@@ -2,7 +2,7 @@
 #define PLAYERCONTROLLER_H_
 
 #include "Controller.h"
-#include "../statemachine.h"
+#include "../states/statemachine.h"
 using namespace std;
 using namespace bammm;
 
@@ -11,6 +11,8 @@ namespace bammm
     class PlayerController : public Controller
     {
         private:
+            StateMachine* _statemachine;
+
         public:
             void input(DynamicArray<string> command);
             PlayerController();
@@ -45,11 +47,11 @@ namespace bammm
 
     void PlayerController::input(DynamicArray<string> multiInput)
     {
-       // State temp1 = _states->getValue(multiInput.get(0));
-        //State temp2 = _stateMachine->getCurrentStates().get(0);
-       // State* newState = &temp1;
-       // State* oldState = &temp2;
-       // _stateMachine->switchState(oldState, newState);
+		State temp1 = _states->getValue(multiInput.get(0));
+		State temp2 = _stateMachine->getCurrentStates().get(0);
+		State* newState = &temp1;
+		State* oldState = &temp2;
+		_stateMachine->switchState(oldState, newState);
     }
 
     PlayerController::~PlayerController()

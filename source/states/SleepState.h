@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "state.h"
-#include "../IStateCallback.h"
+#include "IStateCallback.h"
 #include "IdleState.h"
 
 #ifndef UINT

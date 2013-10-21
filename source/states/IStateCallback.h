@@ -18,6 +18,7 @@
 
 #include <iostream>
 #include "states/state.h"
+#include "actors/actor.h"
 
 using namespace std;
 
@@ -30,6 +31,7 @@ namespace bammm
 			State* currentState;
 			State* newState;
 			Actor* _actor;
+
 		public:
 			IStateCallback(State* current, State* next, Actor* actor)
 			{
@@ -37,6 +39,7 @@ namespace bammm
 				newState = next;
 				_actor = actor;
 			}
+
 			void onTransition()
 			{
 				currentState->breakdown();
