@@ -279,7 +279,7 @@ namespace bammm
 
 	string Vector3D::toString()
 	{
-		string output;
+		/*string output;
 		output.append("<");
 		output.append(output.to_string(x));
 		output.append(",");
@@ -287,7 +287,8 @@ namespace bammm
 		output.append(",");
 		output.append(output.to_string(z));
 		output.append(">");
-		return output;
+		return "<" + to_string(x) + "," + to_string(y) + "," + to_string(z) + ">";*/
+        return "";
 	}
 
 
