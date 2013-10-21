@@ -63,7 +63,7 @@ namespace bammm
 
 	//Creates an grid
 	template<class T>
-	Grid3d::Grid3d<T>()
+	Grid3d<T>::Grid3d<T>()
 	{
 		width = 0;
 		length = 0;
@@ -72,7 +72,7 @@ namespace bammm
 	}
 	//creates a Grid with  size
 	template<class T>
-	Grid3d::Grid3d<T>(int w, int l, int h)
+	Grid3d<T>::Grid3d<T>(int w, int l, int h)
 	{
 		width = w;
 		length = l;
@@ -82,21 +82,21 @@ namespace bammm
 
 	//destructor
 	template<class T>
-	Grid3d::~Grid3d<T>()
+	Grid3d<T>::~Grid3d<T>()
 	{
 		delete grid;
 	}
 
 
 	template<class T>
-	T* Grid3d::access(int x, int y, int z)
+	T* Grid3d<T>::access(int x, int y, int z)
 	{
 		return grid->at(x + (y * width) + (z * width * height));
 	}
 
 
 	template<class T>
-	void Grid3d::insert(int x, int y, int z, T &obj)
+	void Grid3d<T>::insert(int x, int y, int z, T &obj)
 	{
 		int pos = x + (y * width) + (z * width * height);
 		grid->insert(pos, obj);
@@ -104,7 +104,7 @@ namespace bammm
 
 
 	template<class T>
-	void Grid3d::remove(int x, int y, int z)
+	void Grid3d<T>::remove(int x, int y, int z)
 	{
 		int pos = x + (y * width) + (z * width * height);
 		grid->erase(pos);
