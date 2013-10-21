@@ -17,7 +17,7 @@ int main()
 	Actor* bob = new Actor("Bob");
 
 	PlayerController* controller = new PlayerController();
-	controller->initialize(bob);
+	controller->setup(bob);
 
 	bool playGame = true;
 	int choice;
