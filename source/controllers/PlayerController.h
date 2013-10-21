@@ -36,7 +36,7 @@ namespace bammm
         IdleState idleState;
 
         //_actor begins in idleState
-        _stateMachine->addState(idleState);
+        _stateMachine->addState(&idleState);
 
         _states->add("drink", drinkState);
         _states->add("mine", mineState);
