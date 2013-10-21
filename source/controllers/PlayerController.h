@@ -1,8 +1,30 @@
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski	
+ *   Bradley Crusco
+ * Description:
+ * Actor header file.
+ *
+ * Last Modified: Matt Witkowski
+ *
+ */
+
+
 #ifndef PLAYERCONTROLLER_H_
 #define PLAYERCONTROLLER_H_
 
 #include "Controller.h"
 #include "../states/statemachine.h"
+
+#ifndef NULL
+#define NULL ((void *)0)
+#endif
+
 using namespace std;
 using namespace bammm;
 
@@ -36,7 +58,8 @@ namespace bammm
         IdleState idleState;
 
         //_actor begins in idleState
-        _stateMachine->addState(&idleState);
+        _stateMachine->addState(idleState);
+        _stateMachine->switchState(NULL, &idleState);
 
         _states->add("drink", drinkState);
         _states->add("mine", mineState);

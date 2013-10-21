@@ -1,3 +1,20 @@
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski	
+ *   Bradley Crusco
+ * Description:
+ * Actor header file.
+ *
+ * Last Modified: Matt Witkowski
+ *
+ */
+
+
 #ifndef AICONTROLLER_H_
 #define AI_CONTROLLER_H_
 #include "Controller.h"
