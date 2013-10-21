@@ -2,29 +2,31 @@
 #define MINESTATE_H_
 
 #include "state.h"
-#include <stdlib.h>
+#include <iostream>
 
 #ifndef UINT
 #define UINT
-typedef unsigned int UINT
+typedef unsigned int UINT;
 #endif
 
 namespace bammm
 {
     class MineState : State
-    {
+	{
+		private:
+			int successChance;
+
         public:
             MineState();
-            void setup();
+            void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
 
-        private:
-            int successChance = 30;
     };
 
     MineState::MineState()
     {
+    	successChance = 30;
     }
 
     void MineState::setup(Actor* actor)
@@ -38,10 +40,11 @@ namespace bammm
 
     void MineState::tick(float dTime)
     {
-        int random = rand() % 100 + 1;
-
+        //int random = rand() % 100 + 1;
+    	_actor->reduceStamina(1);
         cout << "The dwarf lifts his pickaxe, and swings it at the rock. ";
         
+        /*
         if(random <= successChance)
         {
             cout << "A chunk of runite falls from the rock.\n";
@@ -50,6 +53,7 @@ namespace bammm
         {
             cout << "Nothing useful chips off from the rock.";
         }
+        */
     }
 }
 #endif
