@@ -15,6 +15,7 @@ namespace bammm
 
         public:
             void input(DynamicArray<string> command);
+            void input(string command);
             PlayerController();
             void initialize(Actor* actor);
             virtual ~PlayerController();
@@ -37,6 +38,9 @@ namespace bammm
         SleepState sleepState;
         IdleState idleState;
 
+        //_actor begins in idleState
+        _statemachine->addState(idleState);
+
         _states->add("drink", drinkState);
         _states->add("mine", mineState);
         _states->add("sing", singState);
@@ -53,6 +57,15 @@ namespace bammm
 		State* newState = &temp1;
 		State* oldState = &temp2;
 		_stateMachine->switchState(oldState, newState);
+    }
+
+    void input(string command)
+    {
+    	State temp1 = _states->getValue(command);
+    	State temp2 = _stateMachine->getCurrentStates().get(0);
+    	State* newState = &temp1;
+    	State* oldState = &temp2;
+    	_stateMachine->switchState(oldState, newState);
     }
 
     PlayerController::~PlayerController()

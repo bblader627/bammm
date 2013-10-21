@@ -8,6 +8,7 @@ using namespace bammm;
 using namespace std;
 
 void printWelcome();
+void printOptions();
 
 int main()
 {
@@ -18,7 +19,35 @@ int main()
 	PlayerController* controller = new PlayerController();
 	controller->initialize(bob);
 
-	//start dwarf in IDLE			note - this will occur in initialize once statemachine is functional
+	bool playGame = true;
+	int choice;
+
+	cout << bob->getName() << " is waiting for instructions." << endl;
+
+	while (playGame)
+	{
+		printOptions();
+		cin >> choice;
+
+		switch (choice)
+		{
+			case 1:
+				controller->input("mine");
+				break;
+			case 2:
+				controller->input("drink");
+				break;
+			case 3:
+				controller->input("sing");
+				break;
+			case 4:
+				controller->input("fight");
+				break;
+			case 5:
+				controller->input("sleep");
+				break;
+		}
+	}
 
 	//provide option for state change
 
@@ -33,6 +62,16 @@ void printWelcome()
 	cout << "Welcome to BAMMM -  Alpha v0.1" << endl;
 	cout << "Creators: Alvaro Home - Matthew Konstantinou - Matthew Witkowski - Bradley Crusco - Michael Abramo" << endl;
 	cout << "================================================" << endl;
+}
+
+void printOptions()
+{
+	cout << "Select an activity for your dwarf:" << endl;
+	cout << "1. Mine gold" << endl;
+	cout << "2. Drink ale" << endl;
+	cout << "3. Sing a song" << endl;
+	cout << "4. Fight a dwarf" << endl;
+	cout << "5. Go to sleep" << endl;
 }
 
 bool createActor()
