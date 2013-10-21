@@ -66,8 +66,8 @@ namespace bammm
 	    void tick(float dTime);
 
 	    //void registerTransitionCallback(IStateCallback callback);
-    private:
-	    Actor* actor;
+    protected:
+	    Actor* _actor;
     };
 }
 #endif
