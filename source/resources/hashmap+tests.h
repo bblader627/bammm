@@ -9,7 +9,7 @@
 #define HASHMAP_TESTS_H_
 
 #include "hashmap.h"
-#include "TestSuite/testsuite.h"
+#include "../TestSuite/testsuite.h"
 
 namespace bammm
 {
