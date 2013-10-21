@@ -4,7 +4,7 @@
 
 #ifndef UINT
 #define UINT
-typedef unsigned int UINT
+typedef unsigned int UINT;
 #endif
 
 namespace bammm
@@ -39,6 +39,7 @@ namespace bammm
     void DrinkState::tick(float dTime)
     {
         stoutLife--;
+        _actor->reduceStamina(1);
         if(stoutLife < 1)
         {
             cout << "The dwarf finishes his drink. \"There's nothin' like a Dwarveren Ale from Ironforge.\"" << "\n";

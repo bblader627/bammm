@@ -2,11 +2,11 @@
 #define SINGSTATE_H_
 
 #include "state.h"
-#include <stdlib.h>
+#include <iostream>
 
 #ifndef UINT
 #define UINT
-typedef unsigned int UINT
+typedef unsigned int UINT;
 #endif
 
 namespace bammm
@@ -32,6 +32,7 @@ namespace bammm
     {
         _actor = actor;
         singLine = 0;
+    	cout << "The dwarf begins to sing. "
     }
 
     void SingState::breakDown()
@@ -40,13 +41,8 @@ namespace bammm
 
     void SingState::tick(float dTime)
     {
-        int random = rand() % 100 + 1;
-        
-        cout << "The dwarf begins to sing. ";
-        if(random <= singPercentage)
-        {
-            cout << "\"Far over the misty mountains cold...\"";
-        }
+        _actor->reduceStamina(1);
+        cout << "The dwarf is singing the song of it's people. ";
     }
 }
 #endif
