@@ -1,3 +1,6 @@
+#ifndef IDLESTATE_H_
+#define IDLESTATE_H_
+
 #include "state.h"
 
 #ifndef UINT
@@ -35,5 +38,5 @@ namespace bammm
     {
     }
 }
-
+#endif
 

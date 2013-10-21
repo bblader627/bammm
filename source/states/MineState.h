@@ -1,3 +1,6 @@
+#ifndef MINESTATE_H_
+#define MINESTATE_H_
+
 #include "state.h"
 #include <stdlib.h>
 
@@ -49,5 +52,4 @@ namespace bammm
         }
     }
 }
-
-
+#endif

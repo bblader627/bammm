@@ -1,3 +1,6 @@
+#ifndef SINGSTATE_H_
+#define SINGSTATE_H_
+
 #include "state.h"
 #include <stdlib.h>
 
@@ -44,5 +47,4 @@ namespace bammm
         }
     }
 }
-
-
+#endif

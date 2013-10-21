@@ -1,5 +1,8 @@
+#ifndef CONTROLLER_H_
+#define CONTROLLER_H_
+
 #include "../states/state.h"
-#include "resources/hashmap.h"
+#include "../resources/hashmap.h"
 #include "../actors/actor.h"
 #include <string>
 #include "../statemachine.h"
@@ -11,7 +14,7 @@ namespace bammm
     class Controller
     {
         private:
-            Hashmap<string, State>* _states;
+            HashMap<string, State>* _states;
             Actor* _actor;
             StateMachine* _stateMachine;
 
@@ -22,7 +25,7 @@ namespace bammm
 
     Controller::Controller()
     {
-        _states = new Hashmap<string, State>();
+        _states = new HashMap<string, State>();
         _stateMachine = new StateMachine();
     }
 
@@ -37,3 +40,4 @@ namespace bammm
         delete _stateMachine;
     }
 }
+#endif

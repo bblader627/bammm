@@ -1,3 +1,5 @@
+#ifndef DRINKSTATE_H_
+#define DRINKSTATE_H_
 #include "state.h"
 
 #ifndef UINT
@@ -47,5 +49,4 @@ namespace bammm
         }
     }
 }
-
-
+#endif

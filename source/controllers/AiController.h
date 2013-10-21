@@ -1,3 +1,6 @@
+#ifndef AICONTROLLER_H_
+#define AI_CONTROLLER_H_
+
 #include "Controller.h"
 using namespace std;
 
@@ -88,3 +91,4 @@ namespace bammm
     {
     }
 }
+#endif
