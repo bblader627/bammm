@@ -32,7 +32,7 @@ namespace bammm
     {
         _actor = actor;
         singLine = 0;
-    	cout << "The dwarf begins to sing. "
+    	cout << "The dwarf begins to sing. ";
     }
 
     void SingState::breakDown()

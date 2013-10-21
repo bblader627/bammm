@@ -16,8 +16,8 @@ namespace bammm
     class SleepState : public State
     {
         public:
-            SleepState(Actor* actor);
-            void setup();
+            SleepState();
+            void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
 
