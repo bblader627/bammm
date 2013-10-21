@@ -2,7 +2,7 @@
 #define PLAYERCONTROLLER_H_
 
 #include "Controller.h"
-#include "../statemachine.h"
+#include "../states/statemachine.h"
 using namespace std;
 using namespace bammm;
 
