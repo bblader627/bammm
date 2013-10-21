@@ -13,7 +13,7 @@ namespace bammm
 {
     class Controller
     {
-        private:
+        protected:
             HashMap<string, State>* _states;
             Actor* _actor;
             StateMachine* _stateMachine;
