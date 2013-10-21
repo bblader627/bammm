@@ -14,7 +14,7 @@ namespace bammm
         public:
             AiController();
             void update();
-            void initialize(Actor* actor);
+            void setup(Actor* actor);
             virtual ~AiController();
     };
 
@@ -22,7 +22,7 @@ namespace bammm
     {
     }
 
-    void AiController::initialize(Actor* actor)
+    void AiController::setup(Actor* actor)
     {
         _stateMachine = new StateMachine(actor);
         _states = new State();
