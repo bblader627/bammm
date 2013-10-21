@@ -1,23 +1,15 @@
-#include "../states/state.h"
-#include "resources/hashmap.h"
-#include "../actors/actor.h"
-#include <string>
-#include "../statemachine.h"
-
+#include "Controller.h"
 using namespace std;
 
 namespace bammm
 {
-    class PlayerController
+    class PlayerController : Controller
     {
         private:
-            Hashmap<string, State>* _states;
-            Actor* _actor;
-            StateMachine* _stateMachine;
+            
         public:
-            PlayerController(Actor actor);
             void input(DynamicArray<string> command);
-            void intialize();
+            PlayerController();
             ~PlayerController();
     };
 
@@ -27,8 +19,6 @@ namespace bammm
 
     void PlayerController::initialize(Actor* actor)
     {
-        _states = new Hashmap<string, State>();
-        _stateMachine = new StateMachine();
         _actor = actor;
 
         DrinkState drinkState;
@@ -56,9 +46,7 @@ namespace bammm
         }
     }
 
-    PlayerController::~PlayerController()
+    virtual PlayerController::~PlayerController()
     {
-        delete _states;
-        delete _stateMachine;
     }
 }

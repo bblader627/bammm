@@ -1,23 +1,14 @@
-#include "../states/state.h"
-#include "resources/hashmap.h"
-#include "../actors/actor.h"
-#include <string>
-#include "../statemachine.h"
-
+#include "Controller.h"
 using namespace std;
 
 namespace bammm
 {
-    class AiController
+    class AiController : Controller
     {
         private:
-            Hashmap<string, State>* _states;
-            Actor* _actor;
-            StateMachine* _stateMachine;
 
         public:
-            AiController(Actor actor);
-            void intialize();
+            AiController();
             void update();
             uint counter = 0;
             ~AiController();
@@ -29,8 +20,6 @@ namespace bammm
 
     void AiController::initialize(Actor* actor)
     {
-        _states = new Hashmap<string, State>();
-        _stateMachine = new StateMachine();
         _actor = actor;
         
         DrinkState drinkState;
@@ -95,9 +84,7 @@ namespace bammm
                                  _states->get(newState));
     }
 
-    AiController::~AiController()
+    virtual AiController::~AiController()
     {
-        delete _states;
-        delete _stateMachine;
     }
 }
