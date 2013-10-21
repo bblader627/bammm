@@ -2,6 +2,7 @@
 #define PLAYERCONTROLLER_H_
 
 #include "Controller.h"
+#include "../statemachine.h"
 using namespace std;
 using namespace bammm;
 
@@ -10,7 +11,7 @@ namespace bammm
     class PlayerController : public Controller
     {
         private:
-            
+            StateMachine* _statemachine;
         public:
             void input(DynamicArray<string> command);
             PlayerController();
@@ -25,6 +26,8 @@ namespace bammm
     void PlayerController::initialize(Actor* actor)
     {
         _actor = actor;
+
+        _statemachine = new StateMachine(_actor);
 
         DrinkState drinkState;
         MineState mineState;
@@ -50,6 +53,7 @@ namespace bammm
        // State* oldState = &temp2;
        // _stateMachine->switchState(oldState, newState);
     }
+
     PlayerController::~PlayerController()
     {
     }
