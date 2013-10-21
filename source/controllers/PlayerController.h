@@ -10,7 +10,6 @@ namespace bammm
 {
     class PlayerController : public Controller
     {
-
         public:
             void input(DynamicArray<string> command);
             void input(string command);
