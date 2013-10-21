@@ -52,7 +52,7 @@ int main()
 		}
 	}
 
-	cout << "Thanks for playing!" << endl;
+	cout << "Thanks for playing!  Press enter to quit." << endl;
 	string waitfortext;
 	cin >> waitfortext;
 

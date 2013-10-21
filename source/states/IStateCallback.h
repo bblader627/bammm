@@ -17,13 +17,16 @@
 #define ISTATECALLBACK_H_
 
 #include <iostream>
-#include "state.h"
 #include "../actors/actor.h"
 
 using namespace std;
 
+
+
 namespace bammm
 {
+//Forward declaration of class State;
+class State;
 
 	class IStateCallback
 	{
@@ -40,12 +43,14 @@ namespace bammm
 				_actor = actor;
 			}
 
-			void onTransition()
+			void onTransition();
+			/*
 			{
 				currentState->breakdown();
 				currentState = newState;
 				currentState->setup(_actor);
 			}
+			*/
 	};
 
 }
