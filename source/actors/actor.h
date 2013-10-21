@@ -5,7 +5,8 @@
  * 	Alvaro Home
  * 	Matt Konstantinou
  * 	Michael Abramo
- *
+ *	Matt Witkowski	
+ *   Bradley Crusco
  * Description:
  * Actor header file.
  *
@@ -83,7 +84,7 @@ namespace bammm
 			/*
 			 	isFullyRested
 			 	@Pre-Condition- no parameters
-			 	@Post-Condition- returns true if healthBar and staminaBar are equal to MAX_HEALTH and MAX_STAMINA
+			 	@Post-Condition- returns true if healthBar and staminaBar are equal to 								MAX_HEALTH and MAX_STAMINA
 			 					 returns false otherwise;
 			 */
 			bool isFullyRested();

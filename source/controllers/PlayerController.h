@@ -1,3 +1,20 @@
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski	
+ *   Bradley Crusco
+ * Description:
+ * Actor header file.
+ *
+ * Last Modified: Matt Witkowski
+ *
+ */
+
+
 #ifndef PLAYERCONTROLLER_H_
 #define PLAYERCONTROLLER_H_
 
