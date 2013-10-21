@@ -18,7 +18,7 @@
 
 #include <iostream>
 #include "state.h"
-#include "actor.h"
+#include "../actors/actor.h"
 
 using namespace std;
 
