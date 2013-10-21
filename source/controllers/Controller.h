@@ -20,18 +20,19 @@ namespace bammm
     class Controller
     {
         protected:
-            HashMap<string, State>* _states;
+            HashMap<State>* _states;
             Actor* _actor;
             StateMachine* _stateMachine;
 
         public:
-            void intialize(Actor* actor);
+            Controller();
+            void initialize(Actor* actor);
             virtual ~Controller();
     };
 
     Controller::Controller()
     {
-        _states = new HashMap<string, State>();
+        _states = new HashMap<State>();
         _stateMachine = new StateMachine();
     }
 
