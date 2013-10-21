@@ -1,3 +1,6 @@
+#ifndef BRAWLSTATE_H_
+#define DEFINE BRAWLSTATE_H_
+
 #include "state.h"
 
 #ifndef UINT
@@ -36,5 +39,5 @@ namespace bammm
         cout << "The dwarf pulls his right arm back and then thrusts his arm forward by twisting his core. \"DWARF PUNCHHHH!\"";
     }
 }
-
+#endif
 

@@ -1,3 +1,6 @@
+#ifndef SLEEPSTATE_H_
+#define SLEEPSTATE_H_
+
 #include "state.h"
 
 #ifndef UINT
@@ -48,5 +51,4 @@ namespace bammm
         }
     }
 }
-
-
+#endif

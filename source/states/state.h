@@ -17,7 +17,6 @@
 
 #ifndef STATE_H_
 #define STATE_H_
-#endif
 
 #include <iostream>
 #include "../resources/dynamicarray.h"
@@ -71,3 +70,4 @@ namespace bammm
 	    Actor* actor;
     };
 }
+#endif
