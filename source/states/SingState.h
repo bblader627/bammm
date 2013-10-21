@@ -14,8 +14,8 @@ namespace bammm
     class SingState : public State
     {
         public:
-            SingState();
-            void setup(Actor* actor);
+            SingState(Actor* actor);
+            void setup();
             void breakDown();
             void tick(float dTime);
 
@@ -24,13 +24,13 @@ namespace bammm
             int singLine;
     };
 
-    SingState::SingState()
+    SingState::SingState(Actor* actor)
     {
+    	_actor = actor;
     }
 
-    void SingState::setup(Actor* actor)
+    void SingState::setup()
     {
-        _actor = actor;
         singLine = 0;
     	cout << "The dwarf begins to sing. ";
     }

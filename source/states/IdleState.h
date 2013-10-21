@@ -5,7 +5,7 @@
 
 #ifndef UINT
 #define UINT
-typedef unsigned int UINT
+typedef unsigned int UINT;
 #endif
 
 namespace bammm
@@ -13,21 +13,22 @@ namespace bammm
     class IdleState : public State
     {
         public:
-            IdleState();
-            void setup(Actor* actor);
+            IdleState(Actor* actor);
+            void setup();
             void breakDown();
             void tick(float dTime);
 
         private:
     };
 
-    IdleState::IdleState()
+    IdleState::IdleState(Actor* actor)
     {
+    	_actor = actor;
     }
 
-    void IdleState::setup(Actor* actor)
+    void IdleState::setup()
     {
-        _actor = actor;
+
     }
 
     void IdleState::breakDown()

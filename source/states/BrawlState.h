@@ -5,7 +5,7 @@
 
 #ifndef UINT
 #define UINT
-typedef unsigned int UINT
+typedef unsigned int UINT;
 #endif
 
 namespace bammm
@@ -13,8 +13,8 @@ namespace bammm
     class BrawlState : public State
     {
         public:
-            BrawlState();
-            void setup(Actor* actor);
+            BrawlState(Actor* actor);
+            void setup();
             void breakDown();
             void tick(float dTime);
 
@@ -23,11 +23,12 @@ namespace bammm
 
     BrawlState::BrawlState()
     {
+    	_actor = actor;
     }
 
-    void BrawlState::setup(Actor* actor)
+    void BrawlState::setup()
     {
-        _actor = actor;
+
     }
 
     void BrawlState::breakDown()

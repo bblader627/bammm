@@ -41,9 +41,9 @@ namespace bammm
 	    * Pre-Condition- no parameters
 	    * Post-Condition- no return value
 	    *
-	    * Sets actor values for beginning the state
+	    * Sets actor's necessary attributes for beginning a state
 	    */
-	    void setup(Actor* actor);
+	    void setup();
 
 	    /*
 	    * breakDown
