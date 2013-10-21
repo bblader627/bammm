@@ -28,10 +28,10 @@ class Actor
 		Vector3D *velocity;
 		Vector3D *location;
 
-		float healthBar;
-		float staminaBar;
-		float MAX_HEALTH;
-		float MAX_STAMINA;
+		int healthBar;
+		int staminaBar;
+		int MAX_HEALTH;
+		int MAX_STAMINA;
 
 		int attack;
 		int defense;
