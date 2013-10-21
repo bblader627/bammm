@@ -11,7 +11,6 @@ namespace bammm
     class PlayerController : public Controller
     {
         private:
-            StateMachine* _statemachine;
         public:
             void input(DynamicArray<string> command);
             PlayerController();
@@ -26,7 +25,6 @@ namespace bammm
     void PlayerController::initialize(Actor* actor)
     {
         _actor = actor;
-
         _statemachine = new StateMachine(_actor);
 
         DrinkState drinkState;
