@@ -17,8 +17,8 @@
 #define ISTATECALLBACK_H_
 
 #include <iostream>
-#include "states/state.h"
-#include "actors/actor.h"
+#include "state.h"
+#include "actor.h"
 
 using namespace std;
 
