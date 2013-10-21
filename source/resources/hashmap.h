@@ -13,6 +13,7 @@
 #include "hashnode.h"
 #include "dynamicarray.h"
 #include <string>
+#include <cmath>
 
 #define DEFAULT_MAPSIZE 1000
 
@@ -39,6 +40,7 @@ namespace bammm
 			bool add(string key, T value);
 			bool remove(string key);
 			void removeAll();
+			HashNode<T>* getNode(string);
 			DynamicArray<string>* getAllKeys();
 			DynamicArray<T>* getAllValues();
 			T getValue(string key);
@@ -313,6 +315,13 @@ namespace bammm
 
 		return abs(hash % _mapSize);
 	}
+
+	template<class T>
+	HashNode<T>* HashMap<T>::getNode(string key)
+	{
+		return find(key);
+	}
+
 }
 
 #endif /* HASHMAP_H_ */
