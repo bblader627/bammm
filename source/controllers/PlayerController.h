@@ -26,7 +26,7 @@ namespace bammm
     {
         _actor = actor;
         _states = new HashMap<State>();
-        _statemachine = new StateMachine(_actor);
+        _stateMachine = new StateMachine(_actor);
 
         DrinkState drinkState;
         MineState mineState;
@@ -55,6 +55,8 @@ namespace bammm
 
     PlayerController::~PlayerController()
     {
+        delete _states;
+        delete _stateMachine;
     }
 }
 #endif

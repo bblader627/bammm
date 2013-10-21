@@ -100,6 +100,8 @@ namespace bammm
 
     AiController::~AiController()
     {
+        delete _states;
+        delete _stateMachine;
     }
 }
 #endif
