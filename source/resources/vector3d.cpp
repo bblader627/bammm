@@ -223,6 +223,7 @@ namespace bammm
 		_x += vector.x();
 		_y += vector.y();
 		_z += vector.z();
+		return *this;
 	}
 
 	/**
@@ -245,5 +246,6 @@ namespace bammm
 		_x -= vector.x();
 		_y -= vector.y();
 		_z -= vector.z();
+		return *this;
 	}
 }
