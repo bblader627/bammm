@@ -36,13 +36,6 @@ namespace bammm
         SleepState sleepState;
         IdleState idleState;
 
-        drinkState.setup(actor);
-        mineState.setup(actor);
-        singState.setup(actor);
-        brawlState.setup(actor);
-        sleepState.setup(actor);
-        idleState.setup(actor);
-
         _states->add("drink", drinkState);
         _states->add("mine", mineState);
         _states->add("sing", singState);
