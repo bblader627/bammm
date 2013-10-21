@@ -9,15 +9,13 @@
 #ifndef HASHNODE_H_
 #define HASHNODE_H_
 
-/*
- * TODO: is "using namespace std" a candidate for removal?
- */
-using namespace std;
+#include <string>
 
 #ifndef NULL
 #define NULL ((void*)0)
 #endif
 
+using namespace std;
 namespace bammm
 {
 

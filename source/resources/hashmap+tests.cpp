@@ -222,24 +222,24 @@ namespace bammm
 
 		TestSuite& addToTestSuite(TestSuite& testSuite)
 		{
-			testSuite.addTest(&Triforce::HashMapTests::testConstructor,
+			testSuite.addTest(&bammm::HashMapTests::testConstructor,
 					"testConstructor");
-			testSuite.addTest(&Triforce::HashMapTests::testGetNumberOfNodes,
+			testSuite.addTest(&bammm::HashMapTests::testGetNumberOfNodes,
 					"testGetNumberOfNodes");
-			testSuite.addTest(&Triforce::HashMapTests::testGetSize,
+			testSuite.addTest(&bammm::HashMapTests::testGetSize,
 					"testGetSize");
-			testSuite.addTest(&Triforce::HashMapTests::testContains,
+			testSuite.addTest(&bammm::HashMapTests::testContains,
 					"testContains");
-			testSuite.addTest(&Triforce::HashMapTests::testAdd, "testAdd");
-			testSuite.addTest(&Triforce::HashMapTests::testRemove,
+			testSuite.addTest(&bammm::HashMapTests::testAdd, "testAdd");
+			testSuite.addTest(&bammm::HashMapTests::testRemove,
 					"testRemove");
-			testSuite.addTest(&Triforce::HashMapTests::testRemoveAll,
+			testSuite.addTest(&bammm::HashMapTests::testRemoveAll,
 					"testRemoveAll");
-			testSuite.addTest(&Triforce::HashMapTests::testGetAllKeys,
+			testSuite.addTest(&bammm::HashMapTests::testGetAllKeys,
 					"testGetAllKeys");
-			testSuite.addTest(&Triforce::HashMapTests::testGetAllValues,
+			testSuite.addTest(&bammm::HashMapTests::testGetAllValues,
 					"testGetAllValues");
-			testSuite.addTest(&Triforce::HashMapTests::testGetValue,
+			testSuite.addTest(&bammm::HashMapTests::testGetValue,
 					"testGetValue");
 
 			return testSuite;
