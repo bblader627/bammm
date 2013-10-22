@@ -13,18 +13,16 @@ namespace bammm
     class IdleState : public State
     {
         public:
-            IdleState();
+            IdleState()
+            {
+            	//do nothing
+            }
             void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
 
         private:
     };
-
-    IdleState::IdleState()
-    {
-
-    }
 
     void IdleState::setup(Actor* actor)
     {

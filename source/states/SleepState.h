@@ -18,7 +18,10 @@ namespace bammm
     class SleepState : public State
     {
         public:
-            SleepState();
+            SleepState()
+            {
+            	//do nothing
+            }
             void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
@@ -28,9 +31,6 @@ namespace bammm
             int timeSlept;
     };
 
-    SleepState::SleepState()
-    {
-    }
 
     void SleepState::setup(Actor* actor)
     {

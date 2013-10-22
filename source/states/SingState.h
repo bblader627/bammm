@@ -14,7 +14,10 @@ namespace bammm
     class SingState : public State
     {
         public:
-            SingState();
+            SingState()
+            {
+            	//do nothing
+            }
             void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
@@ -23,10 +26,6 @@ namespace bammm
             const static int singPercentage = 75;
             int singLine;
     };
-
-    SingState::SingState()
-    {
-    }
 
     void SingState::setup(Actor* actor)
     {

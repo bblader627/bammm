@@ -37,7 +37,10 @@ namespace bammm
 			Actor* _actor;
 
         public:
-			State();
+			State()
+			{
+				//do nothing
+			}
 
 			/*
 			* setup
@@ -46,7 +49,10 @@ namespace bammm
 			*
 			* Sets actor's necessary attributes for beginning a state
 			*/
-			void setup(Actor* actor);
+			void setup(Actor* actor)
+			{
+				_actor = actor;
+			}
 
 			/*
 			* breakDown
@@ -55,7 +61,10 @@ namespace bammm
 			*
 			* Returns Actor to old state
 			*/
-			void breakdown();
+			void breakdown()
+			{
+
+			}
 
 			/*
 			* tick

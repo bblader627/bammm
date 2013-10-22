@@ -17,16 +17,14 @@ namespace bammm
 			int successChance;
 
         public:
-            MineState();
+            MineState()
+            {
+            	successChance = 30;
+            }
             void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
     };
-
-    MineState::MineState()
-    {
-    	successChance = 30;
-    }
 
     /*
      * setup
