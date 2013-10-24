@@ -55,13 +55,16 @@ int main()
                 input.add("fight");
 				break;
 			case 5:
-				controller->input("sleep");
+				input.add("sleep");
 				break;
+            
+            if(!playGame)
+            {
+                break;
+            }
 
             controller->input(input);
 		}
-
-		cout << "postInputPoop" << endl;
 	}
 
 	cout << "Thanks for playing!  Press enter to quit." << endl;
@@ -79,7 +82,7 @@ void printWelcome()
 {
 	cout << "================================================" << endl;
 	cout << "Welcome to BAMMM -  Alpha v0.1" << endl;
-	cout << "Creators: Alvaro Home - Matthew Konstantinou - Matthew Witkowski - Bradley Crusco - Michael Abramo" << endl;
+	cout << "Creators: \tAlvaro Home - Matthew Konstantinou - Matthew Witkowski\n\t\tBradley Crusco - Michael Abramo" << endl;
 	cout << "================================================" << endl;
 }
 
