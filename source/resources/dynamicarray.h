@@ -59,6 +59,7 @@ namespace bammm
             bool add(T element);
             void add(uint index, T element);
             T remove(uint index);
+            bool removeElem(T elem);
             void clear();
             string toString();
             uint getMemoryUsage();
@@ -257,6 +258,33 @@ namespace bammm
         _size--;
 
         return removedElement;
+    }
+
+    /**
+     * @brief Removes the first occurrence of elem from the array.
+     * @param elem The elem to remove.
+     * @returns Returns a boolean indicating if removal was a success.
+     * @throws Throws an error when the array is null.
+     */
+    template <class T>
+    bool DynamicArray<T>::removeElem(T elem)
+    {
+        if(_array == NULL)
+        {
+            errorMsg("Array is null.");
+            assert(0);
+        }
+    
+        for(uint i = 0; i < _size; i++)
+        {
+            if(_array[i] == elem)
+            {
+                remove(i);
+                return true;
+            }
+        }
+    
+        return false;
     }
 
     /**
