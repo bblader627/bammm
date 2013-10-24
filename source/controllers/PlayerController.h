@@ -46,6 +46,7 @@ namespace bammm
 
     void PlayerController::setup(Actor* actor)
     {
+        cout << "Setup was called\n";
         _actor = actor;
         _states = new HashMap<State*>();
         _stateMachine = new StateMachine(_actor);
@@ -58,7 +59,6 @@ namespace bammm
         IdleState* idleState = new IdleState();
 
         //_actor begins in idleState
-        //addState causes seg fault
         _stateMachine->addState(idleState);
         _stateMachine->switchState(NULL, idleState);
 
@@ -77,6 +77,7 @@ namespace bammm
 		State* oldState = _stateMachine->getCurrentStates()->get(0);
 
 		_stateMachine->switchState(oldState, newState);
+        _stateMachine->tick( (float)0);
     }
 
     void PlayerController::input(string command)
