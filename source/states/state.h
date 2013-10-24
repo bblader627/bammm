@@ -89,15 +89,16 @@ namespace bammm
 			string to_string()
 			{
 				cout << "State" << endl;
+                return "State";
 			}
 
 			bool operator==(State* s)
 			{
 				//bad - to_string overloader?
-				if (_actor == s)
-				{
+				//if (_actor == s)
+				//{
 
-				}
+				//}
 				return false;
 			}
     };

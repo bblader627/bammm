@@ -36,7 +36,7 @@ using namespace bammm;
 class StateMachine
 {
 	private:
-		DynamicArray<State> * currentStates;
+		DynamicArray<State*> * currentStates;
 		Actor* _actor;
 	public:
 		/*
@@ -44,7 +44,7 @@ class StateMachine
 		 */
 		StateMachine(Actor* actor)
 		{
-			currentStates = new DynamicArray<State>();
+			currentStates = new DynamicArray<State*>();
 			_actor = actor;
 		}
 
@@ -60,9 +60,9 @@ class StateMachine
 		{
 			for(int i = 0; i < (int) currentStates->getSize(); i++)
 			{
-				State thisState = currentStates->get(i);
+				State* thisState = currentStates->get(i);
 
-				thisState.tick(time(NULL));
+				thisState->tick(time(NULL));
 			}
 		}
 
@@ -81,7 +81,6 @@ class StateMachine
 			{
 				currentState->breakdown();
 			}
-
 			currentState = newState;
 			currentState->setup(_actor);
 		}
@@ -94,7 +93,7 @@ class StateMachine
 		 * Called from a Controller
 		 * Adds currently running states to array
 		 */
-		void addState(State newState)
+		void addState(State* newState)
 		{
 			currentStates->add(newState);
 		}
@@ -107,9 +106,9 @@ class StateMachine
 		 * Called from Controller
 		 * Returns currently running states
 		 */
-		DynamicArray<State> getCurrentStates()
+		DynamicArray<State*>* getCurrentStates()
 		{
-			return *currentStates;
+			return currentStates;
 		}
 
 };

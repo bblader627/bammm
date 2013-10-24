@@ -38,7 +38,7 @@ namespace bammm
     class Controller
     {
         protected:
-            HashMap<State>* _states;
+            HashMap<State*>* _states;
             Actor* _actor;
             StateMachine* _stateMachine;
 
