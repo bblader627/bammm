@@ -58,6 +58,7 @@ namespace bammm
         IdleState idleState;
 
         //_actor begins in idleState
+        //addState causes seg fault
         _stateMachine->addState(idleState);
         _stateMachine->switchState(NULL, &idleState);
 
@@ -77,13 +78,16 @@ namespace bammm
 		State* newState = &temp1;
 		State* oldState = &temp2;
 		_stateMachine->switchState(oldState, newState);
+		cout << "poopInput" << endl;
+		return;
     }
 
     void PlayerController::input(string command)
     {
         DynamicArray<string> passValue;
         passValue.add(command);
-        input(passValue);    
+        input(passValue);
+        return;
     }
 
     PlayerController::~PlayerController()

@@ -85,6 +85,21 @@ namespace bammm
 			{
 				callback->onTransition();
 			}
+
+			string to_string()
+			{
+				cout << "State" << endl;
+			}
+
+			bool operator==(State* s)
+			{
+				//bad - to_string overloader?
+				if (_actor == s)
+				{
+
+				}
+				return false;
+			}
     };
 }
 #endif

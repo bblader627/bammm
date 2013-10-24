@@ -44,6 +44,7 @@ class StateMachine
 		 */
 		StateMachine(Actor* actor)
 		{
+			currentStates = new DynamicArray<State>();
 			_actor = actor;
 		}
 
@@ -75,10 +76,12 @@ class StateMachine
 		 */
 		void switchState(State * currentState, State * newState)
 		{
+			//TODO: Check to see if IdleState is currently running
 			if(currentState != NULL)
 			{
 				currentState->breakdown();
 			}
+
 			currentState = newState;
 			currentState->setup(_actor);
 		}

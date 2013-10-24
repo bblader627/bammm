@@ -17,10 +17,13 @@ int main()
 	Actor* bob = new Actor("Bob");
 
 	PlayerController* controller = new PlayerController();
+
 	controller->setup(bob);
 
 	bool playGame = true;
 	int choice;
+
+
 
 	cout << bob->getName() << " is waiting for instructions." << endl;
 
@@ -36,6 +39,7 @@ int main()
 				break;
 			case 1:
 				controller->input("mine");
+				cout << "poop" << endl;
 				break;
 			case 2:
 				controller->input("drink");
@@ -50,6 +54,8 @@ int main()
 				controller->input("sleep");
 				break;
 		}
+
+		cout << "postInputPoop" << endl;
 	}
 
 	cout << "Thanks for playing!  Press enter to quit." << endl;
