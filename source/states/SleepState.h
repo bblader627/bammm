@@ -44,6 +44,7 @@ namespace bammm
 
     void SleepState::tick(float dTime)
     {
+        cout << "In sleep state\n";
         string output = "";
 
         _actor->increaseHealth(2);

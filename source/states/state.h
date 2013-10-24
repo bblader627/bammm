@@ -74,7 +74,10 @@ namespace bammm
 			*
 			* Process state updates based on passed time
 			*/
-			void tick(float dTime);
+			void tick(float dTime)
+            {
+                cout << "Parent\n";
+            }
 
 			/*
 			 * registerTransitionCallback

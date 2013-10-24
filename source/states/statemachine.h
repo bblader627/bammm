@@ -62,7 +62,7 @@ class StateMachine
 			{
 				State* thisState = currentStates->get(i);
 
-				thisState->tick(time(NULL));
+				thisState->tick(0);
 			}
 		}
 
