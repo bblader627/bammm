@@ -47,20 +47,20 @@ namespace bammm
     void PlayerController::setup(Actor* actor)
     {
         _actor = actor;
-        _states = new HashMap<State>();
+        _states = new HashMap<State*>();
         _stateMachine = new StateMachine(_actor);
 
-        DrinkState drinkState;
-        MineState mineState;
-        SingState singState;
-        BrawlState brawlState;
-        SleepState sleepState;
-        IdleState idleState;
+        DrinkState* drinkState = new DrinkState();
+        MineState* mineState = new MineState();
+        SingState* singState = new SingState();
+        BrawlState* brawlState = new BrawlState();
+        SleepState* sleepState = new SleepState();
+        IdleState* idleState = new IdleState();
 
         //_actor begins in idleState
         //addState causes seg fault
         _stateMachine->addState(idleState);
-        _stateMachine->switchState(NULL, &idleState);
+        _stateMachine->switchState(NULL, idleState);
 
         _states->add("drink", drinkState);
         _states->add("mine", mineState);
@@ -73,13 +73,10 @@ namespace bammm
 
     void PlayerController::input(DynamicArray<string> multiInput)
     {
-		State temp1 = _states->getValue(multiInput.get(0));
-		State temp2 = _stateMachine->getCurrentStates().get(0);
-		State* newState = &temp1;
-		State* oldState = &temp2;
+		State* newState = _states->getValue(multiInput.get(0));
+		State* oldState = _stateMachine->getCurrentStates()->get(0);
+
 		_stateMachine->switchState(oldState, newState);
-		cout << "poopInput" << endl;
-		return;
     }
 
     void PlayerController::input(string command)
@@ -87,11 +84,16 @@ namespace bammm
         DynamicArray<string> passValue;
         passValue.add(command);
         input(passValue);
-        return;
     }
 
     PlayerController::~PlayerController()
     {
+        DynamicArray<State*>* temp = _states->getAllValues();
+        for(int i = 0; i < (int)temp->getSize(); i++)
+        {
+            delete temp->get(i);
+        }
+
         delete _states;
         delete _stateMachine;
     }

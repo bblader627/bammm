@@ -27,6 +27,7 @@ int main()
 
 	cout << bob->getName() << " is waiting for instructions." << endl;
 
+    DynamicArray<string> input;
 	while (playGame)
 	{
 		printOptions();
@@ -34,25 +35,30 @@ int main()
 
 		switch (choice)
 		{
+            if(input.getSize() > 0)
+            {   
+                input.clear();
+            }
 			case 0:
-				playGame == false;
+				playGame = false;
 				break;
 			case 1:
-				controller->input("mine");
-				cout << "poop" << endl;
+                input.add("mine");
 				break;
 			case 2:
-				controller->input("drink");
+                input.add("drink");
 				break;
 			case 3:
-				controller->input("sing");
+                input.add("sing");
 				break;
 			case 4:
-				controller->input("fight");
+                input.add("fight");
 				break;
 			case 5:
 				controller->input("sleep");
 				break;
+
+            controller->input(input);
 		}
 
 		cout << "postInputPoop" << endl;
