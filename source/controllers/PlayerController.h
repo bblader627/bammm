@@ -48,7 +48,6 @@ namespace bammm
     {
         _actor = actor;
         _states = new HashMap<State*>();
-        _stateMachine = new StateMachine(_actor);
 
 		//Create the states
         DrinkState* drinkState = new DrinkState();
@@ -66,16 +65,8 @@ namespace bammm
 		sleepState->setup(_actor);
 		idleState->setup(_actor);
 
-        //Add states to _stateMachine to be ticked
-        _stateMachine->addState(idleState);
-		_stateMachine->addState(drinkState);
-		_stateMachine->addState(mineState);
-		_stateMachine->addState(singState);
-		_stateMachine->addState(brawlState);
-		_stateMachine->addState(sleepState);
-
 		//Put actor in idle state
-        _stateMachine->switchState(NULL, idleState);
+        _stateMachine = new StateMachine(_actor, idleState);
 
         _states->add("drink", drinkState);
         _states->add("mine", mineState);
@@ -88,9 +79,12 @@ namespace bammm
 
     void PlayerController::input(DynamicArray<string>* multiInput, float dTime)
     {
-		State* newState = _states->getValue(multiInput->get(0));
-		State* oldState = _stateMachine->getCurrentStates()->get(0);
-		_stateMachine->switchState(oldState, newState);
+		DynamicArray<State*>* newStates = new DynamicArray<State*>();
+		for(int i = 0; i < (int)multiInput->getSize(); i++)
+		{
+			newStates->add(_states->getValue(multiInput->get(i)));
+		}
+		_stateMachine->switchState(newStates);
         _stateMachine->tick(dTime);
     }
 

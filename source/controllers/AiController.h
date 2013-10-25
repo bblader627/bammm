@@ -41,7 +41,7 @@ namespace bammm
 
     void AiController::setup(Actor* actor)
     {
-        _stateMachine = new StateMachine(actor);
+        //_stateMachine = new StateMachine(actor);
         _states = new HashMap<State*>();
         _actor = actor;
         counter = 0;
@@ -71,7 +71,7 @@ namespace bammm
 		_stateMachine->addState(sleepState);
 
 		//Put actor in idle state
-		_stateMachine->switchState(NULL, idleState);
+		//_stateMachine->switchState(NULL, idleState);
 
 		//Add states to hashMap
         _states->add("drink", drinkState);
@@ -85,7 +85,7 @@ namespace bammm
 
     void AiController::update(float dTime)
     {
-        string newStateStr;
+        /*string newStateStr;
         DynamicArray<State*>* currentStates = _stateMachine->getCurrentStates();
 
         if(currentStates->getSize() > 1 && currentStates->get(0) != _states->getValue("idle"))
@@ -132,7 +132,7 @@ namespace bammm
         State* newState = _stateMachine->getCurrentStates()->get(0);
         State* oldState = _states->getValue(newStateStr);
         _stateMachine->switchState(oldState, newState);
-		_stateMachine->tick(dTime);
+		_stateMachine->tick(dTime);*/
     }
 
     AiController::~AiController()

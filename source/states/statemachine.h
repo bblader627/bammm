@@ -42,11 +42,12 @@ class StateMachine
 		/*
 		 * Default Constructor
 		 */
-		StateMachine(Actor* actor)
+		StateMachine(Actor* actor, State* initialState)
 		{
-			currentStates = new DynamicArray<State*>();
 			_actor = actor;
-	}
+			currentStates = new DynamicArray<State*>();
+			currentStates->add(initialState);
+		}
 
 		/*
 		 * tick
@@ -61,6 +62,7 @@ class StateMachine
 			for(int i = 0; i < (int) currentStates->getSize(); i++)
 			{
 				State* thisState = currentStates->get(i);
+				cout << "Ticking: " << thisState->to_string() << "\n";
 				thisState->tick(0);
 			}
 		}
@@ -73,14 +75,22 @@ class StateMachine
 		 *
 		 *PlayerController will be calling switchState
 		 */
-		void switchState(State * currentState, State * newState)
+		void switchState(DynamicArray<State*>* newStates)
 		{
-			//TODO: Check to see if IdleState is currently running
-			if(currentState != NULL)
+			//Prevent invalid input
+			if(newStates == NULL)
 			{
-				currentState->breakdown();
+				return;
 			}
-			currentState = newState;
+
+			//Breakdown all the currentStates
+			for(int i = 0; i < (int)currentStates->getSize(); i++)
+			{
+				currentStates->get(i)->breakdown();	
+			}
+
+			delete currentStates;
+			currentStates = newStates;
 		}
 
 		/*

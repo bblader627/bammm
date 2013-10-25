@@ -32,7 +32,7 @@ int main()
 	string mine = "mine";
 	string drink = "drink";
 	string sing = "sing";
-	string fight = "fight";
+	string brawl = "brawl";
 	float dTime = 0;
 	while (playGame)
 	{
@@ -55,7 +55,7 @@ int main()
                 input->add(sing);
 				break;
 			case 4:
-                input->add(fight);
+                input->add(brawl);
 				break;
 			case 5:
 				input->add(sleep);
