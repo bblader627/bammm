@@ -50,20 +50,12 @@ namespace bammm
         _states = new HashMap<State*>();
 
 		//Create the states
-        DrinkState* drinkState = new DrinkState();
-        MineState* mineState = new MineState();
-        SingState* singState = new SingState();
-        BrawlState* brawlState = new BrawlState();
-        SleepState* sleepState = new SleepState();
-        IdleState* idleState = new IdleState();
-
-		//Setup the states
-		drinkState->setup(_actor);
-		mineState->setup(_actor);
-		singState->setup(_actor);
-		brawlState->setup(_actor);
-		sleepState->setup(_actor);
-		idleState->setup(_actor);
+        DrinkState* drinkState = new DrinkState(_actor);
+        MineState* mineState = new MineState(_actor);
+        SingState* singState = new SingState(_actor);
+        BrawlState* brawlState = new BrawlState(_actor);
+        SleepState* sleepState = new SleepState(_actor);
+        IdleState* idleState = new IdleState(_actor);
 
 		//Put actor in idle state
         _stateMachine = new StateMachine(_actor, idleState);
