@@ -102,7 +102,7 @@ namespace bammm
 				case ':':
 					isValue = true;
 
-					while (input.peek() == ' ' || isdigit(input.peek())v|| input.peek() == 't' || input.peek() == 'f')
+					while (input.peek() == ' ' || isdigit(input.peek()) || input.peek() == 't' || input.peek() == 'f')
 					{
 
 						current = (char) input.get();
