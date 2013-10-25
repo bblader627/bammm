@@ -561,7 +561,7 @@ namespace bammm
         }
         else
         {
-            //delete[] _array;
+            delete[] _array;
 			_array = NULL;
         }
     }

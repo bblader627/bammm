@@ -33,8 +33,8 @@ namespace bammm
     class PlayerController : public Controller
     {
         public:
-            void input(DynamicArray<string> command);
-            void input(string command);
+            void input(DynamicArray<string>* command, float dTime);
+            void input(string command, float dTime);
             PlayerController();
             void setup(Actor* actor);
             ~PlayerController();
@@ -51,6 +51,7 @@ namespace bammm
         _states = new HashMap<State*>();
         _stateMachine = new StateMachine(_actor);
 
+		//Create the states
         DrinkState* drinkState = new DrinkState();
         MineState* mineState = new MineState();
         SingState* singState = new SingState();
@@ -86,19 +87,20 @@ namespace bammm
     }
 
 
-    void PlayerController::input(DynamicArray<string> multiInput)
+    void PlayerController::input(DynamicArray<string>* multiInput, float dTime)
     {
-		State* newState = _states->getValue(multiInput.get(0));
+		State* newState = _states->getValue(multiInput->get(0));
 		State* oldState = _stateMachine->getCurrentStates()->get(0);
 		_stateMachine->switchState(oldState, newState);
-        _stateMachine->tick(0);
+        _stateMachine->tick(dTime);
     }
 
-    void PlayerController::input(string command)
+    void PlayerController::input(string command, float dTime)
     {
-        DynamicArray<string> passValue;
-        passValue.add(command);
-        input(passValue);
+        DynamicArray<string>* passValue = new DynamicArray<string>();
+        passValue->add(command);
+        input(passValue, dTime);
+		delete passValue;
     }
 
     PlayerController::~PlayerController()
@@ -109,7 +111,7 @@ namespace bammm
             delete temp->get(i);
         }
 
-        delete _states;
+        //delete _states;
         delete _stateMachine;
     }
 }
