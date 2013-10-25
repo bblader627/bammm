@@ -20,6 +20,7 @@ namespace bammm
             void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
+			string to_string();
 
         private:
     };
@@ -36,6 +37,11 @@ namespace bammm
     void IdleState::tick(float dTime)
     {
     }
+
+	string IdleState::to_string()
+	{
+		return "Idle State";
+	}
 }
 #endif
 

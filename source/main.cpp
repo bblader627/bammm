@@ -28,34 +28,36 @@ int main()
 	cout << bob->getName() << " is waiting for instructions." << endl;
 
     DynamicArray<string> input;
+	string sleep = "sleep";
+	string mine = "mine";
+	string drink = "drink";
+	string sing = "sing";
+	string fight = "fight";
 	while (playGame)
 	{
+		input.clear();
 		printOptions();
 		cin >> choice;
 
 		switch (choice)
 		{
-            if(input.getSize() > 0)
-            {   
-                input.clear();
-            }
 			case 0:
 				playGame = false;
 				break;
 			case 1:
-                input.add("mine");
+                input.add(mine);
 				break;
 			case 2:
-                input.add("drink");
+                input.add(drink);
 				break;
 			case 3:
-                input.add("sing");
+                input.add(sing);
 				break;
 			case 4:
-                input.add("fight");
+                input.add(fight);
 				break;
 			case 5:
-				input.add("sleep");
+				input.add(sleep);
 				break;
 		}
 
@@ -63,7 +65,6 @@ int main()
 		{
     		break;
 		}
-
 		controller->input(input);
 
 	}

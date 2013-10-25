@@ -21,6 +21,7 @@ namespace bammm
             void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
+			string to_string();
 
         private:
             const static int singPercentage = 75;
@@ -43,5 +44,10 @@ namespace bammm
         _actor->reduceStamina(1);
         cout << "The dwarf is singing the song of it's people. ";
     }
+
+	string SingState::to_string()
+	{
+		return "Sing State";
+	}
 }
 #endif

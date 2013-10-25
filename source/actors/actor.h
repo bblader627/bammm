@@ -230,7 +230,6 @@ namespace bammm
 		else
 		{
 			_staminaBar = 0;
-			return;
 		}
 	}
 
