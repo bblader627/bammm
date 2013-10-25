@@ -57,19 +57,20 @@ int main()
 			case 5:
 				input.add("sleep");
 				break;
-            
-            if(!playGame)
-            {
-                break;
-            }
-
-            controller->input(input);
 		}
+
+		if(!playGame)
+		{
+    		break;
+		}
+
+		controller->input(input);
+
 	}
 
 	cout << "Thanks for playing!  Press enter to quit." << endl;
-	string waitfortext;
-	cin >> waitfortext;
+	//string waitfortext;
+	//cin >> waitfortext;
 
 	//provide option for state change
 
