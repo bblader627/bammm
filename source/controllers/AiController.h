@@ -30,7 +30,7 @@ namespace bammm
 
         public:
             AiController();
-            void update();
+            void update(float dTime);
             void setup(Actor* actor);
             virtual ~AiController();
     };
@@ -45,7 +45,8 @@ namespace bammm
         _states = new HashMap<State*>();
         _actor = actor;
         counter = 0;
-
+		
+		//Create the states
         DrinkState* drinkState = new DrinkState();
         MineState* mineState = new MineState();
         SingState* singState = new SingState();
@@ -53,6 +54,26 @@ namespace bammm
         SleepState* sleepState = new SleepState();
         IdleState* idleState = new IdleState();
 
+		//Setup the states
+		drinkState->setup(_actor);
+		mineState->setup(_actor);
+		singState->setup(_actor);
+		brawlState->setup(_actor);
+		sleepState->setup(_actor);
+		idleState->setup(_actor);
+
+		//Add states to _stateMachine to be ticked
+		_stateMachine->addState(idleState);
+		_stateMachine->addState(drinkState);
+		_stateMachine->addState(mineState);
+		_stateMachine->addState(singState);
+		_stateMachine->addState(brawlState);
+		_stateMachine->addState(sleepState);
+
+		//Put actor in idle state
+		_stateMachine->switchState(NULL, idleState);
+
+		//Add states to hashMap
         _states->add("drink", drinkState);
         _states->add("mine", mineState);
         _states->add("sing", singState);
@@ -62,9 +83,9 @@ namespace bammm
     }
 
 
-    void AiController::update()
+    void AiController::update(float dTime)
     {
-        string newState;
+        string newStateStr;
         DynamicArray<State*>* currentStates = _stateMachine->getCurrentStates();
 
         if(currentStates->getSize() > 1 && currentStates->get(0) != _states->getValue("idle"))
@@ -74,17 +95,17 @@ namespace bammm
 
         if(counter == 0)
         {
-            newState = "idle";
+            newStateStr = "idle";
             counter = 1;
         }
         else if(counter == 1 || counter == 3)
         {
-           newState = "drink"; 
+           newStateStr = "drink"; 
            counter++;
         }
         else if(counter == 2)
         {
-            newState = "mine";
+            newStateStr = "mine";
             counter++;
         }
         else if(counter == 3)
@@ -92,25 +113,26 @@ namespace bammm
             int random = rand() % 100 + 1;
             if(random <= 33)
             {
-                newState = "sleep";
+                newStateStr = "sleep";
                 counter = 0;
             }
             else
             {
                 if(random <= 66)
                 {
-                    newState = "brawl";
+                    newStateStr = "brawl";
                 }
                 else
                 {
-                    newState = "sing";
+                    newStateStr = "sing";
                 }
                 counter = 2;
             }
         }
-        State* newAddState = _stateMachine->getCurrentStates()->get(0);
-        State* oldState = _states->getValue(newState);
-        _stateMachine->switchState(oldState, newAddState);
+        State* newState = _stateMachine->getCurrentStates()->get(0);
+        State* oldState = _states->getValue(newStateStr);
+        _stateMachine->switchState(oldState, newState);
+		_stateMachine->tick(dTime);
     }
 
     AiController::~AiController()

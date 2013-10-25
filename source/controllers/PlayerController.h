@@ -46,7 +46,6 @@ namespace bammm
 
     void PlayerController::setup(Actor* actor)
     {
-        cout << "Setup was called\n";
         _actor = actor;
         _states = new HashMap<State*>();
         _stateMachine = new StateMachine(_actor);
