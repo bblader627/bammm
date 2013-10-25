@@ -41,6 +41,7 @@ namespace bammm
 
     void AiController::setup(Actor* actor)
     {
+		/*
         //_stateMachine = new StateMachine(actor);
         _states = new HashMap<State*>();
         _actor = actor;
@@ -80,6 +81,7 @@ namespace bammm
         _states->add("brawl", brawlState);
         _states->add("sleep", sleepState);
         _states->add("idle", idleState);
+		*/
     }
 
 

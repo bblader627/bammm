@@ -18,8 +18,8 @@ namespace bammm
     class SleepState : public State
     {
         public:
-            SleepState();
-            void setup(Actor* actor);
+            SleepState(Actor* actor);
+            void setup();
             void breakDown();
             void tick(float dTime);
 			string to_string();
@@ -29,13 +29,13 @@ namespace bammm
             int timeSlept;
     };
 
-	SleepState::SleepState()
+	SleepState::SleepState(Actor* actor)
 	{
+		_actor = actor;
 	}
 
-    void SleepState::setup(Actor* actor)
+    void SleepState::setup()
     {
-    	_actor = actor;
         timeSlept = 0;
     }
 
@@ -52,7 +52,7 @@ namespace bammm
 
         if (_actor->isFullyRested())
         {
-        	registerTransitionCallback(new IStateCallback(this, new IdleState(), _actor));
+        	registerTransitionCallback(new IStateCallback(this, new IdleState(_actor), _actor));
         }
 
         if(timeSlept < hoursToSleep)

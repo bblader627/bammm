@@ -17,24 +17,26 @@ namespace bammm
 			int successChance;
 
         public:
-            MineState()
-            {
-            	successChance = 30;
-            }
-            void setup(Actor* actor);
+            MineState(Actor* actor);
+            void setup();
             void breakDown();
             void tick(float dTime);
 			string to_string();
     };
+
+	MineState::MineState(Actor* actor)
+	{
+		_actor = actor;
+	}
 
     /*
      * setup
      * Pre-Condition- no parameters
      * Post-Condition- sets _actor's member variables necessary for beginning a state
      */
-    void MineState::setup(Actor* actor)
+    void MineState::setup()
     {
-    	_actor = actor;
+    	successChance = 30;
     }
 
     void MineState::breakDown()

@@ -38,7 +38,8 @@ namespace bammm
 
         public:
 			State();
-			virtual void setup(Actor* actor);
+			State(Actor* actor);
+			virtual void setup();
 			virtual void breakdown();
 			virtual void tick(float dTime);
 			virtual void registerTransitionCallback(IStateCallback* callback);
@@ -51,6 +52,11 @@ namespace bammm
 	{
 	}
 
+	State::State(Actor* actor)
+	{
+		_actor = actor;
+	}
+
 	/*
 	* setup
 	* Pre-Condition- no parameters
@@ -58,9 +64,8 @@ namespace bammm
 	*
 	* Sets actor's necessary attributes for beginning a state
 	*/
-	void State::setup(Actor* actor)
+	void State::setup()
 	{
-		_actor = actor;
 	}
 
 	/*

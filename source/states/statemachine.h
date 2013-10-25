@@ -62,7 +62,6 @@ class StateMachine
 			for(int i = 0; i < (int) currentStates->getSize(); i++)
 			{
 				State* thisState = currentStates->get(i);
-				cout << "Ticking: " << thisState->to_string() << "\n";
 				thisState->tick(0);
 			}
 		}
@@ -83,7 +82,7 @@ class StateMachine
 				return;
 			}
 
-			//Breakdown all the currentStates
+			//Breakdown all the previous states
 			for(int i = 0; i < (int)currentStates->getSize(); i++)
 			{
 				currentStates->get(i)->breakdown();	
@@ -91,6 +90,12 @@ class StateMachine
 
 			delete currentStates;
 			currentStates = newStates;
+
+			//Setup all the new states
+			for(int i = 0; i < (int)currentStates->getSize(); i++)
+			{
+				currentStates->get(i)->setup();	
+			}
 		}
 
 		/*

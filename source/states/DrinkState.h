@@ -12,11 +12,8 @@ namespace bammm
     class DrinkState : public State
     {
         public:
-            DrinkState()
-            {
-            	//do nothing
-            }
-            void setup(Actor* actor);
+            DrinkState(Actor* actor);
+            void setup();
             void breakDown();
             void tick(float dTime);
 			string to_string();
@@ -26,9 +23,13 @@ namespace bammm
             uint stoutLife;
     };
 
-    void DrinkState::setup(Actor* actor)
+	DrinkState::DrinkState(Actor* actor)
+	{
+		_actor = actor;
+	}
+
+    void DrinkState::setup()
     {
-    	_actor = actor;
         stoutLife = stoutSize;
     }
 
