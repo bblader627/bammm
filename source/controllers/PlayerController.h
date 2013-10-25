@@ -104,7 +104,7 @@ namespace bammm
             delete temp->get(i);
         }
 
-        //delete _states;
+        delete _states;
         delete _stateMachine;
     }
 }
