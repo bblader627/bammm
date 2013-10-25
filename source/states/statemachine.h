@@ -46,7 +46,7 @@ class StateMachine
 		{
 			currentStates = new DynamicArray<State*>();
 			_actor = actor;
-		}
+	}
 
 		/*
 		 * tick
@@ -61,7 +61,6 @@ class StateMachine
 			for(int i = 0; i < (int) currentStates->getSize(); i++)
 			{
 				State* thisState = currentStates->get(i);
-
 				thisState->tick(0);
 			}
 		}
@@ -82,7 +81,6 @@ class StateMachine
 				currentState->breakdown();
 			}
 			currentState = newState;
-			currentState->setup(_actor);
 		}
 
 		/*

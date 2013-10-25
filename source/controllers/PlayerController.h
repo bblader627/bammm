@@ -37,7 +37,7 @@ namespace bammm
             void input(string command);
             PlayerController();
             void setup(Actor* actor);
-            virtual ~PlayerController();
+            ~PlayerController();
     };
 
     PlayerController::PlayerController()
@@ -58,8 +58,23 @@ namespace bammm
         SleepState* sleepState = new SleepState();
         IdleState* idleState = new IdleState();
 
-        //_actor begins in idleState
+		//Setup the states
+		drinkState->setup(_actor);
+		mineState->setup(_actor);
+		singState->setup(_actor);
+		brawlState->setup(_actor);
+		sleepState->setup(_actor);
+		idleState->setup(_actor);
+
+        //Add states to _stateMachine to be ticked
         _stateMachine->addState(idleState);
+		_stateMachine->addState(drinkState);
+		_stateMachine->addState(mineState);
+		_stateMachine->addState(singState);
+		_stateMachine->addState(brawlState);
+		_stateMachine->addState(sleepState);
+
+		//Put actor in idle state
         _stateMachine->switchState(NULL, idleState);
 
         _states->add("drink", drinkState);
@@ -75,9 +90,8 @@ namespace bammm
     {
 		State* newState = _states->getValue(multiInput.get(0));
 		State* oldState = _stateMachine->getCurrentStates()->get(0);
-
 		_stateMachine->switchState(oldState, newState);
-        _stateMachine->tick( (float)0);
+        _stateMachine->tick(0);
     }
 
     void PlayerController::input(string command)

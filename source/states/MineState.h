@@ -24,6 +24,7 @@ namespace bammm
             void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
+			string to_string();
     };
 
     /*
@@ -62,5 +63,10 @@ namespace bammm
     {
     	callback.onTransition();
     }
+
+	string MineState::to_string()
+	{
+		return "Mine State";
+	}
 }
 #endif

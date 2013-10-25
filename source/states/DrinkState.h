@@ -19,6 +19,7 @@ namespace bammm
             void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
+			string to_string();
 
         private:
             static const uint stoutSize = 5;
@@ -48,5 +49,10 @@ namespace bammm
             cout << "The dwarf takes a sip of the Dwarven Ale." << "\n";
         }
     }
+
+	string DrinkState::to_string()
+	{
+		return "Drink State";
+	}
 }
 #endif

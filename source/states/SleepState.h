@@ -18,19 +18,20 @@ namespace bammm
     class SleepState : public State
     {
         public:
-            SleepState()
-            {
-            	//do nothing
-            }
+            SleepState();
             void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
+			string to_string();
 
         private:
             static const int hoursToSleep = 8;
             int timeSlept;
     };
 
+	SleepState::SleepState()
+	{
+	}
 
     void SleepState::setup(Actor* actor)
     {
@@ -44,7 +45,6 @@ namespace bammm
 
     void SleepState::tick(float dTime)
     {
-        cout << "In sleep state\n";
         string output = "";
 
         _actor->increaseHealth(2);
@@ -65,5 +65,10 @@ namespace bammm
             timeSlept++;
         }
     }
+
+	string SleepState::to_string()
+	{
+		return "Sleep State";
+	}
 }
 #endif

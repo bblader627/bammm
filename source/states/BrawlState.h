@@ -17,6 +17,7 @@ namespace bammm
             void setup(Actor* actor);
             void breakDown();
             void tick(float dTime);
+			string to_string();
 
         private:
     };
@@ -39,6 +40,11 @@ namespace bammm
     {
         cout << "The dwarf pulls his right arm back and then thrusts his arm forward by twisting his core. \"DWARF PUNCHHHH!\"";
     }
+
+	string BrawlState::to_string()
+	{
+		return "Brawl State";
+	}
 }
 #endif
 
