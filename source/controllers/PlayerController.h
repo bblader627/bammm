@@ -176,6 +176,8 @@ namespace bammm
 			cout << "5. Go to sleep" << endl;
 		}
 
+		cout << "6. Continue" << endl;
+
     	cout << "0. Quit" << endl;
     }
 

@@ -60,6 +60,12 @@ int main()
 			case 5:
 				input->add(sleep);
 				break;
+			case 6:
+				//wait
+				break;
+			default:
+				cout << "Invalid Input" << endl;
+				break;
 		}
 
 		if(!playGame)
