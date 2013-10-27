@@ -87,6 +87,12 @@ namespace bammm
 			//if so, break it down
 
 			State* newState = _states->getValue(multiInput->get(i));
+
+			/********************************************
+			 *This should be handled in the stateMachine
+			 *This logic should be in statemachine->add()
+			 * or switchState()
+			 *******************************************/
 			if (currentStates->contains(newState))
 			{
 				//switching newState with NULL calls breakdown on newState, the remove on currentStates
