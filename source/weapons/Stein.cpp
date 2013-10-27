@@ -3,9 +3,9 @@
 
 #include "IWeaponType.h"
 #include "../"
-using namespace bammm
+namespace bammm
 {
-	class Stein : public IWeaponType
+	class Stein: public IWeaponType
 	{
 		private:
 			WeaponData* weaponData;
@@ -44,21 +44,21 @@ using namespace bammm
 	{
 		int damage = weaponData->getDamage();
 
-		if(actor == NULL)
+		if (actor == NULL)
 		{
 			return;
 		}
 
-		if(canAttack())
+		if (canAttack())
 		{
-			actor->reduceHealth(damage);	
+			actor->reduceHealth(damage);
 			time = timer->getSeconds + weaponData->getFireRate();
 		}
 	}
 
 	bool canAttack()
 	{
-		if(time->getSeconds() < timer)
+		if (time->getSeconds() < timer)
 		{
 			return false;
 		}
