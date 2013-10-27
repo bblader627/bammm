@@ -1,11 +1,15 @@
 #ifndef DRINKSTATE_H_
 #define DRINKSTATE_H_
+
 #include "state.h"
+#include "SleepState.h"
 
 #ifndef UINT
 #define UINT
 typedef unsigned int UINT;
 #endif
+
+using namespace std;
 
 namespace bammm
 {
@@ -26,6 +30,7 @@ namespace bammm
 	DrinkState::DrinkState(Actor* actor)
 	{
 		_actor = actor;
+
 	}
 
     void DrinkState::setup()
@@ -39,16 +44,35 @@ namespace bammm
 
     void DrinkState::tick(float dTime)
     {
-        stoutLife--;
-        _actor->reduceStamina(1);
-        if(stoutLife < 1)
-        {
-            cout << "The dwarf finishes his drink. \"There's nothin' like a Dwarveren Ale from Ironforge.\"" << "\n";
-        }
-        else
-        {
-            cout << "The dwarf takes a sip of the Dwarven Ale." << "\n";
-        }
+    	string name = _actor->getName();
+    	if (stoutLife==0)
+    	{
+    		stoutLife=5;
+    		if (!(_actor->spendGold(3)))
+			{
+				cout << _actor->getName() << " does not have enough gold to buy alcohol." << endl;
+				return;
+			}
+    	}
+
+		stoutLife--;
+		_actor->reduceStamina(1);
+		_actor->incrementBAC();
+
+		if (_actor->getBAC() >= 0.5)
+		{
+			cout << name << " is too drunk to continue.  He drops his glass and passes out on the floor." << endl;
+			this->registerTransitionCallback(new IStateCallback(this, new SleepState(_actor), _actor));
+			//switchState(this, SleepState);
+		}
+		else if(stoutLife < 1)
+		{
+			cout << name <<  " finishes his drink. \"There's nothin' like a Dwarveren Ale from Ironforge.\"" << "\n";
+		}
+		else
+		{
+			cout << "The dwarf takes a sip of the Dwarven Ale." << "\n";
+		}
     }
 
 	string DrinkState::to_string()

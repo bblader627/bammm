@@ -39,6 +39,9 @@ namespace bammm
 			int _attack;
 			int _defense;
 
+			int gold;
+			float BAC;
+
 		public:
 			//Constructors
 			Actor(string myName);
@@ -57,30 +60,35 @@ namespace bammm
 				@Post-Condition- returns name
 			*/
 			void setName(string myName);
+
 			/*
 				increaseHealth
 				@Pre-Condition- Takes an float amount 
 				@Post-Condition- Increases health by said amount
 			*/
 			void increaseHealth(int amount);
+
 			/*
 				increaseStamina
 				@Pre-Condition- Takes an float amount 
 				@Post-Condition- Increases stamina by said amount
 			*/
 			void increaseStamina(int amount);
+
 			/*
 				reduceHealth
 				@Pre-Condition- Takes an float amount 
 				@Post-Condition- Decreases health by said amount
 			*/
 			void reduceHealth(int amount);
+
 			/*
 				reduceHealth
 				@Pre-Condition- Takes an float amount 
 				@Post-Condition- Decreases stamina by said amount
 			*/
 			void reduceStamina(int amount);
+
 			/*
 			 	isFullyRested
 			 	@Pre-Condition- no parameters
@@ -88,6 +96,45 @@ namespace bammm
 			 					 returns false otherwise;
 			 */
 			bool isFullyRested();
+
+			/*
+			  	increaseBAC
+			 	@Pre-Condition- no parameters;
+			 	@Post-Condition- increments BAC by .1;
+			 */
+			void incrementBAC();
+
+			/*
+			 	resetBAC
+			 	@Pre-Condition- no parameters;
+			 	@Post-Condition- sets BAC back to 0
+			 */
+			void resetBAC();
+
+			/*
+				addGold
+				@Pre-Condition- takes amount of gold to add
+				@Post-Condition- returns total amount of gold
+			 */
+			int addGold(int amount);
+
+			/*
+				resetBAC
+				@Pre-Condition- takes amount of gold to spend;
+				@Post-Condition- decrements gold and returns true if there is enough, returns false if not
+			 */
+			bool spendGold(int amount);
+
+
+			inline int getGold()
+			{
+				return gold;
+			}
+
+			inline float getBAC()
+			{
+				return BAC;
+			}
 
 			inline float getRotation()
 			{
@@ -243,6 +290,31 @@ namespace bammm
 		else
 		{
 			return false;
+		}
+	}
+
+	void Actor::incrementBAC()
+	{
+		BAC += .1;
+		return;
+	}
+
+	int Actor::addGold(int amount)
+	{
+		gold += amount;
+		return gold;
+	}
+
+	bool Actor::spendGold(int amount)
+	{
+		if (gold < amount)
+		{
+			return false;
+		}
+		else
+		{
+			gold -= amount;
+			return true;
 		}
 	}
 }

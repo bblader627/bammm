@@ -47,7 +47,8 @@ namespace bammm
     {
         //int random = rand() % 100 + 1;
     	_actor->reduceStamina(1);
-        cout << "The dwarf lifts his pickaxe, and swings it at the rock. ";
+    	_actor->addGold(1);
+        cout << _actor->getName() << " lifts his pickaxe, and swings it at the rock. " << endl;
         
         /*
         if(random <= successChance)

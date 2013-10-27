@@ -59,10 +59,9 @@ class StateMachine
 		 */
 		void tick(float dTime)
 		{
-			cout << "# of states: " << currentStates->getSize() << endl;
+
 			for(int i = 0; i < (int) currentStates->getSize(); i++)
 			{
-				cout << "tick: " << i << endl;
 				State* thisState = currentStates->get(i);
 				thisState->tick(0);
 			}
