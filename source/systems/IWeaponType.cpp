@@ -1,4 +1,4 @@
-#include "WeaponData.h"
+#include "weapondata.h"
 
 class IWeaponType
 {

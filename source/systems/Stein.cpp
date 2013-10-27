@@ -1,3 +1,4 @@
+#include "IWeaponType.h"
 
 class Stein : public IWeaponType
 {
