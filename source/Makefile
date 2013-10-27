@@ -13,6 +13,9 @@ resources/heap.h resources/queue.h resources/stack.h resources/vector3d.h
 TESTNAME = test
 TESTSRC = main.cpp
 #
+all: re $(SRC) $(TESTSRC)
+	g++ $(SRC) $(TESTSRC) -Wall -Werror -std=c++0x -o $(TESTNAME)
+
 retest: re test
 
 clean:
@@ -27,5 +30,5 @@ fclean: clean
 
 re: fclean
 
-test: $(SRC) $(TESTSRC)
-	g++ $(SRC) $(TESTSRC) -Wall -Werror -std=c++0x -o $(TESTNAME)
+test: $(TESTSRC)
+	g++ $(TESTSRC) -Wall -Werror -std=c++0x -o $(TESTNAME)
