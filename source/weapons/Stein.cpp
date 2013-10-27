@@ -2,7 +2,7 @@
 #define STEIN_H_
 
 #include "IWeaponType.h"
-#include "../"
+#include "../TestSuite/time.h"
 namespace bammm
 {
 	class Stein: public IWeaponType
