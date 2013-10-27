@@ -4,7 +4,7 @@
 
 RM = rm -f
 SRCPATH = .
-SRC = actors/actor.h  controllers/AiController.h controllers/Controller.h \
+SRC = actors/actor.h  actors/DwarfActor.h actors/OrcActor.h controllers/AiController.h controllers/Controller.h \
 controllers/PlayerController.h states/BrawlState.h states/DrinkState.h \
 states/IdleState.h states/IStateCallback.h states/MineState.h \
 states/SingState.h states/SleepState.h states/state.h states/statemachine.h \
