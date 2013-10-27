@@ -37,7 +37,7 @@ int main()
 	while (playGame)
 	{
 		input->clear();
-		printOptions();
+		controller->printOptions();
 		cin >> choice;
 
 		switch (choice)
@@ -89,16 +89,7 @@ void printWelcome()
 	cout << "================================================" << endl;
 }
 
-void printOptions()
-{
-	cout << "Select an activity for your dwarf:" << endl;
-	cout << "0. Quit" << endl;
-	cout << "1. Mine gold" << endl;
-	cout << "2. Drink ale" << endl;
-	cout << "3. Sing a song" << endl;
-	cout << "4. Fight a dwarf" << endl;
-	cout << "5. Go to sleep" << endl;
-}
+
 
 bool createActor()
 {

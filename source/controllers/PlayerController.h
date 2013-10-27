@@ -38,6 +38,7 @@ namespace bammm
             PlayerController();
             void setup(Actor* actor);
             ~PlayerController();
+            void printOptions();
     };
 
     PlayerController::PlayerController()
@@ -60,23 +61,49 @@ namespace bammm
 		//Put actor in idle state
         _stateMachine = new StateMachine(_actor, idleState);
 
-        _states->add("drink", drinkState);
+        _states->add("idle", idleState);
         _states->add("mine", mineState);
+        _states->add("drink", drinkState);
         _states->add("sing", singState);
         _states->add("brawl", brawlState);
         _states->add("sleep", sleepState);
-        _states->add("idle", idleState);
+
     }
 
 
     void PlayerController::input(DynamicArray<string>* multiInput, float dTime)
     {
-		DynamicArray<State*>* newStates = new DynamicArray<State*>();
+    	//all currently running states
+    	DynamicArray<State*>* currentStates = _stateMachine->getCurrentStates();
+
+    	//newStates will have 1 state
+		//DynamicArray<State*>* newStates = new DynamicArray<State*>();
+
 		for(int i = 0; i < (int)multiInput->getSize(); i++)
 		{
-			newStates->add(_states->getValue(multiInput->get(i)));
+			//newStates->add(_states->getValue(multiInput->get(i)));
+
+			//Check to see if state is already running
+			//if so, break it down
+
+			State* newState = _states->getValue(multiInput->get(i));
+			if (currentStates->contains(newState))
+			{
+				//switching newState with NULL calls breakdown on newState, the remove on currentStates
+				//_stateMachine->switchState(newState, NULL);
+
+				newState->breakdown();
+				currentStates->removeElem(newState);
+			}
+			else
+			{
+				_stateMachine->addState(newState);
+			}
+
 		}
-		_stateMachine->switchState(newStates);
+
+		//Should input even call switchstate?
+		//_stateMachine->switchState(newStates);
         _stateMachine->tick(dTime);
     }
 
@@ -86,6 +113,70 @@ namespace bammm
         passValue->add(command);
         input(passValue, dTime);
 		delete passValue;
+    }
+
+    void PlayerController::printOptions()
+    {
+    	DynamicArray<State*>* currentStates = _stateMachine->getCurrentStates();
+    	/*
+
+    	}
+    	*/
+    	//MAKE THIS SMARTER
+    	cout << "Select an activity for your dwarf:" << endl;
+
+		//Mining gold options
+    	if (currentStates->contains(_states->getValue("mine")))
+		{
+			cout << "1. Stop mining gold" << endl;
+		}
+		else
+		{
+			cout << "1. Mine Gold" << endl;
+		}
+
+    	//Drinking options
+    	if (currentStates->contains(_states->getValue("drink")))
+		{
+			cout << "2. Stop drinking ale" << endl;
+		}
+		else
+		{
+			cout << "2. Drink ale" << endl;
+		}
+
+    	//Singing options
+    	if (currentStates->contains(_states->getValue("sing")))
+    	{
+    		cout << "3. Stop signing" << endl;
+    	}
+    	else
+    	{
+    		cout << "3. Sing a song" << endl;
+    	}
+
+    	//Fighting options
+    	if (currentStates->contains(_states->getValue("brawl")))
+    	{
+    		cout << "4. Stop fighting" << endl;
+    	}
+    	else
+    	{
+    		cout << "4. Fight a dwarf" << endl;
+    	}
+
+
+    	//Fighting options
+		if (currentStates->contains(_states->getValue("sleep")))
+		{
+			cout << "5. Wake up" << endl;
+		}
+		else
+		{
+			cout << "5. Go to sleep" << endl;
+		}
+
+    	cout << "0. Quit" << endl;
     }
 
     PlayerController::~PlayerController()
@@ -99,5 +190,7 @@ namespace bammm
         delete _states;
         delete _stateMachine;
     }
+
+
 }
 #endif

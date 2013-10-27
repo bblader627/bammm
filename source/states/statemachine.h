@@ -59,8 +59,10 @@ class StateMachine
 		 */
 		void tick(float dTime)
 		{
+			cout << "# of states: " << currentStates->getSize() << endl;
 			for(int i = 0; i < (int) currentStates->getSize(); i++)
 			{
+				cout << "tick: " << i << endl;
 				State* thisState = currentStates->get(i);
 				thisState->tick(0);
 			}
@@ -74,27 +76,18 @@ class StateMachine
 		 *
 		 *PlayerController will be calling switchState
 		 */
-		void switchState(DynamicArray<State*>* newStates)
+		void switchState(State* current, State* newState)
 		{
-			//Prevent invalid input
-			if(newStates == NULL)
+			if (newState == NULL)
 			{
-				return;
+				current->breakdown();
+				currentStates->removeElem(current);
 			}
-
-			//Breakdown all the previous states
-			for(int i = 0; i < (int)currentStates->getSize(); i++)
+			else
 			{
-				currentStates->get(i)->breakdown();	
-			}
-
-			delete currentStates;
-			currentStates = newStates;
-
-			//Setup all the new states
-			for(int i = 0; i < (int)currentStates->getSize(); i++)
-			{
-				currentStates->get(i)->setup();	
+				current->breakdown();
+				current = newState;
+				current->setup();
 			}
 		}
 

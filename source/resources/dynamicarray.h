@@ -19,6 +19,7 @@
 #include <iostream>
 #include <cstring>
 #include <cassert>
+#include <typeinfo>
 
 using namespace std;
 
@@ -30,6 +31,8 @@ typedef unsigned int uint;
 #ifndef NULL
 #define NULL ((void*)0)
 #endif
+
+using namespace std;
 
 namespace bammm
 {
@@ -70,6 +73,7 @@ namespace bammm
             void ensureCapacity(uint min);
             bool contains(T element);
             void trimToSize();
+
     };
 
     /**
@@ -505,7 +509,7 @@ namespace bammm
         }
         return false;
     }
-    
+
     /**
      * @brief Copies the array over to a new array with capacity of _size.
      */
