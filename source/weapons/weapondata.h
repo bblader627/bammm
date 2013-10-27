@@ -14,8 +14,8 @@
  *
  */
 
-#ifndef ACTOR_H_
-#define ACTOR_H_
+#ifndef WEAPONDATA_H_
+#define WEAPONDATA_H_
 
 #include <iostream>
 #include "vector3d.h"
