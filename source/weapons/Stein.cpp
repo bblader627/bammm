@@ -1,14 +1,20 @@
+#ifndef STEIN
+#define STEIN_H_
+
 #include "IWeaponType.h"
-
-class Stein : public IWeaponType
+using namespace bammm
 {
-	private:
-		WeaponData weaponData;
+	class Stein : public IWeaponType
+	{
+		private:
+			WeaponData weaponData;
 
-	public:
-		Stein();
-		~Stein();
-		void attack();
-		bool canAttack();
-		void reload();
+		public:
+			Stein();
+			~Stein();
+			void attack();
+			bool canAttack();
+			void reload();
+	};
 }
+#endif
