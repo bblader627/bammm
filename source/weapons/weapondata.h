@@ -76,11 +76,6 @@ namespace bammm
 			{
 				return _fireRate;
 			}
-			
-			inline string getType()
-			{
-				return _type;
-			}
 
 			inline string getModel()
 			{
