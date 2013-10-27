@@ -2,6 +2,7 @@
 #define STEIN_H_
 
 #include "IWeaponType.h"
+#include "../"
 using namespace bammm
 {
 	class Stein : public IWeaponType
@@ -9,6 +10,7 @@ using namespace bammm
 		private:
 			WeaponData* weaponData;
 			float timer;
+			Time* time;
 
 		public:
 			Stein();
@@ -22,31 +24,34 @@ using namespace bammm
 	{
 		weaponData = new WeaponData(1, 1, "", "melee");
 		timer = 0;
+		time = new Time();
 	}
 
 	Stein::Stein(WeaponData* wd)
 	{
 		weaponData = wd;
 		timer = 0;
+		time = new Time();
 	}
 
 	Stein::~Stein()
 	{
 		delete weaponData;
+		delete time;
 	}
 
 	void Stein::attack()
 	{
 		if(canAttack())
 		{
-			//Add a damage state to the target?
+
+			time = timer->getSeconds + weaponData->getFireRate();
 		}
-		timer = weaponData->getFireRate();
 	}
 
 	bool canAttack()
 	{
-		if(timer > 0)
+		if(time->getSeconds() > timer)
 		{
 			return false;
 		}
