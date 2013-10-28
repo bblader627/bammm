@@ -54,11 +54,11 @@ namespace bammm
 		if (canAttack())
 		{
 			actor->reduceHealth(damage);
-			time = timer->getSeconds + weaponData->getFireRate();
+			timer = time->getSeconds + weaponData->getFireRate();
 		}
 	}
 
-	bool canAttack()
+	bool Stein::canAttack()
 	{
 		if (time->getSeconds() < timer)
 		{
