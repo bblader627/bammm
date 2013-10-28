@@ -103,7 +103,6 @@ namespace bammm
 			{
 				//switching newState with NULL calls breakdown on newState, the remove on currentStates
 				//_stateMachine->switchState(newState, NULL);
-
 				newState->breakdown();
 				currentStates->removeElem(newState);
 			}

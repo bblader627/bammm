@@ -179,9 +179,9 @@ namespace bammm
 				return velocity->toString();
 			}
 
-			inline string getLocation()
+			inline Vector3D* getLocation()
 			{
-				return location->toString();
+				return location;
 			}
 
 			inline int getHealth()
