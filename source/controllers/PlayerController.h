@@ -20,6 +20,8 @@
 
 #include "Controller.h"
 #include "../states/statemachine.h"
+#include "../resources/grid3d.h"
+#include "../weapons/MeleeCombat.h"
 
 #ifndef NULL
 #define NULL ((void *)0)
@@ -32,17 +34,21 @@ namespace bammm
 {
     class PlayerController : public Controller
     {
+		private:
+			MeleeCombat* meleeCombat;
+			Grid3d<Actor>* grid;
         public:
             void input(DynamicArray<string>* command, float dTime);
             void input(string command, float dTime);
-            PlayerController();
+            PlayerController(Grid3d<Actor>* theGrid);
             void setup(Actor* actor);
             ~PlayerController();
             void printOptions();
     };
 
-    PlayerController::PlayerController()
+    PlayerController::PlayerController(Grid3d<Actor>* theGrid)
     {
+		grid = theGrid;
     }
 
     void PlayerController::setup(Actor* actor)
