@@ -29,7 +29,7 @@ namespace bammm
 			Boomstick();
 			Boomstick(WeaponData *);
 			~Boomstick();
-			void attack(Actor *);
+			int attack();
 			bool canAttack();
 			int getRange();
 
@@ -37,7 +37,7 @@ namespace bammm
 
 	Boomstick::Boomstick()
 	{
-		weaponData = new WeaponData(3, 10000, 1, 0.01, 1, "", "ranged");
+		weaponData = new WeaponData(1, 10000, 1, 0.01, 1, "", "ranged");
 		timer = 0.0;
 		time = new Time();
 	}
@@ -55,20 +55,9 @@ namespace bammm
 		delete time;
 	}
 
-	void Boomstick::attack(Actor* actor)
+	int Boomstick::attack()
 	{
-		int damage = weaponData->getDamage();
-
-		if (actor == NULL)
-		{
-			return;
-		}
-
-		if (canAttack())
-		{
-			actor->reduceHealth(damage);
-			timer = time->getSeconds() + weaponData->getFireRate();
-		}
+		return weaponData->getDamage();
 	}
 
 	bool Boomstick::canAttack()

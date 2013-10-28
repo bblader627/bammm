@@ -25,14 +25,11 @@ namespace bammm{
 
 		RangedWeapon();
 		~RangedWeapon();
-		virtual void attack(Actor*);
+		virtual int attack();
 		virtual bool canAttack();
 		virtual int getRange();
 
 	};
-
-
-
 
 }
 

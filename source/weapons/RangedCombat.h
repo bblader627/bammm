@@ -25,6 +25,8 @@ namespace bammm
 
 			void giveLoot();
 			void victory();
+			bool hit();
+			bool inRange();
 
 		public:
 			RangedCombat(Actor* a1, Actor* a2);
@@ -55,9 +57,21 @@ namespace bammm
 		return true;
 	}
 
-	void RangedCombat::useTurn()
+	bool RangedCombat::hit()
 	{
-		if (canFight())
+		if (inRange())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	bool RangedCombat::inRange()
+	{
+		if (playerTurn)
 		{
 			if (actor2->getLocation()
 					<= actor1->getLocation()
@@ -65,14 +79,49 @@ namespace bammm
 					&& actor2->getLocation()
 							>= actor1->getRangedWeapon()->getRange())
 			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			if (actor1->getLocation()
+					<= actor2->getLocation()
+							+ actor2->getRangedWeapon()->getRange()
+					&& actor1->getLocation()
+							>= actor2->getRangedWeapon()->getRange())
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	}
+
+	void RangedCombat::useTurn()
+	{
+		if (canFight())
+		{
+			if (hit())
+			{
+				int damage;
+
 				if (playerTurn)
 				{
-
-					actor1->getRangedWeapon()->attack(actor2);
+					damage = actor1->getRangedWeapon()->attack();
+					actor2->reduceHealth(damage);
+					cout << actor2->getName() << " has taken " << damage << " damage!" << endl;
 				}
 				else
 				{
-					actor2->getRangedWeapon()->attack(actor1);
+					damage = actor2->getRangedWeapon()->attack();
+					actor1->reduceHealth(damage);
+					cout << actor1->getName() << " has taken " << damage << " damage!" << endl;
 				}
 			}
 		}
@@ -83,12 +132,14 @@ namespace bammm
 		{
 			_winner = actor2;
 			_loser = actor1;
+			cout << _loser->getName() << " has been slain!" << endl;
 			victory();
 		}
 		else if (actor2->getHealth() <= 0)
 		{
 			_winner = actor1;
 			_loser = actor2;
+			cout << _winner->getName() << " has been slain!" << endl;
 			victory();
 		}
 
