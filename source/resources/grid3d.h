@@ -47,10 +47,10 @@ namespace bammm
 			T* access(int x, int y, int z);
 			/*
 			 insert
-			 @Pre-Condition- Takes in xyz coordinate and and object to insert
+			 @Pre-Condition- Takes a vector and and object to insert
 			 @Post-Condition- Inserts object into the grid space
 			 */
-			void insert(int x, int y, int z, T &obj);
+			void insert(Vector3D *vect, T &obj);
 			/*
 			 remove
 			 @Pre-Condition- Takes in xyz coordinate
@@ -96,9 +96,9 @@ namespace bammm
 
 
 	template<class T>
-	void Grid3d<T>::insert(int x, int y, int z, T &obj)
+	void Grid3d<T>::insert(Vector3D *vect, T &obj)
 	{
-		int pos = x + (y * width) + (z * width * height);
+		int pos = vect->X() + (vect->Y() * width) + (vect->Z() * width * height);
 		grid->insert(pos, obj);
 	}
 
