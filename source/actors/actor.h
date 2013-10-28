@@ -218,6 +218,10 @@ namespace bammm
 				return location->z();
 			}
 
+			inline Vector3D * getVectorLocation(){
+				return location;
+			}
+
 	};
 
 	Actor::Actor()
