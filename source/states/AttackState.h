@@ -15,10 +15,10 @@ using namespace std;
 
 namespace bammm
 {
-    class AttackState : public State
+    class CombatArray : public State
     {
         public:
-            AttackState(Actor* actor);
+            CombatArray(Actor* actor);
             void setup();
             void breakDown();
             void tick(float dTime);
@@ -27,26 +27,26 @@ namespace bammm
         private:
     };
 
-	AttackState::AttackState(Actor* actor)
+	CombatArray::AttackState(Actor* actor)
 	{
 		_actor = actor;
 	}
 
-    void AttackState::setup()
+    void CombatArray::setup()
     {
     }
 
-    void AttackState::breakDown()
+    void CombatArray::breakDown()
     {
     }
 
-    void AttackState::tick(float dTime)
+    void CombatArray::tick(float dTime)
     {
     }
 
-	string AttackState::to_string()
+	string CombatArray::to_string()
 	{
-		return "Attack State";
+		return "Combat State";
 	}
 }
 #endif
