@@ -56,7 +56,7 @@ namespace bammm
 			 @Pre-Condition- Takes in xyz coordinate (a vector)
 			 @Post-Condition- Removes object specified by the coordinates
 			 */
-			void remove(Vectord3D *vect);
+			void remove(Vector3D *vect);
 
 	};
 
@@ -91,14 +91,14 @@ namespace bammm
 	template<class T>
 	T* Grid3d<T>::access(Vector3D *vect)
 	{
-		return grid->at(vect->X() + (vect->Y() * width) + (vect->Z() * width * height));
+		return grid->at(vect->x() + (vect->y() * width) + (vect->z() * width * height));
 	}
 
 
 	template<class T>
 	void Grid3d<T>::insert(Vector3D *vect, T &obj)
 	{
-		int pos = vect->X() + (vect->Y() * width) + (vect->Z() * width * height);
+		int pos = vect->x() + (vect->y() * width) + (vect->z() * width * height);
 		grid->insert(pos, obj);
 	}
 
@@ -106,7 +106,7 @@ namespace bammm
 	template<class T>
 	void Grid3d<T>::remove(Vector3D *vect)
 	{
-		int pos = vect->X() + (vect->Y() * width) + (vect->Z() * width * height);
+		int pos = vect->x() + (vect->y() * width) + (vect->z() * width * height);
 		grid->erase(pos);
 	}
 }
