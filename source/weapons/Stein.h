@@ -3,6 +3,7 @@
 
 #include "MeleeWeapon.h"
 #include "../DebugTools/time.h"
+
 namespace bammm
 {
 	class Stein : public MeleeWeapon

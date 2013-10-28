@@ -4,7 +4,7 @@
 #include "MeleeWeapon.h"
 #include "weapondata.h"
 #include "../TestSuite/time.h"
-#include "../actor/actor.h"
+
 namespace bammm
 {
 	class Stein : public MeleeWeapon
