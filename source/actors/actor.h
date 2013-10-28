@@ -204,6 +204,20 @@ namespace bammm
 				return _defense;
 			}
 
+			inline int getX(){
+				return location->x();
+			}
+
+			inline int getY()
+			{
+				return location->y();
+			}
+
+			inline int getZ()
+			{
+				return location->z();
+			}
+
 	};
 
 	Actor::Actor()
