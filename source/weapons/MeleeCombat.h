@@ -75,7 +75,7 @@ namespace bammm
 			//Check to see if hit or miss
 			if(inRange())
 			{
-				int damage = attacker->getWeapon()->attack();
+				int damage = attacker->getMeleeWeapon()->attack();
 				attacked->reduceHealth(damage);
 				cout << attacker->getName() << " hit " << attacked->getName() << " for " << damage << " damage.";
 			}
