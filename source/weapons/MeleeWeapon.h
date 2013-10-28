@@ -17,7 +17,7 @@ namespace bammm
 		public:
 			MeleeWeapon();
 			virtual ~MeleeWeapon();
-			int attack(Actor* target);
+			int attack();
 			virtual bool canAttack();
 	};
 }

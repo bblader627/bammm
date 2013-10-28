@@ -2,7 +2,6 @@
 #define IWEAPONTYPE_H_
 
 #include "weapondata.h"
-#include "../actors/actor.h"
 //#include "../states/AttackState.h"
 namespace bammm
 {
@@ -14,7 +13,7 @@ namespace bammm
 		public:
 			IWeaponType();
 			virtual ~IWeaponType();
-			int attack(Actor* target);
+			int attack();
 			virtual bool canAttack();
 	};
 }
