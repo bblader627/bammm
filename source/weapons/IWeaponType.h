@@ -3,7 +3,7 @@
 
 #include "weapondata.h"
 #include "../actors/actor.h"
-
+//#include "../states/AttackState.h"
 namespace bammm
 {
 	class Actor;
@@ -14,8 +14,8 @@ namespace bammm
 		public:
 			IWeaponType();
 			virtual ~IWeaponType();
-			virtual void attack(Actor* target)=0;
-			virtual bool canAttack()=0;
+			void attack(Actor* target);
+			virtual bool canAttack();
 	};
 }
 #endif
