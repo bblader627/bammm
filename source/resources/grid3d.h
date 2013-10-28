@@ -37,9 +37,9 @@ namespace bammm
 			int height;
 
 		public:
-			Grid3d<T>();
-			Grid3d<T>(int w, int l, int h);
-			~Grid3d<T>();
+			Grid3d();
+			Grid3d(int w, int l, int h);
+			~Grid3d();
 			/*
 			 access
 			 @Pre-Condition- takes in x,y,z  point system ( a vector)
