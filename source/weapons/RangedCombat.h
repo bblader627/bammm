@@ -21,6 +21,7 @@ namespace bammm
 			Actor* actor2;
 			Actor* _winner;
 			Actor* _loser;
+			Grid3d<Actor> GRID;
 			bool playerTurn;
 
 			void giveLoot();
@@ -29,7 +30,7 @@ namespace bammm
 			bool inRange();
 
 		public:
-			RangedCombat(Actor* a1, Actor* a2);
+			RangedCombat(Actor* a1, Actor* a2, Grid3d<Actor> grid);
 			bool canFight();
 			void useTurn();
 			Actor* getWinner();
@@ -38,13 +39,14 @@ namespace bammm
 			~RangedCombat();
 	};
 
-	RangedCombat::RangedCombat(Actor* a1, Actor* a2)
+	RangedCombat::RangedCombat(Actor* a1, Actor* a2, Grid3d<Actor> grid)
 	{
 		actor1 = a1;
 		actor2 = a2;
 		_winner = NULL;
 		_loser = NULL;
 		playerTurn = true;
+		GRID = grid;
 	}
 
 	bool RangedCombat::canFight()
@@ -71,13 +73,27 @@ namespace bammm
 
 	bool RangedCombat::inRange()
 	{
+
+		int playerX, playerY, playerZ;
+		int opponentX, opponentY, opponentZ;
+
+		playerX = actor1->getX();
+		playerY = actor1->getY();
+		playerZ = 0;
+
+		opponentX = actor2->getX();
+		opponentY = actor2->getY();
+		opponentZ = 0;
+
 		if (playerTurn)
 		{
-			if (actor2->getLocation()
-					<= actor1->getLocation()
-							+ actor1->getRangedWeapon()->getRange()
-					&& actor2->getLocation()
-							>= actor1->getRangedWeapon()->getRange())
+			int weaponRange = actor1->getRangedWeapon()->getRange();
+
+			if (opponentX <= playerX + weaponRange
+					&& opponentX >= playerX - weaponRange
+					&& opponentY <= playerY + weaponRange
+					&& opponentY >= playerY - weaponRange
+					&& opponentZ == playerZ)
 			{
 				return true;
 			}
@@ -88,11 +104,13 @@ namespace bammm
 		}
 		else
 		{
-			if (actor1->getLocation()
-					<= actor2->getLocation()
-							+ actor2->getRangedWeapon()->getRange()
-					&& actor1->getLocation()
-							>= actor2->getRangedWeapon()->getRange())
+			int weaponRange = actor2->getRangedWeapon()->getRange();
+
+			if (playerX <= opponentX + weaponRange
+					&& playerX >= opponentX - weaponRange
+					&& playerY <= opponentY + weaponRange
+					&& playerY >= opponentY - weaponRange
+					&& opponentZ == playerZ)
 			{
 				return true;
 			}
@@ -115,13 +133,15 @@ namespace bammm
 				{
 					damage = actor1->getRangedWeapon()->attack();
 					actor2->reduceHealth(damage);
-					cout << actor2->getName() << " has taken " << damage << " damage!" << endl;
+					cout << actor2->getName() << " has taken " << damage
+							<< " damage!" << endl;
 				}
 				else
 				{
 					damage = actor2->getRangedWeapon()->attack();
 					actor1->reduceHealth(damage);
-					cout << actor1->getName() << " has taken " << damage << " damage!" << endl;
+					cout << actor1->getName() << " has taken " << damage
+							<< " damage!" << endl;
 				}
 			}
 		}
