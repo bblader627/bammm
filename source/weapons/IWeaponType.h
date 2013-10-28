@@ -2,6 +2,8 @@
 #define IWEAPONTYPE_H_
 
 #include "weapondata.h"
+#include "../actors/actor.h"
+
 namespace bammm
 {
 	class IWeaponType
