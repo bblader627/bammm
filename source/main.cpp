@@ -15,11 +15,11 @@ int main()
 {
 	printWelcome();
 
-	Grid3d<Actor> GRID;
+	Grid3d<Actor>* GRID = new Grid3d<Actor>();
 
 	Actor* bob = new Actor("Bob");
 
-	PlayerController* controller = new PlayerController();
+	PlayerController* controller = new PlayerController(GRID);
 
 	controller->setup(bob);
 
@@ -86,7 +86,7 @@ int main()
 	//provide option for state change
 
 	//tick
-
+	delete GRID;
 	return 0;
 }
 
