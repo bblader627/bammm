@@ -9,7 +9,6 @@
 #include "time.h"
 
 using namespace std;
-
 namespace bammm
 {
     namespace

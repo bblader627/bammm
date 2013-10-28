@@ -14,23 +14,24 @@ namespace bammm
     class SingState : public State
     {
         public:
-            SingState();
-            void setup(Actor* actor);
+            SingState(Actor* actor);
+            void setup();
             void breakDown();
             void tick(float dTime);
+			string to_string();
 
         private:
             const static int singPercentage = 75;
             int singLine;
     };
 
-    SingState::SingState()
-    {
-    }
+	SingState::SingState(Actor* actor)
+	{
+		_actor = actor;
+	}
 
-    void SingState::setup(Actor* actor)
+    void SingState::setup()
     {
-    	_actor = actor;
         singLine = 0;
     	cout << "The dwarf begins to sing. ";
     }
@@ -44,5 +45,10 @@ namespace bammm
         _actor->reduceStamina(1);
         cout << "The dwarf is singing the song of it's people. ";
     }
+
+	string SingState::to_string()
+	{
+		return "Sing State";
+	}
 }
 #endif

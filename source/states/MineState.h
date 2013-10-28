@@ -17,25 +17,26 @@ namespace bammm
 			int successChance;
 
         public:
-            MineState();
-            void setup(Actor* actor);
+            MineState(Actor* actor);
+            void setup();
             void breakDown();
             void tick(float dTime);
+			string to_string();
     };
 
-    MineState::MineState()
-    {
-    	successChance = 30;
-    }
+	MineState::MineState(Actor* actor)
+	{
+		_actor = actor;
+	}
 
     /*
      * setup
      * Pre-Condition- no parameters
      * Post-Condition- sets _actor's member variables necessary for beginning a state
      */
-    void MineState::setup(Actor* actor)
+    void MineState::setup()
     {
-    	_actor = actor;
+    	successChance = 30;
     }
 
     void MineState::breakDown()
@@ -46,7 +47,8 @@ namespace bammm
     {
         //int random = rand() % 100 + 1;
     	_actor->reduceStamina(1);
-        cout << "The dwarf lifts his pickaxe, and swings it at the rock. ";
+    	_actor->addGold(1);
+        cout << _actor->getName() << " lifts his pickaxe, and swings it at the rock. " << endl;
         
         /*
         if(random <= successChance)
@@ -64,5 +66,10 @@ namespace bammm
     {
     	callback.onTransition();
     }
+
+	string MineState::to_string()
+	{
+		return "Mine State";
+	}
 }
 #endif

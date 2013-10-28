@@ -25,6 +25,7 @@
 #include "../states/SleepState.h"
 #include "../states/SingState.h"
 #include "../states/MineState.h"
+#include "../states/CombatState.h"
 #include "../resources/hashmap.h"
 #include "../actors/actor.h"
 #include <string>
@@ -37,7 +38,7 @@ namespace bammm
     class Controller
     {
         protected:
-            HashMap<State>* _states;
+            HashMap<State*>* _states;
             Actor* _actor;
             StateMachine* _stateMachine;
 

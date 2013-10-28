@@ -38,44 +38,88 @@ namespace bammm
 
         public:
 			State();
+			State(Actor* actor);
+			virtual void setup();
+			virtual void breakdown();
+			virtual void tick(float dTime);
+			virtual void registerTransitionCallback(IStateCallback* callback);
+			virtual string to_string();
+			virtual bool operator==(State* s);
+			virtual ~State();
+	};
 
-			/*
-			* setup
-			* Pre-Condition- no parameters
-			* Post-Condition- no return value
-			*
-			* Sets actor's necessary attributes for beginning a state
-			*/
-			void setup(Actor* actor);
+	State::State()
+	{
+	}
 
-			/*
-			* breakDown
-			* Pre-Condition- no parameters
-			* Post-Condition- no return value
-			*
-			* Returns Actor to old state
-			*/
-			void breakdown();
+	State::State(Actor* actor)
+	{
+		_actor = actor;
+	}
 
-			/*
-			* tick
-			*
-			* Pre-Condition- time as recorded since beginning state
-			* Post-Condition- no return value
-			*
-			* Process state updates based on passed time
-			*/
-			void tick(float dTime);
+	/*
+	* setup
+	* Pre-Condition- no parameters
+	* Post-Condition- no return value
+	*
+	* Sets actor's necessary attributes for beginning a state
+	*/
+	void State::setup()
+	{
+	}
 
-			/*
-			 * registerTransitionCallback
-			 * Pre-Condition- accepts pointer to IStateCallback
-			 * Post-Condition- calls onTransition to swap states in callback
-			 */
-			void registerTransitionCallback(IStateCallback* callback)
-			{
-				callback->onTransition();
-			}
-    };
+	/*
+	* breakDown
+	* Pre-Condition- no parameters
+	* Post-Condition- no return value
+	*
+	* Returns Actor to old state
+	*/
+	void State::breakdown()
+	{
+
+	}
+
+	/*
+	* tick
+	*
+	* Pre-Condition- time as recorded since beginning state
+	* Post-Condition- no return value
+	*
+	* Process state updates based on passed time
+	*/
+	void State::tick(float dTime)
+	{
+		cout << "In parent state\n";
+	}
+
+	/*
+	* registerTransitionCallback
+	* Pre-Condition- accepts pointer to IStateCallback
+	* Post-Condition- calls onTransition to swap states in callback
+	*/
+	void State::registerTransitionCallback(IStateCallback* callback)
+	{
+		callback->onTransition();
+	}
+
+	string State::to_string()
+	{
+		return "State";
+	}
+
+	bool State::operator==(State* s)
+	{
+		//bad - to_string overloader?
+		//if (_actor == s)
+		//{
+
+		//}
+		return false;
+	}
+
+	State::~State()
+	{
+	}
 }
 #endif

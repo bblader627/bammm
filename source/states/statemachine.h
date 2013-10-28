@@ -36,15 +36,17 @@ using namespace bammm;
 class StateMachine
 {
 	private:
-		DynamicArray<State> * currentStates;
+		DynamicArray<State*> * currentStates;
 		Actor* _actor;
 	public:
 		/*
 		 * Default Constructor
 		 */
-		StateMachine(Actor* actor)
+		StateMachine(Actor* actor, State* initialState)
 		{
 			_actor = actor;
+			currentStates = new DynamicArray<State*>();
+			currentStates->add(initialState);
 		}
 
 		/*
@@ -57,11 +59,11 @@ class StateMachine
 		 */
 		void tick(float dTime)
 		{
+
 			for(int i = 0; i < (int) currentStates->getSize(); i++)
 			{
-				State thisState = currentStates->get(i);
-
-				thisState.tick(time(NULL));
+				State* thisState = currentStates->get(i);
+				thisState->tick(0);
 			}
 		}
 
@@ -73,14 +75,19 @@ class StateMachine
 		 *
 		 *PlayerController will be calling switchState
 		 */
-		void switchState(State * currentState, State * newState)
+		void switchState(State* current, State* newState)
 		{
-			if(currentState != NULL)
+			if (newState == NULL)
 			{
-				currentState->breakdown();
+				current->breakdown();
+				currentStates->removeElem(current);
 			}
-			currentState = newState;
-			currentState->setup(_actor);
+			else
+			{
+				current->breakdown();
+				current = newState;
+				current->setup();
+			}
 		}
 
 		/*
@@ -91,7 +98,7 @@ class StateMachine
 		 * Called from a Controller
 		 * Adds currently running states to array
 		 */
-		void addState(State newState)
+		void addState(State* newState)
 		{
 			currentStates->add(newState);
 		}
@@ -104,9 +111,9 @@ class StateMachine
 		 * Called from Controller
 		 * Returns currently running states
 		 */
-		DynamicArray<State> getCurrentStates()
+		DynamicArray<State*>* getCurrentStates()
 		{
-			return *currentStates;
+			return currentStates;
 		}
 
 };

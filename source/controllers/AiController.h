@@ -18,7 +18,7 @@
 #ifndef AICONTROLLER_H_
 #define AI_CONTROLLER_H_
 #include "Controller.h"
-#include "../statemachine.h"
+#include "../states/statemachine.h"
 using namespace std;
 
 namespace bammm
@@ -30,7 +30,7 @@ namespace bammm
 
         public:
             AiController();
-            void update();
+            void update(float dTime);
             void setup(Actor* actor);
             virtual ~AiController();
     };
@@ -41,50 +41,73 @@ namespace bammm
 
     void AiController::setup(Actor* actor)
     {
-        _stateMachine = new StateMachine(actor);
-        _states = new State();
+		/*
+        //_stateMachine = new StateMachine(actor);
+        _states = new HashMap<State*>();
         _actor = actor;
         counter = 0;
+		
+		//Create the states
+        DrinkState* drinkState = new DrinkState();
+        MineState* mineState = new MineState();
+        SingState* singState = new SingState();
+        BrawlState* brawlState = new BrawlState();
+        SleepState* sleepState = new SleepState();
+        IdleState* idleState = new IdleState();
 
-        DrinkState drinkState;
-        MineState mineState;
-        SingState singState;
-        BrawlState brawlState;
-        SleepState sleepState;
-        IdleState idleState;
+		//Setup the states
+		drinkState->setup(_actor);
+		mineState->setup(_actor);
+		singState->setup(_actor);
+		brawlState->setup(_actor);
+		sleepState->setup(_actor);
+		idleState->setup(_actor);
 
+		//Add states to _stateMachine to be ticked
+		_stateMachine->addState(idleState);
+		_stateMachine->addState(drinkState);
+		_stateMachine->addState(mineState);
+		_stateMachine->addState(singState);
+		_stateMachine->addState(brawlState);
+		_stateMachine->addState(sleepState);
+
+		//Put actor in idle state
+		//_stateMachine->switchState(NULL, idleState);
+
+		//Add states to hashMap
         _states->add("drink", drinkState);
         _states->add("mine", mineState);
         _states->add("sing", singState);
         _states->add("brawl", brawlState);
         _states->add("sleep", sleepState);
         _states->add("idle", idleState);
+		*/
     }
 
 
-    void AiController::update()
+    void AiController::update(float dTime)
     {
-        string newState;
-        DynamicArray<State> currentStates = stateMachine->getCurrentStates();
+        /*string newStateStr;
+        DynamicArray<State*>* currentStates = _stateMachine->getCurrentStates();
 
-        if(currentStates.size() > 1 && currentStates.get(0) != _states->getValue("idle"))
+        if(currentStates->getSize() > 1 && currentStates->get(0) != _states->getValue("idle"))
         {
             return;
         }
 
         if(counter == 0)
         {
-            newState = "idle";
+            newStateStr = "idle";
             counter = 1;
         }
         else if(counter == 1 || counter == 3)
         {
-           newState = "drink"; 
+           newStateStr = "drink"; 
            counter++;
         }
         else if(counter == 2)
         {
-            newState = "mine";
+            newStateStr = "mine";
             counter++;
         }
         else if(counter == 3)
@@ -92,31 +115,35 @@ namespace bammm
             int random = rand() % 100 + 1;
             if(random <= 33)
             {
-                newState = "sleep";
+                newStateStr = "sleep";
                 counter = 0;
             }
             else
             {
                 if(random <= 66)
                 {
-                    newState = "brawl";
+                    newStateStr = "brawl";
                 }
                 else
                 {
-                    newState = "sing";
+                    newStateStr = "sing";
                 }
                 counter = 2;
             }
         }
-        State tempState1 = stateMachine->getCurrentState().get(0);
-        State tempState2 = _states->getValue(newState);
-        State* oldState = &tempState1
-        State* newAddState = &tempState2;
-        stateMachine->switchState(oldState, newAddState);
+        State* newState = _stateMachine->getCurrentStates()->get(0);
+        State* oldState = _states->getValue(newStateStr);
+        _stateMachine->switchState(oldState, newState);
+		_stateMachine->tick(dTime);*/
     }
 
     AiController::~AiController()
     {
+        DynamicArray<State*>* temp = _states->getAllValues();
+        for(int i = 0; i < (int) temp->getSize(); i++)
+        {
+            delete temp->get(i);
+        }
         delete _states;
         delete _stateMachine;
     }

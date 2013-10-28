@@ -1,5 +1,6 @@
 #include <iostream>
 #include "actors/actor.h"
+#include "resources/grid3d.h"
 #include "controllers/PlayerController.h"
 //#include "JSON/JSONParser.h"
 //#include "IStateCallback.h"
@@ -14,52 +15,78 @@ int main()
 {
 	printWelcome();
 
+	Grid3d<Actor>* GRID = new Grid3d<Actor>();
+
 	Actor* bob = new Actor("Bob");
 
-	PlayerController* controller = new PlayerController();
+	PlayerController* controller = new PlayerController(GRID);
+
 	controller->setup(bob);
 
 	bool playGame = true;
 	int choice;
 
+
+
 	cout << bob->getName() << " is waiting for instructions." << endl;
 
+    DynamicArray<string>* input = new DynamicArray<string>();
+	string sleep = "sleep";
+	string mine = "mine";
+	string drink = "drink";
+	string sing = "sing";
+	string brawl = "brawl";
+	float dTime = 0;
 	while (playGame)
 	{
-		printOptions();
+		input->clear();
+		controller->printOptions();
 		cin >> choice;
 
 		switch (choice)
 		{
 			case 0:
-				playGame == false;
+				playGame = false;
 				break;
 			case 1:
-				controller->input("mine");
+                input->add(mine);
 				break;
 			case 2:
-				controller->input("drink");
+                input->add(drink);
 				break;
 			case 3:
-				controller->input("sing");
+                input->add(sing);
 				break;
 			case 4:
-				controller->input("fight");
+                input->add(brawl);
 				break;
 			case 5:
-				controller->input("sleep");
+				input->add(sleep);
+				break;
+			case 6:
+				//wait
+				break;
+			default:
+				cout << "Invalid Input" << endl;
 				break;
 		}
+
+		if(!playGame)
+		{
+    		break;
+		}
+		controller->input(input, dTime);
 	}
+	delete input;
 
 	cout << "Thanks for playing!  Press enter to quit." << endl;
-	string waitfortext;
-	cin >> waitfortext;
+	//string waitfortext;
+	//cin >> waitfortext;
 
 	//provide option for state change
 
 	//tick
-
+	delete GRID;
 	return 0;
 }
 
@@ -67,20 +94,11 @@ void printWelcome()
 {
 	cout << "================================================" << endl;
 	cout << "Welcome to BAMMM -  Alpha v0.1" << endl;
-	cout << "Creators: Alvaro Home - Matthew Konstantinou - Matthew Witkowski - Bradley Crusco - Michael Abramo" << endl;
+	cout << "Creators: \tAlvaro Home - Matthew Konstantinou - Matthew Witkowski\n\t\tBradley Crusco - Michael Abramo" << endl;
 	cout << "================================================" << endl;
 }
 
-void printOptions()
-{
-	cout << "Select an activity for your dwarf:" << endl;
-	cout << "0. Quit" << endl;
-	cout << "1. Mine gold" << endl;
-	cout << "2. Drink ale" << endl;
-	cout << "3. Sing a song" << endl;
-	cout << "4. Fight a dwarf" << endl;
-	cout << "5. Go to sleep" << endl;
-}
+
 
 bool createActor()
 {

@@ -43,7 +43,10 @@ class State;
 				_actor = actor;
 			}
 
-			void onTransition();
+			void onTransition()
+			{
+
+			}
 			/*
 			{
 				currentState->breakdown();
