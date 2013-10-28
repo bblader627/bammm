@@ -49,7 +49,7 @@ namespace bammm
 		inline float incrementBAC()
 		{
 			bloodAlcoholContent += 0.001;
-			this->velocity -= 0.01;
+			//this->velocity -= 0.01;
 			return bloodAlcoholContent;
 
 		}
