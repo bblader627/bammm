@@ -73,6 +73,11 @@ namespace bammm
 			return bloodAlcoholContent;
 		}
 
+		inline int getGold()
+		{
+			return goldCount;
+		}
+
 		inline int addGold()
 		{
 			goldCount++;
