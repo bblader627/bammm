@@ -4,12 +4,15 @@
 
 RM = rm -f
 SRCPATH = .
-SRC = actors/actor.h  actors/DwarfActor.h actors/OrcActor.h controllers/AiController.h controllers/Controller.h \
+SRC = actors/actor.h  actors/DwarfActor.h actors/OrcActor.h  \
+controllers/AiController.h controllers/Controller.h \
 controllers/PlayerController.h states/BrawlState.h states/DrinkState.h \
 states/IdleState.h states/IStateCallback.h states/MineState.h \
 states/SingState.h states/SleepState.h states/state.h states/statemachine.h \
 resources/dynamicarray.h resources/hashmap.h resources/hashnode.h \
-resources/heap.h resources/queue.h resources/stack.h resources/vector3d.h
+resources/heap.h resources/queue.h resources/stack.h resources/vector3d.h \
+weapons/IWeaponType.h weapons/weapondata.h weapons/MeleeWeapon.h weapons/Stein.h \
+states/AttackState.h
 TESTNAME = test
 TESTSRC = main.cpp
 #

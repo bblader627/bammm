@@ -18,10 +18,10 @@
 
 #include <iostream>
 #include "../resources/vector3d.h"
-#include "../weapons/IWeaponType.h"
+#include "../weapons/MeleeWeapon.h"
 using namespace std;
 
-class IWeaponType;
+class MeleeWeapon;
 
 namespace bammm
 {
@@ -45,7 +45,7 @@ namespace bammm
 			int gold;
 			float BAC;
 
-			IWeaponType *_weapon;
+			MeleeWeapon *_meleeWeapon;
 
 		public:
 			//Constructors
@@ -61,7 +61,7 @@ namespace bammm
 				@Pre-Condition- takes no arguments
 				@Post-Condition- sets the weapon to w
 			*/
-			void setWeapon(IWeaponType * weapon);
+			void setWeapon(MeleeWeapon* weapon);
 
 			/*
 				setRotation
@@ -146,9 +146,9 @@ namespace bammm
 				return gold;
 			}
 
-			inline IWeaponType * getWeapon()
+			inline MeleeWeapon* getWeapon()
 			{
-				return _weapon;
+				return _meleeWeapon;
 			}
 
 			inline float getBAC()
@@ -233,9 +233,9 @@ namespace bammm
 		_defense = def;
 	}
 
-	void Actor::setWeapon(IWeaponType * weapon)
+	void Actor::setWeapon(MeleeWeapon* weapon)
 	{
-		_weapon =  weapon;
+		_meleeWeapon =  weapon;
 	}
 
 	void Actor::setRotation(float myRotation)

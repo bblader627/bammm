@@ -1,10 +1,8 @@
-#ifndef STEIN
+#ifndef STEIN_H_
 #define STEIN_H_
 
 #include "MeleeWeapon.h"
-#include "weapondata.h"
-#include "../TestSuite/time.h"
-#include "../actor/actor.h"
+#include "../DebugTools/time.h"
 namespace bammm
 {
 	class Stein : public MeleeWeapon
@@ -44,8 +42,6 @@ namespace bammm
 
 	void Stein::attack(Actor* actor)
 	{
-		int damage = weaponData->getDamage();
-
 		if (actor == NULL)
 		{
 			return;
@@ -53,12 +49,13 @@ namespace bammm
 
 		if (canAttack())
 		{
-			actor->reduceHealth(damage);
-			time = timer->getSeconds + weaponData->getFireRate();
+			actor->reduceHealth(weaponData->getDamage());
+			timer = time->getSeconds() + weaponData->getFireRate();
+			//return new AttackState(actor);
 		}
 	}
 
-	bool canAttack()
+	bool Stein::canAttack()
 	{
 		if (time->getSeconds() < timer)
 		{
