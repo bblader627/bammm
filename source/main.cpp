@@ -33,6 +33,7 @@ int main()
 	string drink = "drink";
 	string sing = "sing";
 	string brawl = "brawl";
+	string attack = "attack";
 	float dTime = 0;
 	while (playGame)
 	{
@@ -61,6 +62,9 @@ int main()
 				input->add(sleep);
 				break;
 			case 6:
+				input->add(attack);
+				break;
+			case 7:
 				//wait
 				break;
 			default:
