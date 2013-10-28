@@ -49,6 +49,7 @@ namespace bammm
 
 		public:
 			//Constructors
+			Actor();
 			Actor(string myName);
 			Actor(string myName,int health,int stamina,int atck, int def);
 
