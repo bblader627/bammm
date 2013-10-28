@@ -36,7 +36,12 @@ namespace bammm
 
 	bool MeleeCombat::canFight()
 	{
-		if(actor1->getHealth() <= 0 || actor2->getHealth() <= 0)
+		if (actor1->getHealth() <= 0 || actor2->getHealth() <= 0)
+		{
+			return false;
+		}
+
+		if (!(actor1->getLocation() == actor2->getLocation()))
 		{
 			return false;
 		}
@@ -47,32 +52,35 @@ namespace bammm
 	void MeleeCombat::useTurn()
 	{
 		//Damage
-		if(playerTurn)
+		if(canFight())
 		{
-			int damage = actor1->getWeapon()->attack();
-			actor2->reduceHealth(damage);
-		}
-		else
-		{
-			int damage = actor2->getWeapon()->attack();
-			actor1->reduceHealth(damage);
-		}
+			if (playerTurn)
+			{
+				int damage = actor1->getWeapon()->attack();
+				actor2->reduceHealth(damage);
+			}
+			else
+			{
+				int damage = actor2->getWeapon()->attack();
+				actor1->reduceHealth(damage);
+			}
 
-		//Change turns
-		playerTurn = !playerTurn;
+			//Change turns
+			playerTurn = !playerTurn;
 
-		//Check for end of fight
-		if(actor1->getHealth() <= 0)
-		{
-			_winner = actor2;
-			_loser = actor1;
-			victory();
-		}
-		else if(actor2->getHealth() <= 0)
-		{
-			_winner = actor1;
-			_loser = actor2;
-			victory();
+			//Check for end of fight
+			if (actor1->getHealth() <= 0)
+			{
+				_winner = actor2;
+				_loser = actor1;
+				victory();
+			}
+			else if (actor2->getHealth() <= 0)
+			{
+				_winner = actor1;
+				_loser = actor2;
+				victory();
+			}
 		}
 	}
 
@@ -90,7 +98,8 @@ namespace bammm
 	{
 		//Play victory sound
 		giveLoot();
-		cout << actor1->getName() << " has slain " << actor2->getName() << ".\n";
+		cout << _winner->getName() << " has slain " << _loser->getName()
+				<< ".\n";
 	}
 
 	void MeleeCombat::giveLoot()
@@ -98,7 +107,6 @@ namespace bammm
 		_winner->addGold(_loser->getGold());
 		_loser->spendGold(_loser->getGold());
 	}
-
 
 }
 

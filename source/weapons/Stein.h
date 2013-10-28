@@ -2,7 +2,8 @@
 #define STEIN_H_
 
 #include "MeleeWeapon.h"
-#include "../DebugTools/time.h"
+#include "../TestSuite/time.h"
+
 namespace bammm
 {
 	class Stein : public MeleeWeapon
