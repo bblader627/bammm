@@ -18,6 +18,7 @@
 
 #include <iostream>
 #include "dynamicarray.h"
+#include "vector3d.h"
 using namespace std;
 
 #ifndef NULL
@@ -42,9 +43,9 @@ namespace bammm
 			/*
 			 access
 			 @Pre-Condition- takes in x,y,z  point system ( a vector)
-			 @Post-Condition- will return the value in that point system
+			 @Post-Condition- will return an array that represents the surrounding point
 			 */
-			T* access(Vector3D *vect);
+			DynamicArray<T>* access(Vector3D *vect);
 			/*
 			 insert
 			 @Pre-Condition- Takes a vector and and object to insert
@@ -89,9 +90,26 @@ namespace bammm
 
 
 	template<class T>
-	T* Grid3d<T>::access(Vector3D *vect)
+	DynamicArray<T>* Grid3d<T>::access(Vector3D *vect)
 	{
-		return grid->at(vect->x() + (vect->y() * width) + (vect->z() * width * height));
+		int pos = vect->x() + (vect->y() * width) + (vect->z() * width * height);
+		int start = pos - 5;
+		int end = pos + 5;
+		int i;
+		DynamicArray<T> *space = new DynamicArray<T>(end + start + end); 
+		if(start < 0)
+		{
+			start = 0;
+		}
+		if(end > grid->getCapacity())
+		{
+			end = grid->getSize()-1;
+		}
+		for(i = start; i <= end; i++)
+		{
+			space->add(grid->get(i));
+		}
+		return space;
 	}
 
 
