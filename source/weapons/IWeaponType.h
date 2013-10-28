@@ -14,8 +14,8 @@ namespace bammm
 		public:
 			IWeaponType();
 			virtual ~IWeaponType();
-			virtual void attack(Actor* target);
-			virtual bool canAttack();
+			virtual void attack(Actor* target)=0;
+			virtual bool canAttack()=0;
 	};
 }
 #endif

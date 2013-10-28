@@ -1,12 +1,13 @@
 #ifndef STEIN
 #define STEIN_H_
 
-#include "IWeaponType.h"
+#include "MeleeWeapon.h"
+#include "weapondata.h"
 #include "../TestSuite/time.h"
 #include "../actor/actor.h"
 namespace bammm
 {
-	class Stein: public IWeaponType
+	class Stein : public MeleeWeapon
 	{
 		private:
 			WeaponData* weaponData;
