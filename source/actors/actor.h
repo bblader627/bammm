@@ -45,7 +45,7 @@ namespace bammm
 			int gold;
 			float BAC;
 
-			IWeaponType _weapon;
+			IWeaponType *_weapon;
 
 		public:
 			//Constructors
@@ -60,7 +60,7 @@ namespace bammm
 				@Pre-Condition- takes no arguments
 				@Post-Condition- sets the weapon to w
 			*/
-			void setWeapon(IWeaponType weapon);
+			void setWeapon(IWeaponType * weapon);
 
 			/*
 				setRotation
@@ -145,7 +145,7 @@ namespace bammm
 				return gold;
 			}
 
-			inline IWeaponType getWeapon()
+			inline IWeaponType * getWeapon()
 			{
 				return _weapon;
 			}
@@ -196,7 +196,6 @@ namespace bammm
 			}
 
 
-		
 	};
 
 	Actor::Actor(string myName)
@@ -233,9 +232,9 @@ namespace bammm
 		_defense = def;
 	}
 
-	void Actor::setWeapon(IWeaponType weapon)
+	void Actor::setWeapon(IWeaponType * weapon)
 	{
-		_weapon = weapon;
+		_weapon =  weapon;
 	}
 
 	void Actor::setRotation(float myRotation)
