@@ -26,6 +26,7 @@
 #include "../states/SleepState.h"
 #include "../states/SingState.h"
 #include "../states/MineState.h"
+#include "../states/CombatState.h"
 #include "../resources/hashmap.h"
 #include "../actors/actor.h"
 #include <string>

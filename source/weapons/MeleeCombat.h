@@ -21,10 +21,11 @@ namespace bammm
 			bool canFight();
 			void useTurn();
 			Actor* getWinner();
+			Actor* getLoser();
 			~MeleeCombat();
 	};
 
-	MeleeCombat::MeleeCombat(Actor* a1, Actor* at2)
+	MeleeCombat::MeleeCombat(Actor* a1, Actor* a2)
 	{
 		actor1 = a1;
 		actor2 = a2;
@@ -35,7 +36,7 @@ namespace bammm
 
 	bool MeleeCombat::canFight()
 	{
-		if(a1->getHealth() <= 0 || a2->getHealth() <= 0)
+		if(actor1->getHealth() <= 0 || actor2->getHealth() <= 0)
 		{
 			return false;
 		}
@@ -48,11 +49,13 @@ namespace bammm
 		//Damage
 		if(playerTurn)
 		{
-			actor1->getWeapon()->doDamage(actor2);
+			int damage = actor1->getWeapon()->attack();
+			actor2->reduceHealth(damage);
 		}
 		else
 		{
-			actor2->getWeapon()->doDamage(actor1);
+			int damage = actor2->getWeapon()->attack();
+			actor1->reduceHealth(damage);
 		}
 
 		//Change turns

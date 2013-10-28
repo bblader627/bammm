@@ -12,7 +12,7 @@ states/SingState.h states/SleepState.h states/state.h states/statemachine.h \
 resources/dynamicarray.h resources/hashmap.h resources/hashnode.h \
 resources/heap.h resources/queue.h resources/stack.h resources/vector3d.h \
 weapons/IWeaponType.h weapons/weapondata.h weapons/MeleeWeapon.h weapons/Stein.h \
-states/AttackState.h
+weapons/MeleeCombat.h states/CombatState.h
 TESTNAME = test
 TESTSRC = main.cpp
 #
