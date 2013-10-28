@@ -1,5 +1,6 @@
 #include <iostream>
 #include "actors/actor.h"
+#include "resources/grid3d.h"
 #include "controllers/PlayerController.h"
 //#include "JSON/JSONParser.h"
 //#include "IStateCallback.h"
@@ -13,6 +14,8 @@ void printOptions();
 int main()
 {
 	printWelcome();
+
+	Grid3d<Actor> GRID;
 
 	Actor* bob = new Actor("Bob");
 
@@ -33,7 +36,6 @@ int main()
 	string drink = "drink";
 	string sing = "sing";
 	string brawl = "brawl";
-	string attack = "attack";
 	float dTime = 0;
 	while (playGame)
 	{
@@ -62,9 +64,6 @@ int main()
 				input->add(sleep);
 				break;
 			case 6:
-				input->add(attack);
-				break;
-			case 7:
 				//wait
 				break;
 			default:
