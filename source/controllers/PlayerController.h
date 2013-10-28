@@ -57,6 +57,7 @@ namespace bammm
         BrawlState* brawlState = new BrawlState(_actor);
         SleepState* sleepState = new SleepState(_actor);
         IdleState* idleState = new IdleState(_actor);
+		CombatState* combatState = new CombatState(_actor);
 
 		//Put actor in idle state
         _stateMachine = new StateMachine(_actor, idleState);
@@ -67,7 +68,7 @@ namespace bammm
         _states->add("sing", singState);
         _states->add("brawl", brawlState);
         _states->add("sleep", sleepState);
-
+        _states->add("attack", combatState);
     }
 
 
@@ -172,7 +173,7 @@ namespace bammm
     	}
 
 
-    	//Fighting options
+    	//Sleeping options
 		if (currentStates->contains(_states->getValue("sleep")))
 		{
 			cout << "5. Wake up" << endl;
@@ -182,7 +183,17 @@ namespace bammm
 			cout << "5. Go to sleep" << endl;
 		}
 
-		cout << "6. Continue" << endl;
+		//Combat options
+		if(currentStates->contains(_states->getValue("attack")))
+		{
+			cout << "6. Attack" << endl;
+		}
+		else
+		{
+			cout << "6. Fight Orc" << endl;
+		}
+
+		cout << "7. Continue" << endl;
 
     	cout << "0. Quit" << endl;
     }

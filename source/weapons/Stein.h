@@ -17,7 +17,7 @@ namespace bammm
 			Stein();
 			Stein(WeaponData* wd);
 			~Stein();
-			void attack(Actor* actor);
+			int attack();
 			bool canAttack();
 	};
 
@@ -41,19 +41,15 @@ namespace bammm
 		delete time;
 	}
 
-	void Stein::attack(Actor* actor)
+	int Stein::attack()
 	{
-		if (actor == NULL)
-		{
-			return;
-		}
-
 		if (canAttack())
 		{
-			actor->reduceHealth(weaponData->getDamage());
 			timer = time->getSeconds() + weaponData->getFireRate();
-			//return new AttackState(actor);
+			return weaponData->getDamage();
 		}
+
+		return 0;
 	}
 
 	bool Stein::canAttack()

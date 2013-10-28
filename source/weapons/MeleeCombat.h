@@ -41,38 +41,46 @@ namespace bammm
 			return false;
 		}
 
+		if (!(actor1->getLocation() == actor2->getLocation()))
+		{
+			return false;
+		}
+
 		return true;
 	}
 
 	void MeleeCombat::useTurn()
 	{
 		//Damage
-		if (canFight() && actor1->getLocation() == actor2->getLocation())
+		if(canFight())
 		{
 			if (playerTurn)
 			{
-				actor1->getMeleeWeapon()->attack(actor2);
+				int damage = actor1->getWeapon()->attack();
+				actor2->reduceHealth(damage);
 			}
 			else
 			{
-				actor1->getMeleeWeapon()->attack(actor2);
+				int damage = actor2->getWeapon()->attack();
+				actor1->reduceHealth(damage);
 			}
-		}
-		//Change turns
-		playerTurn = !playerTurn;
 
-		//Check for end of fight
-		if (actor1->getHealth() <= 0)
-		{
-			_winner = actor2;
-			_loser = actor1;
-			victory();
-		}
-		else if (actor2->getHealth() <= 0)
-		{
-			_winner = actor1;
-			_loser = actor2;
-			victory();
+			//Change turns
+			playerTurn = !playerTurn;
+
+			//Check for end of fight
+			if (actor1->getHealth() <= 0)
+			{
+				_winner = actor2;
+				_loser = actor1;
+				victory();
+			}
+			else if (actor2->getHealth() <= 0)
+			{
+				_winner = actor1;
+				_loser = actor2;
+				victory();
+			}
 		}
 	}
 
