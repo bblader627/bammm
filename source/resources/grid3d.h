@@ -41,10 +41,10 @@ namespace bammm
 			~Grid3d<T>();
 			/*
 			 access
-			 @Pre-Condition- takes in x,y,z  point system
+			 @Pre-Condition- takes in x,y,z  point system ( a vector)
 			 @Post-Condition- will return the value in that point system
 			 */
-			T* access(int x, int y, int z);
+			T* access(Vector3D *vect);
 			/*
 			 insert
 			 @Pre-Condition- Takes a vector and and object to insert
@@ -53,10 +53,10 @@ namespace bammm
 			void insert(Vector3D *vect, T &obj);
 			/*
 			 remove
-			 @Pre-Condition- Takes in xyz coordinate
+			 @Pre-Condition- Takes in xyz coordinate (a vector)
 			 @Post-Condition- Removes object specified by the coordinates
 			 */
-			void remove(int x, int y, int z);
+			void remove(Vectord3D *vect);
 
 	};
 
@@ -89,9 +89,9 @@ namespace bammm
 
 
 	template<class T>
-	T* Grid3d<T>::access(int x, int y, int z)
+	T* Grid3d<T>::access(Vector3D *vect)
 	{
-		return grid->at(x + (y * width) + (z * width * height));
+		return grid->at(vect->X() + (vect->Y() * width) + (vect->Z() * width * height));
 	}
 
 
@@ -104,9 +104,9 @@ namespace bammm
 
 
 	template<class T>
-	void Grid3d<T>::remove(int x, int y, int z)
+	void Grid3d<T>::remove(Vector3D *vect)
 	{
-		int pos = x + (y * width) + (z * width * height);
+		int pos = vect->X() + (vect->Y() * width) + (vect->Z() * width * height);
 		grid->erase(pos);
 	}
 }
