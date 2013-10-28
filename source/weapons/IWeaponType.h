@@ -2,8 +2,11 @@
 #define IWEAPONTYPE_H_
 
 #include "weapondata.h"
+#include "../actors/actor.h"
+
 namespace bammm
 {
+	class Actor;
 	class IWeaponType
 	{
 		protected:
@@ -11,8 +14,8 @@ namespace bammm
 		public:
 			IWeaponType();
 			virtual ~IWeaponType();
-			virtual void attack(Actor* target)=0;
-			virtual bool canAttack()=0;
+			virtual void attack(Actor* target);
+			virtual bool canAttack();
 	};
 }
 #endif
