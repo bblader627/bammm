@@ -11,7 +11,6 @@
 
 #include <sys/time.h>
 #include <ostream>
-
 namespace bammm
 {
     class Time
