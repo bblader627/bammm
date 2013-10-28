@@ -61,10 +61,9 @@ namespace bammm
 
 	};
 
-
 	//Creates an grid
 	template<class T>
-	Grid3d<T>::Grid3d<T>()
+	Grid3d<T>::Grid3d()
 	{
 		width = 0;
 		length = 0;
@@ -73,7 +72,7 @@ namespace bammm
 	}
 	//creates a Grid with  size
 	template<class T>
-	Grid3d<T>::Grid3d<T>(int w, int l, int h)
+	Grid3d<T>::Grid3d(int w, int l, int h)
 	{
 		width = w;
 		length = l;
@@ -83,48 +82,48 @@ namespace bammm
 
 	//destructor
 	template<class T>
-	Grid3d<T>::~Grid3d<T>()
+	Grid3d<T>::~Grid3d()
 	{
 		delete grid;
 	}
 
-
 	template<class T>
 	DynamicArray<T>* Grid3d<T>::access(Vector3D *vect)
 	{
-		int pos = vect->x() + (vect->y() * width) + (vect->z() * width * height);
+		int pos = vect->x() + (vect->y() * width)
+				+ (vect->z() * width * height);
 		int start = pos - 5;
 		int end = pos + 5;
 		int i;
-		DynamicArray<T> *space = new DynamicArray<T>(end + start + end); 
-		if(start < 0)
+		DynamicArray<T> *space = new DynamicArray<T>(end + start + end);
+		if (start < 0)
 		{
 			start = 0;
 		}
-		if(end > grid->getCapacity())
+		if (end > grid->getCapacity())
 		{
-			end = grid->getSize()-1;
+			end = grid->getSize() - 1;
 		}
-		for(i = start; i <= end; i++)
+		for (i = start; i <= end; i++)
 		{
 			space->add(grid->get(i));
 		}
 		return space;
 	}
 
-
 	template<class T>
 	void Grid3d<T>::insert(Vector3D *vect, T &obj)
 	{
-		int pos = vect->x() + (vect->y() * width) + (vect->z() * width * height);
+		int pos = vect->x() + (vect->y() * width)
+				+ (vect->z() * width * height);
 		grid->insert(pos, obj);
 	}
-
 
 	template<class T>
 	void Grid3d<T>::remove(Vector3D *vect)
 	{
-		int pos = vect->x() + (vect->y() * width) + (vect->z() * width * height);
+		int pos = vect->x() + (vect->y() * width)
+				+ (vect->z() * width * height);
 		grid->erase(pos);
 	}
 }
