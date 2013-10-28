@@ -71,7 +71,6 @@ namespace bammm
         _states->add("attack", combatState);
     }
 
-
     void PlayerController::input(DynamicArray<string>* multiInput, float dTime)
     {
     	//all currently running states

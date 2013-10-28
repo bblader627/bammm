@@ -13,12 +13,13 @@ namespace bammm
 			Actor* _winner;
 			Actor* _loser;
 			bool playerTurn;
+			bool inRange();
 			void giveLoot();
 			void victory();
+			bool canFight();
 
 		public:
 			MeleeCombat(Actor* a1, Actor* a2);
-			bool canFight();
 			void useTurn();
 			Actor* getWinner();
 			Actor* getLoser();
@@ -41,44 +42,56 @@ namespace bammm
 			return false;
 		}
 
+		return true;
+	}
+
+	bool MeleeCombat::inRange()
+	{
 		if (!(actor1->getLocation() == actor2->getLocation()))
 		{
 			return false;
 		}
-
 		return true;
 	}
 
 	void MeleeCombat::useTurn()
 	{
+		Actor* attacker;
+		Actor* attacked;
 		//Damage
 		if(canFight())
 		{
 			if (playerTurn)
 			{
-				int damage = actor1->getWeapon()->attack();
-				actor2->reduceHealth(damage);
+				attacker = actor1;
+				attacked = actor2;
 			}
 			else
 			{
-				int damage = actor2->getWeapon()->attack();
-				actor1->reduceHealth(damage);
+				attacker = actor2;
+				attacked = actor1;
+			}
+
+			//Check to see if hit or miss
+			if(inRange())
+			{
+				int damage = attacker->getMeleeWeapon()->attack();
+				attacked->reduceHealth(damage);
+				cout << attacker->getName() << " hit " << attacked->getName() << " for " << damage << " damage.";
+			}
+			else
+			{
+				cout << attacker->getName() << " missed " << attacked->getName() << ".";
 			}
 
 			//Change turns
 			playerTurn = !playerTurn;
 
 			//Check for end of fight
-			if (actor1->getHealth() <= 0)
+			if (attacked->getHealth() <= 0)
 			{
-				_winner = actor2;
-				_loser = actor1;
-				victory();
-			}
-			else if (actor2->getHealth() <= 0)
-			{
-				_winner = actor1;
-				_loser = actor2;
+				_winner = attacker;
+				_loser = attacked;
 				victory();
 			}
 		}
