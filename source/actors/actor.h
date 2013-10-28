@@ -19,12 +19,14 @@
 #include <iostream>
 #include "../resources/vector3d.h"
 #include "../weapons/MeleeWeapon.h"
-using namespace std;
+#include "../weapons/RangedWeapon.h"
 
-class MeleeWeapon;
+using namespace std;
 
 namespace bammm
 {
+	class MeleeWeapon;
+
 	class Actor
 	{
 
@@ -46,109 +48,115 @@ namespace bammm
 			float BAC;
 
 			MeleeWeapon *_meleeWeapon;
+			RangedWeapon *_rangedWeapon;
 
 		public:
 			//Constructors
 			Actor();
 			Actor(string myName);
-			Actor(string myName,int health,int stamina,int atck, int def);
+			Actor(string myName, int health, int stamina, int atck, int def);
 
 			//Functions
 
-			
 			/*
-				setWeapon
-				@Pre-Condition- takes no arguments
-				@Post-Condition- sets the weapon to w
-			*/
-			void setWeapon(MeleeWeapon* weapon);
+			 setWeapon
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- sets the weapon to w
+			 */
+			void setMeleeWeapon(MeleeWeapon* weapon);
+
+			void setRangedWeapon(RangedWeapon* weapon);
 
 			/*
-				setRotation
-				@Pre-Condition- takes no arguments
-				@Post-Condition- returns rotation
-			*/
+			 setRotation
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns rotation
+			 */
 			void setRotation(float myRotation);
 			/*
-				setName
-				@Pre-Condition- takes no arguments
-				@Post-Condition- returns name
-			*/
+			 setName
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns name
+			 */
 			void setName(string myName);
 
 			/*
-				increaseHealth
-				@Pre-Condition- Takes an float amount 
-				@Post-Condition- Increases health by said amount
-			*/
+			 increaseHealth
+			 @Pre-Condition- Takes an float amount
+			 @Post-Condition- Increases health by said amount
+			 */
 			void increaseHealth(int amount);
 
 			/*
-				increaseStamina
-				@Pre-Condition- Takes an float amount 
-				@Post-Condition- Increases stamina by said amount
-			*/
+			 increaseStamina
+			 @Pre-Condition- Takes an float amount
+			 @Post-Condition- Increases stamina by said amount
+			 */
 			void increaseStamina(int amount);
 
 			/*
-				reduceHealth
-				@Pre-Condition- Takes an float amount 
-				@Post-Condition- Decreases health by said amount
-			*/
+			 reduceHealth
+			 @Pre-Condition- Takes an float amount
+			 @Post-Condition- Decreases health by said amount
+			 */
 			void reduceHealth(int amount);
 
 			/*
-				reduceHealth
-				@Pre-Condition- Takes an float amount 
-				@Post-Condition- Decreases stamina by said amount
-			*/
+			 reduceHealth
+			 @Pre-Condition- Takes an float amount
+			 @Post-Condition- Decreases stamina by said amount
+			 */
 			void reduceStamina(int amount);
 
 			/*
-			 	isFullyRested
-			 	@Pre-Condition- no parameters
-			 	@Post-Condition- returns true if healthBar and staminaBar are equal to 								MAX_HEALTH and MAX_STAMINA
-			 					 returns false otherwise;
+			 isFullyRested
+			 @Pre-Condition- no parameters
+			 @Post-Condition- returns true if healthBar and staminaBar are equal to 								MAX_HEALTH and MAX_STAMINA
+			 returns false otherwise;
 			 */
 			bool isFullyRested();
 
 			/*
-			  	increaseBAC
-			 	@Pre-Condition- no parameters;
-			 	@Post-Condition- increments BAC by .1;
+			 increaseBAC
+			 @Pre-Condition- no parameters;
+			 @Post-Condition- increments BAC by .1;
 			 */
 			void incrementBAC();
 
 			/*
-			 	resetBAC
-			 	@Pre-Condition- no parameters;
-			 	@Post-Condition- sets BAC back to 0
+			 resetBAC
+			 @Pre-Condition- no parameters;
+			 @Post-Condition- sets BAC back to 0
 			 */
 			void resetBAC();
 
 			/*
-				addGold
-				@Pre-Condition- takes amount of gold to add
-				@Post-Condition- returns total amount of gold
+			 addGold
+			 @Pre-Condition- takes amount of gold to add
+			 @Post-Condition- returns total amount of gold
 			 */
 			int addGold(int amount);
 
 			/*
-				resetBAC
-				@Pre-Condition- takes amount of gold to spend;
-				@Post-Condition- decrements gold and returns true if there is enough, returns false if not
+			 resetBAC
+			 @Pre-Condition- takes amount of gold to spend;
+			 @Post-Condition- decrements gold and returns true if there is enough, returns false if not
 			 */
 			bool spendGold(int amount);
-
 
 			inline int getGold()
 			{
 				return gold;
 			}
 
-			inline MeleeWeapon* getWeapon()
+			inline MeleeWeapon* getMeleeWeapon()
 			{
 				return _meleeWeapon;
+			}
+
+			inline RangedWeapon* getRangedWeapon()
+			{
+				return _rangedWeapon;
 			}
 
 			inline float getBAC()
@@ -196,8 +204,25 @@ namespace bammm
 				return _defense;
 			}
 
-
 	};
+
+	Actor::Actor()
+	{
+		_name = "DefaultName";
+		_rotation = 0;
+
+		velocity = new Vector3D();
+		location = new Vector3D();
+
+		MAX_HEALTH = 100;
+		MAX_STAMINA = 50;
+		_healthBar = MAX_HEALTH;
+		_staminaBar = MAX_STAMINA;
+		_healthBar = 100;
+		_staminaBar = 50;
+		_attack = 4;
+		_defense = 2;
+	}
 
 	Actor::Actor(string myName)
 	{
@@ -216,13 +241,13 @@ namespace bammm
 		_defense = 2;
 	}
 
-	Actor::Actor(string myName,int health,int stamina,int atck, int def)
+	Actor::Actor(string myName, int health, int stamina, int atck, int def)
 	{
 		_name = myName;
 		_rotation = 0;
 		velocity = new Vector3D();
 		location = new Vector3D();
-	
+
 		MAX_HEALTH = health;
 		MAX_STAMINA = stamina;
 		_healthBar = MAX_HEALTH;
@@ -233,9 +258,14 @@ namespace bammm
 		_defense = def;
 	}
 
-	void Actor::setWeapon(MeleeWeapon* weapon)
+	void Actor::setMeleeWeapon(MeleeWeapon* weapon)
 	{
-		_meleeWeapon =  weapon;
+		_meleeWeapon = weapon;
+	}
+
+	void Actor::setRangedWeapon(RangedWeapon* weapon)
+	{
+		_rangedWeapon = weapon;
 	}
 
 	void Actor::setRotation(float myRotation)
@@ -243,16 +273,14 @@ namespace bammm
 		_rotation = myRotation;
 	}
 
-
 	void Actor::setName(string myName)
 	{
 		_name = myName;
 	}
 
-
 	void Actor::increaseHealth(int amount)
 	{
-		if (_healthBar>=MAX_HEALTH)
+		if (_healthBar >= MAX_HEALTH)
 		{
 			_healthBar = MAX_HEALTH;
 			return;
@@ -263,10 +291,9 @@ namespace bammm
 		}
 	}
 
-
 	void Actor::increaseStamina(int amount)
 	{
-		if (_staminaBar>=MAX_STAMINA)
+		if (_staminaBar >= MAX_STAMINA)
 		{
 			_staminaBar = MAX_STAMINA;
 			return;
@@ -276,7 +303,6 @@ namespace bammm
 			_staminaBar += amount;
 		}
 	}
-
 
 	void Actor::reduceHealth(int amount)
 	{
@@ -291,7 +317,6 @@ namespace bammm
 		}
 	}
 
-
 	void Actor::reduceStamina(int amount)
 	{
 		if (_staminaBar > 0)
@@ -303,7 +328,6 @@ namespace bammm
 			_staminaBar = 0;
 		}
 	}
-
 
 	bool Actor::isFullyRested()
 	{
