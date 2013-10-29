@@ -20,7 +20,7 @@
 
 #include <iostream>
 #include "../resources/dynamicarray.h"
-#include "../states/IStateCallback.h"
+#include "IStateCallback.h"
 #include "../actors/actor.h"
 
 #ifndef NULL
@@ -31,18 +31,19 @@ using namespace std;
 
 namespace bammm
 {
+
     class State
     {
 		protected:
 			Actor* _actor;
-
+			IStateCallback* _statemachine;
         public:
 			State();
-			State(Actor* actor);
+			State(Actor* actor, IStateCallback* machine);
 			virtual void setup();
 			virtual void breakdown();
 			virtual void tick(float dTime);
-			virtual void registerTransitionCallback(IStateCallback* callback);
+			virtual void registerTransitionCallback();
 			virtual string to_string();
 			virtual bool operator==(State* s);
 			virtual ~State();
@@ -52,9 +53,10 @@ namespace bammm
 	{
 	}
 
-	State::State(Actor* actor)
+	State::State(Actor* actor, IStateCallback* machine)
 	{
 		_actor = actor;
+		_statemachine = machine;
 	}
 
 	/*
@@ -98,9 +100,9 @@ namespace bammm
 	* Pre-Condition- accepts pointer to IStateCallback
 	* Post-Condition- calls onTransition to swap states in callback
 	*/
-	void State::registerTransitionCallback(IStateCallback* callback)
+	void State::registerTransitionCallback()
 	{
-		callback->onTransition();
+		_statemachine->onTransition(this, "idle");
 	}
 
 	string State::to_string()

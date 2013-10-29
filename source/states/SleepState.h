@@ -52,7 +52,7 @@ namespace bammm
 
         if (_actor->isFullyRested())
         {
-        	registerTransitionCallback(new IStateCallback(this, new IdleState(_actor), _actor));
+        	registerTransitionCallback();
         }
 
         if(timeSlept < hoursToSleep)

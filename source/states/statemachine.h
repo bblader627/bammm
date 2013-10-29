@@ -20,6 +20,7 @@
 
 #include <iostream>
 #include "../resources/dynamicarray.h"
+#include "../resources/hashmap.h"
 #include "state.h"
 
 #include "../states/state.h"
@@ -33,20 +34,22 @@ using namespace std;
 using namespace bammm;
 
 
-class StateMachine
+class StateMachine : IStateCallback
 {
 	private:
-		DynamicArray<State*> * currentStates;
+		DynamicArray<State*>* currentStates;
+		HashMap<State*>* _allStates;
 		Actor* _actor;
 	public:
 		/*
 		 * Default Constructor
 		 */
-		StateMachine(Actor* actor, State* initialState)
+		StateMachine(Actor* actor, State* initialState, HashMap<State*>* allStates)
 		{
 			_actor = actor;
 			currentStates = new DynamicArray<State*>();
 			currentStates->add(initialState);
+			_allStates = allStates;
 		}
 
 		/*
@@ -87,6 +90,15 @@ class StateMachine
 				current->breakdown();
 				current = newState;
 				current->setup();
+			}
+		}
+
+		void switchState(State* current, string newStateString)
+		{
+			State* newState = _allStates->getValue(newStateString);
+			if (newState != NULL)
+			{
+				switchState(current, newState);
 			}
 		}
 

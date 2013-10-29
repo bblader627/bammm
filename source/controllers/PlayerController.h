@@ -63,10 +63,10 @@ namespace bammm
         BrawlState* brawlState = new BrawlState(_actor);
         SleepState* sleepState = new SleepState(_actor);
         IdleState* idleState = new IdleState(_actor);
-		CombatState* combatState = new CombatState(_actor);
+		//CombatState* combatState = new CombatState(_actor);
 
 		//Put actor in idle state
-        _stateMachine = new StateMachine(_actor, idleState);
+        _stateMachine = new StateMachine(_actor, idleState, _states);
 
         _states->add("idle", idleState);
         _states->add("mine", mineState);
@@ -74,7 +74,7 @@ namespace bammm
         _states->add("sing", singState);
         _states->add("brawl", brawlState);
         _states->add("sleep", sleepState);
-        _states->add("attack", combatState);
+        //_states->add("attack", combatState);
     }
 
     void PlayerController::input(DynamicArray<string>* multiInput, float dTime)
@@ -187,6 +187,7 @@ namespace bammm
 			cout << "5. Go to sleep" << endl;
 		}
 
+		/*
 		//Combat options
 		if(currentStates->contains(_states->getValue("attack")))
 		{
@@ -196,7 +197,7 @@ namespace bammm
 		{
 			cout << "6. Fight Orc" << endl;
 		}
-
+		*/
 		cout << "7. Continue" << endl;
 
     	cout << "0. Quit" << endl;

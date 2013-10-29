@@ -13,8 +13,13 @@ using namespace std;
 
 namespace bammm
 {
+
     class DrinkState : public State
     {
+    	private:
+    		IStateCallback* _statemachine;
+			void registerTransitionCallback(string newStateString);
+
         public:
             DrinkState(Actor* actor);
             void setup();
@@ -62,7 +67,7 @@ namespace bammm
 		if (_actor->getBAC() >= 0.5)
 		{
 			cout << name << " is too drunk to continue.  He drops his glass and passes out on the floor." << endl;
-			this->registerTransitionCallback(new IStateCallback(this, new SleepState(_actor), _actor));
+			this->registerTransitionCallback("sleep");
 			//switchState(this, SleepState);
 		}
 		else if(stoutLife < 1)
@@ -78,6 +83,11 @@ namespace bammm
 	string DrinkState::to_string()
 	{
 		return "Drink State";
+	}
+
+	void DrinkState::registerTransitionCallback(string newStateString)
+	{
+		_statemachine->onTransition(this, newStateString);
 	}
 }
 #endif
