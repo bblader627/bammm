@@ -40,15 +40,16 @@ namespace bammm
         public:
             void input(DynamicArray<string>* command, float dTime);
             void input(string command, float dTime);
-            PlayerController(Grid3d<Actor>* theGrid);
+            PlayerController(Grid3d<Actor>* theGrid, MeleeCombat* meleeC);
             void setup(Actor* actor);
             ~PlayerController();
             void printOptions();
     };
 
-    PlayerController::PlayerController(Grid3d<Actor>* theGrid)
+    PlayerController::PlayerController(Grid3d<Actor>* theGrid, MeleeCombat* meleeC)
     {
 		grid = theGrid;
+		meleeCombat = meleeC;
     }
 
     void PlayerController::setup(Actor* actor)
@@ -102,12 +103,31 @@ namespace bammm
 			if (currentStates->contains(newState))
 			{
 				//switching newState with NULL calls breakdown on newState, the remove on currentStates
-				//_stateMachine->switchState(newState, NULL);
-				newState->breakdown();
-				currentStates->removeElem(newState);
+				
+				//Do doTurn in MeleeCombat
+				if(newState->to_string() == "Combat State")
+				{
+					cout << "Here\n";
+					meleeCombat->useTurn();
+					if(meleeCombat->getFightHappening())
+					{
+						newState->breakdown();
+						currentStates->removeElem(newState);
+					}
+				}
+				else
+				{
+					//_stateMachine->switchState(newState, NULL);
+					newState->breakdown();
+					currentStates->removeElem(newState);
+				}
+
+				
 			}
 			else
 			{
+				//NULL should be closest actor
+				meleeCombat->setup(_actor, NULL);
 				_stateMachine->addState(newState);
 			}
 
