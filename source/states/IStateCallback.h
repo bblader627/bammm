@@ -30,30 +30,10 @@ class State;
 
 	class IStateCallback
 	{
-		private:
-			State* currentState;
-			State* newState;
-			Actor* _actor;
-
 		public:
-			IStateCallback(State* current, State* next, Actor* actor)
-			{
-				currentState = current;
-				newState = next;
-				_actor = actor;
-			}
-
-			void onTransition()
-			{
-
-			}
-			/*
-			{
-				currentState->breakdown();
-				currentState = newState;
-				currentState->setup(_actor);
-			}
-			*/
+			virtual void switchState(State* current, State* newState);
+			virtual void switchState(State* current, string newState);
+			void onTransition();
 	};
 
 }
