@@ -17,6 +17,11 @@
 #ifndef WEAPONDATA_H_
 #define WEAPONDATA_H_
 
+#ifndef UINT
+#define UINT
+typedef unsigned int uint;
+#endif
+
 #include <iostream>
 using namespace std;
 
@@ -30,14 +35,14 @@ namespace bammm
 			int _damage;
 			float _reloadSpeed;
 			int _ammoCount;
-			float _fireRate;
+			uint _fireRate;
 			string _model;
 			string _type;
 		public:
 			//Constructors
 			WeaponData();
-			WeaponData(int damage, float fireRate, string model, string type);
-			WeaponData(int range, int clipCapacity, int damage, float reloadSpeed, float fireRate, string model, string type);
+			WeaponData(int damage, uint fireRate, string model, string type);
+			WeaponData(int range, int clipCapacity, int damage, float reloadSpeed, uint fireRate, string model, string type);
 
 			//Functions
 	
@@ -72,7 +77,7 @@ namespace bammm
 				return _ammoCount;
 			}
 			
-			inline float getFireRate()
+			inline uint getFireRate()
 			{
 				return _fireRate;
 			}
@@ -83,6 +88,32 @@ namespace bammm
 			}
 			
 
-	};	
+	};
+
+	WeaponData::WeaponData()
+	{
+	}
+
+	WeaponData::WeaponData(int damage, uint fireRate, string model, string type)
+	{
+		_range = 0;
+		_damage = damage;
+		_fireRate = fireRate;
+		_model = model;
+		_type = type;
+
+	}
+
+	WeaponData::WeaponData(int range, int clipCapacity, int damage, float reloadSpeed, uint fireRate, string model, string type)
+	{
+		_range = range;
+		_clipCapacity = clipCapacity;
+		_reloadSpeed = reloadSpeed;
+		_damage = damage;
+		_fireRate = fireRate;
+		_model = model;
+		_type = type;
+	}
+
 }
 #endif

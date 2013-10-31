@@ -2,6 +2,8 @@
 #include "actors/actor.h"
 #include "resources/grid3d.h"
 #include "controllers/PlayerController.h"
+#include "weapons/Stein.h"
+#include "weapons/MeleeWeapon.h"
 //#include "JSON/JSONParser.h"
 //#include "IStateCallback.h"
 
@@ -19,6 +21,8 @@ int main()
 	MeleeCombat* meleeCombat = new MeleeCombat();
 
 	Actor* bob = new Actor("Bob");
+	Stein* stein = new Stein();
+	bob->setMeleeWeapon(stein);
 
 	PlayerController* controller = new PlayerController(GRID, meleeCombat);
 

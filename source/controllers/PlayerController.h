@@ -107,9 +107,8 @@ namespace bammm
 				//Do doTurn in MeleeCombat
 				if(newState->to_string() == "Combat State")
 				{
-					cout << "Here\n";
 					meleeCombat->useTurn();
-					if(meleeCombat->getFightHappening())
+					if(!meleeCombat->getFightHappening())
 					{
 						newState->breakdown();
 						currentStates->removeElem(newState);
@@ -127,7 +126,7 @@ namespace bammm
 			else
 			{
 				//NULL should be closest actor
-				meleeCombat->setup(_actor, NULL);
+				meleeCombat->setup(_actor, _actor);
 				_stateMachine->addState(newState);
 			}
 

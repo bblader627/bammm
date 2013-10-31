@@ -94,14 +94,23 @@ namespace bammm
 			//Check to see if hit or miss
 			if(inRange())
 			{
-				int damage = attacker->getMeleeWeapon()->attack();
-				attacked->reduceHealth(damage);
-				cout << attacker->getName() << " hit " << attacked->getName() << " for " << damage << " damage.";
+				if(attacker->getMeleeWeapon()->canAttack())
+				{
+					int damage = attacker->getMeleeWeapon()->attack();
+					attacked->reduceHealth(damage);
+					cout << attacker->getName() << " hit " << attacked->getName() << " for " << damage << " damage.";
+				}
+				else
+				{
+					cout << attacker->getName() << " can't attack yet!\n";
+				}
 			}
 			else
 			{
 				cout << attacker->getName() << " missed " << attacked->getName() << ".";
 			}
+
+			cout << attacked->getName() << " has " << attacked->getHealth() << " hp left.\n";
 
 			//Change turns
 			playerTurn = !playerTurn;

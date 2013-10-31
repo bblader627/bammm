@@ -20,6 +20,24 @@ namespace bammm
 			virtual int attack();
 			virtual bool canAttack();
 	};
+
+	MeleeWeapon::MeleeWeapon()
+	{
+	}
+
+	MeleeWeapon::~MeleeWeapon()
+	{
+	}
+
+	int MeleeWeapon::attack()
+	{
+		return 0;
+	}
+
+	bool MeleeWeapon::canAttack()
+	{
+		return true;
+	}
 }
 
 #endif
