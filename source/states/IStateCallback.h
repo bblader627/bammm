@@ -31,8 +31,14 @@ namespace bammm
 	class IStateCallback
 	{
 		public:
-			virtual void switchState(State* current, State* newState);
-			virtual void switchState(State* current, string newStateString);
+			virtual void switchState(State* current, State* newState)
+			{
+
+			}
+			virtual void switchState(State* current, string newStateString)
+			{
+
+			}
 	};
 
 }
