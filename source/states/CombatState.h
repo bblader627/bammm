@@ -15,10 +15,10 @@ using namespace std;
 
 namespace bammm
 {
-    class CombatArray : public State
+    class CombatState : public State
     {
         public:
-            CombatArray(Actor* actor);
+            CombatState(Actor* actor, IStateCallback* statemachine);
             void setup();
             void breakDown();
             void tick(float dTime);
@@ -27,24 +27,25 @@ namespace bammm
         private:
     };
 
-	CombatArray::CombatArray(Actor* actor)
+	CombatState::CombatState(Actor* actor, IStateCallback* statemachine)
 	{
 		_actor = actor;
+		_statemachine = statemachine;
 	}
 
-    void CombatArray::setup()
+    void CombatState::setup()
     {
     }
 
-    void CombatArray::breakDown()
+    void CombatState::breakDown()
     {
     }
 
-    void CombatArray::tick(float dTime)
+    void CombatState::tick(float dTime)
     {
     }
 
-	string CombatArray::to_string()
+	string CombatState::to_string()
 	{
 		return "Combat State";
 	}
