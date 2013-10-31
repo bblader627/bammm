@@ -13,26 +13,45 @@ namespace bammm
 			Actor* _winner;
 			Actor* _loser;
 			bool playerTurn;
+			bool fightHappening;
 			bool inRange();
 			void giveLoot();
 			void victory();
 			bool canFight();
 
 		public:
-			MeleeCombat(Actor* a1, Actor* a2);
+			void setup(Actor* a1, Actor* a2);
+			MeleeCombat();
 			void useTurn();
+			bool getFightHappening();
 			Actor* getWinner();
 			Actor* getLoser();
 			~MeleeCombat();
 	};
 
-	MeleeCombat::MeleeCombat(Actor* a1, Actor* a2)
+	MeleeCombat::MeleeCombat()
+	{
+		actor1 = NULL;
+		actor2 = NULL;
+		_winner = NULL;
+		_loser = NULL;
+		playerTurn = true;
+		fightHappening = false;
+	}
+
+	void MeleeCombat::setup(Actor* a1, Actor* a2)
 	{
 		actor1 = a1;
 		actor2 = a2;
 		_winner = NULL;
 		_loser = NULL;
 		playerTurn = true;
+		fightHappening = true;
+	}
+
+	bool MeleeCombat::getFightHappening()
+	{
+		return fightHappening;
 	}
 
 	bool MeleeCombat::canFight()
@@ -75,14 +94,23 @@ namespace bammm
 			//Check to see if hit or miss
 			if(inRange())
 			{
-				int damage = attacker->getMeleeWeapon()->attack();
-				attacked->reduceHealth(damage);
-				cout << attacker->getName() << " hit " << attacked->getName() << " for " << damage << " damage.";
+				if(attacker->getMeleeWeapon()->canAttack())
+				{
+					int damage = attacker->getMeleeWeapon()->attack();
+					attacked->reduceHealth(damage);
+					cout << attacker->getName() << " hit " << attacked->getName() << " for " << damage << " damage.";
+				}
+				else
+				{
+					cout << attacker->getName() << " can't attack yet!\n";
+				}
 			}
 			else
 			{
 				cout << attacker->getName() << " missed " << attacked->getName() << ".";
 			}
+
+			cout << attacked->getName() << " has " << attacked->getHealth() << " hp left.\n";
 
 			//Change turns
 			playerTurn = !playerTurn;
@@ -113,6 +141,13 @@ namespace bammm
 		giveLoot();
 		cout << _winner->getName() << " has slain " << _loser->getName()
 				<< ".\n";
+		
+		actor1 = NULL;
+		actor2 = NULL;
+		_winner = NULL;
+		_loser = NULL;
+		playerTurn = true;
+		fightHappening = false;
 	}
 
 	void MeleeCombat::giveLoot()

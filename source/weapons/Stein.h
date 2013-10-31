@@ -2,7 +2,12 @@
 #define STEIN_H_
 
 #include "MeleeWeapon.h"
-#include "../TestSuite/time.h"
+#include "../TestSuite/time.cpp"
+
+#ifndef UNIT
+#define UINT
+typedef unsigned int uint;
+#endif
 
 namespace bammm
 {
@@ -10,8 +15,8 @@ namespace bammm
 	{
 		private:
 			WeaponData* weaponData;
-			float timer;
-			Time* time;
+			uint timer;
+			Time time;
 
 		public:
 			Stein();
@@ -23,38 +28,39 @@ namespace bammm
 
 	Stein::Stein()
 	{
-		weaponData = new WeaponData(1, 1, "", "melee");
-		timer = 0;
-		time = new Time();
+		int damage = 10;
+		int cooldown = 2;
+
+		weaponData = new WeaponData(damage, cooldown, "", "melee");
+		timer = 0;;
 	}
 
 	Stein::Stein(WeaponData* wd)
 	{
 		weaponData = wd;
 		timer = 0;
-		time = new Time();
 	}
 
 	Stein::~Stein()
 	{
 		delete weaponData;
-		delete time;
 	}
 
 	int Stein::attack()
 	{
+		time = time.current();
 		if (canAttack())
 		{
-			timer = time->getSeconds() + weaponData->getFireRate();
+			timer = time.getSeconds() + weaponData->getFireRate();
 			return weaponData->getDamage();
 		}
-
 		return 0;
 	}
 
 	bool Stein::canAttack()
 	{
-		if (time->getSeconds() < timer)
+		time = time.current();
+		if (time.getSeconds() < timer)
 		{
 			return false;
 		}
