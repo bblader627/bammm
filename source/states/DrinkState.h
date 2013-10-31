@@ -13,8 +13,14 @@ using namespace std;
 
 namespace bammm
 {
+
     class DrinkState : public State
     {
+    	private:
+    		//IStateCallback* _statemachine;
+    		static const uint stoutSize = 5;
+			uint stoutLife;
+
         public:
             DrinkState(Actor* actor);
             void setup();
@@ -22,9 +28,6 @@ namespace bammm
             void tick(float dTime);
 			string to_string();
 
-        private:
-            static const uint stoutSize = 5;
-            uint stoutLife;
     };
 
 	DrinkState::DrinkState(Actor* actor)
@@ -62,8 +65,7 @@ namespace bammm
 		if (_actor->getBAC() >= 0.5)
 		{
 			cout << name << " is too drunk to continue.  He drops his glass and passes out on the floor." << endl;
-			this->registerTransitionCallback(new IStateCallback(this, new SleepState(_actor), _actor));
-			//switchState(this, SleepState);
+			onTransition("sleep");
 		}
 		else if(stoutLife < 1)
 		{
@@ -79,5 +81,6 @@ namespace bammm
 	{
 		return "Drink State";
 	}
+
 }
 #endif

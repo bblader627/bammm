@@ -1,7 +1,10 @@
-#ifndef COMBATSTATE_H_
-#define COMBATSTATE_H_
+#ifndef ATTACKSTATE_H_
+#define ATTACKSTATE_H_
 
+#include <iostream>
 #include "state.h"
+#include "IStateCallback.h"
+#include "IdleState.h"
 
 #ifndef UINT
 #define UINT
@@ -12,39 +15,36 @@ using namespace std;
 
 namespace bammm
 {
-    class CombatState : public State
+    class CombatArray : public State
     {
         public:
-            CombatState(Actor* actor);
+            CombatArray(Actor* actor);
             void setup();
             void breakDown();
             void tick(float dTime);
 			string to_string();
 
         private:
-            uint stoutLife;
     };
 
-	CombatState::CombatState(Actor* actor)
+	CombatArray::CombatArray(Actor* actor)
 	{
 		_actor = actor;
-
 	}
 
-    void CombatState::setup()
+    void CombatArray::setup()
     {
     }
 
-    void CombatState::breakDown()
+    void CombatArray::breakDown()
     {
     }
 
-    void CombatState::tick(float dTime)
+    void CombatArray::tick(float dTime)
     {
-    	//string name = _actor->getName();
     }
 
-	string CombatState::to_string()
+	string CombatArray::to_string()
 	{
 		return "Combat State";
 	}
