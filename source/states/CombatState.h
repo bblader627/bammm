@@ -27,7 +27,7 @@ namespace bammm
         private:
     };
 
-	CombatArray::AttackState(Actor* actor)
+	CombatArray::CombatArray(Actor* actor)
 	{
 		_actor = actor;
 	}

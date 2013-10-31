@@ -21,6 +21,7 @@
 #include <iostream>
 #include "../resources/dynamicarray.h"
 #include "../resources/hashmap.h"
+#include "IStateCallback.h"
 #include "state.h"
 
 #include "../states/state.h"
@@ -34,7 +35,7 @@ using namespace std;
 using namespace bammm;
 
 
-class StateMachine : IStateCallback
+class StateMachine : public IStateCallback
 {
 	private:
 		DynamicArray<State*>* currentStates;
@@ -126,6 +127,11 @@ class StateMachine : IStateCallback
 		DynamicArray<State*>* getCurrentStates()
 		{
 			return currentStates;
+		}
+
+		virtual ~StateMachine()
+		{
+			delete _actor;
 		}
 
 };

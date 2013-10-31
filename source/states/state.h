@@ -39,11 +39,12 @@ namespace bammm
 			IStateCallback* _statemachine;
         public:
 			State();
-			State(Actor* actor, IStateCallback* machine);
+			State(Actor* actor);
 			virtual void setup();
 			virtual void breakdown();
 			virtual void tick(float dTime);
-			virtual void registerTransitionCallback();
+			virtual void registerTransitionCallback(IStateCallback* statemachine);
+			virtual void onTransition(string nextState);
 			virtual string to_string();
 			virtual bool operator==(State* s);
 			virtual ~State();
@@ -53,10 +54,9 @@ namespace bammm
 	{
 	}
 
-	State::State(Actor* actor, IStateCallback* machine)
+	State::State(Actor* actor)
 	{
 		_actor = actor;
-		_statemachine = machine;
 	}
 
 	/*
@@ -100,9 +100,19 @@ namespace bammm
 	* Pre-Condition- accepts pointer to IStateCallback
 	* Post-Condition- calls onTransition to swap states in callback
 	*/
-	void State::registerTransitionCallback()
+	void State::registerTransitionCallback(IStateCallback* statemachine)
 	{
-		_statemachine->onTransition(this, "idle");
+		_statemachine = statemachine;
+	}
+
+	/*
+	* onTransition
+	* Pre-Condition- accepts next state as text
+	* Post-Condition- returns void, calls switchState on _statemachine
+	*/
+	void State::onTransition(string nextState)
+	{
+		_statemachine->switchState(this, nextState);
 	}
 
 	string State::to_string()
@@ -122,6 +132,7 @@ namespace bammm
 
 	State::~State()
 	{
+
 	}
 }
 #endif

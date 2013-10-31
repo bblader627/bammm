@@ -15,13 +15,12 @@ namespace bammm
     {
 		private:
 			int successChance;
-
+			int maxGold;
         public:
             MineState(Actor* actor);
             void setup();
             void breakDown();
             void tick(float dTime);
-			string to_string();
     };
 
 	MineState::MineState(Actor* actor)
@@ -37,6 +36,7 @@ namespace bammm
     void MineState::setup()
     {
     	successChance = 30;
+    	maxGold = 100;
     }
 
     void MineState::breakDown()
@@ -50,6 +50,12 @@ namespace bammm
     	_actor->addGold(1);
         cout << _actor->getName() << " lifts his pickaxe, and swings it at the rock. " << endl;
         
+        if (_actor->getGold() > maxGold)
+        {
+        	cout << _actor->getName() << "'s purse is full!" << endl;
+        	onTransition("drink");
+        }
+
         /*
         if(random <= successChance)
         {
@@ -62,14 +68,5 @@ namespace bammm
         */
     }
 
-    void registerTransitionCallback(IStateCallback callback)
-    {
-    	callback.onTransition();
-    }
-
-	string MineState::to_string()
-	{
-		return "Mine State";
-	}
 }
 #endif

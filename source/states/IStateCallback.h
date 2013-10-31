@@ -25,15 +25,14 @@ using namespace std;
 
 namespace bammm
 {
-//Forward declaration of class State;
-class State;
+	//Forward declaration of class State;
+	class State;
 
 	class IStateCallback
 	{
 		public:
 			virtual void switchState(State* current, State* newState);
-			virtual void switchState(State* current, string newState);
-			void onTransition();
+			virtual void switchState(State* current, string newStateString);
 	};
 
 }
