@@ -23,6 +23,7 @@ namespace bammm
             void setup();
             void breakDown();
             void tick(float dTime);
+            void switchState(string nextState);
 			string to_string();
 
         private:
@@ -71,6 +72,11 @@ namespace bammm
             output + "zzzZZZ\n";
             timeSlept++;
         }
+    }
+
+    void SleepState::switchState(string nextState)
+    {
+    	_statemachine->switchState(this, nextState);
     }
 
 	string SleepState::to_string()

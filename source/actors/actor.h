@@ -119,7 +119,7 @@ namespace bammm
 			/*
 			 increaseBAC
 			 @Pre-Condition- no parameters;
-			 @Post-Condition- increments BAC by .1;
+			 @Post-Condition- increments BAC by .05;
 			 */
 			void incrementBAC();
 
