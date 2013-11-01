@@ -21,7 +21,7 @@ namespace bammm
 			Actor* actor2;
 			Actor* _winner;
 			Actor* _loser;
-			Grid3d<Actor> GRID;
+//			Grid3d<Actor> GRID;
 			bool playerTurn;
 
 			void giveLoot();
@@ -30,7 +30,7 @@ namespace bammm
 			bool inRange();
 
 		public:
-			RangedCombat(Actor* a1, Actor* a2, Grid3d<Actor> grid);
+			RangedCombat(Actor* a1, Actor* a2 /*,Grid3d<Actor> grid*/);
 			bool canFight();
 			void useTurn();
 			Actor* getWinner();
@@ -39,14 +39,14 @@ namespace bammm
 			~RangedCombat();
 	};
 
-	RangedCombat::RangedCombat(Actor* a1, Actor* a2, Grid3d<Actor> grid)
+	RangedCombat::RangedCombat(Actor* a1, Actor* a2/*, Grid3d<Actor> grid*/)
 	{
 		actor1 = a1;
 		actor2 = a2;
 		_winner = NULL;
 		_loser = NULL;
 		playerTurn = true;
-		GRID = grid;
+		//GRID = grid;
 	}
 
 	bool RangedCombat::canFight()
