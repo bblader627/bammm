@@ -112,7 +112,7 @@ namespace bammm
 	*/
 	void State::switchState(string nextState)
 	{
-		_statemachine->switchState(this, nextState);
+		//_statemachine->switchState(this, nextState);
 	}
 
 	string State::to_string()

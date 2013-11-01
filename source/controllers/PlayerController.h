@@ -58,16 +58,26 @@ namespace bammm
         _states = new HashMap<State*>();
 
 		//Create the states
-        DrinkState* drinkState = new DrinkState(_actor);
-        MineState* mineState = new MineState(_actor);
-        SingState* singState = new SingState(_actor);
-        BrawlState* brawlState = new BrawlState(_actor);
-        SleepState* sleepState = new SleepState(_actor);
-        IdleState* idleState = new IdleState(_actor);
-		CombatState* combatState = new CombatState(_actor);
+        //DO NOT DELETE THE REFERENCES TO STATEMACHINE.  THE CODE WILL SEG FAULT IF YOU DO
+        DrinkState* drinkState = new DrinkState(_actor, _stateMachine);
+        MineState* mineState = new MineState(_actor, _stateMachine);
+        SingState* singState = new SingState(_actor, _stateMachine);
+        BrawlState* brawlState = new BrawlState(_actor, _stateMachine);
+        SleepState* sleepState = new SleepState(_actor, _stateMachine);
+        IdleState* idleState = new IdleState(_actor, _stateMachine);
+		CombatState* combatState = new CombatState(_actor, _stateMachine);
 
 		//Put actor in idle state
+		//TAKE OUT 2ND PARAM, MAKE FUNCTION TO ASSIGN AFTER DECLARATION OF STATES
         _stateMachine = new StateMachine(_actor, idleState, _states);
+
+        drinkState->registerTransitionCallback(_stateMachine);
+        mineState->registerTransitionCallback(_stateMachine);
+        singState->registerTransitionCallback(_stateMachine);
+        brawlState->registerTransitionCallback(_stateMachine);
+        sleepState->registerTransitionCallback(_stateMachine);
+        idleState->registerTransitionCallback(_stateMachine);
+        combatState->registerTransitionCallback(_stateMachine);
 
         _states->add("idle", idleState);
         _states->add("mine", mineState);

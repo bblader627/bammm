@@ -14,6 +14,7 @@ namespace bammm
     {
         public:
             IdleState(Actor* actor);
+            IdleState(Actor* actor, IStateCallback* statemachine);
             void setup();
             void breakDown();
             void tick(float dTime);
@@ -25,6 +26,12 @@ namespace bammm
 	IdleState::IdleState(Actor* actor)
 	{
 		_actor = actor;
+	}
+
+	IdleState::IdleState(Actor* actor, IStateCallback* statemachine)
+	{
+		_actor = actor;
+		registerTransitionCallback(statemachine);
 	}
 
     void IdleState::setup()

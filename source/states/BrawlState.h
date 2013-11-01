@@ -14,6 +14,7 @@ namespace bammm
     {
         public:
             BrawlState(Actor* actor);
+            BrawlState(Actor* actor, IStateCallback* statemachine);
             void setup();
             void breakDown();
             void tick(float dTime);
@@ -26,6 +27,12 @@ namespace bammm
     {
 		_actor = actor;
     }
+
+    BrawlState::BrawlState(Actor* actor, IStateCallback* statemachine)
+	{
+		_actor = actor;
+		registerTransitionCallback(statemachine);
+	}
 
     void BrawlState::setup()
     {
@@ -42,7 +49,7 @@ namespace bammm
 
 	string BrawlState::to_string()
 	{
-		return "Brawl State";
+		return "brawl";
 	}
 }
 #endif

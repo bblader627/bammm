@@ -19,6 +19,7 @@ namespace bammm
     {
         public:
             SleepState(Actor* actor);
+            SleepState(Actor* actor, IStateCallback* statemachine);
             void setup();
             void breakDown();
             void tick(float dTime);
@@ -32,6 +33,12 @@ namespace bammm
 	SleepState::SleepState(Actor* actor)
 	{
 		_actor = actor;
+	}
+
+	SleepState::SleepState(Actor* actor, IStateCallback* statemachine)
+	{
+		_actor = actor;
+		registerTransitionCallback(statemachine);
 	}
 
     void SleepState::setup()
@@ -68,7 +75,7 @@ namespace bammm
 
 	string SleepState::to_string()
 	{
-		return "Sleep State";
+		return "sleep";
 	}
 }
 #endif

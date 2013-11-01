@@ -81,17 +81,12 @@ class StateMachine : public IStateCallback
 		 */
 		void switchState(State* current, State* newState)
 		{
-			if (newState == NULL)
-			{
-				current->breakdown();
-				currentStates->removeElem(current);
-			}
-			else
-			{
-				current->breakdown();
-				current = newState;
-				current->setup();
-			}
+			cout << "switching..." << endl;
+			current->breakdown();
+			currentStates->removeElem(current);
+			currentStates->add(newState);
+			newState->setup();
+
 		}
 
 		void switchState(State* current, string newStateString)
@@ -99,6 +94,7 @@ class StateMachine : public IStateCallback
 			State* newState = _allStates->getValue(newStateString);
 			if (newState != NULL)
 			{
+				cout << "sending to switchState(State*, State*)" << endl;
 				switchState(current, newState);
 			}
 		}
@@ -132,6 +128,11 @@ class StateMachine : public IStateCallback
 		virtual ~StateMachine()
 		{
 			delete _actor;
+		}
+
+		string toString()
+		{
+			return "statemachine";
 		}
 
 };

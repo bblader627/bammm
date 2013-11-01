@@ -36,7 +36,8 @@ namespace bammm
 	CombatState::CombatState(Actor* actor, IStateCallback* statemachine)
 	{
 		_actor = actor;
-		_statemachine = statemachine;
+
+		registerTransitionCallback(statemachine);
 	}
 
     void CombatState::setup()
@@ -53,7 +54,7 @@ namespace bammm
 
 	string CombatState::to_string()
 	{
-		return "Combat State";
+		return "combat";
 	}
 }
 #endif

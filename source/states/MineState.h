@@ -18,16 +18,23 @@ namespace bammm
 			int maxGold;
         public:
             MineState(Actor* actor);
+            MineState(Actor* actor, IStateCallback* statemachine);
             void setup();
             void breakDown();
             void tick(float dTime);
+            void switchState(string nextState);
+            string to_string();
     };
 
 	MineState::MineState(Actor* actor)
 	{
 		_actor = actor;
 	}
-
+	MineState::MineState(Actor* actor, IStateCallback* statemachine)
+	{
+		_actor = actor;
+		registerTransitionCallback(statemachine);
+	}
     /*
      * setup
      * Pre-Condition- no parameters
@@ -67,6 +74,21 @@ namespace bammm
         }
         */
     }
+
+    /* switchState
+	* Pre-Condition- accepts next state as text
+	* Post-Condition- returns void, calls switchState on _statemachine
+	*/
+	void MineState::switchState(string nextState)
+	{
+		cout << "Switching ..." << this->to_string() << endl;
+		_statemachine->switchState(this, nextState);
+	}
+
+	string MineState::to_string()
+	{
+		return "mine";
+	}
 
 }
 #endif

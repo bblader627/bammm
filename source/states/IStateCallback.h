@@ -33,11 +33,11 @@ namespace bammm
 		public:
 			virtual void switchState(State* current, State* newState)
 			{
-
+				cout << "wrong switch" << endl;
 			}
 			virtual void switchState(State* current, string newStateString)
 			{
-
+				cout << "Wrong switch string" << endl;
 			}
 	};
 
