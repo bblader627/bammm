@@ -2,6 +2,8 @@
 #include "actors/actor.h"
 #include "resources/grid3d.h"
 #include "controllers/PlayerController.h"
+#include "weapons/Stein.h"
+#include "weapons/MeleeWeapon.h"
 //#include "JSON/JSONParser.h"
 //#include "IStateCallback.h"
 
@@ -16,10 +18,13 @@ int main()
 	printWelcome();
 
 	Grid3d<Actor>* GRID = new Grid3d<Actor>();
+	MeleeCombat* meleeCombat = new MeleeCombat();
 
 	Actor* bob = new Actor("Bob");
+	Stein* stein = new Stein();
+	bob->setMeleeWeapon(stein);
 
-	PlayerController* controller = new PlayerController(GRID);
+	PlayerController* controller = new PlayerController(GRID, meleeCombat);
 
 	controller->setup(bob);
 
@@ -36,6 +41,7 @@ int main()
 	string drink = "drink";
 	string sing = "sing";
 	string brawl = "brawl";
+	string attack = "attack";
 	float dTime = 0;
 	while (playGame)
 	{
@@ -64,6 +70,8 @@ int main()
 				input->add(sleep);
 				break;
 			case 6:
+				input->add(attack);
+			case 7:
 				//wait
 				break;
 			default:

@@ -18,6 +18,7 @@ namespace bammm
     class CombatState : public State
     {
         public:
+            CombatState(Actor* actor);
             CombatState(Actor* actor, IStateCallback* statemachine);
             void setup();
             void breakDown();
@@ -26,6 +27,11 @@ namespace bammm
 
         private:
     };
+
+	CombatState::CombatState(Actor* actor)
+	{
+		_actor = actor;
+	}
 
 	CombatState::CombatState(Actor* actor, IStateCallback* statemachine)
 	{
