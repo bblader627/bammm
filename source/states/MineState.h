@@ -29,10 +29,12 @@ namespace bammm
 	MineState::MineState(Actor* actor)
 	{
 		_actor = actor;
+		maxGold = 15;
 	}
 	MineState::MineState(Actor* actor, IStateCallback* statemachine)
 	{
 		_actor = actor;
+		maxGold = 15;
 		registerTransitionCallback(statemachine);
 	}
     /*
@@ -56,7 +58,7 @@ namespace bammm
     	_actor->reduceStamina(1);
     	_actor->addGold(1);
         cout << _actor->getName() << " lifts his pickaxe, and swings it at the rock. " << endl;
-        
+        cout << _actor->getGold() << endl;
         if (_actor->getGold() > maxGold)
         {
         	cout << _actor->getName() << "'s purse is full!" << endl;
@@ -81,7 +83,6 @@ namespace bammm
 	*/
 	void MineState::switchState(string nextState)
 	{
-		cout << "Switching ..." << this->to_string() << endl;
 		_statemachine->switchState(this, nextState);
 	}
 

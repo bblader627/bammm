@@ -45,14 +45,28 @@ class StateMachine : public IStateCallback
 		/*
 		 * Default Constructor
 		 */
-		StateMachine(Actor* actor, HashMap<State*>* allStates)
+		StateMachine(Actor* actor, HashMap<State*>* allStates);
+		void initialState(State* initial);
+		void tick(float dTime);
+		void switchState(State* current, State* newState);
+		void switchState(State* current, string newStateString);
+		void addState(State* newState);
+		DynamicArray<State*>* getCurrentStates();
+		virtual ~StateMachine()
+		{
+			delete _actor;
+		}
+		string to_string();
+
+};
+		StateMachine::StateMachine(Actor* actor, HashMap<State*>* allStates)
 		{
 			_actor = actor;
 			currentStates = new DynamicArray<State*>();
 			_allStates = allStates;
 		}
 
-		void initialState(State* initial)
+		void StateMachine::initialState(State* initial)
 		{
 			currentStates->add(initial);
 		}
@@ -65,7 +79,7 @@ class StateMachine : public IStateCallback
 		 * Calls currentStates[i].setup() on every state in the array
 		 * setup() updates states
 		 */
-		void tick(float dTime)
+		void StateMachine::tick(float dTime)
 		{
 
 			for(int i = 0; i < (int) currentStates->getSize(); i++)
@@ -83,7 +97,7 @@ class StateMachine : public IStateCallback
 		 *
 		 *PlayerController will be calling switchState
 		 */
-		void switchState(State* current, State* newState)
+		void StateMachine::switchState(State* current, State* newState)
 		{
 			current->breakdown();
 			currentStates->removeElem(current);
@@ -92,7 +106,7 @@ class StateMachine : public IStateCallback
 
 		}
 
-		void switchState(State* current, string newStateString)
+		void StateMachine::switchState(State* current, string newStateString)
 		{
 			State* newState = _allStates->getValue(newStateString);
 			if (newState != NULL)
@@ -109,7 +123,7 @@ class StateMachine : public IStateCallback
 		 * Called from a Controller
 		 * Adds currently running states to array
 		 */
-		void addState(State* newState)
+		void StateMachine::addState(State* newState)
 		{
 			currentStates->add(newState);
 		}
@@ -122,20 +136,14 @@ class StateMachine : public IStateCallback
 		 * Called from Controller
 		 * Returns currently running states
 		 */
-		DynamicArray<State*>* getCurrentStates()
+		DynamicArray<State*>* StateMachine::getCurrentStates()
 		{
 			return currentStates;
 		}
 
-		virtual ~StateMachine()
-		{
-			delete _actor;
-		}
 
-		string toString()
+		string StateMachine::to_string()
 		{
 			return "statemachine";
 		}
-
-};
 #endif
