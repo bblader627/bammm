@@ -56,6 +56,8 @@ namespace bammm
     {
         _actor = actor;
         _states = new HashMap<State*>();
+        _stateMachine = new StateMachine(_actor, _states);
+
 
 		//Create the states
         //DO NOT DELETE THE REFERENCES TO STATEMACHINE.  THE CODE WILL SEG FAULT IF YOU DO
@@ -68,16 +70,8 @@ namespace bammm
 		CombatState* combatState = new CombatState(_actor, _stateMachine);
 
 		//Put actor in idle state
-		//TAKE OUT 2ND PARAM, MAKE FUNCTION TO ASSIGN AFTER DECLARATION OF STATES
-        _stateMachine = new StateMachine(_actor, idleState, _states);
+		_stateMachine->initialState(idleState);
 
-        drinkState->registerTransitionCallback(_stateMachine);
-        mineState->registerTransitionCallback(_stateMachine);
-        singState->registerTransitionCallback(_stateMachine);
-        brawlState->registerTransitionCallback(_stateMachine);
-        sleepState->registerTransitionCallback(_stateMachine);
-        idleState->registerTransitionCallback(_stateMachine);
-        combatState->registerTransitionCallback(_stateMachine);
 
         _states->add("idle", idleState);
         _states->add("mine", mineState);

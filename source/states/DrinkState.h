@@ -27,6 +27,7 @@ namespace bammm
             void setup();
             void breakDown();
             void tick(float dTime);
+            void switchState(string nextState);
 			string to_string();
 
     };
@@ -82,6 +83,11 @@ namespace bammm
 		{
 			cout << "The dwarf takes a sip of the Dwarven Ale." << "\n";
 		}
+    }
+
+    void DrinkState::switchState(string nextState)
+    {
+    	_statemachine->switchState(this, nextState);
     }
 
 	string DrinkState::to_string()

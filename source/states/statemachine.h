@@ -45,12 +45,16 @@ class StateMachine : public IStateCallback
 		/*
 		 * Default Constructor
 		 */
-		StateMachine(Actor* actor, State* initialState, HashMap<State*>* allStates)
+		StateMachine(Actor* actor, HashMap<State*>* allStates)
 		{
 			_actor = actor;
 			currentStates = new DynamicArray<State*>();
-			currentStates->add(initialState);
 			_allStates = allStates;
+		}
+
+		void initialState(State* initial)
+		{
+			currentStates->add(initial);
 		}
 
 		/*
@@ -81,7 +85,6 @@ class StateMachine : public IStateCallback
 		 */
 		void switchState(State* current, State* newState)
 		{
-			cout << "switching..." << endl;
 			current->breakdown();
 			currentStates->removeElem(current);
 			currentStates->add(newState);
@@ -94,7 +97,6 @@ class StateMachine : public IStateCallback
 			State* newState = _allStates->getValue(newStateString);
 			if (newState != NULL)
 			{
-				cout << "sending to switchState(State*, State*)" << endl;
 				switchState(current, newState);
 			}
 		}
