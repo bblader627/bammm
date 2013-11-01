@@ -38,17 +38,17 @@ namespace bammm
 		private:
 			MeleeCombat* meleeCombat;
 			RangedCombat* rangedCombat;
-			Grid3d<Actor>* grid;
+			Grid3d<Actor*>* grid;
         public:
             void input(DynamicArray<string>* command, float dTime);
             void input(string command, float dTime);
-            PlayerController(Grid3d<Actor>* theGrid, MeleeCombat* meleeC);
+            PlayerController(Grid3d<Actor*>* theGrid, MeleeCombat* meleeC);
             void setup(Actor* actor);
             ~PlayerController();
             void printOptions();
     };
 
-    PlayerController::PlayerController(Grid3d<Actor>* theGrid, MeleeCombat* meleeC)
+    PlayerController::PlayerController(Grid3d<Actor*>* theGrid, MeleeCombat* meleeC)
     {
 		grid = theGrid;
 		meleeCombat = meleeC;

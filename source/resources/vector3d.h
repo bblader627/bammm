@@ -216,6 +216,10 @@ namespace bammm
 		 { 0, 0, 0 };*/
 	}
 
+	Vector3D::~Vector3D()
+	{
+	}
+
 
 	void Vector3D::set(float x, float y, float z)
 	{

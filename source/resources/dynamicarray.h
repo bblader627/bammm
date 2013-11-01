@@ -60,7 +60,7 @@ namespace bammm
             uint getCapacity();
             T operator[](uint index);
             bool add(T element);
-            void add(uint index, T element);
+            void insert(uint index, T element);
             T remove(uint index);
             bool removeElem(T elem);
             void clear();
@@ -206,7 +206,7 @@ namespace bammm
      * @param element The element to be inserted.
      */
     template<class T>
-    void DynamicArray<T>::add(uint index, T element)
+    void DynamicArray<T>::insert(uint index, T element)
     {
         if(_array == NULL)
         {
