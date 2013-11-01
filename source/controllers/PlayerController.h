@@ -22,6 +22,7 @@
 #include "../states/statemachine.h"
 #include "../resources/grid3d.h"
 #include "../weapons/MeleeCombat.h"
+#include "../weapons/RangedCombat.h"
 
 #ifndef NULL
 #define NULL ((void *)0)
