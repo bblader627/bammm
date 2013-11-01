@@ -36,6 +36,7 @@ namespace bammm
     {
 		private:
 			MeleeCombat* meleeCombat;
+			RangedCombat* rangedCombat;
 			Grid3d<Actor>* grid;
         public:
             void input(DynamicArray<string>* command, float dTime);
