@@ -53,7 +53,7 @@ namespace bammm
         if (_actor->getGold() > maxGold)
         {
         	cout << _actor->getName() << "'s purse is full!" << endl;
-        	onTransition("drink");
+        	switchState("drink");
         }
 
         /*

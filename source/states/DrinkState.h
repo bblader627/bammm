@@ -65,7 +65,7 @@ namespace bammm
 		if (_actor->getBAC() >= 0.5)
 		{
 			cout << name << " is too drunk to continue.  He drops his glass and passes out on the floor." << endl;
-			onTransition("sleep");
+			switchState("sleep");
 		}
 		else if(stoutLife < 1)
 		{

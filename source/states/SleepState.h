@@ -52,7 +52,7 @@ namespace bammm
 
         if (_actor->isFullyRested())
         {
-        	onTransition("idle");
+        	switchState("idle");
         }
 
         if(timeSlept < hoursToSleep)
