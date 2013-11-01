@@ -4,6 +4,7 @@
 #include "controllers/PlayerController.h"
 #include "weapons/Stein.h"
 #include "weapons/MeleeWeapon.h"
+#include <random>
 //#include "JSON/JSONParser.h"
 //#include "IStateCallback.h"
 
@@ -16,22 +17,49 @@ void printOptions();
 int main()
 {
 	printWelcome();
-
-	Grid3d<Actor>* GRID = new Grid3d<Actor>();
+	bool printMap = true;
+	int gridX = 10;
+	int gridY = 10;
+	int gridZ = 10;
+	Grid3d<Actor*>* GRID = new Grid3d<Actor*>(gridX,gridY,gridZ);
 	MeleeCombat* meleeCombat = new MeleeCombat();
 
+	//Creation of Hero
 	Actor* bob = new Actor("Bob");
 	Stein* stein = new Stein();
 	bob->setMeleeWeapon(stein);
+	Vector3D* temp = new Vector3D(0,0,0);
+	GRID->insert(temp, bob);
+	delete temp;
+
+	//Random number generator
+	random_device rd;
+	mt19937 generator(rd());
+
+	//Pick random number of orcs
+	int minOrc = 1;
+	int maxOrc = 10;
+	uniform_int_distribution<int> orcDistribution (minOrc, maxOrc);
+	int orcCount = orcDistribution(generator);
+
+	//Create the orcs
+	uniform_int_distribution<int> xDistribution (0, gridX - 1);
+	uniform_int_distribution<int> yDistribution (0, gridY - 1);
+	for(int i = 0; i < orcCount; i++)
+	{
+		int randomX = xDistribution(generator);
+		int randomY = yDistribution(generator);
+		temp = new Vector3D(randomX, randomY, 0);
+		Actor* orc = new Actor("Orc");
+		GRID->insert(temp, orc);
+		delete temp;
+	}
 
 	PlayerController* controller = new PlayerController(GRID, meleeCombat);
-
 	controller->setup(bob);
 
 	bool playGame = true;
 	int choice;
-
-
 
 	cout << bob->getName() << " is waiting for instructions." << endl;
 
@@ -46,6 +74,12 @@ int main()
 	while (playGame)
 	{
 		input->clear();
+
+		if(printMap)
+		{
+			cout << GRID->to_string() << "\n";
+		}
+
 		controller->printOptions();
 		cin >> choice;
 

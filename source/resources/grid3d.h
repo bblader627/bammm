@@ -22,7 +22,7 @@
 using namespace std;
 
 #ifndef NULL
-#define NULL (void *)0
+#define NULL (void *)0)
 #endif
 
 namespace bammm
@@ -46,18 +46,23 @@ namespace bammm
 			 @Post-Condition- will return an array that represents the surrounding point
 			 */
 			DynamicArray<T>* access(Vector3D *vect, int radius);
+
+			T access(int x, int y, int z);
+
 			/*
 			 insert
 			 @Pre-Condition- Takes a vector and and object to insert
 			 @Post-Condition- Inserts object into the grid space
 			 */
-			void insert(Vector3D *vect, T &obj);
+			void insert(Vector3D *vect, T obj);
 			/*
 			 remove
 			 @Pre-Condition- Takes in xyz coordinate (a vector)
 			 @Post-Condition- Removes object specified by the coordinates
 			 */
 			void remove(Vector3D *vect);
+
+			string to_string();
 
 	};
 
@@ -78,6 +83,12 @@ namespace bammm
 		length = l;
 		height = h;
 		grid = new DynamicArray<T>(width * length * height);
+
+		int size = width * length * height;
+		for(int i = 0; i < size; i++)
+		{
+			grid->add(NULL);
+		}
 	}
 
 	//destructor
@@ -111,8 +122,15 @@ namespace bammm
 		return space;
 	}
 
+	template <class T>
+	T Grid3d<T>::access(int x, int y, int z)
+	{
+		int pos = x + (y * width) + (z * width * height);
+		return grid->get(pos);
+	}
+
 	template<class T>
-	void Grid3d<T>::insert(Vector3D *vect, T &obj)
+	void Grid3d<T>::insert(Vector3D *vect, T obj)
 	{
 		int pos = vect->x() + (vect->y() * width)
 				+ (vect->z() * width * height);
@@ -124,7 +142,43 @@ namespace bammm
 	{
 		int pos = vect->x() + (vect->y() * width)
 				+ (vect->z() * width * height);
-		grid->erase(pos);
+		grid->set(pos, NULL);
+	}
+
+	template <class T>
+	string Grid3d<T>::to_string()
+	{
+		string gridString = "";
+
+		for(int i = 0; i < length; i++)
+		{
+			for(int i2 = 0; i2 < width; i2++)
+			{
+				T atLoc;
+				atLoc = access(i, i2, 0);
+
+				if(atLoc == NULL)
+				{
+					gridString = gridString + "- ";
+				}
+				else
+				{
+					if(atLoc->getName() == "Orc")
+					{
+						gridString = gridString + "O ";
+					}
+					else
+					{
+						gridString = gridString + "X ";
+					}
+				}
+
+				atLoc = NULL;
+			}
+			gridString = gridString + "\n";
+		}
+
+		return gridString;	
 	}
 }
 
