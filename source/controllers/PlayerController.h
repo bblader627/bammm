@@ -22,6 +22,7 @@
 #include "../states/statemachine.h"
 #include "../resources/grid3d.h"
 #include "../weapons/MeleeCombat.h"
+#include "../weapons/RangedCombat.h"
 
 #ifndef NULL
 #define NULL ((void *)0)
@@ -36,6 +37,7 @@ namespace bammm
     {
 		private:
 			MeleeCombat* meleeCombat;
+			RangedCombat* rangedCombat;
 			Grid3d<Actor>* grid;
         public:
             void input(DynamicArray<string>* command, float dTime);
