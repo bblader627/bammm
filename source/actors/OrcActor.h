@@ -15,6 +15,7 @@
 
 #include "../resources/vector3d.h"
 #include "actor.h"
+#include "../weapons/OrcishBlade.h"
 #include <cmath>
 
 namespace bammm
@@ -32,11 +33,13 @@ namespace bammm
 			OrcActor()
 			{
 				goldCount = rand() % 6;
+				this->setMeleeWeapon(new OrcishBlade());
 			}
 
 			OrcActor(int gold)
 			{
 				goldCount = gold;
+				this->setMeleeWeapon(new OrcishBlade());
 			}
 
 			inline int getGold()
