@@ -234,6 +234,11 @@ namespace bammm
 				return _alliance;
 			}
 
+			inline int getEnemyAlliance()
+			{
+				return _alliance * -1;
+			}
+
 	};
 
 	Actor::Actor()

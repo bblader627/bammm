@@ -22,7 +22,7 @@
 using namespace std;
 
 #ifndef NULL
-#define NULL (void *)0)
+#define NULL (void *)0
 #endif
 
 namespace bammm
@@ -64,6 +64,7 @@ namespace bammm
 
 			string to_string();
 
+			T getEnemy(Vector3D* loc, T actor);
 	};
 
 	//Creates an grid
@@ -179,6 +180,21 @@ namespace bammm
 		}
 
 		return gridString;	
+	}
+
+	template <class T>
+	T Grid3d<T>::getEnemy(Vector3D* loc, T actor)
+	{
+		T onSpot = access(loc, 0);
+		if(onSpot)
+		{
+			if(onSpot->getAlliance() != actor->getEnemyAlliance())
+			{
+				onSpot = NULL;
+			}
+		}
+
+		return onSpot;
 	}
 }
 
