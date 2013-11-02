@@ -32,14 +32,16 @@ namespace bammm
 
 			OrcActor()
 			{
+				_name = "Orc";
 				goldCount = rand() % 6;
-				this->setMeleeWeapon(new OrcishBlade());
+				setMeleeWeapon(new OrcishBlade());
 			}
 
 			OrcActor(int gold)
 			{
+				_name = "Orc";
 				goldCount = gold;
-				this->setMeleeWeapon(new OrcishBlade());
+				setMeleeWeapon(new OrcishBlade());
 			}
 
 			inline int getGold()

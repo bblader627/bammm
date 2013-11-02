@@ -48,7 +48,7 @@ namespace bammm
 
 	string IdleState::to_string()
 	{
-		return "Idle State";
+		return "idle";
 	}
 }
 #endif

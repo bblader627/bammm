@@ -30,7 +30,7 @@ namespace bammm
 	class Actor
 	{
 
-		private:
+		protected:
 			float _rotation;
 			string _name;
 			Vector3D *velocity;

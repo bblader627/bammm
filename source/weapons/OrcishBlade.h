@@ -1,8 +1,8 @@
-#ifndef STEIN_H_
-#define STEIN_H_
+#ifndef ORCISHBLADE_H_
+#define ORCISHBLADE_H_
 
 #include "MeleeWeapon.h"
-#include "../TestSuite/time.cpp"
+#include "../TestSuite/time.h"
 
 #ifndef UNIT
 #define UINT
@@ -32,7 +32,7 @@ namespace bammm
 		int cooldown = 2;
 
 		weaponData = new WeaponData(damage, cooldown, "", "melee");
-		timer = 0;;
+		timer = 0;
 	}
 
 	OrcishBlade::OrcishBlade(WeaponData* wd)

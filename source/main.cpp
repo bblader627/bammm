@@ -1,8 +1,9 @@
 #include <iostream>
-#include "actors/actor.h"
 #include "resources/grid3d.h"
 #include "controllers/PlayerController.h"
 #include "weapons/Stein.h"
+#include "actors/DwarfActor.h"
+#include "actors/OrcActor.h"
 #include "weapons/MeleeWeapon.h"
 #include <random>
 //#include "JSON/JSONParser.h"
@@ -25,9 +26,7 @@ int main()
 	MeleeCombat* meleeCombat = new MeleeCombat();
 
 	//Creation of Hero
-	Actor* bob = new Actor("Bob");
-	Stein* stein = new Stein();
-	bob->setMeleeWeapon(stein);
+	DwarfActor* bob = new DwarfActor();
 	Vector3D* temp = new Vector3D(0,0,0);
 	GRID->insert(temp, bob);
 	delete temp;
@@ -50,8 +49,7 @@ int main()
 		int randomX = xDistribution(generator);
 		int randomY = yDistribution(generator);
 		temp = new Vector3D(randomX, randomY, 0);
-		Actor* orc = new Actor("Orc");
-		GRID->insert(temp, orc);
+		GRID->insert(temp, new OrcActor());
 		delete temp;
 	}
 
@@ -69,7 +67,7 @@ int main()
 	string drink = "drink";
 	string sing = "sing";
 	string brawl = "brawl";
-	string attack = "attack";
+	string attack = "combat";
 	float dTime = 0;
 	while (playGame)
 	{
