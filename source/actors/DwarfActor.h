@@ -33,6 +33,7 @@ namespace bammm
 		DwarfActor()
 		{
 			_name = "Dwarf";
+			_alliance = ally;
 			bloodAlcoholContent = 0.00;
 			setMeleeWeapon(new Stein());
 			goldCount = 0;
@@ -41,6 +42,7 @@ namespace bammm
 		DwarfActor(float BAC, int gold)
 		{
 			_name = "Dwarf";
+			_alliance = ally;
 			bloodAlcoholContent = BAC;
 			setMeleeWeapon(new Stein());
 			goldCount = gold;

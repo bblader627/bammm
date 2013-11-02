@@ -33,6 +33,7 @@ namespace bammm
 			OrcActor()
 			{
 				_name = "Orc";
+				_alliance = enemy;
 				goldCount = rand() % 6;
 				setMeleeWeapon(new OrcishBlade());
 			}
@@ -40,6 +41,7 @@ namespace bammm
 			OrcActor(int gold)
 			{
 				_name = "Orc";
+				_alliance = enemy;
 				goldCount = gold;
 				setMeleeWeapon(new OrcishBlade());
 			}

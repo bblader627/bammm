@@ -29,7 +29,6 @@ namespace bammm
 
 	class Actor
 	{
-
 		protected:
 			float _rotation;
 			string _name;
@@ -46,6 +45,14 @@ namespace bammm
 
 			int gold;
 			float BAC;
+
+			enum AllianceType
+			{
+				enemy = -1,
+				neutral = 0,
+				ally = 1
+			};
+			AllianceType _alliance;
 
 			MeleeWeapon *_meleeWeapon;
 			RangedWeapon *_rangedWeapon;
@@ -220,6 +227,11 @@ namespace bammm
 
 			inline Vector3D * getVectorLocation(){
 				return location;
+			}
+
+			inline int getAlliance()
+			{
+				return _alliance;
 			}
 
 	};
