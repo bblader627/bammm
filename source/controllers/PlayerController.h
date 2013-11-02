@@ -74,14 +74,13 @@ namespace bammm
 		//Put actor in idle state
 		_stateMachine->initialState(idleState);
 
-
-        _states->add("idle", idleState);
-        _states->add("mine", mineState);
-        _states->add("drink", drinkState);
-        _states->add("sing", singState);
-        _states->add("brawl", brawlState);
-        _states->add("sleep", sleepState);
-       	_states->add("attack", combatState);
+        _states->add(idleState->to_string(), idleState);
+        _states->add(mineState->to_string(), mineState);
+        _states->add(drinkState->to_string(), drinkState);
+        _states->add(singState->to_string(), singState);
+        _states->add(brawlState->to_string(), brawlState);
+        _states->add(sleepState->to_string(), sleepState);
+       	_states->add(combatState->to_string(), combatState);
     }
 
     void PlayerController::input(DynamicArray<string>* multiInput, float dTime)
@@ -111,7 +110,7 @@ namespace bammm
 				//switching newState with NULL calls breakdown on newState, the remove on currentStates
 				
 				//Do doTurn in MeleeCombat
-				if(newState->to_string() == "Combat State")
+				if(newState->to_string() == "combat")
 				{
 					meleeCombat->useTurn();
 					if(!meleeCombat->getFightHappening())
@@ -122,6 +121,7 @@ namespace bammm
 				}
 				else
 				{
+					//In else
 					//_stateMachine->switchState(newState, NULL);
 					newState->breakdown();
 					currentStates->removeElem(newState);
@@ -131,7 +131,7 @@ namespace bammm
 			}
 			else
 			{
-				//NULL should be closest actor
+				//Need to change this to closest enemy
 				meleeCombat->setup(_actor, _actor);
 				_stateMachine->addState(newState);
 			}
@@ -214,7 +214,7 @@ namespace bammm
 
 		
 		//Combat options
-		if (currentStates->contains(_states->getValue("attack")))
+		if (currentStates->contains(_states->getValue("combat")))
 		{
 			cout << "6. Attack" << endl;
 		}

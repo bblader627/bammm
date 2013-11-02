@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include "../resources/vector3d.h"
+#include "../weapons/Stein.h"
 #include "actor.h"
 
 using namespace bammm;
@@ -31,13 +32,19 @@ namespace bammm
 	public:
 		DwarfActor()
 		{
+			_name = "Dwarf";
+			_alliance = ally;
 			bloodAlcoholContent = 0.00;
+			setMeleeWeapon(new Stein());
 			goldCount = 0;
 		}
 
 		DwarfActor(float BAC, int gold)
 		{
+			_name = "Dwarf";
+			_alliance = ally;
 			bloodAlcoholContent = BAC;
+			setMeleeWeapon(new Stein());
 			goldCount = gold;
 		}
 
