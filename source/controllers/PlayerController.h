@@ -132,8 +132,16 @@ namespace bammm
 			else
 			{
 				//Need to change this to closest enemy
-				meleeCombat->setup(_actor, _actor);
-				_stateMachine->addState(newState);
+				Actor* closestEnemy = grid->getEnemy(_actor->getLocation(), _actor);
+				if(closestEnemy)
+				{
+					meleeCombat->setup(_actor, closestEnemy);
+					_stateMachine->addState(newState);
+				}
+				else
+				{
+					cout << "No one to attack\n";
+				}
 			}
 
 		}

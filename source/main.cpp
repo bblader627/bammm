@@ -28,6 +28,7 @@ int main()
 	//Creation of Hero
 	DwarfActor* bob = new DwarfActor();
 	Vector3D* temp = new Vector3D(0,0,0);
+	bob->setLocation(temp);
 	GRID->insert(temp, bob);
 	delete temp;
 
