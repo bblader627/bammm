@@ -16,7 +16,7 @@ namespace bammm
             BrawlState(Actor* actor);
             BrawlState(Actor* actor, IStateCallback* statemachine);
             void setup();
-            void breakDown();
+            void breakdown();
             void tick(float dTime);
 			string to_string();
 
@@ -38,7 +38,7 @@ namespace bammm
     {
     }
 
-    void BrawlState::breakDown()
+    void BrawlState::breakdown()
     {
     }
 

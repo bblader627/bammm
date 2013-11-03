@@ -378,7 +378,7 @@ namespace bammm
 
 	void Actor::incrementBAC()
 	{
-		BAC += .1;
+		BAC += .01;
 		return;
 	}
 

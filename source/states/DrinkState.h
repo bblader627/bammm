@@ -25,7 +25,7 @@ namespace bammm
             DrinkState(Actor* actor);
             DrinkState(Actor* actor, IStateCallback* statemachine);
             void setup();
-            void breakDown();
+            void breakdown();
             void tick(float dTime);
             void switchState(string nextState);
 			string to_string();
@@ -49,8 +49,27 @@ namespace bammm
         stoutLife = stoutSize;
     }
 
-    void DrinkState::breakDown()
+    void DrinkState::breakdown()
     {
+    	double bac = _actor->getBAC();
+    	if (bac < 0.1)
+    	{
+    		//Do nothing
+    	}
+    	else if (bac < 0.25)
+    	{
+    		cout << _actor->getName() << " puts down his drink.  He's slightly tipsy, but is ready to get back to work!" << endl;
+    	}
+    	else if (bac < 0.35)
+		{
+    		_actor->incrementBAC();
+			cout << _actor->getName() << " finishes his sloppily drink and slams it down on the counter, ready to go out and explore the village." << endl;
+		}
+    	else if (bac < 0.5)
+		{
+    		_actor->reduceHealth(2);
+    		cout << _actor->getName() << " is very drunk.  He gets up to leave and falls over a table before making his way out the door." << endl;
+		}
     }
 
     void DrinkState::tick(float dTime)

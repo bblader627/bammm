@@ -20,7 +20,7 @@ namespace bammm
             MineState(Actor* actor);
             MineState(Actor* actor, IStateCallback* statemachine);
             void setup();
-            void breakDown();
+            void breakdown();
             void tick(float dTime);
             void switchState(string nextState);
             string to_string();
@@ -44,16 +44,25 @@ namespace bammm
      */
     void MineState::setup()
     {
+
     	successChance = 30;
     	maxGold = 100;
+
     }
 
-    void MineState::breakDown()
+    void MineState::breakdown()
     {
     }
 
     void MineState::tick(float dTime)
     {
+    	if (_actor->getBAC() > 0.4)
+    	{
+    		cout << _actor->getName() << " drunkenly swings the pickaxe, hits himself in the foot, and decides not to do that anymore." << endl;
+    		switchState("null"); //ends this state;
+    		return;
+    	}
+
         //int random = rand() % 100 + 1;
     	_actor->reduceStamina(1);
     	_actor->addGold(1);

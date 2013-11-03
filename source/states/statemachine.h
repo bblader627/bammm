@@ -51,6 +51,7 @@ class StateMachine : public IStateCallback
 		void switchState(State* current, State* newState);
 		void switchState(State* current, string newStateString);
 		void addState(State* newState);
+		void removeState(State* oldState);
 		DynamicArray<State*>* getCurrentStates();
 		virtual ~StateMachine()
 		{
@@ -68,6 +69,7 @@ class StateMachine : public IStateCallback
 
 		void StateMachine::initialState(State* initial)
 		{
+			initial->setup();
 			currentStates->add(initial);
 		}
 
@@ -99,15 +101,18 @@ class StateMachine : public IStateCallback
 		 */
 		void StateMachine::switchState(State* current, State* newState)
 		{
-			current->breakdown();
-			currentStates->removeElem(current);
-			currentStates->add(newState);
-			newState->setup();
+			removeState(current);
+			addState(newState);
 
 		}
 
 		void StateMachine::switchState(State* current, string newStateString)
 		{
+			if (newStateString=="null")
+			{
+				removeState(current);
+				return;
+			}
 			State* newState = _allStates->getValue(newStateString);
 			if (newState != NULL)
 			{
@@ -117,15 +122,27 @@ class StateMachine : public IStateCallback
 
 		/*
 		 * addState
-		 * Pre-Condition-
-		 * Post-Condition-
+		 * Pre-Condition- accepts pointer to state to be added
+		 * Post-Condition-no return
 		 *
 		 * Called from a Controller
 		 * Adds currently running states to array
 		 */
 		void StateMachine::addState(State* newState)
 		{
+			newState->setup();
 			currentStates->add(newState);
+		}
+
+		/*
+		 * removeState
+		 * Pre-Condition- accepts pointer to state to be removed
+		 * Post-Condition- breaks down states and removies it from array
+		 */
+		void StateMachine::removeState(State* oldState)
+		{
+			oldState->breakdown();
+			currentStates->removeElem(oldState);
 		}
 
 		/**

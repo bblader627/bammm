@@ -21,7 +21,7 @@ namespace bammm
             SleepState(Actor* actor);
             SleepState(Actor* actor, IStateCallback* statemachine);
             void setup();
-            void breakDown();
+            void breakdown();
             void tick(float dTime);
             void switchState(string nextState);
 			string to_string();
@@ -47,7 +47,7 @@ namespace bammm
         timeSlept = 0;
     }
 
-    void SleepState::breakDown()
+    void SleepState::breakdown()
     {
     }
 

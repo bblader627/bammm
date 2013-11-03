@@ -17,7 +17,7 @@ namespace bammm
             SingState(Actor* actor);
             SingState(Actor* actor, IStateCallback* statemachine);
             void setup();
-            void breakDown();
+            void breakdown();
             void tick(float dTime);
 			string to_string();
 
@@ -43,7 +43,7 @@ namespace bammm
     	cout << "The dwarf begins to sing. ";
     }
 
-    void SingState::breakDown()
+    void SingState::breakdown()
     {
     }
 

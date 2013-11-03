@@ -68,6 +68,7 @@ namespace bammm
 	*/
 	void State::setup()
 	{
+		cout << "wrong setup" << endl;
 	}
 
 	/*
@@ -79,7 +80,7 @@ namespace bammm
 	*/
 	void State::breakdown()
 	{
-
+		cout << "wrong breakdown" << endl;
 	}
 
 	/*

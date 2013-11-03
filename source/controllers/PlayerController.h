@@ -93,8 +93,6 @@ namespace bammm
 
 		for(int i = 0; i < (int)multiInput->getSize(); i++)
 		{
-			//newStates->add(_states->getValue(multiInput->get(i)));
-
 			//Check to see if state is already running
 			//if so, break it down
 
@@ -115,16 +113,15 @@ namespace bammm
 					meleeCombat->useTurn();
 					if(!meleeCombat->getFightHappening())
 					{
-						newState->breakdown();
-						currentStates->removeElem(newState);
+						_stateMachine->removeState(newState);
+
 					}
 				}
 				else
 				{
-					//In else
-					//_stateMachine->switchState(newState, NULL);
-					newState->breakdown();
-					currentStates->removeElem(newState);
+					//breakdown and setup are not calling the correct functions
+					_stateMachine->removeState(newState);
+
 				}
 
 				
