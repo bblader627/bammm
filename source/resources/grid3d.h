@@ -112,7 +112,7 @@ namespace bammm
 		{
 			start = 0;
 		}
-		if (end > grid->getCapacity())
+		if (end > (int)grid->getCapacity())
 		{
 			end = grid->getSize() - 1;
 		}
@@ -185,16 +185,21 @@ namespace bammm
 	template <class T>
 	T Grid3d<T>::getEnemy(Vector3D* loc, T actor)
 	{
-		T onSpot = access(loc, 0);
-		if(onSpot)
+		DynamicArray<T>* allOnTile = access(loc, 0);
+		int actorEnemyAlliance = actor->getEnemyAlliance();
+	
+		for(int i = 0; i < (int) allOnTile->getSize(); i++)
 		{
-			if(onSpot->getAlliance() != actor->getEnemyAlliance())
+			T otherActor = allOnTile->get(i);
+			if(actorEnemyAlliance == otherActor->getAlliance())
 			{
-				onSpot = NULL;
+				delete allOnTile;
+				return otherActor;
 			}
 		}
 
-		return onSpot;
+		delete allOnTile;
+		return NULL;
 	}
 }
 

@@ -88,6 +88,13 @@ namespace bammm
 			void setName(string myName);
 
 			/*
+			 setLocation
+			 @Pre-Condition- takes the location to set
+			 @Post-Condition- returns nothing
+			 */
+			void setLocation(Vector3D* loc);
+
+			/*
 			 increaseHealth
 			 @Pre-Condition- Takes an float amount
 			 @Post-Condition- Increases health by said amount
@@ -311,6 +318,11 @@ namespace bammm
 	void Actor::setName(string myName)
 	{
 		_name = myName;
+	}
+
+	void Actor::setLocation(Vector3D* loc)
+	{
+		location = loc;
 	}
 
 	void Actor::increaseHealth(int amount)
