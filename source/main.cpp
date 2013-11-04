@@ -126,7 +126,6 @@ int main()
 		{	
 			if(aiControllers->get(i)->update(dTime))
 			{
-				cout << "Killing orc!\n";
 				aiControllers->remove(i);
 			}
 
