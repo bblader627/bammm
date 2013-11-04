@@ -7,8 +7,6 @@
 #include "actors/OrcActor.h"
 #include "weapons/MeleeWeapon.h"
 #include <random>
-//#include "JSON/JSONParser.h"
-//#include "IStateCallback.h"
 
 using namespace bammm;
 using namespace std;
@@ -109,7 +107,6 @@ int main()
 			case 6:
 				input->add(attack);
 			case 7:
-				//wait
 				break;
 			default:
 				cout << "Invalid Input" << endl;
