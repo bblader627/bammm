@@ -121,10 +121,7 @@ namespace bammm
 				{
 					//breakdown and setup are not calling the correct functions
 					_stateMachine->removeState(newState);
-
 				}
-
-				
 			}
 			else
 			{
@@ -133,14 +130,9 @@ namespace bammm
 				if(closestEnemy)
 				{
 					meleeCombat->setup(_actor, closestEnemy);
-					_stateMachine->addState(newState);
-				}
-				else
-				{
-					cout << "No one to attack\n";
 				}
 			}
-
+			_stateMachine->addState(newState);
 		}
 
 		//Should input even call switchstate?
