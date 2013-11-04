@@ -39,7 +39,7 @@ int main()
 
 	//Pick random number of orcs
 	int minOrc = 1;
-	int maxOrc = 2;
+	int maxOrc = 10;
 	uniform_int_distribution<int> orcDistribution (minOrc, maxOrc);
 	int orcCount = orcDistribution(generator);
 
@@ -56,7 +56,6 @@ int main()
 		AiController* newAi = new AiController(GRID, meleeCombat);
 		newAi->setup(newOrc);
 		aiControllers->add(newAi);
-		cout << "Original Size: " << aiControllers->getSize() << endl;
 		GRID->add(temp, newOrc);
 		
 		delete temp;
