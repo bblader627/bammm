@@ -96,7 +96,7 @@ namespace bammm
 	void AiController::update(float dTime)
 	{
     	//all currently running states
-    	DynamicArray<State*>* currentStates = _stateMachine->getCurrentStates();
+    	/*DynamicArray<State*>* currentStates = _stateMachine->getCurrentStates();
 		
 		//Generate random number
 		random_device rd;
@@ -114,7 +114,9 @@ namespace bammm
 				//breakdown and setup are not calling the correct functions
 				_stateMachine->removeState(newState);
 		}
-		_stateMachine->addState(newState);
+		_stateMachine->addState(newState);*/
+		Vector3D* newLoc = new Vector3D(0,0,0);
+		grid->moveTowards(_actor, newLoc);
         _stateMachine->tick(dTime);
     }
 }

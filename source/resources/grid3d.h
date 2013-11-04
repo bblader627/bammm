@@ -67,6 +67,7 @@ namespace bammm
 			DynamicArray<T>* access(int x, int y, int z);
 			void add(Vector3D* vect, T add);
 			void move(T actor, Vector3D* newLoc);
+			void moveTowards(T ordered, Vector3D* loc);
 	};
 
 	//Creates an grid
@@ -161,8 +162,8 @@ namespace bammm
 	template<class T>
 	bool Grid3d<T>::remove(Vector3D *vect, T elem)
 	{
-		int pos = convertToPos(vect);
-		bool deletedVal = grid->access(vect, 0)->get(0)->removeElem(elem);
+		//int pos = convertToPos(vect);
+		bool deletedVal = access(vect, 0)->get(0)->removeElem(elem);
 		return deletedVal;
 	}
 
@@ -225,7 +226,87 @@ namespace bammm
 	void Grid3d<T>::move(T actor, Vector3D* newLoc)
 	{
 		remove(actor->getLocation(), actor);
+		delete actor->getLocation();
 		add(newLoc, actor);
+	}
+
+	template <class T>
+	void Grid3d<T>::moveTowards(T ordered, Vector3D* target)
+	{
+		Vector3D* orderedLocation = ordered->getLocation();
+		Vector3D* targetLocation = target;
+		//Vector3D* orderedLocation = ordered->getLocation();
+		//Vector3D* targetLocation = target->getLocation();
+
+		//Comparisons
+		bool sameX = orderedLocation->x() == targetLocation->x();
+		bool sameY = orderedLocation->y() == targetLocation->y();
+		bool orderedXLess = orderedLocation->x() < targetLocation->x();
+		bool orderedXGreater = orderedLocation->x() > targetLocation->x();
+		bool orderedYLess = orderedLocation->y() < targetLocation->y();
+		bool orderedYGreater = orderedLocation->y() > targetLocation->y();
+
+		//New Location
+		float newX;
+		float newY;
+		Vector3D* newLoc;
+		
+		if(sameX && sameY)
+		{
+			return;
+		}
+		else if(sameX)
+		{
+			if(orderedYLess)
+			{
+				newY = orderedLocation->y() + 1;
+			}
+			else
+			{
+				newY = orderedLocation->y() - 1;
+			}
+			
+			newX = orderedLocation->x();
+		}
+		else if(sameY)
+		{
+			if(orderedXLess)
+			{
+				newX = orderedLocation->x() + 1;
+			}
+			else
+			{
+				newX = orderedLocation->x() - 1;
+			}
+			
+			newY = orderedLocation->y();
+		}
+		else
+		{
+			
+			if(orderedXLess && orderedYLess)
+			{
+				newX = orderedLocation->x() + 1;
+				newY = orderedLocation->y() + 1;
+			}
+			else if(orderedXLess && orderedYGreater)
+			{
+				newX = orderedLocation->x() + 1;
+				newY = orderedLocation->y() - 1;
+			}
+			else if(orderedXGreater && orderedYLess)
+			{
+				newX = orderedLocation->x() - 1;
+				newY = orderedLocation->y() + 1;
+			}
+			else if(orderedXGreater && orderedYGreater)
+			{
+				newX = orderedLocation->x() - 1;
+				newY = orderedLocation->y() - 1;
+			}
+		}
+		newLoc = new Vector3D(newX, newY, 0);
+		move(ordered, newLoc);
 	}
 }
 
