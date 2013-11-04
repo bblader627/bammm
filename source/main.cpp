@@ -126,11 +126,10 @@ int main()
 		}
 		controller->input(input, dTime);
 
-		//aiControllers->get(0)->update(dTime);
-		/*for(int i = 0; i < (int)aiControllers->getSize(); i++)
+		for(int i = 0; i < (int)aiControllers->getSize(); i++)
 		{	
 			aiControllers->get(i)->update(dTime);
-		}*/
+		}
 	}
 	delete input;
 

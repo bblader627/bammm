@@ -101,11 +101,12 @@ namespace bammm
 		//Generate random number
 		random_device rd;
 		mt19937 generator(rd());
-		uniform_int_distribution<int> randomOrder(0, _states->getSize() - 1);
-		int command = randomOrder(generator);
-
-		//Pick random state
 		DynamicArray<string>* allStates = _states->getAllKeys();
+		uniform_int_distribution<int> randomOrder(0, allStates->getSize() - 1);
+		int command = randomOrder(generator);
+		
+		//Pick random state
+		cout << "Random state: " << allStates->get(command) << endl;
 		State* newState = _states->getValue(allStates->get(command));
 		delete allStates;
 

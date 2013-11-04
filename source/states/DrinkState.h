@@ -100,7 +100,7 @@ namespace bammm
 		}
 		else
 		{
-			cout << "The dwarf takes a sip of the Dwarven Ale." << "\n";
+			cout << name << " takes a sip of the Dwarven Ale." << "\n";
 		}
     }
 
