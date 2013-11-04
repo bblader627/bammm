@@ -38,7 +38,7 @@ int main()
 
 	//Pick random number of orcs
 	int minOrc = 1;
-	int maxOrc = 1;
+	int maxOrc = 10;
 	uniform_int_distribution<int> orcDistribution (minOrc, maxOrc);
 	int orcCount = orcDistribution(generator);
 
@@ -124,7 +124,12 @@ int main()
 
 		for(int i = 0; i < (int)aiControllers->getSize(); i++)
 		{	
-			aiControllers->get(i)->update(dTime);
+			if(aiControllers->get(i)->update(dTime))
+			{
+				cout << "Killing orc!\n";
+				aiControllers->remove(i);
+			}
+
 		}
 	}
 	delete input;

@@ -110,11 +110,14 @@ namespace bammm
 				//Do doTurn in MeleeCombat
 				if(newState->to_string() == "combat")
 				{
-					meleeCombat->useTurn();
 					if(!meleeCombat->getFightHappening())
 					{
 						_stateMachine->removeState(newState);
 
+					}
+					else
+					{
+						meleeCombat->useTurn();
 					}
 				}
 				else
@@ -125,14 +128,17 @@ namespace bammm
 			}
 			else
 			{
-				//Need to change this to closest enemy
-				Actor* closestEnemy = grid->getEnemy(_actor->getLocation(), _actor);
-				if(closestEnemy)
+				//Special case for combat state
+				if(newState->to_string() == "combat")
 				{
-					meleeCombat->setup(_actor, closestEnemy);
+					Actor* closestEnemy = grid->getEnemy(_actor->getLocation(), _actor);
+					if(closestEnemy)
+					{
+						meleeCombat->setup(_actor, closestEnemy);
+					}
 				}
+				_stateMachine->addState(newState);
 			}
-			_stateMachine->addState(newState);
 		}
 
 		//Should input even call switchstate?
