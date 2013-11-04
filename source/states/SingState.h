@@ -40,7 +40,7 @@ namespace bammm
     void SingState::setup()
     {
         singLine = 0;
-    	cout << actor->getName() << " begins to sing. ";
+    	cout << _actor->getName() << " begins to sing. ";
     }
 
     void SingState::breakdown()
@@ -50,7 +50,7 @@ namespace bammm
     void SingState::tick(float dTime)
     {
         _actor->reduceStamina(1);
-        cout << actor->getName() << " is singing the song of it's people.\n";
+        cout << _actor->getName() << " is singing the song of it's people.\n";
     }
 
 	string SingState::to_string()
