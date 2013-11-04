@@ -1,6 +1,7 @@
 #include <iostream>
 #include "resources/grid3d.h"
 #include "controllers/PlayerController.h"
+#include "controllers/AiController.h"
 #include "weapons/Stein.h"
 #include "actors/DwarfActor.h"
 #include "actors/OrcActor.h"
@@ -24,12 +25,12 @@ int main()
 	int gridZ = 10;
 	Grid3d<Actor*>* GRID = new Grid3d<Actor*>(gridX,gridY,gridZ);
 	MeleeCombat* meleeCombat = new MeleeCombat();
+	DynamicArray<AiController*>* aiControllers = new DynamicArray<AiController*>();
 
 	//Creation of Hero
 	DwarfActor* bob = new DwarfActor();
 	Vector3D* temp = new Vector3D(0,0,0);
-	bob->setLocation(temp);
-	GRID->insert(temp, bob);
+	GRID->add(temp, bob);
 	delete temp;
 
 	//Random number generator
@@ -38,7 +39,7 @@ int main()
 
 	//Pick random number of orcs
 	int minOrc = 1;
-	int maxOrc = 10;
+	int maxOrc = 2;
 	uniform_int_distribution<int> orcDistribution (minOrc, maxOrc);
 	int orcCount = orcDistribution(generator);
 
@@ -50,7 +51,14 @@ int main()
 		int randomX = xDistribution(generator);
 		int randomY = yDistribution(generator);
 		temp = new Vector3D(randomX, randomY, 0);
-		GRID->insert(temp, new OrcActor());
+
+		OrcActor* newOrc = new OrcActor();
+		AiController* newAi = new AiController(GRID, meleeCombat);
+		newAi->setup(newOrc);
+		aiControllers->add(newAi);
+		cout << "Original Size: " << aiControllers->getSize() << endl;
+		GRID->add(temp, newOrc);
+		
 		delete temp;
 	}
 
@@ -117,6 +125,12 @@ int main()
     		break;
 		}
 		controller->input(input, dTime);
+
+		//aiControllers->get(0)->update(dTime);
+		/*for(int i = 0; i < (int)aiControllers->getSize(); i++)
+		{	
+			aiControllers->get(i)->update(dTime);
+		}*/
 	}
 	delete input;
 

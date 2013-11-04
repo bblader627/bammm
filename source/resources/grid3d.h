@@ -35,6 +35,7 @@ namespace bammm
 			int width;
 			int length;
 			int height;
+			int convertToPos(Vector3D* vect);
 
 		public:
 			Grid3d();
@@ -47,8 +48,6 @@ namespace bammm
 			 */
 			DynamicArray<T>* access(Vector3D *vect, int radius);
 
-			T access(int x, int y, int z);
-
 			/*
 			 insert
 			 @Pre-Condition- Takes a vector and and object to insert
@@ -60,11 +59,13 @@ namespace bammm
 			 @Pre-Condition- Takes in xyz coordinate (a vector)
 			 @Post-Condition- Removes object specified by the coordinates
 			 */
-			void remove(Vector3D *vect);
+			T remove(Vector3D *vect);
 
 			string to_string();
-
 			T getEnemy(Vector3D* loc, T actor);
+			T access(int x, int y, int z);
+			void add(Vector3D* vect, T add);
+			T move(T actor, Vector3D* newLoc);
 	};
 
 	//Creates an grid
@@ -102,8 +103,7 @@ namespace bammm
 	template<class T>
 	DynamicArray<T>* Grid3d<T>::access(Vector3D *vect, int radius)
 	{
-		int pos = vect->x() + (vect->y() * width)
-				+ (vect->z() * width * height);
+		int pos = convertToPos(vect);
 		int start = pos - radius;
 		int end = pos + radius;
 		DynamicArray<T> *space = new DynamicArray<T>();
@@ -133,17 +133,32 @@ namespace bammm
 	template<class T>
 	void Grid3d<T>::insert(Vector3D *vect, T obj)
 	{
-		int pos = vect->x() + (vect->y() * width)
-				+ (vect->z() * width * height);
+		int pos = convertToPos(vect);
 		grid->insert(pos, obj);
 	}
 
-	template<class T>
-	void Grid3d<T>::remove(Vector3D *vect)
+	template <class T>
+	int Grid3d<T>::convertToPos(Vector3D* vect)
 	{
-		int pos = vect->x() + (vect->y() * width)
+		return vect->x() + (vect->y() * width)
 				+ (vect->z() * width * height);
+	}
+
+	template<class T>
+	void Grid3d<T>::add(Vector3D* vect, T obj)
+	{
+		int pos = convertToPos(vect);
+		grid->set(pos, obj);
+		obj->setLocation(vect);
+	}
+
+	template<class T>
+	T Grid3d<T>::remove(Vector3D *vect)
+	{
+		T deletedVal = grid->access(vect);
+		int pos = convertToPos(vect);
 		grid->set(pos, NULL);
+		return deletedVal;
 	}
 
 	template <class T>
@@ -200,6 +215,13 @@ namespace bammm
 
 		delete allOnTile;
 		return NULL;
+	}
+
+	template <class T>
+	T Grid3d<T>::move(T actor, Vector3D* newLoc)
+	{
+		remove(actor->getLocation());
+		add(newLoc, actor);
 	}
 }
 

@@ -50,7 +50,7 @@ namespace bammm
     void SingState::tick(float dTime)
     {
         _actor->reduceStamina(1);
-        cout << "The dwarf is singing the song of it's people. ";
+        cout << "The dwarf is singing the song of it's people.\n";
     }
 
 	string SingState::to_string()

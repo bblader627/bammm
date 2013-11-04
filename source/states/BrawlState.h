@@ -44,7 +44,7 @@ namespace bammm
 
     void BrawlState::tick(float dTime)
     {
-        cout << "The dwarf pulls his right arm back and then thrusts his arm forward by twisting his core. \"DWARF PUNCHHHH!\"";
+        cout << "The dwarf pulls his right arm back and then thrusts his arm forward by twisting his core. \"DWARF PUNCHHHH!\"\n";
     }
 
 	string BrawlState::to_string()

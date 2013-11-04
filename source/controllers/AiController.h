@@ -8,7 +8,7 @@
  *	Matt Witkowski	
  *   Bradley Crusco
  * Description:
- * AIController header file.
+ * AiController header file.
  *
  * Last Modified: Matt Witkowski
  *
@@ -16,136 +16,106 @@
 
 
 #ifndef AICONTROLLER_H_
-#define AI_CONTROLLER_H_
+#define AICONTROLLER_H_
+
 #include "Controller.h"
 #include "../states/statemachine.h"
+#include "../resources/grid3d.h"
+#include "../weapons/MeleeCombat.h"
+#include "../weapons/RangedCombat.h"
+#include <random>
+
+#ifndef NULL
+#define NULL ((void *)0)
+#endif
+
 using namespace std;
+using namespace bammm;
 
 namespace bammm
 {
     class AiController : public Controller
     {
-        private:
-            uint counter;
-
+		private:
+			MeleeCombat* meleeCombat;
+			RangedCombat* rangedCombat;
+			Grid3d<Actor*>* grid;
         public:
-            AiController();
-            void update(float dTime);
+            AiController(Grid3d<Actor*>* theGrid, MeleeCombat* meleeC);
             void setup(Actor* actor);
-            virtual ~AiController();
+			void update(float dTime);
+            ~AiController();
     };
 
-    AiController::AiController()
+    AiController::AiController(Grid3d<Actor*>* theGrid, MeleeCombat* meleeC)
     {
+		grid = theGrid;
+		meleeCombat = meleeC;
     }
 
     void AiController::setup(Actor* actor)
     {
-		/*
-        //_stateMachine = new StateMachine(actor);
-        _states = new HashMap<State*>();
         _actor = actor;
-        counter = 0;
-		
+        _states = new HashMap<State*>();
+        _stateMachine = new StateMachine(_actor, _states);
+
 		//Create the states
-        DrinkState* drinkState = new DrinkState();
-        MineState* mineState = new MineState();
-        SingState* singState = new SingState();
-        BrawlState* brawlState = new BrawlState();
-        SleepState* sleepState = new SleepState();
-        IdleState* idleState = new IdleState();
-
-		//Setup the states
-		drinkState->setup(_actor);
-		mineState->setup(_actor);
-		singState->setup(_actor);
-		brawlState->setup(_actor);
-		sleepState->setup(_actor);
-		idleState->setup(_actor);
-
-		//Add states to _stateMachine to be ticked
-		_stateMachine->addState(idleState);
-		_stateMachine->addState(drinkState);
-		_stateMachine->addState(mineState);
-		_stateMachine->addState(singState);
-		_stateMachine->addState(brawlState);
-		_stateMachine->addState(sleepState);
+        //DO NOT DELETE THE REFERENCES TO STATEMACHINE.  THE CODE WILL SEG FAULT IF YOU DO
+        DrinkState* drinkState = new DrinkState(_actor, _stateMachine);
+        MineState* mineState = new MineState(_actor, _stateMachine);
+        SingState* singState = new SingState(_actor, _stateMachine);
+        BrawlState* brawlState = new BrawlState(_actor, _stateMachine);
+        SleepState* sleepState = new SleepState(_actor, _stateMachine);
+        IdleState* idleState = new IdleState(_actor, _stateMachine);
+		CombatState* combatState = new CombatState(_actor, _stateMachine);
 
 		//Put actor in idle state
-		//_stateMachine->switchState(NULL, idleState);
+		_stateMachine->initialState(idleState);
 
-		//Add states to hashMap
-        _states->add("drink", drinkState);
-        _states->add("mine", mineState);
-        _states->add("sing", singState);
-        _states->add("brawl", brawlState);
-        _states->add("sleep", sleepState);
-        _states->add("idle", idleState);
-		*/
-    }
-
-
-    void AiController::update(float dTime)
-    {
-        /*string newStateStr;
-        DynamicArray<State*>* currentStates = _stateMachine->getCurrentStates();
-
-        if(currentStates->getSize() > 1 && currentStates->get(0) != _states->getValue("idle"))
-        {
-            return;
-        }
-
-        if(counter == 0)
-        {
-            newStateStr = "idle";
-            counter = 1;
-        }
-        else if(counter == 1 || counter == 3)
-        {
-           newStateStr = "drink"; 
-           counter++;
-        }
-        else if(counter == 2)
-        {
-            newStateStr = "mine";
-            counter++;
-        }
-        else if(counter == 3)
-        {
-            int random = rand() % 100 + 1;
-            if(random <= 33)
-            {
-                newStateStr = "sleep";
-                counter = 0;
-            }
-            else
-            {
-                if(random <= 66)
-                {
-                    newStateStr = "brawl";
-                }
-                else
-                {
-                    newStateStr = "sing";
-                }
-                counter = 2;
-            }
-        }
-        State* newState = _stateMachine->getCurrentStates()->get(0);
-        State* oldState = _states->getValue(newStateStr);
-        _stateMachine->switchState(oldState, newState);
-		_stateMachine->tick(dTime);*/
+        _states->add(idleState->to_string(), idleState);
+        _states->add(mineState->to_string(), mineState);
+        _states->add(drinkState->to_string(), drinkState);
+        _states->add(singState->to_string(), singState);
+        _states->add(brawlState->to_string(), brawlState);
+        _states->add(sleepState->to_string(), sleepState);
+       	_states->add(combatState->to_string(), combatState);
     }
 
     AiController::~AiController()
     {
         DynamicArray<State*>* temp = _states->getAllValues();
-        for(int i = 0; i < (int) temp->getSize(); i++)
+        for(int i = 0; i < (int)temp->getSize(); i++)
         {
             delete temp->get(i);
         }
+
         delete _states;
         delete _stateMachine;
+    }
+
+	void AiController::update(float dTime)
+	{
+    	//all currently running states
+    	DynamicArray<State*>* currentStates = _stateMachine->getCurrentStates();
+		
+		//Generate random number
+		random_device rd;
+		mt19937 generator(rd());
+		uniform_int_distribution<int> randomOrder(0, _states->getSize() - 1);
+		int command = randomOrder(generator);
+
+		//Pick random state
+		DynamicArray<string>* allStates = _states->getAllKeys();
+		State* newState = _states->getValue(allStates->get(command));
+		delete allStates;
+
+		if (currentStates->contains(newState))
+		{	
+				//breakdown and setup are not calling the correct functions
+				_stateMachine->removeState(newState);
+		}
+		_stateMachine->addState(newState);
+        _stateMachine->tick(dTime);
     }
 }
 #endif
