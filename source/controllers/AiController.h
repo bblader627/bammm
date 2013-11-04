@@ -43,7 +43,7 @@ namespace bammm
         public:
             AiController(Grid3d<Actor*>* theGrid, MeleeCombat* meleeC);
             void setup(Actor* actor);
-			void update(float dTime);
+			bool update(float dTime);
             ~AiController();
     };
 
@@ -93,29 +93,23 @@ namespace bammm
         delete _stateMachine;
     }
 
-	void AiController::update(float dTime)
+	bool AiController::update(float dTime)
 	{
     	//all currently running states
-    	DynamicArray<State*>* currentStates = _stateMachine->getCurrentStates();
-		
-		//Generate random number
-		random_device rd;
-		mt19937 generator(rd());
-		DynamicArray<string>* allStates = _states->getAllKeys();
-		uniform_int_distribution<int> randomOrder(0, allStates->getSize() - 1);
-		int command = randomOrder(generator);
-		
-		//Pick random state
-		State* newState = _states->getValue(allStates->get(command));
-		delete allStates;
-
-		if (currentStates->contains(newState))
-		{	
-				//breakdown and setup are not calling the correct functions
-				_stateMachine->removeState(newState);
+		if(_actor->getHealth() <= 0)
+		{
+			grid->remove(_actor->getLocation(), _actor);
+			delete _actor;
+			return true;
 		}
-		_stateMachine->addState(newState);
-        _stateMachine->tick(dTime);
+		else
+		{
+			Vector3D* newLoc = new Vector3D(0,0,0);
+			grid->moveTowards(_actor, newLoc);
+        	_stateMachine->tick(dTime);
+		}
+
+		return false;
     }
 }
 #endif

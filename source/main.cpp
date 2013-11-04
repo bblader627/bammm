@@ -31,7 +31,6 @@ int main()
 	DwarfActor* bob = new DwarfActor();
 	Vector3D* temp = new Vector3D(0,0,0);
 	GRID->add(temp, bob);
-	delete temp;
 
 	//Random number generator
 	random_device rd;
@@ -39,7 +38,7 @@ int main()
 
 	//Pick random number of orcs
 	int minOrc = 1;
-	int maxOrc = 2;
+	int maxOrc = 10;
 	uniform_int_distribution<int> orcDistribution (minOrc, maxOrc);
 	int orcCount = orcDistribution(generator);
 
@@ -54,12 +53,9 @@ int main()
 
 		OrcActor* newOrc = new OrcActor();
 		AiController* newAi = new AiController(GRID, meleeCombat);
+		GRID->add(temp, newOrc);
 		newAi->setup(newOrc);
 		aiControllers->add(newAi);
-		cout << "Original Size: " << aiControllers->getSize() << endl;
-		GRID->add(temp, newOrc);
-		
-		delete temp;
 	}
 
 	PlayerController* controller = new PlayerController(GRID, meleeCombat);
@@ -128,7 +124,12 @@ int main()
 
 		for(int i = 0; i < (int)aiControllers->getSize(); i++)
 		{	
-			aiControllers->get(i)->update(dTime);
+			if(aiControllers->get(i)->update(dTime))
+			{
+				cout << "Killing orc!\n";
+				aiControllers->remove(i);
+			}
+
 		}
 	}
 	delete input;

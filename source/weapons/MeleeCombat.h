@@ -41,6 +41,9 @@ namespace bammm
 
 	void MeleeCombat::setup(Actor* a1, Actor* a2)
 	{
+		if(a1 == NULL || a2 == NULL)
+			return;
+
 		actor1 = a1;
 		actor2 = a2;
 		_winner = NULL;
@@ -66,7 +69,7 @@ namespace bammm
 
 	bool MeleeCombat::inRange()
 	{
-		if (!(actor1->getLocation() == actor2->getLocation()))
+		if (!(*(actor1->getLocation()) == *(actor2->getLocation())))
 		{
 			return false;
 		}

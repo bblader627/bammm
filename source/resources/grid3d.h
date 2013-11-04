@@ -19,6 +19,7 @@
 #include <iostream>
 #include "dynamicarray.h"
 #include "vector3d.h"
+#include "../actors/actor.h"
 using namespace std;
 
 #ifndef NULL
@@ -31,7 +32,7 @@ namespace bammm
 	template<typename T> class Grid3d
 	{
 		private:
-			DynamicArray<T> *grid;
+			DynamicArray<DynamicArray<T>* >* grid;
 			int width;
 			int length;
 			int height;
@@ -46,7 +47,7 @@ namespace bammm
 			 @Pre-Condition- takes in x,y,z  point system ( a vector)
 			 @Post-Condition- will return an array that represents the surrounding point
 			 */
-			DynamicArray<T>* access(Vector3D *vect, int radius);
+			DynamicArray<DynamicArray<T>* >* access(Vector3D *vect, int radius);
 
 			/*
 			 insert
@@ -59,13 +60,14 @@ namespace bammm
 			 @Pre-Condition- Takes in xyz coordinate (a vector)
 			 @Post-Condition- Removes object specified by the coordinates
 			 */
-			T remove(Vector3D *vect);
+			bool remove(Vector3D *vect, T actor);
 
 			string to_string();
 			T getEnemy(Vector3D* loc, T actor);
-			T access(int x, int y, int z);
+			DynamicArray<T>* access(int x, int y, int z);
 			void add(Vector3D* vect, T add);
-			T move(T actor, Vector3D* newLoc);
+			void move(T actor, Vector3D* newLoc);
+			void moveTowards(T ordered, Vector3D* loc);
 	};
 
 	//Creates an grid
@@ -75,7 +77,7 @@ namespace bammm
 		width = 0;
 		length = 0;
 		height = 0;
-		grid = new DynamicArray<T>();
+		grid = new DynamicArray<DynamicArray<T>* >();
 	}
 	//creates a Grid with  size
 	template<class T>
@@ -84,12 +86,12 @@ namespace bammm
 		width = w;
 		length = l;
 		height = h;
-		grid = new DynamicArray<T>(width * length * height);
+		grid = new DynamicArray<DynamicArray<T>* >(width * length * height);
 
 		int size = width * length * height;
 		for(int i = 0; i < size; i++)
 		{
-			grid->add(NULL);
+			grid->add(new DynamicArray<T>);
 		}
 	}
 
@@ -97,16 +99,21 @@ namespace bammm
 	template<class T>
 	Grid3d<T>::~Grid3d()
 	{
+		int size = width * length * height;
+		for(int i = 0; i < size; i++)
+		{
+			delete grid->get(i);
+		}
 		delete grid;
 	}
 
 	template<class T>
-	DynamicArray<T>* Grid3d<T>::access(Vector3D *vect, int radius)
+	DynamicArray<DynamicArray<T>* >* Grid3d<T>::access(Vector3D *vect, int radius)
 	{
 		int pos = convertToPos(vect);
 		int start = pos - radius;
 		int end = pos + radius;
-		DynamicArray<T> *space = new DynamicArray<T>();
+		DynamicArray<DynamicArray<T>* >*space = new DynamicArray<DynamicArray<T>* >();
 
 		if (start < 0)
 		{
@@ -124,7 +131,7 @@ namespace bammm
 	}
 
 	template <class T>
-	T Grid3d<T>::access(int x, int y, int z)
+	DynamicArray<T>* Grid3d<T>::access(int x, int y, int z)
 	{
 		int pos = x + (y * width) + (z * width * height);
 		return grid->get(pos);
@@ -134,7 +141,7 @@ namespace bammm
 	void Grid3d<T>::insert(Vector3D *vect, T obj)
 	{
 		int pos = convertToPos(vect);
-		grid->insert(pos, obj);
+		grid->get(pos)->insert(pos, obj);
 	}
 
 	template <class T>
@@ -148,16 +155,15 @@ namespace bammm
 	void Grid3d<T>::add(Vector3D* vect, T obj)
 	{
 		int pos = convertToPos(vect);
-		grid->set(pos, obj);
+		grid->get(pos)->add(obj);
 		obj->setLocation(vect);
 	}
 
 	template<class T>
-	T Grid3d<T>::remove(Vector3D *vect)
+	bool Grid3d<T>::remove(Vector3D *vect, T elem)
 	{
-		T deletedVal = grid->access(vect);
-		int pos = convertToPos(vect);
-		grid->set(pos, NULL);
+		//int pos = convertToPos(vect);
+		bool deletedVal = access(vect, 0)->get(0)->removeElem(elem);
 		return deletedVal;
 	}
 
@@ -170,16 +176,16 @@ namespace bammm
 		{
 			for(int i2 = 0; i2 < width; i2++)
 			{
-				T atLoc;
+				DynamicArray<T>* atLoc;
 				atLoc = access(i, i2, 0);
 
-				if(atLoc == NULL)
+				if(atLoc->getSize() <= 0)
 				{
 					gridString = gridString + "- ";
 				}
 				else
 				{
-					if(atLoc->getName() == "Orc")
+					if(atLoc->get(0)->getName() == "Orc")
 					{
 						gridString = gridString + "O ";
 					}
@@ -188,8 +194,6 @@ namespace bammm
 						gridString = gridString + "X ";
 					}
 				}
-
-				atLoc = NULL;
 			}
 			gridString = gridString + "\n";
 		}
@@ -200,28 +204,109 @@ namespace bammm
 	template <class T>
 	T Grid3d<T>::getEnemy(Vector3D* loc, T actor)
 	{
-		DynamicArray<T>* allOnTile = access(loc, 0);
+		DynamicArray<DynamicArray<T>* >* tiles = access(loc, 0);
+		DynamicArray<T>* allOnTile = tiles->get(0);
 		int actorEnemyAlliance = actor->getEnemyAlliance();
 	
 		for(int i = 0; i < (int) allOnTile->getSize(); i++)
 		{
-			T otherActor = allOnTile->get(i);
+			Actor* otherActor = allOnTile->get(i);
 			if(actorEnemyAlliance == otherActor->getAlliance())
 			{
-				delete allOnTile;
+				delete tiles;
 				return otherActor;
 			}
 		}
 
-		delete allOnTile;
+		delete tiles;
 		return NULL;
 	}
 
 	template <class T>
-	T Grid3d<T>::move(T actor, Vector3D* newLoc)
+	void Grid3d<T>::move(T actor, Vector3D* newLoc)
 	{
-		remove(actor->getLocation());
+		remove(actor->getLocation(), actor);
+		delete actor->getLocation();
 		add(newLoc, actor);
+	}
+
+	template <class T>
+	void Grid3d<T>::moveTowards(T ordered, Vector3D* target)
+	{
+		Vector3D* orderedLocation = ordered->getLocation();
+		Vector3D* targetLocation = target;
+		//Vector3D* orderedLocation = ordered->getLocation();
+		//Vector3D* targetLocation = target->getLocation();
+
+		//Comparisons
+		bool sameX = orderedLocation->x() == targetLocation->x();
+		bool sameY = orderedLocation->y() == targetLocation->y();
+		bool orderedXLess = orderedLocation->x() < targetLocation->x();
+		bool orderedXGreater = orderedLocation->x() > targetLocation->x();
+		bool orderedYLess = orderedLocation->y() < targetLocation->y();
+		bool orderedYGreater = orderedLocation->y() > targetLocation->y();
+
+		//New Location
+		float newX;
+		float newY;
+		Vector3D* newLoc;
+		
+		if(sameX && sameY)
+		{
+			return;
+		}
+		else if(sameX)
+		{
+			if(orderedYLess)
+			{
+				newY = orderedLocation->y() + 1;
+			}
+			else
+			{
+				newY = orderedLocation->y() - 1;
+			}
+			
+			newX = orderedLocation->x();
+		}
+		else if(sameY)
+		{
+			if(orderedXLess)
+			{
+				newX = orderedLocation->x() + 1;
+			}
+			else
+			{
+				newX = orderedLocation->x() - 1;
+			}
+			
+			newY = orderedLocation->y();
+		}
+		else
+		{
+			
+			if(orderedXLess && orderedYLess)
+			{
+				newX = orderedLocation->x() + 1;
+				newY = orderedLocation->y() + 1;
+			}
+			else if(orderedXLess && orderedYGreater)
+			{
+				newX = orderedLocation->x() + 1;
+				newY = orderedLocation->y() - 1;
+			}
+			else if(orderedXGreater && orderedYLess)
+			{
+				newX = orderedLocation->x() - 1;
+				newY = orderedLocation->y() + 1;
+			}
+			else if(orderedXGreater && orderedYGreater)
+			{
+				newX = orderedLocation->x() - 1;
+				newY = orderedLocation->y() - 1;
+			}
+		}
+		newLoc = new Vector3D(newX, newY, 0);
+		move(ordered, newLoc);
 	}
 }
 
