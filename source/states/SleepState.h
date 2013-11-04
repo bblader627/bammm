@@ -67,7 +67,7 @@ namespace bammm
         {
             if(timeSlept == 0)
             {
-                output = "The dwarf lays on the ground and begins to sleep.\n";
+                output = actor->getName() << " lays on the ground and begins to sleep.\n";
             }
             output + "zzzZZZ\n";
             timeSlept++;
