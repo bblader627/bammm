@@ -106,7 +106,6 @@ namespace bammm
 		int command = randomOrder(generator);
 		
 		//Pick random state
-		cout << "Random state: " << allStates->get(command) << endl;
 		State* newState = _states->getValue(allStates->get(command));
 		delete allStates;
 
