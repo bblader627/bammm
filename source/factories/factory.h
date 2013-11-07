@@ -16,6 +16,10 @@
 #include <iostream>
 #include "../JSON/JSONParser.h"
 #include "../resources/dynamicarray.h"
+#include "../resources/hashmap.h"
+#include "../actors/actor.h"
+#include "../actors/ActorInfo.h"
+#include "../weapons/IWeaponType.h"
 
 using namespace bammm;
 
@@ -23,6 +27,31 @@ namespace bammm
 {
 	class Factory
 	{
-		//HOW PARSE WORK
+		private:
+			void setupArmor();
+		public:
+			Actor getActor(string type);
+			HashMap<ActorInfo> actorData;
+			//HashMap<ArmorInfo> armorData;
+			void setup();
+
+			/*
+			 * Weapon getWeapon(string type);
+			 * Item getItem(string type);
+			 * BehaviorMap getBehavior(string type);
+			 */
+
 	};
+
+	void Factory::setup()
+	{
+		string actorJSON;
+		//JSONParser.parse(lkjsdlfjklsdf) into actorData
+	}
+
+	Actor Factory::getActor(string type)
+	{
+		//return new Actor(actorData.getItem(type));
+	}
+
 }

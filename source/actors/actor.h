@@ -20,6 +20,7 @@
 #include "../resources/vector3d.h"
 #include "../weapons/MeleeWeapon.h"
 #include "../weapons/RangedWeapon.h"
+#include "ActorInfo.h"
 
 using namespace std;
 
@@ -62,6 +63,7 @@ namespace bammm
 			Actor();
 			Actor(string myName);
 			Actor(string myName, int health, int stamina, int atck, int def);
+			Actor(ActorInfo* info);
 
 			//Functions
 
@@ -298,6 +300,23 @@ namespace bammm
 		_staminaBar = stamina;
 		_attack = atck;
 		_defense = def;
+	}
+
+	Actor::Actor(ActorInfo* info)
+	{
+		_name = info->getName();
+		_rotation = 0;
+		velocity = new Vector3D();
+		location = new Vector3D();
+
+		MAX_HEALTH = health;
+		MAX_STAMINA = stamina;
+		_healthBar = MAX_HEALTH;
+		_staminaBar = MAX_STAMINA;
+		_healthBar = info->getHealth();
+		_staminaBar = info->getStamina();
+		_attack = info->getAttack();
+		_defense = info->getDefense();
 	}
 
 	void Actor::setMeleeWeapon(MeleeWeapon* weapon)
