@@ -9,8 +9,8 @@
 #ifndef TESTSUITE_H_
 #define TESTSUITE_H_
 
-#include "time.h"
-#include "test.h"
+#include "Time.h"
+#include "Test.h"
 #include <iostream>
 
 namespace bammm

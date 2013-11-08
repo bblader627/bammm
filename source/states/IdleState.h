@@ -1,7 +1,7 @@
 #ifndef IDLESTATE_H_
 #define IDLESTATE_H_
 
-#include "state.h"
+#include "State.h"
 
 #ifndef UINT
 #define UINT

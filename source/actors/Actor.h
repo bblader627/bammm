@@ -17,7 +17,7 @@
 #define ACTOR_H_
 
 #include <iostream>
-#include "../resources/vector3d.h"
+#include "../resources/Vector3D.h"
 #include "../weapons/MeleeWeapon.h"
 #include "../weapons/RangedWeapon.h"
 #include "ActorInfo.h"

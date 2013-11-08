@@ -9,8 +9,8 @@
 #define BOOMSTICK_H_
 
 #include "RangedWeapon.h"
-#include "../actors/actor.h"
-#include "../TestSuite/time.h"
+#include "../actors/Actor.h"
+#include "../TestSuite/Time.h"
 
 namespace bammm
 {

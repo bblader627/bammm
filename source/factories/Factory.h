@@ -15,9 +15,9 @@
 
 #include <iostream>
 #include "../JSON/JSONParser.h"
-#include "../resources/dynamicarray.h"
-#include "../resources/hashmap.h"
-#include "../actors/actor.h"
+#include "../resources/DynamicArray.h"
+#include "../resources/HashMap.h"
+#include "../actors/Actor.h"
 #include "../actors/ActorInfo.h"
 #include "../weapons/IWeaponType.h"
 

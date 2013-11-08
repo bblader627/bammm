@@ -5,7 +5,7 @@
  *      Author: bradley
  */
 
-#include "hashmap+tests.h"
+#include "HashMap+Tests.h"
 
 namespace bammm
 {

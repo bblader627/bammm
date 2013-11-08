@@ -14,9 +14,9 @@
  */
 
 #include <iostream>
-#include "../resources/vector3d.h"
+#include "../resources/Vector3D.h"
 #include "../weapons/Stein.h"
-#include "actor.h"
+#include "Actor.h"
 
 using namespace bammm;
 

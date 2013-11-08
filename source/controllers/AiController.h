@@ -19,8 +19,8 @@
 #define AICONTROLLER_H_
 
 #include "Controller.h"
-#include "../states/statemachine.h"
-#include "../resources/grid3d.h"
+#include "../states/StateMachine.h"
+#include "../resources/Grid3D.h"
 #include "../weapons/MeleeCombat.h"
 #include "../weapons/RangedCombat.h"
 #include <random>

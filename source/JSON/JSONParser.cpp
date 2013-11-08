@@ -6,7 +6,7 @@
  */
 
 #include "JSONParser.h"
-#include "../resources/dynamicarray.h"
+#include "../resources/DynamicArray.h"
 
 using namespace std;
 using namespace bammm;

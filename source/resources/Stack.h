@@ -16,7 +16,7 @@
 #ifndef STACK_H_
 #define STACK_H_
 
-#include "dynamicarray.h"
+#include "DynamicArray.h"
 
 namespace bammm
 {

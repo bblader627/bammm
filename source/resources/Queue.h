@@ -17,7 +17,7 @@
 #ifndef QUEUE_H_
 #define QUEUE_H_
 
-#include "dynamicarray.h"
+#include "DynamicArray.h"
 
 namespace bammm
 {

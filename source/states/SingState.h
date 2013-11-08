@@ -1,7 +1,7 @@
 #ifndef SINGSTATE_H_
 #define SINGSTATE_H_
 
-#include "state.h"
+#include "State.h"
 #include <iostream>
 
 #ifndef UINT

@@ -1,7 +1,7 @@
 #ifndef MINESTATE_H_
 #define MINESTATE_H_
 
-#include "state.h"
+#include "State.h"
 #include <iostream>
 
 #ifndef UINT

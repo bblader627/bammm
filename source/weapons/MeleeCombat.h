@@ -1,7 +1,7 @@
 #ifndef MELEECOMBAT_H_
 #define MELEECOMBAT_H_
 
-#include "../actors/actor.h"
+#include "../actors/Actor.h"
 
 namespace bammm
 {

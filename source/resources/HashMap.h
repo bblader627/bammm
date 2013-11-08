@@ -17,8 +17,8 @@
 #ifndef HASHMAP_H_
 #define HASHMAP_H_
 
-#include "hashnode.h"
-#include "dynamicarray.h"
+#include "HashNode.h"
+#include "DynamicArray.h"
 #include <string>
 #include <cmath>
 

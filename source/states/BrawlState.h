@@ -1,7 +1,7 @@
 #ifndef BRAWLSTATE_H_
 #define DEFINE BRAWLSTATE_H_
 
-#include "state.h"
+#include "State.h"
 
 #ifndef UINT
 #define UINT

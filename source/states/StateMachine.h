@@ -19,12 +19,12 @@
 #define STATEMACHINE_H_
 
 #include <iostream>
-#include "../resources/dynamicarray.h"
-#include "../resources/hashmap.h"
+#include "../resources/DynamicArray.h"
+#include "../resources/HashMap.h"
 #include "IStateCallback.h"
-#include "state.h"
+#include "State.h"
 
-#include "../states/state.h"
+#include "../states/State.h"
 
 
 #ifndef NULL

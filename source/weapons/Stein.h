@@ -2,7 +2,7 @@
 #define STEIN_H_
 
 #include "MeleeWeapon.h"
-#include "../TestSuite/time.h"
+#include "../TestSuite/Time.h"
 
 #ifndef UNIT
 #define UINT

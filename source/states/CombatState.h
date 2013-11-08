@@ -2,7 +2,7 @@
 #define ATTACKSTATE_H_
 
 #include <iostream>
-#include "state.h"
+#include "State.h"
 #include "IStateCallback.h"
 #include "IdleState.h"
 

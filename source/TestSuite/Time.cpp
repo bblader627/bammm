@@ -6,7 +6,7 @@
  * @version 1.0 10/7/13
  */
 
-#include "time.h"
+#include "Time.h"
 
 using namespace std;
 namespace bammm

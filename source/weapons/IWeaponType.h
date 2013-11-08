@@ -1,7 +1,7 @@
 #ifndef IWEAPONTYPE_H_
 #define IWEAPONTYPE_H_
 
-#include "weapondata.h"
+#include "WeaponData.h"
 //#include "../states/AttackState.h"
 namespace bammm
 {

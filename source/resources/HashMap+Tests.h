@@ -8,8 +8,8 @@
 #ifndef HASHMAP_TESTS_H_
 #define HASHMAP_TESTS_H_
 
-#include "hashmap.h"
-#include "../TestSuite/testsuite.h"
+#include "HashMap.h"
+#include "../TestSuite/TestSuite.h"
 
 namespace bammm
 {

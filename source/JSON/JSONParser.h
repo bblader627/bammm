@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "../resources/dynamicarray.h"
-#include "../resources/hashmap.h"
+#include "../resources/DynamicArray.h"
+#include "../resources/HashMap.h"
 
 #ifndef NULL
 #define NULL (void *) 0

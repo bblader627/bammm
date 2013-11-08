@@ -6,7 +6,7 @@
  * @version 1.0 10/7/13
  */
 
-#include "test.h"
+#include "Test.h"
 #include <cstdlib>
 
 using namespace std;

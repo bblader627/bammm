@@ -18,7 +18,7 @@
 #ifndef CONTROLLER_H_
 #define CONTROLLER_H_
 
-#include "../states/state.h"
+#include "../states/State.h"
 #include "../states/IdleState.h"
 #include "../states/DrinkState.h"
 #include "../states/BrawlState.h"
@@ -26,10 +26,10 @@
 #include "../states/SingState.h"
 #include "../states/MineState.h"
 #include "../states/CombatState.h"
-#include "../resources/hashmap.h"
-#include "../actors/actor.h"
+#include "../resources/HashMap.h"
+#include "../actors/Actor.h"
 #include <string>
-#include "../states/statemachine.h"
+#include "../states/StateMachine.h"
 
 using namespace std;
 

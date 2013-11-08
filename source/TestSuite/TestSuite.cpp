@@ -6,7 +6,7 @@
  * @version 1.0 10/7/13
  */
 
-#include "testsuite.h"
+#include "TestSuite.h"
 
 using namespace std;
 
