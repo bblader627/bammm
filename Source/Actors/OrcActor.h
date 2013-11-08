@@ -13,9 +13,9 @@
  *
  */
 
-#include "../resources/Vector3D.h"
+#include "../Resources/Vector3D.h"
 #include "Actor.h"
-#include "../weapons/OrcishBlade.h"
+#include "../Weapons/OrcishBlade.h"
 #include <cmath>
 
 namespace bammm

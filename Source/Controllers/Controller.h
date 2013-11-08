@@ -18,18 +18,18 @@
 #ifndef CONTROLLER_H_
 #define CONTROLLER_H_
 
-#include "../states/State.h"
-#include "../states/IdleState.h"
-#include "../states/DrinkState.h"
-#include "../states/BrawlState.h"
-#include "../states/SleepState.h"
-#include "../states/SingState.h"
-#include "../states/MineState.h"
-#include "../states/CombatState.h"
-#include "../resources/HashMap.h"
-#include "../actors/Actor.h"
+#include "../States/State.h"
+#include "../States/IdleState.h"
+#include "../States/DrinkState.h"
+#include "../States/BrawlState.h"
+#include "../States/SleepState.h"
+#include "../States/SingState.h"
+#include "../States/MineState.h"
+#include "../States/CombatState.h"
+#include "../Resources/HashMap.h"
+#include "../Actors/Actor.h"
 #include <string>
-#include "../states/StateMachine.h"
+#include "../States/StateMachine.h"
 
 using namespace std;
 

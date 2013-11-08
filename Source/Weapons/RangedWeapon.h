@@ -9,7 +9,7 @@
 #define RANGEDWEAPON_H_
 
 #include "IWeaponType.h"
-//#include "../actors/actor.h"
+//#include "../Actors/Actor.h"
 
 namespace bammm{
 

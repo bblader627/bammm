@@ -15,11 +15,11 @@
 
 #include <iostream>
 #include "../JSON/JSONParser.h"
-#include "../resources/DynamicArray.h"
-#include "../resources/HashMap.h"
-#include "../actors/Actor.h"
-#include "../actors/ActorInfo.h"
-#include "../weapons/IWeaponType.h"
+#include "../Resources/DynamicArray.h"
+#include "../Resources/HashMap.h"
+#include "../Actors/Actor.h"
+#include "../Actors/ActorInfo.h"
+#include "../Weapons/IWeaponType.h"
 
 using namespace bammm;
 

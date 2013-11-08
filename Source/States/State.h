@@ -19,9 +19,9 @@
 #define STATE_H_
 
 #include <iostream>
-#include "../resources/DynamicArray.h"
+#include "../Resources/DynamicArray.h"
 #include "IStateCallback.h"
-#include "../actors/Actor.h"
+#include "../Actors/Actor.h"
 
 #ifndef NULL
 #define NULL (void *)0

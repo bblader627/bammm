@@ -14,9 +14,9 @@
  */
 
 #include <iostream>
-#include "../resources/DynamicArray.h"
+#include "../Resources/DynamicArray.h"
 #include "Factory.h"
-#include "../actors/Actor.h"
+#include "../Actors/Actor.h"
 
 using namespace bammm;
 

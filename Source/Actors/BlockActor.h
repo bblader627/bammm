@@ -14,7 +14,7 @@
  */
 
 #include <iostream>
-#include "../resources/Vector3D.h"
+#include "../Resources/Vector3D.h"
 #include "Actor.h"
 
 using namespace std;

@@ -17,9 +17,9 @@
 #define GRID3D_H_
 
 #include <iostream>
-#include "dynamicarray.h"
-#include "vector3d.h"
-#include "../actors/actor.h"
+#include "DynamicArray.h"
+#include "Vector3D.h"
+#include "../Actors/Actor.h"
 using namespace std;
 
 #ifndef NULL

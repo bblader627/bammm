@@ -2,8 +2,8 @@
 #define MELEEWEAPON_H_
 
 #include "IWeaponType.h"
-//#include "weapondata.h"
-//#include "../actors/actor.h"
+//#include "WeaponData.h"
+//#include "../Actors/Actor.h"
 namespace bammm
 {
 	class Actor;

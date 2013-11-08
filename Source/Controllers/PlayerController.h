@@ -19,10 +19,10 @@
 #define PLAYERCONTROLLER_H_
 
 #include "Controller.h"
-#include "../states/StateMachine.h"
-#include "../resources/Grid3D.h"
-#include "../weapons/MeleeCombat.h"
-#include "../weapons/RangedCombat.h"
+#include "../States/StateMachine.h"
+#include "../Resources/Grid3D.h"
+#include "../Weapons/MeleeCombat.h"
+#include "../Weapons/RangedCombat.h"
 
 #ifndef NULL
 #define NULL ((void *)0)

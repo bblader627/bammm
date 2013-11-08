@@ -8,7 +8,7 @@
 #ifndef RANGEDCOMBAT_H_
 #define RANGEDCOMBAT_H_
 
-#include "../resources/Grid3D.h"
+#include "../Resources/Grid3D.h"
 
 namespace bammm
 {

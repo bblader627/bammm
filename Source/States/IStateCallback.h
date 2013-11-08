@@ -17,7 +17,7 @@
 #define ISTATECALLBACK_H_
 
 #include <iostream>
-#include "../actors/Actor.h"
+#include "../Actors/Actor.h"
 
 using namespace std;
 
