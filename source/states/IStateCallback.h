@@ -17,34 +17,27 @@
 #define ISTATECALLBACK_H_
 
 #include <iostream>
-#include "states/state.h"
-#include "actors/actor.h"
+#include "../actors/actor.h"
 
 using namespace std;
 
+
+
 namespace bammm
 {
+	//Forward declaration of class State;
+	class State;
 
 	class IStateCallback
 	{
-		private:
-			State* currentState;
-			State* newState;
-			Actor* _actor;
-
 		public:
-			IStateCallback(State* current, State* next, Actor* actor)
+			virtual void switchState(State* current, State* newState)
 			{
-				currentState = current;
-				newState = next;
-				_actor = actor;
+				cout << "wrong switch" << endl;
 			}
-
-			void onTransition()
+			virtual void switchState(State* current, string newStateString)
 			{
-				currentState->breakdown();
-				currentState = newState;
-				currentState->setup(_actor);
+				cout << "Wrong switch string" << endl;
 			}
 	};
 

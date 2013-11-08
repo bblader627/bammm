@@ -1,10 +1,17 @@
-/**
- * @file hashmap.h
- * @class HashMap
- * @brief A class that implements a HashMap (a.k.a. Hash Table). Allows us to store and retrieve items using a key.
- * Uses a string as its key type.
- * @author: Bradley Crusco
- * @version 1.0 10/13/13
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski	
+ *   Bradley Crusco
+ * Description:
+ * Hashmap header file.
+ *
+ * Last Modified: Bradely Crusco
+ *
  */
 
 #ifndef HASHMAP_H_

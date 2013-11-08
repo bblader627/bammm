@@ -13,31 +13,43 @@ namespace bammm
     class IdleState : public State
     {
         public:
-            IdleState();
-            void setup(Actor* actor);
-            void breakDown();
+            IdleState(Actor* actor);
+            IdleState(Actor* actor, IStateCallback* statemachine);
+            void setup();
+            void breakdown();
             void tick(float dTime);
+			string to_string();
 
         private:
     };
 
-    IdleState::IdleState()
-    {
+	IdleState::IdleState(Actor* actor)
+	{
+		_actor = actor;
+	}
 
+	IdleState::IdleState(Actor* actor, IStateCallback* statemachine)
+	{
+		_actor = actor;
+		registerTransitionCallback(statemachine);
+	}
+
+    void IdleState::setup()
+    {
     }
 
-    void IdleState::setup(Actor* actor)
-    {
-    	_actor = actor;
-    }
-
-    void IdleState::breakDown()
+    void IdleState::breakdown()
     {
     }
 
     void IdleState::tick(float dTime)
     {
     }
+
+	string IdleState::to_string()
+	{
+		return "idle";
+	}
 }
 #endif
 

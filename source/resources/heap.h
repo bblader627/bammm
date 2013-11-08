@@ -1,8 +1,17 @@
 /*
- * heap.h
+ * CS585
  *
- *  Created on: Oct 13, 2013
- *          Author: mwitkows
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski	
+ *   Bradley Crusco
+ * Description:
+ * Heap header file.
+ *
+ * Last Modified: Matt Witkowski
+ *
  */
 
 #ifndef HEAP_H_

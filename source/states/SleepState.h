@@ -18,27 +18,36 @@ namespace bammm
     class SleepState : public State
     {
         public:
-            SleepState();
-            void setup(Actor* actor);
-            void breakDown();
+            SleepState(Actor* actor);
+            SleepState(Actor* actor, IStateCallback* statemachine);
+            void setup();
+            void breakdown();
             void tick(float dTime);
+            void switchState(string nextState);
+			string to_string();
 
         private:
             static const int hoursToSleep = 8;
             int timeSlept;
     };
 
-    SleepState::SleepState()
-    {
-    }
+	SleepState::SleepState(Actor* actor)
+	{
+		_actor = actor;
+	}
 
-    void SleepState::setup(Actor* actor)
+	SleepState::SleepState(Actor* actor, IStateCallback* statemachine)
+	{
+		_actor = actor;
+		registerTransitionCallback(statemachine);
+	}
+
+    void SleepState::setup()
     {
-    	_actor = actor;
         timeSlept = 0;
     }
 
-    void SleepState::breakDown()
+    void SleepState::breakdown()
     {
     }
 
@@ -51,18 +60,28 @@ namespace bammm
 
         if (_actor->isFullyRested())
         {
-        	registerTransitionCallback(new IStateCallback(this, new IdleState(), _actor));
+        	switchState("idle");
         }
 
         if(timeSlept < hoursToSleep)
         {
             if(timeSlept == 0)
             {
-                output = "The dwarf lays on the ground and begins to sleep.\n";
+                output = _actor->getName() + " lays on the ground and begins to sleep.\n";
             }
             output + "zzzZZZ\n";
             timeSlept++;
         }
     }
+
+    void SleepState::switchState(string nextState)
+    {
+    	_statemachine->switchState(this, nextState);
+    }
+
+	string SleepState::to_string()
+	{
+		return "sleep";
+	}
 }
 #endif

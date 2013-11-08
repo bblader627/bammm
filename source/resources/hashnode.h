@@ -1,11 +1,18 @@
-/**
- * @file hashnode.h
- * @class HashNode
- * @brief A class for storying the key and value pairs for our hash table.
- * @author: Bradley Crusco
- * @version 1.0 10/13/13
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski	
+ *   Bradley Crusco
+ * Description:
+ * Hashnode  header file.
+ *
+ * Last Modified: Bradely Crusco
+ *
  */
-
 #ifndef HASHNODE_H_
 #define HASHNODE_H_
 

@@ -15,39 +15,65 @@ namespace bammm
     {
 		private:
 			int successChance;
-
+			int maxGold;
         public:
-            MineState();
-            void setup(Actor* actor);
-            void breakDown();
+            MineState(Actor* actor);
+            MineState(Actor* actor, IStateCallback* statemachine);
+            void setup();
+            void breakdown();
             void tick(float dTime);
+            void switchState(string nextState);
+            string to_string();
     };
 
-    MineState::MineState()
-    {
-    	successChance = 30;
-    }
-
+	MineState::MineState(Actor* actor)
+	{
+		_actor = actor;
+		maxGold = 15;
+	}
+	MineState::MineState(Actor* actor, IStateCallback* statemachine)
+	{
+		_actor = actor;
+		maxGold = 15;
+		registerTransitionCallback(statemachine);
+	}
     /*
      * setup
      * Pre-Condition- no parameters
      * Post-Condition- sets _actor's member variables necessary for beginning a state
      */
-    void MineState::setup(Actor* actor)
+    void MineState::setup()
     {
-    	_actor = actor;
+
+    	successChance = 30;
+    	maxGold = 100;
+
     }
 
-    void MineState::breakDown()
+    void MineState::breakdown()
     {
     }
 
     void MineState::tick(float dTime)
     {
+    	if (_actor->getBAC() > 0.4)
+    	{
+    		cout << _actor->getName() << " drunkenly swings the pickaxe, hits himself in the foot, and decides not to do that anymore." << endl;
+    		switchState("null"); //ends this state;
+    		return;
+    	}
+
         //int random = rand() % 100 + 1;
     	_actor->reduceStamina(1);
-        cout << "The dwarf lifts his pickaxe, and swings it at the rock. ";
-        
+    	_actor->addGold(1);
+        cout << _actor->getName() << " lifts his pickaxe, and swings it at the rock. " << endl;
+        cout << _actor->getGold() << endl;
+        if (_actor->getGold() > maxGold)
+        {
+        	cout << _actor->getName() << "'s purse is full!" << endl;
+        	switchState("drink");
+        }
+
         /*
         if(random <= successChance)
         {
@@ -60,9 +86,19 @@ namespace bammm
         */
     }
 
-    void registerTransitionCallback(IStateCallback callback)
-    {
-    	callback.onTransition();
-    }
+    /* switchState
+	* Pre-Condition- accepts next state as text
+	* Post-Condition- returns void, calls switchState on _statemachine
+	*/
+	void MineState::switchState(string nextState)
+	{
+		_statemachine->switchState(this, nextState);
+	}
+
+	string MineState::to_string()
+	{
+		return "mine";
+	}
+
 }
 #endif

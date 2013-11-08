@@ -19,8 +19,12 @@
 #define STATEMACHINE_H_
 
 #include <iostream>
-#include "resources/dynamicarray.h"
-#include "states/state.h"
+#include "../resources/dynamicarray.h"
+#include "../resources/hashmap.h"
+#include "IStateCallback.h"
+#include "state.h"
+
+#include "../states/state.h"
 
 
 #ifndef NULL
@@ -31,18 +35,42 @@ using namespace std;
 using namespace bammm;
 
 
-class StateMachine
+class StateMachine : public IStateCallback
 {
 	private:
-		DynamicArray<State> * currentStates;
+		DynamicArray<State*>* currentStates;
+		HashMap<State*>* _allStates;
 		Actor* _actor;
 	public:
 		/*
 		 * Default Constructor
 		 */
-		StateMachine(Actor* actor)
+		StateMachine(Actor* actor, HashMap<State*>* allStates);
+		void initialState(State* initial);
+		void tick(float dTime);
+		void switchState(State* current, State* newState);
+		void switchState(State* current, string newStateString);
+		void addState(State* newState);
+		void removeState(State* oldState);
+		DynamicArray<State*>* getCurrentStates();
+		virtual ~StateMachine()
+		{
+			delete _actor;
+		}
+		string to_string();
+
+};
+		StateMachine::StateMachine(Actor* actor, HashMap<State*>* allStates)
 		{
 			_actor = actor;
+			currentStates = new DynamicArray<State*>();
+			_allStates = allStates;
+		}
+
+		void StateMachine::initialState(State* initial)
+		{
+			initial->setup();
+			currentStates->add(initial);
 		}
 
 		/*
@@ -53,13 +81,13 @@ class StateMachine
 		 * Calls currentStates[i].setup() on every state in the array
 		 * setup() updates states
 		 */
-		void tick(float dTime)
+		void StateMachine::tick(float dTime)
 		{
+
 			for(int i = 0; i < (int) currentStates->getSize(); i++)
 			{
-				State thisState = currentStates->get(i);
-
-				thisState.tick(time(NULL));
+				State* thisState = currentStates->get(i);
+				thisState->tick(0);
 			}
 		}
 
@@ -71,27 +99,50 @@ class StateMachine
 		 *
 		 *PlayerController will be calling switchState
 		 */
-		void switchState(State * currentState, State * newState)
+		void StateMachine::switchState(State* current, State* newState)
 		{
-			if(currentState != NULL)
+			removeState(current);
+			addState(newState);
+
+		}
+
+		void StateMachine::switchState(State* current, string newStateString)
+		{
+			if (newStateString=="null")
 			{
-				currentState->breakdown();
+				removeState(current);
+				return;
 			}
-			currentState = newState;
-			currentState->setup(_actor);
+			State* newState = _allStates->getValue(newStateString);
+			if (newState != NULL)
+			{
+				switchState(current, newState);
+			}
 		}
 
 		/*
 		 * addState
-		 * Pre-Condition-
-		 * Post-Condition-
+		 * Pre-Condition- accepts pointer to state to be added
+		 * Post-Condition-no return
 		 *
 		 * Called from a Controller
 		 * Adds currently running states to array
 		 */
-		void addState(State newState)
+		void StateMachine::addState(State* newState)
 		{
+			newState->setup();
 			currentStates->add(newState);
+		}
+
+		/*
+		 * removeState
+		 * Pre-Condition- accepts pointer to state to be removed
+		 * Post-Condition- breaks down states and removies it from array
+		 */
+		void StateMachine::removeState(State* oldState)
+		{
+			oldState->breakdown();
+			currentStates->removeElem(oldState);
 		}
 
 		/**
@@ -102,10 +153,14 @@ class StateMachine
 		 * Called from Controller
 		 * Returns currently running states
 		 */
-		DynamicArray<State> getCurrentStates()
+		DynamicArray<State*>* StateMachine::getCurrentStates()
 		{
-			return *currentStates;
+			return currentStates;
 		}
 
-};
+
+		string StateMachine::to_string()
+		{
+			return "statemachine";
+		}
 #endif

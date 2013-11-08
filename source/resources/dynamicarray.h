@@ -1,16 +1,25 @@
 /*
- * DynamicArray.h
+ * CS585
  *
- *  Created on: Oct 4, 2013
- *			Author: mwitkows
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski	
+ *   Bradley Crusco
+ * Description:
+ * DynamicArray header file.
+ *
+ * Last Modified: Matt Witkowski
+ *
  */
-
 #ifndef DYNAMICARRAY_H_
 #define DYNAMICARRAY_H_
 
 #include <iostream>
 #include <cstring>
 #include <cassert>
+#include <typeinfo>
 
 using namespace std;
 
@@ -22,6 +31,8 @@ typedef unsigned int uint;
 #ifndef NULL
 #define NULL ((void*)0)
 #endif
+
+using namespace std;
 
 namespace bammm
 {
@@ -49,8 +60,9 @@ namespace bammm
             uint getCapacity();
             T operator[](uint index);
             bool add(T element);
-            void add(uint index, T element);
+            void insert(uint index, T element);
             T remove(uint index);
+            bool removeElem(T elem);
             void clear();
             string toString();
             uint getMemoryUsage();
@@ -61,6 +73,7 @@ namespace bammm
             void ensureCapacity(uint min);
             bool contains(T element);
             void trimToSize();
+
     };
 
     /**
@@ -193,7 +206,7 @@ namespace bammm
      * @param element The element to be inserted.
      */
     template<class T>
-    void DynamicArray<T>::add(uint index, T element)
+    void DynamicArray<T>::insert(uint index, T element)
     {
         if(_array == NULL)
         {
@@ -249,6 +262,33 @@ namespace bammm
         _size--;
 
         return removedElement;
+    }
+
+    /**
+     * @brief Removes the first occurrence of elem from the array.
+     * @param elem The elem to remove.
+     * @returns Returns a boolean indicating if removal was a success.
+     * @throws Throws an error when the array is null.
+     */
+    template <class T>
+    bool DynamicArray<T>::removeElem(T elem)
+    {
+        if(_array == NULL)
+        {
+            errorMsg("Array is null.");
+            assert(0);
+        }
+    
+        for(uint i = 0; i < _size; i++)
+        {
+            if(_array[i] == elem)
+            {
+                remove(i);
+                return true;
+            }
+        }
+    
+        return false;
     }
 
     /**
@@ -469,7 +509,7 @@ namespace bammm
         }
         return false;
     }
-    
+
     /**
      * @brief Copies the array over to a new array with capacity of _size.
      */
@@ -526,6 +566,7 @@ namespace bammm
         else
         {
             delete[] _array;
+			_array = NULL;
         }
     }
 }

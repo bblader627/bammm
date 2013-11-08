@@ -1,8 +1,17 @@
 /*
- * queue.h
+ * CS585
  *
- *  Created on: Oct 12, 2013
- *          Author: mwitkows
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski	
+ *   Bradley Crusco
+ * Description:
+ * Queue header file.
+ *
+ * Last Modified: Matt Witkowski
+ *
  */
 
 #ifndef QUEUE_H_
