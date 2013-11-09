@@ -24,6 +24,10 @@ namespace bammm
 		rootNode.addChild(newNode);
 	}
 
+	HashMap<JSON> JSONParser::getMap(){
+		return rootMap;
+	}
+
 	bool JSONParser::parseFile(string filename)
 	{
 
