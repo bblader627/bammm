@@ -76,6 +76,11 @@ namespace bammm
 		return _defense;
 	}
 
+	string ActorInfo::getName()
+	{
+		return _name;
+	}
+
 	void ActorInfo::setHealth(int health)
 	{
 		_health = health;
@@ -96,3 +101,5 @@ namespace bammm
 		_defense = defense;
 	}
 }
+
+#endif
