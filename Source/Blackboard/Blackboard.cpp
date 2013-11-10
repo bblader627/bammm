@@ -9,7 +9,13 @@
 
 namespace bammm
 {
-	//constructors/destructors?
+	Blackboard::Blackboard()
+	{
+	}
+
+	Blackboard::~Blackboard()
+	{
+	}
 
 	bool Blackboard::addRecord(EnumRecordType type, string subjectID)
 	{
@@ -40,9 +46,11 @@ namespace bammm
 
 	bool Blackboard::removeRecord(EnumRecordType type, string subjectID)
 	{
-		for(int i = 0; i < _listOfRecords.getSize(); i++)
+		for (int i = 0; i < _listOfRecords.getSize(); i++)
 		{
-			if ((_listOfRecords.get(i).getEnumRecordType() == type) && (_listOfRecords.get(i).getSubjectID().compare(subjectID) == 0))
+			if ((_listOfRecords.get(i).getEnumRecordType() == type)
+					&& (_listOfRecords.get(i).getSubjectID().compare(subjectID)
+							== 0))
 			{
 				_listOfRecords.remove(i);
 				return true;
@@ -54,9 +62,9 @@ namespace bammm
 
 	void Blackboard::removeAllRecords(EnumRecordType type)
 	{
-		for(int i = 0; i < _listOfRecords.getSize(); i++)
+		for (int i = 0; i < _listOfRecords.getSize(); i++)
 		{
-			if(_listOfRecords.get(i).getEnumRecordType() == type)
+			if (_listOfRecords.get(i).getEnumRecordType() == type)
 			{
 				_listOfRecords.remove(i);
 			}
