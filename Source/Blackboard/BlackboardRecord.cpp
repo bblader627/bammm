@@ -30,7 +30,7 @@ namespace bammm
 	// Maybe I shouldn't return EnumRecordType? just the int?
 	BlackboardRecord::EnumRecordType BlackboardRecord::getEnumRecordType()
 	{
-
+		return _enumType;
 	}
 
 	string BlackboardRecord::getSubjectID()
