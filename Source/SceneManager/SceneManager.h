@@ -39,11 +39,13 @@ namespace bammm
 
 	void SceneManager::addActor(Actor* actor)
 	{
+		_allActors.add(actor);
 	}
 
 
 	void SceneManager::removeActor(Actor* actor)
 	{
+		_allActors.removeElem(actor);
 	}
 
 	void SceneManager::addTickable()
