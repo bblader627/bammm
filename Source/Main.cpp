@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Resources/Grid3D.h"
+#include "SceneManager/Grid3D.h"
 #include "Controllers/PlayerController.h"
 #include "Controllers/AiController.h"
 #include "Weapons/Stein.h"

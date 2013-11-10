@@ -10,9 +10,9 @@ Controllers/PlayerController.h States/BrawlState.h States/DrinkState.h \
 States/IdleState.h States/IStateCallback.h States/MineState.h \
 States/SingState.h States/SleepState.h States/State.h States/StateMachine.h \
 Resources/DynamicArray.h Resources/HashMap.h Resources/HashNode.h \
-Resources/Heap.h Resources/Queue.h Resources/Stack.h Resources/Vector3D.h \
+Resources/Heap.h Resources/Queue.h Resources/Stack.h SceneManager/Vector3D.h \
 Weapons/IWeaponType.h Weapons/WeaponData.h Weapons/MeleeWeapon.h Weapons/Stein.h \
-Weapons/OrcishBlade.h Weapons/MeleeCombat.h States/CombatState.h Resources/Grid3D.h \
+Weapons/OrcishBlade.h Weapons/MeleeCombat.h States/CombatState.h SceneManager/Grid3D.h \
 Actors/OrcActor.h TestSuite/Time.cpp
 TESTNAME = test
 TESTSRC = Main.cpp
