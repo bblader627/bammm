@@ -20,7 +20,7 @@
 
 #include "Controller.h"
 #include "../States/StateMachine.h"
-#include "../Resources/Grid3D.h"
+#include "../SceneManager/Grid3D.h"
 #include "../Weapons/MeleeCombat.h"
 #include "../Weapons/RangedCombat.h"
 

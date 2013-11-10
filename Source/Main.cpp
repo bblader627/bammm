@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Resources/Grid3D.h"
+#include "SceneManager/Grid3D.h"
 #include "Controllers/PlayerController.h"
 #include "Controllers/AiController.h"
 #include "Weapons/Stein.h"
@@ -7,8 +7,6 @@
 #include "Actors/OrcActor.h"
 #include "Weapons/MeleeWeapon.h"
 #include <random>
-//#include "JSON/JSONParser.h"
-//#include "IStateCallback.h"
 
 using namespace bammm;
 using namespace std;
@@ -109,7 +107,6 @@ int main()
 			case 6:
 				input->add(attack);
 			case 7:
-				//wait
 				break;
 			default:
 				cout << "Invalid Input" << endl;

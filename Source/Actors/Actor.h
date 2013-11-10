@@ -17,7 +17,7 @@
 #define ACTOR_H_
 
 #include <iostream>
-#include "../Resources/Vector3D.h"
+#include "../SceneManager/Vector3D.h"
 #include "../Weapons/MeleeWeapon.h"
 #include "../Weapons/RangedWeapon.h"
 #include "ActorInfo.h"
@@ -309,8 +309,8 @@ namespace bammm
 		velocity = new Vector3D();
 		location = new Vector3D();
 
-		MAX_HEALTH = health;
-		MAX_STAMINA = stamina;
+		MAX_HEALTH = info->getHealth();
+		MAX_STAMINA = info->getStamina();
 		_healthBar = MAX_HEALTH;
 		_staminaBar = MAX_STAMINA;
 		_healthBar = info->getHealth();

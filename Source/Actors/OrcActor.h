@@ -13,7 +13,7 @@
  *
  */
 
-#include "../Resources/Vector3D.h"
+#include "../SceneManager/Vector3D.h"
 #include "Actor.h"
 #include "../Weapons/OrcishBlade.h"
 #include <cmath>
