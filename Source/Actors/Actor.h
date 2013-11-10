@@ -6,7 +6,7 @@
  * 	Matt Konstantinou
  * 	Michael Abramo
  *	Matt Witkowski	
- *   Bradley Crusco
+ *  Bradley Crusco
  * Description:
  * Actor header file.
  *
