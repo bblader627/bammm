@@ -10,6 +10,10 @@
 
 #include <string>
 
+#ifndef NULL
+#define NULL ((void*)0)
+#endif
+
 using namespace std;
 //eh?
 
@@ -29,7 +33,8 @@ namespace bammm
 
 		public:
 			BlackboardRecord(EnumRecordType enumType, string subjectID);
-			BlackboardRecord(EnumRecordType enumType, string subjectID, string targetID, float _value);
+			BlackboardRecord(EnumRecordType enumType, string subjectID,
+					string targetID, float _value);
 			EnumRecordType getEnumRecordType();
 			string getSubjectID();
 			string getTargetID();
