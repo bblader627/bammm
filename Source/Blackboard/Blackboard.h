@@ -21,7 +21,7 @@ namespace bammm
 			bool addRecord(EnumRecordType type, string subjectID);
 			bool addRecord(EnumRecordType type, string subjectID, string targetID, float data);
 			bool removeRecord(EnumRecordType type, string subjectID);
-			void removeAll(EnumRecordType type);
+			void removeAllRecords(EnumRecordType type);
 			int countRecords(EnumRecordType type);
 			int countRecords(EnumRecordType type, string target);
 			float getData(EnumRecordType type);

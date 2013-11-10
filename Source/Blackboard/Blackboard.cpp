@@ -52,7 +52,7 @@ namespace bammm
 		return false;
 	}
 
-	void Blackboard::removeAll(EnumRecordType type)
+	void Blackboard::removeAllRecords(EnumRecordType type)
 	{
 		for(int i = 0; i < _listOfRecords.getSize(); i++)
 		{
