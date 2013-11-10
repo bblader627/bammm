@@ -15,7 +15,7 @@ namespace bammm
 	class Blackboard
 	{
 		private:
-			DynamicArray<BlackboardRecord> _ListOfRecords;
+			DynamicArray<BlackboardRecord> _listOfRecords;
 
 		public:
 			bool addRecord(EnumRecordType type, string subjectID);
@@ -27,7 +27,7 @@ namespace bammm
 			int countRecords(EnumRecordType type, string target);
 			float getData(EnumRecordType type);
 			float getData(EnumRecordType type, string target);
-			//Functions to replace records?
+			//Add functions that replace records?
 	};
 }
 
