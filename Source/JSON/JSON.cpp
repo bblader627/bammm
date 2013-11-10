@@ -58,7 +58,7 @@ namespace bammm
 		}
 		else
 		{
-			return this->children.getNode(childName)->getValue();
+			return this->children.getValue(childName);
 		}
 	}
 
