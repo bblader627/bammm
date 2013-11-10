@@ -13,7 +13,29 @@ namespace bammm
 
 	bool Blackboard::addRecord(EnumRecordType type, string subjectID)
 	{
+		BlackboardRecord record(type, subjectID);
+		if (_listOfRecords.add(record))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
+	bool Blackboard::addRecord(EnumRecordType type, string subjectID,
+			string targetID, float data)
+	{
+		BlackboardRecord record(type, subjectID, targetID, data);
+		if (_listOfRecords.add(record))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	int Blackboard::countRecords(EnumRecordType type)
