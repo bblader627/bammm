@@ -18,6 +18,8 @@ namespace bammm
 			DynamicArray<BlackboardRecord> _listOfRecords;
 
 		public:
+			Blackboard();
+			virtual ~Blackboard();
 			bool addRecord(EnumRecordType type, string subjectID);
 			bool addRecord(EnumRecordType type, string subjectID, string targetID, float data);
 			bool removeRecord(EnumRecordType type, string subjectID);
