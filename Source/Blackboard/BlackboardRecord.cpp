@@ -9,16 +9,16 @@
 
 namespace bammm
 {
-	BlackboardRecord::BlackboardRecord(EnumRecordType enumType,
+	BlackboardRecord::BlackboardRecord(RecordType enumType,
 			string subjectID)
 	{
 		_enumType = enumType;
 		_subjectID = subjectID;
 		_targetID = NULL;
-		_data = 0;
+		_data = 0.0;
 	}
 
-	BlackboardRecord::BlackboardRecord(EnumRecordType enumType,
+	BlackboardRecord::BlackboardRecord(RecordType enumType,
 			string subjectID, string targetID, float data)
 	{
 		_enumType = enumType;
@@ -28,7 +28,7 @@ namespace bammm
 	}
 
 	// Maybe I shouldn't return EnumRecordType? just the int?
-	BlackboardRecord::EnumRecordType BlackboardRecord::getEnumRecordType()
+	RecordType BlackboardRecord::getRecordType()
 	{
 		return _enumType;
 	}

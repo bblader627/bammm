@@ -20,14 +20,14 @@ namespace bammm
 		public:
 			Blackboard();
 			virtual ~Blackboard();
-			bool addRecord(EnumRecordType type, string subjectID);
-			bool addRecord(EnumRecordType type, string subjectID, string targetID, float data);
-			bool removeRecord(EnumRecordType type, string subjectID);
-			void removeAllRecords(EnumRecordType type);
-			int countRecords(EnumRecordType type);
-			int countRecords(EnumRecordType type, string target);
-			float getData(EnumRecordType type);
-			float getData(EnumRecordType type, string target);
+			bool addRecord(RecordType type, string subjectID);
+			bool addRecord(RecordType type, string subjectID, string targetID, float data);
+			bool removeRecord(RecordType type, string subjectID);
+			void removeAllRecords(RecordType type);
+			int countRecords(RecordType type);
+			int countRecords(RecordType type, string target);
+			float getData(RecordType type);
+			float getData(RecordType type, string target);
 			//Add functions that replace records?
 	};
 }

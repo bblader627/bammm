@@ -17,7 +17,7 @@ namespace bammm
 	{
 	}
 
-	bool Blackboard::addRecord(EnumRecordType type, string subjectID)
+	bool Blackboard::addRecord(RecordType type, string subjectID)
 	{
 		BlackboardRecord record(type, subjectID);
 		if (_listOfRecords.add(record))
@@ -30,7 +30,7 @@ namespace bammm
 		}
 	}
 
-	bool Blackboard::addRecord(EnumRecordType type, string subjectID,
+	bool Blackboard::addRecord(RecordType type, string subjectID,
 			string targetID, float data)
 	{
 		BlackboardRecord record(type, subjectID, targetID, data);
@@ -44,11 +44,11 @@ namespace bammm
 		}
 	}
 
-	bool Blackboard::removeRecord(EnumRecordType type, string subjectID)
+	bool Blackboard::removeRecord(RecordType type, string subjectID)
 	{
 		for (int i = 0; i < _listOfRecords.getSize(); i++)
 		{
-			if ((_listOfRecords.get(i).getEnumRecordType() == type)
+			if ((_listOfRecords.get(i).getRecordType() == type)
 					&& (_listOfRecords.get(i).getSubjectID().compare(subjectID)
 							== 0))
 			{
@@ -60,25 +60,25 @@ namespace bammm
 		return false;
 	}
 
-	void Blackboard::removeAllRecords(EnumRecordType type)
+	void Blackboard::removeAllRecords(RecordType type)
 	{
 		for (int i = 0; i < _listOfRecords.getSize(); i++)
 		{
-			if (_listOfRecords.get(i).getEnumRecordType() == type)
+			if (_listOfRecords.get(i).getRecordType() == type)
 			{
 				_listOfRecords.remove(i);
 			}
 		}
 	}
 
-	int Blackboard::countRecords(EnumRecordType type)
+	int Blackboard::countRecords(RecordType type)
 	{
 		int count = 0;
 
 		for (int i = 0; i < _listOfRecords.getSize(); i++)
 		{
 			/* This should just be an int compare, right? */
-			if (_listOfRecords.get(i).getEnumRecordType() == type)
+			if (_listOfRecords.get(i).getRecordType() == type)
 			{
 				count++;
 			}
@@ -87,14 +87,14 @@ namespace bammm
 		return count;
 	}
 
-	int Blackboard::countRecords(EnumRecordType type, string targetID)
+	int Blackboard::countRecords(RecordType type, string targetID)
 	{
 		int count = 0;
 
 		for (int i = 0; i < _listOfRecords.getSize(); i++)
 		{
 			/* This should just be an int compare, right? */
-			if ((_listOfRecords.get(i).getEnumRecordType() == type)
+			if ((_listOfRecords.get(i).getRecordType() == type)
 					&& (_listOfRecords.get(i).getTargetID().compare(targetID)
 							== 0))
 			{
@@ -106,28 +106,32 @@ namespace bammm
 	}
 
 	/* Returns the data at the first found type (To get specific data, use the target specifier function*/
-	float Blackboard::getData(EnumRecordType type)
+	float Blackboard::getData(RecordType type)
 	{
 		for (int i = 0; i < _listOfRecords.getSize(); i++)
 		{
-			if (_listOfRecords.get(i).getEnumRecordType() == type)
+			if (_listOfRecords.get(i).getRecordType() == type)
 			{
 				return _listOfRecords.get(i).getData();
 			}
 		}
+
+		return 0.0;
 	}
 
-	float Blackboard::getData(EnumRecordType type, string targetID)
+	float Blackboard::getData(RecordType type, string targetID)
 	{
 		for (int i = 0; i < _listOfRecords.getSize(); i++)
 		{
-			if ((_listOfRecords.get(i).getEnumRecordType() == type)
+			if ((_listOfRecords.get(i).getRecordType() == type)
 					&& (_listOfRecords.get(i).getTargetID().compare(targetID)
 							== 0))
 			{
 				return _listOfRecords.get(i).getData();
 			}
 		}
+
+		return 0.0;
 	}
 }
 
