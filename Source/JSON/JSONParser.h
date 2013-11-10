@@ -4,6 +4,9 @@
 #include "../Resources/DynamicArray.h"
 #include "../Resources/HashMap.h"
 
+#ifndef JSONPARSER_H_
+#define JSONPARSER_H_
+
 #ifndef NULL
 #define NULL (void *) 0
 #endif
@@ -79,3 +82,5 @@ namespace bammm
 	};
 
 }
+
+#endif
