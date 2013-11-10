@@ -38,6 +38,31 @@ namespace bammm
 		}
 	}
 
+	bool Blackboard::removeRecord(EnumRecordType type, string subjectID)
+	{
+		for(int i = 0; i < _listOfRecords.getSize(); i++)
+		{
+			if ((_listOfRecords.get(i).getEnumRecordType() == type) && (_listOfRecords.get(i).getSubjectID().compare(subjectID) == 0))
+			{
+				_listOfRecords.remove(i);
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	void Blackboard::removeAll(EnumRecordType type)
+	{
+		for(int i = 0; i < _listOfRecords.getSize(); i++)
+		{
+			if(_listOfRecords.get(i).getEnumRecordType() == type)
+			{
+				_listOfRecords.remove(i);
+			}
+		}
+	}
+
 	int Blackboard::countRecords(EnumRecordType type)
 	{
 		int count = 0;
