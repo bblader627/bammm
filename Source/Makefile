@@ -13,7 +13,8 @@ Resources/DynamicArray.h Resources/HashMap.h Resources/HashNode.h \
 Resources/Heap.h Resources/Queue.h Resources/Stack.h SceneManager/Vector3D.h \
 Weapons/IWeaponType.h Weapons/WeaponData.h Weapons/MeleeWeapon.h Weapons/Stein.h \
 Weapons/OrcishBlade.h Weapons/MeleeCombat.h States/CombatState.h SceneManager/Grid3D.h \
-Actors/OrcActor.h TestSuite/Time.cpp SceneManager/SceneManager.h
+Actors/OrcActor.h TestSuite/Time.cpp SceneManager/SceneManager.h Factories/Factory.h \
+JSON/JSONParser.h JSON/JSON.cpp JSON/JSONParser.cpp
 TESTNAME = test
 TESTSRC = Main.cpp
 

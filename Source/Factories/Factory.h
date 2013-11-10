@@ -22,6 +22,7 @@
 #include "../Weapons/IWeaponType.h"
 
 using namespace bammm;
+using namespace std;
 
 namespace bammm
 {
@@ -46,12 +47,37 @@ namespace bammm
 	void Factory::setup()
 	{
 		string actorJSON;
-		//JSONParser.parse(lkjsdlfjklsdf) into actorData
-	}
+		JSONParser* parser = new JSONParser();
+		string filename = "actors.json";
+		parser->parseFile(filename);
 
+
+		/*
+		cout << "poop" << endl;
+
+		HashMap<JSON> rootMap = parser->getMap();
+		JSON dwarfJSON = rootMap.getValue("dwarves");
+		HashMap<JSON>* dwarves = dwarfJSON.getChildren();
+
+		cout << "poop2" << endl;
+		DynamicArray<JSON>* dwarfArray = dwarves->getAllValues();
+
+		int size = dwarfArray->getSize();
+		for (int i = 0; i < size; i++)
+		{
+			//ActorInfo info = new ActorInfo();
+			//info.setName(dwarfArray->get(i).)
+			//actorData.add()
+			cout << dwarfArray->get(i).getName() << endl;
+		}
+		*/
+	}
+	/*
 	Actor Factory::getActor(string type)
 	{
+		return new Actor();
 		//return new Actor(actorData.getItem(type));
 	}
+	*/
 
 }
