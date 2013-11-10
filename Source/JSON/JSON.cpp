@@ -62,6 +62,11 @@ namespace bammm
 		}
 	}
 
+	HashMap<JSON>* JSON::getChildren()
+	{
+		return &children;
+	}
+
 	JSON& JSON::operator=(const JSON & rhs)
 	{
 		this->name = rhs.name;

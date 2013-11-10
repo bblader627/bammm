@@ -39,6 +39,7 @@ namespace bammm
 
 			JSON getParent();
 			JSON getChild(string);
+			HashMap<JSON>* getChildren();
 			string getValue();
 			string getName();
 			JSON_TYPE getType();
