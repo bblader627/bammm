@@ -21,12 +21,12 @@ namespace bammm
 		public:
 			~SceneManager();
 			SceneManager();
-			SceneManager(Grid3d<Actor*> grid);
 			void addActor(Actor* actor);
 			void removeActor(Actor* actor);
 			void addTickable(ITickable* tickable);
 			void removeTickable(ITickable* tickable);
 			string to_string();
+			Grid3d<Actor*> getSceneGraph();
 	};
 
 	SceneManager::~SceneManager()
@@ -37,16 +37,10 @@ namespace bammm
 	{
 	}
 
-	SceneManager::SceneManager(Grid3d<Actor*> grid)
-	{
-		_sceneGraph = grid;
-	}
-
 	void SceneManager::addActor(Actor* actor)
 	{
 		_allActors.add(actor);
 	}
-
 
 	void SceneManager::removeActor(Actor* actor)
 	{
@@ -61,6 +55,11 @@ namespace bammm
 	void SceneManager::removeTickable(ITickable* tickable)
 	{
 		_allTickables.removeElem(tickable);
+	}
+
+	Grid3d<Actor*> SceneManager::getSceneGraph()
+	{
+		return _sceneGraph;
 	}
 
 	string SceneManager::to_string()
