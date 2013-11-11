@@ -68,6 +68,9 @@ namespace bammm
 			void add(Vector3D* vect, T add);
 			void move(T actor, Vector3D* newLoc);
 			void moveTowards(T ordered, Vector3D* loc);
+			int getX();
+			int getY();
+			int getZ();
 	};
 
 	//Creates an grid
@@ -307,6 +310,24 @@ namespace bammm
 		}
 		newLoc = new Vector3D(newX, newY, 0);
 		move(ordered, newLoc);
+	}
+	
+	template<class T>
+	int Grid3d<T>::getX()
+	{
+		return width;
+	}
+
+	template<class T>
+	int Grid3d<T>::getY()
+	{
+		return length;
+	}
+
+	template<class T>
+	int Grid3d<T>::getZ()
+	{
+		return height;
 	}
 }
 

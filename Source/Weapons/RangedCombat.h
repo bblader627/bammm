@@ -39,6 +39,10 @@ namespace bammm
 			~RangedCombat();
 	};
 
+	RangedCombat::~RangedCombat()
+	{
+	}
+
 	RangedCombat::RangedCombat(Actor* a1, Actor* a2/*, Grid3d<Actor> grid*/)
 	{
 		actor1 = a1;

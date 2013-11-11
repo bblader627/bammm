@@ -29,6 +29,10 @@ namespace bammm
 			~MeleeCombat();
 	};
 
+	MeleeCombat::~MeleeCombat()
+	{
+	}
+
 	MeleeCombat::MeleeCombat()
 	{
 		actor1 = NULL;
