@@ -20,7 +20,7 @@
 
 #include "Controller.h"
 #include "../States/StateMachine.h"
-#include "../SceneManager/Grid3D.h"
+#include "../SceneManager/SceneManager.h"
 #include "../Weapons/MeleeCombat.h"
 #include "../Weapons/RangedCombat.h"
 #include "../Factories/Factory.h"
@@ -39,20 +39,20 @@ namespace bammm
 		private:
 			MeleeCombat* meleeCombat;
 			RangedCombat* rangedCombat;
-			Grid3d<Actor*>* grid;
+			SceneManager* sceneManager;
         public:
             void input(DynamicArray<string>* command, float dTime);
             void input(string command, float dTime);
-            PlayerController(Grid3d<Actor*>* theGrid, MeleeCombat* meleeC);
+            PlayerController(SceneManager& scene, MeleeCombat& meleeC);
             void setup(Actor* actor);
             ~PlayerController();
             void printOptions();
     };
 
-    PlayerController::PlayerController(Grid3d<Actor*>* theGrid, MeleeCombat* meleeC)
+    PlayerController::PlayerController(SceneManager& scene, MeleeCombat& meleeC)
     {
-		grid = theGrid;
-		meleeCombat = meleeC;
+		sceneManager = &scene;
+		meleeCombat = &meleeC;
     }
 
     void PlayerController::setup(Actor* actor)
@@ -135,7 +135,7 @@ namespace bammm
 				//Special case for combat state
 				if(newState->to_string() == "combat")
 				{
-					Actor* closestEnemy = grid->getEnemy(_actor->getLocation(), _actor);
+					Actor* closestEnemy = sceneManager->getSceneGraph().getEnemy(_actor->getLocation(), _actor);
 					if(closestEnemy)
 					{
 						meleeCombat->setup(_actor, closestEnemy);

@@ -102,7 +102,6 @@ namespace bammm
 	template<class T>
 	Grid3d<T>::~Grid3d()
 	{
-		cout << "Deconstructor was called\n";
 		int size = width * length * height;
 		for(int i = 0; i < size; i++)
 		{
@@ -114,7 +113,6 @@ namespace bammm
 	template<class T>
 	DynamicArray<DynamicArray<T>* >* Grid3d<T>::access(Vector3D *vect, int radius)
 	{
-		cout << "Start of access" << endl;
 		int pos = convertToPos(vect);
 		int start = pos - radius;
 		int end = pos + radius;
@@ -132,7 +130,6 @@ namespace bammm
 			grid->get(i);
 			space->add(grid->get(i));
 		}
-		cout << "After access" << endl;
 		return space;
 	}
 
@@ -168,8 +165,8 @@ namespace bammm
 	template<class T>
 	bool Grid3d<T>::remove(Vector3D *vect, T elem)
 	{
-		//int pos = convertToPos(vect);
-		bool deletedVal = access(vect, 0)->get(0)->removeElem(elem);
+		int pos = convertToPos(vect);
+		bool deletedVal = access(vect, 0)->get(pos)->removeElem(elem);
 		return deletedVal;
 	}
 

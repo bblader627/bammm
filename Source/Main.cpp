@@ -1,5 +1,5 @@
 #include <iostream>
-#include "SceneManager/Grid3D.h"
+#include "SceneManager/SceneManager.h"
 #include "Controllers/PlayerController.h"
 #include "Controllers/AiController.h"
 #include "Weapons/Stein.h"
@@ -18,17 +18,14 @@ int main()
 {
 	printWelcome();
 	bool printMap = true;
-	int gridX = 10;
-	int gridY = 10;
-	int gridZ = 10;
-	Grid3d<Actor*>* GRID = new Grid3d<Actor*>(gridX,gridY,gridZ);
-	MeleeCombat* meleeCombat = new MeleeCombat();
-	DynamicArray<AiController*>* aiControllers = new DynamicArray<AiController*>();
+	SceneManager sceneManager;
+	MeleeCombat meleeCombat;
+	DynamicArray<AiController*> aiControllers;
 
 	//Creation of Hero
 	DwarfActor* bob = new DwarfActor();
 	Vector3D* temp = new Vector3D(0,0,0);
-	GRID->add(temp, bob);
+	sceneManager.getSceneGraph().add(temp, bob);
 
 	//Random number generator
 	random_device rd;
@@ -41,8 +38,8 @@ int main()
 	int orcCount = orcDistribution(generator);
 
 	//Create the orcs
-	uniform_int_distribution<int> xDistribution (0, gridX - 1);
-	uniform_int_distribution<int> yDistribution (0, gridY - 1);
+	uniform_int_distribution<int> xDistribution (0, sceneManager.getSceneGraph().getX() - 1);
+	uniform_int_distribution<int> yDistribution (0, sceneManager.getSceneGraph().getY() - 1);
 	for(int i = 0; i < orcCount; i++)
 	{
 		int randomX = xDistribution(generator);
@@ -50,14 +47,14 @@ int main()
 		temp = new Vector3D(randomX, randomY, 0);
 
 		OrcActor* newOrc = new OrcActor();
-		AiController* newAi = new AiController(GRID, meleeCombat);
-		GRID->add(temp, newOrc);
+		AiController* newAi = new AiController(sceneManager, meleeCombat);
+		sceneManager.getSceneGraph().add(temp, newOrc);
 		newAi->setup(newOrc);
-		aiControllers->add(newAi);
+		aiControllers.add(newAi);
 	}
 
-	PlayerController* controller = new PlayerController(GRID, meleeCombat);
-	controller->setup(bob);
+	PlayerController controller(sceneManager, meleeCombat);
+	controller.setup(bob);
 
 	bool playGame = true;
 	int choice;
@@ -78,10 +75,10 @@ int main()
 
 		if(printMap)
 		{
-			cout << GRID->to_string() << "\n";
+			cout << sceneManager.getSceneGraph().to_string() << "\n";
 		}
 
-		controller->printOptions();
+		controller.printOptions();
 		cin >> choice;
 
 		switch (choice)
@@ -117,27 +114,21 @@ int main()
 		{
     		break;
 		}
-		controller->input(input, dTime);
+		controller.input(input, dTime);
 
-		for(int i = 0; i < (int)aiControllers->getSize(); i++)
+		for(int i = 0; i < (int)aiControllers.getSize(); i++)
 		{	
-			if(aiControllers->get(i)->update(dTime))
+			if(aiControllers.get(i)->update(dTime))
 			{
-				aiControllers->remove(i);
+				delete aiControllers.remove(i);
 			}
 
 		}
 	}
 	delete input;
 
+
 	cout << "Thanks for playing!  Press enter to quit." << endl;
-	//string waitfortext;
-	//cin >> waitfortext;
-
-	//provide option for state change
-
-	//tick
-	delete GRID;
 	return 0;
 }
 
