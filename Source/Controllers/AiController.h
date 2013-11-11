@@ -20,7 +20,7 @@
 
 #include "Controller.h"
 #include "../States/StateMachine.h"
-#include "../SceneManager/Grid3D.h"
+#include "../SceneManager/SceneManager.h"
 #include "../Weapons/MeleeCombat.h"
 #include "../Weapons/RangedCombat.h"
 #include <random>
@@ -39,18 +39,18 @@ namespace bammm
 		private:
 			MeleeCombat* meleeCombat;
 			RangedCombat* rangedCombat;
-			Grid3d<Actor*>* grid;
+			SceneManager* sceneManager;
         public:
-            AiController(Grid3d<Actor*>* theGrid, MeleeCombat* meleeC);
+            AiController(SceneManager& scene, MeleeCombat& meleeC);
             void setup(Actor* actor);
 			bool update(float dTime);
             ~AiController();
     };
 
-    AiController::AiController(Grid3d<Actor*>* theGrid, MeleeCombat* meleeC)
+    AiController::AiController(SceneManager& scene, MeleeCombat& meleeC)
     {
-		grid = theGrid;
-		meleeCombat = meleeC;
+		sceneManager = &scene;
+		meleeCombat = &meleeC;
     }
 
     void AiController::setup(Actor* actor)
@@ -98,14 +98,14 @@ namespace bammm
     	//all currently running states
 		if(_actor->getHealth() <= 0)
 		{
-			grid->remove(_actor->getLocation(), _actor);
+			sceneManager->getSceneGraph().remove(_actor->getLocation(), _actor);
 			delete _actor;
 			return true;
 		}
 		else
 		{
 			Vector3D* newLoc = new Vector3D(0,0,0);
-			grid->moveTowards(_actor, newLoc);
+			sceneManager->getSceneGraph().moveTowards(_actor, newLoc);
         	_stateMachine->tick(dTime);
 		}
 

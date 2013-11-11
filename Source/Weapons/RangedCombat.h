@@ -8,8 +8,6 @@
 #ifndef RANGEDCOMBAT_H_
 #define RANGEDCOMBAT_H_
 
-#include "../SceneManager/Grid3D.h"
-
 namespace bammm
 {
 
@@ -21,7 +19,7 @@ namespace bammm
 			Actor* actor2;
 			Actor* _winner;
 			Actor* _loser;
-//			Grid3d<Actor> GRID;
+
 			bool playerTurn;
 
 			void giveLoot();
@@ -30,6 +28,7 @@ namespace bammm
 			bool inRange();
 
 		public:
+			RangedCombat();
 			RangedCombat(Actor* a1, Actor* a2 /*,Grid3d<Actor> grid*/);
 			bool canFight();
 			void useTurn();
@@ -38,6 +37,15 @@ namespace bammm
 			Actor* getOpponent();
 			~RangedCombat();
 	};
+
+	RangedCombat::RangedCombat()
+	{
+		actor1 = NULL;
+		actor2 = NULL;
+		_winner = NULL;
+		_loser = NULL;
+		playerTurn = true;
+	}
 
 	RangedCombat::~RangedCombat()
 	{
@@ -50,7 +58,6 @@ namespace bammm
 		_winner = NULL;
 		_loser = NULL;
 		playerTurn = true;
-		//GRID = grid;
 	}
 
 	bool RangedCombat::canFight()

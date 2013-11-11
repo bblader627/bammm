@@ -117,7 +117,6 @@ namespace bammm
 		int start = pos - radius;
 		int end = pos + radius;
 		DynamicArray<DynamicArray<T>* >*space = new DynamicArray<DynamicArray<T>* >();
-
 		if (start < 0)
 		{
 			start = 0;
@@ -128,6 +127,7 @@ namespace bammm
 		}
 		for (int i = start; i <= end; i++)
 		{
+			grid->get(i);
 			space->add(grid->get(i));
 		}
 		return space;
@@ -165,8 +165,8 @@ namespace bammm
 	template<class T>
 	bool Grid3d<T>::remove(Vector3D *vect, T elem)
 	{
-		//int pos = convertToPos(vect);
-		bool deletedVal = access(vect, 0)->get(0)->removeElem(elem);
+		int pos = convertToPos(vect);
+		bool deletedVal = access(vect, 0)->get(pos)->removeElem(elem);
 		return deletedVal;
 	}
 
