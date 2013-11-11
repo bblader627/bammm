@@ -26,7 +26,7 @@ namespace bammm
 			void addTickable(ITickable* tickable);
 			void removeTickable(ITickable* tickable);
 			string to_string();
-			Grid3d<Actor*> getSceneGraph();
+			Grid3d<Actor*>& getSceneGraph();
 	};
 
 	SceneManager::~SceneManager()
@@ -57,7 +57,7 @@ namespace bammm
 		_allTickables.removeElem(tickable);
 	}
 
-	Grid3d<Actor*> SceneManager::getSceneGraph()
+	Grid3d<Actor*>& SceneManager::getSceneGraph()
 	{
 		return _sceneGraph;
 	}
