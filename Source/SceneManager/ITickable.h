@@ -1,3 +1,6 @@
+#ifndef ITICKABLE_H_
+#define ITICKABLE_H_
+
 namespace bammm
 {
 	class ITickable
@@ -11,3 +14,4 @@ namespace bammm
 	{
 	}
 }
+#endif
