@@ -3,6 +3,7 @@
 
 #include "Grid3D.h"
 #include "../Actors/Actor.h"
+#include "ITickable.h"
 using namespace std;
 
 namespace bammm
@@ -11,7 +12,7 @@ namespace bammm
 	{
 		private:
 			DynamicArray<Actor*> _allActors;
-			DynamicArray<Actor*> _allTickables;
+			DynamicArray<ITickable*> _allTickables;
 			Grid3d<Actor*> _sceneGraph;
 
 		public:
@@ -20,8 +21,8 @@ namespace bammm
 			SceneManager(Grid3d<Actor*> grid);
 			void addActor(Actor* actor);
 			void removeActor(Actor* actor);
-			void addTickable();
-			void removeTickable();
+			void addTickable(ITickable* tickable);
+			void removeTickable(ITickable* tickable);
 			string to_string();
 	};
 
@@ -48,12 +49,14 @@ namespace bammm
 		_allActors.removeElem(actor);
 	}
 
-	void SceneManager::addTickable()
+	void SceneManager::addTickable(ITickable* tickable)
 	{
+		_allTickables.add(tickable);
 	}
 
-	void SceneManager::removeTickable()
+	void SceneManager::removeTickable(ITickable* tickable)
 	{
+		_allTickables.removeElem(tickable);
 	}
 
 	string SceneManager::to_string()
