@@ -14,6 +14,9 @@ namespace bammm
 			DynamicArray<Actor*> _allActors;
 			DynamicArray<ITickable*> _allTickables;
 			Grid3d<Actor*> _sceneGraph;
+			static const int SCENE_X = 10;
+			static const int SCENE_Y = 10;
+			static const int SCENE_Z = 10;
 
 		public:
 			~SceneManager();
@@ -30,12 +33,13 @@ namespace bammm
 	{
 	}
 
-	SceneManager::SceneManager()
+	SceneManager::SceneManager() : _sceneGraph(SCENE_X, SCENE_Y, SCENE_Z)
 	{
 	}
 
 	SceneManager::SceneManager(Grid3d<Actor*> grid)
 	{
+		_sceneGraph = grid;
 	}
 
 	void SceneManager::addActor(Actor* actor)
