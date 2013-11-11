@@ -40,7 +40,7 @@ namespace bammm
 			int getAttack();
 			int getDefense();
 
-			//void setName();
+			void setName(string name);
 			void setHealth(int health);
 			void setStamina(int stamina);
 			void setAttack(int attack);
@@ -79,6 +79,11 @@ namespace bammm
 	string ActorInfo::getName()
 	{
 		return _name;
+	}
+
+	void ActorInfo::setName(string name)
+	{
+		_name = name;
 	}
 
 	void ActorInfo::setHealth(int health)

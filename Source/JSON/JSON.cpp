@@ -7,6 +7,7 @@
 
 #include "JSONParser.h"
 #include <sstream>
+#include <iostream>
 
 using namespace bammm;
 using namespace std;

@@ -23,6 +23,7 @@
 #include "../SceneManager/Grid3D.h"
 #include "../Weapons/MeleeCombat.h"
 #include "../Weapons/RangedCombat.h"
+#include "../Factories/Factory.h"
 
 #ifndef NULL
 #define NULL ((void *)0)
@@ -56,6 +57,9 @@ namespace bammm
 
     void PlayerController::setup(Actor* actor)
     {
+    	Factory* actorFactory = new Factory();
+    	actorFactory->setup();
+
         _actor = actor;
         _states = new HashMap<State*>();
         _stateMachine = new StateMachine(_actor, _states);

@@ -32,8 +32,6 @@ typedef unsigned int uint;
 #define NULL ((void*)0)
 #endif
 
-using namespace std;
-
 namespace bammm
 {
     /**
@@ -580,10 +578,10 @@ namespace std
      * @param str The string to be converted/returned.
      * @returns Returns the string passed.
      */
-    string to_string(string str)
+    /*string to_string(string str)
     {
         return str;
-    }
+    }*/
 }
 
 #endif /* DYNAMICARRAY_H_ */

@@ -1,3 +1,6 @@
+#ifndef JSONPARSER_H_
+#define JSONPARSER_H_
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -79,3 +82,5 @@ namespace bammm
 	};
 
 }
+
+#endif
