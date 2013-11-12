@@ -174,6 +174,7 @@ namespace bammm
 	{
 		this->children.add(newNode.name, newNode);
 		newNode.setParent(*this);
+		cout << "addChild" << endl;
 	}
 
 }

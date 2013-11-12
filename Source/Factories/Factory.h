@@ -24,6 +24,11 @@
 using namespace bammm;
 using namespace std;
 
+#ifndef NULL
+#define NULL ((void *)0)
+#endif
+
+
 namespace bammm
 {
 	class Factory
@@ -48,16 +53,30 @@ namespace bammm
 	{
 		string actorJSON;
 		JSONParser* parser = new JSONParser();
-		string filename = "actors.json";
+		string filename = "/home/matthew/workspace/bammm/Source/JSON/actors.json";
 		parser->parseFile(filename);
 
 
-		/*
+
 		cout << "poop" << endl;
 
-		HashMap<JSON> rootMap = parser->getMap();
-		JSON dwarfJSON = rootMap.getValue("dwarves");
-		HashMap<JSON>* dwarves = dwarfJSON.getChildren();
+		HashMap<JSON>* rootMap = parser->getMap();
+
+		cout << "1" << endl;
+
+		cout << rootMap->getNumerOfNodes() << endl;
+
+		/*
+		JSON* dwarfJSON = rootMap->getValue("dwarves");
+		if (dwarfJSON == NULL)
+		{
+			cout << "caught NULL" << endl;
+			return;
+		}
+		cout << "2" << endl;
+
+
+		HashMap<JSON>* dwarves = dwarfJSON->getChildren();
 
 		cout << "poop2" << endl;
 		DynamicArray<JSON>* dwarfArray = dwarves->getAllValues();
@@ -71,6 +90,7 @@ namespace bammm
 			cout << dwarfArray->get(i).getName() << endl;
 		}
 		*/
+
 	}
 	/*
 	Actor Factory::getActor(string type)

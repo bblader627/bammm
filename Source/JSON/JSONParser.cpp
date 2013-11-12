@@ -24,8 +24,8 @@ namespace bammm
 		rootNode.addChild(newNode);
 	}
 
-	HashMap<JSON> JSONParser::getMap(){
-		return rootMap;
+	HashMap<JSON>* JSONParser::getMap(){
+		return &rootMap;
 	}
 
 	bool JSONParser::parseFile(string filename)
@@ -48,12 +48,11 @@ namespace bammm
 					<< endl;
 			return false;
 		}
-
+		cout << "File found!" << endl;
 		while (!input.eof())
 		{
-
 			current = (char) input.get();
-
+			cout << "Current: " << current << endl;
 			switch (current)
 			{
 
@@ -63,11 +62,16 @@ namespace bammm
 					break;
 
 				case '{':
+
 					isValue = false;
-					parentNode = currentNode;
+
 					currentNode = new JSON();
+					parentNode = currentNode;
+
+					//SegFault occurs here - does not get into setParent
 					currentNode->setParent(*parentNode);
 					parentNode->addChild(*currentNode);
+					cout << "am i right??" << endl;
 					break;
 
 				case '"':
@@ -81,6 +85,7 @@ namespace bammm
 					current = (char) input.get();
 					while (!input.eof() && current != '"')
 					{
+						cout << current << endl;
 						if (isValue == false)
 						{
 							name += current;

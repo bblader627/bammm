@@ -77,7 +77,7 @@ namespace bammm
 
 			bool parseFile(string);
 
-			HashMap<JSON> getMap();
+			HashMap<JSON>* getMap();
 
 	};
 
