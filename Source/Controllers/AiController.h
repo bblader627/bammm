@@ -19,10 +19,6 @@
 #define AICONTROLLER_H_
 
 #include "Controller.h"
-#include "../States/StateMachine.h"
-#include "../SceneManager/SceneManager.h"
-#include "../Weapons/MeleeCombat.h"
-#include "../Weapons/RangedCombat.h"
 #include <random>
 
 #ifndef NULL

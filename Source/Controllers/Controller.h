@@ -30,6 +30,9 @@
 #include "../Actors/Actor.h"
 #include <string>
 #include "../States/StateMachine.h"
+#include "../Weapons/MeleeCombat.h"
+#include "../Weapons/RangedCombat.h"
+#include "../SceneManager/SceneManager.h"
 
 using namespace std;
 
