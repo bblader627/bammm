@@ -24,7 +24,8 @@ namespace bammm
 		rootNode.addChild(newNode);
 	}
 
-	HashMap<JSON>* JSONParser::getMap(){
+	HashMap<JSON>* JSONParser::getMap()
+	{
 		return &rootMap;
 	}
 
@@ -48,35 +49,45 @@ namespace bammm
 					<< endl;
 			return false;
 		}
-		cout << "File found!" << endl;
+
 		while (!input.eof())
 		{
+
 			current = (char) input.get();
-			cout << "Current: " << current << endl;
+
 			switch (current)
 			{
 
 				case '[':
+
+					currentNode->setType(JSON_ARRAY);
+
 					isValue = false;
 					isArray++;
 					break;
 
 				case '{':
-
 					isValue = false;
 
-					currentNode = new JSON();
-					parentNode = currentNode;
-
-					//SegFault occurs here - does not get into setParent
-					currentNode->setParent(*parentNode);
-					parentNode->addChild(*currentNode);
-					cout << "am i right??" << endl;
+					if (currentNode == NULL )
+					{
+						currentNode = new JSON();
+						this->addRoot(*currentNode);
+						// JSON node is created - now we continue so we may parse the name and set values
+					}
+					else
+					{
+						//seg faulted before changes to this
+						parentNode = currentNode;
+						currentNode = new JSON();
+						currentNode->setParent(*parentNode);
+						parentNode->addChild(*currentNode);
+					}
 					break;
 
 				case '"':
 
-					if (currentNode == NULL)
+					if (currentNode == NULL )
 					{
 						cout << "Error reading in JSON object" << endl;
 						return false;
@@ -85,7 +96,6 @@ namespace bammm
 					current = (char) input.get();
 					while (!input.eof() && current != '"')
 					{
-						cout << current << endl;
 						if (isValue == false)
 						{
 							name += current;
@@ -103,54 +113,39 @@ namespace bammm
 					}
 					else
 					{
-						currentNode->setValue(current);
-						currentNode->setType(JSON_STRING);
+						currentNode->setValue(value);
+
+						if (value == "false" || value == "true")
+						{
+							currentNode->setType(JSON_BOOL);
+						}
+						else if (value == "")
+						{
+							currentNode->setType(JSON_NULL);
+						}
+						else if (isdigit(value[0]))
+						{
+							for (unsigned int i = 0; i < value.size(); i++)
+							{
+								if (value[i] == '.')
+								{
+									currentNode->setType(JSON_DOUBLE);
+								}
+								else
+								{
+									currentNode->setType(JSON_INT);
+								}
+							}
+						}
+						else
+						{
+							currentNode->setType(JSON_STRING);
+						}
 					}
 					break;
 
 				case ':':
 					isValue = true;
-
-					while (input.peek() == ' ' || isdigit(input.peek()) || input.peek() == 't' || input.peek() == 'f')
-					{
-
-						current = (char) input.get();
-
-						if (isdigit(current))
-						{
-							while (isdigit(current))
-							{
-								value += current;
-								current = (char) input.get();
-							}
-							currentNode->setValue(value);
-							currentNode->setType(JSON_INT);
-							break;
-						}
-						else if (current == 't' || current == 'f')
-						{
-							while (isalpha(current))
-							{
-								value += current;
-								current = (char) input.get();
-							}
-							if (value == "false" || value == "true")
-							{
-								currentNode->setValue(value);
-								currentNode->setType(JSON_BOOL);
-								break;
-							}
-							else
-							{
-								cout
-										<< "Error parsing BOOLEAN value in JSON file."
-										<< endl;
-								return 1;
-							}
-						}
-
-					}
-
 					break;
 
 				case ',':
@@ -162,8 +157,14 @@ namespace bammm
 					break;
 
 				case '}':
+
+					if (parentNode == NULL )
+					{
+						break;
+					}
+
 					currentNode = parentNode;
-					*parentNode = parentNode->getParent();
+					*parentNode = currentNode->getParent();
 					break;
 
 				default:
@@ -171,6 +172,14 @@ namespace bammm
 			}
 
 			continue;
+		}
+
+		if (isArray > 0)
+		{
+			cout
+					<< "Error: Not all brackets or braces are closed in the JSON file."
+					<< endl;
+			return 1;
 		}
 
 		return true;
