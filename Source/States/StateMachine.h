@@ -45,6 +45,7 @@ class StateMachine : public IStateCallback
 		/*
 		 * Default Constructor
 		 */
+		StateMachine();
 		StateMachine(Actor* actor, HashMap<State*>* allStates);
 		void initialState(State* initial);
 		void tick(float dTime);
@@ -60,6 +61,10 @@ class StateMachine : public IStateCallback
 		string to_string();
 
 };
+		StateMachine::StateMachine()
+		{
+		}
+
 		StateMachine::StateMachine(Actor* actor, HashMap<State*>* allStates)
 		{
 			_actor = actor;
