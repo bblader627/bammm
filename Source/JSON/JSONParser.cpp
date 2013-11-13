@@ -38,6 +38,7 @@ namespace bammm
 		int isArray = 0;
 		JSON *currentNode = NULL;
 		JSON *parentNode = NULL;
+		JSON *childNode = NULL;
 		string name = "";
 		string value = "";
 
@@ -69,7 +70,7 @@ namespace bammm
 				case '{':
 					isValue = false;
 
-					if (currentNode == NULL )
+					if (currentNode == NULL)
 					{
 						currentNode = new JSON();
 						this->addRoot(*currentNode);
@@ -87,7 +88,7 @@ namespace bammm
 
 				case '"':
 
-					if (currentNode == NULL )
+					if (currentNode == NULL)
 					{
 						cout << "Error reading in JSON object" << endl;
 						return false;
@@ -109,6 +110,7 @@ namespace bammm
 
 					if (isValue == false)
 					{
+						//the name of the first attribute is the name of the JSON node. Need to fix.
 						currentNode->setName(name);
 					}
 					else
@@ -150,6 +152,15 @@ namespace bammm
 
 				case ',':
 					isValue = false;
+
+					childNode = new JSON();
+
+					*currentNode = currentNode->getParent();
+					currentNode->addChild(*childNode);
+					childNode->setParent(*currentNode);
+
+					currentNode = childNode;
+
 					break;
 
 				case ']':
@@ -158,7 +169,7 @@ namespace bammm
 
 				case '}':
 
-					if (parentNode == NULL )
+					if (parentNode == NULL)
 					{
 						break;
 					}
