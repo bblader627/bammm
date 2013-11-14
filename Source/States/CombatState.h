@@ -19,7 +19,7 @@ namespace bammm
     {
         public:
             CombatState(Actor* actor);
-            CombatState(Actor* actor, IStateCallback* statemachine);
+            CombatState(Actor* actor, IStateCallback& statemachine);
             void setup();
             void breakdown();
             void tick(float dTime);
@@ -33,7 +33,7 @@ namespace bammm
 		_actor = actor;
 	}
 
-	CombatState::CombatState(Actor* actor, IStateCallback* statemachine)
+	CombatState::CombatState(Actor* actor, IStateCallback& statemachine)
 	{
 		_actor = actor;
 

@@ -41,13 +41,13 @@ namespace bammm
     class Controller
     {
         protected:
-            HashMap<State*>* _states;
+            HashMap<State*> _states;
             Actor* _actor;
-            StateMachine* _stateMachine;
+            StateMachine _stateMachine;
 
         public:
             Controller();
-            void setup(Actor* actor);
+            virtual void setup(Actor* actor);
             virtual ~Controller();
     };
 

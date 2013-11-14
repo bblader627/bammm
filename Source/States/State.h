@@ -40,10 +40,11 @@ namespace bammm
         public:
 			State();
 			State(Actor* actor);
+			State(Actor* actor, IStateCallback& stateMachine);
 			virtual void setup();
 			virtual void breakdown();
 			virtual void tick(float dTime);
-			virtual void registerTransitionCallback(IStateCallback* statemachine);
+			virtual void registerTransitionCallback(IStateCallback& statemachine);
 			virtual void switchState(string nextState);
 			virtual string to_string();
 			virtual bool operator==(State* s);
@@ -57,6 +58,12 @@ namespace bammm
 	State::State(Actor* actor)
 	{
 		_actor = actor;
+	}
+
+	State::State(Actor* actor, IStateCallback& stateMachine)
+	{
+		_actor = actor;
+		_statemachine = &stateMachine;
 	}
 
 	/*
@@ -101,9 +108,9 @@ namespace bammm
 	* Pre-Condition- accepts pointer to IStateCallback
 	* Post-Condition- calls switchState to swap states in callback
 	*/
-	void State::registerTransitionCallback(IStateCallback* statemachine)
+	void State::registerTransitionCallback(IStateCallback& statemachine)
 	{
-		_statemachine = statemachine;
+		_statemachine = &statemachine;
 	}
 
 	/*

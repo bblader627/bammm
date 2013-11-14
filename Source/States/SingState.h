@@ -15,7 +15,7 @@ namespace bammm
     {
         public:
             SingState(Actor* actor);
-            SingState(Actor* actor, IStateCallback* statemachine);
+            SingState(Actor* actor, IStateCallback& statemachine);
             void setup();
             void breakdown();
             void tick(float dTime);
@@ -31,7 +31,7 @@ namespace bammm
 		_actor = actor;
 	}
 
-	SingState::SingState(Actor* actor, IStateCallback* statemachine)
+	SingState::SingState(Actor* actor, IStateCallback& statemachine)
 	{
 		_actor = actor;
 		registerTransitionCallback(statemachine);

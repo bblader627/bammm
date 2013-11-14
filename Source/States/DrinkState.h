@@ -23,7 +23,7 @@ namespace bammm
 
         public:
             DrinkState(Actor* actor);
-            DrinkState(Actor* actor, IStateCallback* statemachine);
+            DrinkState(Actor* actor, IStateCallback& statemachine);
             void setup();
             void breakdown();
             void tick(float dTime);
@@ -38,7 +38,7 @@ namespace bammm
 
 	}
 
-	DrinkState::DrinkState(Actor* actor, IStateCallback* statemachine)
+	DrinkState::DrinkState(Actor* actor, IStateCallback& statemachine)
 	{
 		_actor = actor;
 		registerTransitionCallback(statemachine);

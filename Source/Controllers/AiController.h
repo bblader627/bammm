@@ -38,7 +38,7 @@ namespace bammm
 			SceneManager* sceneManager;
         public:
             AiController(SceneManager& scene, MeleeCombat& meleeC);
-            void setup(Actor* actor);
+            void setup(Actor& actor);
 			bool update(float dTime);
             ~AiController();
     };
@@ -49,11 +49,10 @@ namespace bammm
 		meleeCombat = &meleeC;
     }
 
-    void AiController::setup(Actor* actor)
+    void AiController::setup(Actor& actor)
     {
-        _actor = actor;
-        _states = new HashMap<State*>();
-        _stateMachine = new StateMachine(_actor, _states);
+        _actor = &actor;
+        _stateMachine = StateMachine(actor, _states);
 
 		//Create the states
         //DO NOT DELETE THE REFERENCES TO STATEMACHINE.  THE CODE WILL SEG FAULT IF YOU DO
@@ -66,27 +65,24 @@ namespace bammm
 		CombatState* combatState = new CombatState(_actor, _stateMachine);
 
 		//Put actor in idle state
-		_stateMachine->initialState(idleState);
+		_stateMachine.initialState(idleState);
 
-        _states->add(idleState->to_string(), idleState);
-        _states->add(mineState->to_string(), mineState);
-        _states->add(drinkState->to_string(), drinkState);
-        _states->add(singState->to_string(), singState);
-        _states->add(brawlState->to_string(), brawlState);
-        _states->add(sleepState->to_string(), sleepState);
-       	_states->add(combatState->to_string(), combatState);
+        _states.add(idleState->to_string(), idleState);
+        _states.add(mineState->to_string(), mineState);
+        _states.add(drinkState->to_string(), drinkState);
+        _states.add(singState->to_string(), singState);
+        _states.add(brawlState->to_string(), brawlState);
+        _states.add(sleepState->to_string(), sleepState);
+       	_states.add(combatState->to_string(), combatState);
     }
 
     AiController::~AiController()
     {
-        DynamicArray<State*>* temp = _states->getAllValues();
+        DynamicArray<State*>* temp = _states.getAllValues();
         for(int i = 0; i < (int)temp->getSize(); i++)
         {
             delete temp->get(i);
         }
-
-        delete _states;
-        delete _stateMachine;
     }
 
 	bool AiController::update(float dTime)
@@ -102,7 +98,7 @@ namespace bammm
 		{
 			Vector3D* newLoc = new Vector3D(0,0,0);
 			sceneManager->getSceneGraph().moveTowards(_actor, newLoc);
-        	_stateMachine->tick(dTime);
+        	_stateMachine.tick(dTime);
 		}
 
 		return false;

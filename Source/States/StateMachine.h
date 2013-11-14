@@ -46,7 +46,7 @@ class StateMachine : public IStateCallback
 		 * Default Constructor
 		 */
 		StateMachine();
-		StateMachine(Actor* actor, HashMap<State*>* allStates);
+		StateMachine(Actor& actor, HashMap<State*>& allStates);
 		void initialState(State* initial);
 		void tick(float dTime);
 		void switchState(State* current, State* newState);
@@ -56,7 +56,6 @@ class StateMachine : public IStateCallback
 		DynamicArray<State*>* getCurrentStates();
 		virtual ~StateMachine()
 		{
-			delete _actor;
 		}
 		string to_string();
 
@@ -65,11 +64,11 @@ class StateMachine : public IStateCallback
 		{
 		}
 
-		StateMachine::StateMachine(Actor* actor, HashMap<State*>* allStates)
+		StateMachine::StateMachine(Actor& actor, HashMap<State*>& allStates)
 		{
-			_actor = actor;
+			_actor = &actor;
 			currentStates = new DynamicArray<State*>();
-			_allStates = allStates;
+			_allStates = &allStates;
 		}
 
 		void StateMachine::initialState(State* initial)
