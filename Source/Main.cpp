@@ -40,25 +40,25 @@ int main()
 	//Create the orcs
 	uniform_int_distribution<int> xDistribution (0, sceneManager.getSceneGraph().getX() - 1);
 	uniform_int_distribution<int> yDistribution (0, sceneManager.getSceneGraph().getY() - 1);
-	DynamicArray<OrcActor> orcActors;
+	DynamicArray<OrcActor*> orcActors;
 	for(int i = 0; i < orcCount; i++)
 	{
 		int randomX = xDistribution(generator);
 		int randomY = yDistribution(generator);
 		temp = new Vector3D(randomX, randomY, 0);
 
-		OrcActor newOrc;
+		OrcActor* newOrc = new OrcActor();
 		orcActors.add(newOrc);
 
 		AiController* newAi = new AiController(sceneManager, meleeCombat);
-		sceneManager.getSceneGraph().add(temp, orcActors.get(i));
+		sceneManager.getSceneGraph().add(temp, (orcActors.get(i)));
 
-		newAi->setup(orcActors.get(i));
+		newAi->setup(*orcActors.get(i));
 		aiControllers.add(newAi);
 	}
 
 	PlayerController controller(sceneManager, meleeCombat);
-	controller.setup(bob);
+	controller.setup(*bob);
 
 	bool playGame = true;
 	int choice;
