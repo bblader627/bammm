@@ -18,14 +18,14 @@ int main()
 {
 	printWelcome();
 	bool printMap = true;
-	SceneManager sceneManager;
-	MeleeCombat meleeCombat;
-	DynamicArray<AiController*> aiControllers;
+	SceneManager* sceneManager = new SceneManager();
+	MeleeCombat* meleeCombat = new MeleeCombat();
+	DynamicArray<AiController*>* aiControllers = new DynamicArray<AiController*>();
 
 	//Creation of Hero
 	DwarfActor* bob = new DwarfActor();
 	Vector3D* temp = new Vector3D(0,0,0);
-	sceneManager.getSceneGraph().add(temp, bob);
+	sceneManager->getSceneGraph()->add(temp, bob);
 
 	//Random number generator
 	random_device rd;
@@ -38,8 +38,8 @@ int main()
 	int orcCount = orcDistribution(generator);
 
 	//Create the orcs
-	uniform_int_distribution<int> xDistribution (0, sceneManager.getSceneGraph().getX() - 1);
-	uniform_int_distribution<int> yDistribution (0, sceneManager.getSceneGraph().getY() - 1);
+	uniform_int_distribution<int> xDistribution (0, sceneManager->getSceneGraph()->getX() - 1);
+	uniform_int_distribution<int> yDistribution (0, sceneManager->getSceneGraph()->getY() - 1);
 	for(int i = 0; i < orcCount; i++)
 	{
 		int randomX = xDistribution(generator);
@@ -48,13 +48,13 @@ int main()
 
 		OrcActor* newOrc = new OrcActor();
 		AiController* newAi = new AiController(sceneManager, meleeCombat);
-		sceneManager.getSceneGraph().add(temp, newOrc);
+		sceneManager->getSceneGraph()->add(temp, newOrc);
 		newAi->setup(newOrc);
-		aiControllers.add(newAi);
+		aiControllers->add(newAi);
 	}
 
-	PlayerController controller(sceneManager, meleeCombat);
-	controller.setup(bob);
+	PlayerController* controller = new PlayerController(sceneManager, meleeCombat);
+	controller->setup(bob);
 
 	bool playGame = true;
 	int choice;
@@ -75,10 +75,10 @@ int main()
 
 		if(printMap)
 		{
-			cout << sceneManager.getSceneGraph().to_string() << "\n";
+			cout << sceneManager->getSceneGraph()->to_string() << "\n";
 		}
 
-		controller.printOptions();
+		controller->printOptions();
 		cin >> choice;
 
 		switch (choice)
@@ -114,16 +114,18 @@ int main()
 		{
     		break;
 		}
-		controller.input(input, dTime);
-
-		for(int i = 0; i < (int)aiControllers.getSize(); i++)
-		{	
-			if(aiControllers.get(i)->update(dTime))
+		controller->input(input, dTime);
+		cout << "Before AI Controllers tick\n";
+		for(int i = 0; i < (int)aiControllers->getSize(); i++)
+		{
+			cout << aiControllers->getSize() << endl;
+			if(aiControllers->get(i)->update(dTime))
 			{
-				delete aiControllers.remove(i);
+				//delete aiControllers->remove(i);
 			}
 
 		}
+		cout << "After AI Controllers tick\n";
 	}
 	delete input;
 

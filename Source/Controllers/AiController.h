@@ -41,16 +41,16 @@ namespace bammm
 			RangedCombat* rangedCombat;
 			SceneManager* sceneManager;
         public:
-            AiController(SceneManager& scene, MeleeCombat& meleeC);
+            AiController(SceneManager* scene, MeleeCombat* meleeC);
             void setup(Actor* actor);
 			bool update(float dTime);
             ~AiController();
     };
 
-    AiController::AiController(SceneManager& scene, MeleeCombat& meleeC)
+    AiController::AiController(SceneManager* scene, MeleeCombat* meleeC)
     {
-		sceneManager = &scene;
-		meleeCombat = &meleeC;
+		sceneManager = scene;
+		meleeCombat = meleeC;
     }
 
     void AiController::setup(Actor* actor)
@@ -98,14 +98,16 @@ namespace bammm
     	//all currently running states
 		if(_actor->getHealth() <= 0)
 		{
-			sceneManager->getSceneGraph().remove(_actor->getLocation(), _actor);
+			sceneManager->getSceneGraph()->remove(_actor->getLocation(), _actor);
 			delete _actor;
 			return true;
 		}
 		else
 		{
 			Vector3D* newLoc = new Vector3D(0,0,0);
-			sceneManager->getSceneGraph().moveTowards(_actor, newLoc);
+			cout << "Before Graph\n";
+			sceneManager->getSceneGraph()->moveTowards(_actor, newLoc);
+			cout << "After Graph\n";
         	_stateMachine->tick(dTime);
 		}
 

@@ -165,8 +165,7 @@ namespace bammm
 	template<class T>
 	bool Grid3d<T>::remove(Vector3D *vect, T elem)
 	{
-		int pos = convertToPos(vect);
-		bool deletedVal = access(vect, 0)->get(pos)->removeElem(elem);
+		bool deletedVal = access(vect, 0)->get(0)->removeElem(elem);
 		return deletedVal;
 	}
 
@@ -236,6 +235,7 @@ namespace bammm
 	template <class T>
 	void Grid3d<T>::moveTowards(T ordered, Vector3D* target)
 	{
+		
 		Vector3D* orderedLocation = ordered->getLocation();
 		Vector3D* targetLocation = target;
 		//Vector3D* orderedLocation = ordered->getLocation();
