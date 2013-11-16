@@ -51,7 +51,6 @@ namespace bammm
 			DynamicArray<string>* getAllKeys();
 			DynamicArray<T>* getAllValues();
 			T getValue(string key);
-			T& getValue(string key);
 			void printBucket(int index);
 			void printTable();
 	};
@@ -284,33 +283,6 @@ namespace bammm
 		//return (T) NULL;
 	}
 	
-	/**
-	 * HashMap<T>::getValue(string key)
-	 * @brief Returns the reference that corresponds to the given key, or a NULL cast as T otherwise.
-	 * @param key The key to look up in the HashMap.
-	 * @return T&
-	 */
-	template<class T>
-	T& HashMap<T>::getValue(string key)
-	{
-		int bucket = hashString(key);
-		HashNode<T>* temporary = hashMap[bucket];
-
-		while (temporary != NULL)
-		{
-			if (key.compare(temporary->getKey()) == 0)
-			{
-				return temporary->getValue();
-			}
-
-			temporary = &(temporary->getNextNode());
-		}
-
-		T *ret = NULL;
-		return *ret;
-		//return (T) NULL;
-	}
-
 	/**
 	 * HashMap<T>::find(string key)
 	 * @brief Finds and returns the HashNode that corresponds to the given key.

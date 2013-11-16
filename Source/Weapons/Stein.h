@@ -20,7 +20,7 @@ namespace bammm
 
 		public:
 			Stein();
-			Stein(WeaponData* wd);
+			Stein(WeaponData& wd);
 			~Stein();
 			int attack();
 			bool canAttack();
@@ -35,15 +35,14 @@ namespace bammm
 		timer = 0;
 	}
 
-	Stein::Stein(WeaponData* wd)
+	Stein::Stein(WeaponData& wd)
 	{
-		weaponData = wd;
+		weaponData = &wd;
 		timer = 0;
 	}
 
 	Stein::~Stein()
 	{
-		delete weaponData;
 	}
 
 	int Stein::attack()

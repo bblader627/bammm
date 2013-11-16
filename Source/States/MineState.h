@@ -17,8 +17,8 @@ namespace bammm
 			int successChance;
 			int maxGold;
         public:
-            MineState(Actor* actor);
-            MineState(Actor* actor, IStateCallback& statemachine);
+            MineState(Actor& actor);
+            MineState(Actor& actor, IStateCallback& statemachine);
             void setup();
             void breakdown();
             void tick(float dTime);
@@ -26,14 +26,14 @@ namespace bammm
             string to_string();
     };
 
-	MineState::MineState(Actor* actor)
+	MineState::MineState(Actor& actor)
 	{
-		_actor = actor;
+		_actor = &actor;
 		maxGold = 15;
 	}
-	MineState::MineState(Actor* actor, IStateCallback& statemachine)
+	MineState::MineState(Actor& actor, IStateCallback& statemachine)
 	{
-		_actor = actor;
+		_actor = &actor;
 		maxGold = 15;
 		registerTransitionCallback(statemachine);
 	}

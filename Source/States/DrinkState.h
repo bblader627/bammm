@@ -17,13 +17,13 @@ namespace bammm
     class DrinkState : public State
     {
     	private:
-    		//IStateCallback* _statemachine;
+    		IStateCallback* _statemachine;
     		static const uint stoutSize = 5;
 			uint stoutLife;
 
         public:
-            DrinkState(Actor* actor);
-            DrinkState(Actor* actor, IStateCallback& statemachine);
+            DrinkState(Actor& actor);
+            DrinkState(Actor& actor, IStateCallback& statemachine);
             void setup();
             void breakdown();
             void tick(float dTime);
@@ -32,15 +32,15 @@ namespace bammm
 
     };
 
-	DrinkState::DrinkState(Actor* actor)
+	DrinkState::DrinkState(Actor& actor)
 	{
-		_actor = actor;
+		_actor = &actor;
 
 	}
 
-	DrinkState::DrinkState(Actor* actor, IStateCallback& statemachine)
+	DrinkState::DrinkState(Actor& actor, IStateCallback& statemachine)
 	{
-		_actor = actor;
+		_actor = &actor;
 		registerTransitionCallback(statemachine);
 	}
 

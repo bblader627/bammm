@@ -40,7 +40,7 @@ namespace bammm
             void input(DynamicArray<string>* command, float dTime);
             void input(string command, float dTime);
             PlayerController(SceneManager& scene, MeleeCombat& meleeC);
-            void setup(Actor* actor);
+            void setup(Actor& actor);
             ~PlayerController();
             void printOptions();
     };
@@ -51,41 +51,41 @@ namespace bammm
 		meleeCombat = &meleeC;
     }
 
-    void PlayerController::setup(Actor* actor)
+    void PlayerController::setup(Actor& actor)
     {
     	//Factory* actorFactory = new Factory();
     	//actorFactory->setup();
 
-        _actor = actor;
+        _actor = &actor;
         //_stateMachine.setup(_actor, _states);
 
 
 		//Create the states
         //DO NOT DELETE THE REFERENCES TO STATEMACHINE.  THE CODE WILL SEG FAULT IF YOU DO
-        DrinkState* drinkState = new DrinkState(_actor, _stateMachine);
-        MineState* mineState = new MineState(_actor, _stateMachine);
-        SingState* singState = new SingState(_actor, _stateMachine);
-        BrawlState* brawlState = new BrawlState(_actor, _stateMachine);
-        SleepState* sleepState = new SleepState(_actor, _stateMachine);
-        IdleState* idleState = new IdleState(_actor, _stateMachine);
-		CombatState* combatState = new CombatState(_actor, _stateMachine);
+        DrinkState drinkState(actor, _stateMachine);
+        MineState mineState(actor, _stateMachine);
+        SingState singState(actor, _stateMachine);
+        BrawlState brawlState(actor, _stateMachine);
+        SleepState sleepState(actor, _stateMachine);
+        IdleState idleState(actor, _stateMachine);
+		CombatState combatState(actor, _stateMachine);
 
 		//Put actor in idle state
 		_stateMachine.initialState(idleState);
 
-        _states.add(idleState->to_string(), idleState);
-        _states.add(mineState->to_string(), mineState);
-        _states.add(drinkState->to_string(), drinkState);
-        _states.add(singState->to_string(), singState);
-        _states.add(brawlState->to_string(), brawlState);
-        _states.add(sleepState->to_string(), sleepState);
-       	_states.add(combatState->to_string(), combatState);
+        _states.add(idleState.to_string(), idleState);
+        _states.add(mineState.to_string(), mineState);
+        _states.add(drinkState.to_string(), drinkState);
+        _states.add(singState.to_string(), singState);
+        _states.add(brawlState.to_string(), brawlState);
+        _states.add(sleepState.to_string(), sleepState);
+       	_states.add(combatState.to_string(), combatState);
     }
 
     void PlayerController::input(DynamicArray<string>* multiInput, float dTime)
     {
     	//all currently running states
-    	DynamicArray<State*>* currentStates = _stateMachine.getCurrentStates();
+    	DynamicArray<State> currentStates = _stateMachine.getCurrentStates();
 
     	//newStates will have 1 state
 		//DynamicArray<State*>* newStates = new DynamicArray<State*>();
@@ -95,19 +95,20 @@ namespace bammm
 			//Check to see if state is already running
 			//if so, break it down
 
-			State* newState = _states.getValue(multiInput->get(i));
+			//!!!!!!!Danger!!!!!!!
+			State newState = _states.getValue(multiInput->get(i));
 
 			/********************************************
 			 *This should be handled in the stateMachine
 			 *This logic should be in statemachine->add()
 			 * or switchState()
 			 *******************************************/
-			if (currentStates->contains(newState))
+			if (currentStates.contains(newState))
 			{
 				//switching newState with NULL calls breakdown on newState, the remove on currentStates
 				
 				//Do doTurn in MeleeCombat
-				if(newState->to_string() == "combat")
+				if(newState.to_string() == "combat")
 				{
 					if(!meleeCombat->getFightHappening())
 					{
@@ -128,12 +129,12 @@ namespace bammm
 			else
 			{
 				//Special case for combat state
-				if(newState->to_string() == "combat")
+				if(newState.to_string() == "combat")
 				{
 					Actor* closestEnemy = sceneManager->getSceneGraph().getEnemy(_actor->getLocation(), _actor);
 					if(closestEnemy)
 					{
-						meleeCombat->setup(_actor, closestEnemy);
+						meleeCombat->setup(*_actor, *closestEnemy);
 					}
 				}
 				_stateMachine.addState(newState);
@@ -155,7 +156,8 @@ namespace bammm
 
     void PlayerController::printOptions()
     {
-    	DynamicArray<State*>* currentStates = _stateMachine.getCurrentStates();
+		//!!!!!!!!!!!!!Danger!!!!!!!!!!!!
+    	DynamicArray<State> currentStates = _stateMachine.getCurrentStates();
     	/*
 
     	}
@@ -164,7 +166,7 @@ namespace bammm
     	cout << "Select an activity for your dwarf:" << endl;
 
 		//Mining gold options
-    	if (currentStates->contains(_states.getValue("mine")))
+    	if (currentStates.contains(_states.getValue("mine")))
 		{
 			cout << "1. Stop mining gold" << endl;
 		}
@@ -174,7 +176,7 @@ namespace bammm
 		}
 
     	//Drinking options
-    	if (currentStates->contains(_states.getValue("drink")))
+    	if (currentStates.contains(_states.getValue("drink")))
 		{
 			cout << "2. Stop drinking ale" << endl;
 		}
@@ -184,7 +186,7 @@ namespace bammm
 		}
 
     	//Singing options
-    	if (currentStates->contains(_states.getValue("sing")))
+    	if (currentStates.contains(_states.getValue("sing")))
     	{
     		cout << "3. Stop signing" << endl;
     	}
@@ -194,7 +196,7 @@ namespace bammm
     	}
 
     	//Fighting options
-    	if (currentStates->contains(_states.getValue("brawl")))
+    	if (currentStates.contains(_states.getValue("brawl")))
     	{
     		cout << "4. Stop fighting" << endl;
     	}
@@ -205,7 +207,7 @@ namespace bammm
 
 
     	//Sleeping options
-		if (currentStates->contains(_states.getValue("sleep")))
+		if (currentStates.contains(_states.getValue("sleep")))
 		{
 			cout << "5. Wake up" << endl;
 		}
@@ -216,7 +218,7 @@ namespace bammm
 
 		
 		//Combat options
-		if (currentStates->contains(_states.getValue("combat")))
+		if (currentStates.contains(_states.getValue("combat")))
 		{
 			cout << "6. Attack" << endl;
 		}
@@ -232,11 +234,6 @@ namespace bammm
 
     PlayerController::~PlayerController()
     {
-        DynamicArray<State*>* temp = _states.getAllValues();
-        for(int i = 0; i < (int)temp->getSize(); i++)
-        {
-            delete temp->get(i);
-        }
     }
 
 

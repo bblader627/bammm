@@ -20,14 +20,14 @@ namespace bammm
 
 		private:
 
-			WeaponData * weaponData;
+			WeaponData& weaponData;
 			float timer;
 			Time* time;
 
 		public:
 
 			Boomstick();
-			Boomstick(WeaponData *);
+			Boomstick(WeaponData&);
 			~Boomstick();
 			int attack();
 			bool canAttack();
@@ -42,16 +42,15 @@ namespace bammm
 		time = new Time();
 	}
 
-	Boomstick::Boomstick(WeaponData * wd)
+	Boomstick::Boomstick(WeaponData& wd)
 	{
-		weaponData = wd;
+		weaponData = &wd;
 		timer = 0.0;
 		time = new Time();
 	}
 
 	Boomstick::~Boomstick()
 	{
-		delete weaponData;
 		delete time;
 	}
 

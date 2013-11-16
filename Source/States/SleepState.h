@@ -18,8 +18,8 @@ namespace bammm
     class SleepState : public State
     {
         public:
-            SleepState(Actor* actor);
-            SleepState(Actor* actor, IStateCallback& statemachine);
+            SleepState(Actor& actor);
+            SleepState(Actor& actor, IStateCallback& statemachine);
             void setup();
             void breakdown();
             void tick(float dTime);
@@ -31,14 +31,14 @@ namespace bammm
             int timeSlept;
     };
 
-	SleepState::SleepState(Actor* actor)
+	SleepState::SleepState(Actor& actor)
 	{
-		_actor = actor;
+		_actor = &actor;
 	}
 
-	SleepState::SleepState(Actor* actor, IStateCallback& statemachine)
+	SleepState::SleepState(Actor& actor, IStateCallback& statemachine)
 	{
-		_actor = actor;
+		_actor = &actor;
 		registerTransitionCallback(statemachine);
 	}
 

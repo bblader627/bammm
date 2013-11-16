@@ -38,22 +38,22 @@ using namespace bammm;
 class StateMachine : public IStateCallback
 {
 	private:
-		DynamicArray<State*>* currentStates;
-		HashMap<State*>* _allStates;
+		DynamicArray<State> currentStates;
+		HashMap<State>* _allStates;
 		Actor* _actor;
 	public:
 		/*
 		 * Default Constructor
 		 */
 		StateMachine();
-		StateMachine(Actor& actor, HashMap<State*>& allStates);
-		void initialState(State* initial);
+		StateMachine(Actor& actor, HashMap<State>& allStates);
+		void initialState(State& initial);
 		void tick(float dTime);
-		void switchState(State* current, State* newState);
-		void switchState(State* current, string newStateString);
-		void addState(State* newState);
-		void removeState(State* oldState);
-		DynamicArray<State*>* getCurrentStates();
+		void switchState(State& current, State& newState);
+		void switchState(State& current, string newStateString);
+		void addState(State& newState);
+		void removeState(State& oldState);
+		DynamicArray<State>& getCurrentStates();
 		virtual ~StateMachine()
 		{
 		}
@@ -64,17 +64,16 @@ class StateMachine : public IStateCallback
 		{
 		}
 
-		StateMachine::StateMachine(Actor& actor, HashMap<State*>& allStates)
+		StateMachine::StateMachine(Actor& actor, HashMap<State>& allStates)
 		{
 			_actor = &actor;
-			currentStates = new DynamicArray<State*>();
 			_allStates = &allStates;
 		}
 
-		void StateMachine::initialState(State* initial)
+		void StateMachine::initialState(State& initial)
 		{
-			initial->setup();
-			currentStates->add(initial);
+			initial.setup();
+			currentStates.add(initial);
 		}
 
 		/*
@@ -88,10 +87,9 @@ class StateMachine : public IStateCallback
 		void StateMachine::tick(float dTime)
 		{
 
-			for(int i = 0; i < (int) currentStates->getSize(); i++)
+			for(int i = 0; i < (int) currentStates.getSize(); i++)
 			{
-				State* thisState = currentStates->get(i);
-				thisState->tick(0);
+				currentStates.get(i).tick(0);
 			}
 		}
 
@@ -103,25 +101,21 @@ class StateMachine : public IStateCallback
 		 *
 		 *PlayerController will be calling switchState
 		 */
-		void StateMachine::switchState(State* current, State* newState)
+		void StateMachine::switchState(State& current, State& newState)
 		{
 			removeState(current);
 			addState(newState);
 
 		}
 
-		void StateMachine::switchState(State* current, string newStateString)
+		void StateMachine::switchState(State& current, string newStateString)
 		{
 			if (newStateString=="null")
 			{
 				removeState(current);
 				return;
 			}
-			State* newState = _allStates->getValue(newStateString);
-			if (newState != NULL)
-			{
-				switchState(current, newState);
-			}
+			switchState(current, _allStates->getValue(newStateString));
 		}
 
 		/*
@@ -132,10 +126,10 @@ class StateMachine : public IStateCallback
 		 * Called from a Controller
 		 * Adds currently running states to array
 		 */
-		void StateMachine::addState(State* newState)
+		void StateMachine::addState(State& newState)
 		{
-			newState->setup();
-			currentStates->add(newState);
+			newState.setup();
+			currentStates.add(newState);
 		}
 
 		/*
@@ -143,10 +137,10 @@ class StateMachine : public IStateCallback
 		 * Pre-Condition- accepts pointer to state to be removed
 		 * Post-Condition- breaks down states and removies it from array
 		 */
-		void StateMachine::removeState(State* oldState)
+		void StateMachine::removeState(State& oldState)
 		{
-			oldState->breakdown();
-			currentStates->removeElem(oldState);
+			oldState.breakdown();
+			currentStates.removeElem(oldState);
 		}
 
 		/**
@@ -157,7 +151,7 @@ class StateMachine : public IStateCallback
 		 * Called from Controller
 		 * Returns currently running states
 		 */
-		DynamicArray<State*>* StateMachine::getCurrentStates()
+		DynamicArray<State>& StateMachine::getCurrentStates()
 		{
 			return currentStates;
 		}

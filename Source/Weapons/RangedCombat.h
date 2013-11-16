@@ -29,12 +29,12 @@ namespace bammm
 
 		public:
 			RangedCombat();
-			RangedCombat(Actor* a1, Actor* a2 /*,Grid3d<Actor> grid*/);
+			RangedCombat(Actor& a1, Actor& a2 /*,Grid3d<Actor> grid*/);
 			bool canFight();
 			void useTurn();
-			Actor* getWinner();
-			Actor* getLoser();
-			Actor* getOpponent();
+			Actor& getWinner();
+			Actor& getLoser();
+			Actor& getOpponent();
 			~RangedCombat();
 	};
 
@@ -51,10 +51,10 @@ namespace bammm
 	{
 	}
 
-	RangedCombat::RangedCombat(Actor* a1, Actor* a2/*, Grid3d<Actor> grid*/)
+	RangedCombat::RangedCombat(Actor& a1, Actor& a2/*, Grid3d<Actor> grid*/)
 	{
-		actor1 = a1;
-		actor2 = a2;
+		actor1 = &a1;
+		actor2 = &a2;
 		_winner = NULL;
 		_loser = NULL;
 		playerTurn = true;
@@ -176,14 +176,14 @@ namespace bammm
 
 	}
 
-	Actor* RangedCombat::getWinner()
+	Actor& RangedCombat::getWinner()
 	{
-		return _winner;
+		return *(_winner);
 	}
 
-	Actor* RangedCombat::getLoser()
+	Actor& RangedCombat::getLoser()
 	{
-		return _loser;
+		return *(_loser);
 	}
 
 	void RangedCombat::victory()

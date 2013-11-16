@@ -39,15 +39,15 @@ namespace bammm
 			IStateCallback* _statemachine;
         public:
 			State();
-			State(Actor* actor);
-			State(Actor* actor, IStateCallback& stateMachine);
+			State(Actor& actor);
+			State(Actor& actor, IStateCallback& stateMachine);
 			virtual void setup();
 			virtual void breakdown();
 			virtual void tick(float dTime);
 			virtual void registerTransitionCallback(IStateCallback& statemachine);
 			virtual void switchState(string nextState);
 			virtual string to_string();
-			virtual bool operator==(State* s);
+			virtual bool operator==(State& s);
 			virtual ~State();
 	};
 
@@ -55,14 +55,14 @@ namespace bammm
 	{
 	}
 
-	State::State(Actor* actor)
+	State::State(Actor& actor)
 	{
-		_actor = actor;
+		_actor = &actor;
 	}
 
-	State::State(Actor* actor, IStateCallback& stateMachine)
+	State::State(Actor& actor, IStateCallback& stateMachine)
 	{
-		_actor = actor;
+		_actor = &actor;
 		_statemachine = &stateMachine;
 	}
 
@@ -128,7 +128,7 @@ namespace bammm
 		return "State";
 	}
 
-	bool State::operator==(State* s)
+	bool State::operator==(State& s)
 	{
 		//bad - to_string overloader?
 		//if (_actor == s)

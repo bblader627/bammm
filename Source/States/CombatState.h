@@ -18,8 +18,8 @@ namespace bammm
     class CombatState : public State
     {
         public:
-            CombatState(Actor* actor);
-            CombatState(Actor* actor, IStateCallback& statemachine);
+            CombatState(Actor& actor);
+            CombatState(Actor& actor, IStateCallback& statemachine);
             void setup();
             void breakdown();
             void tick(float dTime);
@@ -28,14 +28,14 @@ namespace bammm
         private:
     };
 
-	CombatState::CombatState(Actor* actor)
+	CombatState::CombatState(Actor& actor)
 	{
-		_actor = actor;
+		_actor = &actor;
 	}
 
-	CombatState::CombatState(Actor* actor, IStateCallback& statemachine)
+	CombatState::CombatState(Actor& actor, IStateCallback& statemachine)
 	{
-		_actor = actor;
+		_actor = &actor;
 
 		registerTransitionCallback(statemachine);
 	}

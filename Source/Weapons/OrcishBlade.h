@@ -20,7 +20,7 @@ namespace bammm
 
 		public:
 			OrcishBlade();
-			OrcishBlade(WeaponData* wd);
+			OrcishBlade(WeaponData& wd);
 			~OrcishBlade();
 			int attack();
 			bool canAttack();
@@ -35,15 +35,14 @@ namespace bammm
 		timer = 0;
 	}
 
-	OrcishBlade::OrcishBlade(WeaponData* wd)
+	OrcishBlade::OrcishBlade(WeaponData& wd)
 	{
-		weaponData = wd;
+		weaponData = &wd;
 		timer = 0;
 	}
 
 	OrcishBlade::~OrcishBlade()
 	{
-		delete weaponData;
 	}
 
 	int OrcishBlade::attack()

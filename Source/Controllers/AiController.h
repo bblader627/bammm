@@ -56,33 +56,28 @@ namespace bammm
 
 		//Create the states
         //DO NOT DELETE THE REFERENCES TO STATEMACHINE.  THE CODE WILL SEG FAULT IF YOU DO
-        DrinkState* drinkState = new DrinkState(_actor, _stateMachine);
-        MineState* mineState = new MineState(_actor, _stateMachine);
-        SingState* singState = new SingState(_actor, _stateMachine);
-        BrawlState* brawlState = new BrawlState(_actor, _stateMachine);
-        SleepState* sleepState = new SleepState(_actor, _stateMachine);
-        IdleState* idleState = new IdleState(_actor, _stateMachine);
-		CombatState* combatState = new CombatState(_actor, _stateMachine);
+        DrinkState drinkState(actor, _stateMachine);
+        MineState mineState(actor, _stateMachine);
+        SingState singState(actor, _stateMachine);
+        BrawlState brawlState(actor, _stateMachine);
+        SleepState sleepState(actor, _stateMachine);
+        IdleState idleState(actor, _stateMachine);
+		CombatState combatState(actor, _stateMachine);
 
 		//Put actor in idle state
 		_stateMachine.initialState(idleState);
 
-        _states.add(idleState->to_string(), idleState);
-        _states.add(mineState->to_string(), mineState);
-        _states.add(drinkState->to_string(), drinkState);
-        _states.add(singState->to_string(), singState);
-        _states.add(brawlState->to_string(), brawlState);
-        _states.add(sleepState->to_string(), sleepState);
-       	_states.add(combatState->to_string(), combatState);
+        _states.add(idleState.to_string(), idleState);
+        _states.add(mineState.to_string(), mineState);
+        _states.add(drinkState.to_string(), drinkState);
+        _states.add(singState.to_string(), singState);
+        _states.add(brawlState.to_string(), brawlState);
+        _states.add(sleepState.to_string(), sleepState);
+       	_states.add(combatState.to_string(), combatState);
     }
 
     AiController::~AiController()
     {
-        DynamicArray<State*>* temp = _states.getAllValues();
-        for(int i = 0; i < (int)temp->getSize(); i++)
-        {
-            delete temp->get(i);
-        }
     }
 
 	bool AiController::update(float dTime)

@@ -20,12 +20,12 @@ namespace bammm
 			bool canFight();
 
 		public:
-			void setup(Actor* a1, Actor* a2);
+			void setup(Actor& a1, Actor& a2);
 			MeleeCombat();
 			void useTurn();
 			bool getFightHappening();
-			Actor* getWinner();
-			Actor* getLoser();
+			Actor& getWinner();
+			Actor& getLoser();
 			~MeleeCombat();
 	};
 
@@ -43,13 +43,10 @@ namespace bammm
 		fightHappening = false;
 	}
 
-	void MeleeCombat::setup(Actor* a1, Actor* a2)
+	void MeleeCombat::setup(Actor& a1, Actor& a2)
 	{
-		if(a1 == NULL || a2 == NULL)
-			return;
-
-		actor1 = a1;
-		actor2 = a2;
+		actor1 = &a1;
+		actor2 = &a2;
 		_winner = NULL;
 		_loser = NULL;
 		playerTurn = true;
@@ -132,14 +129,14 @@ namespace bammm
 		}
 	}
 
-	Actor* MeleeCombat::getWinner()
+	Actor& MeleeCombat::getWinner()
 	{
-		return _winner;
+		return *(_winner);
 	}
 
-	Actor* MeleeCombat::getLoser()
+	Actor& MeleeCombat::getLoser()
 	{
-		return _loser;
+		return *(_loser);
 	}
 
 	void MeleeCombat::victory()
