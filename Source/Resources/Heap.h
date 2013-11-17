@@ -6,11 +6,9 @@
  * 	Matt Konstantinou
  * 	Michael Abramo
  *	Matt Witkowski	
- *   Bradley Crusco
+ *  Bradley Crusco
  * Description:
  * Heap header file.
- *
- * Last Modified: Matt Witkowski
  *
  */
 
@@ -26,250 +24,246 @@ typedef unsigned int uint;
 
 namespace bammm
 {
-    template<class T>
-    class Heap
-    {
-        private:
-            void adjustParent(uint index);
-            void adjustChild(uint index);
-            bool _isMax;
-            const static uint initialSize = 10;
-            DynamicArray<T>* _heap;
-            void errorMsg(string msg);
-        
-        public:
-            Heap();
-            Heap(bool isMax);
-            void add(T element);
-            T remove();
-            uint getSize();
-            bool isEmpty();
-            string toString();
-            ~Heap();
-    };
-    
-    /**
-     * @brief Creates a max heap data structure. Only the first element can be removed,
-     * and it uses a DynamicArray as its base.
-     */
-    template <class T>
-    Heap<T>::Heap()
-    {
-       _heap = new DynamicArray<T>(initialSize); 
-       _isMax = true;
-    }
+	template<class T>
+	class Heap
+	{
+		private:
+			bool _isMax;
+			DynamicArray<T>* _heap;
+			const static uint initialSize = 10;
 
-    /**
-     * @brief Creates either a max heap or min heap datastructure. Only the first
-     * element can removed, and it uses a DynamicArray as its base.
-     * @params isMax Is a max heap.
-     */
-    template <class T>
-    Heap<T>::Heap(bool isMax)
-    {
-       _heap = new DynamicArray<T>(initialSize); 
-       _isMax = isMax;
-    }
+			/**
+			 adjustParent
+			 @Pre-Condition- Takes uint index
+			 @Post-Condition- Parent nodes of the index will have been adjusted to follow the heap's rules
+			 */
+			void adjustParent(uint index);
 
-    /**
-     * @brief A helper function for the add method. It adjusts the parent nodes
-     * so they obey the heap's rules.
-     * @params index The element to have its parents adjusted.
-     */
-    template <class T>
-    void Heap<T>::adjustParent(uint index)
-    {
-        if(index == 0)
-        {
-            return;
-        }
+			/**
+			 adjustParent
+			 @Pre-Condition- Takes uint index
+			 @Post-Condition- Child nodes of the index will have been adjusted to follow the heap's rules
+			 */
+			void adjustChild(uint index);
 
-        int parent = (index-1)/2;
-    
-        if(_isMax)
-        {
-            //Parent < Child
-            if(_heap->get(parent) < _heap->get(index))
-            {
-                //Swap them
-                T temp = _heap->get(parent);
-                _heap->set(parent, _heap->get(index));
-                _heap->set(index, temp);
-            
-                //Do this again with parent
-                adjustParent(parent);
-            }
-        }
-        else
-        {
-            //Parent > Child
-            if(_heap->get(parent) > _heap->get(index))
-            {
-                //Swap them
-                T temp = _heap->get(parent);
-                _heap->set(parent, _heap->get(index));
-                _heap->set(index, temp);
-            
-                //Do this again with parent
-                adjustParent(parent);
-            }
-        }
-    }
+			/**
+			 errorMessage
+			 @Pre-Condition- Takes a string message
+			 @Post-Condition- Prints the message as an error
+			 */
+			void errorMessage(string message);
 
-    /**
-     * @brief Adds an element to the heap.
-     * @params element The element to be added.
-     */
-    template <class T>
-    void Heap<T>::add(T element)
-    {
-        _heap->add(element);
-        adjustParent(_heap->getSize() - 1); 
-    }
+		public:
+			Heap();
+			Heap(bool isMax);
+			~Heap();
 
-    /**
-     * @brief Removes the first element from the heap.
-     * @returns Returns the first element from the heap.
-     * @throws Asserts an error when removing from empty heap.
-     */
-    template <class T>
-    T Heap<T>::remove()
-    {
-        if(getSize() <= 0)
-        {
-            errorMsg("Index out of bounds.");
-            assert(0);
-        }
+			/**
+			 add
+			 @Pre-Condition- Takes an element
+			 @Post-Condition- Adds the given element to the heap
+			 */
+			void add(T element);
 
-        T removed = _heap->get(0);
-        _heap->set(0, _heap->get(_heap->getSize() - 1));
-        _heap->remove(_heap->getSize() - 1);
-        adjustChild(0);
-        return removed;
-    }
+			/**
+			 remove
+			 @Pre-Condition- No input
+			 @Post-Condition- Removes the first element on the heap and returns it
+			 */
+			T remove();
 
-    /**
-     * @brief A helper function for remove. It adjusts all the children so
-     * they follow the heap's rules.
-     * @params index The element to have its children adjusted.
-     */
-    template <class T>
-    void Heap<T>::adjustChild(uint index)
-    {
-        uint leftChild = (2 * index) + 1;
-        uint rightChild = (2 * index) + 2;
-        uint chosenChild;
-        uint size = _heap->getSize();
+			/**
+			 getSize
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the size of the heap
+			 */
+			uint getSize();
 
-        if(leftChild >= size)
-        {
-            return;
-        }
+			/**
+			 isEmpty
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns true if the heap is empty, false otherwise
+			 */
+			bool isEmpty();
 
-        if(_isMax)
-        {
-            //Left is auto biggest
-            if(rightChild >= size)
-            {
-                chosenChild = leftChild;
-            }
-            else if(rightChild < size)
-            {
-                if(_heap->get(leftChild) > _heap->get(rightChild))
-                {
-                    chosenChild = leftChild;
-                }
-                else
-                {
-                    chosenChild = rightChild;
-                }
-            }
-        }
-        else
-        {
-            //Left is auto smallest
-            if(rightChild >= size)
-            {
-                chosenChild = leftChild;
-            }
-            else if(rightChild < size)
-            {
-                if(_heap->get(leftChild) < _heap->get(rightChild))
-                {
-                    chosenChild = leftChild;
-                }
-                else
-                {
-                    chosenChild = rightChild;
-                }
-            }
-        }
-        T temp = _heap->get(chosenChild);
-        _heap->set(chosenChild, _heap->get(index));
-        _heap->set(index, temp);
-        adjustChild(chosenChild);
-    }
+			/**
+			 toString
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a string representation of the heap
+			 */
+			string toString();
+	};
 
-    /**
-     * @brief Creates a string of the Heap.
-     * @returns Returns a string that reprsents the Heap.
-     */
-    template <class T>
-    string Heap<T>::toString()
-    {
-        return _heap->toString();
-    }
+	template<class T>
+	Heap<T>::Heap()
+	{
+		_heap = new DynamicArray<T>(initialSize);
+		_isMax = true;
+	}
 
-    /**
-     * @brief Checks if the heap is empty.
-     * @returns Returns a boolean reprsenting if the heap is empty.
-     */
-    template <class T>
-    bool Heap<T>::isEmpty()
-    {
-        if(getSize() > 0)
-        {
-            return false;
-        }
+	template<class T>
+	Heap<T>::Heap(bool isMax)
+	{
+		_heap = new DynamicArray<T>(initialSize);
+		_isMax = isMax;
+	}
 
-        return true;
-    }
+	template<class T>
+	Heap<T>::~Heap()
+	{
+		if (_heap == NULL)
+		{
+			errorMessage("Cannot delete null heap.");
+			assert(0);
+		}
 
-    /**
-     * @brief Gets the size of the heap.
-     * @returns Returns the size of the heap.
-     */
-    template <class T>
-    uint Heap<T>::getSize()
-    {
-        return _heap->getSize();
-    }
+		delete _heap;
+	}
 
-    /**
-     * @brief Deletes the stack if it hasn't already been deleted.
-     * @throws Asserts an error if the stack has already been deleted.
-     */
-    template <class T>
-    Heap<T>::~Heap()
-    {
-        if(_heap == NULL)
-        {
-            errorMsg("Cannot delete null heap.");
-            assert(0);
-        }
-        
-        delete _heap;
-    }
+	template<class T>
+	void Heap<T>::add(T element)
+	{
+		_heap->add(element);
+		adjustParent(_heap->getSize() - 1);
+	}
 
-    /**
-     * @brief Outputs an error message to the console.
-     * @param msg The error message.
-     */
-    template <class T>
-    void Heap<T>::errorMsg(string msg)
-    {
-        cout << "An error has occurred. " << msg << "\n";
-    }
+	template<class T>
+	T Heap<T>::remove()
+	{
+		if (getSize() <= 0)
+		{
+			errorMessage("Index out of bounds.");
+			assert(0);
+		}
+
+		T removed = _heap->get(0);
+		_heap->set(0, _heap->get(_heap->getSize() - 1));
+		_heap->remove(_heap->getSize() - 1);
+		adjustChild(0);
+		return removed;
+	}
+
+	template<class T>
+	uint Heap<T>::getSize()
+	{
+		return _heap->getSize();
+	}
+
+	template<class T>
+	bool Heap<T>::isEmpty()
+	{
+		if (getSize() > 0)
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	template<class T>
+	string Heap<T>::toString()
+	{
+		return _heap->toString();
+	}
+
+	template<class T>
+	void Heap<T>::adjustParent(uint index)
+	{
+		if (index == 0)
+		{
+			return;
+		}
+
+		int parent = (index - 1) / 2;
+
+		if (_isMax)
+		{
+			if (_heap->get(parent) < _heap->get(index))
+			{
+				//Swap them
+				T temp = _heap->get(parent);
+				_heap->set(parent, _heap->get(index));
+				_heap->set(index, temp);
+
+				adjustParent(parent);
+			}
+		}
+		else
+		{
+			if (_heap->get(parent) > _heap->get(index))
+			{
+				//Swap them
+				T temp = _heap->get(parent);
+				_heap->set(parent, _heap->get(index));
+				_heap->set(index, temp);
+
+				adjustParent(parent);
+			}
+		}
+	}
+
+	template<class T>
+	void Heap<T>::adjustChild(uint index)
+	{
+		uint leftChild = (2 * index) + 1;
+		uint rightChild = (2 * index) + 2;
+		uint chosenChild;
+		uint size = _heap->getSize();
+
+		if (leftChild >= size)
+		{
+			return;
+		}
+
+		if (_isMax)
+		{
+			//Left is automatically the biggest
+			if (rightChild >= size)
+			{
+				chosenChild = leftChild;
+			}
+			else if (rightChild < size)
+			{
+				if (_heap->get(leftChild) > _heap->get(rightChild))
+				{
+					chosenChild = leftChild;
+				}
+				else
+				{
+					chosenChild = rightChild;
+				}
+			}
+		}
+		else
+		{
+			//Left is automatically the smallest
+			if (rightChild >= size)
+			{
+				chosenChild = leftChild;
+			}
+			else if (rightChild < size)
+			{
+				if (_heap->get(leftChild) < _heap->get(rightChild))
+				{
+					chosenChild = leftChild;
+				}
+				else
+				{
+					chosenChild = rightChild;
+				}
+			}
+		}
+		T temp = _heap->get(chosenChild);
+		_heap->set(chosenChild, _heap->get(index));
+		_heap->set(index, temp);
+		adjustChild(chosenChild);
+	}
+
+	template<class T>
+	void Heap<T>::errorMessage(string message)
+	{
+		cout << "An error has occurred. " << message << "\n";
+	}
 }
 
 #endif

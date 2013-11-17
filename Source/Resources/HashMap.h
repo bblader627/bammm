@@ -6,21 +6,19 @@
  * 	Matt Konstantinou
  * 	Michael Abramo
  *	Matt Witkowski	
- *   Bradley Crusco
+ *  Bradley Crusco
  * Description:
- * Hashmap header file.
- *
- * Last Modified: Bradely Crusco
+ * HashMap header file.
  *
  */
 
 #ifndef HASHMAP_H_
 #define HASHMAP_H_
 
-#include "HashNode.h"
-#include "DynamicArray.h"
 #include <string>
 #include <cmath>
+#include "HashNode.h"
+#include "DynamicArray.h"
 
 #define DEFAULT_MAPSIZE 1000
 
@@ -33,33 +31,99 @@ namespace bammm
 	class HashMap
 	{
 		private:
-			int _mapSize, _numberOfNodes;
+			int _mapSize;
+			int _numberOfNodes;
 			HashNode<T>** hashMap;
+
+			/**
+			 find
+			 @Pre-Condition- Takes a string key
+			 @Post-Condition- Finds and returns the HashNode with the given key
+			 */
 			HashNode<T>* find(string key);
+
+			/**
+			 hashString
+			 @Pre-Condition- Takes a string key
+			 @Post-Condition- Calculates a hash string based on the given key and returns it as a long
+			 */
 			long hashString(string key);
 
 		public:
 			HashMap(int size = DEFAULT_MAPSIZE);
 			virtual ~HashMap();
+
+			/**
+			 getNumerOfNodes
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the number of nodes in the map
+			 */
 			int getNumerOfNodes();
+
+			/**
+			 getSize
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the size of the map
+			 */
 			int getSize();
+
+			/**
+			 contains
+			 @Pre-Condition- Takes a string key
+			 @Post-Condition- Returns true if the key is found in the map
+			 */
 			bool contains(string key);
+
+			/**
+			 add
+			 @Pre-Condition- Takes a string key and a T value
+			 @Post-Condition- Adds the key value pair as a node to the map and returns true on success
+			 */
 			bool add(string key, T value);
+
+			/**
+			 remove
+			 @Pre-Condition- Takes a string key
+			 @Post-Condition- Remove the node that corresponds to the given key and returns true on success
+			 */
 			bool remove(string key);
+
+			/**
+			 removeAll
+			 @Pre-Condition- No input
+			 @Post-Condition- Removes all the nodes in the map
+			 */
 			void removeAll();
-			HashNode<T>* getNode(string);
+
+			/**
+			 getAllKeys
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a DynamicArray containing all the keys in the map
+			 */
 			DynamicArray<string>* getAllKeys();
+
+			/**
+			 getAllValues
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a DynamicArray containing all the values in the map
+			 */
 			DynamicArray<T>* getAllValues();
+
+			/**
+			 getNode
+			 @Pre-Condition- Takes a string key
+			 @Post-Condition- Finds and returns the node corresponding to the given key
+			 */
+			HashNode<T>* getNode(string key);
+
+			/**
+			 getValue
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a DynamicArray containing all the values in the map
+			 */
 			T getValue(string key);
-			void printBucket(int index);
-			void printTable();
 	};
 
-	/**
-	 * HashMap<T>::HashMap(int size)
-	 * @brief Constructor for HashMap, specified by the argument size.
-	 * @param size An int used to set the size of the HashMap.
-	 */
 	template<class T>
 	HashMap<T>::HashMap(int size)
 	{
@@ -72,10 +136,6 @@ namespace bammm
 		}
 	}
 
-	/**
-	 * HashMap<T>::~HashMap()
-	 * @brief Destructor for HashMap, removes all nodes in the map, then deletes the hashMap.
-	 */
 	template<class T>
 	HashMap<T>::~HashMap()
 	{
@@ -83,33 +143,18 @@ namespace bammm
 		delete[] hashMap;
 	}
 
-	/**
-	 * HashMap<T>::getNumerOfNodes()
-	 * @brief Returns the number of nodes in the HashMap.
-	 * @return int
-	 */
 	template<class T>
 	int HashMap<T>::getNumerOfNodes()
 	{
 		return _numberOfNodes;
 	}
 
-	/**
-	 * @brief Returns the size of the HashMap
-	 * @return int
-	 */
 	template<class T>
 	int HashMap<T>::getSize()
 	{
 		return _mapSize;
 	}
 
-	/**
-	 * HashMap<T>::contains(string key)
-	 * @brief Returns true if the given key argument exists in the HashMap, false otherwise.
-	 * @param key The key to check if it is present in the HashMap.
-	 * @return bool
-	 */
 	template<class T>
 	bool HashMap<T>::contains(string key)
 	{
@@ -123,13 +168,6 @@ namespace bammm
 		}
 	}
 
-	/**
-	 * HashMap<T>::add(string key, T value)
-	 * @brief Takes a key and a value and adds them to the HashMap. Returns true on success, false otherwise.
-	 * @param key The key to assign to pair with the value.
-	 * @param value The value being stored in the HashMap.
-	 * @return bool
-	 */
 	template<class T>
 	bool HashMap<T>::add(string key, T value)
 	{
@@ -147,12 +185,6 @@ namespace bammm
 		return true;
 	}
 
-	/**
-	 * HashMap<T>::remove(string key)
-	 * @brief Removes the HashNode from the HashMap that corresponds to the given key. Returns true on success, false otherwise.
-	 * @param key The key for the HashNode to be removed.
-	 * @return bool
-	 */
 	template<class T>
 	bool HashMap<T>::remove(string key)
 	{
@@ -190,10 +222,6 @@ namespace bammm
 		return false;
 	}
 
-	/**
-	 * HashMap<T>::removeAll()
-	 * @brief Removes all HashNodes from the HeapMap.
-	 */
 	template<class T>
 	void HashMap<T>::removeAll()
 	{
@@ -208,11 +236,6 @@ namespace bammm
 		}
 	}
 
-	/**
-	 * HashMap<T>::getAllKeys()
-	 * @brief Returns the set of all keys in the form of a DynamicArray.
-	 * @return DynamicArray<string>&
-	 */
 	template<class T>
 	DynamicArray<string>* HashMap<T>::getAllKeys()
 	{
@@ -232,11 +255,6 @@ namespace bammm
 		return keys;
 	}
 
-	/**
-	 * HashMap<T>::getAllValues()
-	 * @brief Returns the set of all values in the HashMap in the form of a DynamicArray.
-	 * @return DynamicArray<T>
-	 */
 	template<class T>
 	DynamicArray<T>* HashMap<T>::getAllValues()
 	{
@@ -256,12 +274,12 @@ namespace bammm
 		return values;
 	}
 
-	/**
-	 * HashMap<T>::getValue(string key)
-	 * @brief Returns the value that corresponds to the given key, or a NULL cast as T otherwise.
-	 * @param key The key to look up in the HashMap.
-	 * @return T
-	 */
+	template<class T>
+	HashNode<T>* HashMap<T>::getNode(string key)
+	{
+		return find(key);
+	}
+
 	template<class T>
 	T HashMap<T>::getValue(string key)
 	{
@@ -280,15 +298,8 @@ namespace bammm
 
 		T *ret = NULL;
 		return *ret;
-		//return (T) NULL;
 	}
 
-	/**
-	 * HashMap<T>::find(string key)
-	 * @brief Finds and returns the HashNode that corresponds to the given key.
-	 * @param key The key to lookup in the HashMap.
-	 * @return HashNode<T>*
-	 */
 	template<class T>
 	HashNode<T>* HashMap<T>::find(string key)
 	{
@@ -308,12 +319,6 @@ namespace bammm
 		return NULL;
 	}
 
-	/**
-	 * HashMap<T>::hashString(string key)
-	 * @brief The hash function for a given string. Determines where into the HashMap to insert our key value pair.
-	 * @param key The key to hash.
-	 * @return long
-	 */
 	template<class T>
 	long HashMap<T>::hashString(string key)
 	{
@@ -326,16 +331,6 @@ namespace bammm
 
 		return abs(hash % _mapSize);
 	}
-
-	/*
-	 * @brief: Return the entire node that has the corresponding key
-	 */
-	template<class T>
-	HashNode<T>* HashMap<T>::getNode(string key)
-	{
-		return find(key);
-	}
-
 }
 
-#endif /* HASHMAP_H_ */
+#endif
