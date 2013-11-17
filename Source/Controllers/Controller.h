@@ -6,18 +6,16 @@
  * 	Matt Konstantinou
  * 	Michael Abramo
  *	Matt Witkowski	
- *   Bradley Crusco
+ *  Bradley Crusco
  * Description:
  * Controller header file.
  *
- * Last Modified: Matt Witkowski
- *
  */
-
 
 #ifndef CONTROLLER_H_
 #define CONTROLLER_H_
 
+#include <string>
 #include "../States/State.h"
 #include "../States/IdleState.h"
 #include "../States/DrinkState.h"
@@ -28,36 +26,42 @@
 #include "../States/CombatState.h"
 #include "../Resources/HashMap.h"
 #include "../Actors/Actor.h"
-#include <string>
 #include "../States/StateMachine.h"
 
 using namespace std;
 
 namespace bammm
 {
-    class Controller
-    {
-        protected:
-            HashMap<State*>* _states;
-            Actor* _actor;
-            StateMachine* _stateMachine;
+	class Controller
+	{
+		protected:
+			HashMap<State*>* _states;
+			Actor* _actor;
+			StateMachine* _stateMachine;
 
-        public:
-            Controller();
-            void setup(Actor* actor);
-            virtual ~Controller();
-    };
+		public:
+			Controller();
+			virtual ~Controller();
 
-    Controller::Controller()
-    {
-    }
+			/**
+			 setup
+			 @Pre-Condition- Takes an actor as input
+			 @Post-Condition- Actor passed as argument is setup for use
+			 */
+			void setup(Actor* actor);
+	};
 
-    void Controller::setup(Actor* actor)
-    {
-    }
+	Controller::Controller()
+	{
+	}
 
-    Controller::~Controller()
-    {
-    }
+	Controller::~Controller()
+	{
+	}
+
+	void Controller::setup(Actor* actor)
+	{
+	}
 }
+
 #endif
