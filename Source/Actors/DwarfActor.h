@@ -19,8 +19,6 @@
 #include "../Weapons/Stein.h"
 #include "Actor.h"
 
-using namespace bammm;
-
 namespace bammm
 {
 	class DwarfActor: public Actor
