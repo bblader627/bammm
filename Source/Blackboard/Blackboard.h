@@ -88,4 +88,5 @@ namespace bammm
 			//TODO: Add functions that replace records?
 	};
 }
+
 #endif
