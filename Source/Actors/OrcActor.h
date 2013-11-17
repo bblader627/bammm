@@ -5,36 +5,34 @@
  * 	Alvaro Home
  * 	Matt Konstantinou
  * 	Michael Abramo
- *
+ *	Matt Witkowski
+ *  Bradley Crusco
  * Description:
- * Actor header file.
- *
- * Last Modified: Michael Abramo
+ * OrcActor header file.
  *
  */
+#ifndef ORCACTOR_H_
+#define ORCACTOR_H_
 
+#include <cmath>
 #include "../SceneManager/Vector3D.h"
 #include "Actor.h"
 #include "../Weapons/OrcishBlade.h"
-#include <cmath>
 
 namespace bammm
 {
-
 	class OrcActor: public Actor
 	{
-
 		private:
-
-			int goldCount;
+			//TODO: Why do we need additional private members specifying goldCount when actor already has _gold?
+			int _goldCount;
 
 		public:
-
 			OrcActor()
 			{
 				_name = "Orc";
 				_alliance = enemy;
-				goldCount = rand() % 6;
+				_goldCount = rand() % 6;
 				setMeleeWeapon(new OrcishBlade());
 			}
 
@@ -42,15 +40,14 @@ namespace bammm
 			{
 				_name = "Orc";
 				_alliance = enemy;
-				goldCount = gold;
+				_goldCount = gold;
 				setMeleeWeapon(new OrcishBlade());
 			}
 
 			inline int getGold()
 			{
-				return goldCount;
+				return _goldCount;
 			}
-
 	};
-
 }
+#endif
