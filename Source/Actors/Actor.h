@@ -10,8 +10,6 @@
  * Description:
  * Actor header file.
  *
- * Last Modified: Alvaro Home
- *
  */
 #ifndef ACTOR_H_
 #define ACTOR_H_
@@ -33,8 +31,8 @@ namespace bammm
 		protected:
 			float _rotation;
 			string _name;
-			Vector3D *velocity;
-			Vector3D *location;
+			Vector3D *_velocity;
+			Vector3D *_location;
 
 			int _healthBar;
 			int _staminaBar;
@@ -44,14 +42,12 @@ namespace bammm
 			int _attack;
 			int _defense;
 
-			int gold;
-			float BAC;
+			int _gold;
+			float _BAC;
 
 			enum AllianceType
 			{
-				enemy = -1,
-				neutral = 0,
-				ally = 1
+				enemy = -1, neutral = 0, ally = 1
 			};
 			AllianceType _alliance;
 
@@ -59,58 +55,61 @@ namespace bammm
 			RangedWeapon *_rangedWeapon;
 
 		public:
-			//Constructors
 			Actor();
 			Actor(string myName);
-			Actor(string myName, int health, int stamina, int atck, int def);
+			Actor(string myName, int health, int stamina, int attack, int defense);
 			Actor(ActorInfo* info);
 
-			//Functions
-
-			/*
-			 setWeapon
+			/**
+			 setMeleeWeapon
 			 @Pre-Condition- takes no arguments
 			 @Post-Condition- sets the weapon to w
 			 */
 			void setMeleeWeapon(MeleeWeapon* weapon);
 
+			/**
+			 setRangedWeapon
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- sets the weapon to w
+			 */
 			void setRangedWeapon(RangedWeapon* weapon);
 
-			/*
+			/**
 			 setRotation
 			 @Pre-Condition- takes no arguments
 			 @Post-Condition- returns rotation
 			 */
 			void setRotation(float myRotation);
-			/*
+
+			/**
 			 setName
 			 @Pre-Condition- takes no arguments
 			 @Post-Condition- returns name
 			 */
 			void setName(string myName);
 
-			/*
+			/**
 			 setLocation
 			 @Pre-Condition- takes the location to set
 			 @Post-Condition- returns nothing
 			 */
-			void setLocation(Vector3D* loc);
+			void setLocation(Vector3D* location);
 
-			/*
+			/**
 			 increaseHealth
 			 @Pre-Condition- Takes an float amount
 			 @Post-Condition- Increases health by said amount
 			 */
 			void increaseHealth(int amount);
 
-			/*
+			/**
 			 increaseStamina
 			 @Pre-Condition- Takes an float amount
 			 @Post-Condition- Increases stamina by said amount
 			 */
 			void increaseStamina(int amount);
 
-			/*
+			/**
 			 reduceHealth
 			 @Pre-Condition- Takes an float amount
 			 @Post-Condition- Decreases health by said amount
@@ -124,7 +123,7 @@ namespace bammm
 			 */
 			void reduceStamina(int amount);
 
-			/*
+			/**
 			 isFullyRested
 			 @Pre-Condition- no parameters
 			 @Post-Condition- returns true if healthBar and staminaBar are equal to 								MAX_HEALTH and MAX_STAMINA
@@ -132,7 +131,7 @@ namespace bammm
 			 */
 			bool isFullyRested();
 
-			/*
+			/**
 			 increaseBAC
 			 @Pre-Condition- no parameters;
 			 @Post-Condition- increments BAC by .05;
@@ -146,14 +145,14 @@ namespace bammm
 			 */
 			void resetBAC();
 
-			/*
+			/**
 			 addGold
 			 @Pre-Condition- takes amount of gold to add
 			 @Post-Condition- returns total amount of gold
 			 */
 			int addGold(int amount);
 
-			/*
+			/**
 			 resetBAC
 			 @Pre-Condition- takes amount of gold to spend;
 			 @Post-Condition- decrements gold and returns true if there is enough, returns false if not
@@ -162,7 +161,7 @@ namespace bammm
 
 			inline int getGold()
 			{
-				return gold;
+				return _gold;
 			}
 
 			inline MeleeWeapon* getMeleeWeapon()
@@ -177,7 +176,7 @@ namespace bammm
 
 			inline float getBAC()
 			{
-				return BAC;
+				return _BAC;
 			}
 
 			inline float getRotation()
@@ -192,12 +191,12 @@ namespace bammm
 
 			inline string getVelocity()
 			{
-				return velocity->toString();
+				return _velocity->toString();
 			}
 
 			inline Vector3D* getLocation()
 			{
-				return location;
+				return _location;
 			}
 
 			inline int getHealth()
@@ -220,22 +219,24 @@ namespace bammm
 				return _defense;
 			}
 
-			inline int getX(){
-				return location->x();
+			inline int getX()
+			{
+				return _location->x();
 			}
 
 			inline int getY()
 			{
-				return location->y();
+				return _location->y();
 			}
 
 			inline int getZ()
 			{
-				return location->z();
+				return _location->z();
 			}
 
-			inline Vector3D * getVectorLocation(){
-				return location;
+			inline Vector3D * getVectorLocation()
+			{
+				return _location;
 			}
 
 			inline int getAlliance()
@@ -255,8 +256,8 @@ namespace bammm
 		_name = "DefaultName";
 		_rotation = 0;
 
-		velocity = new Vector3D();
-		location = new Vector3D();
+		_velocity = new Vector3D();
+		_location = new Vector3D();
 
 		MAX_HEALTH = 100;
 		MAX_STAMINA = 50;
@@ -272,8 +273,8 @@ namespace bammm
 	{
 		_name = myName;
 		_rotation = 0;
-		velocity = new Vector3D();
-		location = new Vector3D();
+		_velocity = new Vector3D();
+		_location = new Vector3D();
 
 		MAX_HEALTH = 100;
 		MAX_STAMINA = 50;
@@ -285,12 +286,12 @@ namespace bammm
 		_defense = 2;
 	}
 
-	Actor::Actor(string myName, int health, int stamina, int atck, int def)
+	Actor::Actor(string myName, int health, int stamina, int attack, int defense)
 	{
 		_name = myName;
 		_rotation = 0;
-		velocity = new Vector3D();
-		location = new Vector3D();
+		_velocity = new Vector3D();
+		_location = new Vector3D();
 
 		MAX_HEALTH = health;
 		MAX_STAMINA = stamina;
@@ -298,16 +299,16 @@ namespace bammm
 		_staminaBar = MAX_STAMINA;
 		_healthBar = health;
 		_staminaBar = stamina;
-		_attack = atck;
-		_defense = def;
+		_attack = attack;
+		_defense = defense;
 	}
 
 	Actor::Actor(ActorInfo* info)
 	{
 		_name = info->getName();
 		_rotation = 0;
-		velocity = new Vector3D();
-		location = new Vector3D();
+		_velocity = new Vector3D();
+		_location = new Vector3D();
 
 		MAX_HEALTH = info->getHealth();
 		MAX_STAMINA = info->getStamina();
@@ -339,9 +340,9 @@ namespace bammm
 		_name = myName;
 	}
 
-	void Actor::setLocation(Vector3D* loc)
+	void Actor::setLocation(Vector3D* location)
 	{
-		location = loc;
+		_location = location;
 	}
 
 	void Actor::increaseHealth(int amount)
@@ -409,25 +410,25 @@ namespace bammm
 
 	void Actor::incrementBAC()
 	{
-		BAC += .01;
+		_BAC += .01;
 		return;
 	}
 
 	int Actor::addGold(int amount)
 	{
-		gold += amount;
-		return gold;
+		_gold += amount;
+		return _gold;
 	}
 
 	bool Actor::spendGold(int amount)
 	{
-		if (gold < amount)
+		if (_gold < amount)
 		{
 			return false;
 		}
 		else
 		{
-			gold -= amount;
+			_gold -= amount;
 			return true;
 		}
 	}

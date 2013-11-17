@@ -32,13 +32,13 @@ namespace bammm
 	BlockActor::BlockActor()
 	{
 		_name = "Building";
-		location = new Vector3D();
+		_location = new Vector3D();
 	}
 
 	BlockActor::BlockActor(string name, Vector3D* loc, int health)
 	{
 		_name = name;
-		location = loc;
+		_location = loc;
 		MAX_HEALTH = health;
 	}
 }
