@@ -6,11 +6,9 @@
  * 	Matt Konstantinou
  * 	Michael Abramo
  *	Matt Witkowski
- *   Bradley Crusco
+ *  Bradley Crusco
  * Description:
- * Actor header file.
- *
- * Last Modified: Alvaro Home
+ * ActorInfo header file.
  *
  */
 #ifndef ACTORINFO_H_
@@ -18,42 +16,102 @@
 
 #include <iostream>
 
-
 using namespace std;
 
 namespace bammm
 {
 	class ActorInfo
 	{
-		//string myName, int health, int stamina, int atck, int def
 		private:
 			string _name;
 			int _health;
 			int _stamina;
 			int _attack;
 			int _defense;
+
 		public:
-			ActorInfo(string myName, int health, int stamina, int atck, int def);
+			ActorInfo(string name, int health, int stamina, int attack,
+					int defense);
+
+			/**
+			 getName
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns name
+			 */
 			string getName();
+
+			/**
+			 getHealth
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns health
+			 */
 			int getHealth();
+
+			/**
+			 getStamina
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns stamina
+			 */
 			int getStamina();
+
+			/**
+			 getAttack
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns attack
+			 */
 			int getAttack();
+
+			/**
+			 getDefense
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns defense
+			 */
 			int getDefense();
 
+			/**
+			 setName
+			 @Pre-Condition- takes in name to set
+			 @Post-Condition- returns void
+			 */
 			void setName(string name);
+
+			/**
+			 setHealth
+			 @Pre-Condition- takes in health to set
+			 @Post-Condition- returns void
+			 */
 			void setHealth(int health);
+
+			/**
+			 setStamina
+			 @Pre-Condition- takes in stamina to set
+			 @Post-Condition- returns void
+			 */
 			void setStamina(int stamina);
+
+			/**
+			 setAttack
+			 @Pre-Condition- takes in attack
+			 @Post-Condition- returns void
+			 */
 			void setAttack(int attack);
+
+			/**
+			 setDefense
+			 @Pre-Condition- takes in defense
+			 @Post-Condition- returns void
+			 */
 			void setDefense(int defense);
 	};
 
-	ActorInfo::ActorInfo(string myName, int health, int stamina, int atck, int def)
+	ActorInfo::ActorInfo(string name, int health, int stamina, int attack,
+			int defense)
 	{
-		_name = myName;
+		_name = name;
 		_health = health;
 		_stamina = stamina;
-		_attack = atck;
-		_defense = def;
+		_attack = attack;
+		_defense = defense;
 	}
 
 	int ActorInfo::getHealth()

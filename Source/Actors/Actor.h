@@ -56,8 +56,8 @@ namespace bammm
 
 		public:
 			Actor();
-			Actor(string myName);
-			Actor(string myName, int health, int stamina, int attack, int defense);
+			Actor(string name);
+			Actor(string name, int health, int stamina, int attack, int defense);
 			Actor(ActorInfo* info);
 
 			/**
@@ -86,7 +86,7 @@ namespace bammm
 			 @Pre-Condition- takes no arguments
 			 @Post-Condition- returns name
 			 */
-			void setName(string myName);
+			void setName(string name);
 
 			/**
 			 setLocation
@@ -269,9 +269,9 @@ namespace bammm
 		_defense = 2;
 	}
 
-	Actor::Actor(string myName)
+	Actor::Actor(string name)
 	{
-		_name = myName;
+		_name = name;
 		_rotation = 0;
 		_velocity = new Vector3D();
 		_location = new Vector3D();
@@ -286,9 +286,9 @@ namespace bammm
 		_defense = 2;
 	}
 
-	Actor::Actor(string myName, int health, int stamina, int attack, int defense)
+	Actor::Actor(string name, int health, int stamina, int attack, int defense)
 	{
-		_name = myName;
+		_name = name;
 		_rotation = 0;
 		_velocity = new Vector3D();
 		_location = new Vector3D();
@@ -335,9 +335,9 @@ namespace bammm
 		_rotation = myRotation;
 	}
 
-	void Actor::setName(string myName)
+	void Actor::setName(string name)
 	{
-		_name = myName;
+		_name = name;
 	}
 
 	void Actor::setLocation(Vector3D* location)
