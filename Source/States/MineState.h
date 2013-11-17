@@ -23,7 +23,7 @@ namespace bammm
             void breakdown();
             void tick(float dTime);
             void switchState(string nextState);
-            string to_string();
+            string toString();
     };
 
 	MineState::MineState(Actor* actor)
@@ -92,10 +92,10 @@ namespace bammm
 	*/
 	void MineState::switchState(string nextState)
 	{
-		_statemachine->switchState(this, nextState);
+		_stateMachine->switchState(this, nextState);
 	}
 
-	string MineState::to_string()
+	string MineState::toString()
 	{
 		return "mine";
 	}

@@ -19,7 +19,7 @@ namespace bammm
             void setup();
             void breakdown();
             void tick(float dTime);
-			string to_string();
+			string toString();
 
         private:
             const static int singPercentage = 75;
@@ -53,7 +53,7 @@ namespace bammm
         cout << _actor->getName() << " is singing the song of it's people.\n";
     }
 
-	string SingState::to_string()
+	string SingState::toString()
 	{
 		return "sing";
 	}

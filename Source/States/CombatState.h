@@ -23,7 +23,7 @@ namespace bammm
             void setup();
             void breakdown();
             void tick(float dTime);
-			string to_string();
+			string toString();
 
         private:
     };
@@ -52,7 +52,7 @@ namespace bammm
     {
     }
 
-	string CombatState::to_string()
+	string CombatState::toString()
 	{
 		return "combat";
 	}

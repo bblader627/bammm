@@ -14,11 +14,11 @@ namespace bammm
     {
         public:
             BrawlState(Actor* actor);
-            BrawlState(Actor* actor, IStateCallback* statemachine);
+            BrawlState(Actor* actor, IStateCallback* stateMachine);
             void setup();
             void breakdown();
-            void tick(float dTime);
-			string to_string();
+            void tick(float deltaTime);
+			string toString();
 
         private:
     };
@@ -28,10 +28,10 @@ namespace bammm
 		_actor = actor;
     }
 
-    BrawlState::BrawlState(Actor* actor, IStateCallback* statemachine)
+    BrawlState::BrawlState(Actor* actor, IStateCallback* stateMachine)
 	{
 		_actor = actor;
-		registerTransitionCallback(statemachine);
+		registerTransitionCallback(stateMachine);
 	}
 
     void BrawlState::setup()
@@ -42,12 +42,12 @@ namespace bammm
     {
     }
 
-    void BrawlState::tick(float dTime)
+    void BrawlState::tick(float deltaTime)
     {
         cout << _actor->getName() << " pulls his right arm back and then thrusts his arm forward by twisting his core. \"DWARF PUNCHHHH!\"\n";
     }
 
-	string BrawlState::to_string()
+	string BrawlState::toString()
 	{
 		return "brawl";
 	}

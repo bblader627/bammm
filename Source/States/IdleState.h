@@ -18,7 +18,7 @@ namespace bammm
             void setup();
             void breakdown();
             void tick(float dTime);
-			string to_string();
+			string toString();
 
         private:
     };
@@ -46,7 +46,7 @@ namespace bammm
     {
     }
 
-	string IdleState::to_string()
+	string IdleState::toString()
 	{
 		return "idle";
 	}

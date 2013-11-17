@@ -28,7 +28,7 @@ namespace bammm
             void breakdown();
             void tick(float dTime);
             void switchState(string nextState);
-			string to_string();
+			string toString();
 
     };
 
@@ -106,10 +106,10 @@ namespace bammm
 
     void DrinkState::switchState(string nextState)
     {
-    	_statemachine->switchState(this, nextState);
+    	_stateMachine->switchState(this, nextState);
     }
 
-	string DrinkState::to_string()
+	string DrinkState::toString()
 	{
 		return "drink";
 	}
