@@ -11,6 +11,8 @@
  * BlockActor header file.
  *
  */
+#ifndef BLOCKACTOR_H_
+#define BLOCKACTOR_H_
 
 #include <iostream>
 #include "../SceneManager/Vector3D.h"
@@ -41,3 +43,4 @@ namespace bammm
 		MAX_HEALTH = health;
 	}
 }
+#endif
