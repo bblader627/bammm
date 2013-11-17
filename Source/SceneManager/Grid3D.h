@@ -422,7 +422,19 @@ namespace bammm
 	template<class T>
 	Vector3D* Grid3D<T>::findInGrid(string target)
 	{
-		return new Vector3D();
+		for (int gridIndex = 0; gridIndex < _grid->_size; gridIndex++)
+		{
+			DynamicArray<T>* cell = _grid->get(gridIndex);
+			for (int cellIndex = 0; cellIndex < cell->_size; cellIndex++)
+			{
+				T* actor = cell->get(cellIndex);
+				if (actor->to_string() == target)
+				{
+					return convertToVector(gridIndex);
+				}
+			}
+		}
+		return NULL;
 	}
 
 	template <class T>
