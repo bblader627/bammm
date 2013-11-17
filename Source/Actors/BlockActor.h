@@ -43,4 +43,5 @@ namespace bammm
 		MAX_HEALTH = health;
 	}
 }
+
 #endif

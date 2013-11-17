@@ -96,4 +96,5 @@ namespace bammm
 			}
 	};
 }
+
 #endif
