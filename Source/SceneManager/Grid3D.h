@@ -19,6 +19,7 @@
 #include <iostream>
 #include "../Resources/DynamicArray.h"
 #include "Vector3D.h"
+#include "../Resources/Stack.h"
 #include "../Actors/Actor.h"
 using namespace std;
 
@@ -37,6 +38,13 @@ namespace bammm
 			int length;
 			int height;
 			int convertToPos(Vector3D* vect);
+
+			/*
+			 * getPath
+			 * @Pre-Condition- takes Position of actor to be found, current location, and stack of directions
+			 * @Post-Condition- returns stack of directions
+			 */
+			Stack<Vector3D*>* getPath(Vector3D* actorPos, Vector3D* currentLoc, Stack<Vector3D*>* path);
 
 		public:
 			Grid3d();
@@ -61,6 +69,15 @@ namespace bammm
 			 @Post-Condition- Removes object specified by the coordinates
 			 */
 			bool remove(Vector3D *vect, T actor);
+
+			/*
+			 * getPath
+			 * @Pre-Condition- takes current Actor, destination string
+			 * @Post-Condition- returns stack of directions
+			 */
+			Stack<Vector3D*>* getPath(Actor* actor, string destination);
+
+			Vector3D findInGrid(string target);
 
 			string to_string();
 			T getEnemy(Vector3D* loc, T actor);
@@ -169,6 +186,37 @@ namespace bammm
 		return deletedVal;
 	}
 
+	template<class T>
+	Stack<Vector3D*>* getPath(Actor* actor, string destination)
+	{
+		Vector3D* target = findInGrid(destination);
+		if (target==NULL)
+		{
+			return new Stack<Vector3D*>();
+		}
+
+		Vector3D* actorLocation = actor->getLocation();
+		return getPath(actorLocation, target, new Stack<Vector3D*>);
+
+	}
+
+	template<class T>
+	Stack<Vector3D*>* getPath(Vector3D* actorPos, Vector3D* currentLoc, Stack<Vector3D*>* path)
+	{
+		if (*currentLoc==*actorPos)
+		{
+			return path;
+		}
+
+
+	}
+
+	template<class T>
+	Vector3D* findInGrid(string target)
+	{
+		return new Vector3D();
+	}
+
 	template <class T>
 	string Grid3d<T>::to_string()
 	{
@@ -229,6 +277,8 @@ namespace bammm
 	{
 		remove(actor->getLocation(), actor);
 		delete actor->getLocation();
+
+
 		add(newLoc, actor);
 	}
 
