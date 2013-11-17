@@ -7,11 +7,8 @@
  * 	Michael Abramo
  *	Matt Witkowski
  *	Bradley Crusco
- *
  * Description:
- * Drinking state header file.
- *
- * Last Modified: Matthew Konstantinou
+ * State header file.
  *
  */
 
@@ -31,23 +28,66 @@ using namespace std;
 
 namespace bammm
 {
-
-    class State
-    {
+	class State
+	{
 		protected:
 			Actor* _actor;
-			IStateCallback* _statemachine;
-        public:
+			IStateCallback* _stateMachine;
+
+		public:
 			State();
 			State(Actor* actor);
-			virtual void setup();
-			virtual void breakdown();
-			virtual void tick(float dTime);
-			virtual void registerTransitionCallback(IStateCallback* statemachine);
-			virtual void switchState(string nextState);
-			virtual string to_string();
-			virtual bool operator==(State* s);
 			virtual ~State();
+
+			/**
+			 setup
+			 @Pre-Condition- No input
+			 @Post-Condition- Sets up the state
+			 */
+			virtual void setup();
+
+			/**
+			 breakdown
+			 @Pre-Condition- No input
+			 @Post-Condition- Performs a breakdown on the state
+			 */
+			virtual void breakdown();
+
+			/**
+			 tick
+			 @Pre-Condition- Takes in a float deltaTime
+			 @Post-Condition- Executes a tick of length deltaTime
+			 */
+			virtual void tick(float deltaTime);
+
+			/**
+			 registerTransitionCallback
+			 @Pre-Condition- Takes in a IStateCallback* state machine
+			 @Post-Condition- A transition callback is registered
+			 */
+			virtual void registerTransitionCallback(
+					IStateCallback* stateMachine);
+
+			/**
+			 switchState
+			 @Pre-Condition- Takes in a string nextState
+			 @Post-Condition- The current state is switched to the given nextState
+			 */
+			virtual void switchState(string nextState);
+
+			/**
+			 toString
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a string representation of the state
+			 */
+			virtual string toString();
+
+			/**
+			 operator==
+			 @Pre-Condition- Takes in a State*
+			 @Post-Condition- Returns a boolean of the comparison between two states
+			 */
+			virtual bool operator==(State* state);
 	};
 
 	State::State()
@@ -59,81 +99,45 @@ namespace bammm
 		_actor = actor;
 	}
 
-	/*
-	* setup
-	* Pre-Condition- no parameters
-	* Post-Condition- no return value
-	*
-	* Sets actor's necessary attributes for beginning a state
-	*/
+	State::~State()
+	{
+
+	}
+
 	void State::setup()
 	{
 		cout << "wrong setup" << endl;
 	}
 
-	/*
-	* breakDown
-	* Pre-Condition- no parameters
-	* Post-Condition- no return value
-	*
-	* Returns Actor to old state
-	*/
 	void State::breakdown()
 	{
 		cout << "wrong breakdown" << endl;
 	}
 
-	/*
-	* tick
-	*
-	* Pre-Condition- time as recorded since beginning state
-	* Post-Condition- no return value
-	*
-	* Process state updates based on passed time
-	*/
-	void State::tick(float dTime)
+	void State::tick(float deltaTime)
 	{
 		cout << "In parent state\n";
 	}
 
-	/*
-	* registerTransitionCallback
-	* Pre-Condition- accepts pointer to IStateCallback
-	* Post-Condition- calls switchState to swap states in callback
-	*/
-	void State::registerTransitionCallback(IStateCallback* statemachine)
+	void State::registerTransitionCallback(IStateCallback* stateMachine)
 	{
-		_statemachine = statemachine;
+		_stateMachine = stateMachine;
 	}
 
-	/*
-	* switchState
-	* Pre-Condition- accepts next state as text
-	* Post-Condition- returns void, calls switchState on _statemachine
-	*/
 	void State::switchState(string nextState)
 	{
 		//_statemachine->switchState(this, nextState);
 	}
 
-	string State::to_string()
+	string State::toString()
 	{
 		return "State";
 	}
 
-	bool State::operator==(State* s)
+	bool State::operator==(State* state)
 	{
-		//bad - to_string overloader?
-		//if (_actor == s)
-		//{
-
-		//}
 		return false;
 	}
-
-	State::~State()
-	{
-
-	}
 }
+
 #endif

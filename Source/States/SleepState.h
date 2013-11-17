@@ -24,7 +24,7 @@ namespace bammm
             void breakdown();
             void tick(float dTime);
             void switchState(string nextState);
-			string to_string();
+			string toString();
 
         private:
             static const int hoursToSleep = 8;
@@ -76,10 +76,10 @@ namespace bammm
 
     void SleepState::switchState(string nextState)
     {
-    	_statemachine->switchState(this, nextState);
+    	_stateMachine->switchState(this, nextState);
     }
 
-	string SleepState::to_string()
+	string SleepState::toString()
 	{
 		return "sleep";
 	}

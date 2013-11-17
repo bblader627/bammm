@@ -6,11 +6,9 @@
  * 	Matt Konstantinou
  * 	Michael Abramo
  *	Matt Witkowski	
- *   Bradley Crusco
+ *  Bradley Crusco
  * Description:
  * Hashnode  header file.
- *
- * Last Modified: Bradely Crusco
  *
  */
 #ifndef HASHNODE_H_
@@ -23,9 +21,9 @@
 #endif
 
 using namespace std;
+
 namespace bammm
 {
-
 	template<class T>
 	class HashNode
 	{
@@ -38,18 +36,50 @@ namespace bammm
 			HashNode();
 			HashNode(string key, T value);
 			virtual ~HashNode();
+
+			/**
+			 getKey
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _key as a string
+			 */
 			string getKey();
+
+			/**
+			 setKey
+			 @Pre-Condition- Takes a string key
+			 @Post-Condition- Sets _key as key
+			 */
 			void setKey(string key);
+
+			/**
+			 getValue
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _value
+			 */
 			T getValue();
+
+			/**
+			 setValue
+			 @Pre-Condition- Takes a T value
+			 @Post-Condition- Sets _value to the given value
+			 */
 			void setValue(T value);
+
+			/**
+			 getNextNode
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _nextNode
+			 */
 			HashNode& getNextNode();
+
+			/**
+			 setNextNode
+			 @Pre-Condition- Takes a HashNode address node
+			 @Post-Condition- Sets _nextNode to node
+			 */
 			void setNextNode(HashNode& node);
 	};
 
-	/**
-	 * HashNode<T>::HashNode()
-	 * @brief Empty constructor for HashNode(). Sets _key to empty string and _nextNode to NULL.
-	 */
 	template<class T>
 	HashNode<T>::HashNode()
 	{
@@ -57,12 +87,6 @@ namespace bammm
 		_nextNode = NULL;
 	}
 
-	/**
-	 * HashNode<T>::HashNode(string key, T value)
-	 * @brief Constructor for HashNode with arguments key and value. Sets each member function accordingly.
-	 * @param key Key for this value.
-	 * @param value Value being stored in the hash.
-	 */
 	template<class T>
 	HashNode<T>::HashNode(string key, T value)
 	{
@@ -71,75 +95,41 @@ namespace bammm
 		_nextNode = NULL;
 	}
 
-	/**
-	 * HashNode<T>::~HashNode()
-	 * @brief Default destructor for a HashNode.
-	 */
 	template<class T>
 	HashNode<T>::~HashNode()
 	{
 	}
 
-	/**
-	 * HashNode<T>::getKey()
-	 * @brief Returns the key stored in this HashNode.
-	 * @return string
-	 */
 	template<class T>
 	string HashNode<T>::getKey()
 	{
 		return _key;
 	}
 
-	/*
-	 * HashNode<T>::setKey(string key)
-	 * @brief Sets _key to the argument key.
-	 * @param key The key to assign to the member.
-	 */
 	template<class T>
 	void HashNode<T>::setKey(string key)
 	{
 		_key = key;
 	}
 
-	/**
-	 * HashNode<T>::getValue()
-	 * @brief Returns the value stored in this HashNode.
-	 * @return T
-	 */
 	template<class T>
 	T HashNode<T>::getValue()
 	{
 		return _value;
 	}
 
-	/**
-	 * HashNode<T>::setValue(T value)
-	 * @brief Sets _value to the argument value.
-	 * @param value The value to assign to the member.
-	 */
 	template<class T>
 	void HashNode<T>::setValue(T value)
 	{
 		_value = value;
 	}
 
-	/**
-	 * HashNode<T>::getNextNode()
-	 * @brief Returns the address of _nextNode.
-	 * @return HashNode<T>&
-	 */
 	template<class T>
 	HashNode<T>& HashNode<T>::getNextNode()
 	{
 		return *(_nextNode);
 	}
 
-	/**
-	 * HashNode<T>::setNextNode(HashNode& node)
-	 * @brief Sets _nextNode to the argument node.
-	 * @param node The node to assign to the member.
-	 */
 	template<class T>
 	void HashNode<T>::setNextNode(HashNode& node)
 	{
@@ -147,4 +137,4 @@ namespace bammm
 	}
 }
 
-#endif /* HASHNODE_H_ */
+#endif
