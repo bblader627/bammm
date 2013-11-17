@@ -1,16 +1,22 @@
 /*
- * BlackboardRecord.cpp
+ * CS585
  *
- *  Created on: Nov 9, 2013
- *      Author: bradley
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * BlackboardRecord cpp file.
+ *
  */
 
 #include "BlackboardRecord.h"
 
 namespace bammm
 {
-	BlackboardRecord::BlackboardRecord(RecordType enumType,
-			string subjectID)
+	BlackboardRecord::BlackboardRecord(RecordType enumType, string subjectID)
 	{
 		_enumType = enumType;
 		_subjectID = subjectID;
@@ -18,8 +24,8 @@ namespace bammm
 		_data = 0.0;
 	}
 
-	BlackboardRecord::BlackboardRecord(RecordType enumType,
-			string subjectID, string targetID, float data)
+	BlackboardRecord::BlackboardRecord(RecordType enumType, string subjectID,
+			string targetID, float data)
 	{
 		_enumType = enumType;
 		_subjectID = subjectID;
@@ -27,7 +33,6 @@ namespace bammm
 		_data = data;
 	}
 
-	// Maybe I shouldn't return EnumRecordType? just the int?
 	RecordType BlackboardRecord::getRecordType()
 	{
 		return _enumType;
@@ -48,4 +53,3 @@ namespace bammm
 		return _data;
 	}
 }
-

@@ -1,8 +1,15 @@
 /*
- * BlackboardRecord.h
+ * CS585
  *
- *  Created on: Nov 9, 2013
- *      Author: bradley
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * BlackboardRecord header file.
+ *
  */
 
 #ifndef BLACKBOARDRECORD_H_
@@ -31,11 +38,35 @@ namespace bammm
 			BlackboardRecord(RecordType enumType, string subjectID);
 			BlackboardRecord(RecordType enumType, string subjectID,
 					string targetID, float _value);
+
+			/**
+			 getRecordType
+			 @Pre-Condition- Takes no arguments
+			 @Post-Condition- Returns RecordType _enumType
+			 */
 			RecordType getRecordType();
+
+			/**
+			 getSubjectID
+			 @Pre-Condition- Takes no arguments
+			 @Post-Condition- Returns subjectID
+			 */
 			string getSubjectID();
+
+			/**
+			 getSubjectID
+			 @Pre-Condition- Takes no arguments
+			 @Post-Condition- Returns targetID
+			 */
 			string getTargetID();
+
+			/**
+			 getSubjectID
+			 @Pre-Condition- Takes no arguments
+			 @Post-Condition- Returns _data
+			 */
 			float getData();
 	};
 }
 
-#endif /* BLACKBOARDRECORD_H_ */
+#endif
