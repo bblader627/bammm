@@ -1,8 +1,15 @@
 /*
- * Blackboard.cpp
+ * CS585
  *
- *  Created on: Nov 9, 2013
- *      Author: bradley
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * Blackboard cpp file.
+ *
  */
 
 #include "Blackboard.h"
@@ -77,7 +84,7 @@ namespace bammm
 
 		for (int i = 0; i < _listOfRecords.getSize(); i++)
 		{
-			/* This should just be an int compare, right? */
+			//This should just be an int compare, right?
 			if (_listOfRecords.get(i).getRecordType() == type)
 			{
 				count++;
@@ -93,7 +100,7 @@ namespace bammm
 
 		for (int i = 0; i < _listOfRecords.getSize(); i++)
 		{
-			/* This should just be an int compare, right? */
+			//This should just be an int compare, right?
 			if ((_listOfRecords.get(i).getRecordType() == type)
 					&& (_listOfRecords.get(i).getTargetID().compare(targetID)
 							== 0))
@@ -105,7 +112,7 @@ namespace bammm
 		return count;
 	}
 
-	/* Returns the data at the first found type (To get specific data, use the target specifier function*/
+	/* Returns the data at the first found type (To get specific data, use the target specifier function */
 	float Blackboard::getData(RecordType type)
 	{
 		for (int i = 0; i < _listOfRecords.getSize(); i++)
@@ -134,4 +141,3 @@ namespace bammm
 		return 0.0;
 	}
 }
-
