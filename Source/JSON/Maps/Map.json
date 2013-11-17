@@ -1,0 +1,227 @@
+{
+	"Map":
+	[
+		"Water Objects":
+		[
+			{
+				"name": "Deep Water",
+				"x": 0,
+				"y": 0,
+				"z": 0,
+				"walkable": false
+			},
+			{
+				"name": "Deep Water",
+				"x": 1,
+				"y": 0,
+				"z": 0,
+				"walkable": false
+			},
+			{
+				"name": "Deep Water",
+				"x": 2,
+				"y": 0,
+				"z": 0,
+				"walkable": false
+			},
+			{
+				"name": "Deep Water",
+				"x": 0,
+				"y": 1,
+				"z": 0,
+				"walkable": false
+			},
+			{
+				"name": "Deep Water",
+				"x": 1,
+				"y": 1,
+				"z": 0,
+				"walkable": false
+			},
+			{
+				"name": "Deep Water",
+				"x": 2,
+				"y": 1,
+				"z": 0,
+				"walkable": false
+			},
+			{
+				"name": "Deep Water",
+				"x": 0,
+				"y": 2,
+				"z": 0,
+				"walkable": false
+			},
+			{
+				"name": "Deep Water",
+				"x": 1,
+				"y": 2,
+				"z": 0,
+				"walkable": false
+			},
+			{
+				"name": "Deep Water",
+				"x": 0,
+				"y": 3,
+				"z": 0,
+				"walkable": false
+			}
+		],
+		"Barrier Objects":
+		[
+			{
+				"name": "Fortress Wall",
+				"x": 0,
+				"y": 4,
+				"z": 0,
+				"walkable": false
+			},
+			{
+				"name": "Fortress Wall",
+				"x": 1,
+				"y": 4,
+				"z": 0,
+				"walkable": false
+			},
+			{
+				"name": "Fortress Wall",
+				"x": 3,
+				"y": 4,
+				"z": 0,
+				"walkable": false
+			},
+			{
+				"name": "Fortress Wall",
+				"x": 4,
+				"y": 4,
+				"z": 0,
+				"walkable": false
+			},
+			{
+				"name": "Fortress Wall",
+				"x": 5,
+				"y": 4,
+				"z": 0,
+				"walkable": false
+			},
+			{
+				"name": "Fortress Wall",
+				"x": 5,
+				"y": 5,
+				"z": 0,
+				"walkable": false
+			},
+			{
+				"name": "Fortress Wall",
+				"x": 5,
+				"y": 6,
+				"z": 0,
+				"walkable": false
+			},
+			{
+				"name": "Fortress Wall",
+				"x": 5,
+				"y": 8,
+				"z": 0,
+				"walkable": false
+			},
+			{
+				"name": "Fortress Wall",
+				"x": 5,
+				"y": 9,
+				"z": 0,
+				"walkable": false
+			}
+		],
+		"Mine Objects":
+		[
+			{
+				"name": "Iron ore",
+				"x": 6,
+				"y": 8,
+				"z": 0,
+				"walkable": true
+			},
+			{
+				"name": "Iron ore",
+				"x": 6,
+				"y": 9,
+				"z": 0,
+				"walkable": true
+			},
+			{
+				"name": "Iron ore",
+				"x": 7,
+				"y": 8,
+				"z": 0,
+				"walkable": true
+			},
+			{
+				"name": "Iron ore",
+				"x": 7,
+				"y": 9,
+				"z": 0,
+				"walkable": true
+			},
+			{
+				"name": "Iron ore",
+				"x": 8,
+				"y": 8,
+				"z": 0,
+				"walkable": true
+			},
+			{
+				"name": "Iron ore",
+				"x": 8,
+				"y": 9,
+				"z": 0,
+				"walkable": true
+			},
+			{
+				"name": "Iron ore",
+				"x": 9,
+				"y": 8,
+				"z": 0,
+				"walkable": true
+			},
+			{
+				"name": "Iron ore",
+				"x": 8,
+				"y": 9,
+				"z": 0,
+				"walkable": true
+			}
+		],
+		"Building Objects":
+		[
+			{
+				"name": "Gym",
+				"x": 0,
+				"y": 5,
+				"z": 0,
+				"walkable": true
+			},
+			{
+				"name": "Blacksmith",
+				"x": 4,
+				"y": 5,
+				"z": 0,
+				"walkable": true
+			},
+			{
+				"name": "Armory",
+				"x": 4,
+				"y": 6,
+				"z": 0,
+				"walkable": true
+			},
+			{
+				"name": "Fire pit",
+				"x": 2,
+				"y": 7,
+				"z": 0,
+				"walkable": true
+			},
+		]
+	]
+}
