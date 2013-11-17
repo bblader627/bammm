@@ -6,14 +6,11 @@
  * 	Matt Konstantinou
  * 	Michael Abramo
  *	Matt Witkowski	
- *   Bradley Crusco
+ *  Bradley Crusco
  * Description:
  * PlayerController header file.
  *
- * Last Modified: Matt Witkowski
- *
  */
-
 
 #ifndef PLAYERCONTROLLER_H_
 #define PLAYERCONTROLLER_H_
@@ -30,98 +27,140 @@
 #endif
 
 using namespace std;
-using namespace bammm;
 
 namespace bammm
 {
-    class PlayerController : public Controller
-    {
+	class PlayerController: public Controller
+	{
 		private:
-			MeleeCombat* meleeCombat;
-			RangedCombat* rangedCombat;
-			SceneManager* sceneManager;
-        public:
-            void input(DynamicArray<string>* command, float dTime);
-            void input(string command, float dTime);
-            PlayerController(SceneManager* scene, MeleeCombat* meleeC);
-            void setup(Actor* actor);
-            ~PlayerController();
-            void printOptions();
-    };
+			MeleeCombat* _meleeCombat;
+			RangedCombat* _rangedCombat;
+			SceneManager* _sceneManager;
 
-    PlayerController::PlayerController(SceneManager* scene, MeleeCombat* meleeC)
-    {
-		sceneManager = scene;
-		meleeCombat = meleeC;
-    }
+		public:
+			PlayerController(SceneManager* scene, MeleeCombat* meleeCombat);
+			~PlayerController();
 
-    void PlayerController::setup(Actor* actor)
-    {
-    	Factory* actorFactory = new Factory();
-    	actorFactory->setup();
+			/**
+			 setup
+			 @Pre-Condition- Takes an actor as input
+			 @Post-Condition- Actor passed as argument is setup for use
+			 */
+			void setup(Actor* actor);
 
-        _actor = actor;
-        _states = new HashMap<State*>();
-        _stateMachine = new StateMachine(_actor, _states);
+			/**
+			 input
+			 @Pre-Condition- Takes a single command and a detlaTime
+			 @Post-Condition- The command and deltaTime are passed to the overloaded input
+			 */
+			void input(string command, float deltaTime);
 
+			/**
+			 input
+			 @Pre-Condition- Takes a single command and a detlaTime
+			 @Post-Condition- The input is executed
+			 */
+			void input(DynamicArray<string>* command, float deltaTime);
 
-		//Create the states
-        //DO NOT DELETE THE REFERENCES TO STATEMACHINE.  THE CODE WILL SEG FAULT IF YOU DO
-        DrinkState* drinkState = new DrinkState(_actor, _stateMachine);
-        MineState* mineState = new MineState(_actor, _stateMachine);
-        SingState* singState = new SingState(_actor, _stateMachine);
-        BrawlState* brawlState = new BrawlState(_actor, _stateMachine);
-        SleepState* sleepState = new SleepState(_actor, _stateMachine);
-        IdleState* idleState = new IdleState(_actor, _stateMachine);
+			/**
+			 printOptions
+			 @Pre-Condition- Takes no arguments
+			 @Post-Condition- Prints out control options to the screen
+			 */
+			void printOptions();
+	};
+
+	PlayerController::PlayerController(SceneManager* scene,
+			MeleeCombat* meleeCombat)
+	{
+		_sceneManager = scene;
+		_meleeCombat = meleeCombat;
+	}
+
+	PlayerController::~PlayerController()
+	{
+		DynamicArray<State*>* temp = _states->getAllValues();
+		for (int i = 0; i < (int) temp->getSize(); i++)
+		{
+			delete temp->get(i);
+		}
+
+		delete _states;
+		delete _stateMachine;
+	}
+
+	void PlayerController::setup(Actor* actor)
+	{
+		Factory* actorFactory = new Factory();
+		actorFactory->setup();
+
+		_actor = actor;
+		_states = new HashMap<State*>();
+		_stateMachine = new StateMachine(_actor, _states);
+
+		//DO NOT DELETE THE REFERENCES TO STATEMACHINE.  THE CODE WILL SEG FAULT IF YOU DO
+		DrinkState* drinkState = new DrinkState(_actor, _stateMachine);
+		MineState* mineState = new MineState(_actor, _stateMachine);
+		SingState* singState = new SingState(_actor, _stateMachine);
+		BrawlState* brawlState = new BrawlState(_actor, _stateMachine);
+		SleepState* sleepState = new SleepState(_actor, _stateMachine);
+		IdleState* idleState = new IdleState(_actor, _stateMachine);
 		CombatState* combatState = new CombatState(_actor, _stateMachine);
 
-		//Put actor in idle state
 		_stateMachine->initialState(idleState);
 
-        _states->add(idleState->to_string(), idleState);
-        _states->add(mineState->to_string(), mineState);
-        _states->add(drinkState->to_string(), drinkState);
-        _states->add(singState->to_string(), singState);
-        _states->add(brawlState->to_string(), brawlState);
-        _states->add(sleepState->to_string(), sleepState);
-       	_states->add(combatState->to_string(), combatState);
-    }
+		_states->add(idleState->to_string(), idleState);
+		_states->add(mineState->to_string(), mineState);
+		_states->add(drinkState->to_string(), drinkState);
+		_states->add(singState->to_string(), singState);
+		_states->add(brawlState->to_string(), brawlState);
+		_states->add(sleepState->to_string(), sleepState);
+		_states->add(combatState->to_string(), combatState);
+	}
 
-    void PlayerController::input(DynamicArray<string>* multiInput, float dTime)
-    {
-    	//all currently running states
-    	DynamicArray<State*>* currentStates = _stateMachine->getCurrentStates();
+	void PlayerController::input(string command, float deltaTime)
+	{
+		DynamicArray<string>* passValue = new DynamicArray<string>();
+		passValue->add(command);
+		input(passValue, deltaTime);
+		delete passValue;
+	}
 
-    	//newStates will have 1 state
+	void PlayerController::input(DynamicArray<string>* multiInput,
+			float deltaTime)
+	{
+		DynamicArray<State*>* currentStates = _stateMachine->getCurrentStates();
+
+		//newStates will have 1 state
 		//DynamicArray<State*>* newStates = new DynamicArray<State*>();
 
-		for(int i = 0; i < (int)multiInput->getSize(); i++)
+		for (int i = 0; i < (int) multiInput->getSize(); i++)
 		{
 			//Check to see if state is already running
-			//if so, break it down
+			//If so, break it down
 
 			State* newState = _states->getValue(multiInput->get(i));
 
-			/********************************************
-			 *This should be handled in the stateMachine
-			 *This logic should be in statemachine->add()
-			 * or switchState()
-			 *******************************************/
+			/*
+			 This should be handled in the stateMachine
+			 This logic should be in statemachine->add()
+			 or switchState()
+			 */
 			if (currentStates->contains(newState))
 			{
-				//switching newState with NULL calls breakdown on newState, the remove on currentStates
-				
+				//Switching newState with NULL calls breakdown on newState, the remove on currentStates
+
 				//Do doTurn in MeleeCombat
-				if(newState->to_string() == "combat")
+				if (newState->to_string() == "combat")
 				{
-					if(!meleeCombat->getFightHappening())
+					if (!_meleeCombat->getFightHappening())
 					{
 						_stateMachine->removeState(newState);
 
 					}
 					else
 					{
-						meleeCombat->useTurn();
+						_meleeCombat->useTurn();
 					}
 				}
 				else
@@ -133,12 +172,14 @@ namespace bammm
 			else
 			{
 				//Special case for combat state
-				if(newState->to_string() == "combat")
+				if (newState->to_string() == "combat")
 				{
-					Actor* closestEnemy = sceneManager->getSceneGraph()->getEnemy(_actor->getLocation(), _actor);
-					if(closestEnemy)
+					Actor* closestEnemy =
+							_sceneManager->getSceneGraph()->getEnemy(
+									_actor->getLocation(), _actor);
+					if (closestEnemy)
 					{
-						meleeCombat->setup(_actor, closestEnemy);
+						_meleeCombat->setup(_actor, closestEnemy);
 					}
 				}
 				_stateMachine->addState(newState);
@@ -147,29 +188,18 @@ namespace bammm
 
 		//Should input even call switchstate?
 		//_stateMachine->switchState(newStates);
-        _stateMachine->tick(dTime);
-    }
+		_stateMachine->tick(deltaTime);
+	}
 
-    void PlayerController::input(string command, float dTime)
-    {
-        DynamicArray<string>* passValue = new DynamicArray<string>();
-        passValue->add(command);
-        input(passValue, dTime);
-		delete passValue;
-    }
+	void PlayerController::printOptions()
+	{
+		DynamicArray<State*>* currentStates = _stateMachine->getCurrentStates();
 
-    void PlayerController::printOptions()
-    {
-    	DynamicArray<State*>* currentStates = _stateMachine->getCurrentStates();
-    	/*
-
-    	}
-    	*/
-    	//MAKE THIS SMARTER
-    	cout << "Select an activity for your dwarf:" << endl;
+		//TODO: Make this smarter.
+		cout << "Select an activity for your dwarf:" << endl;
 
 		//Mining gold options
-    	if (currentStates->contains(_states->getValue("mine")))
+		if (currentStates->contains(_states->getValue("mine")))
 		{
 			cout << "1. Stop mining gold" << endl;
 		}
@@ -178,8 +208,8 @@ namespace bammm
 			cout << "1. Mine Gold" << endl;
 		}
 
-    	//Drinking options
-    	if (currentStates->contains(_states->getValue("drink")))
+		//Drinking options
+		if (currentStates->contains(_states->getValue("drink")))
 		{
 			cout << "2. Stop drinking ale" << endl;
 		}
@@ -188,28 +218,27 @@ namespace bammm
 			cout << "2. Drink ale" << endl;
 		}
 
-    	//Singing options
-    	if (currentStates->contains(_states->getValue("sing")))
-    	{
-    		cout << "3. Stop signing" << endl;
-    	}
-    	else
-    	{
-    		cout << "3. Sing a song" << endl;
-    	}
+		//Singing options
+		if (currentStates->contains(_states->getValue("sing")))
+		{
+			cout << "3. Stop signing" << endl;
+		}
+		else
+		{
+			cout << "3. Sing a song" << endl;
+		}
 
-    	//Fighting options
-    	if (currentStates->contains(_states->getValue("brawl")))
-    	{
-    		cout << "4. Stop fighting" << endl;
-    	}
-    	else
-    	{
-    		cout << "4. Fight a dwarf" << endl;
-    	}
+		//Fighting options
+		if (currentStates->contains(_states->getValue("brawl")))
+		{
+			cout << "4. Stop fighting" << endl;
+		}
+		else
+		{
+			cout << "4. Fight a dwarf" << endl;
+		}
 
-
-    	//Sleeping options
+		//Sleeping options
 		if (currentStates->contains(_states->getValue("sleep")))
 		{
 			cout << "5. Wake up" << endl;
@@ -219,7 +248,6 @@ namespace bammm
 			cout << "5. Go to sleep" << endl;
 		}
 
-		
 		//Combat options
 		if (currentStates->contains(_states->getValue("combat")))
 		{
@@ -229,24 +257,11 @@ namespace bammm
 		{
 			cout << "6. Fight Orc" << endl;
 		}
-		
+
 		cout << "7. Continue" << endl;
 
-    	cout << "0. Quit" << endl;
-    }
-
-    PlayerController::~PlayerController()
-    {
-        DynamicArray<State*>* temp = _states->getAllValues();
-        for(int i = 0; i < (int)temp->getSize(); i++)
-        {
-            delete temp->get(i);
-        }
-
-        delete _states;
-        delete _stateMachine;
-    }
-
-
+		cout << "0. Quit" << endl;
+	}
 }
+
 #endif
