@@ -37,6 +37,22 @@ namespace bammm
 			int _length;
 			int _height;
 
+			//Directions
+			 Vector3D *UP;
+			 Vector3D *DOWN;
+			 Vector3D *LEFT;
+			 Vector3D *RIGHT;
+			 Vector3D *ZERO;
+
+			 /*
+			 UP = { 0, 1, 0 };
+			 DOWN = { 0, -1, 0 };
+			 LEFT = { -1, 0, 0};
+			 RIGHT = { 1, 0, 0 };
+			 ZERO = { 0, 0, 0 };
+			 */
+
+
 			/*
 			 convertToPosition
 			 @Pre-Condition- Takes a Vector3D vector
@@ -54,14 +70,16 @@ namespace bammm
 			/*
 			 * getPath
 			 * @Pre-Condition- takes Position of actor to be found, current location, and stack of directions
-			 * @Post-Condition- returns stack of directions
+			 * @Post-Condition- returns true if path is found
 			 */
-			Stack<Vector3D*>* getPath(Vector3D* actorPos, Vector3D* currentLoc, Stack<Vector3D*>* path);
+			bool getPath(Vector3D* actorPos, Vector3D* currentLoc, Vector3D* directionOfPrevious, Stack<Vector3D*>* path);
 
 		public:
 			Grid3D();
 			Grid3D(int width, int length, int height);
 			~Grid3D();
+
+			void setupDirections();
 
 			/*
 			 access
@@ -171,6 +189,9 @@ namespace bammm
 		_length = 0;
 		_height = 0;
 		_grid = new DynamicArray<DynamicArray<T>*>();
+
+		setupDirections();
+
 	}
 
 	template<class T>
@@ -186,6 +207,8 @@ namespace bammm
 		{
 			_grid->add(new DynamicArray<T>);
 		}
+
+		setupDirections();
 	}
 
 	template<class T>
@@ -197,6 +220,16 @@ namespace bammm
 			delete _grid->get(i);
 		}
 		delete _grid;
+	}
+
+	template<class T>
+	void Grid3D<T>::setupDirections()
+	{
+		UP = new Vector3D(0, 1, 0);
+		DOWN = new Vector3D(0, -1, 0);
+		LEFT = new Vector3D(-1, 0, 0);
+		RIGHT = new Vector3D(1, 0, 0);
+		ZERO = new Vector3D(0, 0, 0);
 	}
 
 	template<class T>
@@ -263,83 +296,127 @@ namespace bammm
 		}
 
 		Vector3D* actorLocation = actor->getLocation();
-		return getPath(actorLocation, target, new Stack<Vector3D*>);
+		Stack<Vector3D*>* path = new Stack<Vector3D*>*;
+		if (getPath(actorLocation, target, ZERO, path))
+		{
+			return path;
+		}
+		else
+		{
+			cout << "Path not found" << endl;
+			return new Stack<Vector3D*>*;
+		}
 
 	}
 
 	template<class T>
-	Stack<Vector3D*>* Grid3D<T>::getPath(Vector3D* actorPos, Vector3D* currentLoc, Stack<Vector3D*>* path)
+	bool Grid3D<T>::getPath(Vector3D* actorPos, Vector3D* currentLoc, Vector3D* directionOfPrevious, Stack<Vector3D*>* path)
 	{
-		/*
-		 UP = { 0, 1, 0 };
-		 DOWN = { 0, -1, 0 };
-		 LEFT = { -1, 0, 0};
-		 RIGHT = { 1, 0, 0 };
-		 ZERO = { 0, 0, 0 };
-		 */
-
 		int actorPosition = convertToPosition(actorPos);
 		int currentPosition = convertToPosition(currentLoc);
+
+		//base case
 		if (actorPosition == currentPosition)
 		{
-			return path;
+			return true;
 		}
 
-		if (actorPosition < currentPosition) //Have to go down or left of currentLoc(Favor left)
+		//If cell collision
+		if (!(directionOfPrevious == ZERO))
 		{
-			for (int xDiff = currentPosition % actorPosition; xDiff > 0; xDiff--)
+			DynamicArray<T*>* cell = _grid->get(currentPosition - 1);
+			if (cell->_size == 0)
 			{
-				DynamicArray<T*>* cell = _grid->get(currentPosition);
-				if (cell->_size == 0)
-				{
-					path->push(new Vector3D(-1, 0, 0));
-					currentPosition -= 1;
-				}
-				else
-				{
-					//break loop
-					xDiff = 0;
-					currentLoc = convertToVector(currentPosition);
-					return getPath(actorPos, currentLoc, path);
+				return false;
+			}
+		}
 
+		if (actorPosition < currentPosition) //Have to go down
+		{
+			//if on the same line
+			if ((currentPosition - actorPosition) < _width)
+			{
+				path->push(LEFT);
+				//If you can't go left
+				if (!(getPath(actorPos, new Vector3D(convertToVector(currentPosition - 1)), RIGHT, path)))
+				{
+					path->pop();
+					path->push(UP);
+					//If you can't go up
+					if (!(directionOfPrevious == UP) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition + _width)), DOWN, path)))
+					{
+						path->pop();
+						path->push(DOWN);
+						//If you can't go down
+						if (!(directionOfPrevious == DOWN) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition - _width)), UP, path)))
+						{
+							path->pop();
+							return false;
+						}
+					}
+				}
+			}
+			//If not on the same line
+			else
+			{
+				path->push(DOWN);
+				if (!(directionOfPrevious == DOWN) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition - _width)), UP, path)))
+				{
+					path->pop();
+					path->push(LEFT);
+					if (!(directionOfPrevious == LEFT) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition - 1)), RIGHT, path)))
+					{
+						path->pop();
+						path->push(UP);
+						//If you can't go up
+						if (!(directionOfPrevious == UP) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition + _width)), DOWN, path)))
+						{
+							path->pop();
+							return false;
+						}
+					}
 				}
 			}
 		}
-		else if (actorPosition > currentPosition) //Anywhere up or to the right on the same y
+		else //Have to go up
 		{
+			//if on the same line
 			if ((actorPosition - currentPosition) < _width)
 			{
-				//Same Y; Move RIGHT
-				//return path when found
-				for (int xDiff = actorPosition - currentPosition; xDiff > 0; xDiff--)
+				path->push(RIGHT);
+				if (!(getPath(actorPos, new Vector3D(convertToVector(currentPosition + 1)), LEFT, path)))
 				{
-					DynamicArray<T*>* cell = _grid->get(currentPosition);
-					if (cell->_size == 0)
+					path->pop();
+					path->push(UP);
+					if (!(getPath(actorPos, new Vector3D(convertToVector(currentPosition + _width)), DOWN, path)))
 					{
-						path->push(new Vector3D(1, 0, 0));
-						currentPosition += 1;
+						path->pop();
 					}
-					else
-					{
-						xDiff = 0;
-						currentLoc = convertToVector(currentPosition);
-						return getPath(actorPos, currentLoc, path);
-					}
-
 				}
 			}
 			else
 			{
-				path->push(new Vector3D(0, 1, 0));
-				currentPosition += _width;
-				currentLoc = convertToVector(currentPosition);
-				return getPath(actorPos, currentLoc, path);
-				//move up
-				//recursion
+				path->push(UP);
+				//if you can't go up
+				if (!(directionOfPrevious == UP) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition + _width)), DOWN, path)))
+				{
+					path->pop();
+					path->push(RIGHT);
+					//if you can't go right
+					if (!(getPath(actorPos, new Vector3D(convertToVector(currentPosition + 1)), LEFT, path)))
+					{
+						path->pop();
+						path->push(LEFT);
+						//If you can't go LEFT
+						if (!(getPath(actorPos, new Vector3D(convertToVector(currentPosition - 1)), RIGHT, path)))
+						{
+							path->pop();
+							return false;
+						}
+					}
+				}
 			}
 		}
-
-
 	}
 
 	template<class T>
@@ -428,7 +505,6 @@ namespace bammm
 
 		float newX;
 		float newY;
-		Vector3D * newLocation;
 
 		if (sameX && sameY)
 		{
