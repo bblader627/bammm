@@ -57,7 +57,8 @@ namespace bammm
 		public:
 			Actor();
 			Actor(string name);
-			Actor(string name, int health, int stamina, int attack, int defense);
+			Actor(string name, int health, int stamina, int attack,
+					int defense);
 			Actor(ActorInfo* info);
 
 			/**
