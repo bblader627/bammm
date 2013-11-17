@@ -5,11 +5,10 @@
  * 	Alvaro Home
  * 	Matt Konstantinou
  * 	Michael Abramo
- *
+ *	Matt Witkowski
+ *  Bradley Crusco
  * Description:
- * Actor header file.
- *
- * Last Modified: Matthew Konstantinou
+ * BlockActor header file.
  *
  */
 
@@ -21,12 +20,12 @@ using namespace std;
 
 namespace bammm
 {
-	
-	class BlockActor : public Actor
+
+	class BlockActor: public Actor
 	{
 		public:
 			BlockActor();
-			BlockActor(string name, Vector3D* loc, int health);
+			BlockActor(string name, Vector3D* location, int health);
 	};
 
 	BlockActor::BlockActor()
@@ -35,10 +34,10 @@ namespace bammm
 		_location = new Vector3D();
 	}
 
-	BlockActor::BlockActor(string name, Vector3D* loc, int health)
+	BlockActor::BlockActor(string name, Vector3D* location, int health)
 	{
 		_name = name;
-		_location = loc;
+		_location = location;
 		MAX_HEALTH = health;
 	}
 }
