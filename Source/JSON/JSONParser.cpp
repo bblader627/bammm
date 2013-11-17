@@ -1,22 +1,27 @@
 /*
- * JSONParser.cpp
+ * CS585
  *
- *  Created on: Oct 20, 2013
- *      Author: michael
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * JSONParser cpp file.
+ *
  */
 
 #include "JSONParser.h"
 #include "../Resources/DynamicArray.h"
 
 using namespace std;
-using namespace bammm;
 
 namespace bammm
 {
-
 	void JSONParser::addRoot(JSON & newNode)
 	{
-		rootMap.add(newNode.getName(), newNode);
+		_rootMap.add(newNode.getName(), newNode);
 	}
 
 	void JSONParser::addChild(JSON & rootNode, JSON & newNode)
@@ -26,10 +31,10 @@ namespace bammm
 
 	HashMap<JSON>* JSONParser::getMap()
 	{
-		return &rootMap;
+		return &_rootMap;
 	}
 
-	bool JSONParser::parseFile(string filename)
+	bool JSONParser::parseFile(string fileName)
 	{
 
 		ifstream input;
@@ -42,11 +47,11 @@ namespace bammm
 		string name = "";
 		string value = "";
 
-		input.open(filename.c_str());
+		input.open(fileName.c_str());
 
 		if (!input.is_open())
 		{
-			cout << "Failed to open file: " << filename << " does not exist."
+			cout << "Failed to open file: " << fileName << " does not exist."
 					<< endl;
 			return false;
 		}
@@ -60,13 +65,10 @@ namespace bammm
 			{
 
 				case '[':
-
 					currentNode->setType(JSON_ARRAY);
-
 					isValue = false;
 					isArray++;
 					break;
-
 				case '{':
 					isValue = false;
 
@@ -85,7 +87,6 @@ namespace bammm
 						parentNode->addChild(*currentNode);
 					}
 					break;
-
 				case '"':
 
 					if (currentNode == NULL)
@@ -145,11 +146,9 @@ namespace bammm
 						}
 					}
 					break;
-
 				case ':':
 					isValue = true;
 					break;
-
 				case ',':
 					isValue = false;
 
@@ -160,13 +159,10 @@ namespace bammm
 					childNode->setParent(*currentNode);
 
 					currentNode = childNode;
-
 					break;
-
 				case ']':
 					isArray--;
 					break;
-
 				case '}':
 
 					if (parentNode == NULL)
@@ -177,7 +173,6 @@ namespace bammm
 					currentNode = parentNode;
 					*parentNode = currentNode->getParent();
 					break;
-
 				default:
 					break;
 			}
