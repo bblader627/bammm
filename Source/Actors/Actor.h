@@ -62,6 +62,8 @@ namespace bammm
 					int defense);
 			Actor(ActorInfo* info);
 
+			string to_string();
+
 			/**
 			 setMeleeWeapon
 			 @Pre-Condition- takes no arguments
@@ -320,6 +322,11 @@ namespace bammm
 		_staminaBar = info->getStamina();
 		_attack = info->getAttack();
 		_defense = info->getDefense();
+	}
+
+	string Actor::to_string()
+	{
+		return _name;
 	}
 
 	void Actor::setMeleeWeapon(MeleeWeapon* weapon)
