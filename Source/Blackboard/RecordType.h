@@ -1,8 +1,15 @@
 /*
- * RecordType.h
+ * CS585
  *
- *  Created on: Nov 9, 2013
- *      Author: bradley
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * RecordType header file.
+ *
  */
 
 #ifndef RECORDTYPE_H_
@@ -16,4 +23,4 @@ namespace bammm
 	};
 }
 
-#endif /* RECORDTYPE_H_ */
+#endif
