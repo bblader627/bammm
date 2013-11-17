@@ -5,11 +5,10 @@
  * 	Alvaro Home
  * 	Matt Konstantinou
  * 	Michael Abramo
- *
+ *	Matt Witkowski
+ *  Bradley Crusco
  * Description:
- * Actor header file.
- *
- * Last Modified: Alvaro Home
+ * DwarfActor header file.
  *
  */
 
@@ -22,83 +21,78 @@ using namespace bammm;
 
 namespace bammm
 {
-	class DwarfActor:public Actor
+	class DwarfActor: public Actor
 	{
-		//using Actor::velocity;
-	private:
-		float bloodAlcoholContent;
-		int goldCount;
+		private:
+			//TODO: Why do we need additional private members specifying bloodAlcoholContent and goldCount when Actor already has _BAC and _gold?
+			float _bloodAlcoholContent;
+			int _goldCount;
 
-	public:
-		DwarfActor()
-		{
-			_name = "Dwarf";
-			_alliance = ally;
-			bloodAlcoholContent = 0.00;
-			setMeleeWeapon(new Stein());
-			goldCount = 0;
-		}
+		public:
+			DwarfActor()
+			{
+				_name = "Dwarf";
+				_alliance = ally;
+				_bloodAlcoholContent = 0.00;
+				setMeleeWeapon(new Stein());
+				_goldCount = 0;
+				_bloodAlcoholContent = _BAC;
+			}
 
-		DwarfActor(float BAC, int gold)
-		{
-			_name = "Dwarf";
-			_alliance = ally;
-			bloodAlcoholContent = BAC;
-			setMeleeWeapon(new Stein());
-			goldCount = gold;
-		}
+			DwarfActor(float BAC, int gold)
+			{
+				_name = "Dwarf";
+				_alliance = ally;
+				_bloodAlcoholContent = BAC;
+				setMeleeWeapon(new Stein());
+				_goldCount = gold;
+			}
 
-		inline float getBAC()
-		{
-			return bloodAlcoholContent;
-		}
+			inline float getBAC()
+			{
+				return _bloodAlcoholContent;
+			}
 
-		inline float incrementBAC()
-		{
-			bloodAlcoholContent += 0.001;
-			//this->velocity -= 0.01;
-			return bloodAlcoholContent;
+			inline float incrementBAC()
+			{
+				_bloodAlcoholContent += 0.001;
+				return _bloodAlcoholContent;
 
-		}
+			}
 
-		inline float incrementBAC(float amount)
-		{
-			bloodAlcoholContent += amount;
-			return bloodAlcoholContent;
-		}
+			inline float incrementBAC(float amount)
+			{
+				_bloodAlcoholContent += amount;
+				return _bloodAlcoholContent;
+			}
 
-		inline float decrementBAC()
-		{
-			bloodAlcoholContent -= 0.001;
-			return bloodAlcoholContent;
-		}
+			inline float decrementBAC()
+			{
+				_bloodAlcoholContent -= 0.001;
+				return _bloodAlcoholContent;
+			}
 
-		inline float resetBAC()
-		{
-			// "Sleep it off"
-			bloodAlcoholContent = 0.00;
-			return bloodAlcoholContent;
-		}
+			inline float resetBAC()
+			{
+				_bloodAlcoholContent = 0.00;
+				return _bloodAlcoholContent;
+			}
 
-		inline int getGold()
-		{
-			return goldCount;
-		}
+			inline int getGold()
+			{
+				return _goldCount;
+			}
 
-		inline int addGold()
-		{
-			goldCount++;
-			return goldCount;
-		}
+			inline int addGold()
+			{
+				_goldCount++;
+				return _goldCount;
+			}
 
-		inline int addGold(int amount)
-		{
-			goldCount += amount;
-			return goldCount;
-		}
-
-
-
-
+			inline int addGold(int amount)
+			{
+				_goldCount += amount;
+				return _goldCount;
+			}
 	};
 }
