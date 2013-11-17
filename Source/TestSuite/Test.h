@@ -1,9 +1,15 @@
-/**
- * @file test.h
- * @class Test
- * @brief Class that defines a Test object, which holds a function to be tested and a name for that test.
- * @author: Bradley Crusco
- * @version 1.0 10/7/13
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * Test header file.
+ *
  */
 
 #ifndef TEST_H_
@@ -11,6 +17,9 @@
 
 #include <string>
 #include <functional>
+#include <cstdlib>
+
+using namespace std;
 
 namespace bammm
 {
@@ -19,15 +28,27 @@ namespace bammm
 		public:
 			typedef std::function<int(void)> Func;
 			Test();
-			Test(Func func, std::string name);
+			Test(Func function, std::string name);
 			virtual ~Test();
+
+			/**
+			 getFunction
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns Func _function
+			 */
 			Func getFunction();
-			std::string getName();
+
+			/**
+			 getName
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _name
+			 */
+			string getName();
 
 		private:
 			Func _function;
-			std::string _name;
+			string _name;
 	};
 }
 
-#endif /* TEST_H_ */
+#endif

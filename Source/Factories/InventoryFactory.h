@@ -7,13 +7,13 @@
  * 	Michael Abramo
  *
  * Description:
- * InventoryObject header file.
+ * InventoryFactory header file.
  *
  * Last Modified: Alvaro Home
  *
  */
-#ifndef INVENTORYOBJECT_H_
-#define INVENTORYOBJECT_H_
+#ifndef INVENTORYFACTORY_H_
+#define INVENTORYFACTORY_H_
 
 #include <iostream>
 
@@ -21,12 +21,9 @@ using namespace std;
 
 namespace bammm
 {
-	class InventoryObject
+	class InventoryFactory
 	{
-		public:
-			string id;
 
-			InventoryObject(string id);
 	};
 }
 #endif

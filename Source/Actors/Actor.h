@@ -11,6 +11,7 @@
  * Actor header file.
  *
  */
+
 #ifndef ACTOR_H_
 #define ACTOR_H_
 
@@ -64,7 +65,7 @@ namespace bammm
 			/**
 			 setMeleeWeapon
 			 @Pre-Condition- takes no arguments
-			 @Post-Condition- sets the weapon to w
+			 @Post-Condition- sets the weapon to weapon
 			 */
 			void setMeleeWeapon(MeleeWeapon* weapon);
 

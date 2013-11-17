@@ -1,3 +1,17 @@
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *	Bradley Crusco
+ * Description:
+ * DrinkState header file.
+ *
+ */
+
 #ifndef DRINKSTATE_H_
 #define DRINKSTATE_H_
 
@@ -13,24 +27,51 @@ using namespace std;
 
 namespace bammm
 {
+	class DrinkState: public State
+	{
+		private:
+			static const uint stoutSize = 5;
+			uint _stoutLife;
 
-    class DrinkState : public State
-    {
-    	private:
-    		//IStateCallback* _statemachine;
-    		static const uint stoutSize = 5;
-			uint stoutLife;
+		public:
+			DrinkState(Actor* actor);
+			DrinkState(Actor* actor, IStateCallback* stateMachine);
 
-        public:
-            DrinkState(Actor* actor);
-            DrinkState(Actor* actor, IStateCallback* statemachine);
-            void setup();
-            void breakdown();
-            void tick(float dTime);
-            void switchState(string nextState);
-			string to_string();
+			/**
+			 setup
+			 @Pre-Condition- No input
+			 @Post-Condition- Sets up the state
+			 */
+			void setup();
 
-    };
+			/**
+			 breakdown
+			 @Pre-Condition- No input
+			 @Post-Condition- Performs a breakdown on the state
+			 */
+			void breakdown();
+
+			/**
+			 tick
+			 @Pre-Condition- Takes in a float deltaTime
+			 @Post-Condition- Executes a tick of length deltaTime
+			 */
+			void tick(float deltaTime);
+
+			/**
+			 switchState
+			 @Pre-Condition- Takes in a string nextState
+			 @Post-Condition- The current state is switched to the given nextState
+			 */
+			void switchState(string nextState);
+
+			/**
+			 toString
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a string representation of the state
+			 */
+			string toString();
+	};
 
 	DrinkState::DrinkState(Actor* actor)
 	{
@@ -38,81 +79,92 @@ namespace bammm
 
 	}
 
-	DrinkState::DrinkState(Actor* actor, IStateCallback* statemachine)
+	DrinkState::DrinkState(Actor* actor, IStateCallback* stateMachine)
 	{
 		_actor = actor;
-		registerTransitionCallback(statemachine);
+		registerTransitionCallback(stateMachine);
 	}
 
-    void DrinkState::setup()
-    {
-        stoutLife = stoutSize;
-    }
+	void DrinkState::setup()
+	{
+		_stoutLife = stoutSize;
+	}
 
-    void DrinkState::breakdown()
-    {
-    	double bac = _actor->getBAC();
-    	if (bac < 0.1)
-    	{
-    		//Do nothing
-    	}
-    	else if (bac < 0.25)
-    	{
-    		cout << _actor->getName() << " puts down his drink.  He's slightly tipsy, but is ready to get back to work!" << endl;
-    	}
-    	else if (bac < 0.35)
+	void DrinkState::breakdown()
+	{
+		double BAC = _actor->getBAC();
+		if (BAC < 0.1)
 		{
-    		_actor->incrementBAC();
-			cout << _actor->getName() << " finishes his sloppily drink and slams it down on the counter, ready to go out and explore the village." << endl;
+			//Do nothing
 		}
-    	else if (bac < 0.5)
+		else if (BAC < 0.25)
 		{
-    		_actor->reduceHealth(2);
-    		cout << _actor->getName() << " is very drunk.  He gets up to leave and falls over a table before making his way out the door." << endl;
+			cout << _actor->getName()
+					<< " puts down his drink.  He's slightly tipsy, but is ready to get back to work!"
+					<< endl;
 		}
-    }
+		else if (BAC < 0.35)
+		{
+			_actor->incrementBAC();
+			cout << _actor->getName()
+					<< " finishes his sloppily drink and slams it down on the counter, ready to go out and explore the village."
+					<< endl;
+		}
+		else if (BAC < 0.5)
+		{
+			_actor->reduceHealth(2);
+			cout << _actor->getName()
+					<< " is very drunk.  He gets up to leave and falls over a table before making his way out the door."
+					<< endl;
+		}
+	}
 
-    void DrinkState::tick(float dTime)
-    {
-    	string name = _actor->getName();
-    	if (stoutLife==0)
-    	{
-    		stoutLife=5;
-    		if (!(_actor->spendGold(3)))
+	void DrinkState::tick(float deltaTime)
+	{
+		string name = _actor->getName();
+		if (_stoutLife == 0)
+		{
+			_stoutLife = 5;
+			if (!(_actor->spendGold(3)))
 			{
-				cout << _actor->getName() << " does not have enough gold to buy alcohol." << endl;
+				cout << _actor->getName()
+						<< " does not have enough gold to buy alcohol." << endl;
 				return;
 			}
-    	}
+		}
 
-		stoutLife--;
+		_stoutLife--;
 		_actor->reduceStamina(1);
 		_actor->incrementBAC();
 
 		if (_actor->getBAC() >= 0.5)
 		{
-			cout << name << " is too drunk to continue.  He drops his glass and passes out on the floor." << endl;
+			cout << name
+					<< " is too drunk to continue.  He drops his glass and passes out on the floor."
+					<< endl;
 			switchState("sleep");
 		}
-		else if(stoutLife < 1)
+		else if (_stoutLife < 1)
 		{
-			cout << name <<  " finishes his drink. \"There's nothin' like a Dwarveren Ale from Ironforge.\"" << "\n";
+			cout << name
+					<< " finishes his drink. \"There's nothin' like a Dwarveren Ale from Ironforge.\""
+					<< "\n";
 		}
 		else
 		{
 			cout << name << " takes a sip of the Dwarven Ale." << "\n";
 		}
-    }
+	}
 
-    void DrinkState::switchState(string nextState)
-    {
-    	_statemachine->switchState(this, nextState);
-    }
+	void DrinkState::switchState(string nextState)
+	{
+		_stateMachine->switchState(this, nextState);
+	}
 
-	string DrinkState::to_string()
+	string DrinkState::toString()
 	{
 		return "drink";
 	}
-
 }
+
 #endif

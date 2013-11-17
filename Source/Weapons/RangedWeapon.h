@@ -1,39 +1,56 @@
 /*
- * RangedWeapon.h
+ * CS585
  *
- *  Created on: Oct 27, 2013
- *      Author: michael
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * RangedWeapon header file.
+ *
  */
 
 #ifndef RANGEDWEAPON_H_
 #define RANGEDWEAPON_H_
 
 #include "IWeaponType.h"
-//#include "../Actors/Actor.h"
 
-namespace bammm{
-
+namespace bammm
+{
 	class Actor;
 
 	class RangedWeapon
 	{
 		private:
-
-		WeaponData* weaponData;
+			WeaponData* _weaponData;
 
 		public:
+			RangedWeapon();
+			virtual ~RangedWeapon();
 
-		RangedWeapon();
-		~RangedWeapon();
-		virtual int attack();
-		virtual bool canAttack();
-		virtual int getRange();
+			/**
+			 attack
+			 @Pre-Condition- No input
+			 @Post-Condition- Attack is executed
+			 */
+			virtual int attack();
 
+			/**
+			 canAttack
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns true if weapon can attack
+			 */
+			virtual bool canAttack();
+
+			/**
+			 getRange
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the distance between the weapon user and their target
+			 */
+			virtual int getRange();
 	};
-
 }
 
-
-
-
-#endif /* RANGEDWEAPON_H_ */
+#endif

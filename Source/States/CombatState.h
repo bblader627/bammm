@@ -1,3 +1,17 @@
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *	Bradley Crusco
+ * Description:
+ * CombatState header file.
+ *
+ */
+
 #ifndef ATTACKSTATE_H_
 #define ATTACKSTATE_H_
 
@@ -15,46 +29,68 @@ using namespace std;
 
 namespace bammm
 {
-    class CombatState : public State
-    {
-        public:
-            CombatState(Actor* actor);
-            CombatState(Actor* actor, IStateCallback* statemachine);
-            void setup();
-            void breakdown();
-            void tick(float dTime);
-			string to_string();
+	class CombatState: public State
+	{
+		public:
+			CombatState(Actor* actor);
+			CombatState(Actor* actor, IStateCallback* stateMachine);
 
-        private:
-    };
+			/**
+			 setup
+			 @Pre-Condition- No input
+			 @Post-Condition- Sets up the state
+			 */
+			void setup();
+
+			/**
+			 breakdown
+			 @Pre-Condition- No input
+			 @Post-Condition- Performs a breakdown on the state
+			 */
+			void breakdown();
+
+			/**
+			 tick
+			 @Pre-Condition- Takes in a float deltaTime
+			 @Post-Condition- Executes a tick of length deltaTime
+			 */
+			void tick(float deltaTime);
+
+			/**
+			 toString
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a string representation of the state
+			 */
+			string toString();
+	};
 
 	CombatState::CombatState(Actor* actor)
 	{
 		_actor = actor;
 	}
 
-	CombatState::CombatState(Actor* actor, IStateCallback* statemachine)
+	CombatState::CombatState(Actor* actor, IStateCallback* stateMachine)
 	{
 		_actor = actor;
-
-		registerTransitionCallback(statemachine);
+		registerTransitionCallback(stateMachine);
 	}
 
-    void CombatState::setup()
-    {
-    }
+	void CombatState::setup()
+	{
+	}
 
-    void CombatState::breakdown()
-    {
-    }
+	void CombatState::breakdown()
+	{
+	}
 
-    void CombatState::tick(float dTime)
-    {
-    }
+	void CombatState::tick(float deltaTime)
+	{
+	}
 
-	string CombatState::to_string()
+	string CombatState::toString()
 	{
 		return "combat";
 	}
 }
+
 #endif

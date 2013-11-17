@@ -5,13 +5,10 @@
  * 	Alvaro Home
  * 	Matt Konstantinou
  * 	Michael Abramo
- * 	Bradley Crusco
- * 	Matt Witkowski
- *
+ *	Matt Witkowski
+ *	Bradley Crusco
  * Description:
  * StateMachine header file.
- *
- * Last Modified: Matthew Konstantinou
  *
  */
 
@@ -24,143 +21,146 @@
 #include "IStateCallback.h"
 #include "State.h"
 
-#include "../States/State.h"
-
-
 #ifndef NULL
 #define NULL (void *)0
 #endif
 
 using namespace std;
-using namespace bammm;
 
-
-class StateMachine : public IStateCallback
+namespace bammm
 {
-	private:
-		DynamicArray<State*>* currentStates;
-		HashMap<State*>* _allStates;
-		Actor* _actor;
-	public:
-		/*
-		 * Default Constructor
-		 */
-		StateMachine(Actor* actor, HashMap<State*>* allStates);
-		void initialState(State* initial);
-		void tick(float dTime);
-		void switchState(State* current, State* newState);
-		void switchState(State* current, string newStateString);
-		void addState(State* newState);
-		void removeState(State* oldState);
-		DynamicArray<State*>* getCurrentStates();
-		virtual ~StateMachine()
+	class StateMachine: public IStateCallback
+	{
+		private:
+			DynamicArray<State*>* currentStates;
+			HashMap<State*>* _allStates;
+			Actor* _actor;
+
+		public:
+			StateMachine(Actor* actor, HashMap<State*>* allStates);
+			virtual ~StateMachine();
+
+			/**
+			 setup
+			 @Pre-Condition- Takes in a State* initial
+			 @Post-Condition- Sets the initial state of the state machine as the given initial
+			 */
+			void initialState(State* initial);
+
+			/**
+			 tick
+			 @Pre-Condition- Takes in a float deltaTime
+			 @Post-Condition- Executes a tick of length deltaTime
+			 */
+			void tick(float deltaTime);
+
+			/**
+			 switchState
+			 @Pre-Condition- Takes in two pointers to States, the current state and the newState
+			 @Post-Condition- The current state is switched to the given newState
+			 */
+			void switchState(State* current, State* newState);
+
+			/**
+			 switchState
+			 @Pre-Condition- Takes in a pointer to the current State and a string representing new state
+			 @Post-Condition- The current state is switched to the state specified by the string newStateString
+			 */
+			void switchState(State* current, string newStateString);
+
+			/**
+			 addState
+			 @Pre-Condition- Takes in a pointer to a State state
+			 @Post-Condition- Adds the given State state to the state machine
+			 */
+			void addState(State* state);
+
+			/**
+			 removeState
+			 @Pre-Condition- Takes in a pointer to a State state
+			 @Post-Condition- Removes the given State state from the state machine
+			 */
+			void removeState(State* state);
+
+			/**
+			 getCurrentStates
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns all the current states in the state machine
+			 */
+			DynamicArray<State*>* getCurrentStates();
+			string toString();
+	};
+
+	StateMachine::StateMachine(Actor* actor, HashMap<State*>* allStates)
+	{
+		_actor = actor;
+		currentStates = new DynamicArray<State*>();
+		_allStates = allStates;
+	}
+
+	virtual StateMachine::~StateMachine()
+	{
+		delete _actor;
+	}
+
+	void StateMachine::initialState(State* initial)
+	{
+		initial->setup();
+		currentStates->add(initial);
+	}
+
+	void StateMachine::tick(float deltaTime)
+	{
+
+		for (int i = 0; i < (int) currentStates->getSize(); i++)
 		{
-			delete _actor;
+			State* thisState = currentStates->get(i);
+			thisState->tick(0);
 		}
-		string to_string();
+	}
 
-};
-		StateMachine::StateMachine(Actor* actor, HashMap<State*>* allStates)
-		{
-			_actor = actor;
-			currentStates = new DynamicArray<State*>();
-			_allStates = allStates;
-		}
+	void StateMachine::switchState(State* current, State* newState)
+	{
+		removeState(current);
+		addState(newState);
 
-		void StateMachine::initialState(State* initial)
-		{
-			initial->setup();
-			currentStates->add(initial);
-		}
+	}
 
-		/*
-		 * tick
-		 * Pre-Condition-
-		 * Post-Condition-
-		 *
-		 * Calls currentStates[i].setup() on every state in the array
-		 * setup() updates states
-		 */
-		void StateMachine::tick(float dTime)
-		{
-
-			for(int i = 0; i < (int) currentStates->getSize(); i++)
-			{
-				State* thisState = currentStates->get(i);
-				thisState->tick(0);
-			}
-		}
-
-		/*
-		 * switchState
-		 *
-		 * Pre-Condition-
-		 * Post-Condition-
-		 *
-		 *PlayerController will be calling switchState
-		 */
-		void StateMachine::switchState(State* current, State* newState)
+	void StateMachine::switchState(State* current, string newStateString)
+	{
+		if (newStateString == "null")
 		{
 			removeState(current);
-			addState(newState);
-
+			return;
 		}
-
-		void StateMachine::switchState(State* current, string newStateString)
+		State* newState = _allStates->getValue(newStateString);
+		if (newState != NULL)
 		{
-			if (newStateString=="null")
-			{
-				removeState(current);
-				return;
-			}
-			State* newState = _allStates->getValue(newStateString);
-			if (newState != NULL)
-			{
-				switchState(current, newState);
-			}
+			switchState(current, newState);
 		}
+	}
 
-		/*
-		 * addState
-		 * Pre-Condition- accepts pointer to state to be added
-		 * Post-Condition-no return
-		 *
-		 * Called from a Controller
-		 * Adds currently running states to array
-		 */
-		void StateMachine::addState(State* newState)
-		{
-			newState->setup();
-			currentStates->add(newState);
-		}
+	void StateMachine::addState(State* state)
+	{
+		state->setup();
+		currentStates->add(state);
+	}
 
-		/*
-		 * removeState
-		 * Pre-Condition- accepts pointer to state to be removed
-		 * Post-Condition- breaks down states and removies it from array
-		 */
-		void StateMachine::removeState(State* oldState)
-		{
-			oldState->breakdown();
-			currentStates->removeElem(oldState);
-		}
+	void StateMachine::removeState(State* state)
+	{
+		state->breakdown();
+		currentStates->removeElement(state);
+	}
 
-		/**
-		 * getCurrentStates
-		 * Pre-Condition-
-		 * Post-Condition-
-		 *
-		 * Called from Controller
-		 * Returns currently running states
-		 */
-		DynamicArray<State*>* StateMachine::getCurrentStates()
-		{
-			return currentStates;
-		}
+	DynamicArray<State*>* StateMachine::getCurrentStates()
+	{
+		return currentStates;
+	}
 
+	string StateMachine::toString()
+	{
+		return "statemachine";
+	}
+}
 
-		string StateMachine::to_string()
-		{
-			return "statemachine";
-		}
 #endif

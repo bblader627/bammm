@@ -34,6 +34,11 @@ namespace bammm
 		return &_rootMap;
 	}
 
+	JSON JSONParser::getRootNode(string key)
+	{
+		return _rootMap.getValue(key);
+	}
+
 	bool JSONParser::parseFile(string fileName)
 	{
 
