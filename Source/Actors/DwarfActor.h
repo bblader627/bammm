@@ -11,6 +11,8 @@
  * DwarfActor header file.
  *
  */
+#ifndef DWARFACTOR_H_
+#define DWARFACTOR_H_
 
 #include <iostream>
 #include "../SceneManager/Vector3D.h"
@@ -96,3 +98,4 @@ namespace bammm
 			}
 	};
 }
+#endif
