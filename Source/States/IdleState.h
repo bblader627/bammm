@@ -11,6 +11,7 @@
  * IdleState header file.
  *
  */
+
 #ifndef IDLESTATE_H_
 #define IDLESTATE_H_
 
