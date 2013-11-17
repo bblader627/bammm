@@ -24,9 +24,6 @@
 #include "IStateCallback.h"
 #include "State.h"
 
-#include "../States/State.h"
-
-
 #ifndef NULL
 #define NULL (void *)0
 #endif
