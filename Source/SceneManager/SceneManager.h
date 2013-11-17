@@ -1,3 +1,17 @@
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * SceneManager header file.
+ *
+ */
+
 #ifndef SCENEMANAGER_H_
 #define SCENEMANAGER_H_
 
