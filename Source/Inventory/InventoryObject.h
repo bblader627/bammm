@@ -23,6 +23,10 @@ namespace bammm
 {
 	class InventoryObject
 	{
+		public:
+			string id;
+
+			InventoryObject(string id);
 	};
 }
 #endif
