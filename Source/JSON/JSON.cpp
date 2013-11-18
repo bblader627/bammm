@@ -38,10 +38,15 @@ namespace bammm
 
 	JSON::~JSON()
 	{
+		cout << "Deleting JSON\n";
 	}
 
 	JSON JSON::getParent()
 	{
+		if(_parent == NULL)
+		{
+			cout << "Parent is null\n";
+		}
 		return *_parent;
 	}
 

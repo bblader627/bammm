@@ -65,22 +65,22 @@ namespace bammm
 		{
 
 			current = (char) input.get();
-
 			switch (current)
 			{
 
 				case '[':
+					cout << "Parsing [" << "\n";
 					currentNode->setType(JSON_ARRAY);
 					isValue = false;
 					isArray++;
 					break;
 				case '{':
+					cout << "Parsing {" << "\n";
 					isValue = false;
-
 					if (currentNode == NULL)
 					{
 						currentNode = new JSON();
-						this->addRoot(*currentNode);
+						addRoot(*currentNode);
 						// JSON node is created - now we continue so we may parse the name and set values
 					}
 					else
@@ -94,6 +94,7 @@ namespace bammm
 					break;
 				case '"':
 
+					cout << "Parsing \"" << "\n";
 					if (currentNode == NULL)
 					{
 						cout << "Error reading in JSON object" << endl;
@@ -101,6 +102,8 @@ namespace bammm
 					}
 
 					current = (char) input.get();
+					name = "";
+					value = "";
 					while (!input.eof() && current != '"')
 					{
 						if (isValue == false)
@@ -152,24 +155,29 @@ namespace bammm
 					}
 					break;
 				case ':':
+					cout << "Parsing :" << "\n";
 					isValue = true;
 					break;
 				case ',':
+					cout << "Parsing ," << "\n";
 					isValue = false;
 
 					childNode = new JSON();
-
+					cout << "Before getParent()\n";
 					*currentNode = currentNode->getParent();
+					cout << "Before addChild\n";
 					currentNode->addChild(*childNode);
+					cout << "Before setParent\n";
 					childNode->setParent(*currentNode);
 
 					currentNode = childNode;
 					break;
 				case ']':
+					cout << "Parsing ]" << "\n";
 					isArray--;
 					break;
 				case '}':
-
+					cout << "Parsing }" << "\n";
 					if (parentNode == NULL)
 					{
 						break;

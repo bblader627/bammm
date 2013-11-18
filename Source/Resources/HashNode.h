@@ -34,7 +34,7 @@ namespace bammm
 
 		public:
 			HashNode();
-			HashNode(string key, T value);
+			HashNode(string key, T& value);
 			virtual ~HashNode();
 
 			/**
@@ -88,7 +88,7 @@ namespace bammm
 	}
 
 	template<class T>
-	HashNode<T>::HashNode(string key, T value)
+	HashNode<T>::HashNode(string key, T& value)
 	{
 		_key = key;
 		_value = value;
