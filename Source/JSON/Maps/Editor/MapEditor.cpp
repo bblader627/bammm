@@ -11,6 +11,17 @@ namespace bammm
 
 	MapEditor::~MapEditor()
 	{
+		for(int i = 0; i < _y; i++)
+		{
+			for(int j = 0; j < _x; j++)
+			{
+				delete[] _grid[i][j];
+			}
+
+			delete[] _grid[i];
+		}
+
+		delete[] _grid;
 	}
 
 	bool MapEditor::loadMap(string filename)
