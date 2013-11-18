@@ -17,6 +17,7 @@ namespace bammm
 			int successChance;
 			int maxGold;
         public:
+			~MineState();
             MineState(Actor& actor);
             MineState(Actor& actor, IStateCallback& statemachine);
             void setup();
@@ -25,6 +26,10 @@ namespace bammm
             void switchState(string nextState);
             string to_string();
     };
+
+	MineState::~MineState()
+	{
+	}
 
 	MineState::MineState(Actor& actor)
 	{

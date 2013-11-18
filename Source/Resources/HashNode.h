@@ -40,7 +40,7 @@ namespace bammm
 			virtual ~HashNode();
 			string getKey();
 			void setKey(string key);
-			T getValue();
+			T& getValue();
 			void setValue(T value);
 			HashNode& getNextNode();
 			void setNextNode(HashNode& node);
@@ -108,7 +108,7 @@ namespace bammm
 	 * @return T
 	 */
 	template<class T>
-	T HashNode<T>::getValue()
+	T& HashNode<T>::getValue()
 	{
 		return _value;
 	}

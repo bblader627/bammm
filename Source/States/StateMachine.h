@@ -83,10 +83,10 @@ class StateMachine : public IStateCallback
 		 */
 		void StateMachine::tick(float dTime)
 		{
-
 			for(int i = 0; i < (int) currentStates.getSize(); i++)
 			{
-				currentStates.get(i).tick(0);
+				cout << "Before tick\n";
+				currentStates.get(i).tick(dTime);
 			}
 		}
 

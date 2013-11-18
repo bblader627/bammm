@@ -50,7 +50,7 @@ namespace bammm
 			HashNode<T>* getNode(string);
 			DynamicArray<string>* getAllKeys();
 			DynamicArray<T>* getAllValues();
-			T getValue(string key);
+			T& getValue(string key);
 			void printBucket(int index);
 			void printTable();
 	};
@@ -263,7 +263,7 @@ namespace bammm
 	 * @return T
 	 */
 	template<class T>
-	T HashMap<T>::getValue(string key)
+	T& HashMap<T>::getValue(string key)
 	{
 		int bucket = hashString(key);
 		HashNode<T>* temporary = hashMap[bucket];
