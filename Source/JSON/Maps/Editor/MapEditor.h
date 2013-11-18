@@ -17,17 +17,13 @@ namespace bammm
 			int _cursorY;
 			int _cursorZ;
 			string _name;
-			char _grid[10][10][10];
+			char*** _grid;
 			JSONParser _parser;
 			ofstream fileOutput;
-
-		public:
-			MapEditor();
-			~MapEditor();
+			
 			bool loadMap(string filename);
 			bool saveMap();
 			void createMap(int x, int y, int z);
-			void startEditor();
 			void removeItem(int x, int y, int z);
 			void addItem(int x, int y, int z, char item);
 			void displayMap();
@@ -45,6 +41,11 @@ namespace bammm
 			string createBarrierJson();
 			string createMineJson();
 			string createBuildingJson();
+
+		public:
+			MapEditor();
+			~MapEditor();
+			void startEditor();
 	};
 }
 
