@@ -15,15 +15,19 @@ namespace bammm
 
 	bool MapEditor::loadMap(string filename)
 	{
-		cout << filename << "\n";
-		_parser.parseFile(filename);
+		cout << "Under construction. Needs JsonParser\n";
+		//cout << filename << "\n";
+		//_parser.parseFile(filename);
 		return true;
 	}
 
 	bool MapEditor::saveMap()
 	{
-		_name = "Map";
-		cout << createJson();
+		cout << "Save as: \n";
+		cin >> _name;
+		fileOutput.open(_name + ".json");
+		fileOutput << createJson();
+		fileOutput.close();
 		return true;
 	}
 

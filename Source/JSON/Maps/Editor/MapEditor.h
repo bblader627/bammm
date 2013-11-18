@@ -3,6 +3,7 @@
 
 #include "../../JSONParser.h"
 #include <iostream>
+#include <fstream>
 #include <string>
 namespace bammm
 {
@@ -18,6 +19,8 @@ namespace bammm
 			string _name;
 			char _grid[10][10][10];
 			JSONParser _parser;
+			ofstream fileOutput;
+
 		public:
 			MapEditor();
 			~MapEditor();
