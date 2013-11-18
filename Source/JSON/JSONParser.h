@@ -189,7 +189,6 @@ namespace bammm
 			 @Pre-Condition- Takes in the key of the desired JSON node
 			 @Post-Condition- Returns the JSON node with name "key"
 			 */
-
 			JSON getRootNode(string key);
 	};
 }
