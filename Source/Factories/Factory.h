@@ -56,29 +56,14 @@ namespace bammm
 		string filename = "/home/matthew/workspace/bammm/Source/JSON/actors.json";
 		parser->parseFile(filename);
 
-
-
 		cout << "poop" << endl;
 
 		HashMap<JSON>* rootMap = parser->getMap();
-
-		cout << "1" << endl;
-
 		cout << rootMap->getNumerOfNodes() << endl;
 
-		/*
-		JSON* dwarfJSON = rootMap->getValue("dwarves");
-		if (dwarfJSON == NULL)
-		{
-			cout << "caught NULL" << endl;
-			return;
-		}
-		cout << "2" << endl;
 
-
-		HashMap<JSON>* dwarves = dwarfJSON->getChildren();
-
-		cout << "poop2" << endl;
+		JSON dwarfJSON = rootMap->getValue("dwarves");
+		HashMap<JSON>* dwarves = dwarfJSON.getChildren();
 		DynamicArray<JSON>* dwarfArray = dwarves->getAllValues();
 
 		int size = dwarfArray->getSize();
@@ -87,9 +72,19 @@ namespace bammm
 			//ActorInfo info = new ActorInfo();
 			//info.setName(dwarfArray->get(i).)
 			//actorData.add()
-			cout << dwarfArray->get(i).getName() << endl;
+			JSON dwarf = dwarfArray->get(i);
+			string name = dwarf["name"];
+			string health = dwarf["health"];
+			string stamina = dwarf["stamina"];
+			string attack = dwarf["attack"];
+			string defense = dwarf["defense"];
+
+
+			//ActorInfo* info = new ActorInfo(name, health, stamina, attack, defense);
+			//actorData.add(name, info);
+
+			cout << name << endl;
 		}
-		*/
 
 	}
 	/*
