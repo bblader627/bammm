@@ -18,6 +18,7 @@
 #include <iostream>
 #include "../Resources/DynamicArray.h"
 #include "Vector3D.h"
+#include "../Resources/Stack.h"
 #include "../Actors/Actor.h"
 
 using namespace std;
@@ -42,6 +43,20 @@ namespace bammm
 			 @Post-Condition- Converts it to an int representing a position in the grid
 			 */
 			int convertToPosition(Vector3D* vector);
+
+			/*
+			 * convertToVector
+			 * @Pre-Condition- Takes integer
+			 * @Post-Condition- Converts integer to vector3d
+			 */
+			Vector3D* convertToVector(int position);
+
+			/*
+			 * getPath
+			 * @Pre-Condition- takes Position of actor to be found, current location, and stack of directions
+			 * @Post-Condition- returns stack of directions
+			 */
+			Stack<Vector3D*>* getPath(Vector3D* actorPos, Vector3D* currentLoc, Stack<Vector3D*>* path);
 
 		public:
 			Grid3D();
@@ -85,7 +100,22 @@ namespace bammm
 			bool remove(Vector3D *vector, T object);
 
 			/*
-			 toString
+			 * getPath
+			 * @Pre-Condition- takes current Actor, destination string
+			 * @Post-Condition- returns stack of directions
+			 */
+			Stack<Vector3D*>* getPath(Actor* actor, string destination);
+
+			Vector3D* findInGrid(string target);
+
+			string to_string();
+			T getEnemy(Vector3D* loc, T actor);
+			DynamicArray<T>* access(int x, int y, int z);
+			void add(Vector3D* vect, T add);
+			void move(T actor, Vector3D* newLoc);
+			void moveTowards(T ordered, Vector3D* loc);
+			/*
+			toString
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns a string that represents the Grid3D
 			 */
@@ -224,6 +254,101 @@ namespace bammm
 	}
 
 	template<class T>
+	Stack<Vector3D*>* Grid3D<T>::getPath(Actor* actor, string destination)
+	{
+		Vector3D* target = findInGrid(destination);
+		if (target==NULL)
+		{
+			return new Stack<Vector3D*>();
+		}
+
+		Vector3D* actorLocation = actor->getLocation();
+		return getPath(actorLocation, target, new Stack<Vector3D*>);
+
+	}
+
+	template<class T>
+	Stack<Vector3D*>* Grid3D<T>::getPath(Vector3D* actorPos, Vector3D* currentLoc, Stack<Vector3D*>* path)
+	{
+		/*
+		 UP = { 0, 1, 0 };
+		 DOWN = { 0, -1, 0 };
+		 LEFT = { -1, 0, 0};
+		 RIGHT = { 1, 0, 0 };
+		 ZERO = { 0, 0, 0 };
+		 */
+
+		int actorPosition = convertToPosition(actorPos);
+		int currentPosition = convertToPosition(currentLoc);
+		if (actorPosition == currentPosition)
+		{
+			return path;
+		}
+
+		if (actorPosition < currentPosition) //Have to go down or left of currentLoc(Favor left)
+		{
+			for (int xDiff = currentPosition % actorPosition; xDiff > 0; xDiff--)
+			{
+				DynamicArray<T*>* cell = _grid->get(currentPosition);
+				if (cell->_size == 0)
+				{
+					path->push(new Vector3D(-1, 0, 0));
+					currentPosition -= 1;
+				}
+				else
+				{
+					//break loop
+					xDiff = 0;
+					currentLoc = convertToVector(currentPosition);
+					return getPath(actorPos, currentLoc, path);
+
+				}
+			}
+		}
+		else if (actorPosition > currentPosition) //Anywhere up or to the right on the same y
+		{
+			if ((actorPosition - currentPosition) < _width)
+			{
+				//Same Y; Move RIGHT
+				//return path when found
+				for (int xDiff = actorPosition - currentPosition; xDiff > 0; xDiff--)
+				{
+					DynamicArray<T*>* cell = _grid->get(currentPosition);
+					if (cell->_size == 0)
+					{
+						path->push(new Vector3D(1, 0, 0));
+						currentPosition += 1;
+					}
+					else
+					{
+						xDiff = 0;
+						currentLoc = convertToVector(currentPosition);
+						return getPath(actorPos, currentLoc, path);
+					}
+
+				}
+			}
+			else
+			{
+				path->push(new Vector3D(0, 1, 0));
+				currentPosition += _width;
+				currentLoc = convertToVector(currentPosition);
+				return getPath(actorPos, currentLoc, path);
+				//move up
+				//recursion
+			}
+		}
+
+
+	}
+
+	template<class T>
+	Vector3D* Grid3D<T>::findInGrid(string target)
+	{
+		return new Vector3D();
+	}
+
+	template <class T>
 	string Grid3D<T>::toString()
 	{
 		string gridString = "";
@@ -284,6 +409,8 @@ namespace bammm
 		remove(actor->getLocation(), actor);
 		delete actor->getLocation();
 		add(newLocation, actor);
+		add(newLocation, actor);
+
 	}
 
 	template<class T>
@@ -383,6 +510,15 @@ namespace bammm
 	{
 		return vector->x() + (vector->y() * _width)
 				+ (vector->z() * _width * _height);
+	}
+
+	template<class T>
+	Vector3D* Grid3D<T>::convertToVector(int position)
+	{
+		int z = position % (_length * _width);
+		int y = position % _width;
+		int x = position % _length;
+		return new Vector3D(x, y, z);
 	}
 }
 

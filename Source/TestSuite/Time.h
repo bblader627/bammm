@@ -1,9 +1,15 @@
-/**
- * @file time.h
- * @class Time
- * @brief Contains all functions related to time to be used by TestSuite for recording start, end, and duration time values.
- * @author: Bradley Crusco
- * @version 1.0 10/7/13
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * Time header file.
+ *
  */
 
 #ifndef TIME_H_
@@ -11,50 +17,81 @@
 
 #include <sys/time.h>
 #include <ostream>
+
+using namespace std;
+
 namespace bammm
 {
-    class Time
-    {
-        public:
-            Time();
-            Time(unsigned int sec, unsigned int usec);
-            virtual ~Time();
-            unsigned int getSeconds() const;
-            unsigned int getUseconds() const;
-            static Time current();
-            Time operator+(const Time& time) const;
-            Time operator-(const Time& time) const;
+	class Time
+	{
+		private:
+			unsigned int _seconds;
+			unsigned int _uSeconds;
 
-        private:
-            unsigned int _sec;
-            unsigned int _usec;
-    };
+		public:
+			Time();
+			Time(unsigned int seconds, unsigned int uSeconds);
+			virtual ~Time();
 
-    /**
-     * std::basic_ostream<charT, traits>& operator<<()
-     * Operator for outputing a Time object to a stream.
-     *
-     * @param os The output stream.
-     * @param time The time object to be output.
-     * @return template<typename charT, typename traits>
-     */
-    template<typename charT, typename traits>
-    std::basic_ostream<charT, traits>& operator<<(
-            std::basic_ostream<charT, traits>& os, const Time& time)
-    {
-        int old_fill(os.fill());
-        int old_width(os.width());
+			/**
+			 getSeconds
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _seconds
+			 */
+			unsigned int getSeconds() const;
 
-        os << time.getSeconds() << '.';
-        os.fill('0');
-        os.width(6);
-        os << time.getUseconds();
+			/**
+			 getUSeconds
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _uSeconds
+			 */
+			unsigned int getUSeconds() const;
 
-        os.fill(old_fill);
-        os.width(old_width);
+			/**
+			 current
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the current Time
+			 */
+			static Time current();
 
-        return os;
-    }
+			/**
+			 operator+
+			 @Pre-Condition- Takes in const Time& time
+			 @Post-Condition- Performs and returns the result of an addition between two Time objects
+			 */
+			Time operator+(const Time& time) const;
+
+			/**
+			 operator-
+			 @Pre-Condition- Takes in const Time& time
+			 @Post-Condition- Performs and returns the result of a subtraction between two Time objects
+			 */
+			Time operator-(const Time& time) const;
+	};
+
+	/**
+	 operator<<
+	 @Pre-Condition- Takes in a std::basic_ostream<charT, traits>& and a const Time&
+	 @Post-Condition- The given time is passed to the given outStream
+	 Note: Was implemented here due to issues compiling otherwise
+	 */
+	template<typename charT, typename traits>
+	std::basic_ostream<charT, traits>& operator<<(
+			std::basic_ostream<charT, traits>& outStream, const Time& time)
+	{
+		int oldFill(outStream.fill());
+		int oldwidth(outStream.width());
+
+		outStream << time.getSeconds() << '.';
+		outStream.fill('0');
+		outStream.width(6);
+		outStream << time.getUSeconds();
+
+		outStream.fill(oldFill);
+		outStream.width(oldwidth);
+
+		return outStream;
+	}
 }
 
-#endif /* TIME_H_ */
+#endif

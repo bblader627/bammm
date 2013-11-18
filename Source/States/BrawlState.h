@@ -1,3 +1,17 @@
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *	Bradley Crusco
+ * Description:
+ * BrawlState header file.
+ *
+ */
+
 #ifndef BRAWLSTATE_H_
 #define DEFINE BRAWLSTATE_H_
 
@@ -10,44 +24,67 @@ typedef unsigned int UINT;
 
 namespace bammm
 {
-    class BrawlState : public State
-    {
-        public:
-            BrawlState(Actor* actor);
-            BrawlState(Actor* actor, IStateCallback* statemachine);
-            void setup();
-            void breakdown();
-            void tick(float dTime);
-			string to_string();
+	class BrawlState: public State
+	{
+		public:
+			BrawlState(Actor* actor);
+			BrawlState(Actor* actor, IStateCallback* stateMachine);
 
-        private:
-    };
+			/**
+			 setup
+			 @Pre-Condition- No input
+			 @Post-Condition- Sets up the state
+			 */
+			void setup();
 
-    BrawlState::BrawlState(Actor* actor)
-    {
-		_actor = actor;
-    }
+			/**
+			 breakdown
+			 @Pre-Condition- No input
+			 @Post-Condition- Performs a breakdown on the state
+			 */
+			void breakdown();
 
-    BrawlState::BrawlState(Actor* actor, IStateCallback* statemachine)
+			/**
+			 tick
+			 @Pre-Condition- Takes in a float deltaTime
+			 @Post-Condition- Executes a tick of length deltaTime
+			 */
+			void tick(float deltaTime);
+
+			/**
+			 toString
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a string representation of the state
+			 */
+			string toString();
+	};
+
+	BrawlState::BrawlState(Actor* actor)
 	{
 		_actor = actor;
-		registerTransitionCallback(statemachine);
 	}
 
-    void BrawlState::setup()
-    {
-    }
+	BrawlState::BrawlState(Actor* actor, IStateCallback* stateMachine)
+	{
+		_actor = actor;
+		registerTransitionCallback(stateMachine);
+	}
 
-    void BrawlState::breakdown()
-    {
-    }
+	void BrawlState::setup()
+	{
+	}
 
-    void BrawlState::tick(float dTime)
-    {
-        cout << _actor->getName() << " pulls his right arm back and then thrusts his arm forward by twisting his core. \"DWARF PUNCHHHH!\"\n";
-    }
+	void BrawlState::breakdown()
+	{
+	}
 
-	string BrawlState::to_string()
+	void BrawlState::tick(float deltaTime)
+	{
+		cout << _actor->getName()
+				<< " pulls his right arm back and then thrusts his arm forward by twisting his core. \"DWARF PUNCHHHH!\"\n";
+	}
+
+	string BrawlState::toString()
 	{
 		return "brawl";
 	}

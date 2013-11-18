@@ -1,8 +1,22 @@
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *	Bradley Crusco
+ * Description:
+ * MineState header file.
+ *
+ */
+
 #ifndef MINESTATE_H_
 #define MINESTATE_H_
 
-#include "State.h"
 #include <iostream>
+#include "State.h"
 
 #ifndef UINT
 #define UINT
@@ -11,94 +25,106 @@ typedef unsigned int UINT;
 
 namespace bammm
 {
-    class MineState : public State
-    {
+	class MineState: public State
+	{
 		private:
-			int successChance;
-			int maxGold;
-        public:
-            MineState(Actor* actor);
-            MineState(Actor* actor, IStateCallback* statemachine);
-            void setup();
-            void breakdown();
-            void tick(float dTime);
-            void switchState(string nextState);
-            string to_string();
-    };
+			int _successChance;
+			int _maximumGold;
+
+		public:
+			MineState(Actor* actor);
+			MineState(Actor* actor, IStateCallback* stateMachine);
+
+			/**
+			 setup
+			 @Pre-Condition- No input
+			 @Post-Condition- Sets up the state
+			 */
+			void setup();
+
+			/**
+			 breakdown
+			 @Pre-Condition- No input
+			 @Post-Condition- Performs a breakdown on the state
+			 */
+			void breakdown();
+
+			/**
+			 tick
+			 @Pre-Condition- Takes in a float deltaTime
+			 @Post-Condition- Executes a tick of length deltaTime
+			 */
+			void tick(float deltaTime);
+
+			/**
+			 switchState
+			 @Pre-Condition- Takes in a string nextState
+			 @Post-Condition- The current state is switched to the given nextState
+			 */
+			void switchState(string nextState);
+
+			/**
+			 toString
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a string representation of the state
+			 */
+			string toString();
+	};
 
 	MineState::MineState(Actor* actor)
 	{
 		_actor = actor;
-		maxGold = 15;
+		_maximumGold = 15;
 	}
-	MineState::MineState(Actor* actor, IStateCallback* statemachine)
+	MineState::MineState(Actor* actor, IStateCallback* stateMachine)
 	{
 		_actor = actor;
-		maxGold = 15;
-		registerTransitionCallback(statemachine);
+		_maximumGold = 15;
+		registerTransitionCallback(stateMachine);
 	}
-    /*
-     * setup
-     * Pre-Condition- no parameters
-     * Post-Condition- sets _actor's member variables necessary for beginning a state
-     */
-    void MineState::setup()
-    {
 
-    	successChance = 30;
-    	maxGold = 100;
+	void MineState::setup()
+	{
+		_successChance = 30;
+		_maximumGold = 100;
+	}
 
-    }
+	void MineState::breakdown()
+	{
+	}
 
-    void MineState::breakdown()
-    {
-    }
+	void MineState::tick(float deltaTime)
+	{
+		if (_actor->getBAC() > 0.4)
+		{
+			cout << _actor->getName()
+					<< " drunkenly swings the pickaxe, hits himself in the foot, and decides not to do that anymore."
+					<< endl;
+			switchState("null"); //Ends this state;
+			return;
+		}
 
-    void MineState::tick(float dTime)
-    {
-    	if (_actor->getBAC() > 0.4)
-    	{
-    		cout << _actor->getName() << " drunkenly swings the pickaxe, hits himself in the foot, and decides not to do that anymore." << endl;
-    		switchState("null"); //ends this state;
-    		return;
-    	}
+		_actor->reduceStamina(1);
+		_actor->addGold(1);
+		cout << _actor->getName()
+				<< " lifts his pickaxe, and swings it at the rock. " << endl;
+		cout << _actor->getGold() << endl;
+		if (_actor->getGold() > _maximumGold)
+		{
+			cout << _actor->getName() << "'s purse is full!" << endl;
+			switchState("drink");
+		}
+	}
 
-        //int random = rand() % 100 + 1;
-    	_actor->reduceStamina(1);
-    	_actor->addGold(1);
-        cout << _actor->getName() << " lifts his pickaxe, and swings it at the rock. " << endl;
-        cout << _actor->getGold() << endl;
-        if (_actor->getGold() > maxGold)
-        {
-        	cout << _actor->getName() << "'s purse is full!" << endl;
-        	switchState("drink");
-        }
-
-        /*
-        if(random <= successChance)
-        {
-            cout << "A chunk of runite falls from the rock.\n";
-        }
-        else
-        {
-            cout << "Nothing useful chips off from the rock.";
-        }
-        */
-    }
-
-    /* switchState
-	* Pre-Condition- accepts next state as text
-	* Post-Condition- returns void, calls switchState on _statemachine
-	*/
 	void MineState::switchState(string nextState)
 	{
-		_statemachine->switchState(this, nextState);
+		_stateMachine->switchState(this, nextState);
 	}
 
-	string MineState::to_string()
+	string MineState::toString()
 	{
 		return "mine";
 	}
-
 }
+
 #endif
