@@ -45,7 +45,7 @@ namespace bammm
 			virtual bool canAttack();
 
 			/**
-			 canAttack
+			 getRange
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns the distance between the weapon user and their target
 			 */
