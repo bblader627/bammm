@@ -3,6 +3,7 @@
 
 #include "../../JSONParser.h"
 #include <iostream>
+#include <fstream>
 #include <string>
 namespace bammm
 {
@@ -16,15 +17,13 @@ namespace bammm
 			int _cursorY;
 			int _cursorZ;
 			string _name;
-			char _grid[10][10][10];
+			char*** _grid;
 			JSONParser _parser;
-		public:
-			MapEditor();
-			~MapEditor();
+			ofstream fileOutput;
+			
 			bool loadMap(string filename);
 			bool saveMap();
 			void createMap(int x, int y, int z);
-			void startEditor();
 			void removeItem(int x, int y, int z);
 			void addItem(int x, int y, int z, char item);
 			void displayMap();
@@ -42,6 +41,11 @@ namespace bammm
 			string createBarrierJson();
 			string createMineJson();
 			string createBuildingJson();
+
+		public:
+			MapEditor();
+			~MapEditor();
+			void startEditor();
 	};
 }
 

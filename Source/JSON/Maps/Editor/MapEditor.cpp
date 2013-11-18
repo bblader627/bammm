@@ -11,19 +11,34 @@ namespace bammm
 
 	MapEditor::~MapEditor()
 	{
+		for(int i = 0; i < _y; i++)
+		{
+			for(int j = 0; j < _x; j++)
+			{
+				delete[] _grid[i][j];
+			}
+
+			delete[] _grid[i];
+		}
+
+		delete[] _grid;
 	}
 
 	bool MapEditor::loadMap(string filename)
 	{
-		cout << filename << "\n";
-		_parser.parseFile(filename);
+		cout << "Under construction. Needs JsonParser\n";
+		//cout << filename << "\n";
+		//_parser.parseFile(filename);
 		return true;
 	}
 
 	bool MapEditor::saveMap()
 	{
-		_name = "Map";
-		cout << createJson();
+		cout << "Save as: \n";
+		cin >> _name;
+		fileOutput.open(_name + ".json");
+		fileOutput << createJson();
+		fileOutput.close();
 		return true;
 	}
 
@@ -33,10 +48,13 @@ namespace bammm
 		_y = y;
 		_z = z;
 
-		for(int i = 0; i < _x; i++)
+		_grid = new char**[_y];
+		for(int i = 0; i < _y; i++)
 		{
-			for(int j = 0; j < _y; j++)
+			_grid[i] = new char*[_x];
+			for(int j = 0; j < _x; j++)
 			{
+				_grid[i][j] = new char[_z];
 				for(int k = 0; k < _z; k++)
 				{
 					_grid[i][j][k] = '.';
@@ -167,9 +185,9 @@ namespace bammm
 
 	void MapEditor::displayMap()
 	{
-		for(int i = 0; i < _x; i++)
+		for(int i = 0; i < _y; i++)
 		{
-			for(int j = 0; j < _y; j++)
+			for(int j = 0; j < _x; j++)
 			{
 				if(i == _cursorY && j == _cursorX)
 				{
@@ -288,8 +306,8 @@ namespace bammm
 		jsonString = jsonString + "\"" + _name + "\":\n";
 		jsonString = jsonString + "[\n";
 		jsonString = jsonString + "\"x\": " + to_string(_x) + ",\n";
-		jsonString = jsonString + "\"y\": " + to_string(_x) + ",\n";
-		jsonString = jsonString + "\"z\": " + to_string(_x) + ",\n";
+		jsonString = jsonString + "\"y\": " + to_string(_y) + ",\n";
+		jsonString = jsonString + "\"z\": " + to_string(_z) + ",\n";
 		jsonString = jsonString + createWaterJson() + ",\n";
 		jsonString = jsonString + createBarrierJson() + ",\n";
 		jsonString = jsonString + createMineJson() + ",\n";
@@ -394,7 +412,7 @@ namespace bammm
 		bool matched = false;
 		string buildingName = "";
 		bool firstItem = true;
-		string name = "Mine Objects";
+		string name = "Building Objects";
 		string jsonString = "\"" + name + "\":\n";
 		jsonString = jsonString + "[\n";
 		for(int x = 0; x < _x; x++)
