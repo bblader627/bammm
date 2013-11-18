@@ -183,6 +183,13 @@ namespace bammm
 			 @Post-Condition- Returns the entire map as a HashMap
 			 */
 			HashMap<JSON>* getMap();
+
+			/*
+			 getRootNode
+			 @Pre-Condition- Takes in the key of the desired JSON node
+			 @Post-Condition- Returns the JSON node with name "key"
+			 */
+			JSON getRootNode(string key);
 	};
 }
 

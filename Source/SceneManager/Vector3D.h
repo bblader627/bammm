@@ -1,15 +1,14 @@
-	/*
+/*
  * CS585
  *
- * Team BAMMM
+ * Team Bammm
  * 	Alvaro Home
- * 	Matt Konstantino
+ * 	Matt Konstantinou
  * 	Michael Abramo
- *
+ *	Matt Witkowski
+ *  Bradley Crusco
  * Description:
- * 	Vector3D Header Class
- *
- * Last Modified: Alvaro Home
+ * Vector3D header file.
  *
  */
 
@@ -25,6 +24,7 @@
 #endif
 
 using namespace std;
+
 namespace bammm
 {
 	class Vector3D
@@ -35,30 +35,34 @@ namespace bammm
 			float _z;
 
 		public:
-			//Constant Variables
-			/*static const Vector3D *UP;
-			static const Vector3D *DOWN;
-			static const Vector3D *LEFT;
-			static const Vector3D *RIGHT;
-			static const Vector3D *ZERO;*/
+			/*
+			 static const Vector3D *UP;
+			 static const Vector3D *DOWN;
+			 static const Vector3D *LEFT;
+			 static const Vector3D *RIGHT;
+			 static const Vector3D *ZERO;
+			 */
 
 			Vector3D();
 			Vector3D(float x, float y, float z);
 			~Vector3D();
+
 			/**
 			 set
 			 @Pre-Condition- Takes in new values for x,y,z components
 			 @Post-Condition- Returns nothing but sets x,y,z components to new values
 			 */
 			void set(float a, float b, float c);
+
 			/**
 			 normalize
 			 @Pre-Condition-Takes no arguments
-			 @Post-Condition- returns nothing, just normalizea this Vector
+			 @Post-Condition- returns nothing, just normalizes this vector
 			 Normal
 			 A = {x,y,z} / |a| |a| = magnitude
-			 */	
+			 */
 			void normalize();
+
 			/**
 			 magnitude
 			 @Pre-Condition-Takes no arguments
@@ -66,13 +70,15 @@ namespace bammm
 			 |a| = sqrt( x^2 + y^2 + z^2)
 			 */
 			float magnitude();
+
 			/*
-			 sqrMagnitude
+			 squareMagnitude
 			 @Pre-Condition-Takes no arguments
 			 @Post-Condition- returns sqaured length of vector
 			 |a| = sx^2 + y^2 + z^2
-			 */	
-			float sqrMagnitude();
+			 */
+			float squareMagnitude();
+
 			/**
 			 dotProduct
 			 @Pre-Condition-Takes a Vector and will perform a Dot Product
@@ -81,6 +87,7 @@ namespace bammm
 			 A*B = Ax*Bx + Ay*By + Az*Bz
 			 */
 			float dotProduct(Vector3D &vector);
+
 			/**
 			 divideVector
 			 @Pre-Condition- Takes in scalar value
@@ -88,7 +95,8 @@ namespace bammm
 			 Vector Division
 			 A/n = {Ax/n,Ay/n,Az/n}  n = scalar value
 			 */
-			void divideVector(int n);
+			void divideVector(int scalar);
+
 			/**
 			 multiplyVector
 			 @Pre-Condition- Takes in scalar value
@@ -96,7 +104,8 @@ namespace bammm
 			 Vector Multiplication
 			 A*n = {Ax*n,Ay*n,Az*n}  n = scalar value
 			 */
-			void multiplyVector(int n);
+			void multiplyVector(int scalar);
+
 			/**
 			 crossProduct
 			 @Pre-Condition- Takes a Vector and performs a Cross Product
@@ -105,6 +114,7 @@ namespace bammm
 			 AxB = [(Ay * Bz) - (Az - By), (Ax * Bz) - (Az - Bx), (Ax * By) - (Ay -Bx)]
 			 */
 			Vector3D crossProduct(Vector3D &vector);
+
 			/**
 			 toString
 			 @Pre-Condition- Takes no parameters
@@ -113,37 +123,42 @@ namespace bammm
 			string toString();
 
 			/**
-			 Overload ==
+			 operator==
 			 @Pre-Condition-Takes a vector
 			 @Post-Condition- compares the equality of the vectors
 			 */
 			bool operator==(const Vector3D &vector);
+
 			/**
-			 Overload !=
+			 operator!=
 			 @Pre-Condition-Takes a vector
 			 @Post-Condition- compares the equality of the vectors
 			 */
 			bool operator!=(const Vector3D &vector);
+
 			/**
-			 Overload +
+			 operator+
 			 @Pre-Condition-Takes a vector
 			 @Post-Condition- adds two vectors
 			 */
 			Vector3D operator+(const Vector3D &vector);
+
 			/**
-			 Overload +=
+			 operator+=
 			 @Pre-Condition-Takes a vector
 			 @Post-Condition- adds two vectors together stores it in original
 			 */
 			Vector3D& operator+=(const Vector3D &vector);
+
 			/**
-			 Overload -
+			 operator-
 			 @Pre-Condition-Takes a vector
 			 @Post-Condition- subtracts two vectors
 			 */
 			Vector3D operator-(const Vector3D &vector);
+
 			/**
-			 Overload -=
+			 operator-=
 			 @Pre-Condition-Takes a vector
 			 @Post-Condition- subtracts two vectors together stores it in original
 			 */
@@ -185,6 +200,7 @@ namespace bammm
 		_x = 0;
 		_y = 0;
 		_z = 0;
+
 		/*
 		 const Vector3D Vector3D::UP =
 		 { 0, 1, 0 };
@@ -195,7 +211,8 @@ namespace bammm
 		 const Vector3D Vector3D::RIGHT =
 		 { 1, 0, 0 };
 		 const Vector3D Vector3D::ZERO =
-		 { 0, 0, 0 };*/
+		 { 0, 0, 0 };
+		 */
 	}
 
 	Vector3D::Vector3D(float x, float y, float z)
@@ -203,6 +220,7 @@ namespace bammm
 		_x = x;
 		_y = y;
 		_z = z;
+
 		/*
 		 const Vector3D Vector3D::UP =
 		 { 0, 1, 0 };
@@ -213,13 +231,13 @@ namespace bammm
 		 const Vector3D Vector3D::RIGHT =
 		 { 1, 0, 0 };
 		 const Vector3D Vector3D::ZERO =
-		 { 0, 0, 0 };*/
+		 { 0, 0, 0 };
+		 */
 	}
 
 	Vector3D::~Vector3D()
 	{
 	}
-
 
 	void Vector3D::set(float x, float y, float z)
 	{
@@ -227,7 +245,6 @@ namespace bammm
 		_y = y;
 		_z = z;
 	}
-
 
 	void Vector3D::normalize()
 	{
@@ -237,40 +254,34 @@ namespace bammm
 		_z = _z / normal;
 	}
 
-
 	float Vector3D::magnitude()
 	{
 		return sqrt((_x * _x) + (_y * _y) + (_z * _z));
 	}
 
-
-	float Vector3D::sqrMagnitude()
+	float Vector3D::squareMagnitude()
 	{
 		return (_x * _x) + (_y * _y) + (_z * _z);
 	}
-
 
 	float Vector3D::dotProduct(Vector3D &vect)
 	{
 		return (_x * vect.x()) + (_y * vect.y()) + (_z * vect.z());
 	}
 
-
-	void Vector3D::divideVector(int n)
+	void Vector3D::divideVector(int scalar)
 	{
-		_x = _x / n;
-		_y = _y / n;
-		_z = _z / n;
+		_x = _x / scalar;
+		_y = _y / scalar;
+		_z = _z / scalar;
 	}
 
-
-	void Vector3D::multiplyVector(int n)
+	void Vector3D::multiplyVector(int scalar)
 	{
-		_x = _x * n;
-		_y = _y * n;
-		_z = _z * n;
+		_x = _x * scalar;
+		_y = _y * scalar;
+		_z = _z * scalar;
 	}
-
 
 	Vector3D Vector3D::crossProduct(Vector3D &vector)
 	{
@@ -280,21 +291,10 @@ namespace bammm
 
 	}
 
-
 	string Vector3D::toString()
 	{
-		/*string output;
-		output.append("<");
-		output.append(output.to_string(x));
-		output.append(",");
-		output.append(output.to_string(y));
-		output.append(",");
-		output.append(output.to_string(z));
-		output.append(">");
-		return "<" + to_string(x) + "," + to_string(y) + "," + to_string(z) + ">";*/
-        return "";
+		return "";
 	}
-
 
 	bool Vector3D::operator==(const Vector3D &vector)
 	{
@@ -308,7 +308,6 @@ namespace bammm
 		}
 	}
 
-
 	bool Vector3D::operator!=(const Vector3D &vector)
 	{
 		if ((_x == vector.x()) && (_y == vector.y()) && (_z == vector.z()))
@@ -321,12 +320,10 @@ namespace bammm
 		}
 	}
 
-
 	Vector3D Vector3D::operator+(const Vector3D &vector)
 	{
 		return Vector3D(_x + vector.x(), _y + vector.y(), _z + vector.z());
 	}
-
 
 	Vector3D& Vector3D::operator+=(const Vector3D &vector)
 	{
@@ -336,12 +333,10 @@ namespace bammm
 		return *this;
 	}
 
-
 	Vector3D Vector3D::operator-(const Vector3D &vector)
 	{
 		return Vector3D(_x - vector.x(), _y - vector.y(), _z - vector.z());
 	}
-
 
 	Vector3D& Vector3D::operator-=(const Vector3D &vector)
 	{
@@ -350,11 +345,6 @@ namespace bammm
 		_z -= vector.z();
 		return *this;
 	}
-
-
-
-
-
 }
-#endif
 
+#endif

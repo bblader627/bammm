@@ -1,43 +1,69 @@
-/**
- * @file testsuite.h
- * @class TestSuite
- * @brief Allows a user to add and execute test functions. Displays success or failure, start time, end time, run time, and memory usage information.
- * @author: Bradley Crusco
- * @version 1.0 10/7/13
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * TestSuite header file.
+ *
  */
 
 #ifndef TESTSUITE_H_
 #define TESTSUITE_H_
 
+#include <iostream>
 #include "Time.h"
 #include "Test.h"
-#include <iostream>
+
+using namespace std;
 
 namespace bammm
 {
 	class TestSuite
 	{
+		private:
+			static const int _MaximumNumberOfTests = 250;
+			int _numberOfTests;
+			Test _tests[_MaximumNumberOfTests];
+
 		public:
 			TestSuite();
 			virtual ~TestSuite();
-			/**
-			 *
-			 * @brief convert a test function returns boolean into one return int
-			 * utilizing std::function in the TestSuite only,
-			 * it won't hurt the performance of the main codes
-			 *
-			 **/
-			void addTest(std::function<bool(void)> testFunction,
-					std::string testName);
-			void addTestWithMemoryCheck(Test::Func testFunction,
-					std::string testName);
-			void runTests();
-			bool executeTest(Test test);
 
-		private:
-			static const int MaximumNumberOfTests = 250;
-			int numberOfTests;
-			Test tests[MaximumNumberOfTests];
+			/**
+			 addTest
+			 @Pre-Condition- Takes in a std::function<bool(void)>, which is the testFunction, and a name for the test
+			 @Post-Condition- A test is created and added to the suite
+			 */
+			void addTest(std::function<bool(void)> testFunction,
+					string testName);
+
+			/**
+			 addTestWithMemoryCheck
+			 @Pre-Condition- Takes in a Test::Func testFunction, which is the testFunction that allows for memory checking, and a name for the test
+			 @Post-Condition- A test is created and added to the suite
+			 */
+			void addTestWithMemoryCheck(Test::Func testFunction,
+					string testName);
+
+			/**
+			 runTests
+			 @Pre-Condition- No input
+			 @Post-Condition- Runs all the tests in the test suite
+			 */
+			void runTests();
+
+			/**
+			 executeTest
+			 @Pre-Condition- Takes a Test as input
+			 @Post-Condition- Executes this test and returns true on success, false otherwise
+			 */
+			bool executeTest(Test test);
 	};
 }
-#endif /* TESTSUITE_H_ */
+
+#endif

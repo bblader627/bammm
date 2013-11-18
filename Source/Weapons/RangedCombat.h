@@ -1,8 +1,15 @@
 /*
- * RangedCombat.h
+ * CS585
  *
- *  Created on: Oct 28, 2013
- *      Author: michael
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * RangedCombat header file.
+ *
  */
 
 #ifndef RANGEDCOMBAT_H_
@@ -10,64 +17,182 @@
 
 namespace bammm
 {
-
 	class RangedCombat
 	{
-
 		private:
-			Actor* actor1;
-			Actor* actor2;
+			Actor* _actor1;
+			Actor* _actor2;
 			Actor* _winner;
 			Actor* _loser;
+			bool _playerTurn;
 
-			bool playerTurn;
-
+			/**
+			 giveLoot
+			 @Pre-Condition- No input
+			 @Post-Condition- Defeated enemy is looted
+			 */
 			void giveLoot();
+
+			/**
+			 victory
+			 @Pre-Condition- No input
+			 @Post-Condition- Victory declared and giveLoot called
+			 */
 			void victory();
+
+			/**
+			 hit
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns true if enemy is hit, false otherwise
+			 */
 			bool hit();
+
+			/**
+			 inRange
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns true if enemy is in range, false otherwise
+			 */
 			bool inRange();
 
 		public:
 			RangedCombat();
-			RangedCombat(Actor* a1, Actor* a2 /*,Grid3d<Actor> grid*/);
-			bool canFight();
-			void useTurn();
-			Actor* getWinner();
-			Actor* getLoser();
-			Actor* getOpponent();
+			RangedCombat(Actor* actor1, Actor* actor2 /*,Grid3d<Actor> grid*/);
 			~RangedCombat();
+
+			/**
+			 canFight
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns true if you can engage your opponent in combat, false otherwise
+			 */
+			bool canFight();
+
+			/**
+			 useTurn
+			 @Pre-Condition- No input
+			 @Post-Condition- Executes a turn of combat
+			 */
+			void useTurn();
+
+			/**
+			 getWinner
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the winner of the fight
+			 */
+			Actor* getWinner();
+
+			/**
+			 getLoser
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the loser of the fight
+			 */
+			Actor* getLoser();
+
+			/**
+			 getOpponent
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the opponent being fought
+			 */
+			//TODO: This function is not implemented right now
+			Actor* getOpponent();
 	};
 
 	RangedCombat::RangedCombat()
 	{
-		actor1 = NULL;
-		actor2 = NULL;
+		_actor1 = NULL;
+		_actor2 = NULL;
 		_winner = NULL;
 		_loser = NULL;
-		playerTurn = true;
+		_playerTurn = true;
+	}
+
+	RangedCombat::RangedCombat(Actor* actor1, Actor* actor2/*, Grid3d<Actor> grid*/)
+	{
+		_actor1 = actor1;
+		_actor2 = actor2;
+		_winner = NULL;
+		_loser = NULL;
+		_playerTurn = true;
 	}
 
 	RangedCombat::~RangedCombat()
 	{
 	}
 
-	RangedCombat::RangedCombat(Actor* a1, Actor* a2/*, Grid3d<Actor> grid*/)
-	{
-		actor1 = a1;
-		actor2 = a2;
-		_winner = NULL;
-		_loser = NULL;
-		playerTurn = true;
-	}
-
 	bool RangedCombat::canFight()
 	{
-		if (actor1->getHealth() <= 0 || actor2->getHealth() <= 0)
+		if (_actor1->getHealth() <= 0 || _actor2->getHealth() <= 0)
 		{
 			return false;
 		}
 
 		return true;
+	}
+
+	void RangedCombat::useTurn()
+	{
+		if (canFight())
+		{
+			if (hit())
+			{
+				int damage;
+
+				if (_playerTurn)
+				{
+					damage = _actor1->getRangedWeapon()->attack();
+					_actor2->reduceHealth(damage);
+					cout << _actor2->getName() << " has taken " << damage
+							<< " damage!" << endl;
+				}
+				else
+				{
+					damage = _actor2->getRangedWeapon()->attack();
+					_actor1->reduceHealth(damage);
+					cout << _actor1->getName() << " has taken " << damage
+							<< " damage!" << endl;
+				}
+			}
+		}
+
+		_playerTurn = !_playerTurn;
+
+		if (_actor1->getHealth() <= 0)
+		{
+			_winner = _actor2;
+			_loser = _actor1;
+			cout << _loser->getName() << " has been slain!" << endl;
+			victory();
+		}
+		else if (_actor2->getHealth() <= 0)
+		{
+			_winner = _actor1;
+			_loser = _actor2;
+			cout << _winner->getName() << " has been slain!" << endl;
+			victory();
+		}
+	}
+
+	Actor* RangedCombat::getWinner()
+	{
+		return _winner;
+	}
+
+	Actor* RangedCombat::getLoser()
+	{
+		return _loser;
+	}
+
+	void RangedCombat::giveLoot()
+	{
+		_winner->addGold(_loser->getGold());
+		_loser->spendGold(_loser->getGold());
+	}
+
+	void RangedCombat::victory()
+	{
+		//Play victory sound
+		giveLoot();
+		cout << _winner->getName() << " has slain " << _loser->getName()
+				<< ".\n";
 	}
 
 	bool RangedCombat::hit()
@@ -88,17 +213,17 @@ namespace bammm
 		int playerX, playerY, playerZ;
 		int opponentX, opponentY, opponentZ;
 
-		playerX = actor1->getX();
-		playerY = actor1->getY();
+		playerX = _actor1->getX();
+		playerY = _actor1->getY();
 		playerZ = 0;
 
-		opponentX = actor2->getX();
-		opponentY = actor2->getY();
+		opponentX = _actor2->getX();
+		opponentY = _actor2->getY();
 		opponentZ = 0;
 
-		if (playerTurn)
+		if (_playerTurn)
 		{
-			int weaponRange = actor1->getRangedWeapon()->getRange();
+			int weaponRange = _actor1->getRangedWeapon()->getRange();
 
 			if (opponentX <= playerX + weaponRange
 					&& opponentX >= playerX - weaponRange
@@ -115,7 +240,7 @@ namespace bammm
 		}
 		else
 		{
-			int weaponRange = actor2->getRangedWeapon()->getRange();
+			int weaponRange = _actor2->getRangedWeapon()->getRange();
 
 			if (playerX <= opponentX + weaponRange
 					&& playerX >= opponentX - weaponRange
@@ -131,75 +256,6 @@ namespace bammm
 			}
 		}
 	}
-
-	void RangedCombat::useTurn()
-	{
-		if (canFight())
-		{
-			if (hit())
-			{
-				int damage;
-
-				if (playerTurn)
-				{
-					damage = actor1->getRangedWeapon()->attack();
-					actor2->reduceHealth(damage);
-					cout << actor2->getName() << " has taken " << damage
-							<< " damage!" << endl;
-				}
-				else
-				{
-					damage = actor2->getRangedWeapon()->attack();
-					actor1->reduceHealth(damage);
-					cout << actor1->getName() << " has taken " << damage
-							<< " damage!" << endl;
-				}
-			}
-		}
-
-		playerTurn = !playerTurn;
-
-		if (actor1->getHealth() <= 0)
-		{
-			_winner = actor2;
-			_loser = actor1;
-			cout << _loser->getName() << " has been slain!" << endl;
-			victory();
-		}
-		else if (actor2->getHealth() <= 0)
-		{
-			_winner = actor1;
-			_loser = actor2;
-			cout << _winner->getName() << " has been slain!" << endl;
-			victory();
-		}
-
-	}
-
-	Actor* RangedCombat::getWinner()
-	{
-		return _winner;
-	}
-
-	Actor* RangedCombat::getLoser()
-	{
-		return _loser;
-	}
-
-	void RangedCombat::victory()
-	{
-		//Play victory sound
-		giveLoot();
-		cout << _winner->getName() << " has slain " << _loser->getName()
-				<< ".\n";
-	}
-
-	void RangedCombat::giveLoot()
-	{
-		_winner->addGold(_loser->getGold());
-		_loser->spendGold(_loser->getGold());
-	}
-
 }
 
-#endif /* RANGEDCOMBAT_H_ */
+#endif

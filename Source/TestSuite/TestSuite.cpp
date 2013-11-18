@@ -1,14 +1,18 @@
-/**
- * @file testsuite.cpp
- * @class TestSuite
- * @brief Allows a user to add and execute test functions. Displays success or failure, start time, end time, run time, and memory usage information.
- * @author: Bradley Crusco
- * @version 1.0 10/7/13
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * TestSuite cpp file.
+ *
  */
 
 #include "TestSuite.h"
-
-using namespace std;
 
 namespace bammm
 {
@@ -24,42 +28,27 @@ namespace bammm
 		}
 	}
 
-	/**
-	 * TestSuite::TestSuite()
-	 * Default constructor for TestSuite. Sets numberOfTests equal to 0.
-	 */
 	TestSuite::TestSuite()
 	{
-		numberOfTests = 0;
+		_numberOfTests = 0;
 	}
 
-	/**
-	 * TestSuite::~TestSuite()
-	 * Default destructor for TestSuite.
-	 */
 	TestSuite::~TestSuite()
 	{
 	}
 
-	/**
-	 * TestSuite::addTest()
-	 * Takes a function to be tested and a name for that test and adds it to an array of tests to run.
-	 *
-	 * @param testFunction The function to be tested.
-	 * @param testName The name of the test being added.
-	 */
 	void TestSuite::addTest(std::function<bool(void)> testFunction,
 			string testName)
 	{
 		addTestWithMemoryCheck(
-				std::bind(TestSuitePrivate::wrapperFuncReturnBool,
-						testFunction), testName);
+				bind(TestSuitePrivate::wrapperFuncReturnBool, testFunction),
+				testName);
 	}
 
 	void TestSuite::addTestWithMemoryCheck(Test::Func testFunction,
-			std::string testName)
+			string testName)
 	{
-		if (numberOfTests == MaximumNumberOfTests)
+		if (_numberOfTests == _MaximumNumberOfTests)
 		{
 			cout
 					<< "Could not add test to TestSuite, maximum number of tests have been added."
@@ -67,23 +56,18 @@ namespace bammm
 		}
 		else
 		{
-			tests[numberOfTests] = Test(testFunction, testName);
-			numberOfTests++;
+			_tests[_numberOfTests] = Test(testFunction, testName);
+			_numberOfTests++;
 		}
 	}
 
-	/**
-	 * TestSuite::runTests()
-	 * Executes all tests added to the suite. Prints results for each test as it completes them.
-	 * Prints a summary at the conclusion.
-	 */
 	void TestSuite::runTests()
 	{
 		int numberOfSuccesses = 0, numberOfFailures = 0;
 
-		for (int i = 0; i < numberOfTests; i++)
+		for (int i = 0; i < _numberOfTests; i++)
 		{
-			if (executeTest(tests[i]))
+			if (executeTest(_tests[i]))
 			{
 				numberOfSuccesses++;
 			}
@@ -100,16 +84,6 @@ namespace bammm
 				<< "\e[0m" << endl;
 	}
 
-	/**
-	 * TestSuite::executeTest()
-	 * Executes each individual test and prints results to screen.
-	 * Unit test function is to return an int. -1 will mean the test failed.
-	 * 0 or greater will indicate that the test was a success, and will give the number of
-	 * memory allocations that were not freed.
-	 *
-	 * @param test The test to be executed
-	 * @return bool
-	 */
 	bool TestSuite::executeTest(Test test)
 	{
 		Time startTime(Time::current());

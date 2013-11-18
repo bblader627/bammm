@@ -54,6 +54,8 @@ namespace bammm
 	{
 		if (this->_value != "empty")
 		{
+			cout << "Error retrieving child: " << this->getName()
+					<< " has no children. \n";
 			return *this;
 		}
 		else

@@ -5,12 +5,10 @@
  * 	Alvaro Home
  * 	Matt Konstantinou
  * 	Michael Abramo
- *	Matt Witkowski	
- *   Bradley Crusco
+ *	Matt Witkowski
+ *  Bradley Crusco
  * Description:
- * WeaponData Class header file.
- *
- * Last Modified: Alvaro Home
+ * WeaponData header file.
  *
  */
 
@@ -23,6 +21,7 @@ typedef unsigned int uint;
 #endif
 
 #include <iostream>
+
 using namespace std;
 
 namespace bammm
@@ -38,56 +37,69 @@ namespace bammm
 			uint _fireRate;
 			string _model;
 			string _type;
+
 		public:
-			//Constructors
 			WeaponData();
 			WeaponData(int damage, uint fireRate, string model, string type);
-			WeaponData(int range, int clipCapacity, int damage, float reloadSpeed, uint fireRate, string model, string type);
+			WeaponData(int range, int clipCapacity, int damage,
+					float reloadSpeed, uint fireRate, string model,
+					string type);
 
-			//Functions
-	
+			/**
+			 getType
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns type
+			 */
+			string getType();
 
-			inline string getType()
-			{
-				return _type;
-			}
+			/**
+			 getRange
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns range
+			 */
+			int getRange();
 
-			inline int getRange()
-			{
-				return _range;
-			}
-		
-			inline int getClipCapacity()
-			{
-				return _clipCapacity;
-			}
+			/**
+			 getClipCapacity
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns clip capacity
+			 */
+			int getClipCapacity();
 
-			inline int getDamage()
-			{
-				return _damage;
-			}
+			/**
+			 getDamage
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns damage
+			 */
+			int getDamage();
 
-			inline float getReloadSpeed()
-			{
-				return _reloadSpeed;
-			}
+			/**
+			 getReloadSpeed
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns reload speed
+			 */
+			float getReloadSpeed();
 
-			inline int getAmmoCount()
-			{
-				return _ammoCount;
-			}
-			
-			inline uint getFireRate()
-			{
-				return _fireRate;
-			}
+			/**
+			 getAmmoCount
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns ammo count
+			 */
+			int getAmmoCount();
 
-			inline string getModel()
-			{
-				return _model;
-			}
-			
+			/**
+			 getFireRate
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns fire rate
+			 */
+			uint getFireRate();
 
+			/**
+			 getModel
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns model
+			 */
+			string getModel();
 	};
 
 	WeaponData::WeaponData()
@@ -101,10 +113,10 @@ namespace bammm
 		_fireRate = fireRate;
 		_model = model;
 		_type = type;
-
 	}
 
-	WeaponData::WeaponData(int range, int clipCapacity, int damage, float reloadSpeed, uint fireRate, string model, string type)
+	WeaponData::WeaponData(int range, int clipCapacity, int damage,
+			float reloadSpeed, uint fireRate, string model, string type)
 	{
 		_range = range;
 		_clipCapacity = clipCapacity;
@@ -115,5 +127,45 @@ namespace bammm
 		_type = type;
 	}
 
+	string WeaponData::getType()
+	{
+		return _type;
+	}
+
+	int WeaponData::getRange()
+	{
+		return _range;
+	}
+
+	int WeaponData::getClipCapacity()
+	{
+		return _clipCapacity;
+	}
+
+	int WeaponData::getDamage()
+	{
+		return _damage;
+	}
+
+	float WeaponData::getReloadSpeed()
+	{
+		return _reloadSpeed;
+	}
+
+	int WeaponData::getAmmoCount()
+	{
+		return _ammoCount;
+	}
+
+	uint WeaponData::getFireRate()
+	{
+		return _fireRate;
+	}
+
+	string WeaponData::getModel()
+	{
+		return _model;
+	}
 }
+
 #endif

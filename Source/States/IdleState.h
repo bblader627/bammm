@@ -1,3 +1,17 @@
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *	Bradley Crusco
+ * Description:
+ * IdleState header file.
+ *
+ */
+
 #ifndef IDLESTATE_H_
 #define IDLESTATE_H_
 
@@ -10,46 +24,69 @@ typedef unsigned int UINT;
 
 namespace bammm
 {
-    class IdleState : public State
-    {
-        public:
-            IdleState(Actor* actor);
-            IdleState(Actor* actor, IStateCallback* statemachine);
-            void setup();
-            void breakdown();
-            void tick(float dTime);
-			string to_string();
+	class IdleState: public State
+	{
+		public:
+			IdleState(Actor* actor);
+			IdleState(Actor* actor, IStateCallback* stateMachine);
 
-        private:
-    };
+			/**
+			 setup
+			 @Pre-Condition- No input
+			 @Post-Condition- Sets up the state
+			 */
+			void setup();
+
+			/**
+			 breakdown
+			 @Pre-Condition- No input
+			 @Post-Condition- Performs a breakdown on the state
+			 */
+			void breakdown();
+
+			/**
+			 tick
+			 @Pre-Condition- Takes in a float deltaTime
+			 @Post-Condition- Executes a tick of length deltaTime
+			 */
+			void tick(float deltaTime);
+
+			/**
+			 toString
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a string representation of the state
+			 */
+			string toString();
+	};
 
 	IdleState::IdleState(Actor* actor)
 	{
 		_actor = actor;
 	}
 
-	IdleState::IdleState(Actor* actor, IStateCallback* statemachine)
+	IdleState::IdleState(Actor* actor, IStateCallback* stateMachine)
 	{
 		_actor = actor;
-		registerTransitionCallback(statemachine);
+		registerTransitionCallback(stateMachine);
 	}
 
-    void IdleState::setup()
-    {
-    }
+	void IdleState::setup()
+	{
+	}
 
-    void IdleState::breakdown()
-    {
-    }
+	void IdleState::breakdown()
+	{
+	}
 
-    void IdleState::tick(float dTime)
-    {
-    }
+	void IdleState::tick(float deltaTime)
+	{
+	}
 
-	string IdleState::to_string()
+	string IdleState::toString()
 	{
 		return "idle";
 	}
 }
+
 #endif
 

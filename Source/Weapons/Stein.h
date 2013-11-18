@@ -1,3 +1,17 @@
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * Stein header file.
+ *
+ */
+
 #ifndef STEIN_H_
 #define STEIN_H_
 
@@ -11,18 +25,30 @@ typedef unsigned int uint;
 
 namespace bammm
 {
-	class Stein : public MeleeWeapon
+	class Stein: public MeleeWeapon
 	{
 		private:
-			WeaponData* weaponData;
-			uint timer;
-			Time time;
+			WeaponData* _weaponData;
+			uint _timer;
+			Time _time;
 
 		public:
 			Stein();
-			Stein(WeaponData* wd);
+			Stein(WeaponData* weaponData);
 			~Stein();
+
+			/**
+			 attack
+			 @Pre-Condition- No input
+			 @Post-Condition- Attack is executed
+			 */
 			int attack();
+
+			/**
+			 canAttack
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns true if weapon can attack
+			 */
 			bool canAttack();
 	};
 
@@ -31,36 +57,37 @@ namespace bammm
 		int damage = 10;
 		int cooldown = 2;
 
-		weaponData = new WeaponData(damage, cooldown, "", "melee");
-		timer = 0;
+		_weaponData = new WeaponData(damage, cooldown, "", "melee");
+		_timer = 0;
 	}
 
-	Stein::Stein(WeaponData* wd)
+	Stein::Stein(WeaponData* weaponData)
 	{
-		weaponData = wd;
-		timer = 0;
+		_weaponData = weaponData;
+		_timer = 0;
 	}
 
 	Stein::~Stein()
 	{
-		delete weaponData;
+		delete _weaponData;
 	}
 
 	int Stein::attack()
 	{
-		time = time.current();
+		_time = _time.current();
 		if (canAttack())
 		{
-			timer = time.getSeconds() + weaponData->getFireRate();
-			return weaponData->getDamage();
+			_timer = _time.getSeconds() + _weaponData->getFireRate();
+			return _weaponData->getDamage();
 		}
+
 		return 0;
 	}
 
 	bool Stein::canAttack()
 	{
-		time = time.current();
-		if (time.getSeconds() < timer)
+		_time = _time.current();
+		if (_time.getSeconds() < _timer)
 		{
 			return false;
 		}
@@ -68,4 +95,5 @@ namespace bammm
 		return true;
 	}
 }
+
 #endif

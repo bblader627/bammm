@@ -18,6 +18,7 @@
 #include <iostream>
 #include "../Resources/DynamicArray.h"
 #include "Vector3D.h"
+#include "../Resources/Stack.h"
 #include "../Actors/Actor.h"
 
 using namespace std;
@@ -36,6 +37,22 @@ namespace bammm
 			int _length;
 			int _height;
 
+			//Directions
+			 Vector3D *UP;
+			 Vector3D *DOWN;
+			 Vector3D *LEFT;
+			 Vector3D *RIGHT;
+			 Vector3D *ZERO;
+
+			 /*
+			 UP = { 0, 1, 0 };
+			 DOWN = { 0, -1, 0 };
+			 LEFT = { -1, 0, 0};
+			 RIGHT = { 1, 0, 0 };
+			 ZERO = { 0, 0, 0 };
+			 */
+
+
 			/*
 			 convertToPosition
 			 @Pre-Condition- Takes a Vector3D vector
@@ -43,10 +60,26 @@ namespace bammm
 			 */
 			int convertToPosition(Vector3D* vector);
 
+			/*
+			 * convertToVector
+			 * @Pre-Condition- Takes integer
+			 * @Post-Condition- Converts integer to vector3d
+			 */
+			Vector3D* convertToVector(int position);
+
+			/*
+			 * getPath
+			 * @Pre-Condition- takes Position of actor to be found, current location, and stack of directions
+			 * @Post-Condition- returns true if path is found
+			 */
+			bool getPath(Vector3D* actorPos, Vector3D* currentLoc, Vector3D* directionOfPrevious, Stack<Vector3D*>* path);
+
 		public:
 			Grid3D();
 			Grid3D(int width, int length, int height);
 			~Grid3D();
+
+			void setupDirections();
 
 			/*
 			 access
@@ -85,7 +118,22 @@ namespace bammm
 			bool remove(Vector3D *vector, T object);
 
 			/*
-			 toString
+			 * getPath
+			 * @Pre-Condition- takes current Actor, destination string
+			 * @Post-Condition- returns stack of directions
+			 */
+			Stack<Vector3D*>* getPath(Actor* actor, string destination);
+
+			Vector3D* findInGrid(string target);
+
+			string to_string();
+			T getEnemy(Vector3D* loc, T actor);
+			DynamicArray<T>* access(int x, int y, int z);
+			void add(Vector3D* vect, T add);
+			void move(T actor, Vector3D* newLoc);
+			void moveTowards(T ordered, Vector3D* loc);
+			/*
+			toString
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns a string that represents the Grid3D
 			 */
@@ -141,6 +189,9 @@ namespace bammm
 		_length = 0;
 		_height = 0;
 		_grid = new DynamicArray<DynamicArray<T>*>();
+
+		setupDirections();
+
 	}
 
 	template<class T>
@@ -156,6 +207,8 @@ namespace bammm
 		{
 			_grid->add(new DynamicArray<T>);
 		}
+
+		setupDirections();
 	}
 
 	template<class T>
@@ -167,6 +220,16 @@ namespace bammm
 			delete _grid->get(i);
 		}
 		delete _grid;
+	}
+
+	template<class T>
+	void Grid3D<T>::setupDirections()
+	{
+		UP = new Vector3D(0, 1, 0);
+		DOWN = new Vector3D(0, -1, 0);
+		LEFT = new Vector3D(-1, 0, 0);
+		RIGHT = new Vector3D(1, 0, 0);
+		ZERO = new Vector3D(0, 0, 0);
 	}
 
 	template<class T>
@@ -224,6 +287,157 @@ namespace bammm
 	}
 
 	template<class T>
+	Stack<Vector3D*>* Grid3D<T>::getPath(Actor* actor, string destination)
+	{
+		Vector3D* target = findInGrid(destination);
+		if (target==NULL)
+		{
+			return new Stack<Vector3D*>();
+		}
+
+		Vector3D* actorLocation = actor->getLocation();
+		Stack<Vector3D*>* path = new Stack<Vector3D*>*;
+		if (getPath(actorLocation, target, ZERO, path))
+		{
+			return path;
+		}
+		else
+		{
+			cout << "Path not found" << endl;
+			return new Stack<Vector3D*>*;
+		}
+
+	}
+
+	template<class T>
+	bool Grid3D<T>::getPath(Vector3D* actorPos, Vector3D* currentLoc, Vector3D* directionOfPrevious, Stack<Vector3D*>* path)
+	{
+		int actorPosition = convertToPosition(actorPos);
+		int currentPosition = convertToPosition(currentLoc);
+
+		//base case
+		if (actorPosition == currentPosition)
+		{
+			return true;
+		}
+
+		//If cell collision
+		if (!(directionOfPrevious == ZERO))
+		{
+			DynamicArray<T*>* cell = _grid->get(currentPosition - 1);
+			if (cell->_size == 0)
+			{
+				return false;
+			}
+		}
+
+		if (actorPosition < currentPosition) //Have to go down
+		{
+			//if on the same line
+			if ((currentPosition - actorPosition) < _width)
+			{
+				path->push(LEFT);
+				//If you can't go left
+				if (!(getPath(actorPos, new Vector3D(convertToVector(currentPosition - 1)), RIGHT, path)))
+				{
+					path->pop();
+					path->push(UP);
+					//If you can't go up
+					if (!(directionOfPrevious == UP) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition + _width)), DOWN, path)))
+					{
+						path->pop();
+						path->push(DOWN);
+						//If you can't go down
+						if (!(directionOfPrevious == DOWN) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition - _width)), UP, path)))
+						{
+							path->pop();
+							return false;
+						}
+					}
+				}
+			}
+			//If not on the same line
+			else
+			{
+				path->push(DOWN);
+				if (!(directionOfPrevious == DOWN) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition - _width)), UP, path)))
+				{
+					path->pop();
+					path->push(LEFT);
+					if (!(directionOfPrevious == LEFT) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition - 1)), RIGHT, path)))
+					{
+						path->pop();
+						path->push(UP);
+						//If you can't go up
+						if (!(directionOfPrevious == UP) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition + _width)), DOWN, path)))
+						{
+							path->pop();
+							return false;
+						}
+					}
+				}
+			}
+		}
+		else //Have to go up
+		{
+			//if on the same line
+			if ((actorPosition - currentPosition) < _width)
+			{
+				path->push(RIGHT);
+				if (!(getPath(actorPos, new Vector3D(convertToVector(currentPosition + 1)), LEFT, path)))
+				{
+					path->pop();
+					path->push(UP);
+					if (!(getPath(actorPos, new Vector3D(convertToVector(currentPosition + _width)), DOWN, path)))
+					{
+						path->pop();
+					}
+				}
+			}
+			else
+			{
+				path->push(UP);
+				//if you can't go up
+				if (!(directionOfPrevious == UP) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition + _width)), DOWN, path)))
+				{
+					path->pop();
+					path->push(RIGHT);
+					//if you can't go right
+					if (!(getPath(actorPos, new Vector3D(convertToVector(currentPosition + 1)), LEFT, path)))
+					{
+						path->pop();
+						path->push(LEFT);
+						//If you can't go LEFT
+						if (!(getPath(actorPos, new Vector3D(convertToVector(currentPosition - 1)), RIGHT, path)))
+						{
+							path->pop();
+							return false;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	template<class T>
+	Vector3D* Grid3D<T>::findInGrid(string target)
+	{
+		for (int gridIndex = 0; gridIndex < _grid->_size; gridIndex++)
+		{
+			DynamicArray<T>* cell = _grid->get(gridIndex);
+			for (int cellIndex = 0; cellIndex < cell->_size; cellIndex++)
+			{
+				T* actor = cell->get(cellIndex);
+				if (actor->to_string() == target)
+				{
+					return convertToVector(gridIndex);
+				}
+			}
+		}
+		return NULL;
+	}
+
+	template <class T>
 	string Grid3D<T>::toString()
 	{
 		string gridString = "";
@@ -284,6 +498,8 @@ namespace bammm
 		remove(actor->getLocation(), actor);
 		delete actor->getLocation();
 		add(newLocation, actor);
+		add(newLocation, actor);
+
 	}
 
 	template<class T>
@@ -301,7 +517,6 @@ namespace bammm
 
 		float newX;
 		float newY;
-		Vector3D * newLocation;
 
 		if (sameX && sameY)
 		{
@@ -383,6 +598,15 @@ namespace bammm
 	{
 		return vector->x() + (vector->y() * _width)
 				+ (vector->z() * _width * _height);
+	}
+
+	template<class T>
+	Vector3D* Grid3D<T>::convertToVector(int position)
+	{
+		int z = position % (_length * _width);
+		int y = position % _width;
+		int x = position % _length;
+		return new Vector3D(x, y, z);
 	}
 }
 
