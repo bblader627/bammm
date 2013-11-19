@@ -98,7 +98,7 @@ namespace bammm
 		_allStates = allStates;
 	}
 
-	virtual StateMachine::~StateMachine()
+	StateMachine::~StateMachine()
 	{
 		delete _actor;
 	}
