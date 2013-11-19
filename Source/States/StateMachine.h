@@ -35,7 +35,7 @@ using namespace bammm;
 class StateMachine : public IStateCallback
 {
 	private:
-		DynamicArray<State> currentStates;
+		DynamicArray<State*> currentStates;
 		HashMap<State>* _allStates;
 		Actor* _actor;
 	public:
@@ -50,7 +50,7 @@ class StateMachine : public IStateCallback
 		void switchState(State& current, string newStateString);
 		void addState(State& newState);
 		void removeState(State& oldState);
-		DynamicArray<State>& getCurrentStates();
+		DynamicArray<State*>& getCurrentStates();
 		virtual ~StateMachine()
 		{
 		}
@@ -70,7 +70,7 @@ class StateMachine : public IStateCallback
 		void StateMachine::initialState(State& initial)
 		{
 			initial.setup();
-			currentStates.add(initial);
+			currentStates.add(&initial);
 		}
 
 		/*
@@ -86,7 +86,7 @@ class StateMachine : public IStateCallback
 			for(int i = 0; i < (int) currentStates.getSize(); i++)
 			{
 				cout << "Before tick\n";
-				currentStates.get(i).tick(dTime);
+				currentStates.get(i)->tick(dTime);
 			}
 		}
 
@@ -126,7 +126,7 @@ class StateMachine : public IStateCallback
 		void StateMachine::addState(State& newState)
 		{
 			newState.setup();
-			currentStates.add(newState);
+			currentStates.add(&newState);
 		}
 
 		/*
@@ -137,7 +137,7 @@ class StateMachine : public IStateCallback
 		void StateMachine::removeState(State& oldState)
 		{
 			oldState.breakdown();
-			currentStates.removeElem(oldState);
+			currentStates.removeElem(&oldState);
 		}
 
 		/**
@@ -148,7 +148,7 @@ class StateMachine : public IStateCallback
 		 * Called from Controller
 		 * Returns currently running states
 		 */
-		DynamicArray<State>& StateMachine::getCurrentStates()
+		DynamicArray<State*>& StateMachine::getCurrentStates()
 		{
 			return currentStates;
 		}

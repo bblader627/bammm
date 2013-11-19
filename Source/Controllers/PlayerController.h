@@ -85,7 +85,8 @@ namespace bammm
     void PlayerController::input(DynamicArray<string>* multiInput, float dTime)
     {
     	//all currently running states
-    	DynamicArray<State> currentStates = _stateMachine.getCurrentStates();
+		//Danger
+    	DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
 
     	//newStates will have 1 state
 		//DynamicArray<State*>* newStates = new DynamicArray<State*>();
@@ -96,7 +97,7 @@ namespace bammm
 			//if so, break it down
 
 			//!!!!!!!Danger!!!!!!!
-			State newState = _states.getValue(multiInput->get(i));
+			State* newState  = &_states.getValue(multiInput->get(i));
 
 			/********************************************
 			 *This should be handled in the stateMachine
@@ -108,11 +109,11 @@ namespace bammm
 				//switching newState with NULL calls breakdown on newState, the remove on currentStates
 				
 				//Do doTurn in MeleeCombat
-				if(newState.to_string() == "combat")
+				if(newState->to_string() == "combat")
 				{
 					if(!meleeCombat->getFightHappening())
 					{
-						_stateMachine.removeState(newState);
+						_stateMachine.removeState(*newState);
 
 					}
 					else
@@ -123,13 +124,13 @@ namespace bammm
 				else
 				{
 					//breakdown and setup are not calling the correct functions
-					_stateMachine.removeState(newState);
+					_stateMachine.removeState(*newState);
 				}
 			}
 			else
 			{
 				//Special case for combat state
-				if(newState.to_string() == "combat")
+				if(newState->to_string() == "combat")
 				{
 					Actor* closestEnemy = sceneManager->getSceneGraph().getEnemy(_actor->getLocation(), _actor);
 					if(closestEnemy)
@@ -137,7 +138,7 @@ namespace bammm
 						meleeCombat->setup(*_actor, *closestEnemy);
 					}
 				}
-				_stateMachine.addState(newState);
+				_stateMachine.addState(*newState);
 			}
 		}
 
@@ -156,8 +157,8 @@ namespace bammm
 
     void PlayerController::printOptions()
     {
-		//!!!!!!!!!!!!!Danger!!!!!!!!!!!!
-    	DynamicArray<State> currentStates = _stateMachine.getCurrentStates();
+		cout << "Made it here\n";
+    	DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
     	/*
 
     	}
@@ -166,7 +167,7 @@ namespace bammm
     	cout << "Select an activity for your dwarf:" << endl;
 
 		//Mining gold options
-    	if (currentStates.contains(_states.getValue("mine")))
+    	if (currentStates.contains(&_states.getValue("mine")))
 		{
 			cout << "1. Stop mining gold" << endl;
 		}
@@ -176,7 +177,7 @@ namespace bammm
 		}
 
     	//Drinking options
-    	if (currentStates.contains(_states.getValue("drink")))
+    	if (currentStates.contains(&_states.getValue("drink")))
 		{
 			cout << "2. Stop drinking ale" << endl;
 		}
@@ -186,7 +187,7 @@ namespace bammm
 		}
 
     	//Singing options
-    	if (currentStates.contains(_states.getValue("sing")))
+    	if (currentStates.contains(&_states.getValue("sing")))
     	{
     		cout << "3. Stop signing" << endl;
     	}
@@ -196,7 +197,7 @@ namespace bammm
     	}
 
     	//Fighting options
-    	if (currentStates.contains(_states.getValue("brawl")))
+    	if (currentStates.contains(&_states.getValue("brawl")))
     	{
     		cout << "4. Stop fighting" << endl;
     	}
@@ -207,7 +208,7 @@ namespace bammm
 
 
     	//Sleeping options
-		if (currentStates.contains(_states.getValue("sleep")))
+		if (currentStates.contains(&_states.getValue("sleep")))
 		{
 			cout << "5. Wake up" << endl;
 		}
@@ -218,7 +219,7 @@ namespace bammm
 
 		
 		//Combat options
-		if (currentStates.contains(_states.getValue("combat")))
+		if (currentStates.contains(&_states.getValue("combat")))
 		{
 			cout << "6. Attack" << endl;
 		}
