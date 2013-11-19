@@ -79,7 +79,7 @@ namespace bammm
 			 @Pre-Condition- Takes a string key and a T value
 			 @Post-Condition- Adds the key value pair as a node to the map and returns true on success
 			 */
-			bool add(string key, T& value);
+			bool add(string key, T value);
 
 			/**
 			 remove
@@ -169,7 +169,7 @@ namespace bammm
 	}
 
 	template<class T>
-	bool HashMap<T>::add(string key, T& value)
+	bool HashMap<T>::add(string key, T value)
 	{
 		if (find(key) != NULL)
 		{
