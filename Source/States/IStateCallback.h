@@ -51,17 +51,17 @@ namespace bammm
 
 	}
 
-	virtual IStateCallback::~IStateCallback()
+	IStateCallback::~IStateCallback()
 	{
 
 	}
 
-	virtual void IStateCallback::switchState(State* current, State* newState)
+	void IStateCallback::switchState(State* current, State* newState)
 	{
 		cout << "wrong switch" << endl;
 	}
-	virtual void IStateCallback::switchState(State* current,
-			string newStateString)
+
+	void IStateCallback::switchState(State* current, string newStateString)
 	{
 		cout << "Wrong switch string" << endl;
 	}
