@@ -62,8 +62,6 @@ namespace bammm
 					int defense);
 			Actor(ActorInfo* info);
 
-			string to_string();
-
 			/**
 			 setMeleeWeapon
 			 @Pre-Condition- takes no arguments
@@ -163,96 +161,138 @@ namespace bammm
 			 */
 			bool spendGold(int amount);
 
-			inline int getGold()
-			{
-				return _gold;
-			}
+			/**
+			 getGold
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _gold
+			 */
+			int getGold();
 
-			inline MeleeWeapon* getMeleeWeapon()
-			{
-				return _meleeWeapon;
-			}
+			/**
+			 getMeleeWeapon
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _meleeWeapon
+			 */
+			MeleeWeapon* getMeleeWeapon();
 
-			inline RangedWeapon* getRangedWeapon()
-			{
-				return _rangedWeapon;
-			}
+			/**
+			 getRangedWeapon
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _rangedWeapon
+			 */
+			RangedWeapon* getRangedWeapon();
 
-			inline float getBAC()
-			{
-				return _BAC;
-			}
+			/**
+			 getBAC
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _BAC
+			 */
+			float getBAC();
 
-			inline float getRotation()
-			{
-				return _rotation;
-			}
+			/**
+			 getRotation
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _rotation
+			 */
+			float getRotation();
 
-			inline string getName()
-			{
-				return _name;
-			}
+			/**
+			 getName
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _name
+			 */
+			string getName();
 
-			inline string getVelocity()
-			{
-				return _velocity->toString();
-			}
+			/**
+			 getVelocity
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _velocity
+			 */
+			string getVelocity();
 
-			inline Vector3D* getLocation()
-			{
-				return _location;
-			}
+			/**
+			 getLocation
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _location
+			 */
+			Vector3D* getLocation();
 
-			inline int getHealth()
-			{
-				return _healthBar;
-			}
+			/**
+			 getHealth
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _healthBar
+			 */
+			int getHealth();
 
-			inline int getStamina()
-			{
-				return _staminaBar;
-			}
+			/**
+			 getStamina
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _staminaBar
+			 */
+			int getStamina();
 
-			inline int getAttack()
-			{
-				return _attack;
-			}
+			/**
+			 getAttack
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _attack
+			 */
+			int getAttack();
 
-			inline int getDefense()
-			{
-				return _defense;
-			}
+			/**
+			 getDefense
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _defense
+			 */
+			int getDefense();
 
-			inline int getX()
-			{
-				return _location->x();
-			}
+			/**
+			 getX
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _location->x
+			 */
+			int getX();
 
-			inline int getY()
-			{
-				return _location->y();
-			}
+			/**
+			 getY
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _location->y
+			 */
+			int getY();
 
-			inline int getZ()
-			{
-				return _location->z();
-			}
+			/**
+			 getZ
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _location->z
+			 */
+			int getZ();
 
-			inline Vector3D * getVectorLocation()
-			{
-				return _location;
-			}
+			/**
+			 getVectorLocation
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _location
+			 */
+			Vector3D * getVectorLocation();
 
-			inline int getAlliance()
-			{
-				return _alliance;
-			}
+			/**
+			 getAlliance
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _alliance
+			 */
+			int getAlliance();
 
-			inline int getEnemyAlliance()
-			{
-				return _alliance * -1;
-			}
+			/**
+			 getEnemyAlliance
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _alliance * -1
+			 */
+			int getEnemyAlliance();
 
+			/**
+			 toString
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _name
+			 */
+			string toString();
 	};
 
 	Actor::Actor()
@@ -322,11 +362,6 @@ namespace bammm
 		_staminaBar = info->getStamina();
 		_attack = info->getAttack();
 		_defense = info->getDefense();
-	}
-
-	string Actor::to_string()
-	{
-		return _name;
 	}
 
 	void Actor::setMeleeWeapon(MeleeWeapon* weapon)
@@ -440,6 +475,101 @@ namespace bammm
 			_gold -= amount;
 			return true;
 		}
+	}
+
+	int Actor::getGold()
+	{
+		return _gold;
+	}
+
+	MeleeWeapon* Actor::getMeleeWeapon()
+	{
+		return _meleeWeapon;
+	}
+
+	RangedWeapon* Actor::getRangedWeapon()
+	{
+		return _rangedWeapon;
+	}
+
+	float Actor::getBAC()
+	{
+		return _BAC;
+	}
+
+	float Actor::getRotation()
+	{
+		return _rotation;
+	}
+
+	string Actor::getName()
+	{
+		return _name;
+	}
+
+	string Actor::getVelocity()
+	{
+		return _velocity->toString();
+	}
+
+	Vector3D* Actor::getLocation()
+	{
+		return _location;
+	}
+
+	int Actor::getHealth()
+	{
+		return _healthBar;
+	}
+
+	int Actor::getStamina()
+	{
+		return _staminaBar;
+	}
+
+	int Actor::getAttack()
+	{
+		return _attack;
+	}
+
+	int Actor::getDefense()
+	{
+		return _defense;
+	}
+
+	int Actor::getX()
+	{
+		return _location->x();
+	}
+
+	int Actor::getY()
+	{
+		return _location->y();
+	}
+
+	int Actor::getZ()
+	{
+		return _location->z();
+	}
+
+	Vector3D * Actor::getVectorLocation()
+	{
+		return _location;
+	}
+
+	int Actor::getAlliance()
+	{
+		return _alliance;
+	}
+
+	int Actor::getEnemyAlliance()
+	{
+		return _alliance * -1;
+	}
+
+	string Actor::toString()
+	{
+		return _name;
 	}
 }
 #endif
