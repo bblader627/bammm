@@ -1,4 +1,5 @@
 /*
+
  * CS585
  *
  * Team Bammm
@@ -10,10 +11,10 @@
  * Description:
  * JSONParser cpp file.
  *
- */
+
 
 #include "JSONParser.h"
-#include "../Resources/DynamicArray.h"
+#include "DynamicArray.h"
 
 using namespace std;
 
@@ -21,7 +22,9 @@ namespace bammm
 {
 	void JSONParser::addRoot(JSON & newNode)
 	{
+		cout << "adding root \n";
 		_rootMap.add(newNode.getName(), newNode);
+		cout << "root added \n";
 	}
 
 	void JSONParser::addChild(JSON & rootNode, JSON & newNode)
@@ -79,6 +82,7 @@ namespace bammm
 					isValue = false;
 					if (currentNode == NULL)
 					{
+						cout << "here \n";
 						currentNode = new JSON();
 						addRoot(*currentNode);
 						// JSON node is created - now we continue so we may parse the name and set values
@@ -86,11 +90,13 @@ namespace bammm
 					else
 					{
 						//seg faulted before changes to this
+						cout << "here2 \n";
 						parentNode = currentNode;
 						currentNode = new JSON();
 						currentNode->setParent(*parentNode);
 						parentNode->addChild(*currentNode);
 					}
+					cout << "Completed { \n";
 					break;
 				case '"':
 
@@ -204,3 +210,4 @@ namespace bammm
 		return true;
 	}
 }
+*/

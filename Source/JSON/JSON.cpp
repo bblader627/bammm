@@ -14,7 +14,8 @@
 
 #include <sstream>
 #include <iostream>
-#include "JSONParser.h"
+#include "JSON.h"
+
 
 using namespace std;
 
@@ -23,27 +24,18 @@ namespace bammm
 	JSON::JSON()
 	{
 		_name = "empty";
-		_value = "empty";
 		_type = JSON_NULL;
 		_parent = NULL;
 	}
 
-	JSON::JSON(string name, string value, JSON_TYPE type, const JSON & parent)
+/*	JSON::~JSON()
 	{
-		_name = name;
-		_value = value;
-		_type = type;
-		*_parent = parent;
-	}
-
-	JSON::~JSON()
-	{
-		cout << "Deleting JSON\n";
+		cout << "Deleting JSON \n";
 	}
 
 	JSON JSON::getParent()
 	{
-		if(_parent == NULL)
+		if (_parent == NULL)
 		{
 			cout << "Parent is null\n";
 		}
@@ -72,6 +64,11 @@ namespace bammm
 	string JSON::getName()
 	{
 		return _name;
+	}
+
+	string JSON::getValue()
+	{
+		return _value;
 	}
 
 	JSON_TYPE JSON::getType()
@@ -119,7 +116,7 @@ namespace bammm
 		}
 		else
 		{
-			/*	The to_string() function is not recognized for me. Something wrong with compiler.	*/
+				The to_string() function is not recognized for me. Something wrong with compiler.
 			stringstream stringStreamValue;
 			stringStreamValue >> newValue;
 			this->_value = stringStreamValue.str();
@@ -136,7 +133,7 @@ namespace bammm
 		}
 		else
 		{
-			/*	The to_string() function is not recognized for me. Something wrong with compiler.	*/
+				The to_string() function is not recognized for me. Something wrong with compiler.
 			stringstream stringStreamValue;
 			stringStreamValue >> newValue;
 			this->_value = stringStreamValue.str();
@@ -158,6 +155,7 @@ namespace bammm
 
 	void JSON::addChild(JSON & newNode)
 	{
+		cout << "addChild" << endl;
 		this->_children.add(newNode._name, newNode);
 		newNode.setParent(*this);
 		cout << "addChild" << endl;
@@ -186,6 +184,6 @@ namespace bammm
 		{
 			return this->_value;
 		}
-	}
+	}*/
 }
 
