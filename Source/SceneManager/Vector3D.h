@@ -164,35 +164,47 @@ namespace bammm
 			 */
 			Vector3D& operator-=(const Vector3D &vector);
 
-			inline float x() const
-			{
-				return _x;
-			}
+			/**
+			 getX
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _x
+			 */
+			float getX() const;
 
-			inline float y() const
-			{
-				return _y;
-			}
+			/**
+			 getY
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _y
+			 */
+			float getY() const;
 
-			inline float z() const
-			{
-				return _z;
-			}
+			/**
+			 getZ
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _z
+			 */
+			float getZ() const;
 
-			inline float& x()
-			{
-				return _x;
-			}
+			/**
+			 getX
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _x
+			 */
+			float& getX();
 
-			inline float& y()
-			{
-				return _y;
-			}
+			/**
+			 getY
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _y
+			 */
+			float& getY();
 
-			inline float& z()
-			{
-				return _z;
-			}
+			/**
+			 getZ
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _z
+			 */
+			float& getZ();
 	};
 
 	Vector3D::Vector3D()
@@ -266,7 +278,7 @@ namespace bammm
 
 	float Vector3D::dotProduct(Vector3D &vect)
 	{
-		return (_x * vect.x()) + (_y * vect.y()) + (_z * vect.z());
+		return (_x * vect.getX()) + (_y * vect.getY()) + (_z * vect.getZ());
 	}
 
 	void Vector3D::divideVector(int scalar)
@@ -285,9 +297,9 @@ namespace bammm
 
 	Vector3D Vector3D::crossProduct(Vector3D &vector)
 	{
-		return Vector3D((_y * vector.z()) - (_z - vector.y()),
-				(_x * vector.z()) - (_z - vector.x()),
-				(_x * vector.y()) - (_y - vector.x()));
+		return Vector3D((_y * vector.getZ()) - (_z - vector.getY()),
+				(_x * vector.getZ()) - (_z - vector.getX()),
+				(_x * vector.getY()) - (_y - vector.getX()));
 
 	}
 
@@ -298,7 +310,8 @@ namespace bammm
 
 	bool Vector3D::operator==(const Vector3D &vector)
 	{
-		if ((_x == vector.x()) && (_y == vector.y()) && (_z == vector.z()))
+		if ((_x == vector.getX()) && (_y == vector.getY())
+				&& (_z == vector.getZ()))
 		{
 			return true;
 		}
@@ -310,7 +323,8 @@ namespace bammm
 
 	bool Vector3D::operator!=(const Vector3D &vector)
 	{
-		if ((_x == vector.x()) && (_y == vector.y()) && (_z == vector.z()))
+		if ((_x == vector.getX()) && (_y == vector.getY())
+				&& (_z == vector.getZ()))
 		{
 			return false;
 		}
@@ -322,28 +336,60 @@ namespace bammm
 
 	Vector3D Vector3D::operator+(const Vector3D &vector)
 	{
-		return Vector3D(_x + vector.x(), _y + vector.y(), _z + vector.z());
+		return Vector3D(_x + vector.getX(), _y + vector.getY(),
+				_z + vector.getZ());
 	}
 
 	Vector3D& Vector3D::operator+=(const Vector3D &vector)
 	{
-		_x += vector.x();
-		_y += vector.y();
-		_z += vector.z();
+		_x += vector.getX();
+		_y += vector.getY();
+		_z += vector.getZ();
 		return *this;
 	}
 
 	Vector3D Vector3D::operator-(const Vector3D &vector)
 	{
-		return Vector3D(_x - vector.x(), _y - vector.y(), _z - vector.z());
+		return Vector3D(_x - vector.getX(), _y - vector.getY(),
+				_z - vector.getZ());
 	}
 
 	Vector3D& Vector3D::operator-=(const Vector3D &vector)
 	{
-		_x -= vector.x();
-		_y -= vector.y();
-		_z -= vector.z();
+		_x -= vector.getX();
+		_y -= vector.getY();
+		_z -= vector.getZ();
 		return *this;
+	}
+
+	float Vector3D::getX() const
+	{
+		return _x;
+	}
+
+	float Vector3D::getY() const
+	{
+		return _y;
+	}
+
+	float Vector3D::getZ() const
+	{
+		return _z;
+	}
+
+	float& Vector3D::getX()
+	{
+		return _x;
+	}
+
+	float& Vector3D::getY()
+	{
+		return _y;
+	}
+
+	float& Vector3D::getZ()
+	{
+		return _z;
 	}
 }
 

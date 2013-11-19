@@ -109,13 +109,13 @@ namespace bammm
 
 		_stateMachine->initialState(idleState);
 
-		_states->add(idleState->to_string(), idleState);
-		_states->add(mineState->to_string(), mineState);
-		_states->add(drinkState->to_string(), drinkState);
-		_states->add(singState->to_string(), singState);
-		_states->add(brawlState->to_string(), brawlState);
-		_states->add(sleepState->to_string(), sleepState);
-		_states->add(combatState->to_string(), combatState);
+		_states->add(idleState->toString(), idleState);
+		_states->add(mineState->toString(), mineState);
+		_states->add(drinkState->toString(), drinkState);
+		_states->add(singState->toString(), singState);
+		_states->add(brawlState->toString(), brawlState);
+		_states->add(sleepState->toString(), sleepState);
+		_states->add(combatState->toString(), combatState);
 	}
 
 	void PlayerController::input(string command, float deltaTime)
@@ -151,9 +151,9 @@ namespace bammm
 				//Switching newState with NULL calls breakdown on newState, the remove on currentStates
 
 				//Do doTurn in MeleeCombat
-				if (newState->to_string() == "combat")
+				if (newState->toString() == "combat")
 				{
-					if (!_meleeCombat->getFightHappening())
+					if (!_meleeCombat->fightHappening())
 					{
 						_stateMachine->removeState(newState);
 
@@ -172,7 +172,7 @@ namespace bammm
 			else
 			{
 				//Special case for combat state
-				if (newState->to_string() == "combat")
+				if (newState->toString() == "combat")
 				{
 					Actor* closestEnemy =
 							_sceneManager->getSceneGraph()->getEnemy(

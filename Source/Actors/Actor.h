@@ -539,12 +539,12 @@ namespace bammm
 
 	int Actor::getX()
 	{
-		return _location->x();
+		return _location->getX();
 	}
 
 	int Actor::getY()
 	{
-		return _location->y();
+		return _location->getY();
 	}
 
 	int Actor::getZ()

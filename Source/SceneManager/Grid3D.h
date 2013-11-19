@@ -504,12 +504,12 @@ namespace bammm
 		Vector3D* orderedLocation = ordered->getLocation();
 		Vector3D* targetLocation = newLocation;
 
-		bool sameX = orderedLocation->x() == targetLocation->x();
-		bool sameY = orderedLocation->y() == targetLocation->y();
-		bool orderedXLess = orderedLocation->x() < targetLocation->x();
-		bool orderedXGreater = orderedLocation->x() > targetLocation->x();
-		bool orderedYLess = orderedLocation->y() < targetLocation->y();
-		bool orderedYGreater = orderedLocation->y() > targetLocation->y();
+		bool sameX = orderedLocation->getX() == targetLocation->getX();
+		bool sameY = orderedLocation->getY() == targetLocation->getY();
+		bool orderedXLess = orderedLocation->getX() < targetLocation->getX();
+		bool orderedXGreater = orderedLocation->getX() > targetLocation->getX();
+		bool orderedYLess = orderedLocation->getY() < targetLocation->getY();
+		bool orderedYGreater = orderedLocation->getY() > targetLocation->getY();
 
 		float newX;
 		float newY;
@@ -522,49 +522,49 @@ namespace bammm
 		{
 			if (orderedYLess)
 			{
-				newY = orderedLocation->y() + 1;
+				newY = orderedLocation->getY() + 1;
 			}
 			else
 			{
-				newY = orderedLocation->y() - 1;
+				newY = orderedLocation->getY() - 1;
 			}
 
-			newX = orderedLocation->x();
+			newX = orderedLocation->getX();
 		}
 		else if (sameY)
 		{
 			if (orderedXLess)
 			{
-				newX = orderedLocation->x() + 1;
+				newX = orderedLocation->getX() + 1;
 			}
 			else
 			{
-				newX = orderedLocation->x() - 1;
+				newX = orderedLocation->getX() - 1;
 			}
 
-			newY = orderedLocation->y();
+			newY = orderedLocation->getY();
 		}
 		else
 		{
 			if (orderedXLess && orderedYLess)
 			{
-				newX = orderedLocation->x() + 1;
-				newY = orderedLocation->y() + 1;
+				newX = orderedLocation->getX() + 1;
+				newY = orderedLocation->getY() + 1;
 			}
 			else if (orderedXLess && orderedYGreater)
 			{
-				newX = orderedLocation->x() + 1;
-				newY = orderedLocation->y() - 1;
+				newX = orderedLocation->getX() + 1;
+				newY = orderedLocation->getY() - 1;
 			}
 			else if (orderedXGreater && orderedYLess)
 			{
-				newX = orderedLocation->x() - 1;
-				newY = orderedLocation->y() + 1;
+				newX = orderedLocation->getX() - 1;
+				newY = orderedLocation->getY() + 1;
 			}
 			else if (orderedXGreater && orderedYGreater)
 			{
-				newX = orderedLocation->x() - 1;
-				newY = orderedLocation->y() - 1;
+				newX = orderedLocation->getX() - 1;
+				newY = orderedLocation->getY() - 1;
 			}
 		}
 		newLocation = new Vector3D(newX, newY, 0);
@@ -592,7 +592,7 @@ namespace bammm
 	template<class T>
 	int Grid3D<T>::convertToPosition(Vector3D* vector)
 	{
-		return vector->x() + (vector->y() * _width)
+		return vector->getX() + (vector->getY() * _width)
 				+ (vector->z() * _width * _height);
 	}
 
