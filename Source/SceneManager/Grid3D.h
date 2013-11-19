@@ -79,6 +79,7 @@ namespace bammm
 			Grid3D(int width, int length, int height);
 			~Grid3D();
 
+			//TODO:Add docstyle comments
 			void setupDirections();
 
 			/*
@@ -124,14 +125,9 @@ namespace bammm
 			 */
 			Stack<Vector3D*>* getPath(Actor* actor, string destination);
 
+			//TODO:Add docstyle comment
 			Vector3D* findInGrid(string target);
 
-			string to_string();
-			T getEnemy(Vector3D* loc, T actor);
-			DynamicArray<T>* access(int x, int y, int z);
-			void add(Vector3D* vect, T add);
-			void move(T actor, Vector3D* newLoc);
-			void moveTowards(T ordered, Vector3D* loc);
 			/*
 			toString
 			 @Pre-Condition- No input
