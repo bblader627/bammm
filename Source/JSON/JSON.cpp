@@ -16,7 +16,6 @@
 #include <iostream>
 #include "JSON.h"
 
-
 using namespace std;
 
 namespace bammm
@@ -33,6 +32,15 @@ namespace bammm
 		cout << "Deleting JSON \n";
 	}
 
+	string JSON::getName()
+	{
+		return _name;
+	}
+
+	JSON_TYPE JSON::getType()
+	{
+		return _type;
+	}
 
 	JSON JSON::getParent()
 	{
@@ -43,157 +51,154 @@ namespace bammm
 		return *_parent;
 	}
 
-	JSON_TYPE JSON::getType(){
-		return _type;
-	}
-
-	string JSON::getName(){
-		return _name;
-	}
-
-	/*
-	JSON JSON::getChild(string name)
+	void JSON::setName(string newName)
 	{
-		if (this->_value != "empty")
-		{
-			cout << "Error retrieving child: " << this->getName()
-					<< " has no children. \n";
-			return *this;
-		}
-		else
-		{
-			return this->_children.getValue(name);
-		}
+		_name = newName;
 	}
 
-	HashMap<JSON>* JSON::getChildren()
-	{
-		return &_children;
-	}
+/*
+ JSON JSON::getChild(string name)
+ {
+ if (this->_value != "empty")
+ {
+ cout << "Error retrieving child: " << this->getName()
+ << " has no children. \n";
+ return *this;
+ }
+ else
+ {
+ return this->_children.getValue(name);
+ }
+ }
 
-	string JSON::getName()
-	{
-		return _name;
-	}
+ HashMap<JSON>* JSON::getChildren()
+ {
+ return &_children;
+ }
 
-	string JSON::getValue()
-	{
-		return _value;
-	}
+ string JSON::getName()
+ {
+ return _name;
+ }
 
-	JSON_TYPE JSON::getType()
-	{
-		return _type;
-	}
+ string JSON::getValue()
+ {
+ return _value;
+ }
 
-	bool JSON::setParent(JSON newParent)
-	{
-		*_parent = newParent;
-		return true;
-	}
+ JSON_TYPE JSON::getType()
+ {
+ return _type;
+ }
 
-	bool JSON::setValue(string newValue)
-	{
-		this->_value = newValue;
-		return true;
-	}
+ bool JSON::setParent(JSON newParent)
+ {
+ *_parent = newParent;
+ return true;
+ }
 
-	bool JSON::setValue(bool newValue)
-	{
-		if (this->_type != JSON_BOOL)
-		{
-			return false;
-		}
-		else
-		{
-			if (newValue == false)
-			{
-				this->_value = "false";
-			}
-			else
-			{
-				this->_value = "true";
-			}
-			return true;
-		}
-	}
+ bool JSON::setValue(string newValue)
+ {
+ this->_value = newValue;
+ return true;
+ }
 
-	bool JSON::setValue(int newValue)
-	{
-		if (this->_type != JSON_INT)
-		{
-			return false;
-		}
-		else
-		{
-				The to_string() function is not recognized for me. Something wrong with compiler.
-			stringstream stringStreamValue;
-			stringStreamValue >> newValue;
-			this->_value = stringStreamValue.str();
-			return true;
+ bool JSON::setValue(bool newValue)
+ {
+ if (this->_type != JSON_BOOL)
+ {
+ return false;
+ }
+ else
+ {
+ if (newValue == false)
+ {
+ this->_value = "false";
+ }
+ else
+ {
+ this->_value = "true";
+ }
+ return true;
+ }
+ }
 
-		}
-	}
+ bool JSON::setValue(int newValue)
+ {
+ if (this->_type != JSON_INT)
+ {
+ return false;
+ }
+ else
+ {
+ The to_string() function is not recognized for me. Something wrong with compiler.
+ stringstream stringStreamValue;
+ stringStreamValue >> newValue;
+ this->_value = stringStreamValue.str();
+ return true;
 
-	bool JSON::setValue(double newValue)
-	{
-		if (this->_type != JSON_DOUBLE)
-		{
-			return false;
-		}
-		else
-		{
-				The to_string() function is not recognized for me. Something wrong with compiler.
-			stringstream stringStreamValue;
-			stringStreamValue >> newValue;
-			this->_value = stringStreamValue.str();
-			return true;
-		}
-	}
+ }
+ }
 
-	bool JSON::setName(string newName)
-	{
-		this->_name = newName;
-		return true;
-	}
+ bool JSON::setValue(double newValue)
+ {
+ if (this->_type != JSON_DOUBLE)
+ {
+ return false;
+ }
+ else
+ {
+ The to_string() function is not recognized for me. Something wrong with compiler.
+ stringstream stringStreamValue;
+ stringStreamValue >> newValue;
+ this->_value = stringStreamValue.str();
+ return true;
+ }
+ }
 
-	bool JSON::setType(JSON_TYPE newType)
-	{
-		this->_type = newType;
-		return true;
-	}
+ bool JSON::setName(string newName)
+ {
+ this->_name = newName;
+ return true;
+ }
 
-	void JSON::addChild(JSON & newNode)
-	{
-		cout << "addChild" << endl;
-		this->_children.add(newNode._name, newNode);
-		newNode.setParent(*this);
-		cout << "addChild" << endl;
-	}
+ bool JSON::setType(JSON_TYPE newType)
+ {
+ this->_type = newType;
+ return true;
+ }
 
-	JSON& JSON::operator=(const JSON & rightHandSide)
-	{
-		this->_name = rightHandSide._name;
-		this->_value = rightHandSide._value;
-		this->_type = rightHandSide._type;
-		this->_parent = rightHandSide._parent;
-		this->_children = rightHandSide._children;
+ void JSON::addChild(JSON & newNode)
+ {
+ cout << "addChild" << endl;
+ this->_children.add(newNode._name, newNode);
+ newNode.setParent(*this);
+ cout << "addChild" << endl;
+ }
 
-		return *this;
-	}
-*
-	string JSON::operator[](const string & index)
-	{
+ JSON& JSON::operator=(const JSON & rightHandSide)
+ {
+ this->_name = rightHandSide._name;
+ this->_value = rightHandSide._value;
+ this->_type = rightHandSide._type;
+ this->_parent = rightHandSide._parent;
+ this->_children = rightHandSide._children;
 
-		if (this->_value == "empty")
-		{
-			JSON temporary = this->getChild(index);
-			return temporary[index];
-		}
-		else
-		{
-			return this->_value;
-		}
-	}*/
+ return *this;
+ }
+ *
+ string JSON::operator[](const string & index)
+ {
+
+ if (this->_value == "empty")
+ {
+ JSON temporary = this->getChild(index);
+ return temporary[index];
+ }
+ else
+ {
+ return this->_value;
+ }
+ }*/
 }
 

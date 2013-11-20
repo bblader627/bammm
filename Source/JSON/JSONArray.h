@@ -3,6 +3,14 @@
  *
  *  Created on: Nov 19, 2013
  *      Author: michael
+ *
+ *      DOCUMENTATION
+ *
+ *      Inherits from JSON
+ *      Represents an Array in JSON
+ *      May hold any JSON Object including JSONPrimitive and JSONArray
+ *      Stores JSON Objects in a DynamicArray
+ *
  */
 
 #ifndef JSONARRAY_H_
@@ -26,9 +34,9 @@ namespace bammm
 			JSONArray(string);
 			JSONArray(string, JSON*);
 
-			virtual ~JSONArray();
+			~JSONArray();
 
-			JSONPrimitive::value_t operator[](const unsigned int & rhs);
+			JSON operator[](const unsigned int & rhs);
 
 	};
 
@@ -53,20 +61,15 @@ namespace bammm
 		_parent = parent;
 	}
 
-	virtual JSONArray::~JSONArray()
+	JSONArray::~JSONArray()
 	{
+		cout << "Deleting JSON Array \n";
 		delete _children;
 	}
 
-	JSONPrimitive::value_t JSONArray::operator[](const unsigned int & rhs)
+	JSON JSONArray::operator[](const unsigned int & rhs)
 	{
-		if (_children[rhs].getType() == JSON_ARRAY)
-		{
-			cout
-					<< "Error: Can not return a JSON ARRAY using the [] operator \n";
-			return "error";
-		}
-		else if (_children[rhs].getType() == JSON_NULL)
+		if (_children[rhs].getType() == JSON_NULL)
 		{
 			cout
 					<< "Error: JSONPrimitive Object not initialized to a value or incorrect type :: JSON_NULL \n";
@@ -74,7 +77,7 @@ namespace bammm
 		}
 		else
 		{
-			return _children[rhs].getValue();
+			return _children[rhs];
 		}
 	}
 
