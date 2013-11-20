@@ -19,7 +19,7 @@
 #include <fstream>
 #include <string>
 
-#include "../Resources/HashMap.h"
+#include "HashMap.h"
 #include "JSON.h"
 
 #ifndef NULL
@@ -35,7 +35,7 @@ namespace bammm
 	class JSONParser
 	{
 		private:
-			HashMap<JSON> _rootMap;
+			HashMap<JSONPrimitive> _rootMap;
 
 /*
 			*
