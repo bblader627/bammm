@@ -593,7 +593,7 @@ namespace bammm
 	int Grid3D<T>::convertToPosition(Vector3D* vector)
 	{
 		return vector->getX() + (vector->getY() * _width)
-				+ (vector->z() * _width * _height);
+				+ (vector->getZ() * _width * _height);
 	}
 
 	template<class T>

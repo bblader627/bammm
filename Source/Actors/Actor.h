@@ -549,7 +549,7 @@ namespace bammm
 
 	int Actor::getZ()
 	{
-		return _location->z();
+		return _location->getZ();
 	}
 
 	Vector3D * Actor::getVectorLocation()
