@@ -21,6 +21,7 @@
 
 #include "HashMap.h"
 #include "JSON.h"
+#include "JSONPrimitive.h"
 
 #ifndef NULL
 #define NULL (void *) 0
@@ -35,7 +36,7 @@ namespace bammm
 	class JSONParser
 	{
 		private:
-			HashMap<JSONPrimitive> _rootMap;
+			HashMap<JSON> _rootMap;
 
 /*
 			*

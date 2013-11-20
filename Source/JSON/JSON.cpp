@@ -28,10 +28,11 @@ namespace bammm
 		_parent = NULL;
 	}
 
-/*	JSON::~JSON()
+	JSON::~JSON()
 	{
 		cout << "Deleting JSON \n";
 	}
+
 
 	JSON JSON::getParent()
 	{
@@ -42,6 +43,15 @@ namespace bammm
 		return *_parent;
 	}
 
+	JSON_TYPE JSON::getType(){
+		return _type;
+	}
+
+	string JSON::getName(){
+		return _name;
+	}
+
+	/*
 	JSON JSON::getChild(string name)
 	{
 		if (this->_value != "empty")
@@ -171,7 +181,7 @@ namespace bammm
 
 		return *this;
 	}
-
+*
 	string JSON::operator[](const string & index)
 	{
 

@@ -8,7 +8,8 @@
 #ifndef JSON_H_
 #define JSON_H_
 
-#include "JSONParser.h"
+#include <string>
+#include "HashMap.h"
 
 namespace bammm
 {
@@ -29,7 +30,7 @@ namespace bammm
 
 		public:
 			JSON();
-			~JSON();
+			virtual ~JSON();
 
 			/**
 			 getParent
@@ -129,7 +130,7 @@ namespace bammm
 			void addChild(JSON, JSON);
 
 			JSON & operator=(const JSON & rightHandSide);
-			virtual string operator[](const string & index);
+			string operator[](const string & index);
 	};
 
 }

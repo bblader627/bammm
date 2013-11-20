@@ -9,7 +9,7 @@
 #define JSONPRIMITIVE_H_
 
 #include "JSON.h"
-
+using namespace bammm;
 namespace bammm
 {
 
@@ -18,19 +18,48 @@ namespace bammm
 
 		protected:
 
-			string _value;
+			union value_t
+			{
+					char c;
+					int i;
+					double d;
+			} _value;
 
 		public:
 
-			JSONPrimitive()
-			{
-				_name = "empty";
-				_value = "empty";
-				_type = JSON_NULL;
-			}
+			JSONPrimitive();
+			JSONPrimitive(char* newName, value_t newValue,
+					bammm::JSON_TYPE newType);
 
 			virtual ~JSONPrimitive();
+			value_t getValue();
+
 	};
+
+	JSONPrimitive::JSONPrimitive()
+	{
+		_name = "empty";
+		_value.i = 8;
+		_type = JSON_NULL;
+	}
+
+	JSONPrimitive::JSONPrimitive(char* newName, value_t newValue,
+			JSON_TYPE newType)
+	{
+		_name = newName;
+		_value = newValue;
+		_type = newType;
+	}
+
+	virtual JSONPrimitive::~JSONPrimitive()
+	{
+
+	}
+
+	JSONPrimitive::value_t JSONPrimitive::getValue()
+	{
+		return _value;
+	}
 
 }
 
