@@ -19,7 +19,7 @@
 #include <fstream>
 #include <string>
 
-#include "HashMap.h"
+#include "../Resources/HashMap.h"
 #include "JSON.h"
 
 #ifndef NULL
