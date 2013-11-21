@@ -50,15 +50,14 @@ int main()
 		OrcActor* newOrc = new OrcActor();
 		orcActors.add(newOrc);
 
-		AiController* newAi = new AiController(sceneManager, meleeCombat);
+		AiController* newAi = new AiController();
+		newAi->setup(*orcActors.get(i), sceneManager, meleeCombat);
 		sceneManager.getSceneGraph().add(temp, (orcActors.get(i)));
-
-		newAi->setup(*orcActors.get(i));
 		aiControllers.add(newAi);
 	}
 
-	PlayerController controller(sceneManager, meleeCombat);
-	controller.setup(*bob);
+	PlayerController controller;
+	controller.setup(*bob, sceneManager, meleeCombat);
 
 	bool playGame = true;
 	int choice;
@@ -120,18 +119,26 @@ int main()
 		}
 		controller.input(input, dTime);
 
-		/*for(int i = 0; i < (int)aiControllers.getSize(); i++)
-		{	
+		for(int i = 0; i < (int)aiControllers.getSize(); i++)
+		{
 			if(aiControllers.get(i)->update(dTime))
 			{
-				delete aiControllers.remove(i);
+				aiControllers.remove(i);
 			}
 
-		}*/
+		}
 	}
 	delete input;
 
 
+	for(int i = 0; i < (int)aiControllers.getSize(); i++)
+	{
+		if(aiControllers.get(i)->update(dTime))
+		{
+			delete aiControllers.remove(i);
+		}
+
+	}
 	cout << "Thanks for playing!  Press enter to quit." << endl;
 	return 0;
 }
