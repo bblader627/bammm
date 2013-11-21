@@ -56,6 +56,16 @@ namespace bammm
 		_name = newName;
 	}
 
+	void JSON::setType(JSON_TYPE newType)
+	{
+		_type = newType;
+	}
+
+	void JSON::addChild(JSON & newNode)
+	{
+		_children.add(newNode.getName(), newNode);
+	}
+
 /*
  JSON JSON::getChild(string name)
  {
