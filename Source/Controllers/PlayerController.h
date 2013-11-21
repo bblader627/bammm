@@ -39,20 +39,20 @@ namespace bammm
         public:
             void input(DynamicArray<string>* command, float dTime);
             void input(string command, float dTime);
-            PlayerController(SceneManager& scene, MeleeCombat& meleeC);
-            void setup(Actor& actor);
+            PlayerController();
+            void setup(Actor& actor, SceneManager& scene, MeleeCombat& meleeC);
             ~PlayerController();
             void printOptions();
     };
 
-    PlayerController::PlayerController(SceneManager& scene, MeleeCombat& meleeC)
+	PlayerController::PlayerController()
+	{
+	}
+
+    void PlayerController::setup(Actor& actor, SceneManager& scene, MeleeCombat& meleeC)
     {
 		sceneManager = &scene;
 		meleeCombat = &meleeC;
-    }
-
-    void PlayerController::setup(Actor& actor)
-    {
     	//Factory* actorFactory = new Factory();
     	//actorFactory->setup();
 
@@ -62,24 +62,24 @@ namespace bammm
 
 		//Create the states
         //DO NOT DELETE THE REFERENCES TO STATEMACHINE.  THE CODE WILL SEG FAULT IF YOU DO
-        DrinkState drinkState(actor, _stateMachine);
-        MineState mineState(actor, _stateMachine);
-        SingState singState(actor, _stateMachine);
-        BrawlState brawlState(actor, _stateMachine);
-        SleepState sleepState(actor, _stateMachine);
-        IdleState idleState(actor, _stateMachine);
-		CombatState combatState(actor, _stateMachine);
+        DrinkState* drinkState = new DrinkState(actor, _stateMachine);
+        MineState* mineState = new MineState(actor, _stateMachine);
+        SingState* singState = new SingState(actor, _stateMachine);
+        BrawlState* brawlState = new BrawlState(actor, _stateMachine);
+        SleepState* sleepState = new SleepState(actor, _stateMachine);
+        IdleState* idleState = new IdleState(actor, _stateMachine);
+		CombatState* combatState = new CombatState(actor, _stateMachine);
 
-        _states.add(idleState.to_string(), idleState);
-        _states.add(mineState.to_string(), mineState);
-        _states.add(drinkState.to_string(), drinkState);
-        _states.add(singState.to_string(), singState);
-        _states.add(brawlState.to_string(), brawlState);
-        _states.add(sleepState.to_string(), sleepState);
-       	_states.add(combatState.to_string(), combatState);
+        _states.add(idleState->to_string(), idleState);
+        _states.add(mineState->to_string(), mineState);
+        _states.add(drinkState->to_string(), drinkState);
+        _states.add(singState->to_string(), singState);
+        _states.add(brawlState->to_string(), brawlState);
+        _states.add(sleepState->to_string(), sleepState);
+       	_states.add(combatState->to_string(), combatState);
 		
 		//Put actor in idle state
-		_stateMachine.initialState(_states.getValue(idleState.to_string()));
+		_stateMachine.initialState(_states.getValue(idleState->to_string()));
     }
 
     void PlayerController::input(DynamicArray<string>* multiInput, float dTime)
@@ -97,7 +97,7 @@ namespace bammm
 			//if so, break it down
 
 			//!!!!!!!Danger!!!!!!!
-			State* newState  = &_states.getValue(multiInput->get(i));
+			State* newState  = _states.getValue(multiInput->get(i));
 
 			/********************************************
 			 *This should be handled in the stateMachine
@@ -113,7 +113,7 @@ namespace bammm
 				{
 					if(!meleeCombat->getFightHappening())
 					{
-						_stateMachine.removeState(*newState);
+						_stateMachine.removeState(newState);
 
 					}
 					else
@@ -124,7 +124,7 @@ namespace bammm
 				else
 				{
 					//breakdown and setup are not calling the correct functions
-					_stateMachine.removeState(*newState);
+					_stateMachine.removeState(newState);
 				}
 			}
 			else
@@ -138,7 +138,7 @@ namespace bammm
 						meleeCombat->setup(*_actor, *closestEnemy);
 					}
 				}
-				_stateMachine.addState(*newState);
+				_stateMachine.addState(newState);
 			}
 		}
 
@@ -167,7 +167,7 @@ namespace bammm
     	cout << "Select an activity for your dwarf:" << endl;
 
 		//Mining gold options
-    	if (currentStates.contains(&_states.getValue("mine")))
+    	if (currentStates.contains(_states.getValue("mine")))
 		{
 			cout << "1. Stop mining gold" << endl;
 		}
@@ -177,7 +177,7 @@ namespace bammm
 		}
 
     	//Drinking options
-    	if (currentStates.contains(&_states.getValue("drink")))
+    	if (currentStates.contains(_states.getValue("drink")))
 		{
 			cout << "2. Stop drinking ale" << endl;
 		}
@@ -187,7 +187,7 @@ namespace bammm
 		}
 
     	//Singing options
-    	if (currentStates.contains(&_states.getValue("sing")))
+    	if (currentStates.contains(_states.getValue("sing")))
     	{
     		cout << "3. Stop signing" << endl;
     	}
@@ -197,7 +197,7 @@ namespace bammm
     	}
 
     	//Fighting options
-    	if (currentStates.contains(&_states.getValue("brawl")))
+    	if (currentStates.contains(_states.getValue("brawl")))
     	{
     		cout << "4. Stop fighting" << endl;
     	}
@@ -208,7 +208,7 @@ namespace bammm
 
 
     	//Sleeping options
-		if (currentStates.contains(&_states.getValue("sleep")))
+		if (currentStates.contains(_states.getValue("sleep")))
 		{
 			cout << "5. Wake up" << endl;
 		}
@@ -219,7 +219,7 @@ namespace bammm
 
 		
 		//Combat options
-		if (currentStates.contains(&_states.getValue("combat")))
+		if (currentStates.contains(_states.getValue("combat")))
 		{
 			cout << "6. Attack" << endl;
 		}

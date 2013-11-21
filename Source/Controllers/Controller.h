@@ -41,7 +41,7 @@ namespace bammm
     class Controller
     {
         protected:
-            HashMap<State> _states;
+            HashMap<State*> _states;
             Actor* _actor;
             StateMachine _stateMachine;
 
@@ -61,6 +61,14 @@ namespace bammm
 
     Controller::~Controller()
     {
+		DynamicArray<string>* keys = _states.getAllKeys();
+		int size = keys->getSize();
+		for(int i = 0; i < size; i++)
+		{
+			delete _states.getValue(keys->get(i));
+		}
+		
+		delete keys;
     }
 }
 #endif
