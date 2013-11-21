@@ -52,7 +52,7 @@ namespace bammm
     void AiController::setup(Actor& actor)
     {
         _actor = &actor;
-        _stateMachine = StateMachine(actor, _states);
+    	_stateMachine.setup(actor, _states);
 
 		//Create the states
         //DO NOT DELETE THE REFERENCES TO STATEMACHINE.  THE CODE WILL SEG FAULT IF YOU DO
@@ -64,9 +64,6 @@ namespace bammm
         IdleState idleState(actor, _stateMachine);
 		CombatState combatState(actor, _stateMachine);
 
-		//Put actor in idle state
-		_stateMachine.initialState(idleState);
-
         _states.add(idleState.to_string(), idleState);
         _states.add(mineState.to_string(), mineState);
         _states.add(drinkState.to_string(), drinkState);
@@ -74,6 +71,9 @@ namespace bammm
         _states.add(brawlState.to_string(), brawlState);
         _states.add(sleepState.to_string(), sleepState);
        	_states.add(combatState.to_string(), combatState);
+		
+		//Put actor in idle state
+		_stateMachine.initialState(_states.getValue(idleState.to_string()));
     }
 
     AiController::~AiController()

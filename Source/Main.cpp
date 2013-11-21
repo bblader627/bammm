@@ -120,14 +120,14 @@ int main()
 		}
 		controller.input(input, dTime);
 
-		for(int i = 0; i < (int)aiControllers.getSize(); i++)
+		/*for(int i = 0; i < (int)aiControllers.getSize(); i++)
 		{	
 			if(aiControllers.get(i)->update(dTime))
 			{
 				delete aiControllers.remove(i);
 			}
 
-		}
+		}*/
 	}
 	delete input;
 

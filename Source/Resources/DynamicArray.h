@@ -56,16 +56,16 @@ namespace bammm
             DynamicArray(uint capacity);
             uint getSize();
             uint getCapacity();
-            T operator[](uint index);
+            T& operator[](uint index);
             bool add(T element);
             void insert(uint index, T element);
-            T remove(uint index);
+            T& remove(uint index);
             bool removeElem(T elem);
             void clear();
             string toString();
             uint getMemoryUsage();
             virtual ~DynamicArray();
-            T get(uint index);
+            T& get(uint index);
             void set(uint index, T value);
             int indexOf(T element);
             void ensureCapacity(uint min);
@@ -134,7 +134,7 @@ namespace bammm
      * @returns A reference to the element at the specified index.
      */
      template <class T>
-     T DynamicArray<T>::operator[](uint index)
+     T& DynamicArray<T>::operator[](uint index)
      {
         if(_array == NULL)
         {
@@ -242,7 +242,7 @@ namespace bammm
      * @throws Throws an error when the array is null or when the index is out of bounds.
      */
     template<class T>
-    T DynamicArray<T>::remove(uint index)
+    T& DynamicArray<T>::remove(uint index)
     {
         if(_array == NULL)
         {
@@ -255,7 +255,7 @@ namespace bammm
             errorMsg("Index out of bounds.");
             assert(0);
         }
-        T removedElement = _array[index];
+        T& removedElement = _array[index];
         shiftElementsLeft(index);
         _size--;
 
@@ -400,7 +400,7 @@ namespace bammm
      * @throws Throws an error when index is out of bounds or when array is null.
      */
     template<class T>
-    T DynamicArray<T>::get(uint index)
+    T& DynamicArray<T>::get(uint index)
     {
         if(_array == NULL)
         {

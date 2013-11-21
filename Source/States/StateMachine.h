@@ -51,9 +51,8 @@ class StateMachine : public IStateCallback
 		void addState(State& newState);
 		void removeState(State& oldState);
 		DynamicArray<State*>& getCurrentStates();
-		virtual ~StateMachine()
-		{
-		}
+		virtual ~StateMachine();
+		void setup(Actor&, HashMap<State>&);
 		string to_string();
 
 };
@@ -61,7 +60,18 @@ class StateMachine : public IStateCallback
 		{
 		}
 
+		StateMachine::~StateMachine()
+		{
+			cout << "This is being destroyed\n";
+		}
+
 		StateMachine::StateMachine(Actor& actor, HashMap<State>& allStates)
+		{
+			_actor = &actor;
+			_allStates = &allStates;
+		}
+
+		void StateMachine::setup(Actor& actor, HashMap<State>& allStates)
 		{
 			_actor = &actor;
 			_allStates = &allStates;
