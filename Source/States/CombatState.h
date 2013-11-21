@@ -20,9 +20,9 @@ namespace bammm
         public:
             CombatState(Actor& actor);
             CombatState(Actor& actor, IStateCallback& statemachine);
-            void setup();
+            virtual void setup();
             void breakdown();
-            void tick(float dTime);
+            virtual void tick(float dTime);
 			string to_string();
 
         private:

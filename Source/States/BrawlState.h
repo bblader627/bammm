@@ -15,12 +15,10 @@ namespace bammm
         public:
             BrawlState(Actor& actor);
             BrawlState(Actor& actor, IStateCallback& statemachine);
-            void setup();
+            virtual void setup();
             void breakdown();
-            void tick(float dTime);
+            virtual void tick(float dTime);
 			string to_string();
-
-        private:
     };
 
     BrawlState::BrawlState(Actor& actor)

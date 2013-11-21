@@ -20,9 +20,9 @@ namespace bammm
 			~MineState();
             MineState(Actor& actor);
             MineState(Actor& actor, IStateCallback& statemachine);
-            void setup();
+            virtual void setup();
             void breakdown();
-            void tick(float dTime);
+            virtual void tick(float dTime);
             void switchState(string nextState);
             string to_string();
     };
