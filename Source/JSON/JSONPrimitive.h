@@ -19,7 +19,7 @@
 namespace bammm
 {
 
-	class JSONPrimitive: JSON
+	class JSONPrimitive: public JSON
 	{
 
 		private:

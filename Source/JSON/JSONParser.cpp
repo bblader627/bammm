@@ -14,11 +14,19 @@
 
 #include "JSONParser.h"
 #include "DynamicArray.h"
+#include "JSON.h"
+#include "JSONArray.h"
+#include <stdlib.h>
 
 using namespace std;
 
 namespace bammm
 {
+
+	JSONParser::JSONParser()
+	{
+
+	}
 
 	void JSONParser::addRoot(JSON & newNode)
 	{
@@ -42,34 +50,257 @@ namespace bammm
 		return _rootMap.getValue(key);
 	}
 
-/*
- bool JSONParser::parseFile(string fileName)
- {
+	bool JSONParser::parseFile(string fileName)
+	{
 
- ifstream input;
- char current;
- bool isValue = false;
- int isArray = 0;
- JSON *currentNode = NULL;
- JSON *parentNode = NULL;
- JSON *childNode = NULL;
- string name = "";
- string value = "";
+		ifstream input;
+		char current;
+		bool isKey = false;
+		bool isValue = false;
+		bool isDouble = false;
+		JSON *currentNode = NULL;
+		JSON *parentNode = NULL;
+		string name = "";
+		string value = "";
 
- input.open(fileName.c_str());
+		input.open(fileName.c_str());
 
- if (!input.is_open())
- {
- cout << "Failed to open file: " << fileName << " does not exist."
- << endl;
- return false;
- }
+		if (!input.is_open())
+		{
+			cout << "Failed to open file: " << fileName << " does not exist."
+					<< endl;
+			return false;
+		}
 
- while (!input.eof())
- {
+		while (!input.eof())
+		{
 
- current = (char) input.get();
- switch (current)
+			current = (char) input.get();
+
+			switch (current)
+			{
+
+				case '{':
+					cout << "Parsing { \n";
+
+					*currentNode = JSON("root");
+
+					isValue = false;
+					isKey = true;
+
+					break;
+
+				case '}':
+					cout << "Parsing } \n";
+
+					if (parentNode == NULL)
+					{
+						/* This will be the final output of the parser. This should not output before completion. */
+						cout << "Completed parsing " << fileName << ". \n";
+						input.close();
+
+						currentNode = NULL;
+					}
+					else
+					{
+						*currentNode = currentNode->getParent();
+						*parentNode = parentNode->getParent();
+
+						isKey = true;
+					}
+
+					break;
+
+				case '[':
+					cout << "Parsing [ \n";
+					if (currentNode == NULL)
+					{
+						*currentNode = JSONArray(name);
+						addRoot(*currentNode);
+					}
+					else
+					{
+						parentNode = currentNode;
+						*currentNode = JSONArray(name);
+						parentNode->addChild(*currentNode);
+					}
+					break;
+
+				case ']':
+
+					*currentNode = currentNode->getParent();
+					*parentNode = parentNode->getParent();
+
+					isKey = true;
+
+					break;
+
+				case '"':
+					cout << "Parsing \" \n";
+
+					/*if (currentNode == NULL)
+					 {
+					 cout << "Error: JSON Object not created";
+					 return false;
+					 }*/
+
+					/* Parse name within quotations
+					 * The Object with the name will be created after we find JSON type
+					 * JSON type will be determined after parsing a colon
+					 */
+					current = (char) input.get();
+					name = "";
+					value = "";
+					while (!input.eof() && current != '"')
+					{
+						if (isValue == false && isKey == true)
+						{
+							name += current;
+						}
+						else if (isValue == true && isKey == false)
+						{
+							value += current;
+						}
+						current = (char) input.get();
+					}
+
+					break;
+
+				case ':':
+					cout << "Parsing : \n";
+
+					isKey = false;
+					isValue = true;
+
+					value = "";
+
+					/* check  what comes after colon so we may determine type */
+					current = (char) input.peek();
+					while (!input.eof() && current == ' ')
+					{
+						current = (char) input.get();
+					}
+
+					/* Now that we know the value, we may confirm the type of the JSON Node and create it. */
+
+					parentNode = currentNode;
+
+					if (current == '{')
+					{
+						*currentNode = JSON(name);
+
+						isKey = true;
+						isValue = false;
+					}
+					else if (current == '[')
+					{
+						*currentNode = JSONArray(name);
+
+						isKey = true;
+						isValue = false;
+					}
+					else if (current == '"')
+					{
+
+						current = input.get();
+						while (!input.eof() && current == ' ')
+						{
+							value += current;
+							current = (char) input.get();
+						}
+
+						*currentNode = JSONPrimitive(name, value, JSON_STRING);
+
+					}
+					else if (current == 'f' || current == 't')
+					{
+
+						while (!input.eof() && current == ' ')
+						{
+							value += current;
+							current = (char) input.get();
+						}
+
+						if (value == "false")
+						{
+							*currentNode = JSONPrimitive(name, false,
+									JSON_BOOL);
+						}
+						else if (value == "true")
+						{
+							*currentNode = JSONPrimitive(name, true, JSON_BOOL);
+						}
+						else
+						{
+							cout << "Error parsing string or bool value \n";
+							return false;
+						}
+					}
+					else if (isdigit(current))
+					{
+
+						while (!input.eof() && current == ' ')
+						{
+							value += current;
+							current = (char) input.get();
+						}
+
+						/* Determine whether value has a decimal. If so, make DOUBLE. Else INT */
+
+						for (unsigned int i; i < value.size(); i++)
+						{
+							if (value[i] == '.')
+							{
+								isDouble = true;
+								break;
+							}
+							isDouble = false;
+						}
+
+						if (isDouble == false)
+						{
+							*currentNode = JSONPrimitive(name,
+									atoi(value.c_str()), JSON_DOUBLE);
+						}
+						else
+						{
+							*currentNode = JSONPrimitive(name,
+									atof(value.c_str()), JSON_DOUBLE);
+						}
+					}
+					else
+					{
+						cout << "Error parsing value. Invalid character. \n";
+						return false;
+					}
+
+					currentNode->setParent(*parentNode);
+					parentNode->addChild(*currentNode);
+
+					break;
+
+				case ',':
+					cout << "Parsing , \n";
+
+					/* reset node to parent so next key/value may be added as a child to parent */
+					*currentNode = currentNode->getParent();
+					*parentNode = parentNode->getParent();
+
+					isKey = true;
+
+					break;
+
+			}
+		}
+
+		delete currentNode;
+		delete parentNode;
+
+		return true;
+	}
+}
+
+/*switch (current)
  {
 
  case '[':
@@ -208,8 +439,10 @@ namespace bammm
  return 1;
  }
 
+ delete currentNode;
+ delete parentNode;
  return true;
  }
+ }
  */
-}
 

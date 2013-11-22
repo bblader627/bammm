@@ -15,7 +15,7 @@ namespace bammm
 {
 	enum JSON_TYPE
 	{
-		JSON_NULL, JSON_ARRAY, JSON_STRING, JSON_INT, JSON_DOUBLE, JSON_BOOL
+		JSON_NULL, JSON_ARRAY, JSON_STRING, JSON_INT, JSON_DOUBLE, JSON_BOOL, JSON_OBJECT
 	};
 
 	class JSON
@@ -31,6 +31,7 @@ namespace bammm
 		public:
 
 			JSON();
+			JSON(string);
 			~JSON();
 
 			/*
@@ -67,6 +68,8 @@ namespace bammm
 			 @Post-Condition- sets this JSON Nodes JSON_TYPE equal to the JSON_TYPE argument. Returns void.
 			 */
 			void setType(JSON_TYPE);
+
+			void setParent(JSON &);
 
 			void addChild(JSON &);
 

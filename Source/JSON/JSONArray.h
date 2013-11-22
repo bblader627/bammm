@@ -22,7 +22,7 @@
 namespace bammm
 {
 
-	class JSONArray: JSON
+	class JSONArray: public JSON
 	{
 
 		private:
@@ -36,6 +36,8 @@ namespace bammm
 			JSONArray(string, JSON*);
 
 			~JSONArray();
+
+			void addChild(JSON &);
 
 			JSON operator[](const unsigned int & rhs);
 

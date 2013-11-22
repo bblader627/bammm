@@ -23,7 +23,13 @@ namespace bammm
 	JSON::JSON()
 	{
 		_name = "empty";
-		_type = JSON_NULL;
+		_type = JSON_OBJECT;
+		_parent = NULL;
+	}
+
+	JSON::JSON(string newName){
+		_name = newName;
+		_type = JSON_OBJECT;
 		_parent = NULL;
 	}
 
@@ -59,6 +65,11 @@ namespace bammm
 	void JSON::setType(JSON_TYPE newType)
 	{
 		_type = newType;
+	}
+
+	void JSON::setParent(JSON & newParent)
+	{
+		*_parent = newParent;
 	}
 
 	void JSON::addChild(JSON & newNode)
