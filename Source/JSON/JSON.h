@@ -9,7 +9,7 @@
 #define JSON_H_
 
 #include <string>
-#include "../Resources/HashMap.h"
+#include "HashMap.h"
 
 namespace bammm
 {
@@ -69,9 +69,9 @@ namespace bammm
 			 */
 			void setType(JSON_TYPE);
 
-			void setParent(JSON *);
+			void setParent(JSON &);
 
-			void addChild(JSON *);
+			void addChild(JSON &);
 
 			/*			*
 			 getParent

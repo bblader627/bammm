@@ -16,7 +16,7 @@
 #ifndef JSONARRAY_H_
 #define JSONARRAY_H_
 
-#include "../Resources/DynamicArray.h"
+#include "DynamicArray.h"
 #include "JSON.h"
 
 namespace bammm

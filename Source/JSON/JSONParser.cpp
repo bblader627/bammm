@@ -13,7 +13,7 @@
  */
 
 #include "JSONParser.h"
-#include "../Resources/DynamicArray.h"
+#include "DynamicArray.h"
 #include "JSON.h"
 #include "JSONArray.h"
 #include <stdlib.h>
@@ -35,7 +35,7 @@ namespace bammm
 		cout << "root added \n";
 	}
 
-	void JSONParser::addChild(JSON & rootNode, JSON * newNode)
+	void JSONParser::addChild(JSON & rootNode, JSON & newNode)
 	{
 		rootNode.addChild(newNode);
 	}
@@ -87,7 +87,13 @@ namespace bammm
 					cout << "Parsing { \n";
 					cout.flush();
 
-					currentNode = new JSON("root");
+					if (currentNode == NULL)
+					{
+						currentNode = new JSON("root");
+						addRoot(*currentNode);
+						cout << "root added \n";
+						cout.flush();
+					}
 
 					isValue = false;
 					isKey = true;
@@ -129,7 +135,7 @@ namespace bammm
 					{
 						parentNode = currentNode;
 						currentNode = new JSONArray(name);
-						parentNode->addChild(currentNode);
+						parentNode->addChild(*currentNode);
 					}
 					break;
 
@@ -256,6 +262,7 @@ namespace bammm
 						else
 						{
 							cout << "Error parsing string or bool value \n";
+							cout.flush();
 							return false;
 						}
 					}
@@ -297,13 +304,13 @@ namespace bammm
 					}
 					else
 					{
-						cout << "Error parsing value. Invalid character. \n";
+						cout << "Error parsing value. Invalid character found. \n";
 						return false;
 					}
 
-					currentNode->setParent(parentNode);
+					currentNode->setParent(*parentNode);
 					cout << "parent set" << endl;
-					parentNode->addChild(currentNode);
+					parentNode->addChild(*currentNode);
 
 					cout << "Added object to map \n";
 					cout.flush();
@@ -311,7 +318,7 @@ namespace bammm
 					break;
 
 				case ',':
-					cout << "Parsing , \n";
+					cout << "Parsing , \n" << endl;
 					cout.flush();
 
 					/* reset node to parent so next key/value may be added as a child to parent */

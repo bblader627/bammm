@@ -67,15 +67,24 @@ namespace bammm
 		_type = newType;
 	}
 
-	void JSON::setParent(JSON * newParent)
+	void JSON::setParent(JSON & newParent)
 	{
-		_parent = newParent;
+		/*if(newParent == NULL){
+			cout << "Error: Attempting to add NULL as a parent \n";
+			return;
+		}*/
+		*_parent = newParent;
 	}
 
-	void JSON::addChild(JSON * newNode)
+	void JSON::addChild(JSON & newNode)
 	{
+/*		if(newNode == NULL){
+			cout << "Error: Attempting to add NULL as a child \n";
+			cout.flush();
+			return;
+		}*/
 		cout << "Adding Child \n";
-		_children.add(newNode->getName(), *newNode);
+		_children.add(newNode.getName(), newNode);
 	}
 
 /*

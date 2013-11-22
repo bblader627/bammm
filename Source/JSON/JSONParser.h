@@ -19,7 +19,7 @@
 #include <fstream>
 #include <string>
 
-#include "../Resources/HashMap.h"
+#include "HashMap.h"
 #include "JSON.h"
 #include "JSONPrimitive.h"
 
@@ -54,7 +54,7 @@ namespace bammm
 			 @Post-Condition- Adds the child to the specified rootNode
 			 */
 
-			void addChild(JSON & rootNode, JSON * newNode);
+			void addChild(JSON & rootNode, JSON & newNode);
 
 		public:
 
