@@ -72,6 +72,9 @@ namespace bammm
 			return false;
 		}
 
+		cout << "File found and opened. Beginning parse. \n";
+		cout.flush();
+
 		while (!input.eof())
 		{
 
@@ -82,8 +85,9 @@ namespace bammm
 
 				case '{':
 					cout << "Parsing { \n";
+					cout.flush();
 
-					*currentNode = JSON("root");
+					currentNode = new JSON("root");
 
 					isValue = false;
 					isKey = true;
@@ -92,6 +96,7 @@ namespace bammm
 
 				case '}':
 					cout << "Parsing } \n";
+					cout.flush();
 
 					if (parentNode == NULL)
 					{
@@ -113,20 +118,24 @@ namespace bammm
 
 				case '[':
 					cout << "Parsing [ \n";
+					cout.flush();
+
 					if (currentNode == NULL)
 					{
-						*currentNode = JSONArray(name);
+						currentNode = new JSONArray(name);
 						addRoot(*currentNode);
 					}
 					else
 					{
 						parentNode = currentNode;
-						*currentNode = JSONArray(name);
+						currentNode = new JSONArray(name);
 						parentNode->addChild(*currentNode);
 					}
 					break;
 
 				case ']':
+					cout << "Parsing ] \n";
+					cout.flush();
 
 					*currentNode = currentNode->getParent();
 					*parentNode = parentNode->getParent();
@@ -137,6 +146,7 @@ namespace bammm
 
 				case '"':
 					cout << "Parsing \" \n";
+					cout.flush();
 
 					/*if (currentNode == NULL)
 					 {
@@ -168,6 +178,7 @@ namespace bammm
 
 				case ':':
 					cout << "Parsing : \n";
+					cout.flush();
 
 					isKey = false;
 					isValue = true;
@@ -187,17 +198,21 @@ namespace bammm
 
 					if (current == '{')
 					{
-						*currentNode = JSON(name);
+						currentNode = new JSON(name);
 
 						isKey = true;
 						isValue = false;
+						cout << "New JSON Object found and created \n";
+						cout.flush();
 					}
 					else if (current == '[')
 					{
-						*currentNode = JSONArray(name);
+						currentNode = new JSONArray(name);
 
 						isKey = true;
 						isValue = false;
+						cout << "New JSON Array found and created \n";
+						cout.flush();
 					}
 					else if (current == '"')
 					{
@@ -209,8 +224,11 @@ namespace bammm
 							current = (char) input.get();
 						}
 
-						*currentNode = JSONPrimitive(name, value, JSON_STRING);
+						currentNode = new JSONPrimitive(name, value,
+								JSON_STRING);
 
+						cout << "New JSON_STRING found and created \n";
+						cout.flush();
 					}
 					else if (current == 'f' || current == 't')
 					{
@@ -223,12 +241,17 @@ namespace bammm
 
 						if (value == "false")
 						{
-							*currentNode = JSONPrimitive(name, false,
+							currentNode = new JSONPrimitive(name, false,
 									JSON_BOOL);
+							cout << "New JSON_BOOL false found and created \n";
+							cout.flush();
 						}
 						else if (value == "true")
 						{
-							*currentNode = JSONPrimitive(name, true, JSON_BOOL);
+							currentNode = new JSONPrimitive(name, true,
+									JSON_BOOL);
+							cout << "New JSON_BOOL true found and created \n";
+							cout.flush();
 						}
 						else
 						{
@@ -259,13 +282,17 @@ namespace bammm
 
 						if (isDouble == false)
 						{
-							*currentNode = JSONPrimitive(name,
-									atoi(value.c_str()), JSON_DOUBLE);
+							currentNode = new JSONPrimitive(name,
+									atoi(value.c_str()), JSON_INT);
+							cout << "New JSON_INT found and created \n";
+							cout.flush();
 						}
 						else
 						{
-							*currentNode = JSONPrimitive(name,
+							currentNode = new JSONPrimitive(name,
 									atof(value.c_str()), JSON_DOUBLE);
+							cout << "New JSON_DOUBLE found and created \n";
+							cout.flush();
 						}
 					}
 					else
@@ -275,12 +302,17 @@ namespace bammm
 					}
 
 					currentNode->setParent(*parentNode);
+					cout << "parent set" << endl;
 					parentNode->addChild(*currentNode);
+
+					cout << "Added object to map \n";
+					cout.flush();
 
 					break;
 
 				case ',':
 					cout << "Parsing , \n";
+					cout.flush();
 
 					/* reset node to parent so next key/value may be added as a child to parent */
 					*currentNode = currentNode->getParent();
@@ -292,6 +324,9 @@ namespace bammm
 
 			}
 		}
+
+		cout << "End of file reached \n";
+		cout.flush();
 
 		delete currentNode;
 		delete parentNode;

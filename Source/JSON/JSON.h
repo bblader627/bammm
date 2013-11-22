@@ -69,7 +69,7 @@ namespace bammm
 			 */
 			void setType(JSON_TYPE);
 
-			void setParent(JSON &);
+			void setParent(JSON);
 
 			void addChild(JSON &);
 
