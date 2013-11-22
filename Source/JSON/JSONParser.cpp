@@ -35,7 +35,7 @@ namespace bammm
 		cout << "root added \n";
 	}
 
-	void JSONParser::addChild(JSON & rootNode, JSON & newNode)
+	void JSONParser::addChild(JSON & rootNode, JSON * newNode)
 	{
 		rootNode.addChild(newNode);
 	}
@@ -129,7 +129,7 @@ namespace bammm
 					{
 						parentNode = currentNode;
 						currentNode = new JSONArray(name);
-						parentNode->addChild(*currentNode);
+						parentNode->addChild(currentNode);
 					}
 					break;
 
@@ -301,9 +301,9 @@ namespace bammm
 						return false;
 					}
 
-					currentNode->setParent(*parentNode);
+					currentNode->setParent(parentNode);
 					cout << "parent set" << endl;
-					parentNode->addChild(*currentNode);
+					parentNode->addChild(currentNode);
 
 					cout << "Added object to map \n";
 					cout.flush();
