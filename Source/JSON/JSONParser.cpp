@@ -13,7 +13,7 @@
  */
 
 #include "JSONParser.h"
-#include "DynamicArray.h"
+#include "../Resources/DynamicArray.h"
 #include "JSON.h"
 #include "JSONArray.h"
 #include <stdlib.h>
@@ -53,7 +53,7 @@ namespace bammm
 	bool JSONParser::parseFile(string fileName)
 	{
 
-		ifstream input;
+		/*ifstream input;
 		char current;
 		bool isKey = false;
 		bool isValue = false;
@@ -106,7 +106,7 @@ namespace bammm
 
 					if (parentNode == NULL)
 					{
-						/* This will be the final output of the parser. This should not output before completion. */
+						This will be the final output of the parser. This should not output before completion. 
 						cout << "Completed parsing " << fileName << ". \n";
 						input.close();
 
@@ -154,7 +154,7 @@ namespace bammm
 					cout << "Parsing \" \n";
 					cout.flush();
 
-					/*if (currentNode == NULL)
+					if (currentNode == NULL)
 					 {
 					 cout << "Error: JSON Object not created";
 					 return false;
@@ -163,7 +163,7 @@ namespace bammm
 					/* Parse name within quotations
 					 * The Object with the name will be created after we find JSON type
 					 * JSON type will be determined after parsing a colon
-					 */
+					 
 					current = (char) input.get();
 					name = "";
 					value = "";
@@ -191,14 +191,14 @@ namespace bammm
 
 					value = "";
 
-					/* check  what comes after colon so we may determine type */
+					 check  what comes after colon so we may determine type 
 					current = (char) input.peek();
 					while (!input.eof() && current == ' ')
 					{
 						current = (char) input.get();
 					}
 
-					/* Now that we know the value, we may confirm the type of the JSON Node and create it. */
+					 Now that we know the value, we may confirm the type of the JSON Node and create it. 
 
 					parentNode = currentNode;
 
@@ -275,7 +275,7 @@ namespace bammm
 							current = (char) input.get();
 						}
 
-						/* Determine whether value has a decimal. If so, make DOUBLE. Else INT */
+						 Determine whether value has a decimal. If so, make DOUBLE. Else INT 
 
 						for (unsigned int i; i < value.size(); i++)
 						{
@@ -321,7 +321,7 @@ namespace bammm
 					cout << "Parsing , \n" << endl;
 					cout.flush();
 
-					/* reset node to parent so next key/value may be added as a child to parent */
+					reset node to parent so next key/value may be added as a child to parent 
 					*currentNode = currentNode->getParent();
 					*parentNode = parentNode->getParent();
 
@@ -337,7 +337,7 @@ namespace bammm
 
 		delete currentNode;
 		delete parentNode;
-
+		*/
 		return true;
 	}
 }

@@ -51,7 +51,7 @@ namespace bammm
 
 	void Factory::setup()
 	{
-		string actorJSON;
+		/*string actorJSON;
 		JSONParser* parser = new JSONParser();
 		string filename = "/home/matthew/workspace/bammm/Source/JSON/actors.json";
 		parser->parseFile(filename);
@@ -83,8 +83,8 @@ namespace bammm
 			//ActorInfo* info = new ActorInfo(name, health, stamina, attack, defense);
 			//actorData.add(name, info);
 
-			cout << name << endl;
-		}
+			//cout << name << endl;
+		}*/
 
 	}
 	/*

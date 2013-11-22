@@ -278,6 +278,7 @@ namespace bammm
 	template<class T>
 	bool Grid3D<T>::remove(Vector3D *vector, T object)
 	{
+		cout << "Removing " << object->getName() << endl;
 		bool deletedValue = access(vector, 0)->get(0)->removeElement(object);
 		return deletedValue;
 	}
@@ -494,8 +495,6 @@ namespace bammm
 		remove(actor->getLocation(), actor);
 		delete actor->getLocation();
 		add(newLocation, actor);
-		add(newLocation, actor);
-
 	}
 
 	template<class T>

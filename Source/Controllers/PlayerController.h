@@ -91,8 +91,8 @@ namespace bammm
 
 	void PlayerController::setup(Actor* actor)
 	{
-		Factory* actorFactory = new Factory();
-		actorFactory->setup();
+		/*Factory* actorFactory = new Factory();
+		actorFactory->setup();*/
 
 		_actor = actor;
 		_states = new HashMap<State*>();
