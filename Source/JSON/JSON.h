@@ -91,12 +91,16 @@ namespace bammm
 			virtual bool getBoolValue();
 			virtual string getStringValue();
 
+			/*
 			JSON * operator[](int index)
 			{
 				DynamicArray<JSON*>* childrenArray = _children.getAllValues();
 				return childrenArray->get(index);
 				//return _children.getValue(key);
 			}
+			*/
+
+			virtual JSON operator[](const unsigned int & rhs);
 
 			JSON* operator[](const string key)
 			{
