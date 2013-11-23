@@ -64,4 +64,25 @@ namespace bammm
 		return _children[rhs];
 	}
 
+	int JSONArray::getIntValue()
+	{
+		return 0;
+
+	}
+
+	double JSONArray::getDoubleValue()
+	{
+		return 0.0;
+	}
+
+	bool JSONArray::getBoolValue()
+	{
+		return false;
+	}
+
+	string JSONArray::getStringValue()
+	{
+		return "";
+	}
+
 }
