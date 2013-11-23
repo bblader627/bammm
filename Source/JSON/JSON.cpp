@@ -59,6 +59,11 @@ namespace bammm
 		return _parent;
 	}
 
+	int JSON::sizeOfChildren()
+	{
+		return _children.getNumerOfNodes();
+	}
+
 	void JSON::setName(string newName)
 	{
 		_name = newName;
