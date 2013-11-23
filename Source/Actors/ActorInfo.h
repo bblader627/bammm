@@ -30,8 +30,8 @@ namespace bammm
 			int _defense;
 
 		public:
-			ActorInfo(string name, int health, int stamina, int attack,
-					int defense);
+			ActorInfo();
+			ActorInfo(string name, int health, int stamina, int attack, int defense);
 
 			/**
 			 getName
@@ -104,8 +104,17 @@ namespace bammm
 			void setDefense(int defense);
 	};
 
-	ActorInfo::ActorInfo(string name, int health, int stamina, int attack,
-			int defense)
+	ActorInfo::ActorInfo()
+	{
+		_name = "n/a";
+		_health = 10;
+		_stamina = 5;
+		_attack = 10;
+		_defense = 10;
+
+	}
+
+	ActorInfo::ActorInfo(string name, int health, int stamina, int attack, int defense)
 	{
 		_name = name;
 		_health = health;
