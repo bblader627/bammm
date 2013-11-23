@@ -100,7 +100,7 @@ namespace bammm
 			}
 			*/
 
-			virtual JSON operator[](const unsigned int & rhs);
+			JSON operator[](const unsigned int & rhs);
 
 			JSON* operator[](const string key)
 			{

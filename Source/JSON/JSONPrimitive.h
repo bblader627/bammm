@@ -100,7 +100,7 @@ namespace bammm
 
 			JSONPrimitive & operator[](const string & rhs);
 
-			virtual JSON operator[](const unsigned int & rhs);
+			//JSON operator[](const unsigned int & rhs);
 	};
 
 }

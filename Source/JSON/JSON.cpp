@@ -117,8 +117,8 @@ namespace bammm
 		return "";
 	}
 
-	JSON operator[](const unsigned int & rhs)
+	JSON JSON::operator[](const unsigned int & rhs)
 	{
-		return this;
+		return *this;
 	}
 }
