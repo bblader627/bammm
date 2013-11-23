@@ -32,15 +32,15 @@ namespace bammm
 			int _singLine;
 
 		public:
-			SingState(Actor* actor);
-			SingState(Actor* actor, IStateCallback* stateMachine);
+			SingState(Actor& actor);
+			SingState(Actor& actor, IStateCallback& stateMachine);
 
 			/**
 			 setup
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			void setup();
+			virtual void setup();
 
 			/**
 			 breakdown
@@ -54,7 +54,7 @@ namespace bammm
 			 @Pre-Condition- Takes in a float deltaTime
 			 @Post-Condition- Executes a tick of length deltaTime
 			 */
-			void tick(float deltaTime);
+			virtual void tick(float deltaTime);
 
 			/**
 			 toString
@@ -64,14 +64,14 @@ namespace bammm
 			string toString();
 	};
 
-	SingState::SingState(Actor* actor)
+	SingState::SingState(Actor& actor)
 	{
-		_actor = actor;
+		_actor = &actor;
 	}
 
-	SingState::SingState(Actor* actor, IStateCallback* stateMachine)
+	SingState::SingState(Actor& actor, IStateCallback& stateMachine)
 	{
-		_actor = actor;
+		_actor = &actor;
 		registerTransitionCallback(stateMachine);
 	}
 

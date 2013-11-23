@@ -5,10 +5,13 @@
  * 	Alvaro Home
  * 	Matt Konstantinou
  * 	Michael Abramo
- *	Matt Witkowski
- *	Bradley Crusco
+ * 	Bradley Crusco
+ * 	Matt Witkowski
+ *
  * Description:
  * StateMachine header file.
+ *
+ * Last Modified: Matthew Konstantinou
  *
  */
 
@@ -32,13 +35,13 @@ namespace bammm
 	class StateMachine: public IStateCallback
 	{
 		private:
-			DynamicArray<State*>* currentStates;
+			DynamicArray<State*> currentStates;
 			HashMap<State*>* _allStates;
 			Actor* _actor;
-
 		public:
-			StateMachine(Actor* actor, HashMap<State*>* allStates);
-			virtual ~StateMachine();
+			StateMachine();
+			StateMachine(Actor& actor, HashMap<State*>& allStates);
+			virtual ~StateMachine();		
 
 			/**
 			 setup
@@ -52,22 +55,22 @@ namespace bammm
 			 @Pre-Condition- Takes in a float deltaTime
 			 @Post-Condition- Executes a tick of length deltaTime
 			 */
-			void tick(float deltaTime);
-
+			void tick(float dTime);
+		
 			/**
 			 switchState
-			 @Pre-Condition- Takes in two pointers to States, the current state and the newState
+			 @Pre-Condition- Takes in two State references, the current state and the newState
 			 @Post-Condition- The current state is switched to the given newState
 			 */
-			void switchState(State* current, State* newState);
-
+			void switchState(State& current, State& newState);
+		
 			/**
 			 switchState
-			 @Pre-Condition- Takes in a pointer to the current State and a string representing new state
+			 @Pre-Condition- Takes in a reference to the current State and a string representing new state
 			 @Post-Condition- The current state is switched to the state specified by the string newStateString
 			 */
-			void switchState(State* current, string newStateString);
-
+			void switchState(State& current, string newStateString);
+		
 			/**
 			 addState
 			 @Pre-Condition- Takes in a pointer to a State state
@@ -75,7 +78,7 @@ namespace bammm
 			 */
 			void addState(State* state);
 
-			/**
+			/**			 
 			 removeState
 			 @Pre-Condition- Takes in a pointer to a State state
 			 @Post-Condition- Removes the given State state from the state machine
@@ -84,83 +87,86 @@ namespace bammm
 
 			/**
 			 getCurrentStates
-			 @Pre-Condition- No input
+		 	 @Pre-Condition- No input
 			 @Post-Condition- Returns all the current states in the state machine
 			 */
-			DynamicArray<State*>* getCurrentStates();
+			DynamicArray<State*>& getCurrentStates();
+			void setup(Actor&, HashMap<State*>&);
 			string toString();
-	};
 
-	StateMachine::StateMachine(Actor* actor, HashMap<State*>* allStates)
+	};
+	
+	StateMachine::StateMachine()
 	{
-		_actor = actor;
-		currentStates = new DynamicArray<State*>();
-		_allStates = allStates;
 	}
 
 	StateMachine::~StateMachine()
 	{
-		delete _actor;
+	}
+
+	StateMachine::StateMachine(Actor& actor, HashMap<State*>& allStates)
+	{
+		_actor = &actor;
+		_allStates = &allStates;
+	}
+
+	void StateMachine::setup(Actor& actor, HashMap<State*>& allStates)
+	{
+		_actor = &actor;
+		_allStates = &allStates;
 	}
 
 	void StateMachine::initialState(State* initial)
 	{
 		initial->setup();
-		currentStates->add(initial);
+		currentStates.add(initial);
 	}
 
-	void StateMachine::tick(float deltaTime)
+	void StateMachine::tick(float dTime)
 	{
-
-		for (int i = 0; i < (int) currentStates->getSize(); i++)
+		for(int i = 0; i < (int) currentStates.getSize(); i++)
 		{
-			State* thisState = currentStates->get(i);
-			thisState->tick(0);
+			currentStates.get(i)->tick(dTime);
 		}
 	}
 
-	void StateMachine::switchState(State* current, State* newState)
+	void StateMachine::switchState(State& current, State& newState)
 	{
-		removeState(current);
-		addState(newState);
-
+		removeState(&current);
+		addState(&newState);
 	}
 
-	void StateMachine::switchState(State* current, string newStateString)
+	void StateMachine::switchState(State& current, string newStateString)
 	{
-		if (newStateString == "null")
+		if (newStateString=="null")
 		{
-			removeState(current);
+			removeState(&current);
 			return;
 		}
-		State* newState = _allStates->getValue(newStateString);
-		if (newState != NULL)
-		{
-			switchState(current, newState);
-		}
+		switchState(current, *_allStates->getValue(newStateString));
 	}
 
-	void StateMachine::addState(State* state)
+	void StateMachine::addState(State* newState)
 	{
-		state->setup();
-		currentStates->add(state);
+		newState->setup();
+		currentStates.add(newState);
 	}
 
-	void StateMachine::removeState(State* state)
+	void StateMachine::removeState(State* oldState)
 	{
-		state->breakdown();
-		currentStates->removeElement(state);
+		oldState->breakdown();
+		currentStates.removeElement(oldState);
 	}
 
-	DynamicArray<State*>* StateMachine::getCurrentStates()
+	DynamicArray<State*>& StateMachine::getCurrentStates()
 	{
 		return currentStates;
 	}
+
 
 	string StateMachine::toString()
 	{
 		return "statemachine";
 	}
 }
-
 #endif

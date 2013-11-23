@@ -34,15 +34,15 @@ namespace bammm
 			uint _stoutLife;
 
 		public:
-			DrinkState(Actor* actor);
-			DrinkState(Actor* actor, IStateCallback* stateMachine);
+			DrinkState(Actor& actor);
+			DrinkState(Actor& actor, IStateCallback& stateMachine);
 
 			/**
 			 setup
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			void setup();
+			virtual void setup();
 
 			/**
 			 breakdown
@@ -56,7 +56,7 @@ namespace bammm
 			 @Pre-Condition- Takes in a float deltaTime
 			 @Post-Condition- Executes a tick of length deltaTime
 			 */
-			void tick(float deltaTime);
+			virtual void tick(float deltaTime);
 
 			/**
 			 switchState
@@ -73,15 +73,15 @@ namespace bammm
 			string toString();
 	};
 
-	DrinkState::DrinkState(Actor* actor)
+	DrinkState::DrinkState(Actor& actor)
 	{
-		_actor = actor;
+		_actor = &actor;
 
 	}
 
-	DrinkState::DrinkState(Actor* actor, IStateCallback* stateMachine)
+	DrinkState::DrinkState(Actor& actor, IStateCallback& stateMachine)
 	{
-		_actor = actor;
+		_actor = &actor;
 		registerTransitionCallback(stateMachine);
 	}
 

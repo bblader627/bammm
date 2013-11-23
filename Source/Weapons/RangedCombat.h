@@ -56,7 +56,7 @@ namespace bammm
 
 		public:
 			RangedCombat();
-			RangedCombat(Actor* actor1, Actor* actor2 /*,Grid3d<Actor> grid*/);
+			RangedCombat(Actor& actor1, Actor& actor2 /*,Grid3d<Actor> grid*/);
 			~RangedCombat();
 
 			/**
@@ -78,14 +78,14 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns the winner of the fight
 			 */
-			Actor* getWinner();
+			Actor& getWinner();
 
 			/**
 			 getLoser
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns the loser of the fight
 			 */
-			Actor* getLoser();
+			Actor& getLoser();
 
 			/**
 			 getOpponent
@@ -105,10 +105,10 @@ namespace bammm
 		_playerTurn = true;
 	}
 
-	RangedCombat::RangedCombat(Actor* actor1, Actor* actor2/*, Grid3d<Actor> grid*/)
+	RangedCombat::RangedCombat(Actor& actor1, Actor& actor2/*, Grid3d<Actor> grid*/)
 	{
-		_actor1 = actor1;
-		_actor2 = actor2;
+		_actor1 = &actor1;
+		_actor2 = &actor2;
 		_winner = NULL;
 		_loser = NULL;
 		_playerTurn = true;
@@ -171,14 +171,14 @@ namespace bammm
 		}
 	}
 
-	Actor* RangedCombat::getWinner()
+	Actor& RangedCombat::getWinner()
 	{
-		return _winner;
+		return *(_winner);
 	}
 
-	Actor* RangedCombat::getLoser()
+	Actor& RangedCombat::getLoser()
 	{
-		return _loser;
+		return *(_loser);
 	}
 
 	void RangedCombat::giveLoot()

@@ -34,7 +34,7 @@ namespace bammm
 
 		public:
 			OrcishBlade();
-			OrcishBlade(WeaponData* weaponData);
+			OrcishBlade(WeaponData& weaponData);
 			~OrcishBlade();
 
 			/**
@@ -61,9 +61,9 @@ namespace bammm
 		_timer = 0;
 	}
 
-	OrcishBlade::OrcishBlade(WeaponData* weaponData)
+	OrcishBlade::OrcishBlade(WeaponData& weaponData)
 	{
-		_weaponData = weaponData;
+		_weaponData = &weaponData;
 		_timer = 0;
 	}
 

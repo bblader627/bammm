@@ -27,8 +27,8 @@ namespace bammm
 	class BrawlState: public State
 	{
 		public:
-			BrawlState(Actor* actor);
-			BrawlState(Actor* actor, IStateCallback* stateMachine);
+			BrawlState(Actor& actor);
+			BrawlState(Actor& actor, IStateCallback& stateMachine);
 
 			/**
 			 setup
@@ -49,7 +49,7 @@ namespace bammm
 			 @Pre-Condition- Takes in a float deltaTime
 			 @Post-Condition- Executes a tick of length deltaTime
 			 */
-			void tick(float deltaTime);
+			virtual void tick(float deltaTime);
 
 			/**
 			 toString
@@ -59,14 +59,14 @@ namespace bammm
 			string toString();
 	};
 
-	BrawlState::BrawlState(Actor* actor)
+	BrawlState::BrawlState(Actor& actor)
 	{
-		_actor = actor;
+		_actor = &actor;
 	}
 
-	BrawlState::BrawlState(Actor* actor, IStateCallback* stateMachine)
+	BrawlState::BrawlState(Actor& actor, IStateCallback& stateMachine)
 	{
-		_actor = actor;
+		_actor = &actor;
 		registerTransitionCallback(stateMachine);
 	}
 
@@ -90,4 +90,3 @@ namespace bammm
 	}
 }
 #endif
-

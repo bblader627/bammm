@@ -36,15 +36,15 @@ namespace bammm
 			int _timeSlept;
 
 		public:
-			SleepState(Actor* actor);
-			SleepState(Actor* actor, IStateCallback* stateMachine);
+			SleepState(Actor& actor);
+			SleepState(Actor& actor, IStateCallback& stateMachine);
 
 			/**
 			 setup
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			void setup();
+			virtual void setup();
 
 			/**
 			 breakdown
@@ -58,7 +58,7 @@ namespace bammm
 			 @Pre-Condition- Takes in a float deltaTime
 			 @Post-Condition- Executes a tick of length deltaTime
 			 */
-			void tick(float deltaTime);
+			virtual void tick(float deltaTime);
 
 			/**
 			 switchState
@@ -75,14 +75,14 @@ namespace bammm
 			string toString();
 	};
 
-	SleepState::SleepState(Actor* actor)
+	SleepState::SleepState(Actor& actor)
 	{
-		_actor = actor;
+		_actor = &actor;
 	}
 
-	SleepState::SleepState(Actor* actor, IStateCallback* stateMachine)
+	SleepState::SleepState(Actor& actor, IStateCallback& stateMachine)
 	{
-		_actor = actor;
+		_actor = &actor;
 		registerTransitionCallback(stateMachine);
 	}
 

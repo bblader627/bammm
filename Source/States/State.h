@@ -36,7 +36,7 @@ namespace bammm
 
 		public:
 			State();
-			State(Actor* actor);
+			State(Actor& actor);
 			virtual ~State();
 
 			/**
@@ -62,11 +62,10 @@ namespace bammm
 
 			/**
 			 registerTransitionCallback
-			 @Pre-Condition- Takes in a IStateCallback* state machine
+			 @Pre-Condition- Takes in a IStateCallback& state machine
 			 @Post-Condition- A transition callback is registered
 			 */
-			virtual void registerTransitionCallback(
-					IStateCallback* stateMachine);
+			virtual void registerTransitionCallback(IStateCallback& stateMachine);
 
 			/**
 			 switchState
@@ -94,9 +93,9 @@ namespace bammm
 	{
 	}
 
-	State::State(Actor* actor)
+	State::State(Actor& actor)
 	{
-		_actor = actor;
+		_actor = &actor;
 	}
 
 	State::~State()
@@ -119,9 +118,9 @@ namespace bammm
 		cout << "In parent state\n";
 	}
 
-	void State::registerTransitionCallback(IStateCallback* stateMachine)
+	void State::registerTransitionCallback(IStateCallback& stateMachine)
 	{
-		_stateMachine = stateMachine;
+		_stateMachine = &stateMachine;
 	}
 
 	void State::switchState(string nextState)

@@ -12,15 +12,16 @@
  *
  */
 
+
 #ifndef AICONTROLLER_H_
 #define AICONTROLLER_H_
 
-#include <random>
 #include "Controller.h"
 #include "../States/StateMachine.h"
 #include "../SceneManager/SceneManager.h"
 #include "../Weapons/MeleeCombat.h"
 #include "../Weapons/RangedCombat.h"
+#include <random>
 
 #ifndef NULL
 #define NULL ((void *)0)
@@ -30,99 +31,85 @@ using namespace std;
 
 namespace bammm
 {
-	class AiController: public Controller
-	{
+    class AiController : public Controller
+    {
 		private:
 			MeleeCombat* _meleeCombat;
 			RangedCombat* _rangedCombat;
 			SceneManager* _sceneManager;
-
-		public:
-			AiController(SceneManager* scene, MeleeCombat* meleeCombat);
-			~AiController();
-
+        public:
+			AiController();
+            ~AiController();
+			
 			/**
 			 setup
-			 @Pre-Condition- Takes an actor as input
-			 @Post-Condition- Actor passed as argument is setup for use
-			 */
-			void setup(Actor* actor);
-
+			 @Pre-Condition- Takes an Actor, SceneManager, MeleeCombat as input
+			 @Post-Condition- Sets up the controller with passed parameters
+			 */            
+			void setup(Actor& actor, SceneManager& scene, MeleeCombat& meleeCombat);
+			
 			/**
 			 update
 			 @Pre-Condition- Takes a float delta time (change in time) as input
-			 @Post-Condition- Updates are executed based on the deltaTime
-			 */
-			bool update(float deltaTime);
-	};
+			 @Post-Condition- Updates are executed based on the deltaTime. Returns true when controller should be deleted.
+			 */		
+			bool update(float dTime);
+			
+    };
 
-	AiController::AiController(SceneManager* scene, MeleeCombat* meleeCombat)
+	AiController::AiController()
 	{
-		_sceneManager = scene;
-		_meleeCombat = meleeCombat;
 	}
 
-	AiController::~AiController()
-	{
-		DynamicArray<State*>* temp = _states->getAllValues();
-		for (int i = 0; i < (int) temp->getSize(); i++)
-		{
-			delete temp->get(i);
-		}
-
-		delete _states;
-		delete _stateMachine;
-	}
-
-	void AiController::setup(Actor* actor)
-	{
-		_actor = actor;
-		_states = new HashMap<State*>();
-		_stateMachine = new StateMachine(_actor, _states);
+    void AiController::setup(Actor& actor, SceneManager& scene, MeleeCombat& meleeCombat)
+    {
+		_sceneManager = &scene;
+		_meleeCombat = &meleeCombat;
+        _actor = &actor;
+    	_stateMachine.setup(actor, _states);
 
 		//Create the states
-		//DO NOT DELETE THE REFERENCES TO STATEMACHINE. THE CODE WILL SEG FAULT IF YOU DO
-		DrinkState* drinkState = new DrinkState(_actor, _stateMachine);
-		MineState* mineState = new MineState(_actor, _stateMachine);
-		SingState* singState = new SingState(_actor, _stateMachine);
-		BrawlState* brawlState = new BrawlState(_actor, _stateMachine);
-		SleepState* sleepState = new SleepState(_actor, _stateMachine);
-		IdleState* idleState = new IdleState(_actor, _stateMachine);
-		CombatState* combatState = new CombatState(_actor, _stateMachine);
+        DrinkState* drinkState = new DrinkState(actor, _stateMachine);
+        MineState* mineState = new MineState(actor, _stateMachine);
+        SingState* singState = new SingState(actor, _stateMachine);
+        BrawlState* brawlState = new BrawlState(actor, _stateMachine);
+        SleepState* sleepState = new SleepState(actor, _stateMachine);
+        IdleState* idleState = new IdleState(actor, _stateMachine);
+		CombatState* combatState = new CombatState(actor, _stateMachine);
 
+        _states.add(idleState->toString(), idleState);
+        _states.add(mineState->toString(), mineState);
+        _states.add(drinkState->toString(), drinkState);
+        _states.add(singState->toString(), singState);
+        _states.add(brawlState->toString(), brawlState);
+        _states.add(sleepState->toString(), sleepState);
+       	_states.add(combatState->toString(), combatState);
+		
 		//Put actor in idle state
-		_stateMachine->initialState(idleState);
+		_stateMachine.initialState(_states.getValue(idleState->toString()));
+    }
 
-		_states->add(idleState->toString(), idleState);
-		_states->add(mineState->toString(), mineState);
-		_states->add(drinkState->toString(), drinkState);
-		_states->add(singState->toString(), singState);
-		_states->add(brawlState->toString(), brawlState);
-		_states->add(sleepState->toString(), sleepState);
-		_states->add(combatState->toString(), combatState);
-	}
+    AiController::~AiController()
+    {
+    }
 
-	bool AiController::update(float deltaTime)
+	bool AiController::update(float dTime)
 	{
-		//All currently running states
-		if (_actor->getHealth() <= 0)
+    	//all currently running states
+		if(_actor->getHealth() <= 0)
 		{
-			_sceneManager->getSceneGraph()->remove(_actor->getLocation(),
-					_actor);
+			_sceneManager->getSceneGraph().remove(_actor->getLocation(), _actor);
 			delete _actor;
 			return true;
 		}
 		else
 		{
-			Vector3D* newLoc = new Vector3D(0, 0, 0);
-			cout << "Before Graph\n";
-			_sceneManager->getSceneGraph()->moveTowards(_actor, newLoc);
-			cout << "After Graph\n";
-			_stateMachine->tick(deltaTime);
+			Vector3D* newLoc = new Vector3D(0,0,0);
+			_sceneManager->getSceneGraph().moveTowards(_actor, newLoc);
+        	_stateMachine.tick(dTime);
 		}
 
 		return false;
-	}
+    }
 }
-
 #endif

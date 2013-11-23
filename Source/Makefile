@@ -21,6 +21,9 @@ TESTSRC = Main.cpp
 all: re $(SRC) $(TESTSRC)
 	g++ $(SRC) $(TESTSRC) -Wall -Werror -std=c++0x -o $(TESTNAME)
 
+debug: re $(SRC) $(TESTSRC)
+	g++ $(SRC) $(TESTSRC) -Wall -Werror -std=c++0x -o $(TESTNAME) -g
+
 retest: re test
 
 clean:

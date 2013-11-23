@@ -15,10 +15,10 @@
 #ifndef HASHMAP_H_
 #define HASHMAP_H_
 
-#include <string>
-#include <cmath>
 #include "HashNode.h"
 #include "DynamicArray.h"
+#include <string>
+#include <cmath>
 
 #define DEFAULT_MAPSIZE 1000
 
@@ -121,7 +121,7 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns a DynamicArray containing all the values in the map
 			 */
-			T getValue(string key);
+			T& getValue(string key);
 	};
 
 	template<class T>
@@ -274,14 +274,14 @@ namespace bammm
 		return values;
 	}
 
+	/**
+	 * HashMap<T>::getValue(string key)
+	 * @brief Returns the value that corresponds to the given key, or a NULL cast as T otherwise.
+	 * @param key The key to look up in the HashMap.
+	 * @return T
+	 */
 	template<class T>
-	HashNode<T>* HashMap<T>::getNode(string key)
-	{
-		return find(key);
-	}
-
-	template<class T>
-	T HashMap<T>::getValue(string key)
+	T& HashMap<T>::getValue(string key)
 	{
 		int bucket = hashString(key);
 		HashNode<T>* temporary = hashMap[bucket];

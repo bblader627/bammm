@@ -32,15 +32,15 @@ namespace bammm
 			int _maximumGold;
 
 		public:
-			MineState(Actor* actor);
-			MineState(Actor* actor, IStateCallback* stateMachine);
+			MineState(Actor& actor);
+			MineState(Actor& actor, IStateCallback& stateMachine);
 
 			/**
 			 setup
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			void setup();
+			virtual void setup();
 
 			/**
 			 breakdown
@@ -54,7 +54,7 @@ namespace bammm
 			 @Pre-Condition- Takes in a float deltaTime
 			 @Post-Condition- Executes a tick of length deltaTime
 			 */
-			void tick(float deltaTime);
+			virtual void tick(float deltaTime);
 
 			/**
 			 switchState
@@ -71,14 +71,14 @@ namespace bammm
 			string toString();
 	};
 
-	MineState::MineState(Actor* actor)
+	MineState::MineState(Actor& actor)
 	{
-		_actor = actor;
+		_actor = &actor;
 		_maximumGold = 15;
 	}
-	MineState::MineState(Actor* actor, IStateCallback* stateMachine)
+	MineState::MineState(Actor& actor, IStateCallback& stateMachine)
 	{
-		_actor = actor;
+		_actor = &actor;
 		_maximumGold = 15;
 		registerTransitionCallback(stateMachine);
 	}

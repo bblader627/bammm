@@ -34,7 +34,7 @@ namespace bammm
 
 		public:
 			Stein();
-			Stein(WeaponData* weaponData);
+			Stein(WeaponData& weaponData);
 			~Stein();
 
 			/**
@@ -61,9 +61,9 @@ namespace bammm
 		_timer = 0;
 	}
 
-	Stein::Stein(WeaponData* weaponData)
+	Stein::Stein(WeaponData& wd)
 	{
-		_weaponData = weaponData;
+		_weaponData = &wd;
 		_timer = 0;
 	}
 

@@ -34,7 +34,7 @@ namespace bammm
 
 		public:
 			HashNode();
-			HashNode(string key, T& value);
+			HashNode(string key, T value);
 			virtual ~HashNode();
 
 			/**
@@ -56,7 +56,7 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _value
 			 */
-			T getValue();
+			T& getValue();
 
 			/**
 			 setValue
@@ -88,7 +88,7 @@ namespace bammm
 	}
 
 	template<class T>
-	HashNode<T>::HashNode(string key, T& value)
+	HashNode<T>::HashNode(string key, T value)
 	{
 		_key = key;
 		_value = value;
@@ -113,7 +113,7 @@ namespace bammm
 	}
 
 	template<class T>
-	T HashNode<T>::getValue()
+	T& HashNode<T>::getValue()
 	{
 		return _value;
 	}

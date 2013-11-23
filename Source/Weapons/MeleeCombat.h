@@ -68,7 +68,7 @@ namespace bammm
 			 @Post-Condition- The actors will be setup to engage in combat
 			 */
 			//TODO:Why does MeleeCombat use setup and RangedCombat use a constructor for the same purpose? This is inconsistent
-			void setup(Actor* actor1, Actor* actor2);
+			void setup(Actor& actor1, Actor& actor2);
 
 			/**
 			 useTurn
@@ -89,14 +89,14 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns the winner of the fight
 			 */
-			Actor* getWinner();
+			Actor& getWinner();
 
 			/**
 			 getLoser
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns the loser of the fight
 			 */
-			Actor* getLoser();
+			Actor& getLoser();
 	};
 
 	MeleeCombat::MeleeCombat()
@@ -113,13 +113,11 @@ namespace bammm
 	{
 	}
 
-	void MeleeCombat::setup(Actor* actor1, Actor* actor2)
+	void MeleeCombat::setup(Actor& actor1, Actor& actor2)
 	{
-		if (actor1 == NULL || actor2 == NULL)
-			return;
 
-		_actor1 = actor1;
-		_actor2 = actor2;
+		_actor1 = &actor1;
+		_actor2 = &actor2;
 		_winner = NULL;
 		_loser = NULL;
 		_playerTurn = true;
@@ -187,14 +185,14 @@ namespace bammm
 		return _fightHappening;
 	}
 
-	Actor* MeleeCombat::getWinner()
+	Actor& MeleeCombat::getWinner()
 	{
-		return _winner;
+		return *(_winner);
 	}
 
-	Actor* MeleeCombat::getLoser()
+	Actor& MeleeCombat::getLoser()
 	{
-		return _loser;
+		return *(_loser);
 	}
 
 	void MeleeCombat::giveLoot()

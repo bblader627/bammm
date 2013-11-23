@@ -24,13 +24,13 @@ namespace bammm
 	class Boomstick: RangedWeapon
 	{
 		private:
-			WeaponData* _weaponData;
+			WeaponData& _weaponData;
 			float _timer;
 			Time* _time;
 
 		public:
 			Boomstick();
-			Boomstick(WeaponData* weaponData);
+			Boomstick(WeaponData& weaponData);
 			~Boomstick();
 
 			/**
@@ -62,16 +62,15 @@ namespace bammm
 		_time = new Time();
 	}
 
-	Boomstick::Boomstick(WeaponData* weaponData)
+	Boomstick::Boomstick(WeaponData& weaponData)
 	{
-		_weaponData = weaponData;
+		_weaponData = &weaponData;
 		_timer = 0.0;
 		_time = new Time();
 	}
 
 	Boomstick::~Boomstick()
 	{
-		delete _weaponData;
 		delete _time;
 	}
 

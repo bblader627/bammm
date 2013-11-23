@@ -27,15 +27,15 @@ namespace bammm
 	class IdleState: public State
 	{
 		public:
-			IdleState(Actor* actor);
-			IdleState(Actor* actor, IStateCallback* stateMachine);
+			IdleState(Actor& actor);
+			IdleState(Actor& actor, IStateCallback& stateMachine);
 
 			/**
 			 setup
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			void setup();
+			virtual void setup();
 
 			/**
 			 breakdown
@@ -49,7 +49,7 @@ namespace bammm
 			 @Pre-Condition- Takes in a float deltaTime
 			 @Post-Condition- Executes a tick of length deltaTime
 			 */
-			void tick(float deltaTime);
+			virtual void tick(float deltaTime);
 
 			/**
 			 toString
@@ -59,14 +59,14 @@ namespace bammm
 			string toString();
 	};
 
-	IdleState::IdleState(Actor* actor)
+	IdleState::IdleState(Actor& actor)
 	{
-		_actor = actor;
+		_actor = &actor;
 	}
 
-	IdleState::IdleState(Actor* actor, IStateCallback* stateMachine)
+	IdleState::IdleState(Actor& actor, IStateCallback& stateMachine)
 	{
-		_actor = actor;
+		_actor = &actor;
 		registerTransitionCallback(stateMachine);
 	}
 

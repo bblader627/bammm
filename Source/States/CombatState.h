@@ -32,15 +32,15 @@ namespace bammm
 	class CombatState: public State
 	{
 		public:
-			CombatState(Actor* actor);
-			CombatState(Actor* actor, IStateCallback* stateMachine);
+			CombatState(Actor& actor);
+			CombatState(Actor& actor, IStateCallback& stateMachine);
 
 			/**
 			 setup
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			void setup();
+			virtual void setup();
 
 			/**
 			 breakdown
@@ -54,7 +54,7 @@ namespace bammm
 			 @Pre-Condition- Takes in a float deltaTime
 			 @Post-Condition- Executes a tick of length deltaTime
 			 */
-			void tick(float deltaTime);
+			virtual void tick(float deltaTime);
 
 			/**
 			 toString
@@ -64,14 +64,14 @@ namespace bammm
 			string toString();
 	};
 
-	CombatState::CombatState(Actor* actor)
+	CombatState::CombatState(Actor& actor)
 	{
-		_actor = actor;
+		_actor = &actor;
 	}
 
-	CombatState::CombatState(Actor* actor, IStateCallback* stateMachine)
+	CombatState::CombatState(Actor& actor, IStateCallback& stateMachine)
 	{
-		_actor = actor;
+		_actor = &actor;
 		registerTransitionCallback(stateMachine);
 	}
 

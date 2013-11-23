@@ -6,9 +6,11 @@
  * 	Matt Konstantinou
  * 	Michael Abramo
  *	Matt Witkowski	
- *  Bradley Crusco
+ *   Bradley Crusco
  * Description:
  * DynamicArray header file.
+ *
+ * Last Modified: Matt Witkowski
  *
  */
 #ifndef DYNAMICARRAY_H_
@@ -18,6 +20,8 @@
 #include <cstring>
 #include <cassert>
 #include <typeinfo>
+
+using namespace std;
 
 #ifndef UINT
 #define UINT
@@ -120,7 +124,7 @@ namespace bammm
 			 @Pre-Condition- Takes an index
 			 @Post-Condition- Removes the element at the given index
 			 */
-			T remove(uint index);
+			T& remove(uint index);
 
 			/**
 			 removeElement
@@ -176,14 +180,14 @@ namespace bammm
 			 @Pre-Condition- Takes a unit index
 			 @Post-Condition- Returns the element at that index
 			 */
-			T get(uint index);
+			T& get(uint index);
 
 			/**
 			 operator[]
 			 @Pre-Condition- Takes a unit index
 			 @Post-Condition- Returns the element at that index
 			 */
-			T operator[](uint index);
+			T& operator[](uint index);
 	};
 
 	template<class T>
@@ -312,7 +316,7 @@ namespace bammm
 	}
 
 	template<class T>
-	T DynamicArray<T>::remove(uint index)
+	T& DynamicArray<T>::remove(uint index)
 	{
 		if (_array == NULL)
 		{
@@ -325,7 +329,7 @@ namespace bammm
 			errorMessage("Index out of bounds.");
 			assert(0);
 		}
-		T removedElement = _array[index];
+		T& removedElement = _array[index];
 		shiftElementsLeft(index);
 		_size--;
 
@@ -479,7 +483,7 @@ namespace bammm
 	}
 
 	template<class T>
-	T DynamicArray<T>::get(uint index)
+	T& DynamicArray<T>::get(uint index)
 	{
 		if (_array == NULL)
 		{
@@ -497,7 +501,7 @@ namespace bammm
 	}
 
 	template<class T>
-	T DynamicArray<T>::operator[](uint index)
+	T& DynamicArray<T>::operator[](uint index)
 	{
 		if (_array == NULL)
 		{
