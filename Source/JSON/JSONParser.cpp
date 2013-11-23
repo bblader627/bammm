@@ -194,8 +194,11 @@ namespace bammm
 					value = "";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 check  what comes after colon so we may determine type 
 =======
+=======
+>>>>>>> refs/heads/json
 					cout << "WHAT'S THE COUNT?!?!?! ---- " << current << endl;
 
 					/* check  what comes after colon so we may determine type */
@@ -348,9 +351,15 @@ namespace bammm
 					cout.flush();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 					reset node to parent so next key/value may be added as a child to parent 
 					*currentNode = currentNode->getParent();
 					*parentNode = parentNode->getParent();
+=======
+					/* reset node to parent so next key/value may be added as a child to parent */
+					currentNode = currentNode->getParent();
+					parentNode = parentNode->getParent();
+>>>>>>> refs/heads/json
 =======
 					/* reset node to parent so next key/value may be added as a child to parent */
 					currentNode = currentNode->getParent();
