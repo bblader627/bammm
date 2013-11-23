@@ -38,7 +38,7 @@ namespace bammm
 
 			JSON();
 			JSON(string);
-			~JSON();
+			virtual ~JSON();
 
 			/*
 			 getName
@@ -86,34 +86,10 @@ namespace bammm
 
 			void addChild(JSON &);
 
-			/*
-			 getIntValue
-			 @Pre-Condition-  Takes no argument
-			 @Post-Condition- returns an int that is equal to the value of this JSON Node
-			 */
 			virtual int getIntValue();
-
-			/*
-			 getDoubleValue
-			 @Pre-Condition-  Takes no argument
-			 @Post-Condition- returns a double that is equal to the value of this JSON Node
-			 */
 			virtual double getDoubleValue();
-
-			/*
-			 getBoolValue
-			 @Pre-Condition-  Takes no argument
-			 @Post-Condition- returns a bool that is equal to the boolean value of this JSON Node
-			 */
 			virtual bool getBoolValue();
-
-			/*
-			 getStringValue
-			 @Pre-Condition-  Takes no argument
-			 @Post-Condition- returns a string that is equal to the value of this JSON Node
-			 */
 			virtual string getStringValue();
-
 
 			JSON * operator[](int index)
 			{
