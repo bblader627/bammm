@@ -3,7 +3,7 @@
 
 #include "Grid3D.h"
 #include "../Actors/Actor.h"
-#include "ITickable.h"
+#include "../Interfaces/ITickable.h"
 using namespace std;
 
 namespace bammm

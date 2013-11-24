@@ -42,6 +42,9 @@ namespace bammm
             HashMap<State*> _states;
             Actor* _actor;
             StateMachine _stateMachine;
+			MeleeCombat* _meleeCombat;
+			RangedCombat* _rangedCombat;
+			SceneManager* _sceneManager;
 
         public:
             Controller();

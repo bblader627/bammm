@@ -29,10 +29,6 @@ namespace bammm
 {
     class PlayerController : public Controller
     {
-		private:
-			MeleeCombat* _meleeCombat;
-			RangedCombat* _rangedCombat;
-			SceneManager* _sceneManager;
         public:
 			PlayerController();
 			~PlayerController();

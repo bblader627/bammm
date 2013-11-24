@@ -33,10 +33,6 @@ namespace bammm
 {
     class AiController : public Controller
     {
-		private:
-			MeleeCombat* _meleeCombat;
-			RangedCombat* _rangedCombat;
-			SceneManager* _sceneManager;
         public:
 			AiController();
             ~AiController();
