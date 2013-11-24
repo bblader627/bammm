@@ -61,10 +61,10 @@ namespace bammm
 		string filename = "actors.json";
 		parser->parseFile(filename);
 
-		cout << "poop" << endl;
+		cout << "poop" << "\n";
 
 		JSON* dwarves = parser->getRootNode("dwarves");
-		cout << dwarves->getName() << endl;
+		cout << dwarves->getName() << "\n";
 
 		for (int i = 0; i<dwarves->sizeOfChildren(); i++)
 		{

@@ -100,21 +100,21 @@ namespace bammm
 		{
 			cout << _actor->getName()
 					<< " puts down his drink.  He's slightly tipsy, but is ready to get back to work!"
-					<< endl;
+					<< "\n";
 		}
 		else if (BAC < 0.35)
 		{
 			_actor->incrementBAC();
 			cout << _actor->getName()
 					<< " finishes his sloppily drink and slams it down on the counter, ready to go out and explore the village."
-					<< endl;
+					<< "\n";
 		}
 		else if (BAC < 0.5)
 		{
 			_actor->reduceHealth(2);
 			cout << _actor->getName()
 					<< " is very drunk.  He gets up to leave and falls over a table before making his way out the door."
-					<< endl;
+					<< "\n";
 		}
 	}
 
@@ -127,7 +127,7 @@ namespace bammm
 			if (!(_actor->spendGold(3)))
 			{
 				cout << _actor->getName()
-						<< " does not have enough gold to buy alcohol." << endl;
+						<< " does not have enough gold to buy alcohol." << "\n";
 				return;
 			}
 		}
@@ -140,7 +140,7 @@ namespace bammm
 		{
 			cout << name
 					<< " is too drunk to continue.  He drops his glass and passes out on the floor."
-					<< endl;
+					<< "\n";
 			switchState("sleep");
 		}
 		else if (_stoutLife < 1)

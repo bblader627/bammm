@@ -52,7 +52,7 @@ namespace bammm
 		{
 			cout
 					<< "Could not add test to TestSuite, maximum number of tests have been added."
-					<< endl;
+					<< "\n";
 		}
 		else
 		{
@@ -81,7 +81,7 @@ namespace bammm
 		cout << "\e[32m" << "Number of successes: " << numberOfSuccesses
 				<< "\e[0m";
 		cout << "\e[31m" << " Number of failures: " << numberOfFailures
-				<< "\e[0m" << endl;
+				<< "\e[0m" << "\n";
 	}
 
 	bool TestSuite::executeTest(Test test)
@@ -91,21 +91,21 @@ namespace bammm
 		Time endTime(Time::current());
 		Time duration(startTime - endTime);
 
-		cout << "\e[33m" << "Test: " << test.getName() << "\e[0m" << endl;
+		cout << "\e[33m" << "Test: " << test.getName() << "\e[0m" << "\n";
 		cout << "Start time: " << startTime << " End time: " << endTime
-				<< " Duration: " << duration << endl;
+				<< " Duration: " << duration << "\n";
 
 		if (result == -1)
 		{
-			cout << "Result: " << "\e[31m" << "Failed" << "\e[0m" << endl;
+			cout << "Result: " << "\e[31m" << "Failed" << "\e[0m" << "\n";
 			return false;
 
 		}
 		else
 		{
 			cout << "Number of memory allocations not freed: " << result
-					<< endl;
-			cout << "Result: " << "\e[32m" << "Success" << "\e[0m" << endl;
+					<< "\n";
+			cout << "Result: " << "\e[32m" << "Success" << "\e[0m" << "\n";
 			return true;
 		}
 	}

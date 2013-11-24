@@ -179,73 +179,73 @@ namespace bammm
     	}
     	*/
     	//MAKE THIS SMARTER
-    	cout << "Select an activity for your dwarf:" << endl;
+    	cout << "Select an activity for your dwarf:" << "\n";
 
 		//Mining gold options
     	if (currentStates.contains(_states.getValue("mine")))
 		{
-			cout << "1. Stop mining gold" << endl;
+			cout << "1. Stop mining gold" << "\n";
 		}
 		else
 		{
-			cout << "1. Mine Gold" << endl;
+			cout << "1. Mine Gold" << "\n";
 		}
 
     	//Drinking options
     	if (currentStates.contains(_states.getValue("drink")))
 		{
-			cout << "2. Stop drinking ale" << endl;
+			cout << "2. Stop drinking ale" << "\n";
 		}
 		else
 		{
-			cout << "2. Drink ale" << endl;
+			cout << "2. Drink ale" << "\n";
 		}
 
     	//Singing options
     	if (currentStates.contains(_states.getValue("sing")))
     	{
-    		cout << "3. Stop singing" << endl;
+    		cout << "3. Stop singing" << "\n";
     	}
     	else
     	{
-    		cout << "3. Sing a song" << endl;
+    		cout << "3. Sing a song" << "\n";
     	}
 
     	//Fighting options
     	if (currentStates.contains(_states.getValue("brawl")))
     	{
-    		cout << "4. Stop fighting" << endl;
+    		cout << "4. Stop fighting" << "\n";
     	}
     	else
     	{
-    		cout << "4. Fight a dwarf" << endl;
+    		cout << "4. Fight a dwarf" << "\n";
     	}
 
 
     	//Sleeping options
 		if (currentStates.contains(_states.getValue("sleep")))
 		{
-			cout << "5. Wake up" << endl;
+			cout << "5. Wake up" << "\n";
 		}
 		else
 		{
-			cout << "5. Go to sleep" << endl;
+			cout << "5. Go to sleep" << "\n";
 		}
 
 		
 		//Combat options
 		if (currentStates.contains(_states.getValue("combat")))
 		{
-			cout << "6. Attack" << endl;
+			cout << "6. Attack" << "\n";
 		}
 		else
 		{
-			cout << "6. Fight Orc" << endl;
+			cout << "6. Fight Orc" << "\n";
 		}
 		
-		cout << "7. Continue" << endl;
+		cout << "7. Continue" << "\n";
 
-    	cout << "0. Quit" << endl;
+    	cout << "0. Quit" << "\n";
     }
 
     PlayerController::~PlayerController()

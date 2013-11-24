@@ -99,7 +99,7 @@ namespace bammm
 		{
 			cout << _actor->getName()
 					<< " drunkenly swings the pickaxe, hits himself in the foot, and decides not to do that anymore."
-					<< endl;
+					<< "\n";
 			switchState("null"); //Ends this state;
 			return;
 		}
@@ -107,11 +107,11 @@ namespace bammm
 		_actor->reduceStamina(1);
 		_actor->addGold(1);
 		cout << _actor->getName()
-				<< " lifts his pickaxe, and swings it at the rock. " << endl;
-		cout << _actor->getGold() << endl;
+				<< " lifts his pickaxe, and swings it at the rock. " << "\n";
+		cout << _actor->getGold() << "\n";
 		if (_actor->getGold() > _maximumGold)
 		{
-			cout << _actor->getName() << "'s purse is full!" << endl;
+			cout << _actor->getName() << "'s purse is full!" << "\n";
 			switchState("drink");
 		}
 	}

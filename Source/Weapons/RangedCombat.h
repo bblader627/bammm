@@ -141,14 +141,14 @@ namespace bammm
 					damage = _actor1->getRangedWeapon()->attack();
 					_actor2->reduceHealth(damage);
 					cout << _actor2->getName() << " has taken " << damage
-							<< " damage!" << endl;
+							<< " damage!" << "\n";
 				}
 				else
 				{
 					damage = _actor2->getRangedWeapon()->attack();
 					_actor1->reduceHealth(damage);
 					cout << _actor1->getName() << " has taken " << damage
-							<< " damage!" << endl;
+							<< " damage!" << "\n";
 				}
 			}
 		}
@@ -159,14 +159,14 @@ namespace bammm
 		{
 			_winner = _actor2;
 			_loser = _actor1;
-			cout << _loser->getName() << " has been slain!" << endl;
+			cout << _loser->getName() << " has been slain!" << "\n";
 			victory();
 		}
 		else if (_actor2->getHealth() <= 0)
 		{
 			_winner = _actor1;
 			_loser = _actor2;
-			cout << _winner->getName() << " has been slain!" << endl;
+			cout << _winner->getName() << " has been slain!" << "\n";
 			victory();
 		}
 	}

@@ -299,7 +299,7 @@ namespace bammm
 		}
 		else
 		{
-			cout << "Path not found" << endl;
+			cout << "Path not found" << "\n";
 			return new Stack<Vector3D*>*;
 		}
 

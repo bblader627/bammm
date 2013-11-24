@@ -62,7 +62,7 @@ int main()
 	bool playGame = true;
 	int choice;
 
-	cout << bob->getName() << " is waiting for instructions." << endl;
+	cout << bob->getName() << " is waiting for instructions." << "\n";
 
     DynamicArray<string>* input = new DynamicArray<string>();
 	string sleep = "sleep";
@@ -109,7 +109,7 @@ int main()
 			case 7:
 				break;
 			default:
-				cout << "Invalid Input" << endl;
+				cout << "Invalid Input" << "\n";
 				break;
 		}
 
@@ -139,16 +139,16 @@ int main()
 		}
 
 	}
-	cout << "Thanks for playing!  Press enter to quit." << endl;
+	cout << "Thanks for playing!  Press enter to quit." << "\n";
 	return 0;
 }
 
 void printWelcome()
 {
-	cout << "================================================" << endl;
-	cout << "Welcome to BAMMM -  Alpha v0.1" << endl;
-	cout << "Creators: \tAlvaro Home - Matthew Konstantinou - Matthew Witkowski\n\t\tBradley Crusco - Michael Abramo" << endl;
-	cout << "================================================" << endl;
+	cout << "================================================" << "\n";
+	cout << "Welcome to BAMMM -  Alpha v0.1" << "\n";
+	cout << "Creators: \tAlvaro Home - Matthew Konstantinou - Matthew Witkowski\n\t\tBradley Crusco - Michael Abramo" << "\n";
+	cout << "================================================" << "\n";
 }
 
 

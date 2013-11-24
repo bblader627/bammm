@@ -106,12 +106,12 @@ namespace bammm
 
 	void State::setup()
 	{
-		cout << "wrong setup" << endl;
+		cout << "wrong setup" << "\n";
 	}
 
 	void State::breakdown()
 	{
-		cout << "wrong breakdown" << endl;
+		cout << "wrong breakdown" << "\n";
 	}
 
 	void State::tick(float deltaTime)

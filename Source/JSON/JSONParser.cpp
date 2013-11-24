@@ -69,7 +69,7 @@ namespace bammm
 		if (!input.is_open())
 		{
 			cout << "Failed to open file: " << fileName << " does not exist."
-					<< endl;
+					<< "\n";
 			return false;
 		}
 
@@ -181,7 +181,7 @@ namespace bammm
 						current = (char) input.get();
 					}
 
-					cout << "Name : " << name << "\nValue: " << value << endl;
+					cout << "Name : " << name << "\nValue: " << value << "\n";
 
 					break;
 
@@ -194,7 +194,7 @@ namespace bammm
 
 					value = "";
 
-					cout << "WHAT'S THE COUNT?!?!?! ---- " << current << endl;
+					cout << "WHAT'S THE COUNT?!?!?! ---- " << current << "\n";
 
 					/* check  what comes after colon so we may determine type */
 					current = (char) input.peek();
@@ -202,13 +202,13 @@ namespace bammm
 					{
 						current = (char) input.get();
 					}
-					cout << "WHAT'S THE COUNT 2?!?!?! ---- " << current << endl;
+					cout << "WHAT'S THE COUNT 2?!?!?! ---- " << current << "\n";
 
 					/* Now that we know the value, we may confirm the type of the JSON Node and create it. */
 
 					parentNode = currentNode;
 
-					cout << name << endl;
+					cout << name << "\n";
 
 					if (current == '{')
 					{
@@ -233,14 +233,14 @@ namespace bammm
 
 						current = (char) input.get();
 						current = (char) input.get();
-						cout << "the goddamn character is  ------  " << current << endl;
+						cout << "the goddamn character is  ------  " << current << "\n";
 						while (!input.eof() && current != '"')
 						{
 							value += current;
 							current = (char) input.get();
 						}
 
-						cout << "the goddamn value is  ------  " << value << endl;
+						cout << "the goddamn value is  ------  " << value << "\n";
 						currentNode = new JSONPrimitive(name, value,
 								JSON_STRING);
 
@@ -320,9 +320,9 @@ namespace bammm
 						return false;
 					}
 
-					cout << "setting parent" << endl;
+					cout << "setting parent" << "\n";
 					currentNode->setParent(*parentNode);
-					cout << "parent set" << endl;
+					cout << "parent set" << "\n";
 
 					if (parentNode == NULL)
 					{
@@ -336,12 +336,12 @@ namespace bammm
 					cout << "Added object to map \n";
 					cout.flush();
 
-					cout << "Name: " << currentNode->getName() << " Type: " << currentNode->getType() << " Value: " << value << endl;
+					cout << "Name: " << currentNode->getName() << " Type: " << currentNode->getType() << " Value: " << value << "\n";
 
 					break;
 
 				case ',':
-					cout << "Parsing , \n" << endl;
+					cout << "Parsing , \n" << "\n";
 					cout.flush();
 
 					/* reset node to parent so next key/value may be added as a child to parent */
