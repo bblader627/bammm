@@ -1,20 +1,23 @@
 /*
- * CS585
- *
- * Team Bammm
- * 	Alvaro Home
- * 	Matt Konstantinou
- * 	Michael Abramo
- *
- * Description:
- * ActorFactory header file.
- *
- * Last Modified: Matthew Konstantinou
- *
- */
+* CS585
+*
+* Team Bammm
+* 	Alvaro Home
+* 	Matt Konstantinou
+* 	Michael Abramo
+*
+* Description:
+* ActorFactory header file.
+*
+* Last Modified: Matthew Konstantinou
+*
+*/
 
 #include <iostream>
 #include "../JSON/JSONParser.h"
+#include "../JSON/JSON.h"
+#include "../JSON/JSONArray.h"
+#include "../JSON/JSONPrimitive.h"
 #include "../Resources/DynamicArray.h"
 #include "../Resources/HashMap.h"
 #include "../Actors/Actor.h"
@@ -29,6 +32,7 @@ using namespace std;
 #endif
 
 
+
 namespace bammm
 {
 	class Factory
@@ -38,6 +42,7 @@ namespace bammm
 		public:
 			Actor getActor(string type);
 			HashMap<ActorInfo> actorData;
+			HashMap<ActorInfo> mapData;
 			//HashMap<ArmorInfo> armorData;
 			void setup();
 
@@ -51,48 +56,47 @@ namespace bammm
 
 	void Factory::setup()
 	{
-		/*string actorJSON;
+		string actorJSON;
 		JSONParser* parser = new JSONParser();
-		string filename = "/home/matthew/workspace/bammm/Source/JSON/actors.json";
+		string filename = "actors.json";
 		parser->parseFile(filename);
 
 		cout << "poop" << endl;
 
-		HashMap<JSON>* rootMap = parser->getMap();
-		cout << rootMap->getNumerOfNodes() << endl;
+		JSON* dwarves = parser->getRootNode("dwarves");
+		cout << dwarves->getName() << endl;
 
-
-		JSON dwarfJSON = rootMap->getValue("dwarves");
-		HashMap<JSON>* dwarves = dwarfJSON.getChildren();
-		DynamicArray<JSON>* dwarfArray = dwarves->getAllValues();
-
-		int size = dwarfArray->getSize();
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i<dwarves->sizeOfChildren(); i++)
 		{
-			//ActorInfo info = new ActorInfo();
-			//info.setName(dwarfArray->get(i).)
-			//actorData.add()
-			JSON dwarf = dwarfArray->get(i);
-			string name = dwarf["name"];
-			string health = dwarf["health"];
-			string stamina = dwarf["stamina"];
-			string attack = dwarf["attack"];
-			string defense = dwarf["defense"];
+			JSON* name = dwarves[i]["name"];
+			JSON* health = dwarves[i]["health"];
+			JSON* stamina = dwarves[i]["stamina"];
+			JSON* attack = dwarves[i]["attack"];
+			JSON* defense = dwarves[i]["defense"];
 
-
-			//ActorInfo* info = new ActorInfo(name, health, stamina, attack, defense);
-			//actorData.add(name, info);
-
-			//cout << name << endl;
-		}*/
+			ActorInfo* info = new ActorInfo(name->getStringValue(), health->getIntValue(),
+								stamina->getIntValue(), attack->getIntValue(),
+								defense->getIntValue());
+			actorData.add(name->getStringValue(), *info);
+		}
 
 	}
-	/*
-	Actor Factory::getActor(string type)
-	{
-		return new Actor();
-		//return new Actor(actorData.getItem(type));
-	}
-	*/
 
 }
+
+/*
+Actor Factory::getActor(string type)
+{
+	if (type == "dwarf")
+	{
+
+	}
+	else if (type == "block")
+	{
+
+	}
+	return new Actor();
+
+}
+*/
+

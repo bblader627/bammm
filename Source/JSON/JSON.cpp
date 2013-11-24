@@ -59,6 +59,11 @@ namespace bammm
 		return _parent;
 	}
 
+	int JSON::sizeOfChildren()
+	{
+		return _children.getNumerOfNodes();
+	}
+
 	void JSON::setName(string newName)
 	{
 		_name = newName;
@@ -90,5 +95,30 @@ namespace bammm
 		}
 		cout << "Adding Child \n";
 		_children.add(newNode.getName(), &newNode);
+	}
+
+	int JSON::getIntValue()
+	{
+		return 0;
+	}
+
+	double JSON::getDoubleValue()
+	{
+		return 0.0;
+	}
+
+	bool JSON::getBoolValue()
+	{
+		return false;
+	}
+
+	string JSON::getStringValue()
+	{
+		return "";
+	}
+
+	JSON JSON::operator[](const unsigned int & rhs)
+	{
+		return *this;
 	}
 }

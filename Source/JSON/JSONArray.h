@@ -41,6 +41,34 @@ namespace bammm
 
 			JSON operator[](const unsigned int & rhs);
 
+			/*
+			 getIntValue
+			 @Pre-Condition-  Takes no argument
+			 @Post-Condition- returns an int that is equal to the value of this JSON Node
+			 */
+			int getIntValue();
+
+			/*
+			 getDoubleValue
+			 @Pre-Condition-  Takes no argument
+			 @Post-Condition- returns a double that is equal to the value of this JSON Node
+			 */
+			double getDoubleValue();
+
+			/*
+			 getBoolValue
+			 @Pre-Condition-  Takes no argument
+			 @Post-Condition- returns a bool that is equal to the boolean value of this JSON Node
+			 */
+			bool getBoolValue();
+
+			/*
+			 getStringValue
+			 @Pre-Condition-  Takes no argument
+			 @Post-Condition- returns a string that is equal to the value of this JSON Node
+			 */
+			string getStringValue();
+
 	};
 
 }

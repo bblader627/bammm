@@ -38,7 +38,7 @@ namespace bammm
 
 			JSON();
 			JSON(string);
-			~JSON();
+			virtual ~JSON();
 
 			/*
 			 getName
@@ -62,6 +62,13 @@ namespace bammm
 			JSON * getParent();
 
 			/*
+			 sizeOfChildren
+			 @Pre-Condition- Takes no argument
+			 @Post-Condition- return size of _children
+			 */
+			int sizeOfChildren();
+
+			/*
 			 setName
 			 @Pre-Condition-  Takes a string argument
 			 @Post-Condition- sets this JSON Nodes name equal to the string argument. Returns void.
@@ -78,6 +85,27 @@ namespace bammm
 			void setParent(JSON &);
 
 			void addChild(JSON &);
+
+			virtual int getIntValue();
+			virtual double getDoubleValue();
+			virtual bool getBoolValue();
+			virtual string getStringValue();
+
+			/*
+			JSON * operator[](int index)
+			{
+				DynamicArray<JSON*>* childrenArray = _children.getAllValues();
+				return childrenArray->get(index);
+				//return _children.getValue(key);
+			}
+			*/
+
+			JSON operator[](const unsigned int & rhs);
+
+			JSON* operator[](const string key)
+			{
+				return _children.getValue(key);
+			}
 
 	};
 

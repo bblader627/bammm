@@ -100,6 +100,7 @@ namespace bammm
 
 			JSONPrimitive & operator[](const string & rhs);
 
+			//JSON operator[](const unsigned int & rhs);
 	};
 
 }
