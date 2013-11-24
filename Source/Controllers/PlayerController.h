@@ -60,6 +60,13 @@ namespace bammm
 			 @Post-Condition- Prints out control options to the screen
 			 */
 			void printOptions();
+
+			/** 
+			 canDelete
+			 @Pre-Condition- Takes nothing
+			 @Post-Condition- Returns a boolean representing if the Controller can be deleted or not.
+			 */
+			 virtual bool canDelete();
     };
 
 	PlayerController::PlayerController()
@@ -247,6 +254,16 @@ namespace bammm
 
     	cout << "0. Quit" << "\n";
     }
+
+	bool PlayerController::canDelete()
+	{
+		if(_actor->getHealth() <= 0)
+		{
+			return true;
+		}
+
+		return false;
+	}
 
     PlayerController::~PlayerController()
     {

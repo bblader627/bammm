@@ -17,10 +17,6 @@
 #define AICONTROLLER_H_
 
 #include "Controller.h"
-#include "../States/StateMachine.h"
-#include "../SceneManager/SceneManager.h"
-#include "../Weapons/MeleeCombat.h"
-#include "../Weapons/RangedCombat.h"
 #include <random>
 
 #ifndef NULL
@@ -31,7 +27,7 @@ using namespace std;
 
 namespace bammm
 {
-    class AiController : public Controller
+    class AiController: public Controller, ITickable
     {
         public:
 			AiController();
@@ -45,11 +41,18 @@ namespace bammm
 			void setup(Actor& actor, SceneManager& scene, MeleeCombat& meleeCombat);
 			
 			/**
-			 update
+			 tick
 			 @Pre-Condition- Takes a float delta time (change in time) as input
-			 @Post-Condition- Updates are executed based on the deltaTime. Returns true when controller should be deleted.
+			 @Post-Condition- Updates are executed based on the deltaTime.
 			 */		
-			bool update(float dTime);
+			virtual void tick(float deltaTime);
+
+			/**
+			 canDelete
+			 @Pre-Condition- Takes nothing
+			 @Post-Condition- Returns a boolean representing if the Controller can be deleted or not.
+			 */
+			 bool canDelete();
 			
     };
 
@@ -87,25 +90,26 @@ namespace bammm
 
     AiController::~AiController()
     {
+		_sceneManager->getSceneGraph().remove(_actor->getLocation(), _actor);
+		delete _actor;
     }
 
-	bool AiController::update(float dTime)
+	bool AiController::canDelete()
 	{
-    	//all currently running states
 		if(_actor->getHealth() <= 0)
 		{
-			_sceneManager->getSceneGraph().remove(_actor->getLocation(), _actor);
-			delete _actor;
 			return true;
-		}
-		else
-		{
-			Vector3D* newLoc = new Vector3D(0,0,0);
-			_sceneManager->getSceneGraph().moveTowards(_actor, newLoc);
-        	_stateMachine.tick(dTime);
 		}
 
 		return false;
+	}
+
+	void AiController::tick(float deltaTime)
+	{
+    	//all currently running states
+		Vector3D* newLoc = new Vector3D(0,0,0);
+		_sceneManager->getSceneGraph().moveTowards(_actor, newLoc);
+        _stateMachine.tick(deltaTime);
     }
 }
 #endif

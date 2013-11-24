@@ -21,7 +21,7 @@ namespace bammm
 	{
 		public:
 			virtual ~ITickable();
-			virtual void tick(float dTime)=0;
+			virtual void tick(float deltaTime)=0;
 	};
 
 	ITickable::~ITickable()

@@ -8,7 +8,7 @@ using namespace std;
 
 namespace bammm
 {
-	class SceneManager
+	class SceneManager: ITickable
 	{
 		private:
 			DynamicArray<Actor*> _allActors;
@@ -19,14 +19,17 @@ namespace bammm
 			static const int SCENE_Z = 10;
 
 		public:
-			~SceneManager();
+			virtual ~SceneManager();
 			SceneManager();
+
 			void addActor(Actor* actor);
 			void removeActor(Actor* actor);
 			void addTickable(ITickable* tickable);
 			void removeTickable(ITickable* tickable);
 			string toString();
 			Grid3D<Actor*>& getSceneGraph();
+			virtual void tick(float deltaTime);
+
 	};
 
 	SceneManager::~SceneManager()
@@ -60,6 +63,15 @@ namespace bammm
 	Grid3D<Actor*>& SceneManager::getSceneGraph()
 	{
 		return _sceneGraph;
+	}
+
+	void SceneManager::tick(float deltaTime)
+	{
+		int size = _allTickables.getSize();
+		for(int i = 0; i < size; i++)
+		{
+			_allTickables.get(i)->tick(deltaTime);
+		}
 	}
 
 	string SceneManager::toString()

@@ -50,19 +50,21 @@ namespace bammm
             Controller();
 			virtual ~Controller();
 			
-			/**Fix parameters
+			/**Fix
 			 setup
-			 @Pre-Condition- Takes an actor as input
+			 @Pre-Condition- Takes an Actor, SceneManager, and MeleeCombat as input
 			 @Post-Condition - Sets up the controller with the passed Actor.
 			 */            
-			virtual void setup(Actor* actor);
+			virtual void setup(Actor& actor, SceneManager& scene, MeleeCombat& meleeCombat)=0;
+			/**
+			 canDelete
+			 @Pre-Condition- Takes nothing
+			 @Post-Condition- Returns a boolean representing fi the Controller can be deleted or not.
+			 */
+			virtual bool canDelete()=0;
     };
 
     Controller::Controller()
-    {
-    }
-
-    void Controller::setup(Actor* actor)
     {
     }
 

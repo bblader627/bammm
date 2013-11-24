@@ -121,7 +121,8 @@ int main()
 
 		for(int i = 0; i < (int)aiControllers.getSize(); i++)
 		{
-			if(aiControllers.get(i)->update(dTime))
+			aiControllers.get(i)->tick(dTime);
+			if(aiControllers.get(i)->canDelete())
 			{
 				delete aiControllers.remove(i);
 			}
@@ -133,11 +134,7 @@ int main()
 
 	for(int i = 0; i < (int)aiControllers.getSize(); i++)
 	{
-		if(aiControllers.get(i)->update(dTime))
-		{
-			delete aiControllers.remove(i);
-		}
-
+		delete aiControllers.remove(i);
 	}
 	cout << "Thanks for playing!  Press enter to quit." << "\n";
 	return 0;
