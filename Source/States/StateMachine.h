@@ -21,7 +21,8 @@
 #include <iostream>
 #include "../Resources/DynamicArray.h"
 #include "../Resources/HashMap.h"
-#include "IStateCallback.h"
+#include "../Interfaces/IStateCallback.h"
+#include "../Interfaces/ITickable.h"
 #include "State.h"
 
 #ifndef NULL

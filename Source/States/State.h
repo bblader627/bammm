@@ -17,7 +17,8 @@
 
 #include <iostream>
 #include "../Resources/DynamicArray.h"
-#include "IStateCallback.h"
+#include "../Interfaces/IStateCallback.h"
+#include "../Interfaces/ITickable.h"
 #include "../Actors/Actor.h"
 
 #ifndef NULL
@@ -28,7 +29,7 @@ using namespace std;
 
 namespace bammm
 {
-	class State
+	class State: public ITickable
 	{
 		protected:
 			Actor* _actor;

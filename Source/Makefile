@@ -7,7 +7,7 @@ SRCPATH = .
 SRC = Actors/Actor.h  Actors/DwarfActor.h Actors/OrcActor.h  \
 Controllers/AiController.h Controllers/Controller.h \
 Controllers/PlayerController.h States/BrawlState.h States/DrinkState.h \
-States/IdleState.h States/IStateCallback.h States/MineState.h \
+States/IdleState.h Interfaces/IStateCallback.h States/MineState.h \
 States/SingState.h States/SleepState.h States/State.h States/StateMachine.h \
 Resources/DynamicArray.h Resources/HashMap.h Resources/HashNode.h \
 Resources/Heap.h Resources/Queue.h Resources/Stack.h SceneManager/Vector3D.h \

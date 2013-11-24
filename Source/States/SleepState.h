@@ -17,8 +17,6 @@
 
 #include <iostream>
 #include "State.h"
-#include "IStateCallback.h"
-#include "IdleState.h"
 
 #ifndef UINT
 #define UINT

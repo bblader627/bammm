@@ -16,7 +16,6 @@
 #define DRINKSTATE_H_
 
 #include "State.h"
-#include "SleepState.h"
 
 #ifndef UINT
 #define UINT
