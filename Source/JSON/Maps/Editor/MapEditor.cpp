@@ -144,11 +144,11 @@ namespace bammm
 			}
 			else if(convertedChoice == '1')
 			{
-				addItem(_cursorX, _cursorY, _cursorZ, 'W');
+				addItem(_cursorX, _cursorY, _cursorZ, '~');
 			}
 			else if(convertedChoice == '2')
 			{
-				addItem(_cursorX, _cursorY, _cursorZ, 'B');
+				addItem(_cursorX, _cursorY, _cursorZ, '#');
 			}
 			else if(convertedChoice == '3')
 			{
@@ -164,7 +164,7 @@ namespace bammm
 			}
 			else if(convertedChoice == '6')
 			{
-				addItem(_cursorX, _cursorY, _cursorZ, 'M');
+				addItem(_cursorX, _cursorY, _cursorZ, '^');
 			}
 			else if(convertedChoice == '7')
 			{
@@ -191,16 +191,62 @@ namespace bammm
 			{
 				if(i == _cursorY && j == _cursorX)
 				{
-					cout << "\033[44m" << _grid[i][j][_cursorZ];
+					cout << colorSymbol(_grid[i][j][_cursorZ], true);
 				}
 				else
 				{
-					cout << _grid[i][j][_cursorZ];
+					cout << colorSymbol(_grid[i][j][_cursorZ], false);
 				}
-				cout << "\033[49m" << " ";
+				cout << " ";
 			}
 			cout << "\n";
 		}
+	}
+
+	string MapEditor::colorSymbol(char symbol, bool selected)
+	{
+		string convertedSymbol = "";
+		const string DEFAULT_COLOR = "0m";
+		const string START_COLOR = "\033[";
+		const string GREEN_TEXT = "32m";
+		const string BLUE_TEXT = "34m";
+		const string BLACK_TEXT = "30m";
+		const string RED_TEXT = "31m";
+		const string YELLOW_TEXT = "33m";
+		const string PURPLE_TEXT = "34m";
+		const string CYAN_TEXT = "36m";
+		const string WHITE_TEXT = "37m";
+		const string HIGHLIGHT = "4;";
+
+		string color = START_COLOR;
+		if(selected)
+		{
+			color = color + HIGHLIGHT;
+		}
+
+		if(symbol == '.')
+		{
+			color = color + GREEN_TEXT;
+		}
+		else if(symbol == '~')
+		{
+			color = color + BLUE_TEXT;
+		}
+		else if(symbol == '#')
+		{
+			color = color + BLACK_TEXT;
+		}
+		else if(symbol == '^')
+		{
+			color = color + WHITE_TEXT;
+		}
+		else
+		{
+			color = color + WHITE_TEXT;
+		}
+
+		convertedSymbol = color + symbol + START_COLOR + DEFAULT_COLOR;
+		return convertedSymbol;
 	}
 
 	void MapEditor::displayCoordinates()
@@ -319,7 +365,7 @@ namespace bammm
 
 	string MapEditor::createWaterJson()
 	{
-		char item = 'W';
+		char item = '~';
 		bool firstItem = true;
 		string name = "Water Objects";
 		string jsonString = "\"" + name + "\":\n";
@@ -347,7 +393,7 @@ namespace bammm
 
 	string MapEditor::createBarrierJson()
 	{
-		char item = 'B';
+		char item = '#';
 		bool firstItem = true;
 		string name = "Barrier Objects";
 		string jsonString = "\"" + name + "\":\n";
@@ -376,7 +422,7 @@ namespace bammm
 
 	string MapEditor::createMineJson()
 	{
-		char item = 'M';
+		char item = '^';
 		bool firstItem = true;
 		string name = "Mine Objects";
 		string jsonString = "\"" + name + "\":\n";

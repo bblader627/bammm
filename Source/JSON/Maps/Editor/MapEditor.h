@@ -18,7 +18,7 @@ namespace bammm
 			int _cursorZ;
 			string _name;
 			char*** _grid;
-			JSONParser _parser;
+			//JSONParser _parser;
 			ofstream fileOutput;
 			
 			bool loadMap(string filename);
@@ -41,6 +41,8 @@ namespace bammm
 			string createBarrierJson();
 			string createMineJson();
 			string createBuildingJson();
+
+			string colorSymbol(char symbol, bool selected);
 
 		public:
 			MapEditor();
