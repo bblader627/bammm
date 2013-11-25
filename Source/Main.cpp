@@ -20,41 +20,12 @@ int main()
 	bool printMap = true;
 	SceneManager sceneManager;
 	MeleeCombat meleeCombat;
-	DynamicArray<AiController*> aiControllers;
+	sceneManager.setMeleeCombat(meleeCombat);
 
 	//Creation of Hero
 	DwarfActor* bob = new DwarfActor();
 	Vector3D* temp = new Vector3D(0,0,0);
 	sceneManager.getSceneGraph().add(temp, bob);
-
-	//Random number generator
-	random_device rd;
-	mt19937 generator(rd());
-
-	//Pick random number of orcs
-	int minOrc = 1;
-	int maxOrc = 10;
-	uniform_int_distribution<int> orcDistribution (minOrc, maxOrc);
-	int orcCount = orcDistribution(generator);
-
-	//Create the orcs
-	uniform_int_distribution<int> xDistribution (0, sceneManager.getSceneGraph().getX() - 1);
-	uniform_int_distribution<int> yDistribution (0, sceneManager.getSceneGraph().getY() - 1);
-	DynamicArray<OrcActor*> orcActors;
-	for(int i = 0; i < orcCount; i++)
-	{
-		int randomX = xDistribution(generator);
-		int randomY = yDistribution(generator);
-		temp = new Vector3D(randomX, randomY, 0);
-
-		OrcActor* newOrc = new OrcActor();
-		orcActors.add(newOrc);
-
-		AiController* newAi = new AiController();
-		newAi->setup(*orcActors.get(i), sceneManager, meleeCombat);
-		sceneManager.getSceneGraph().add(temp, (orcActors.get(i)));
-		aiControllers.add(newAi);
-	}
 
 	PlayerController controller;
 	controller.setup(*bob, sceneManager, meleeCombat);
@@ -118,24 +89,9 @@ int main()
     		break;
 		}
 		controller.input(input, dTime);
-
-		for(int i = 0; i < (int)aiControllers.getSize(); i++)
-		{
-			aiControllers.get(i)->tick(dTime);
-			if(aiControllers.get(i)->canDelete())
-			{
-				delete aiControllers.remove(i);
-			}
-
-		}
 	}
 	delete input;
 
-
-	for(int i = 0; i < (int)aiControllers.getSize(); i++)
-	{
-		delete aiControllers.remove(i);
-	}
 	cout << "Thanks for playing!  Press enter to quit." << "\n";
 	return 0;
 }

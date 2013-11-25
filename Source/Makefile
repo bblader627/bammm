@@ -15,7 +15,7 @@ Weapons/IWeaponType.h Weapons/WeaponData.h Weapons/MeleeWeapon.h Weapons/Stein.h
 Weapons/OrcishBlade.h Weapons/MeleeCombat.h States/CombatState.h SceneManager/Grid3D.h \
 Actors/OrcActor.h TestSuite/Time.cpp SceneManager/SceneManager.h Interfaces/ITickable.h \
 Factories/Factory.h JSON/JSON.cpp JSON/JSONParser.cpp JSON/JSONArray.cpp \
-JSON/JSONPrimitive.cpp 
+JSON/JSONPrimitive.cpp States/MovementState.h
 TESTNAME = test
 TESTSRC = Main.cpp
 

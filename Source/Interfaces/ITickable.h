@@ -22,10 +22,16 @@ namespace bammm
 		public:
 			virtual ~ITickable();
 			virtual void tick(float deltaTime)=0;
+			virtual bool canDelete();
 	};
 
 	ITickable::~ITickable()
 	{
+	}
+
+	bool ITickable::canDelete()
+	{
+	    return false;
 	}
 }
 

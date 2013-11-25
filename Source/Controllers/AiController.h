@@ -27,7 +27,8 @@ using namespace std;
 
 namespace bammm
 {
-    class AiController: public Controller, ITickable
+	class SceneManager;
+    class AiController: public Controller
     {
         public:
 			AiController();
@@ -52,7 +53,7 @@ namespace bammm
 			 @Pre-Condition- Takes nothing
 			 @Post-Condition- Returns a boolean representing if the Controller can be deleted or not.
 			 */
-			 bool canDelete();
+			 virtual bool canDelete();
 			
     };
 
@@ -75,6 +76,7 @@ namespace bammm
         SleepState* sleepState = new SleepState(actor, _stateMachine);
         IdleState* idleState = new IdleState(actor, _stateMachine);
 		CombatState* combatState = new CombatState(actor, _stateMachine);
+		MovementState* movementState = new MovementState(actor, _stateMachine);
 
         _states.add(idleState->toString(), idleState);
         _states.add(mineState->toString(), mineState);
@@ -83,6 +85,7 @@ namespace bammm
         _states.add(brawlState->toString(), brawlState);
         _states.add(sleepState->toString(), sleepState);
        	_states.add(combatState->toString(), combatState);
+       	_states.add(movementState->toString(), movementState);
 		
 		//Put actor in idle state
 		_stateMachine.initialState(_states.getValue(idleState->toString()));
@@ -90,7 +93,8 @@ namespace bammm
 
     AiController::~AiController()
     {
-		_sceneManager->getSceneGraph().remove(_actor->getLocation(), _actor);
+		//Prevents deletion of dead units for now
+		//_sceneManager->getSceneGraph().remove(_actor->getLocation(), _actor);
 		delete _actor;
     }
 
@@ -106,9 +110,13 @@ namespace bammm
 
 	void AiController::tick(float deltaTime)
 	{
+		DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
+		State* newState = _states.getValue("movement");
     	//all currently running states
-		Vector3D* newLoc = new Vector3D(0,0,0);
-		_sceneManager->getSceneGraph().moveTowards(_actor, newLoc);
+		if(!currentStates.contains(newState))
+		{
+			_stateMachine.addState(newState);	
+		}
         _stateMachine.tick(deltaTime);
     }
 }
