@@ -36,8 +36,6 @@ using namespace std;
 
 namespace bammm
 {
-	class SceneManager;
-
     class Controller
     {
         protected:
@@ -46,7 +44,6 @@ namespace bammm
             StateMachine _stateMachine;
 			MeleeCombat* _meleeCombat;
 			RangedCombat* _rangedCombat;
-			SceneManager* _sceneManager;
 
         public:
             Controller();
@@ -54,10 +51,10 @@ namespace bammm
 			
 			/**Fix
 			 setup
-			 @Pre-Condition- Takes an Actor, SceneManager, and MeleeCombat as input
+			 @Pre-Condition- Takes an Actor, and MeleeCombat as input
 			 @Post-Condition - Sets up the controller with the passed Actor.
 			 */            
-			virtual void setup(Actor& actor, SceneManager& scene, MeleeCombat& meleeCombat)=0;
+			virtual void setup(Actor& actor, MeleeCombat& meleeCombat)=0;
 			/**
 			 canDelete
 			 @Pre-Condition- Takes nothing

@@ -49,10 +49,10 @@ namespace bammm
             
 			/**
 			 setup
-			 @Pre-Condition- Takes an Actor, SceneManager, and MeleeCombat
+			 @Pre-Condition- Takes an Actor, and MeleeCombat
 			 @Post-Condition- Sets up the controller with the passed Actor, SceneManager, and MeleeCombat
 			 */			
-			void setup(Actor& actor, SceneManager& scene, MeleeCombat& meleeC);
+			void setup(Actor& actor, MeleeCombat& meleeC);
             
 			/**
 			 printOptions
@@ -73,9 +73,8 @@ namespace bammm
 	{
 	}
 
-    void PlayerController::setup(Actor& actor, SceneManager& scene, MeleeCombat& meleeCombat)
+    void PlayerController::setup(Actor& actor, MeleeCombat& meleeCombat)
     {
-		_sceneManager = &scene;
 		_meleeCombat = &meleeCombat;
     	//Factory* actorFactory = new Factory();
     	//actorFactory->setup();();
@@ -155,7 +154,7 @@ namespace bammm
 				//Special case for combat state
 				if (newState->toString() == "combat")
 				{
-					Actor* closestEnemy = _sceneManager->getSceneGraph().getEnemy(_actor->getLocation(), _actor);
+					Actor* closestEnemy = SceneManager::getSceneGraph().getEnemy(_actor->getLocation(), _actor);
 					if(closestEnemy)
 					{
 						_meleeCombat->setup(*_actor, *closestEnemy);

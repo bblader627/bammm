@@ -31,7 +31,6 @@ namespace bammm
 	class MovementState: public State
 	{
 		private:
-			SceneManager* _sceneManager;
 			Vector3D* _direction;
 
 		public:
@@ -41,10 +40,10 @@ namespace bammm
 			/**
 			 Update this to take a Vector3D once we get rid of circular
 			 setup
-			 @Pre-Condition- Takes a SceneManager and a Vector3D
+			 @Pre-Condition- Takes nothing
 			 @Post-Condition- Sets up the state
 			 */
-			virtual void setup(SceneManager& sceneManager);
+			virtual void setup();
 
 			/**
 			 breakdown
@@ -86,9 +85,8 @@ namespace bammm
 		registerTransitionCallback(stateMachine);
 	}
 
-	void MovementState::setup(SceneManager& sceneManager)
+	void MovementState::setup()
 	{
-		_sceneManager = &sceneManager;
 		//_direction = &direction;
 	}
 
@@ -99,7 +97,7 @@ namespace bammm
 	void MovementState::tick(float deltaTime)
 	{
 		Vector3D* newLoc = new Vector3D(0,0,0);
-		_sceneManager->getSceneGraph().moveTowards(_actor, newLoc);
+		SceneManager::getSceneGraph().moveTowards(_actor, newLoc);
 		//switchState("idle");
 	}
 

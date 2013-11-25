@@ -27,7 +27,6 @@ using namespace std;
 
 namespace bammm
 {
-	class SceneManager;
     class AiController: public Controller
     {
         public:
@@ -36,10 +35,10 @@ namespace bammm
 			
 			/**
 			 setup
-			 @Pre-Condition- Takes an Actor, SceneManager, MeleeCombat as input
+			 @Pre-Condition- Takes an Actor, MeleeCombat as input
 			 @Post-Condition- Sets up the controller with passed parameters
 			 */            
-			void setup(Actor& actor, SceneManager& scene, MeleeCombat& meleeCombat);
+			void setup(Actor& actor, MeleeCombat& meleeCombat);
 			
 			/**
 			 tick
@@ -61,9 +60,8 @@ namespace bammm
 	{
 	}
 
-    void AiController::setup(Actor& actor, SceneManager& scene, MeleeCombat& meleeCombat)
+    void AiController::setup(Actor& actor, MeleeCombat& meleeCombat)
     {
-		_sceneManager = &scene;
 		_meleeCombat = &meleeCombat;
         _actor = &actor;
     	_stateMachine.setup(actor, _states);
@@ -94,7 +92,7 @@ namespace bammm
     AiController::~AiController()
     {
 		//Prevents deletion of dead units for now
-		//_sceneManager->getSceneGraph().remove(_actor->getLocation(), _actor);
+		//SceneManager::getSceneGraph().remove(_actor->getLocation(), _actor);
 		delete _actor;
     }
 

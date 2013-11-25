@@ -18,10 +18,10 @@ namespace bammm
 			DynamicArray<Actor*> _allActors;
 			MeleeCombat* _meleeCombat;
 			DynamicArray<ITickable*> _allTickables;
-			Grid3D<Actor*> _sceneGraph;
 			static const int SCENE_X = 10;
 			static const int SCENE_Y = 10;
 			static const int SCENE_Z = 10;
+			static Grid3D<Actor*> _sceneGraph;
 
 		public:
 			virtual ~SceneManager();
@@ -33,16 +33,18 @@ namespace bammm
 			ITickable* removeTickable(ITickable* tickable);
 			void setMeleeCombat(MeleeCombat& meleeCombat);
 			string toString();
-			Grid3D<Actor*>& getSceneGraph();
+			static Grid3D<Actor*>& getSceneGraph();
 			virtual void tick(float deltaTime);
 
 	};
+
+	Grid3D<Actor*> SceneManager::_sceneGraph(SCENE_X, SCENE_Y, SCENE_Z);
 
 	SceneManager::~SceneManager()
 	{
 	}
 
-	SceneManager::SceneManager() : _sceneGraph(SCENE_X, SCENE_Y, SCENE_Z)
+	SceneManager::SceneManager()
 	{
 	    Vector3D* temp;
 	    //Random number generator

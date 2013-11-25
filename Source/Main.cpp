@@ -28,7 +28,7 @@ int main()
 	sceneManager.getSceneGraph().add(temp, bob);
 
 	PlayerController controller;
-	controller.setup(*bob, sceneManager, meleeCombat);
+	controller.setup(*bob, meleeCombat);
 
 	bool playGame = true;
 	int choice;
@@ -49,7 +49,7 @@ int main()
 
 		if(printMap)
 		{
-			cout << sceneManager.getSceneGraph().toString() << "\n";
+			cout << SceneManager::getSceneGraph().toString() << "\n";
 		}
 
 		controller.printOptions();
