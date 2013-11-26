@@ -38,13 +38,21 @@ namespace bammm
 	class Factory
 	{
 		private:
-			void setupArmor();
-		public:
-			Actor getActor(string type);
 			HashMap<ActorInfo> actorData;
 			HashMap<ActorInfo> mapData;
 			//HashMap<ArmorInfo> armorData;
+
+		public:
+
+			/*
+			 getActor
+			 @Pre-Condition- accepts characteristics of desired actor
+			 @Post-Condition- returns new actor
+			 */
+			Actor getActor(string type, string name, int health, int stamina, int attack, int defense, string behavior);
+
 			void setup();
+			void setupArmor();
 
 			/*
 			 * Weapon getWeapon(string type);
@@ -61,10 +69,10 @@ namespace bammm
 		string filename = "actors.json";
 		parser->parseFile(filename);
 
-		cout << "poop" << "\n";
+		cout << "poop" << endl;
 
 		JSON* dwarves = parser->getRootNode("dwarves");
-		cout << dwarves->getName() << "\n";
+		cout << dwarves->getName() << endl;
 
 		for (int i = 0; i<dwarves->sizeOfChildren(); i++)
 		{
@@ -73,30 +81,33 @@ namespace bammm
 			JSON* stamina = dwarves[i]["stamina"];
 			JSON* attack = dwarves[i]["attack"];
 			JSON* defense = dwarves[i]["defense"];
+			JSON* behavior = dwarves[i]["behavior"];
 
-			ActorInfo* info = new ActorInfo(name->getStringValue(), health->getIntValue(),
+			JSON* x = dwarves[i]["x"];
+			JSON* y = dwarves[i]["y"];
+			JSON* z = dwarves[i]["z"];
+
+			ActorInfo* info = new ActorInfo("dwarf", name->getStringValue(), health->getIntValue(),
 								stamina->getIntValue(), attack->getIntValue(),
-								defense->getIntValue());
-			actorData.add(name->getStringValue(), *info);
+								defense->getIntValue(), behavior->getStringValue());
+			info->setLocation(new Vector3D((float)(x->getDoubleValue()), (float)(y->getDoubleValue()), (float)(z->getDoubleValue())));
+
+			actorData.add("dwarf" + i, *info);
 		}
+
+	}
+
+	Actor Factory::getActor(string type, string name, int health, int stamina, int attack, int defense, string behavior)
+	{
+		Actor* newActor = new Actor(type, name, health, stamina, attack, defense, behavior);
+		newActor->setLocation(new Vector3D(0.0f,0.0f,0.0f));
+		return *newActor;
 
 	}
 
 }
 
 /*
-Actor Factory::getActor(string type)
-{
-	if (type == "dwarf")
-	{
 
-	}
-	else if (type == "block")
-	{
-
-	}
-	return new Actor();
-
-}
 */
 
