@@ -17,7 +17,7 @@
 
 #include <iostream>
 #include "State.h"
-#include "../SceneManager/SceneManager.h"
+#include "../SceneManager/Grid3D.h"
 
 #ifndef UINT
 #define UINT
@@ -32,10 +32,11 @@ namespace bammm
 	{
 		private:
 			Vector3D* _direction;
+			Grid3D<Actor*>* _sceneGraph;
 
 		public:
 			MovementState(Actor& actor);
-			MovementState(Actor& actor, IStateCallback& stateMachine);
+			MovementState(Actor& actor, IStateCallback& stateMachine, Grid3D<Actor*>& sceneGraph);
 
 			/**
 			 Update this to take a Vector3D once we get rid of circular
@@ -79,8 +80,9 @@ namespace bammm
 		_actor = &actor;
 	}
 
-	MovementState::MovementState(Actor& actor, IStateCallback& stateMachine)
+	MovementState::MovementState(Actor& actor, IStateCallback& stateMachine, Grid3D<Actor*>& sceneGraph )
 	{
+		_sceneGraph = &sceneGraph;
 		_actor = &actor;
 		registerTransitionCallback(stateMachine);
 	}
@@ -97,7 +99,8 @@ namespace bammm
 	void MovementState::tick(float deltaTime)
 	{
 		Vector3D* newLoc = new Vector3D(0,0,0);
-		SceneManager::getSceneGraph().moveTowards(_actor, newLoc);
+		_sceneGraph->moveTowards(_actor, newLoc);
+		//SceneManager::getSceneGraph().moveTowards(_actor, newLoc);
 		//switchState("idle");
 	}
 

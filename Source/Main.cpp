@@ -1,11 +1,7 @@
 #include <iostream>
 #include "SceneManager/SceneManager.h"
 #include "Controllers/PlayerController.h"
-#include "Controllers/AiController.h"
-#include "Weapons/Stein.h"
 #include "Actors/DwarfActor.h"
-#include "Actors/OrcActor.h"
-#include "Weapons/MeleeWeapon.h"
 #include <random>
 
 using namespace bammm;
@@ -28,7 +24,7 @@ int main()
 	sceneManager.getSceneGraph().add(temp, bob);
 
 	PlayerController controller;
-	controller.setup(*bob, meleeCombat);
+	controller.setup(*bob, meleeCombat, sceneManager.getSceneGraph());
 
 	bool playGame = true;
 	int choice;
@@ -49,7 +45,7 @@ int main()
 
 		if(printMap)
 		{
-			cout << SceneManager::getSceneGraph().toString() << "\n";
+			cout << sceneManager.getSceneGraph().toString() << "\n";
 		}
 
 		controller.printOptions();
@@ -89,6 +85,7 @@ int main()
     		break;
 		}
 		controller.input(input, dTime);
+		sceneManager.tick(0);
 	}
 	delete input;
 

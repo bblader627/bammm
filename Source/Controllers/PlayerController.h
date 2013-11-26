@@ -52,7 +52,7 @@ namespace bammm
 			 @Pre-Condition- Takes an Actor, and MeleeCombat
 			 @Post-Condition- Sets up the controller with the passed Actor, SceneManager, and MeleeCombat
 			 */			
-			void setup(Actor& actor, MeleeCombat& meleeC);
+			void setup(Actor& actor, MeleeCombat& meleeC, Grid3D<Actor*>& sceneGraph);
             
 			/**
 			 printOptions
@@ -73,9 +73,10 @@ namespace bammm
 	{
 	}
 
-    void PlayerController::setup(Actor& actor, MeleeCombat& meleeCombat)
+    void PlayerController::setup(Actor& actor, MeleeCombat& meleeCombat, Grid3D<Actor*>& sceneGraph)
     {
 		_meleeCombat = &meleeCombat;
+		_sceneGraph = &sceneGraph;
     	//Factory* actorFactory = new Factory();
     	//actorFactory->setup();();
 
@@ -154,11 +155,11 @@ namespace bammm
 				//Special case for combat state
 				if (newState->toString() == "combat")
 				{
-					Actor* closestEnemy = SceneManager::getSceneGraph().getEnemy(_actor->getLocation(), _actor);
+					/*Actor* closestEnemy = SceneManager::getSceneGraph().getEnemy(_actor->getLocation(), _actor);
 					if(closestEnemy)
 					{
 						_meleeCombat->setup(*_actor, *closestEnemy);
-					}
+					}*/
 				}
 				_stateMachine.addState(newState);
 			}

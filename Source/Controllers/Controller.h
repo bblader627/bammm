@@ -31,6 +31,7 @@
 #include "../States/StateMachine.h"
 #include "../Weapons/MeleeCombat.h"
 #include "../Weapons/RangedCombat.h"
+#include "../SceneManager/Grid3D.h"
 
 using namespace std;
 
@@ -41,6 +42,7 @@ namespace bammm
         protected:
             HashMap<State*> _states;
             Actor* _actor;
+			Grid3D<Actor*>* _sceneGraph;
             StateMachine _stateMachine;
 			MeleeCombat* _meleeCombat;
 			RangedCombat* _rangedCombat;
@@ -54,7 +56,7 @@ namespace bammm
 			 @Pre-Condition- Takes an Actor, and MeleeCombat as input
 			 @Post-Condition - Sets up the controller with the passed Actor.
 			 */            
-			virtual void setup(Actor& actor, MeleeCombat& meleeCombat)=0;
+			virtual void setup(Actor& actor, MeleeCombat& meleeCombat, Grid3D<Actor*>& sceneGraph)=0;
 			/**
 			 canDelete
 			 @Pre-Condition- Takes nothing

@@ -27,7 +27,7 @@ using namespace std;
 
 namespace bammm
 {
-    class AiController: public Controller
+    class AiController: public Controller, public ITickable
     {
         public:
 			AiController();
@@ -38,7 +38,7 @@ namespace bammm
 			 @Pre-Condition- Takes an Actor, MeleeCombat as input
 			 @Post-Condition- Sets up the controller with passed parameters
 			 */            
-			void setup(Actor& actor, MeleeCombat& meleeCombat);
+			void setup(Actor& actor, MeleeCombat& meleeCombat, Grid3D<Actor*>& sceneGraph);
 			
 			/**
 			 tick
@@ -60,8 +60,9 @@ namespace bammm
 	{
 	}
 
-    void AiController::setup(Actor& actor, MeleeCombat& meleeCombat)
+    void AiController::setup(Actor& actor, MeleeCombat& meleeCombat, Grid3D<Actor*>& sceneGraph)
     {
+		_sceneGraph = &sceneGraph;
 		_meleeCombat = &meleeCombat;
         _actor = &actor;
     	_stateMachine.setup(actor, _states);
@@ -74,7 +75,7 @@ namespace bammm
         SleepState* sleepState = new SleepState(actor, _stateMachine);
         IdleState* idleState = new IdleState(actor, _stateMachine);
 		CombatState* combatState = new CombatState(actor, _stateMachine);
-		MovementState* movementState = new MovementState(actor, _stateMachine);
+		MovementState* movementState = new MovementState(actor, _stateMachine, sceneGraph);
 
         _states.add(idleState->toString(), idleState);
         _states.add(mineState->toString(), mineState);

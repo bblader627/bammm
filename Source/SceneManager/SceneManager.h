@@ -4,7 +4,7 @@
 #include "Grid3D.h"
 #include "../Actors/Actor.h"
 #include "../Actors/OrcActor.h"
-//#include "../Controllers/AiController.h"
+#include "../Controllers/AiController.h"
 #include "../Interfaces/ITickable.h"
 #include "../Weapons/MeleeCombat.h"
 #include <random>
@@ -21,7 +21,7 @@ namespace bammm
 			static const int SCENE_X = 10;
 			static const int SCENE_Y = 10;
 			static const int SCENE_Z = 10;
-			static Grid3D<Actor*> _sceneGraph;
+			Grid3D<Actor*> _sceneGraph;
 
 		public:
 			virtual ~SceneManager();
@@ -33,18 +33,18 @@ namespace bammm
 			ITickable* removeTickable(ITickable* tickable);
 			void setMeleeCombat(MeleeCombat& meleeCombat);
 			string toString();
-			static Grid3D<Actor*>& getSceneGraph();
+			Grid3D<Actor*>& getSceneGraph();
 			virtual void tick(float deltaTime);
 
 	};
 
-	Grid3D<Actor*> SceneManager::_sceneGraph(SCENE_X, SCENE_Y, SCENE_Z);
+	//Grid3D<Actor*> SceneManager::_sceneGraph(SCENE_X, SCENE_Y, SCENE_Z);
 
 	SceneManager::~SceneManager()
 	{
 	}
 
-	SceneManager::SceneManager()
+	SceneManager::SceneManager(): _sceneGraph(SCENE_X, SCENE_Y, SCENE_Z)
 	{
 	    Vector3D* temp;
 	    //Random number generator
@@ -69,10 +69,10 @@ namespace bammm
 	        OrcActor* newOrc = new OrcActor();
 	        addActor(newOrc);
 
-	        //AiController* newAi = new AiController();
-	        //newAi->setup(*_allActors.get(i), *this, *_meleeCombat);
+	        AiController* newAi = new AiController();
+	        newAi->setup(*_allActors.get(i), *_meleeCombat, _sceneGraph);
 	        getSceneGraph().add(temp, (_allActors.get(i)));
-	        //addTickable(newAi);
+	        addTickable(newAi);
 	    }
 	}
 
@@ -109,6 +109,7 @@ namespace bammm
 
 	void SceneManager::tick(float deltaTime)
 	{
+		cout << "I was ticked\n";
 		int size = _allTickables.getSize();
 		for(int i = 0; i < size; i++)
 		{
