@@ -32,6 +32,8 @@ namespace bammm
 		protected:
 			float _rotation;
 			string _name;
+			string _type;
+			string _behavior;
 			Vector3D *_velocity;
 			Vector3D *_location;
 
@@ -58,8 +60,8 @@ namespace bammm
 		public:
 			Actor();
 			Actor(string name);
-			Actor(string name, int health, int stamina, int attack,
-					int defense);
+			Actor(string type, string name, int health, int stamina, int attack,
+					int defense, string behavior);
 			Actor(ActorInfo* info);
 
 			/**
@@ -85,10 +87,24 @@ namespace bammm
 
 			/**
 			 setName
-			 @Pre-Condition- takes no arguments
-			 @Post-Condition- returns name
+			 @Pre-Condition- takes name
+			 @Post-Condition- returns void
 			 */
 			void setName(string name);
+
+			/**
+			 setType
+			 @Pre-Condition- takes type
+			 @Post-Condition- returns void
+			 */
+			void setType(string type);
+
+			/**
+			 setBehavior
+			 @Pre-Condition- takes behavior
+			 @Post-Condition- returns void
+			 */
+			void setBehavior(string behavior);
 
 			/**
 			 setLocation
@@ -204,6 +220,20 @@ namespace bammm
 			string getName();
 
 			/**
+			 getType
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _type
+			 */
+			string getType();
+
+			/**
+			 getBehavior
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _behavior
+			 */
+			string getBehavior();
+
+			/**
 			 getVelocity
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _velocity
@@ -297,6 +327,7 @@ namespace bammm
 
 	Actor::Actor()
 	{
+		_type = "dwarf";
 		_name = "DefaultName";
 		_rotation = 0;
 
@@ -316,6 +347,7 @@ namespace bammm
 	Actor::Actor(string name)
 	{
 		_name = name;
+		_type = "dwarf";
 		_rotation = 0;
 		_velocity = new Vector3D();
 		_location = new Vector3D();
@@ -330,9 +362,11 @@ namespace bammm
 		_defense = 2;
 	}
 
-	Actor::Actor(string name, int health, int stamina, int attack, int defense)
+	Actor::Actor(string type, string name, int health, int stamina, int attack, int defense, string behavior)
 	{
+		_type = type;
 		_name = name;
+
 		_rotation = 0;
 		_velocity = new Vector3D();
 		_location = new Vector3D();
@@ -345,10 +379,13 @@ namespace bammm
 		_staminaBar = stamina;
 		_attack = attack;
 		_defense = defense;
+
+		_behavior = behavior;
 	}
 
 	Actor::Actor(ActorInfo* info)
 	{
+		_type = info->getType();
 		_name = info->getName();
 		_rotation = 0;
 		_velocity = new Vector3D();
@@ -362,6 +399,8 @@ namespace bammm
 		_staminaBar = info->getStamina();
 		_attack = info->getAttack();
 		_defense = info->getDefense();
+
+		_behavior = info->getBehavior();
 	}
 
 	void Actor::setMeleeWeapon(MeleeWeapon* weapon)
@@ -382,6 +421,16 @@ namespace bammm
 	void Actor::setName(string name)
 	{
 		_name = name;
+	}
+
+	void Actor::setType(string type)
+	{
+		_type = type;
+	}
+
+	void Actor::setBehavior(string behavior)
+	{
+		_behavior = behavior;
 	}
 
 	void Actor::setLocation(Vector3D* location)
@@ -535,6 +584,16 @@ namespace bammm
 	int Actor::getDefense()
 	{
 		return _defense;
+	}
+
+	string Actor::getType()
+	{
+		return _type;
+	}
+
+	string Actor::getBehavior()
+	{
+		return _behavior;
 	}
 
 	int Actor::getX()
