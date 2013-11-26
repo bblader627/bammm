@@ -49,8 +49,8 @@ namespace bammm
             
 			/**
 			 setup
-			 @Pre-Condition- Takes an Actor, and MeleeCombat
-			 @Post-Condition- Sets up the controller with the passed Actor, SceneManager, and MeleeCombat
+			 @Pre-Condition- Takes an Actor, MeleeCombat, and Grid3D as input
+			 @Post-Condition- Sets up the controller with the passed Actor, MeleeCombat, and Grid3D.
 			 */			
 			void setup(Actor& actor, MeleeCombat& meleeC, Grid3D<Actor*>& sceneGraph);
             
