@@ -11,6 +11,7 @@
  * OrcActor header file.
  *
  */
+
 #ifndef ORCACTOR_H_
 #define ORCACTOR_H_
 
@@ -28,26 +29,15 @@ namespace bammm
 			int _goldCount;
 
 		public:
-			OrcActor()
-			{
-				_name = "Orc";
-				_alliance = enemy;
-				_goldCount = rand() % 6;
-				setMeleeWeapon(new OrcishBlade());
-			}
+			OrcActor();
+			OrcActor(int gold);
 
-			OrcActor(int gold)
-			{
-				_name = "Orc";
-				_alliance = enemy;
-				_goldCount = gold;
-				setMeleeWeapon(new OrcishBlade());
-			}
-
-			inline int getGold()
-			{
-				return _goldCount;
-			}
+			/**
+			 getGold
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _gold
+			 */
+			int getGold();
 	};
 }
 
