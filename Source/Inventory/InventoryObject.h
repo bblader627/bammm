@@ -5,13 +5,13 @@
  * 	Alvaro Home
  * 	Matt Konstantinou
  * 	Michael Abramo
- *
+ *	Matt Witkowski
+ *  Bradley Crusco
  * Description:
  * InventoryObject header file.
  *
- * Last Modified: Alvaro Home
- *
  */
+
 #ifndef INVENTORYOBJECT_H_
 #define INVENTORYOBJECT_H_
 
@@ -29,5 +29,6 @@ namespace bammm
 			InventoryObject(string id);
 	};
 }
+
 #endif
 
