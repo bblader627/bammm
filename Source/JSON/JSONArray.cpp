@@ -1,26 +1,22 @@
 /*
- * JSONArray.h
+ * CS585
  *
- *  Created on: Nov 19, 2013
- *      Author: michael
- *
- *      DOCUMENTATION
- *
- *      Inherits from JSON
- *      Represents an Array in JSON
- *      May hold any JSON Object including JSONPrimitive and JSONArray
- *      Stores JSON Objects in a DynamicArray
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * JSONArray cpp file.
  *
  */
 
 #include <iostream>
 #include "JSONArray.h"
 
-using namespace bammm;
-
 namespace bammm
 {
-
 	JSONArray::JSONArray()
 	{
 		_name = "empty";
@@ -84,5 +80,4 @@ namespace bammm
 	{
 		return "";
 	}
-
 }
