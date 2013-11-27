@@ -23,61 +23,108 @@ namespace bammm
 			Grid3D<Actor*> _sceneGraph;
 
 		public:
-			virtual ~SceneManager();
 			SceneManager();
+			virtual ~SceneManager();
 
+			/**
+			 addActor
+			 @Pre-Condition- Takes in an actor
+			 @Post-Condition- Adds the actor to the scene
+			 */
 			void addActor(Actor* actor);
-			void removeActor(Actor* actor);
-			void addTickable(ITickable* tickable);
-			ITickable* removeTickable(ITickable* tickable);
-			void setMeleeCombat(MeleeCombat& meleeCombat);
-			string toString();
-			Grid3D<Actor*>& getSceneGraph();
-			virtual void tick(float deltaTime);
 
+			/**
+			 removeActor
+			 @Pre-Condition- Takes in an actor
+			 @Post-Condition- Removes the given actor from the scene
+			 */
+			void removeActor(Actor* actor);
+
+			/**
+			 addTickable
+			 @Pre-Condition- Takes in a tickable
+			 @Post-Condition- Adds the given tickable to the scene
+			 */
+			void addTickable(ITickable* tickable);
+
+			/**
+			 removeTickable
+			 @Pre-Condition- Takes in a tickable
+			 @Post-Condition- Removes the given tickable from the scene
+			 */
+			ITickable* removeTickable(ITickable* tickable);
+
+			/**
+			 setMeleeCombat
+			 @Pre-Condition- Takes in MeleeCombat
+			 @Post-Condition- Sets the MeleeCombat arguement to the scene
+			 */
+			void setMeleeCombat(MeleeCombat& meleeCombat);
+
+			/**
+			 toString
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns an empty string right now
+			 */
+			string toString();
+
+			/**
+			 getSceneGraph
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the Grid3D of the scene
+			 */
+			Grid3D<Actor*>& getSceneGraph();
+
+			/**
+			 tick
+			 @Pre-Condition- Takes in float deltaTime
+			 @Post-Condition- The scene ticks for the duration of the deltaTime
+			 */
+			virtual void tick(float deltaTime);
 	};
 
-	//Grid3D<Actor*> SceneManager::_sceneGraph(SCENE_X, SCENE_Y, SCENE_Z);
+	SceneManager::SceneManager() :
+			_sceneGraph(SCENE_X, SCENE_Y, SCENE_Z)
+	{
+		Vector3D* temp;
+		//Random number generator
+		random_device rd;
+		mt19937 generator(rd());
+
+		//Pick random number of orcs
+		int minOrc = 1;
+		int maxOrc = 10;
+		uniform_int_distribution<int> orcDistribution(minOrc, maxOrc);
+		int orcCount = orcDistribution(generator);
+
+		//Create the orcs
+		uniform_int_distribution<int> xDistribution(0,
+				getSceneGraph().getX() - 1);
+		uniform_int_distribution<int> yDistribution(0,
+				getSceneGraph().getY() - 1);
+		for (int i = 0; i < orcCount; i++)
+		{
+			int randomX = xDistribution(generator);
+			int randomY = yDistribution(generator);
+			temp = new Vector3D(randomX, randomY, 0);
+
+			Actor* newOrc = new Actor("orc");
+			addActor(newOrc);
+
+			AiController* newAi = new AiController();
+			newAi->setup(*_allActors.get(i), *_meleeCombat, _sceneGraph);
+			getSceneGraph().add(temp, (_allActors.get(i)));
+			addTickable(newAi);
+		}
+	}
 
 	SceneManager::~SceneManager()
 	{
 	}
 
-	SceneManager::SceneManager(): _sceneGraph(SCENE_X, SCENE_Y, SCENE_Z)
-	{
-	    Vector3D* temp;
-	    //Random number generator
-	    random_device rd;
-	    mt19937 generator(rd());
-
-	    //Pick random number of orcs
-	    int minOrc = 1;
-	    int maxOrc = 10;
-	    uniform_int_distribution<int> orcDistribution (minOrc, maxOrc);
-	    int orcCount = orcDistribution(generator);
-
-	    //Create the orcs
-	    uniform_int_distribution<int> xDistribution (0, getSceneGraph().getX() - 1);
-	    uniform_int_distribution<int> yDistribution (0, getSceneGraph().getY() - 1);
-	    for(int i = 0; i < orcCount; i++)
-	    {
-	        int randomX = xDistribution(generator);
-	        int randomY = yDistribution(generator);
-	        temp = new Vector3D(randomX, randomY, 0);
-
-	        Actor* newOrc = new Actor("orc");
-	        addActor(newOrc);
-
-	        AiController* newAi = new AiController();
-	        newAi->setup(*_allActors.get(i), *_meleeCombat, _sceneGraph);
-	        getSceneGraph().add(temp, (_allActors.get(i)));
-	        addTickable(newAi);
-	    }
-	}
-
 	void SceneManager::setMeleeCombat(MeleeCombat& meleeCombat)
 	{
-	    _meleeCombat = &meleeCombat;
+		_meleeCombat = &meleeCombat;
 	}
 
 	void SceneManager::addActor(Actor* actor)
@@ -110,12 +157,12 @@ namespace bammm
 	{
 		cout << "I was ticked\n";
 		int size = _allTickables.getSize();
-		for(int i = 0; i < size; i++)
+		for (int i = 0; i < size; i++)
 		{
 			_allTickables.get(i)->tick(deltaTime);
-			if(_allTickables.get(i)->canDelete())
+			if (_allTickables.get(i)->canDelete())
 			{
-			    delete removeTickable(_allTickables.get(i));
+				delete removeTickable(_allTickables.get(i));
 			}
 		}
 	}
