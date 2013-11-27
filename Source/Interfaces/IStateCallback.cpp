@@ -18,12 +18,10 @@ namespace bammm
 {
 	IStateCallback::IStateCallback()
 	{
-
 	}
 
 	IStateCallback::~IStateCallback()
 	{
-
 	}
 
 	void IStateCallback::switchState(State* current, State* newState)
