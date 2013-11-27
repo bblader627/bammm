@@ -18,7 +18,7 @@ int main()
 	sceneManager.setMeleeCombat(meleeCombat);
 
 	//Creation of Hero
-	Actor* bob = new Actor();
+	Actor* bob = new Actor("dwarf");
 	Vector3D* temp = new Vector3D(0,0,0);
 	sceneManager.getSceneGraph().add(temp, bob);
 
