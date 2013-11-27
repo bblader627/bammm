@@ -11,6 +11,7 @@
  * DwarfActor header file.
  *
  */
+
 #ifndef DWARFACTOR_H_
 #define DWARFACTOR_H_
 
@@ -29,71 +30,64 @@ namespace bammm
 			int _goldCount;
 
 		public:
-			DwarfActor()
-			{
-				_name = "Dwarf";
-				_alliance = ally;
-				_bloodAlcoholContent = 0.00;
-				setMeleeWeapon(new Stein());
-				_goldCount = 0;
-				_bloodAlcoholContent = _BAC;
-			}
+			DwarfActor();
+			DwarfActor(float BAC, int gold);
 
-			DwarfActor(float BAC, int gold)
-			{
-				_name = "Dwarf";
-				_alliance = ally;
-				_bloodAlcoholContent = BAC;
-				setMeleeWeapon(new Stein());
-				_goldCount = gold;
-			}
+			/**
+			 getBAC
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _BAC
+			 */
+			float getBAC();
 
-			inline float getBAC()
-			{
-				return _bloodAlcoholContent;
-			}
+			/**
+			 increaseBAC
+			 @Pre-Condition- No input
+			 @Post-Condition- increments BAC by .05
+			 */
+			float incrementBAC();
 
-			inline float incrementBAC()
-			{
-				_bloodAlcoholContent += 0.001;
-				return _bloodAlcoholContent;
+			/**
+			 increaseBAC
+			 @Pre-Condition- Takes in a float representing the amount to increment
+			 @Post-Condition- increments BAC by amount
+			 */
+			float incrementBAC(float amount);
 
-			}
+			/**
+			 decrementBAC
+			 @Pre-Condition- No input
+			 @Post-Condition- Decrements BAC by .05;
+			 */
+			float decrementBAC();
 
-			inline float incrementBAC(float amount)
-			{
-				_bloodAlcoholContent += amount;
-				return _bloodAlcoholContent;
-			}
+			/*
+			 resetBAC
+			 @Pre-Condition- No input
+			 @Post-Condition- sets BAC back to 0
+			 */
+			float resetBAC();
 
-			inline float decrementBAC()
-			{
-				_bloodAlcoholContent -= 0.001;
-				return _bloodAlcoholContent;
-			}
+			/**
+			 getGold
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _gold
+			 */
+			int getGold();
 
-			inline float resetBAC()
-			{
-				_bloodAlcoholContent = 0.00;
-				return _bloodAlcoholContent;
-			}
+			/**
+			 addGold
+			 @Pre-Condition- No input
+			 @Post-Condition- Increments amount of gold by 1
+			 */
+			int addGold();
 
-			inline int getGold()
-			{
-				return _goldCount;
-			}
-
-			inline int addGold()
-			{
-				_goldCount++;
-				return _goldCount;
-			}
-
-			inline int addGold(int amount)
-			{
-				_goldCount += amount;
-				return _goldCount;
-			}
+			/**
+			 addGold
+			 @Pre-Condition- takes amount of gold to add
+			 @Post-Condition- returns total amount of gold
+			 */
+			int addGold(int amount);
 	};
 }
 
