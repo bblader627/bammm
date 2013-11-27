@@ -1,7 +1,6 @@
 #include <iostream>
 #include "SceneManager/SceneManager.h"
 #include "Controllers/PlayerController.h"
-#include "Actors/DwarfActor.h"
 #include <random>
 
 using namespace bammm;
@@ -19,7 +18,7 @@ int main()
 	sceneManager.setMeleeCombat(meleeCombat);
 
 	//Creation of Hero
-	DwarfActor* bob = new DwarfActor();
+	Actor* bob = new Actor();
 	Vector3D* temp = new Vector3D(0,0,0);
 	sceneManager.getSceneGraph().add(temp, bob);
 
