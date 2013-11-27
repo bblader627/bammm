@@ -5,13 +5,13 @@
  * 	Alvaro Home
  * 	Matt Konstantinou
  * 	Michael Abramo
- *
+ *	Matt Witkowski
+ *  Bradley Crusco
  * Description:
  * InventoryFactory header file.
  *
- * Last Modified: Alvaro Home
- *
  */
+
 #ifndef INVENTORYFACTORY_H_
 #define INVENTORYFACTORY_H_
 
@@ -26,5 +26,6 @@ namespace bammm
 
 	};
 }
+
 #endif
 
