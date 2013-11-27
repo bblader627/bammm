@@ -11,7 +11,6 @@
  * ActorInfo header file.
  *
  */
-
 #ifndef ACTORINFO_H_
 #define ACTORINFO_H_
 
@@ -25,15 +24,25 @@ namespace bammm
 	{
 		private:
 			string _name;
+			string _type;
 			int _health;
 			int _stamina;
 			int _attack;
 			int _defense;
+			string _behavior;
+			Vector3D* _location;
+
 
 		public:
 			ActorInfo();
-			ActorInfo(string name, int health, int stamina, int attack,
-					int defense);
+			ActorInfo(string type, string name, int health, int stamina, int attack, int defense, string behavior);
+
+			/**
+			 getType
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns type
+			 */
+			string getType();
 
 			/**
 			 getName
@@ -71,6 +80,28 @@ namespace bammm
 			int getDefense();
 
 			/**
+			 getBehavior
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns behavior
+			 */
+			string getBehavior();
+
+			/**
+			 getLocation
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _location
+			 */
+			Vector3D* getLocation();
+
+
+			/**
+			 setType
+			 @Pre-Condition- takes type
+			 @Post-Condition- returns void
+			 */
+			void setType(string type);
+
+			/**
 			 setName
 			 @Pre-Condition- takes in name to set
 			 @Post-Condition- returns void
@@ -104,7 +135,23 @@ namespace bammm
 			 @Post-Condition- returns void
 			 */
 			void setDefense(int defense);
+
+			/**
+			 setDefense
+			 @Pre-Condition- takes in defense
+			 @Post-Condition- returns void
+			 */
+			void setBehavior(string behavior);
+
+			/**
+			 setLocation
+			 @Pre-Condition- takes the location to set
+			 @Post-Condition- returns nothing
+			 */
+			void setLocation(Vector3D* location);
+
 	};
+
 }
 
 #endif

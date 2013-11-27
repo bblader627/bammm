@@ -1,39 +1,35 @@
-/*
- * CS585
- *
- * Team Bammm
- * 	Alvaro Home
- * 	Matt Konstantinou
- * 	Michael Abramo
- *	Matt Witkowski
- *  Bradley Crusco
- * Description:
- * ActorInfo cpp file.
- *
- */
+#include <iostream>
 
-#include "ActorInfo.h"
+using namespace std;
 
 namespace bammm
 {
+
 	ActorInfo::ActorInfo()
 	{
+		_type = "none";
 		_name = "n/a";
 		_health = 10;
 		_stamina = 5;
 		_attack = 10;
 		_defense = 10;
-
+		_behavior = "drink";
 	}
 
-	ActorInfo::ActorInfo(string name, int health, int stamina, int attack,
-			int defense)
+	ActorInfo::ActorInfo(string type, string name, int health, int stamina, int attack, int defense, string behavior)
 	{
+		_type = type;
 		_name = name;
 		_health = health;
 		_stamina = stamina;
 		_attack = attack;
 		_defense = defense;
+		_behavior = behavior;
+	}
+
+	string ActorInfo::getType()
+	{
+		return _type;
 	}
 
 	int ActorInfo::getHealth()
@@ -61,6 +57,21 @@ namespace bammm
 		return _name;
 	}
 
+	string ActorInfo::getBehavior()
+	{
+		return _behavior;
+	}
+
+	Vector3D* ActorInfo::getLocation()
+	{
+		return _location;
+	}
+
+	void ActorInfo::setType(string type)
+	{
+		_type = type;
+	}
+
 	void ActorInfo::setName(string name)
 	{
 		_name = name;
@@ -84,5 +95,15 @@ namespace bammm
 	void ActorInfo::setDefense(int defense)
 	{
 		_defense = defense;
+	}
+
+	void ActorInfo::setBehavior(string behavior)
+	{
+		_behavior = behavior;
+	}
+
+	void ActorInfo::setLocation(Vector3D* location)
+	{
+		_location = location;
 	}
 }

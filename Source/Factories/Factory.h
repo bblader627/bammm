@@ -11,6 +11,8 @@
 *
 * Last Modified: Matthew Konstantinou
 *
+*** Orc names courtesy of Skyrim
+*
 */
 
 #include <iostream>
@@ -23,6 +25,7 @@
 #include "../Actors/Actor.h"
 #include "../Actors/ActorInfo.h"
 #include "../Weapons/IWeaponType.h"
+#include "../SceneManager/SceneManager.h"
 
 using namespace bammm;
 using namespace std;
@@ -39,8 +42,17 @@ namespace bammm
 	{
 		private:
 			HashMap<ActorInfo> actorData;
+			HashMap<ActorInfo> blockData;
 			HashMap<ActorInfo> mapData;
 			//HashMap<ArmorInfo> armorData;
+			SceneManager* scene;
+
+			/*
+			 parseToInfo
+			 @Pre-Condition- accepts pointer to root JSON node and type string
+			 @Post-Condition- returns void
+			 */
+			void parseToActorInfo(JSON* rootNode, string type, HashMap<ActorInfo>* map);
 
 		public:
 
@@ -71,29 +83,33 @@ namespace bammm
 
 		cout << "poop" << endl;
 
+
+		// Parsing dwarves
 		JSON* dwarves = parser->getRootNode("dwarves");
-		cout << dwarves->getName() << endl;
+		this->parseToActorInfo(dwarves, "dwarf", &actorData);
 
-		for (int i = 0; i<dwarves->sizeOfChildren(); i++)
-		{
-			JSON* name = dwarves[i]["name"];
-			JSON* health = dwarves[i]["health"];
-			JSON* stamina = dwarves[i]["stamina"];
-			JSON* attack = dwarves[i]["attack"];
-			JSON* defense = dwarves[i]["defense"];
-			JSON* behavior = dwarves[i]["behavior"];
+		// Parsing orcs
+		JSON* orcs = parser->getRootNode("orcs");
+		this->parseToActorInfo(orcs, "orc", &actorData);
 
-			JSON* x = dwarves[i]["x"];
-			JSON* y = dwarves[i]["y"];
-			JSON* z = dwarves[i]["z"];
+		//Parsing Map info
+		JSON* map = parser->getRootNode("map");
+		//JSON* x = map["x"];
+		//JSON* y = map["y"];
+		//JSON* z = map["z"];
+		
+		JSON* wall = map["Wall"];
+		this->parseToActorInfo(wall, "Wall", &blockData);
 
-			ActorInfo* info = new ActorInfo("dwarf", name->getStringValue(), health->getIntValue(),
-								stamina->getIntValue(), attack->getIntValue(),
-								defense->getIntValue(), behavior->getStringValue());
-			info->setLocation(new Vector3D((float)(x->getDoubleValue()), (float)(y->getDoubleValue()), (float)(z->getDoubleValue())));
+		JSON* buildings = map["Buildings"];
+		this->parseToActorInfo(buildings, "Building", &blockData);
 
-			actorData.add("dwarf" + i, *info);
-		}
+		JSON* trees = map["Trees"];
+		this->parseToActorInfo(trees, "Tree", &blockData);
+
+		JSON* ore = map["Ore"];
+		this->parseToActorInfo(ore, "Ore", &blockData);
+
 
 	}
 
@@ -103,6 +119,33 @@ namespace bammm
 		newActor->setLocation(new Vector3D(0.0f,0.0f,0.0f));
 		return *newActor;
 
+	}
+
+	void Factory::parseToActorInfo(JSON* rootNode, string type, HashMap<ActorInfo>* map)
+	{
+		for (int i = 0; i<rootNode->sizeOfChildren(); i++)
+		{
+			JSON* name = rootNode[i]["name"];
+			JSON* health = rootNode[i]["health"];
+			JSON* stamina = rootNode[i]["stamina"];
+			JSON* attack = rootNode[i]["attack"];
+			JSON* defense = rootNode[i]["defense"];
+			JSON* behavior = rootNode[i]["behavior"];
+
+			JSON* x = rootNode[i]["x"];
+			JSON* y = rootNode[i]["y"];
+			JSON* z = rootNode[i]["z"];
+
+			ActorInfo* info = new ActorInfo(type, name->getStringValue(), health->getIntValue(),
+								stamina->getIntValue(), attack->getIntValue(),
+								defense->getIntValue(), behavior->getStringValue());
+
+			info->setLocation(new Vector3D((float)(x->getDoubleValue()), (float)(y->getDoubleValue()), (float)(z->getDoubleValue())));
+
+			string i_str = "" + i;
+			map->add(type + i_str, *info);
+			scene->addActor(new Actor(info));
+		}
 	}
 
 }
