@@ -61,34 +61,6 @@ namespace bammm
 			 */
 			string toString();
 	};
-
-	CombatState::CombatState(Actor& actor)
-	{
-		_actor = &actor;
-	}
-
-	CombatState::CombatState(Actor& actor, IStateCallback& stateMachine)
-	{
-		_actor = &actor;
-		registerTransitionCallback(stateMachine);
-	}
-
-	void CombatState::setup()
-	{
-	}
-
-	void CombatState::breakdown()
-	{
-	}
-
-	void CombatState::tick(float deltaTime)
-	{
-	}
-
-	string CombatState::toString()
-	{
-		return "combat";
-	}
 }
 
 #endif
