@@ -3,7 +3,6 @@
 
 #include "Grid3D.h"
 #include "../Actors/Actor.h"
-#include "../Actors/OrcActor.h"
 #include "../Controllers/AiController.h"
 #include "../Interfaces/ITickable.h"
 #include "../Weapons/MeleeCombat.h"
@@ -66,7 +65,7 @@ namespace bammm
 	        int randomY = yDistribution(generator);
 	        temp = new Vector3D(randomX, randomY, 0);
 
-	        OrcActor* newOrc = new OrcActor();
+	        Actor* newOrc = new Actor("orc");
 	        addActor(newOrc);
 
 	        AiController* newAi = new AiController();
