@@ -1,3 +1,17 @@
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * MapEditor cpp file
+ *
+ */
+
 #include "MapEditor.h" 
 
 namespace bammm
@@ -11,9 +25,9 @@ namespace bammm
 
 	MapEditor::~MapEditor()
 	{
-		for(int i = 0; i < _y; i++)
+		for (int i = 0; i < _y; i++)
 		{
-			for(int j = 0; j < _x; j++)
+			for (int j = 0; j < _x; j++)
 			{
 				delete[] _grid[i][j];
 			}
@@ -36,9 +50,9 @@ namespace bammm
 	{
 		cout << "Save as: \n";
 		cin >> _name;
-		fileOutput.open(_name + ".json");
-		fileOutput << createJson();
-		fileOutput.close();
+		_fileOutput.open(_name + ".json");
+		_fileOutput << createJSON();
+		_fileOutput.close();
 		return true;
 	}
 
@@ -49,13 +63,13 @@ namespace bammm
 		_z = z;
 
 		_grid = new char**[_y];
-		for(int i = 0; i < _y; i++)
+		for (int i = 0; i < _y; i++)
 		{
 			_grid[i] = new char*[_x];
-			for(int j = 0; j < _x; j++)
+			for (int j = 0; j < _x; j++)
 			{
 				_grid[i][j] = new char[_z];
-				for(int k = 0; k < _z; k++)
+				for (int k = 0; k < _z; k++)
 				{
 					_grid[i][j][k] = '.';
 				}
@@ -76,15 +90,15 @@ namespace bammm
 		{
 			getline(cin, choice);
 			convertedChoice = atoi(choice.c_str());
-		}while(convertedChoice != 1 && convertedChoice != 2);
+		} while (convertedChoice != 1 && convertedChoice != 2);
 
 		string filename;
 		int x, y, z;
-		switch(convertedChoice)
+		switch (convertedChoice)
 		{
 			case 1:
 				cout << "Enter the name of the file\n";
-				getline(cin,filename);
+				getline(cin, filename);
 				loadMap(filename);
 				break;
 			case 2:
@@ -98,75 +112,75 @@ namespace bammm
 				break;
 		}
 
-		while(true)
+		while (true)
 		{
 			displayCoordinates();
 			displayMap();
 			cout << "Enter a command. Enter h for help:" << "\n";
 			cin >> choice;
 			convertedChoice = choice.at(0);
-			if(convertedChoice == 'v')
+			if (convertedChoice == 'v')
 			{
 				saveMap();
 				break;
 			}
-			else if(convertedChoice == 'h')
+			else if (convertedChoice == 'h')
 			{
 				displayHelp();
 			}
-			else if(convertedChoice == 'w')
+			else if (convertedChoice == 'w')
 			{
 				moveUp();
 			}
-			else if(convertedChoice == 'a')
+			else if (convertedChoice == 'a')
 			{
 				moveLeft();
 			}
-			else if(convertedChoice == 's')
+			else if (convertedChoice == 's')
 			{
 				moveDown();
 			}
-			else if(convertedChoice == 'd')
+			else if (convertedChoice == 'd')
 			{
 				moveRight();
 			}
-			else if(convertedChoice == 'q')
+			else if (convertedChoice == 'q')
 			{
 				moveZDown();
 			}
-			else if(convertedChoice == 'e')
+			else if (convertedChoice == 'e')
 			{
 				moveZUp();
 			}
-			else if(convertedChoice == 'r')
+			else if (convertedChoice == 'r')
 			{
 				removeItem(_cursorX, _cursorY, _cursorZ);
 			}
-			else if(convertedChoice == '1')
+			else if (convertedChoice == '1')
 			{
 				addItem(_cursorX, _cursorY, _cursorZ, '~');
 			}
-			else if(convertedChoice == '2')
+			else if (convertedChoice == '2')
 			{
 				addItem(_cursorX, _cursorY, _cursorZ, '#');
 			}
-			else if(convertedChoice == '3')
+			else if (convertedChoice == '3')
 			{
 				addItem(_cursorX, _cursorY, _cursorZ, 'F');
 			}
-			else if(convertedChoice == '4')
+			else if (convertedChoice == '4')
 			{
 				addItem(_cursorX, _cursorY, _cursorZ, 'A');
 			}
-			else if(convertedChoice == '5')
+			else if (convertedChoice == '5')
 			{
 				addItem(_cursorX, _cursorY, _cursorZ, 'G');
 			}
-			else if(convertedChoice == '6')
+			else if (convertedChoice == '6')
 			{
 				addItem(_cursorX, _cursorY, _cursorZ, '^');
 			}
-			else if(convertedChoice == '7')
+			else if (convertedChoice == '7')
 			{
 				addItem(_cursorX, _cursorY, _cursorZ, 'S');
 			}
@@ -177,7 +191,7 @@ namespace bammm
 	{
 		_grid[y][x][z] = '.';
 	}
-	
+
 	void MapEditor::addItem(int x, int y, int z, char item)
 	{
 		_grid[y][x][z] = item;
@@ -185,11 +199,11 @@ namespace bammm
 
 	void MapEditor::displayMap()
 	{
-		for(int i = 0; i < _y; i++)
+		for (int i = 0; i < _y; i++)
 		{
-			for(int j = 0; j < _x; j++)
+			for (int j = 0; j < _x; j++)
 			{
-				if(i == _cursorY && j == _cursorX)
+				if (i == _cursorY && j == _cursorX)
 				{
 					cout << colorSymbol(_grid[i][j][_cursorZ], true);
 				}
@@ -219,24 +233,24 @@ namespace bammm
 		const string HIGHLIGHT = "4;";
 
 		string color = START_COLOR;
-		if(selected)
+		if (selected)
 		{
 			color = color + HIGHLIGHT;
 		}
 
-		if(symbol == '.')
+		if (symbol == '.')
 		{
 			color = color + GREEN_TEXT;
 		}
-		else if(symbol == '~')
+		else if (symbol == '~')
 		{
 			color = color + BLUE_TEXT;
 		}
-		else if(symbol == '#')
+		else if (symbol == '#')
 		{
 			color = color + BLACK_TEXT;
 		}
-		else if(symbol == '^')
+		else if (symbol == '^')
 		{
 			color = color + WHITE_TEXT;
 		}
@@ -251,7 +265,8 @@ namespace bammm
 
 	void MapEditor::displayCoordinates()
 	{
-		cout << "(" << _cursorX << ", " << _cursorY << ", " << _cursorZ << ")\n";
+		cout << "(" << _cursorX << ", " << _cursorY << ", " << _cursorZ
+				<< ")\n";
 	}
 
 	void MapEditor::displayHelp()
@@ -280,7 +295,7 @@ namespace bammm
 	{
 		_cursorY -= 1;
 
-		if(_cursorY < 0)
+		if (_cursorY < 0)
 		{
 			_cursorY = _y - 1;
 		}
@@ -290,7 +305,7 @@ namespace bammm
 	{
 		_cursorY += 1;
 
-		if(_cursorY >= _y)
+		if (_cursorY >= _y)
 		{
 			_cursorY = 0;
 		}
@@ -300,7 +315,7 @@ namespace bammm
 	{
 		_cursorX -= 1;
 
-		if(_cursorX < 0)
+		if (_cursorX < 0)
 		{
 			_cursorX = _x - 1;
 		}
@@ -310,7 +325,7 @@ namespace bammm
 	{
 		_cursorX += 1;
 
-		if(_cursorX >= _x)
+		if (_cursorX >= _x)
 		{
 			_cursorX = 0;
 		}
@@ -320,7 +335,7 @@ namespace bammm
 	{
 		_cursorZ += 1;
 
-		if(_cursorZ >= _z)
+		if (_cursorZ >= _z)
 		{
 			_cursorZ = 0;
 		}
@@ -330,13 +345,14 @@ namespace bammm
 	{
 		_cursorZ -= 1;
 
-		if(_cursorZ < 0)
+		if (_cursorZ < 0)
 		{
 			_cursorZ = _z - 1;
 		}
 	}
 
-	string MapEditor::createJsonObject(int x, int y, int z, string name, string walkable)
+	string MapEditor::createJSONObject(int x, int y, int z, string name,
+			string walkable)
 	{
 		string nameVal = "\"name\": \"" + name + "\",\n";
 		string xVal = "\"x\": " + to_string(x) + ",\n";
@@ -346,7 +362,7 @@ namespace bammm
 		return "{\n" + nameVal + xVal + yVal + zVal + walkVal + "}";
 	}
 
-	string MapEditor::createJson()
+	string MapEditor::createJSON()
 	{
 		string jsonString = "{\n";
 		jsonString = jsonString + "\"" + _name + "\":\n";
@@ -354,35 +370,37 @@ namespace bammm
 		jsonString = jsonString + "\"x\": " + to_string(_x) + ",\n";
 		jsonString = jsonString + "\"y\": " + to_string(_y) + ",\n";
 		jsonString = jsonString + "\"z\": " + to_string(_z) + ",\n";
-		jsonString = jsonString + createWaterJson() + ",\n";
-		jsonString = jsonString + createBarrierJson() + ",\n";
-		jsonString = jsonString + createMineJson() + ",\n";
-		jsonString = jsonString + createBuildingJson() + "\n";
+		jsonString = jsonString + createWaterJSON() + ",\n";
+		jsonString = jsonString + createBarrierJSON() + ",\n";
+		jsonString = jsonString + createMineJSON() + ",\n";
+		jsonString = jsonString + createBuildingJSON() + "\n";
 		jsonString = jsonString + "]\n";
 		jsonString = jsonString + "}";
 		return jsonString;
 	}
 
-	string MapEditor::createWaterJson()
+	string MapEditor::createWaterJSON()
 	{
 		char item = '~';
 		bool firstItem = true;
 		string name = "Water Objects";
 		string jsonString = "\"" + name + "\":\n";
 		jsonString = jsonString + "[\n";
-		for(int x = 0; x < _x; x++)
+		for (int x = 0; x < _x; x++)
 		{
-			for(int y = 0; y < _y; y++)
+			for (int y = 0; y < _y; y++)
 			{
-				for(int z = 0; z < _z; z++)
+				for (int z = 0; z < _z; z++)
 				{
-					if(_grid[y][x][z] == item)
+					if (_grid[y][x][z] == item)
 					{
-						if(!firstItem)
+						if (!firstItem)
 						{
 							jsonString = jsonString + ",\n";
 						}
-						jsonString = jsonString + createJsonObject(x, y, z, "Deep Water", "false") + "\n";
+						jsonString = jsonString
+								+ createJSONObject(x, y, z, "Deep Water",
+										"false") + "\n";
 					}
 				}
 			}
@@ -391,27 +409,29 @@ namespace bammm
 		return jsonString;
 	}
 
-	string MapEditor::createBarrierJson()
+	string MapEditor::createBarrierJSON()
 	{
 		char item = '#';
 		bool firstItem = true;
 		string name = "Barrier Objects";
 		string jsonString = "\"" + name + "\":\n";
 		jsonString = jsonString + "[\n";
-		for(int x = 0; x < _x; x++)
+		for (int x = 0; x < _x; x++)
 		{
-			for(int y = 0; y < _y; y++)
+			for (int y = 0; y < _y; y++)
 			{
-				for(int z = 0; z < _z; z++)
+				for (int z = 0; z < _z; z++)
 				{
-					if(_grid[y][x][z] == item)
+					if (_grid[y][x][z] == item)
 					{
-						if(!firstItem)
+						if (!firstItem)
 						{
 							jsonString = jsonString + ",\n";
 						}
 						firstItem = false;
-						jsonString = jsonString + createJsonObject(x, y, z, "Fortress Wall", "false") + "";
+						jsonString = jsonString
+								+ createJSONObject(x, y, z, "Fortress Wall",
+										"false") + "";
 					}
 				}
 			}
@@ -420,27 +440,29 @@ namespace bammm
 		return jsonString;
 	}
 
-	string MapEditor::createMineJson()
+	string MapEditor::createMineJSON()
 	{
 		char item = '^';
 		bool firstItem = true;
 		string name = "Mine Objects";
 		string jsonString = "\"" + name + "\":\n";
 		jsonString = jsonString + "[\n";
-		for(int x = 0; x < _x; x++)
+		for (int x = 0; x < _x; x++)
 		{
-			for(int y = 0; y < _y; y++)
+			for (int y = 0; y < _y; y++)
 			{
-				for(int z = 0; z < _z; z++)
+				for (int z = 0; z < _z; z++)
 				{
-					if(_grid[y][x][z] == item)
+					if (_grid[y][x][z] == item)
 					{
-						if(!firstItem)
+						if (!firstItem)
 						{
 							jsonString = jsonString + ",\n";
 						}
 						firstItem = false;
-						jsonString = jsonString + createJsonObject(x, y, z, "Iron ore", "false") + "";
+						jsonString = jsonString
+								+ createJSONObject(x, y, z, "Iron ore", "false")
+								+ "";
 					}
 				}
 			}
@@ -449,7 +471,7 @@ namespace bammm
 		return jsonString;
 	}
 
-	string MapEditor::createBuildingJson()
+	string MapEditor::createBuildingJSON()
 	{
 		char gym = 'G';
 		char fire = 'F';
@@ -461,42 +483,44 @@ namespace bammm
 		string name = "Building Objects";
 		string jsonString = "\"" + name + "\":\n";
 		jsonString = jsonString + "[\n";
-		for(int x = 0; x < _x; x++)
+		for (int x = 0; x < _x; x++)
 		{
-			for(int y = 0; y < _y; y++)
+			for (int y = 0; y < _y; y++)
 			{
-				for(int z = 0; z < _z; z++)
+				for (int z = 0; z < _z; z++)
 				{
-					if(_grid[y][x][z] == gym)
+					if (_grid[y][x][z] == gym)
 					{
 						buildingName = "Gym";
 						matched = true;
 					}
-					if(_grid[y][x][z] == fire)
+					if (_grid[y][x][z] == fire)
 					{
 						buildingName = "Fire pit";
 						matched = true;
 					}
-					if(_grid[y][x][z] == smith)
+					if (_grid[y][x][z] == smith)
 					{
 						buildingName = "Blacksmith";
 						matched = true;
 					}
-					if(_grid[y][x][z] == armory)
+					if (_grid[y][x][z] == armory)
 					{
 						buildingName = "Armory";
 						matched = true;
 					}
 
-					if(matched)
+					if (matched)
 					{
 						matched = false;
-						if(!firstItem)
+						if (!firstItem)
 						{
 							jsonString = jsonString + ",\n";
 						}
 						firstItem = false;
-						jsonString = jsonString + createJsonObject(x, y, z, buildingName, "false") + "";
+						jsonString = jsonString
+								+ createJSONObject(x, y, z, buildingName,
+										"false") + "";
 					}
 				}
 			}
