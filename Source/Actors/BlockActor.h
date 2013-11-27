@@ -11,6 +11,7 @@
  * BlockActor header file.
  *
  */
+
 #ifndef BLOCKACTOR_H_
 #define BLOCKACTOR_H_
 
@@ -29,19 +30,6 @@ namespace bammm
 			BlockActor();
 			BlockActor(string name, Vector3D* location, int health);
 	};
-
-	BlockActor::BlockActor()
-	{
-		_name = "Building";
-		_location = new Vector3D();
-	}
-
-	BlockActor::BlockActor(string name, Vector3D* location, int health)
-	{
-		_name = name;
-		_location = location;
-		MAX_HEALTH = health;
-	}
 }
 
 #endif
