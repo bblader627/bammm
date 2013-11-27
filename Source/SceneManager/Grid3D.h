@@ -45,14 +45,6 @@ namespace bammm
 			Vector3D *ZERO;
 
 			/*
-			 UP = { 0, 1, 0 };
-			 DOWN = { 0, -1, 0 };
-			 LEFT = { -1, 0, 0};
-			 RIGHT = { 1, 0, 0 };
-			 ZERO = { 0, 0, 0 };
-			 */
-
-			/*
 			 convertToPosition
 			 @Pre-Condition- Takes a Vector3D vector
 			 @Post-Condition- Converts it to an int representing a position in the grid
@@ -79,13 +71,17 @@ namespace bammm
 			Grid3D(int width, int length, int height);
 			~Grid3D();
 
-			//TODO:Add docstyle comments
+			/*
+			 setupDirections
+			 @Pre-Condition- No input
+			 @Post-Condition- Sets up directions
+			 */
 			void setupDirections();
 
 			/*
 			 access
-			 @Pre-Condition- takes in x,y,z  point system ( a vector)
-			 @Post-Condition- will return an array that represents the surrounding point
+			 @Pre-Condition- Takes in x,y,z  point system ( a vector)
+			 @Post-Condition- Will return an array that represents the surrounding point
 			 */
 			DynamicArray<DynamicArray<T>*>* access(Vector3D *vector,
 					int radius);
