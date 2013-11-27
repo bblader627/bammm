@@ -1,13 +1,15 @@
 /*
- * JSONPrimitive.h
+ * CS585
  *
- *  Created on: Nov 19, 2013
- *      Author: michael
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * JSONPrimitive header file.
  *
- *      DOCUMENTATION:
- *
- *      Inherits from JSON
- *      JSONPrimitive represents a key:value pair in a JSON Object
  */
 
 #ifndef JSONPRIMITIVE_H_
@@ -18,12 +20,9 @@
 
 namespace bammm
 {
-
 	class JSONPrimitive: public JSON
 	{
-
 		private:
-
 			struct value_t
 			{
 					string str;
@@ -33,76 +32,76 @@ namespace bammm
 			} _value;
 
 		public:
-
 			JSONPrimitive();
-			JSONPrimitive(string, value_t, JSON_TYPE);
-			JSONPrimitive(string, string, JSON_TYPE);
-			JSONPrimitive(string, int, JSON_TYPE);
-			JSONPrimitive(string, double, JSON_TYPE);
-
+			JSONPrimitive(string newName, value_t newValue, JSON_TYPE newType);
+			JSONPrimitive(string newName, string newValue, JSON_TYPE newType);
+			JSONPrimitive(string newName, int newValue, JSON_TYPE newType);
+			JSONPrimitive(string newName, double newValue, JSON_TYPE newType);
 			~JSONPrimitive();
 
-			/*
+			/**
 			 getValue
 			 @Pre-Condition-  Takes no argument
 			 @Post-Condition- returns a STRUCT that contains the value of this JSON Node depending on type
 			 */
 			value_t getValue();
 
-			/*
+			/**
 			 setValue
 			 @Pre-Condition-  Takes an int argument
 			 @Post-Condition- sets this JSON Nodes value equal to the int argument. Returns void.
 			 */
-			void setValue(int);
+			void setValue(int newValue);
 
-			/*
+			/**
 			 setValue
 			 @Pre-Condition-  Takes a double argument
 			 @Post-Condition- sets this JSON Nodes value equal to the double argument. Returns void.
 			 */
-			void setValue(double);
+			void setValue(double newValue);
 
-			/*
+			/**
 			 setValue
 			 @Pre-Condition-  Takes a string argument
 			 @Post-Condition- sets this JSON Nodes value equal to the string argument. Returns void.
 			 */
-			void setValue(string);
+			void setValue(string newValue);
 
-			/*
+			/**
 			 getIntValue
 			 @Pre-Condition-  Takes no argument
 			 @Post-Condition- returns an int that is equal to the value of this JSON Node
 			 */
 			int getIntValue();
 
-			/*
+			/**
 			 getDoubleValue
 			 @Pre-Condition-  Takes no argument
 			 @Post-Condition- returns a double that is equal to the value of this JSON Node
 			 */
 			double getDoubleValue();
 
-			/*
+			/**
 			 getBoolValue
 			 @Pre-Condition-  Takes no argument
 			 @Post-Condition- returns a bool that is equal to the boolean value of this JSON Node
 			 */
 			bool getBoolValue();
 
-			/*
+			/**
 			 getStringValue
 			 @Pre-Condition-  Takes no argument
 			 @Post-Condition- returns a string that is equal to the value of this JSON Node
 			 */
 			string getStringValue();
 
+			/**
+			 operator[]
+			 @Pre-Condition-  const string & rhs
+			 @Post-Condition- Returns a JSONPrimitive &
+			 */
 			JSONPrimitive & operator[](const string & rhs);
-
-			//JSON operator[](const unsigned int & rhs);
 	};
-
 }
 
-#endif /* JSONPRIMITIVE_H_ */
+#endif

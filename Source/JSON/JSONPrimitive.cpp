@@ -1,20 +1,21 @@
 /*
- * JSONPrimitive.h
+ * CS585
  *
- *  Created on: Nov 19, 2013
- *      Author: michael
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * JSONPrimitive cpp file.
  *
- *      DOCUMENTATION:
- *
- *      Inherits from JSON
- *      JSONPrimitive represents a key:value pair in a JSON Object
  */
 
 #include "JSONPrimitive.h"
 
 namespace bammm
 {
-
 	JSONPrimitive::JSONPrimitive()
 	{
 		_name = "empty";
@@ -84,24 +85,23 @@ namespace bammm
 		return _value.str;
 	}
 
-	void JSONPrimitive::setValue(int newVal)
+	void JSONPrimitive::setValue(int newValue)
 	{
-		_value.i = newVal;
+		_value.i = newValue;
 	}
 
-	void JSONPrimitive::setValue(double newVal)
+	void JSONPrimitive::setValue(double newValue)
 	{
-		_value.d = newVal;
+		_value.d = newValue;
 	}
 
-	void JSONPrimitive::setValue(string newVal)
+	void JSONPrimitive::setValue(string newValue)
 	{
-		_value.str = newVal;
+		_value.str = newValue;
 	}
 
 	JSONPrimitive & JSONPrimitive::operator[](const string & rhs)
 	{
 		return *this;
 	}
-
 }
