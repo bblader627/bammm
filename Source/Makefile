@@ -11,8 +11,8 @@ States/IdleState.h Interfaces/IStateCallback.h States/MineState.h \
 States/SingState.h States/SleepState.h States/State.h States/StateMachine.h \
 Resources/DynamicArray.h Resources/HashMap.h Resources/HashNode.h \
 Resources/Heap.h Resources/Queue.h Resources/Stack.h SceneManager/Vector3D.h \
-Weapons/IWeaponType.h Weapons/WeaponData.h Weapons/MeleeWeapon.h Weapons/Stein.h \
-Weapons/OrcishBlade.h Weapons/MeleeCombat.h States/CombatState.h SceneManager/Grid3D.h \
+Weapons/IWeaponType.h Weapons/WeaponData.h Weapons/MeleeWeapon.h \
+Weapons/MeleeCombat.h States/CombatState.h SceneManager/Grid3D.h \
 TestSuite/Time.cpp SceneManager/SceneManager.h Interfaces/ITickable.h \
 Factories/Factory.h JSON/JSON.cpp JSON/JSONParser.cpp JSON/JSONArray.cpp \
 JSON/JSONPrimitive.cpp States/MovementState.h
