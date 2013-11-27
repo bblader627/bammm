@@ -1,15 +1,14 @@
 /*
- * JSONArray.h
+ * CS585
  *
- *  Created on: Nov 19, 2013
- *      Author: michael
- *
- *      DOCUMENTATION
- *
- *      Inherits from JSON
- *      Represents an Array in JSON
- *      May hold any JSON Object including JSONPrimitive and JSONArray
- *      Stores JSON Objects in a DynamicArray
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * JSONArray header file.
  *
  */
 
@@ -21,55 +20,59 @@
 
 namespace bammm
 {
-
 	class JSONArray: public JSON
 	{
-
 		private:
-
 			DynamicArray<JSON> _children;
 
 		public:
-
 			JSONArray();
-			JSONArray(string);
-			JSONArray(string, JSON*);
-
+			JSONArray(string name);
+			JSONArray(string name, JSON *parent);
 			~JSONArray();
 
-			void addChild(JSON &);
+			/**
+			 addChild
+			 @Pre-Condition-  Takes a JSON
+			 @Post-Condition- Adds this argument to the array
+			 */
+			void addChild(JSON & newNode);
 
+			/**
+			 operator[]
+			 @Pre-Condition-  const unsigned int & rhs
+			 @Post-Condition- Returns a JSON
+			 */
 			JSON operator[](const unsigned int & rhs);
 
-			/*
+			/**
 			 getIntValue
 			 @Pre-Condition-  Takes no argument
 			 @Post-Condition- returns an int that is equal to the value of this JSON Node
 			 */
 			int getIntValue();
 
-			/*
+			/**
 			 getDoubleValue
 			 @Pre-Condition-  Takes no argument
 			 @Post-Condition- returns a double that is equal to the value of this JSON Node
 			 */
 			double getDoubleValue();
 
-			/*
+			/**
 			 getBoolValue
 			 @Pre-Condition-  Takes no argument
 			 @Post-Condition- returns a bool that is equal to the boolean value of this JSON Node
 			 */
 			bool getBoolValue();
 
-			/*
+			/**
 			 getStringValue
 			 @Pre-Condition-  Takes no argument
 			 @Post-Condition- returns a string that is equal to the value of this JSON Node
 			 */
 			string getStringValue();
-
 	};
-
 }
-#endif /* JSONARRAY_H_ */
+
+#endif
