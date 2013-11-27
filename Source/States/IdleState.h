@@ -58,34 +58,6 @@ namespace bammm
 			 */
 			string toString();
 	};
-
-	IdleState::IdleState(Actor& actor)
-	{
-		_actor = &actor;
-	}
-
-	IdleState::IdleState(Actor& actor, IStateCallback& stateMachine)
-	{
-		_actor = &actor;
-		registerTransitionCallback(stateMachine);
-	}
-
-	void IdleState::setup()
-	{
-	}
-
-	void IdleState::breakdown()
-	{
-	}
-
-	void IdleState::tick(float deltaTime)
-	{
-	}
-
-	string IdleState::toString()
-	{
-		return "idle";
-	}
 }
 
 #endif
