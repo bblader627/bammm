@@ -53,24 +53,6 @@ namespace bammm
 		_defense = 2;
 	}
 
-	Actor::Actor(string type)
-		{
-			_name = "DefaultName;
-			_type = "type";
-			_rotation = 0;
-			_velocity = new Vector3D();
-			_location = new Vector3D();
-
-			MAX_HEALTH = 100;
-			MAX_STAMINA = 50;
-			_healthBar = MAX_HEALTH;
-			_staminaBar = MAX_STAMINA;
-			_healthBar = 100;
-			_staminaBar = 50;
-			_attack = 4;
-			_defense = 2;
-		}
-
 	Actor::Actor(string type, string name, int health, int stamina, int attack,
 			int defense, string behavior)
 	{
