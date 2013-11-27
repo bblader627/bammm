@@ -38,20 +38,19 @@ namespace bammm
 			int _height;
 
 			//Directions
-			 Vector3D *UP;
-			 Vector3D *DOWN;
-			 Vector3D *LEFT;
-			 Vector3D *RIGHT;
-			 Vector3D *ZERO;
+			Vector3D *UP;
+			Vector3D *DOWN;
+			Vector3D *LEFT;
+			Vector3D *RIGHT;
+			Vector3D *ZERO;
 
-			 /*
+			/*
 			 UP = { 0, 1, 0 };
 			 DOWN = { 0, -1, 0 };
 			 LEFT = { -1, 0, 0};
 			 RIGHT = { 1, 0, 0 };
 			 ZERO = { 0, 0, 0 };
 			 */
-
 
 			/*
 			 convertToPosition
@@ -72,7 +71,8 @@ namespace bammm
 			 * @Pre-Condition- takes Position of actor to be found, current location, and stack of directions
 			 * @Post-Condition- returns true if path is found
 			 */
-			bool getPath(Vector3D* actorPos, Vector3D* currentLoc, Vector3D* directionOfPrevious, Stack<Vector3D*>* path);
+			bool getPath(Vector3D* actorPos, Vector3D* currentLoc,
+					Vector3D* directionOfPrevious, Stack<Vector3D*>* path);
 
 		public:
 			Grid3D();
@@ -125,11 +125,15 @@ namespace bammm
 			 */
 			Stack<Vector3D*>* getPath(Actor* actor, string destination);
 
-			//TODO:Add docstyle comment
+			/*
+			 findInGrid
+			 @Pre-Condition- Takes a string target
+			 @Post-Condition- Returns the vector3D location of the target's position in the grid
+			 */
 			Vector3D* findInGrid(string target);
 
 			/*
-			toString
+			 toString
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns a string that represents the Grid3D
 			 */
@@ -286,7 +290,7 @@ namespace bammm
 	Stack<Vector3D*>* Grid3D<T>::getPath(Actor* actor, string destination)
 	{
 		Vector3D* target = findInGrid(destination);
-		if (target==NULL)
+		if (target == NULL)
 		{
 			return new Stack<Vector3D*>();
 		}
@@ -306,7 +310,8 @@ namespace bammm
 	}
 
 	template<class T>
-	bool Grid3D<T>::getPath(Vector3D* actorPos, Vector3D* currentLoc, Vector3D* directionOfPrevious, Stack<Vector3D*>* path)
+	bool Grid3D<T>::getPath(Vector3D* actorPos, Vector3D* currentLoc,
+			Vector3D* directionOfPrevious, Stack<Vector3D*>* path)
 	{
 		int actorPosition = convertToPosition(actorPos);
 		int currentPosition = convertToPosition(currentLoc);
@@ -334,17 +339,30 @@ namespace bammm
 			{
 				path->push(LEFT);
 				//If you can't go left
-				if (!(getPath(actorPos, new Vector3D(convertToVector(currentPosition - 1)), RIGHT, path)))
+				if (!(getPath(actorPos,
+						new Vector3D(convertToVector(currentPosition - 1)),
+						RIGHT, path)))
 				{
 					path->pop();
 					path->push(UP);
 					//If you can't go up
-					if (!(directionOfPrevious == UP) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition + _width)), DOWN, path)))
+					if (!(directionOfPrevious == UP)
+							|| !(getPath(actorPos,
+									new Vector3D(
+											convertToVector(
+													currentPosition + _width)),
+									DOWN, path)))
 					{
 						path->pop();
 						path->push(DOWN);
 						//If you can't go down
-						if (!(directionOfPrevious == DOWN) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition - _width)), UP, path)))
+						if (!(directionOfPrevious == DOWN)
+								|| !(getPath(actorPos,
+										new Vector3D(
+												convertToVector(
+														currentPosition
+																- _width)), UP,
+										path)))
 						{
 							path->pop();
 							return false;
@@ -356,16 +374,32 @@ namespace bammm
 			else
 			{
 				path->push(DOWN);
-				if (!(directionOfPrevious == DOWN) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition - _width)), UP, path)))
+				if (!(directionOfPrevious == DOWN)
+						|| !(getPath(actorPos,
+								new Vector3D(
+										convertToVector(
+												currentPosition - _width)), UP,
+								path)))
 				{
 					path->pop();
 					path->push(LEFT);
-					if (!(directionOfPrevious == LEFT) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition - 1)), RIGHT, path)))
+					if (!(directionOfPrevious == LEFT)
+							|| !(getPath(actorPos,
+									new Vector3D(
+											convertToVector(
+													currentPosition - 1)),
+									RIGHT, path)))
 					{
 						path->pop();
 						path->push(UP);
 						//If you can't go up
-						if (!(directionOfPrevious == UP) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition + _width)), DOWN, path)))
+						if (!(directionOfPrevious == UP)
+								|| !(getPath(actorPos,
+										new Vector3D(
+												convertToVector(
+														currentPosition
+																+ _width)),
+										DOWN, path)))
 						{
 							path->pop();
 							return false;
@@ -380,11 +414,16 @@ namespace bammm
 			if ((actorPosition - currentPosition) < _width)
 			{
 				path->push(RIGHT);
-				if (!(getPath(actorPos, new Vector3D(convertToVector(currentPosition + 1)), LEFT, path)))
+				if (!(getPath(actorPos,
+						new Vector3D(convertToVector(currentPosition + 1)),
+						LEFT, path)))
 				{
 					path->pop();
 					path->push(UP);
-					if (!(getPath(actorPos, new Vector3D(convertToVector(currentPosition + _width)), DOWN, path)))
+					if (!(getPath(actorPos,
+							new Vector3D(
+									convertToVector(currentPosition + _width)),
+							DOWN, path)))
 					{
 						path->pop();
 					}
@@ -394,17 +433,27 @@ namespace bammm
 			{
 				path->push(UP);
 				//if you can't go up
-				if (!(directionOfPrevious == UP) || !(getPath(actorPos, new Vector3D(convertToVector(currentPosition + _width)), DOWN, path)))
+				if (!(directionOfPrevious == UP)
+						|| !(getPath(actorPos,
+								new Vector3D(
+										convertToVector(
+												currentPosition + _width)),
+								DOWN, path)))
 				{
 					path->pop();
 					path->push(RIGHT);
 					//if you can't go right
-					if (!(getPath(actorPos, new Vector3D(convertToVector(currentPosition + 1)), LEFT, path)))
+					if (!(getPath(actorPos,
+							new Vector3D(convertToVector(currentPosition + 1)),
+							LEFT, path)))
 					{
 						path->pop();
 						path->push(LEFT);
 						//If you can't go LEFT
-						if (!(getPath(actorPos, new Vector3D(convertToVector(currentPosition - 1)), RIGHT, path)))
+						if (!(getPath(actorPos,
+								new Vector3D(
+										convertToVector(currentPosition - 1)),
+								RIGHT, path)))
 						{
 							path->pop();
 							return false;
@@ -433,7 +482,7 @@ namespace bammm
 		return NULL;
 	}
 
-	template <class T>
+	template<class T>
 	string Grid3D<T>::toString()
 	{
 		string gridString = "";
