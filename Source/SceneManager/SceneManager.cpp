@@ -41,7 +41,7 @@ namespace bammm
 			int randomY = yDistribution(generator);
 			temp = new Vector3D(randomX, randomY, 0);
 
-			Actor* newOrc = new Actor("Dick", "orc");
+			Actor* newOrc = new Actor("Mr. Orc", "orc");
 			addActor(newOrc);
 
 			AiController* newAi = new AiController();
