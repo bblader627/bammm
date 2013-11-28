@@ -34,11 +34,12 @@ namespace bammm
 		this->parseToActorInfo(orcs, "orc", &actorData);
 
 		//Parsing Map info
-		JSON* map = parser->getRootNode("map");
+		//JSON* map = parser->getRootNode("map");
 		//JSON* x = map["x"];
 		//JSON* y = map["y"];
 		//JSON* z = map["z"];
 
+		/*
 		JSON* wall = map["Wall"];
 		this->parseToActorInfo(wall, "Wall", &blockData);
 
@@ -50,6 +51,7 @@ namespace bammm
 
 		JSON* ore = map["Ore"];
 		this->parseToActorInfo(ore, "Ore", &blockData);
+		*/
 
 	}
 
