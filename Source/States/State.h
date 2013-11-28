@@ -89,55 +89,6 @@ namespace bammm
 			 */
 			virtual bool operator==(State* state);
 	};
-
-	State::State()
-	{
-	}
-
-	State::State(Actor& actor)
-	{
-		_actor = &actor;
-	}
-
-	State::~State()
-	{
-
-	}
-
-	void State::setup()
-	{
-		cout << "wrong setup" << "\n";
-	}
-
-	void State::breakdown()
-	{
-		cout << "wrong breakdown" << "\n";
-	}
-
-	void State::tick(float deltaTime)
-	{
-		cout << "In parent state\n";
-	}
-
-	void State::registerTransitionCallback(IStateCallback& stateMachine)
-	{
-		_stateMachine = &stateMachine;
-	}
-
-	void State::switchState(string nextState)
-	{
-		//_statemachine->switchState(this, nextState);
-	}
-
-	string State::toString()
-	{
-		return "State";
-	}
-
-	bool State::operator==(State* state)
-	{
-		return false;
-	}
 }
 
 #endif

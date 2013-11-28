@@ -1,5 +1,4 @@
 /*
-
  * CS585
  *
  * Team Bammm
@@ -26,7 +25,6 @@ namespace bammm
 
 	JSONParser::JSONParser()
 	{
-
 	}
 
 	void JSONParser::addRoot(JSON & newNode)
@@ -51,7 +49,7 @@ namespace bammm
 		return _rootMap.getValue(key);
 	}
 
-	bool JSONParser::parseFile(string fileName)
+	bool JSONParser::parseFile(string filename)
 	{
 
 		ifstream input;
@@ -64,11 +62,11 @@ namespace bammm
 		string name = "";
 		string value = "";
 
-		input.open(fileName.c_str());
+		input.open(filename.c_str());
 
 		if (!input.is_open())
 		{
-			cout << "Failed to open file: " << fileName << " does not exist."
+			cout << "Failed to open file: " << filename << " does not exist."
 					<< "\n";
 			return false;
 		}
@@ -108,7 +106,7 @@ namespace bammm
 					if (parentNode == NULL)
 					{
 						/* This will be the final output of the parser. This should not output before completion. */
-						cout << "Completed parsing " << fileName << ". \n";
+						cout << "Completed parsing " << filename << ". \n";
 						input.close();
 
 						currentNode = NULL;
@@ -233,14 +231,16 @@ namespace bammm
 
 						current = (char) input.get();
 						current = (char) input.get();
-						cout << "the goddamn character is  ------  " << current << "\n";
+						cout << "the goddamn character is  ------  " << current
+								<< "\n";
 						while (!input.eof() && current != '"')
 						{
 							value += current;
 							current = (char) input.get();
 						}
 
-						cout << "the goddamn value is  ------  " << value << "\n";
+						cout << "the goddamn value is  ------  " << value
+								<< "\n";
 						currentNode = new JSONPrimitive(name, value,
 								JSON_STRING);
 
@@ -336,7 +336,9 @@ namespace bammm
 					cout << "Added object to map \n";
 					cout.flush();
 
-					cout << "Name: " << currentNode->getName() << " Type: " << currentNode->getType() << " Value: " << value << "\n";
+					cout << "Name: " << currentNode->getName() << " Type: "
+							<< currentNode->getType() << " Value: " << value
+							<< "\n";
 
 					break;
 

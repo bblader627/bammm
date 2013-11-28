@@ -1,17 +1,19 @@
 /*
-* CS585
-*
-* Team Bammm
-* 	Alvaro Home
-* 	Matt Konstantinou
-* 	Michael Abramo
-*
-* Description:
-* ActorFactory header file.
-*
-* Last Modified: Matthew Konstantinou
-*
-*/
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * Factory header file.
+ *
+ */
+
+#ifndef FACTORY_H_
+#define FACTORY_H_
 
 #include <iostream>
 #include "../JSON/JSONParser.h"
@@ -23,6 +25,7 @@
 #include "../Actors/Actor.h"
 #include "../Actors/ActorInfo.h"
 #include "../Weapons/IWeaponType.h"
+#include "../SceneManager/SceneManager.h"
 
 using namespace bammm;
 using namespace std;
@@ -31,72 +34,55 @@ using namespace std;
 #define NULL ((void *)0)
 #endif
 
-
-
 namespace bammm
 {
 	class Factory
 	{
 		private:
-			void setupArmor();
-		public:
-			Actor getActor(string type);
 			HashMap<ActorInfo> actorData;
+			HashMap<ActorInfo> blockData;
 			HashMap<ActorInfo> mapData;
 			//HashMap<ArmorInfo> armorData;
+			SceneManager* scene;
+
+			/*
+			 parseToInfo
+			 @Pre-Condition- accepts pointer to root JSON node and type string
+			 @Post-Condition- returns void
+			 */
+			void parseToActorInfo(JSON* rootNode, string type,
+					HashMap<ActorInfo>* map);
+
+		public:
+
+			/*
+			 getActor
+			 @Pre-Condition- accepts characteristics of desired actor
+			 @Post-Condition- returns new actor
+			 */
+			Actor getActor(string type, string name, int health, int stamina,
+					int attack, int defense, string behavior);
+
+			/*
+			 setup
+			 @Pre-Condition- No input
+			 @Post-Condition- Sets up factory
+			 */
 			void setup();
+
+			/*
+			 setupArmor
+			 @Pre-Condition- No input
+			 @Post-Condition- Sets up armor
+			 */
+			void setupArmor();
 
 			/*
 			 * Weapon getWeapon(string type);
 			 * Item getItem(string type);
 			 * BehaviorMap getBehavior(string type);
 			 */
-
 	};
-
-	void Factory::setup()
-	{
-		string actorJSON;
-		JSONParser* parser = new JSONParser();
-		string filename = "actors.json";
-		parser->parseFile(filename);
-
-		cout << "poop" << "\n";
-
-		JSON* dwarves = parser->getRootNode("dwarves");
-		cout << dwarves->getName() << "\n";
-
-		for (int i = 0; i<dwarves->sizeOfChildren(); i++)
-		{
-			JSON* name = dwarves[i]["name"];
-			JSON* health = dwarves[i]["health"];
-			JSON* stamina = dwarves[i]["stamina"];
-			JSON* attack = dwarves[i]["attack"];
-			JSON* defense = dwarves[i]["defense"];
-
-			ActorInfo* info = new ActorInfo(name->getStringValue(), health->getIntValue(),
-								stamina->getIntValue(), attack->getIntValue(),
-								defense->getIntValue());
-			actorData.add(name->getStringValue(), *info);
-		}
-
-	}
-
 }
 
-/*
-Actor Factory::getActor(string type)
-{
-	if (type == "dwarf")
-	{
-
-	}
-	else if (type == "block")
-	{
-
-	}
-	return new Actor();
-
-}
-*/
-
+#endif

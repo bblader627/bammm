@@ -4,18 +4,25 @@
 
 RM = rm -f
 SRCPATH = .
-SRC = Actors/Actor.h  Actors/DwarfActor.h Actors/OrcActor.h  \
-Controllers/AiController.h Controllers/Controller.h \
-Controllers/PlayerController.h States/BrawlState.h States/DrinkState.h \
-States/IdleState.h Interfaces/IStateCallback.h States/MineState.h \
-States/SingState.h States/SleepState.h States/State.h States/StateMachine.h \
+SRC = Actors/Actor.cpp Actors/ActorInfo.cpp \
+Controllers/AiController.cpp Controllers/Controller.cpp Controllers/PlayerController.cpp \
+States/BrawlState.cpp States/DrinkState.cpp States/MovementState.cpp \
+States/IdleState.cpp Interfaces/IStateCallback.cpp States/MineState.cpp States/CombatState.cpp \
+States/SingState.cpp States/SleepState.cpp States/State.cpp States/StateMachine.cpp \
+\
 Resources/DynamicArray.h Resources/HashMap.h Resources/HashNode.h \
-Resources/Heap.h Resources/Queue.h Resources/Stack.h SceneManager/Vector3D.h \
-Weapons/IWeaponType.h Weapons/WeaponData.h Weapons/MeleeWeapon.h Weapons/Stein.h \
-Weapons/OrcishBlade.h Weapons/MeleeCombat.h States/CombatState.h SceneManager/Grid3D.h \
-Actors/OrcActor.h TestSuite/Time.cpp SceneManager/SceneManager.h Interfaces/ITickable.h \
-Factories/Factory.h JSON/JSON.cpp JSON/JSONParser.cpp JSON/JSONArray.cpp \
-JSON/JSONPrimitive.cpp States/MovementState.h
+Resources/Heap.h Resources/Queue.h Resources/Stack.h \
+\
+Weapons/IWeaponType.h Weapons/WeaponData.cpp Weapons/MeleeWeapon.cpp \
+Weapons/MeleeCombat.cpp \
+\
+SceneManager/Vector3D.cpp SceneManager/Grid3D.h SceneManager/SceneManager.cpp  \
+Factories/Factory.cpp \
+Interfaces/ITickable.cpp \
+JSON/JSON.cpp JSON/JSONParser.cpp JSON/JSONArray.cpp \
+JSON/JSONPrimitive.cpp \
+\
+TestSuite/Time.cpp
 TESTNAME = test
 TESTSRC = Main.cpp
 

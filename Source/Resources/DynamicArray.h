@@ -6,13 +6,12 @@
  * 	Matt Konstantinou
  * 	Michael Abramo
  *	Matt Witkowski	
- *   Bradley Crusco
+ *  Bradley Crusco
  * Description:
  * DynamicArray header file.
  *
- * Last Modified: Matt Witkowski
- *
  */
+
 #ifndef DYNAMICARRAY_H_
 #define DYNAMICARRAY_H_
 
@@ -554,22 +553,6 @@ namespace bammm
 	{
 		cout << "An error has occurred. " << message << "\n";
 	}
-}
-
-//TODO: What is this and why is it here? Can it be removed?
-namespace std
-{
-/**
- * @brief The to_string function is crap, and doesn't have a to_string(str). This
- * is very bad practice, but is needed for templates to function properly without
- * includes.
- * @param str The string to be converted/returned.
- * @returns Returns the string passed.
- */
-/*string to_string(string str)
- {
- return str;
- }*/
 }
 
 #endif

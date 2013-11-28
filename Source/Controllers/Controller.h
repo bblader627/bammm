@@ -12,7 +12,6 @@
  *
  */
 
-
 #ifndef CONTROLLER_H_
 #define CONTROLLER_H_
 
@@ -37,48 +36,36 @@ using namespace std;
 
 namespace bammm
 {
-    class Controller
-    {
-        protected:
-            HashMap<State*> _states;
-            Actor* _actor;
+	class Controller
+	{
+		protected:
+			HashMap<State*> _states;
+			Actor* _actor;
 			Grid3D<Actor*>* _sceneGraph;
-            StateMachine _stateMachine;
+			StateMachine _stateMachine;
 			MeleeCombat* _meleeCombat;
 			RangedCombat* _rangedCombat;
 
-        public:
-            Controller();
+		public:
+			Controller();
 			virtual ~Controller();
-			
-			/**Fix
+
+			//TODO: Fix
+			/**
 			 setup
 			 @Pre-Condition- Takes an Actor, MeleeCombat, and Grid3D as input
 			 @Post-Condition - Sets up the controller with the passed Actor, MeleeCombat, and Grid3D.
-			 */            
-			virtual void setup(Actor& actor, MeleeCombat& meleeCombat, Grid3D<Actor*>& sceneGraph)=0;
+			 */
+			virtual void setup(Actor& actor, MeleeCombat& meleeCombat,
+					Grid3D<Actor*>& sceneGraph)=0;
+
 			/**
 			 canDelete
 			 @Pre-Condition- Takes nothing
 			 @Post-Condition- Returns a boolean representing fi the Controller can be deleted or not.
 			 */
 			virtual bool canDelete()=0;
-    };
-
-    Controller::Controller()
-    {
-    }
-
-    Controller::~Controller()
-    {
-		DynamicArray<string>* keys = _states.getAllKeys();
-		int size = keys->getSize();
-		for(int i = 0; i < size; i++)
-		{
-			delete _states.getValue(keys->get(i));
-		}
-		
-		delete keys;
-    }
+	};
 }
+
 #endif

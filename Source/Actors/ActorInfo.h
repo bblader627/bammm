@@ -15,6 +15,7 @@
 #define ACTORINFO_H_
 
 #include <iostream>
+#include "../SceneManager/Vector3D.h"
 
 using namespace std;
 
@@ -24,14 +25,25 @@ namespace bammm
 	{
 		private:
 			string _name;
+			string _type;
 			int _health;
 			int _stamina;
 			int _attack;
 			int _defense;
+			string _behavior;
+			Vector3D* _location;
+
 
 		public:
 			ActorInfo();
-			ActorInfo(string name, int health, int stamina, int attack, int defense);
+			ActorInfo(string type, string name, int health, int stamina, int attack, int defense, string behavior);
+
+			/**
+			 getType
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns type
+			 */
+			string getType();
 
 			/**
 			 getName
@@ -69,6 +81,28 @@ namespace bammm
 			int getDefense();
 
 			/**
+			 getBehavior
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns behavior
+			 */
+			string getBehavior();
+
+			/**
+			 getLocation
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _location
+			 */
+			Vector3D* getLocation();
+
+
+			/**
+			 setType
+			 @Pre-Condition- takes type
+			 @Post-Condition- returns void
+			 */
+			void setType(string type);
+
+			/**
 			 setName
 			 @Pre-Condition- takes in name to set
 			 @Post-Condition- returns void
@@ -102,76 +136,23 @@ namespace bammm
 			 @Post-Condition- returns void
 			 */
 			void setDefense(int defense);
+
+			/**
+			 setDefense
+			 @Pre-Condition- takes in defense
+			 @Post-Condition- returns void
+			 */
+			void setBehavior(string behavior);
+
+			/**
+			 setLocation
+			 @Pre-Condition- takes the location to set
+			 @Post-Condition- returns nothing
+			 */
+			void setLocation(Vector3D* location);
+
 	};
 
-	ActorInfo::ActorInfo()
-	{
-		_name = "n/a";
-		_health = 10;
-		_stamina = 5;
-		_attack = 10;
-		_defense = 10;
-
-	}
-
-	ActorInfo::ActorInfo(string name, int health, int stamina, int attack, int defense)
-	{
-		_name = name;
-		_health = health;
-		_stamina = stamina;
-		_attack = attack;
-		_defense = defense;
-	}
-
-	int ActorInfo::getHealth()
-	{
-		return _health;
-	}
-
-	int ActorInfo::getStamina()
-	{
-		return _stamina;
-	}
-
-	int ActorInfo::getAttack()
-	{
-		return _attack;
-	}
-
-	int ActorInfo::getDefense()
-	{
-		return _defense;
-	}
-
-	string ActorInfo::getName()
-	{
-		return _name;
-	}
-
-	void ActorInfo::setName(string name)
-	{
-		_name = name;
-	}
-
-	void ActorInfo::setHealth(int health)
-	{
-		_health = health;
-	}
-
-	void ActorInfo::setStamina(int stamina)
-	{
-		_stamina = stamina;
-	}
-
-	void ActorInfo::setAttack(int attack)
-	{
-		_attack = attack;
-	}
-
-	void ActorInfo::setDefense(int defense)
-	{
-		_defense = defense;
-	}
 }
 
 #endif

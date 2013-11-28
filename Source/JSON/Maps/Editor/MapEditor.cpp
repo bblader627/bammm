@@ -1,3 +1,17 @@
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * MapEditor cpp file
+ *
+ */
+
 #include "MapEditor.h" 
 
 namespace bammm
@@ -36,9 +50,9 @@ namespace bammm
 	{
 		cout << "Save as: \n";
 		cin >> _name;
-		fileOutput.open(_name + ".json");
-		fileOutput << createJson();
-		fileOutput.close();
+		_fileOutput.open(_name + ".json");
+		_fileOutput << createJSON();
+		_fileOutput.close();
 		return true;
 	}
 
@@ -257,7 +271,8 @@ namespace bammm
 
 	void MapEditor::displayCoordinates()
 	{
-		cout << "(" << _cursorX << ", " << _cursorY << ", " << _cursorZ << ")\n";
+		cout << "(" << _cursorX << ", " << _cursorY << ", " << _cursorZ
+				<< ")\n";
 	}
 
 	void MapEditor::displayHelp()
@@ -343,7 +358,8 @@ namespace bammm
 		}
 	}
 
-	string MapEditor::createJsonObject(int x, int y, int z, string name, string walkable)
+	string MapEditor::createJSONObject(int x, int y, int z, string name,
+			string walkable)
 	{
 		string nameVal = "\"name\": \"" + name + "\",\n";
 		string xVal = "\"x\": " + to_string(x) + ",\n";
@@ -353,7 +369,7 @@ namespace bammm
 		return "{\n" + nameVal + xVal + yVal + zVal + walkVal + "}";
 	}
 
-	string MapEditor::createJson()
+	string MapEditor::createJSON()
 	{
 		string jsonString = "{\n";
 		jsonString = jsonString + "\"" + _name + "\":\n";
@@ -361,16 +377,16 @@ namespace bammm
 		jsonString = jsonString + "\"x\": " + to_string(_x) + ",\n";
 		jsonString = jsonString + "\"y\": " + to_string(_y) + ",\n";
 		jsonString = jsonString + "\"z\": " + to_string(_z) + ",\n";
-		jsonString = jsonString + createWaterJson() + ",\n";
-		jsonString = jsonString + createBarrierJson() + ",\n";
-		jsonString = jsonString + createMineJson() + ",\n";
-		jsonString = jsonString + createBuildingJson() + "\n";
+		jsonString = jsonString + createWaterJSON() + ",\n";
+		jsonString = jsonString + createBarrierJSON() + ",\n";
+		jsonString = jsonString + createMineJSON() + ",\n";
+		jsonString = jsonString + createBuildingJSON() + "\n";
 		jsonString = jsonString + "]\n";
 		jsonString = jsonString + "}";
 		return jsonString;
 	}
 
-	string MapEditor::createWaterJson()
+	string MapEditor::createWaterJSON()
 	{
 		char item = '~';
 		bool firstItem = true;
@@ -389,7 +405,9 @@ namespace bammm
 						{
 							jsonString = jsonString + ",\n";
 						}
-						jsonString = jsonString + createJsonObject(x, y, z, "Deep Water", "false") + "\n";
+						jsonString = jsonString
+								+ createJSONObject(x, y, z, "Deep Water",
+										"false") + "\n";
 					}
 				}
 			}
@@ -398,7 +416,7 @@ namespace bammm
 		return jsonString;
 	}
 
-	string MapEditor::createBarrierJson()
+	string MapEditor::createBarrierJSON()
 	{
 		char item = '#';
 		bool firstItem = true;
@@ -418,7 +436,9 @@ namespace bammm
 							jsonString = jsonString + ",\n";
 						}
 						firstItem = false;
-						jsonString = jsonString + createJsonObject(x, y, z, "Fortress Wall", "false") + "";
+						jsonString = jsonString
+								+ createJSONObject(x, y, z, "Fortress Wall",
+										"false") + "";
 					}
 				}
 			}
@@ -427,7 +447,7 @@ namespace bammm
 		return jsonString;
 	}
 
-	string MapEditor::createMineJson()
+	string MapEditor::createMineJSON()
 	{
 		char item = '^';
 		bool firstItem = true;
@@ -447,7 +467,9 @@ namespace bammm
 							jsonString = jsonString + ",\n";
 						}
 						firstItem = false;
-						jsonString = jsonString + createJsonObject(x, y, z, "Iron ore", "false") + "";
+						jsonString = jsonString
+								+ createJSONObject(x, y, z, "Iron ore", "false")
+								+ "";
 					}
 				}
 			}
@@ -456,7 +478,7 @@ namespace bammm
 		return jsonString;
 	}
 
-	string MapEditor::createBuildingJson()
+	string MapEditor::createBuildingJSON()
 	{
 		char gym = 'G';
 		char fire = 'F';
@@ -503,7 +525,9 @@ namespace bammm
 							jsonString = jsonString + ",\n";
 						}
 						firstItem = false;
-						jsonString = jsonString + createJsonObject(x, y, z, buildingName, "false") + "";
+						jsonString = jsonString
+								+ createJSONObject(x, y, z, buildingName,
+										"false") + "";
 					}
 				}
 			}

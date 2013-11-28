@@ -21,18 +21,13 @@ namespace bammm
 	{
 		public:
 			virtual ~ITickable();
+
+			//TODO: Add doc style comment
 			virtual void tick(float deltaTime)=0;
+
+			//TODO: Add doc style comment
 			virtual bool canDelete();
 	};
-
-	ITickable::~ITickable()
-	{
-	}
-
-	bool ITickable::canDelete()
-	{
-	    return false;
-	}
 }
 
 #endif
