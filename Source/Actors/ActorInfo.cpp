@@ -1,4 +1,6 @@
 #include <iostream>
+#include "ActorInfo.h"
+#include "../SceneManager/Vector3D.h"
 
 using namespace std;
 

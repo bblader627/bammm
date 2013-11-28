@@ -15,6 +15,7 @@
 #define ACTORINFO_H_
 
 #include <iostream>
+#include "../SceneManager/Vector3D.h"
 
 using namespace std;
 

@@ -13,6 +13,7 @@
  */
 
 #include "Actor.h"
+#include "../SceneManager/Vector3D.h"
 
 namespace bammm
 {
@@ -35,10 +36,10 @@ namespace bammm
 		_defense = 2;
 	}
 
-	Actor::Actor(string name)
+	Actor::Actor(string name, string type)
 	{
 		_name = name;
-		_type = "dwarf";
+		_type = type;
 		_rotation = 0;
 		_velocity = new Vector3D();
 		_location = new Vector3D();
