@@ -6,7 +6,7 @@ RM = rm -f
 SRCPATH = .
 SRC = Actors/Actor.h Actors/Actor.cpp Actors/ActorInfo.h Actors/ActorInfo.cpp \
 Controllers/AiController.h Controllers/Controller.h Controllers/PlayerController.h \
-Controllers/AiController.cpp Controllers/PlayerController.cpp \
+Controllers/AiController.cpp Controllers/Controller.cpp Controllers/PlayerController.cpp \
 \
 States/BrawlState.h States/DrinkState.h States/MovementState.h \
 States/IdleState.h Interfaces/IStateCallback.h States/MineState.h States/CombatState.h \
@@ -16,15 +16,16 @@ States/IdleState.cpp Interfaces/IStateCallback.cpp States/MineState.cpp States/C
 States/SingState.cpp States/SleepState.cpp States/State.cpp States/StateMachine.cpp \
 \
 Resources/DynamicArray.h Resources/HashMap.h Resources/HashNode.h \
-Resources/Heap.h Resources/Queue.h Resources/Stack.h SceneManager/Vector3D.h \
+Resources/Heap.h Resources/Queue.h Resources/Stack.h \
 \
 Weapons/IWeaponType.h Weapons/WeaponData.h Weapons/MeleeWeapon.h \
 Weapons/MeleeCombat.h Weapons/MeleeCombat.cpp \
 \
-SceneManager/Grid3D.h SceneManager/SceneManager.h \
-SceneManager/SceneManager.cpp  \
+SceneManager/Vector3D.h SceneManager/Grid3D.h SceneManager/SceneManager.h \
+SceneManager/Vector3D.cpp SceneManager/SceneManager.cpp  \
 \
 Interfaces/ITickable.h Factories/Factory.h Factories/Factory.cpp \
+Interfaces/ITickable.cpp \
 \
 JSON/JSON.cpp JSON/JSONParser.cpp JSON/JSONArray.cpp \
 JSON/JSONPrimitive.cpp \
