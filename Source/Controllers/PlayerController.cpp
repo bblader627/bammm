@@ -29,8 +29,6 @@ namespace bammm
 	{
 		_meleeCombat = &meleeCombat;
 		_sceneGraph = &sceneGraph;
-		//Factory* actorFactory = new Factory();
-		//actorFactory->setup();();
 
 		_actor = &actor;
 		_stateMachine.setup(actor, _states);
