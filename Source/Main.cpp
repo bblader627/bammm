@@ -17,14 +17,20 @@ int main()
 	Factory* actorFactory = new Factory();
 	actorFactory->setup();
 	SceneManager sceneManager;
+
+	//Move to SceneManager
 	MeleeCombat meleeCombat;
 	sceneManager.setMeleeCombat(meleeCombat);
 
+	//Will be done in factory
 	//Creation of Hero
 	Actor* bob = new Actor("Bob", "dwarf");
 	Vector3D* temp = new Vector3D(0, 0, 0);
+
+	//Will become unnecessary
 	sceneManager.getSceneGraph().add(temp, bob);
 
+	////Move to SceneManager?
 	PlayerController controller;
 	controller.setup(*bob, meleeCombat, sceneManager.getSceneGraph());
 

@@ -131,10 +131,9 @@ namespace bammm
 	void PlayerController::printOptions()
 	{
 		DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
-		/*
+		//cout << "What would you like your villagers to do?\n  To run the simulation, enter \"wait [number of iterations]\"." << endl;
 
-		 }
-		 */
+
 		//MAKE THIS SMARTER
 		cout << "Select an activity for your dwarf:" << "\n";
 
@@ -201,6 +200,7 @@ namespace bammm
 		cout << "7. Continue" << "\n";
 
 		cout << "0. Quit" << "\n";
+
 	}
 
 	bool PlayerController::canDelete()
