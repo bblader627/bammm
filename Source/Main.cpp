@@ -14,8 +14,8 @@ int main()
 	printWelcome();
 	bool printMap = true;
 
-	//Factory* actorFactory = new Factory();
-	//actorFactory->setup();();
+	Factory* actorFactory = new Factory();
+	actorFactory->setup();
 	SceneManager sceneManager;
 	MeleeCombat meleeCombat;
 	sceneManager.setMeleeCombat(meleeCombat);
@@ -75,6 +75,7 @@ int main()
 				break;
 			case 6:
 				input->add(attack);
+				break;
 			case 7:
 				break;
 			default:
