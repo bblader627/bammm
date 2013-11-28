@@ -110,6 +110,10 @@ namespace bammm
 				saveMap();
 				break;
 			}
+			else if(convertedChoice == 'x')
+			{
+				break;
+			}
 			else if(convertedChoice == 'h')
 			{
 				displayHelp();
@@ -171,6 +175,8 @@ namespace bammm
 				addItem(_cursorX, _cursorY, _cursorZ, 'S');
 			}
 		}
+
+		cout << "Thank you for using the BAMMM editor.\n";
 	}
 
 	void MapEditor::removeItem(int x, int y, int z)
@@ -216,7 +222,7 @@ namespace bammm
 		const string PURPLE_TEXT = "34m";
 		const string CYAN_TEXT = "36m";
 		const string WHITE_TEXT = "37m";
-		const string HIGHLIGHT = "4;";
+		const string HIGHLIGHT = "7;";
 
 		string color = START_COLOR;
 		if(selected)
@@ -257,6 +263,7 @@ namespace bammm
 	void MapEditor::displayHelp()
 	{
 		cout << "v. Save" << "\n";
+		cout << "x. Exit" << "\n";
 		cout << "w. Move Up" << "\n";
 		cout << "a. Move Left" << "\n";
 		cout << "s. Move Down" << "\n";

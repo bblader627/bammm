@@ -38,8 +38,6 @@ namespace bammm
 
 	};
 
-	//Grid3D<Actor*> SceneManager::_sceneGraph(SCENE_X, SCENE_Y, SCENE_Z);
-
 	SceneManager::~SceneManager()
 	{
 	}
