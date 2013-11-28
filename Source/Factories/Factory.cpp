@@ -20,10 +20,8 @@ namespace bammm
 	{
 		string actorJSON;
 		JSONParser* parser = new JSONParser();
-		string filename = "actors.json";
+		string filename = "JSON/actors.json";
 		parser->parseFile(filename);
-
-		cout << "poop" << endl;
 
 		// Parsing dwarves
 		JSON* dwarves = parser->getRootNode("dwarves");
@@ -33,13 +31,14 @@ namespace bammm
 		JSON* orcs = parser->getRootNode("orcs");
 		this->parseToActorInfo(orcs, "orc", &actorData);
 
+		/*
 		//Parsing Map info
-		//JSON* map = parser->getRootNode("map");
+		JSON* map = parser->getRootNode("map");
 		//JSON* x = map["x"];
 		//JSON* y = map["y"];
 		//JSON* z = map["z"];
 
-		/*
+
 		JSON* wall = map["Wall"];
 		this->parseToActorInfo(wall, "Wall", &blockData);
 
@@ -51,7 +50,7 @@ namespace bammm
 
 		JSON* ore = map["Ore"];
 		this->parseToActorInfo(ore, "Ore", &blockData);
-		*/
+		 */
 
 	}
 
