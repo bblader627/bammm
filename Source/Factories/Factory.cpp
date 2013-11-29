@@ -20,17 +20,28 @@ namespace bammm
 	{
 		string actorJSON;
 		JSONParser* parser = new JSONParser();
-		string filename = "JSON/actors.json";
+		string filename = "JSON/dwarves.json";
 		parser->parseFile(filename);
+		cout << "file parsed" << endl;
 
 		// Parsing dwarves
-		JSON* dwarves = parser->getRootNode("dwarves");
+
+		parser->printAllRoots();
+
+		//segfault on getRootNode
+		JSON* root = parser->getRootNode("root");
+
+		HashMap<JSON*>* rootChildren = root->getAllChildren();
+
+		JSON* dwarves = rootChildren->getValue("dwarves");
+
 		this->parseToActorInfo(dwarves, "dwarf", &actorData);
+		cout << "After parseToActorInfo" << endl;
 
 		// Parsing orcs
 		JSON* orcs = parser->getRootNode("orcs");
 		this->parseToActorInfo(orcs, "orc", &actorData);
-
+		cout << "poop" << endl;
 		/*
 		//Parsing Map info
 		JSON* map = parser->getRootNode("map");
@@ -67,14 +78,22 @@ namespace bammm
 	void Factory::parseToActorInfo(JSON* rootNode, string type,
 			HashMap<ActorInfo>* map)
 	{
-		for (int i = 0; i < rootNode->sizeOfChildren(); i++)
+
+		cout << "in parseToActorInfo" << endl;
+		int numberOfChildren = rootNode->sizeOfChildren();
+		cout << "numberOfChildren: " << numberOfChildren << endl;
+		for (int i = 0; i < numberOfChildren; i++)
 		{
+			cout << rootNode[i].getAllChildren()->getNumerOfNodes() << endl;
+			cout << "name " << endl;
 			JSON* name = rootNode[i]["name"];
 			JSON* health = rootNode[i]["health"];
 			JSON* stamina = rootNode[i]["stamina"];
+			cout << "attack " << endl;;
 			JSON* attack = rootNode[i]["attack"];
 			JSON* defense = rootNode[i]["defense"];
 			JSON* behavior = rootNode[i]["behavior"];
+			cout << "done " << endl;
 
 			JSON* x = rootNode[i]["x"];
 			JSON* y = rootNode[i]["y"];

@@ -2,15 +2,18 @@
 #include "SceneManager/SceneManager.h"
 #include "Controllers/PlayerController.h"
 #include <random>
+#include <exception>
 
 using namespace bammm;
 using namespace std;
 
 void printWelcome();
 void printOptions();
+DynamicArray<string>* parseInput(string);
 
 int main()
 {
+
 	printWelcome();
 	bool printMap = true;
 
@@ -18,83 +21,95 @@ int main()
 	actorFactory->setup();
 	SceneManager sceneManager;
 
-	//Move to SceneManager
+	cout << "factory done" << endl;
+
 	MeleeCombat meleeCombat;
 	sceneManager.setMeleeCombat(meleeCombat);
 
-	//Will be done in factory
-	//Creation of Hero
-	Actor* bob = new Actor("Bob", "dwarf");
-	Vector3D* temp = new Vector3D(0, 0, 0);
-
-	//Will become unnecessary
-	sceneManager.getSceneGraph().add(temp, bob);
-
 	////Move to SceneManager?
 	PlayerController controller;
-	controller.setup(*bob, meleeCombat, sceneManager.getSceneGraph());
+	//controller.setup(*bob, meleeCombat, sceneManager.getSceneGraph());
 
 	bool playGame = true;
-	int choice;
-
-	cout << bob->getName() << " is waiting for instructions." << "\n";
+	bool doTick = true;
+	string command;
+	unsigned int loopCounter = 0;
 
 	DynamicArray<string>* input = new DynamicArray<string>();
-	string sleep = "sleep";
+
+	//string sleep = "sleep";
 	string mine = "mine";
 	string drink = "drink";
 	string sing = "sing";
 	string brawl = "brawl";
 	string attack = "combat";
+	string wait = "wait";
+
 	float dTime = 0;
 	while (playGame)
 	{
-		input->clear();
-
-		if (printMap)
+		doTick = true;
+		if (loopCounter == 0)
 		{
-			cout << sceneManager.getSceneGraph().toString() << "\n";
-		}
+			input->clear();
 
-		controller.printOptions();
-		cin >> choice;
+			if (printMap)
+			{
+				cout << sceneManager.getSceneGraph().toString() << "\n";
+			}
 
-		switch (choice)
-		{
-			case 0:
+			//controller.printOptions();
+			getline(cin, command);
+
+			input = parseInput(command);
+			command = input->get(0);
+
+			if (command == wait)
+			{
+				//Wait [#]
+
+				if (input->getSize() == 2)
+				{
+					string number_str = input->get(1);
+					loopCounter = atoi(number_str.c_str());
+				}
+				else
+				{
+					cout << "Invalid input\n";
+					doTick = false;
+				}
+
+				if (loopCounter == 0)
+				{
+					cout << "Invalid input\n";
+					doTick = false;
+				}
+
+			}
+
+			else if (command == "exit")
+			{
 				playGame = false;
+			}
+
+
+			if (!playGame)
+			{
 				break;
-			case 1:
-				input->add(mine);
-				break;
-			case 2:
-				input->add(drink);
-				break;
-			case 3:
-				input->add(sing);
-				break;
-			case 4:
-				input->add(brawl);
-				break;
-			case 5:
-				input->add(sleep);
-				break;
-			case 6:
-				input->add(attack);
-				break;
-			case 7:
-				break;
-			default:
-				cout << "Invalid Input" << "\n";
-				break;
+			}
+
+			if (doTick)
+			{
+				controller.input(input, dTime);
+				sceneManager.tick(0);
+			}
+		}
+		else	//looping
+		{
+			loopCounter--;
+			sceneManager.tick(0);
 		}
 
-		if (!playGame)
-		{
-			break;
-		}
-		controller.input(input, dTime);
-		sceneManager.tick(0);
 	}
 	delete input;
 
@@ -105,9 +120,8 @@ int main()
 void printWelcome()
 {
 	cout << "================================================" << "\n";
-	cout << "Welcome to BAMMM -  Alpha v0.1" << "\n";
-	cout
-			<< "Creators: \tAlvaro Home - Matthew Konstantinou - Matthew Witkowski\n\t\tBradley Crusco - Michael Abramo"
+	cout << "Welcome to BAMMM -  Alpha v0.2" << "\n";
+	cout << "Creators: \tAlvaro Home - Matthew Konstantinou - Matthew Witkowski\n\t\tBradley Crusco - Michael Abramo"
 			<< "\n";
 	cout << "================================================" << "\n";
 }
@@ -116,4 +130,36 @@ bool createActor()
 {
 
 	return false;
+}
+
+DynamicArray<string>* parseInput(string input)
+{
+	char delimiter = ' ';
+	char current;
+
+	string builder = "";
+	DynamicArray<string>* result = new DynamicArray<string>();
+
+	for (unsigned int i = 0; i < input.size(); i++)
+	{
+		current = input[i];
+
+		if ( i == input.size()-1)
+		{
+			builder += current;
+			result->add(builder);
+			builder = "";
+		}
+
+		if (current == delimiter)
+		{
+			result->add(builder);
+			builder = "";
+		}
+		else
+		{
+			builder += current;
+		}
+	}
+	return result;
 }
