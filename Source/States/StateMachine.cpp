@@ -31,10 +31,12 @@ namespace bammm
 		_allStates = &allStates;
 	}
 
-	void StateMachine::setup(Actor& actor, HashMap<State*>& allStates)
+	void StateMachine::setup(Actor& actor, HashMap<State*>& allStates, MeleeCombat* meleeCombat)
 	{
 		_actor = &actor;
 		_allStates = &allStates;
+		_meleeCombat = meleeCombat;
+
 	}
 
 	void StateMachine::initialState(State* initial)
@@ -74,7 +76,6 @@ namespace bammm
 			if (newState->toString() == "combat")
 			{
 				//test for fight hapening
-				/*
 				if (!_meleeCombat->fightHappening())
 				{
 					this->removeState(newState);
@@ -84,7 +85,6 @@ namespace bammm
 				{
 					_meleeCombat->useTurn();
 				}
-				*/
 			}
 			else
 			{
@@ -94,6 +94,15 @@ namespace bammm
 		}
 		else
 		{
+			//Special case for combat state
+			if (newState->toString() == "combat")
+			{
+				/*Actor* closestEnemy = SceneManager::getSceneGraph().getEnemy(_actor->getLocation(), _actor);
+				 if(closestEnemy)
+				 {
+				 _meleeCombat->setup(*_actor, *closestEnemy);
+				 }*/
+			}
 			newState->setup();
 			currentStates.add(newState);
 		}
