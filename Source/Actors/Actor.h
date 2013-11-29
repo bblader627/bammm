@@ -322,7 +322,7 @@ namespace bammm
 			/**
 			 getEnemyAlliance
 			 @Pre-Condition- No input
-			 @Post-Condition- Returns _alliance * -1
+			 @Post-Condition- Returns the enemy's alliance
 			 */
 			int getEnemyAlliance();
 

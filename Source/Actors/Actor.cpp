@@ -27,7 +27,7 @@ namespace bammm
 
 		_velocity = new Vector3D();
 		_location = new Vector3D();
-		_collision = true;
+		_collision = false;
 
 		MAX_HEALTH = 100;
 		MAX_STAMINA = 50;
@@ -36,12 +36,13 @@ namespace bammm
 		_healthBar = 100;
 		_staminaBar = 50;
 		_attack = 4;
+		_alliance = ally;
 		_defense = 2;
 	}
 
 	Actor::Actor(string name, string type)
 	{
-		_collision = true;
+		_collision = false;
 		_name = name;
 		_type = type;
 		_rotation = 0;
@@ -56,6 +57,7 @@ namespace bammm
 		_staminaBar = 50;
 		_attack = 4;
 		_defense = 2;
+		_alliance = ally;
 	}
 
 	Actor::Actor(string type, string name, int health, int stamina, int attack,
@@ -78,6 +80,8 @@ namespace bammm
 		_defense = defense;
 
 		_behavior = behavior;
+		_alliance = ally;
+		_collision = false;
 	}
 
 	Actor::Actor(ActorInfo* info)
@@ -98,6 +102,7 @@ namespace bammm
 		_defense = info->getDefense();
 
 		_behavior = info->getBehavior();
+		_alliance = ally;
 	}
 
 	void Actor::setMeleeWeapon(MeleeWeapon* weapon)
