@@ -79,8 +79,6 @@ namespace bammm
 			 *******************************************/
 			if (currentStates.contains(newState))
 			{
-				//switching newState with NULL calls breakdown on newState, the remove on currentStates
-
 				//Do doTurn in MeleeCombat
 				if (newState->toString() == "combat")
 				{
@@ -115,8 +113,6 @@ namespace bammm
 			}
 		}
 
-		//Should input even call switchstate?
-		//_stateMachine->switchState(newStates);
 		_stateMachine.tick(deltaTime);
 	}
 

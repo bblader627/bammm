@@ -14,6 +14,7 @@
 
 #include "StateMachine.h"
 
+
 namespace bammm
 {
 	StateMachine::StateMachine()
@@ -68,10 +69,35 @@ namespace bammm
 
 	void StateMachine::addState(State* newState)
 	{
-		newState->setup();
-		currentStates.add(newState);
-	}
+		if (currentStates.contains(newState))
+		{
+			if (newState->toString() == "combat")
+			{
+				//test for fight hapening
+				/*
+				if (!_meleeCombat->fightHappening())
+				{
+					this->removeState(newState);
 
+				}
+				else
+				{
+					_meleeCombat->useTurn();
+				}
+				*/
+			}
+			else
+			{
+				//breakdown and setup are not calling the correct functions
+				this->removeState(newState);
+			}
+		}
+		else
+		{
+			newState->setup();
+			currentStates.add(newState);
+		}
+	}
 	void StateMachine::removeState(State* oldState)
 	{
 		oldState->breakdown();

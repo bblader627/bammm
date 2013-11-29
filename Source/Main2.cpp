@@ -31,6 +31,7 @@ int main()
 	*/
 
 	bool playGame = true;
+	bool doTick = true;
 	string command;
 	unsigned int loopCounter = 0;
 
@@ -56,6 +57,7 @@ int main()
 	float dTime = 0;
 	while (playGame)
 	{
+		doTick = true;
 		if (loopCounter == 0)
 		{
 			input->clear();
@@ -82,12 +84,14 @@ int main()
 				}
 				else
 				{
-					cout << "Invalid input" << endl;
+					cout << "Invalid input\n";
+					doTick = false;
 				}
 
 				if (loopCounter == 0)
 				{
 					cout << "Invalid input\n";
+					doTick = false;
 				}
 
 			}
@@ -104,13 +108,15 @@ int main()
 					type = input->get(2);
 					if (!(oreType->contains(type)))
 					{
-						cout << type << " is not a valid ore type" << endl;
+						cout << type << " is not a valid ore type\n";
+						doTick = false;
 					}
 					//Add to controllerinput
 				}
 				else
 				{
-					cout << "Invalid input" << endl;
+					cout << "Invalid input\n";
+					doTick = false;
 				}
 
 			}
@@ -124,7 +130,8 @@ int main()
 				}
 				else
 				{
-					cout << "Invalid input" << endl;
+					cout << "Invalid input\n";
+					doTick = false;
 				}
 			}
 			else if (command == brawl)
@@ -148,6 +155,7 @@ int main()
 				catch (exception& e)
 				{
 					cout << "Invalid beverage name.\n";
+					doTick = false;
 				}
 			}
 			else if (command == "exit")
@@ -156,7 +164,8 @@ int main()
 			}
 			else
 			{
-				cout << "Invalid input" << endl;
+				cout << "Invalid input\n";
+				doTick = false;
 			}
 
 
@@ -166,9 +175,11 @@ int main()
 				break;
 			}
 
-			cout << "endloop\n";
-			//controller.input(input, dTime);
-			//sceneManager.tick(0);
+			if (doTick)
+			{
+				//controller.input(input, dTime);
+				//sceneManager.tick(0);
+			}
 		}
 		else	//looping
 		{
