@@ -31,7 +31,7 @@ namespace bammm
 		_sceneGraph = &sceneGraph;
 
 		_actor = &actor;
-		_stateMachine.setup(actor, _states);
+		_stateMachine.setup(actor, _states, _meleeCombat);
 
 		//Create the states
 		DrinkState* drinkState = new DrinkState(actor, _stateMachine);
@@ -54,66 +54,96 @@ namespace bammm
 		_stateMachine.initialState(_states.getValue(idleState->toString()));
 	}
 
-	void PlayerController::input(DynamicArray<string>* multiInput,
+	void PlayerController::input(DynamicArray<string>* commandString,
 			float deltaTime)
 	{
-		//all currently running states
-		//Danger
-		DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
+		string newState = commandString->get(0);
+		bool doTick = true;
 
-		//newStates will have 1 state
-		//DynamicArray<State*>* newStates = new DynamicArray<State*>();
+		DynamicArray<string>* oreType = new DynamicArray<string>();
+		oreType->add("iron");
+		oreType->add("coal");
+		oreType->add("gold");
 
-		for (int i = 0; i < (int) multiInput->getSize(); i++)
+
+		if (newState == "mine")
 		{
-			//Check to see if state is already running
-			//if so, break it down
+			//mine [#] [ore-type]
+			int numOre;
+			string type;
 
-			//!!!!!!!Danger!!!!!!!
-			State* newState = _states.getValue(multiInput->get(i));
-
-			/********************************************
-			 *This should be handled in the stateMachine
-			 *This logic should be in statemachine->add()
-			 * or switchState()
-			 *******************************************/
-			if (currentStates.contains(newState))
+			if (commandString->getSize() == 3)
 			{
-				//Do doTurn in MeleeCombat
-				if (newState->toString() == "combat")
+				string number_str = commandString->get(1);
+				numOre = atoi(number_str.c_str());
+				type = commandString->get(2);
+				if (!(oreType->contains(type)))
 				{
-					if (!_meleeCombat->fightHappening())
-					{
-						_stateMachine.removeState(newState);
-
-					}
-					else
-					{
-						_meleeCombat->useTurn();
-					}
+					cout << type << " is not a valid ore type\n";
+					doTick = false;
 				}
-				else
+				//Add to controllerinput
+			}
+			else
+			{
+				cout << "Invalid input\n";
+				doTick = false;
+			}
+
+		}
+		else if (newState == "sing")
+		{
+			//sing [songname]
+			string songname;
+			if (commandString->getSize() >= 2)
+			{
+				for (unsigned int i = 1; i < commandString->getSize(); i++)
 				{
-					//breakdown and setup are not calling the correct functions
-					_stateMachine.removeState(newState);
+					songname += commandString->get(i);
 				}
 			}
 			else
 			{
-				//Special case for combat state
-				if (newState->toString() == "combat")
-				{
-					/*Actor* closestEnemy = SceneManager::getSceneGraph().getEnemy(_actor->getLocation(), _actor);
-					 if(closestEnemy)
-					 {
-					 _meleeCombat->setup(*_actor, *closestEnemy);
-					 }*/
-				}
-				_stateMachine.addState(newState);
+				cout << "Invalid input\n";
+				doTick = false;
 			}
 		}
+		else if (newState == "brawl")
+		{
+			//how even
 
-		_stateMachine.tick(deltaTime);
+		}
+		else if (newState == "attack")
+		{
+			//attack [actor name]
+
+		}
+		else if (newState == "drink")
+		{
+			//drink [beverage name]
+			string beverage;
+			try
+			{
+				beverage = commandString->get(1);
+			}
+			catch (exception& e)
+			{
+				cout << "Invalid beverage name.\n";
+			}
+		}
+		else
+		{
+			cout << "Invalid input\n";
+			doTick = false;
+		}
+
+
+		if (doTick)
+		{
+			State* stateToAdd = _states.getValue(newState);
+			_stateMachine.addState(stateToAdd);
+			_stateMachine.tick(deltaTime);
+		}
 	}
 
 	void PlayerController::input(string command, float deltaTime)

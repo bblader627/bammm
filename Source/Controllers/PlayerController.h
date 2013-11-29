@@ -37,7 +37,7 @@ namespace bammm
 			 @Pre-Condition- Takes multiple commands and a deltaTime
 			 @Post-Condition- The commands are executed.
 			 */
-			void input(DynamicArray<string>* command, float deltaTime);
+			void input(DynamicArray<string>* commandString, float deltaTime);
 
 			/**
 			 input
