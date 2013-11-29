@@ -14,8 +14,8 @@ int main()
 	printWelcome();
 	bool printMap = true;
 
-	Factory* actorFactory = new Factory();
-	actorFactory->setup();
+	//Factory* actorFactory;
+	//actorFactory.setup();
 	SceneManager sceneManager;
 
 	//Move to SceneManager

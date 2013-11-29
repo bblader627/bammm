@@ -48,6 +48,8 @@ namespace bammm
 			int _gold;
 			float _BAC;
 
+			bool _collision;
+
 			enum AllianceType
 			{
 				enemy = -1, neutral = 0, ally = 1
@@ -183,6 +185,13 @@ namespace bammm
 			 @Post-Condition- Returns _gold
 			 */
 			int getGold();
+			
+			/**
+			 getMeleeWeapon
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _collision
+			 */
+			bool getCollision();
 
 			/**
 			 getMeleeWeapon

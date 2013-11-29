@@ -27,6 +27,7 @@ namespace bammm
 
 		_velocity = new Vector3D();
 		_location = new Vector3D();
+		_collision = true;
 
 		MAX_HEALTH = 100;
 		MAX_STAMINA = 50;
@@ -40,6 +41,7 @@ namespace bammm
 
 	Actor::Actor(string name, string type)
 	{
+		_collision = true;
 		_name = name;
 		_type = type;
 		_rotation = 0;
@@ -224,6 +226,11 @@ namespace bammm
 	int Actor::getGold()
 	{
 		return _gold;
+	}
+
+	bool Actor::getCollision()
+	{
+		return _collision;
 	}
 
 	MeleeWeapon* Actor::getMeleeWeapon()
