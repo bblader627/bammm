@@ -28,10 +28,12 @@ namespace bammm
 		registerTransitionCallback(stateMachine);
 	}
 
-	void MineState::setup()
+	void MineState::setup(DynamicArray<string>* args)
 	{
 		_successChance = 30;
 		_maximumGold = 100;
+		_amountToMine = atoi(args->get(1).c_str());
+		_oreType = args->get(2);
 	}
 
 	void MineState::breakdown()
@@ -40,6 +42,15 @@ namespace bammm
 
 	void MineState::tick(float deltaTime)
 	{
+		if (_actor->getGold() > _maximumGold || _amountToMine <= 0)
+		{
+
+			cout << _actor->getName() << " is finished mining!" << "\n";
+			_amountToMine = 0;
+			switchState("drink");
+			return;
+		}
+
 		if (_actor->getBAC() > 0.4)
 		{
 			cout << _actor->getName()
@@ -51,14 +62,11 @@ namespace bammm
 
 		_actor->reduceStamina(1);
 		_actor->addGold(1);
+
 		cout << _actor->getName()
 				<< " lifts his pickaxe, and swings it at the rock. " << "\n";
 		cout << _actor->getGold() << "\n";
-		if (_actor->getGold() > _maximumGold)
-		{
-			cout << _actor->getName() << "'s purse is full!" << "\n";
-			switchState("drink");
-		}
+
 	}
 
 	void MineState::switchState(string nextState)

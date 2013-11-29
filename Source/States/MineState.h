@@ -30,6 +30,8 @@ namespace bammm
 		private:
 			int _successChance;
 			int _maximumGold;
+			int _amountToMine;
+			string _oreType;
 
 		public:
 			MineState(Actor& actor);
@@ -40,7 +42,7 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			virtual void setup();
+			virtual void setup(DynamicArray<string>* args);
 
 			/**
 			 breakdown

@@ -29,7 +29,7 @@ namespace bammm
 		registerTransitionCallback(stateMachine);
 	}
 
-	void MovementState::setup()
+	void MovementState::setup(DynamicArray<string>* args)
 	{
 		//_direction = &direction;
 	}

@@ -27,7 +27,7 @@ namespace bammm
 		registerTransitionCallback(stateMachine);
 	}
 
-	void CombatState::setup()
+	void CombatState::setup(DynamicArray<string>* args)
 	{
 	}
 

@@ -28,7 +28,7 @@ namespace bammm
 		registerTransitionCallback(stateMachine);
 	}
 
-	void DrinkState::setup()
+	void DrinkState::setup(DynamicArray<string>* args)
 	{
 		_stoutLife = _stoutSize;
 	}
