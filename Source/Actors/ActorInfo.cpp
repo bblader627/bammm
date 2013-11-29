@@ -16,9 +16,10 @@ namespace bammm
 		_attack = 10;
 		_defense = 10;
 		_behavior = "drink";
+		_collision = true;
 	}
 
-	ActorInfo::ActorInfo(string type, string name, int health, int stamina, int attack, int defense, string behavior)
+	ActorInfo::ActorInfo(string type, string name, int health, int stamina, int attack, int defense, string behavior, bool collision)
 	{
 		_type = type;
 		_name = name;
@@ -27,6 +28,7 @@ namespace bammm
 		_attack = attack;
 		_defense = defense;
 		_behavior = behavior;
+		_collision = collision;
 	}
 
 	string ActorInfo::getType()
@@ -69,6 +71,11 @@ namespace bammm
 		return _location;
 	}
 
+	bool ActorInfo::getCollision()
+	{
+		return _collision;
+	}
+
 	void ActorInfo::setType(string type)
 	{
 		_type = type;
@@ -107,5 +114,10 @@ namespace bammm
 	void ActorInfo::setLocation(Vector3D* location)
 	{
 		_location = location;
+	}
+
+	void ActorInfo::setCollision(bool collision)
+	{
+		_collision = collision;
 	}
 }

@@ -8,17 +8,16 @@
  *	Matt Witkowski
  *	Bradley Crusco
  * Description:
- * MovementState header file.
+ * DamageState header file.
  *
  */
 
-#ifndef MOVEMENTSTATE_H_
-#define MOVEMENTSTATE_H_
+#ifndef DAMAGESTATE_H_
+#define DAMAGESTATE_H_
 
 #include <iostream>
 #include "State.h"
-#include "../SceneManager/Grid3D.h"
-
+#include "../Weapons/MeleeWeapon.h"
 #ifndef UINT
 #define UINT
 typedef unsigned int UINT;
@@ -28,15 +27,14 @@ using namespace std;
 
 namespace bammm
 {
-	class MovementState: public State
+	class DamageState: public State
 	{
 		private:
-			Vector3D* _direction;
-			Grid3D<Actor*>* _sceneGraph;
+			Actor* _target;
 
 		public:
-			MovementState(Actor& actor);
-			MovementState(Actor& actor, IStateCallback& stateMachine, Grid3D<Actor*>& sceneGraph);
+			DamageState(Actor& actor);
+			DamageState(Actor& actor, IStateCallback& stateMachine);
 
 			/**
 			 Update this to take a Vector3D once we get rid of circular
@@ -46,6 +44,13 @@ namespace bammm
 			 */
 			virtual void setup();
 
+			/**
+			 setup
+			 @Pre-Condition- Takes an Actor to apply damage to
+			 @Post-Condition- Sets up the state with an Actor
+			 */
+			virtual void setup(Actor& target);
+			
 			/**
 			 breakdown
 			 @Pre-Condition- No input

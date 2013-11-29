@@ -27,6 +27,7 @@ namespace bammm
 			string _name;
 			string _type;
 			int _health;
+			bool _collision;
 			int _stamina;
 			int _attack;
 			int _defense;
@@ -36,7 +37,7 @@ namespace bammm
 
 		public:
 			ActorInfo();
-			ActorInfo(string type, string name, int health, int stamina, int attack, int defense, string behavior);
+			ActorInfo(string type, string name, int health, int stamina, int attack, int defense, string behavior, bool collision);
 
 			/**
 			 getType
@@ -94,6 +95,12 @@ namespace bammm
 			 */
 			Vector3D* getLocation();
 
+			/**
+			 getLocation
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _collision
+			 */
+			bool getCollision();
 
 			/**
 			 setType
@@ -150,6 +157,13 @@ namespace bammm
 			 @Post-Condition- returns nothing
 			 */
 			void setLocation(Vector3D* location);
+			
+			/**
+			 setCollision
+			 @Pre-Condition- takes a boolean to set the collision
+			 @Post-Condition- returns nothing
+			 */
+			void setCollision(bool collision);
 
 	};
 

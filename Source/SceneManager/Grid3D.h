@@ -38,11 +38,11 @@ namespace bammm
 			int _height;
 
 			//Directions
-			Vector3D *UP;
-			Vector3D *DOWN;
-			Vector3D *LEFT;
-			Vector3D *RIGHT;
-			Vector3D *ZERO;
+			Vector3D* UP;
+			Vector3D* DOWN;
+			Vector3D* LEFT;
+			Vector3D* RIGHT;
+			Vector3D* ZERO;
 
 			/*
 			 convertToPosition
@@ -137,15 +137,15 @@ namespace bammm
 
 			/*
 			 getEnemy
-			 @Pre-Condition- Takes location and an enemy
+			 @Pre-Condition- Takes location and an actor
 			 @Post-Condition- Returns that enemy on that location
 			 */
-			T getEnemy(Vector3D* location, T enemy);
+			T getEnemy(Vector3D* location, T unit);
 
 			/*
 			 move
 			 @Pre-Condition- Takes in an actor and a vector newLocation
-			 @Post-Condition- The actor moves to the new location
+			 @Post-Condition- The actor moves to the new location. newLocation will be deleted if the actor cannot move.
 			 */
 			void move(T actor, Vector3D* newLocation);
 
@@ -155,6 +155,13 @@ namespace bammm
 			 @Post-Condition- The ordered object is told to move towards the new location
 			 */
 			void moveTowards(T ordered, Vector3D* newLocation);
+			
+			/*
+			 isWalkable
+			 @Pre-Condition- Takes a location/vector
+			 @Post-Condition- A boolean representing if the spot is walkable
+			 */
+			bool isWalkable(Vector3D location);
 
 			/*
 			 getX
@@ -513,11 +520,11 @@ namespace bammm
 	}
 
 	template<class T>
-	T Grid3D<T>::getEnemy(Vector3D* location, T enemy)
+	T Grid3D<T>::getEnemy(Vector3D* location, T unit)
 	{
 		DynamicArray<DynamicArray<T>*>* tiles = access(location, 0);
 		DynamicArray<T>* allOnTile = tiles->get(0);
-		int actorEnemyAlliance = enemy->getEnemyAlliance();
+		int actorEnemyAlliance = unit->getEnemyAlliance();
 
 		for (int i = 0; i < (int) allOnTile->getSize(); i++)
 		{
@@ -536,9 +543,47 @@ namespace bammm
 	template<class T>
 	void Grid3D<T>::move(T actor, Vector3D* newLocation)
 	{
-		remove(actor->getLocation(), actor);
-		delete actor->getLocation();
-		add(newLocation, actor);
+		if(isWalkable(*newLocation))
+		{
+			remove(actor->getLocation(), actor);
+			delete actor->getLocation();
+			add(newLocation, actor);
+		}
+		else
+		{
+			delete newLocation;
+		}
+	}
+
+	template<class T>
+	bool Grid3D<T>::isWalkable(Vector3D location)
+	{
+		//Checks for in grid bounds
+		if(location.getX() < 0 || location.getY() < 0 || location.getZ() < 0)
+		{
+			return false;
+		}
+		
+		//Checks for in grid bounds
+		if(location.getX() >= _width || location.getY() >= _length || location.getZ() >= _height)
+		{
+			return false;
+		}
+
+		//int radius = 0;
+		DynamicArray<DynamicArray<T>*>* tiles = access(&location, 0);
+		DynamicArray<T>* allOnTile = tiles->get(0);
+		int size = allOnTile->getSize();
+
+		for(int i = 0; i < size; i++)
+		{
+			if(allOnTile->get(i)->getCollision() == true)
+			{
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	template<class T>

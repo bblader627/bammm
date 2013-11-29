@@ -75,15 +75,19 @@ namespace bammm
 			JSON* attack = rootNode[i]["attack"];
 			JSON* defense = rootNode[i]["defense"];
 			JSON* behavior = rootNode[i]["behavior"];
+			//////////////This was added/////////////
+			JSON* collision = rootNode[i]["collision"];
+			/////////////////////////////////////////
 
 			JSON* x = rootNode[i]["x"];
 			JSON* y = rootNode[i]["y"];
 			JSON* z = rootNode[i]["z"];
 
+	
 			ActorInfo* info = new ActorInfo(type, name->getStringValue(),
 					health->getIntValue(), stamina->getIntValue(),
 					attack->getIntValue(), defense->getIntValue(),
-					behavior->getStringValue());
+					behavior->getStringValue(), !!collision->getIntValue());
 
 			info->setLocation(
 					new Vector3D((float) (x->getDoubleValue()),

@@ -24,6 +24,7 @@
 #include "../States/SingState.h"
 #include "../States/MineState.h"
 #include "../States/CombatState.h"
+#include "../States/DamageState.h"
 #include "../States/MoveState.h"
 #include "../Resources/HashMap.h"
 #include "../Actors/Actor.h"
