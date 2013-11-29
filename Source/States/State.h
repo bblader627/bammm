@@ -20,6 +20,7 @@
 #include "../Interfaces/IStateCallback.h"
 #include "../Interfaces/ITickable.h"
 #include "../Actors/Actor.h"
+#include "../SceneManager/Vector3D.h"
 
 #ifndef NULL
 #define NULL (void *)0
@@ -46,6 +47,13 @@ namespace bammm
 			 @Post-Condition- Sets up the state
 			 */
 			virtual void setup();
+			
+			/**
+			 setup
+			 @Pre-Condition- No input
+			 @Post-Condition- Sets up the state
+			 */
+			virtual void setup(Vector3D direction);
 
 			/**
 			 breakdown
