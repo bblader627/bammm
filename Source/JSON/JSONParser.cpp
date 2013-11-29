@@ -348,7 +348,7 @@ namespace bammm
 					cout << "\tName: " << currentNode->getName() << " Type: "
 							<< currentNode->getType() << " Value: " << value
 							<< "\n";
-
+					cout << "Parent: " << currentNode->getParent()->getName() << endl;
 					break;
 
 				case ',':
