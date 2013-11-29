@@ -50,11 +50,18 @@ namespace bammm
 			
 			/**
 			 setup
-			 @Pre-Condition- No input
+			 @Pre-Condition- Takes a Vector3D reference
 			 @Post-Condition- Sets up the state
 			 */
 			virtual void setup(Vector3D direction);
 
+			/**
+			 setup
+			 @Pre-Condition- Takes an Actor reference
+			 @Post-Condition- Sets up the state
+			 */
+			virtual void setup(Actor& target);
+			
 			/**
 			 breakdown
 			 @Pre-Condition- No input

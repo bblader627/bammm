@@ -137,10 +137,10 @@ namespace bammm
 
 			/*
 			 getEnemy
-			 @Pre-Condition- Takes location and an enemy
+			 @Pre-Condition- Takes location and an actor
 			 @Post-Condition- Returns that enemy on that location
 			 */
-			T getEnemy(Vector3D* location, T enemy);
+			T getEnemy(Vector3D* location, T unit);
 
 			/*
 			 move
@@ -520,11 +520,11 @@ namespace bammm
 	}
 
 	template<class T>
-	T Grid3D<T>::getEnemy(Vector3D* location, T enemy)
+	T Grid3D<T>::getEnemy(Vector3D* location, T unit)
 	{
 		DynamicArray<DynamicArray<T>*>* tiles = access(location, 0);
 		DynamicArray<T>* allOnTile = tiles->get(0);
-		int actorEnemyAlliance = enemy->getEnemyAlliance();
+		int actorEnemyAlliance = unit->getEnemyAlliance();
 
 		for (int i = 0; i < (int) allOnTile->getSize(); i++)
 		{

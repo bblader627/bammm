@@ -17,6 +17,7 @@
 
 #include <iostream>
 #include "State.h"
+#include "../Weapons/MeleeWeapon.h"
 #ifndef UINT
 #define UINT
 typedef unsigned int UINT;

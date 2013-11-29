@@ -58,8 +58,10 @@ namespace bammm
 		}
 		else
 		{
-			cout << attackerName << " can't attack yet." << "\n":
+			cout << attackerName << " can't attack yet." << "\n";
 		}
+
+		switchState("null");
 	}
 
 	void DamageState::switchState(string nextState)

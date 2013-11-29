@@ -36,6 +36,7 @@ namespace bammm
 		SleepState* sleepState = new SleepState(actor, _stateMachine);
 		IdleState* idleState = new IdleState(actor, _stateMachine);
 		CombatState* combatState = new CombatState(actor, _stateMachine);
+		DamageState* damageState = new DamageState(actor, _stateMachine);
 		MoveState* moveState = new MoveState(actor, _stateMachine,
 				sceneGraph);
 
@@ -47,6 +48,7 @@ namespace bammm
 		_states.add(sleepState->toString(), sleepState);
 		_states.add(combatState->toString(), combatState);
 		_states.add(moveState->toString(), moveState);
+		_states.add(damageState->toString(), damageState);
 
 		//Put actor in idle state
 		_stateMachine.initialState(_states.getValue(idleState->toString()));
@@ -71,16 +73,31 @@ namespace bammm
 
 	void AiController::tick(float deltaTime)
 	{
+		Actor* enemy = _sceneGraph->getEnemy(_actor->getLocation(), _actor);
 		DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
-		State* newState = _states.getValue("movement");
-		
-		//all currently running states
-		if (!currentStates.contains(newState))
+		State* newState;
+		if(enemy)
 		{
-			_stateMachine.addState(newState);
+			cout << "I want to fight\n";
+			newState = _states.getValue("damage");
+			
+			if(!currentStates.contains(newState))
+			{
+				_stateMachine.addState(newState);
+			}
+
+			newState->setup(*enemy);
 		}
 		else
 		{
+			newState = _states.getValue("movement");
+		
+			//all currently running states
+			if (!currentStates.contains(newState))
+			{
+				_stateMachine.addState(newState);
+			}
+
 			//Random number generator
 			random_device rd;
 			mt19937 generator(rd());

@@ -53,6 +53,7 @@ namespace bammm
 		Vector3D* newLoc = new Vector3D(x, y, z);
 		
 		_sceneGraph->move(_actor, newLoc);
+		switchState("null");
 	}
 
 	void MoveState::switchState(string nextState)
