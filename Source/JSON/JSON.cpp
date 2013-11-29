@@ -64,6 +64,11 @@ namespace bammm
 		return _children.getNumerOfNodes();
 	}
 
+	HashMap<JSON*>* JSON::getAllChildren()
+	{
+		return &_children;
+	}
+
 	void JSON::setName(string newName)
 	{
 		_name = newName;
@@ -93,7 +98,6 @@ namespace bammm
 			cout.flush();
 			return;
 		}
-		cout << "Adding Child \n";
 		_children.add(newNode.getName(), &newNode);
 	}
 

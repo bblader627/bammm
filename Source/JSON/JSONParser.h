@@ -75,6 +75,9 @@ namespace bammm
 			 */
 			JSON* getRootNode(string key);
 
+
+			void printAllRoots();
+
 			//TODO: Can this implementation be moved to the cpp file?
 			/**
 			 operator[]
