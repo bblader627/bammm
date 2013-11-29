@@ -47,7 +47,7 @@ namespace bammm
 
 			cout << _actor->getName() << " is finished mining!" << "\n";
 			_amountToMine = 0;
-			switchState("drink");
+			switchState("null");
 			return;
 		}
 

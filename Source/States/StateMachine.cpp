@@ -41,7 +41,7 @@ namespace bammm
 
 	void StateMachine::initialState(State* initial)
 	{
-		initial->setup();
+		initial->setup(new DynamicArray<string>());
 		currentStates.add(initial);
 	}
 
@@ -56,7 +56,7 @@ namespace bammm
 	void StateMachine::switchState(State& current, State& newState)
 	{
 		removeState(&current);
-		addState(&newState);
+		addState(&newState, new DynamicArray<string>());
 	}
 
 	void StateMachine::switchState(State& current, string newStateString)
@@ -103,7 +103,47 @@ namespace bammm
 				 _meleeCombat->setup(*_actor, *closestEnemy);
 				 }*/
 			}
-			newState->setup();
+			cout << "poop" << endl;
+			newState->setup(new DynamicArray<string>());
+			currentStates.add(newState);
+		}
+	}
+
+	void StateMachine::addState(State* newState, DynamicArray<string>* args)
+	{
+		if (currentStates.contains(newState))
+		{
+			if (newState->toString() == "combat")
+			{
+				//test for fight hapening
+				if (!_meleeCombat->fightHappening())
+				{
+					this->removeState(newState);
+
+				}
+				else
+				{
+					_meleeCombat->useTurn();
+				}
+			}
+			else
+			{
+				//breakdown and setup are not calling the correct functions
+				this->removeState(newState);
+			}
+		}
+		else
+		{
+			//Special case for combat state
+			if (newState->toString() == "combat")
+			{
+				/*Actor* closestEnemy = SceneManager::getSceneGraph().getEnemy(_actor->getLocation(), _actor);
+				 if(closestEnemy)
+				 {
+				 _meleeCombat->setup(*_actor, *closestEnemy);
+				 }*/
+			}
+			newState->setup(args);
 			currentStates.add(newState);
 		}
 	}

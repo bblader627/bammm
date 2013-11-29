@@ -27,7 +27,7 @@ namespace bammm
 		registerTransitionCallback(stateMachine);
 	}
 
-	void IdleState::setup()
+	void IdleState::setup(DynamicArray<string>* args)
 	{
 	}
 

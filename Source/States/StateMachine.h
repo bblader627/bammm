@@ -76,7 +76,14 @@ namespace bammm
 			 @Pre-Condition- Takes in a pointer to a State state
 			 @Post-Condition- Adds the given State state to the state machine
 			 */
-			void addState(State* state);
+			void addState(State* newState);
+
+			/**
+			 addState
+			 @Pre-Condition- Takes in a pointer to a State state and DynamicArray of args
+			 @Post-Condition- Adds the given State state to the state machine
+			 */
+			void addState(State* newState, DynamicArray<string>* args);
 
 			/**			 
 			 removeState
