@@ -75,7 +75,14 @@ namespace bammm
 			if (commandString->getSize() == 3)
 			{
 				string number_str = commandString->get(1);
+
 				numOre = atoi(number_str.c_str());
+				if (numOre == 0)
+				{
+					cout << "Invalid argument\n";
+					doTick = false;
+				}
+				numOre = 0;
 				type = commandString->get(2);
 				if (!(oreType->contains(type)))
 				{
@@ -83,6 +90,7 @@ namespace bammm
 					doTick = false;
 				}
 				//Add to controllerinput
+
 			}
 			else
 			{
@@ -141,7 +149,7 @@ namespace bammm
 		if (doTick)
 		{
 			State* stateToAdd = _states.getValue(newState);
-			_stateMachine.addState(stateToAdd);
+			_stateMachine.addState(stateToAdd, commandString);
 			_stateMachine.tick(deltaTime);
 		}
 	}

@@ -76,7 +76,7 @@ namespace bammm
 		//all currently running states
 		if (!currentStates.contains(newState))
 		{
-			_stateMachine.addState(newState);
+			_stateMachine.addState(newState, new DynamicArray<string>());
 		}
 		_stateMachine.tick(deltaTime);
 	}
