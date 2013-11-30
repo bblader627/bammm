@@ -125,4 +125,14 @@ namespace bammm
 	{
 		return *this;
 	}
+
+	JSON* JSON::operator[](string key)
+	{
+		return _children.getValue(key);
+	}
+
+	JSON* JSON::getChild(string key)
+	{
+		return _children.getValue(key);
+	}
 }
