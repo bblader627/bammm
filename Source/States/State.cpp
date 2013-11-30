@@ -43,6 +43,10 @@ namespace bammm
 	{
 	}
 
+	void State::setup(string target)
+	{
+	}
+
 	void State::breakdown()
 	{
 		cout << "wrong breakdown" << "\n";
