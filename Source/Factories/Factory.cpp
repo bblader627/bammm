@@ -82,37 +82,36 @@ namespace bammm
 		cout << "in parseToActorInfo" << endl;
 		int numberOfChildren = rootNode->sizeOfChildren();
 		cout << "numberOfChildren: " << numberOfChildren << endl;
+
+		DynamicArray<JSON*>* rootChildren = rootNode->getAllChildren()->getAllValues();
+
 		for (int i = 0; i < numberOfChildren; i++)
 		{
-			cout << "name " << endl;
-			JSON* name = rootNode[i]["name"];
-			JSON* health = rootNode[i]["health"];
-			JSON* stamina = rootNode[i]["stamina"];
-			JSON* attack = rootNode[i]["attack"];
-			JSON* defense = rootNode[i]["defense"];
-			JSON* behavior = rootNode[i]["behavior"];
+			JSON* child = rootChildren->get(i);
 
-			JSON* x = rootNode[i]["x"];
-			JSON* y = rootNode[i]["y"];
-			JSON* z = rootNode[i]["z"];
+			string name = child->getChild("name")->getStringValue();
+			int health = child->getChild("health")->getIntValue();
+			int stamina = child->getChild("stamina")->getIntValue();
+			int attack = child->getChild("attack")->getIntValue();
+			int defense = child->getChild("defense")->getIntValue();
+			string behavior = child->getChild("behavior")->getStringValue();
 
+			int x = child->getChild("x")->getIntValue();
+			int y = child->getChild("y")->getIntValue();
+			int z = child->getChild("z")->getIntValue();
 
-			ActorInfo* info = new ActorInfo(type, name->getStringValue(),
-					health->getIntValue(), stamina->getIntValue(),
-					attack->getIntValue(), defense->getIntValue(),
-					behavior->getStringValue());
+			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack, defense, behavior);
 
-			cout << "done " << endl;
+			info->setLocation(new Vector3D((float)x, (float)y, (float)z));
 
-
-			info->setLocation(
-					new Vector3D((float) (x->getDoubleValue()),
-							(float) (y->getDoubleValue()),
-							(float) (z->getDoubleValue())));
+			cout << name << " " << health << " " << stamina  << " " << attack  << " " << defense  << " " << behavior
+					 << " " << x  << " " << y  << " " << z << endl;
 
 			string i_str = "" + i;
 			map->add(type + i_str, *info);
+			//Fails to add actor in SceneManager
 			scene->addActor(new Actor(info));
+
 		}
 	}
 }

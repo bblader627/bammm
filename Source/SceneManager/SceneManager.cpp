@@ -62,7 +62,9 @@ namespace bammm
 
 	void SceneManager::addActor(Actor* actor)
 	{
+		cout << "adding actor" << endl;
 		_allActors.add(actor);
+		cout << "actor successfully added" << endl;
 	}
 
 	void SceneManager::removeActor(Actor* actor)
