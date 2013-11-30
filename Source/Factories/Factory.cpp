@@ -58,7 +58,7 @@ namespace bammm
 			int attack, int defense, string behavior)
 	{
 		Actor* newActor = new Actor(type, name, health, stamina, attack,
-				defense, behavior);
+				defense, behavior, Actor::AllianceType::enemy);
 		newActor->setLocation(new Vector3D(0.0f, 0.0f, 0.0f));
 		return *newActor;
 

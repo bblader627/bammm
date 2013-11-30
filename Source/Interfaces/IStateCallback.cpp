@@ -26,11 +26,11 @@ namespace bammm
 
 	void IStateCallback::switchState(State* current, State* newState)
 	{
-		cout << "wrong switch" << "\n";
+		//cout << "wrong switch" << "\n";
 	}
 
 	void IStateCallback::switchState(State* current, string newStateString)
 	{
-		cout << "Wrong switch string" << "\n";
+		//cout << "Wrong switch string" << "\n";
 	}
 }

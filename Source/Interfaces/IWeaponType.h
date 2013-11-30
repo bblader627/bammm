@@ -15,7 +15,7 @@
 #ifndef IWEAPONTYPE_H_
 #define IWEAPONTYPE_H_
 
-#include "WeaponData.h"
+#include "../Weapons/WeaponData.h"
 
 namespace bammm
 {
@@ -35,14 +35,14 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Attack is executed
 			 */
-			int attack();
+			virtual int attack()=0;
 
 			/**
 			 canAttack
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns true if weapon can attack
 			 */
-			virtual bool canAttack();
+			virtual bool canAttack()=0;
 	};
 }
 

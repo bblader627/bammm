@@ -42,6 +42,7 @@ namespace bammm
 
 	void DamageState::tick(float deltaTime)
 	{
+		cout << "Start of tick\n";
 		MeleeWeapon* weapon = _actor->getMeleeWeapon();
 		int damage = weapon->attack();
 		_target->reduceHealth(damage);
