@@ -84,25 +84,26 @@ namespace bammm
 		cout << "numberOfChildren: " << numberOfChildren << endl;
 		for (int i = 0; i < numberOfChildren; i++)
 		{
-			cout << rootNode[i].getAllChildren()->getNumerOfNodes() << endl;
 			cout << "name " << endl;
 			JSON* name = rootNode[i]["name"];
 			JSON* health = rootNode[i]["health"];
 			JSON* stamina = rootNode[i]["stamina"];
-			cout << "attack " << endl;;
 			JSON* attack = rootNode[i]["attack"];
 			JSON* defense = rootNode[i]["defense"];
 			JSON* behavior = rootNode[i]["behavior"];
-			cout << "done " << endl;
 
 			JSON* x = rootNode[i]["x"];
 			JSON* y = rootNode[i]["y"];
 			JSON* z = rootNode[i]["z"];
 
+
 			ActorInfo* info = new ActorInfo(type, name->getStringValue(),
 					health->getIntValue(), stamina->getIntValue(),
 					attack->getIntValue(), defense->getIntValue(),
 					behavior->getStringValue());
+
+			cout << "done " << endl;
+
 
 			info->setLocation(
 					new Vector3D((float) (x->getDoubleValue()),

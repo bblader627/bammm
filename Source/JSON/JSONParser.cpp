@@ -68,6 +68,7 @@ namespace bammm
 		bool isDouble = false;
 		JSON *currentNode = NULL;
 		JSON *parentNode = NULL;
+		bool skipGet = false;
 		string name = "";
 		string value = "";
 
@@ -85,9 +86,11 @@ namespace bammm
 
 		while (!input.eof())
 		{
-
-			current = (char) input.get();
-
+			if (!skipGet)
+			{
+				current = (char) input.get();
+			}
+			skipGet = false;
 			switch (current)
 			{
 
@@ -141,7 +144,7 @@ namespace bammm
 					}
 					else
 					{
-						parentNode = currentNode;
+						parentNode = currentNode->getParent();
 						currentNode = new JSONArray(name);
 						parentNode->addChild(*currentNode);
 					}
@@ -286,7 +289,7 @@ namespace bammm
 					else if (isdigit(current))
 					{
 
-						while (!input.eof() && current != ' ')
+						while (!input.eof() && current != ',')
 						{
 							value += current;
 							current = (char) input.get();
@@ -321,6 +324,7 @@ namespace bammm
 							cout.flush();
 						}
 
+						skipGet = true;
 						isValue = false;
 						isKey = true;
 					}
@@ -357,7 +361,11 @@ namespace bammm
 
 					/* reset node to parent so next key/value may be added as a child to parent */
 					currentNode = currentNode->getParent();
-					parentNode = parentNode->getParent();
+					cout << "Set current node to parent: " << currentNode->getName() << endl;
+
+					parentNode = currentNode->getParent();
+					cout << "Set parent node to parent's parent: " << currentNode->getName() << endl;
+
 
 					isValue = false;
 					isKey = true;
