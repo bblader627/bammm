@@ -32,13 +32,13 @@ namespace bammm
 	class MeleeWeapon
 	{
 		protected:
-			WeaponData* _weaponData;
+			WeaponData _weaponData;
 			uint _timer;
 			Time _time;
 
 		public:
 			MeleeWeapon();
-			MeleeWeapon(WeaponData& weaponData);
+			MeleeWeapon(WeaponData weaponData);
 			virtual ~MeleeWeapon();
 
 			/**

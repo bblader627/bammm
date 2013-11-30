@@ -21,9 +21,9 @@ namespace bammm
 		_timer = 0;
 	}
 
-	MeleeWeapon::MeleeWeapon(WeaponData& weaponData)
+	MeleeWeapon::MeleeWeapon(WeaponData weaponData)
 	{
-		_weaponData = &weaponData;
+		_weaponData = weaponData;
 		_timer = 0;
 	}
 
@@ -34,23 +34,18 @@ namespace bammm
 	int MeleeWeapon::attack()
 	{
 		_time = _time.current();
-		if(canAttack())
-		{
-			_timer = _time.getSeconds() + _weaponData->getFireRate();
-			return _weaponData->getDamage();
-		}
-
-		return 0;
+		_timer = _time.getSeconds() + _weaponData.getFireRate();
+		return _weaponData.getDamage();
 	}
 
 	bool MeleeWeapon::canAttack()
 	{
 		_time = _time.current();
+		cout << _time.getSeconds() << " < " << _timer << "\n";
 		if (_time.getSeconds() < _timer)
 		{
 			return false;
 		}
-
 		return true;
 	}
 }

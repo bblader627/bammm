@@ -42,6 +42,10 @@ namespace bammm
 			temp = new Vector3D(randomX, randomY, 0);
 
 			Actor* newOrc = new Actor("Mr. Orc", "orc", Actor::AllianceType::enemy);
+			//We need factory to create our weapons
+			WeaponData weaponData(10, 2, "", "");
+			newOrc->setMeleeWeapon(new MeleeWeapon(weaponData));
+			///////////////////////////////////////
 			addActor(newOrc);
 
 			AiController* newAi = new AiController();
