@@ -42,6 +42,7 @@ namespace bammm
 			temp = new Vector3D(randomX, randomY, 0);
 
 			Actor* newOrc = new Actor("Mr. Orc", "orc", Actor::AllianceType::enemy);
+			newOrc->setLocation(temp);
 			//We need factory to create our weapons
 			WeaponData weaponData(10, 2, "", "");
 			newOrc->setMeleeWeapon(new MeleeWeapon(weaponData));
@@ -50,7 +51,6 @@ namespace bammm
 
 			AiController* newAi = new AiController();
 			newAi->setup(*_allActors.get(i), *_meleeCombat, _sceneGraph);
-			getSceneGraph().add(temp, (_allActors.get(i)));
 			addTickable(newAi);
 		}
 	}
@@ -67,11 +67,13 @@ namespace bammm
 	void SceneManager::addActor(Actor* actor)
 	{
 		_allActors.add(actor);
+		_sceneGraph.add(actor->getLocation(), actor);
 	}
 
 	void SceneManager::removeActor(Actor* actor)
 	{
 		_allActors.removeElement(actor);
+		_sceneGraph.remove(actor->getLocation(), actor);
 	}
 
 	void SceneManager::addTickable(ITickable* tickable)
