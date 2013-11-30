@@ -14,8 +14,8 @@ States/DamageState.cpp \
 Resources/DynamicArray.h Resources/HashMap.h Resources/HashNode.h \
 Resources/Heap.h Resources/Queue.h Resources/Stack.h \
 \
-Weapons/IWeaponType.h Weapons/WeaponData.cpp Weapons/MeleeWeapon.cpp \
-Weapons/MeleeCombat.cpp \
+Weapons/WeaponData.cpp Weapons/MeleeWeapon.cpp \
+Interfaces/IWeaponType.h Weapons/MeleeCombat.cpp \
 \
 SceneManager/Vector3D.cpp SceneManager/Grid3D.h SceneManager/SceneManager.cpp  \
 Factories/Factory.cpp \

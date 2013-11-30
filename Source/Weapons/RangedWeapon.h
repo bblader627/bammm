@@ -15,7 +15,7 @@
 #ifndef RANGEDWEAPON_H_
 #define RANGEDWEAPON_H_
 
-#include "IWeaponType.h"
+#include "../Interfaces/IWeaponType.h"
 
 namespace bammm
 {
