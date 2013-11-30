@@ -50,6 +50,7 @@ namespace bammm
 
 	JSON JSONArray::operator[](const unsigned int & rhs)
 	{
+		cout << "returning child of array" << endl;
 		if (_children[rhs].getType() == JSON_NULL)
 		{
 			cout
