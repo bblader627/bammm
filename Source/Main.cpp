@@ -26,9 +26,10 @@ int main()
 	//Creation of Hero
 	Actor* bob = new Actor("Bob", "dwarf", Actor::AllianceType::ally);
 	Vector3D* temp = new Vector3D(0, 0, 0);
+	bob->setLocation(temp);
 
 	//Will become unnecessary
-	sceneManager.getSceneGraph().add(temp, bob);
+	sceneManager.addActor(bob);
 
 	////Move to SceneManager?
 	PlayerController controller;
@@ -95,6 +96,12 @@ int main()
 		}
 		controller.input(input, dTime);
 		sceneManager.tick(0);
+
+		if(controller.canDelete())
+		{
+			//Remove dwarf from Scene
+			sceneManager.removeActor(bob);
+		}
 	}
 	delete input;
 

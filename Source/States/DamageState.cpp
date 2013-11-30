@@ -38,19 +38,18 @@ namespace bammm
 
 	void DamageState::breakdown()
 	{
+		cout << "State is broken\n";
 	}
 
 	void DamageState::tick(float deltaTime)
 	{
-		cout << "Start of tick\n";
 		MeleeWeapon* weapon = _actor->getMeleeWeapon();
-		int damage = weapon->attack();
-		_target->reduceHealth(damage);
 		string attackerName = _actor->getName();
 		string targetName = _target->getName();
-
 		if(weapon->canAttack())
 		{
+			int damage = weapon->attack();
+			_target->reduceHealth(damage);
 			cout << attackerName << " hits " << targetName << " for " << damage << " damage. \n";
 			if(_target->getHealth() <= 0)
 			{

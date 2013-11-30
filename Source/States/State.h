@@ -63,6 +63,13 @@ namespace bammm
 			virtual void setup(Actor& target);
 			
 			/**
+			 setup
+			 @Pre-Condition- Takes the actor's name
+			 @Post-Condition- Sets up the state
+			 */
+			virtual void setup(string target);
+			
+			/**
 			 breakdown
 			 @Pre-Condition- No input
 			 @Post-Condition- Performs a breakdown on the state
