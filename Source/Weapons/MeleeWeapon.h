@@ -37,7 +37,7 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Attack is executed
 			 */
-			virtual int attack();
+			virtual void attack();
 
 			/**
 			 canAttack

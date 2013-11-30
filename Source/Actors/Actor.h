@@ -29,6 +29,12 @@ namespace bammm
 
 	class Actor
 	{
+		public:
+			enum AllianceType
+			{
+				enemy = -1, neutral = 0, ally = 1
+			};
+		
 		protected:
 			float _rotation;
 			string _name;
@@ -50,10 +56,6 @@ namespace bammm
 
 			bool _collision;
 
-			enum AllianceType
-			{
-				enemy = -1, neutral = 0, ally = 1
-			};
 			AllianceType _alliance;
 
 			MeleeWeapon *_meleeWeapon;
@@ -61,9 +63,9 @@ namespace bammm
 
 		public:
 			Actor();
-			Actor(string name, string type);
+			Actor(string name, string type, AllianceType alliance);
 			Actor(string type, string name, int health, int stamina, int attack,
-					int defense, string behavior);
+					int defense, string behavior, AllianceType alliance);
 			Actor(ActorInfo* info);
 
 			/**

@@ -24,7 +24,7 @@ namespace bammm
 	{
 	}
 
-	int MeleeWeapon::attack()
+	void MeleeWeapon::attack()
 	{
 		return 0;
 	}

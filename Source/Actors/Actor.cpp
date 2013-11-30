@@ -36,11 +36,10 @@ namespace bammm
 		_healthBar = 100;
 		_staminaBar = 50;
 		_attack = 4;
-		_alliance = ally;
 		_defense = 2;
 	}
 
-	Actor::Actor(string name, string type)
+	Actor::Actor(string name, string type, AllianceType alliance)
 	{
 		_collision = false;
 		_name = name;
@@ -57,11 +56,11 @@ namespace bammm
 		_staminaBar = 50;
 		_attack = 4;
 		_defense = 2;
-		_alliance = ally;
+		_alliance = alliance;
 	}
 
 	Actor::Actor(string type, string name, int health, int stamina, int attack,
-			int defense, string behavior)
+			int defense, string behavior, AllianceType alliance)
 	{
 		_type = type;
 		_name = name;
@@ -80,8 +79,8 @@ namespace bammm
 		_defense = defense;
 
 		_behavior = behavior;
-		_alliance = ally;
 		_collision = false;
+		_alliance = alliance;
 	}
 
 	Actor::Actor(ActorInfo* info)

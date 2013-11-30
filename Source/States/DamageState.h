@@ -70,7 +70,7 @@ namespace bammm
 			 @Pre-Condition- Takes in a string nextState
 			 @Post-Condition- The current state is switched to the given nextState
 			 */
-			void switchState(string nextState);
+			virtual void switchState(string nextState);
 
 			/**
 			 toString

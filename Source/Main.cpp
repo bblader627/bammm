@@ -24,7 +24,7 @@ int main()
 
 	//Will be done in factory
 	//Creation of Hero
-	Actor* bob = new Actor("Bob", "dwarf");
+	Actor* bob = new Actor("Bob", "dwarf", Actor::AllianceType::ally);
 	Vector3D* temp = new Vector3D(0, 0, 0);
 
 	//Will become unnecessary
