@@ -24,7 +24,7 @@ namespace bammm
 	{
 		string actorJSON;
 		JSONParser* parser = new JSONParser();
-		string filename = "JSON/dwarves.json";
+		string filename = "JSON/actors.json";
 		parser->parseFile(filename);
 		cout << "file parsed" << endl;
 
@@ -38,14 +38,32 @@ namespace bammm
 		HashMap<JSON*>* rootChildren = root->getAllChildren();
 
 		JSON* dwarves = rootChildren->getValue("dwarves");
-
 		this->parseToActorInfo(dwarves, "dwarf", &actorData);
-		cout << "After parseToActorInfo" << endl;
+		cout << "Dwarves Parsed" << endl;
+
+		JSON* orcs = rootChildren->getValue("orcs");
+		this->parseToActorInfo(orcs, "orc", &actorData);
+		cout << "Orcs parsed" << endl;
+
+		//===========MAP=========//
+		JSON* wall = rootChildren->getValue("wall");
+		this->parseToActorInfo(wall, "wall", &blockData);
+		cout << "Wall parsed" << endl;
+
+		JSON* buildings = rootChildren->getValue("buildings");
+		this->parseToActorInfo(buildings, "building", &blockData);
+		cout << "Buildings parsed" << endl;
+
+		JSON* trees = rootChildren->getValue("trees");
+		this->parseToActorInfo(trees, "tree", &blockData);
+		cout << "Trees parsed" << endl;
+
+		JSON* ore = rootChildren->getValue("ore");
+		this->parseToActorInfo(ore, "ore", &blockData);
+		cout << "Ore parsed" << endl;
 
 		// Parsing orcs
-		JSON* orcs = parser->getRootNode("orcs");
-		this->parseToActorInfo(orcs, "orc", &actorData);
-		cout << "poop" << endl;
+
 		/*
 		//Parsing Map info
 		JSON* map = parser->getRootNode("map");
@@ -114,7 +132,6 @@ namespace bammm
 			string i_str = "" + i;
 			map->add(type + i_str, *info);
 			Actor* myActor = new Actor(info);
-			//Fails to add actor in SceneManager
 			scene->addActor(myActor);
 
 		}

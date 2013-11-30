@@ -189,8 +189,13 @@ namespace bammm
 					cout << "Parsing ] \n";
 					cout.flush();
 
-					currentNode = currentNode->getParent();
+					cout << "Array root node: " << arrayRootNode->getName() << endl;
+					currentNode = arrayRootNode;
 					parentNode = parentNode->getParent();
+					arrayRootNode = parentNode;
+					cout << "Current at end of array: " << currentNode->getName() << endl;
+					cout << "Parent at end of array: " << parentNode->getName() << endl;
+
 
 					isKey = true;
 					isArray = false;
