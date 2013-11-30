@@ -351,11 +351,10 @@ namespace bammm
 					}
 					else if (isdigit(current))
 					{
-
 						while (!input.eof() && current != ','&& current != '}')
 						{
-							value += current;
 							current = (char) input.get();
+							value += current;
 						}
 
 						/* Determine whether value has a decimal. If so, make DOUBLE. Else INT */
