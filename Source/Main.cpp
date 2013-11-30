@@ -17,9 +17,9 @@ int main()
 	printWelcome();
 	bool printMap = true;
 
-	Factory* actorFactory = new Factory();
-	actorFactory->setup();
 	SceneManager sceneManager;
+	Factory* actorFactory = new Factory(&sceneManager);
+	actorFactory->setup();
 
 	cout << "factory done" << endl;
 

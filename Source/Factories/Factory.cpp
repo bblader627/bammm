@@ -16,6 +16,10 @@
 
 namespace bammm
 {
+	Factory::Factory(SceneManager* manager)
+	{
+		scene = manager;
+	}
 	void Factory::setup()
 	{
 		string actorJSON;
@@ -109,8 +113,9 @@ namespace bammm
 
 			string i_str = "" + i;
 			map->add(type + i_str, *info);
+			Actor* myActor = new Actor(info);
 			//Fails to add actor in SceneManager
-			scene->addActor(new Actor(info));
+			scene->addActor(myActor);
 
 		}
 	}

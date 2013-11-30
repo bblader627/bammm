@@ -19,6 +19,7 @@ namespace bammm
 	SceneManager::SceneManager() :
 			_sceneGraph(SCENE_X, SCENE_Y, SCENE_Z)
 	{
+		_allActors = *(new DynamicArray<Actor*>());
 		Vector3D* temp;
 		//Random number generator
 		random_device rd;
@@ -62,9 +63,7 @@ namespace bammm
 
 	void SceneManager::addActor(Actor* actor)
 	{
-		cout << "adding actor" << endl;
 		_allActors.add(actor);
-		cout << "actor successfully added" << endl;
 	}
 
 	void SceneManager::removeActor(Actor* actor)

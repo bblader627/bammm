@@ -54,6 +54,9 @@ namespace bammm
 					HashMap<ActorInfo>* map);
 
 		public:
+			//Add default constructor where scene is instantiated
+			Factory(SceneManager* manager);
+
 
 			/*
 			 getActor
