@@ -17,6 +17,7 @@
 
 #include "Controller.h"
 #include <random>
+#include "../Interfaces/ITickable.h"
 
 #ifndef NULL
 #define NULL ((void *)0)
@@ -26,7 +27,7 @@ using namespace std;
 
 namespace bammm
 {
-	class AiController: public Controller, public ITickable
+	class AiController: public Controller
 	{
 		public:
 			AiController();
@@ -53,6 +54,7 @@ namespace bammm
 			 @Post-Condition- Returns a boolean representing if the Controller can be deleted or not.
 			 */
 			virtual bool canDelete();
+
 	};
 }
 
