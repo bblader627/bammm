@@ -544,4 +544,12 @@ namespace bammm
 	}
 }
 
+namespace std
+{
+	to_string(string str)
+	{
+		return str;
+	}
+}
+
 #endif
