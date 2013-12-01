@@ -31,7 +31,8 @@ namespace bammm
 
 		public:
 			MoveState(Actor& actor);
-			MoveState(Actor& actor, IStateCallback& stateMachine, Grid3D<Actor*>& sceneGraph);
+			MoveState(Actor& actor, IStateCallback& stateMachine,
+					Grid3D<Actor*>& sceneGraph);
 
 			/**
 			 Update this to take a Vector3D once we get rid of circular
@@ -47,7 +48,6 @@ namespace bammm
 			 @Post-Condition- Sets up the state with a direction
 			 */
 			void setDirection(Vector3D direction);
-			
 
 			/**
 			 breakdown

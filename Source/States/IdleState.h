@@ -31,7 +31,6 @@ namespace bammm
 			 @Post-Condition- Sets up the state
 			 */
 			//virtual void setup(DynamicArray<string>* args);
-
 			/**
 			 breakdown
 			 @Pre-Condition- No input

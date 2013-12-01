@@ -40,21 +40,20 @@ namespace bammm
 			//virtual void setup(DynamicArray<string>* args);
 			void setup();
 
+			/**
+			 setup
+			 @Pre-Condition- No input
+			 @Post-Condition- Sets up the state
+			 */
+			void setAmount(int amountToMine);
 
 			/**
 			 setup
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			 void setAmount(int amountToMine);
+			void setOreType(string oreType);
 
-			/**
-			 setup
-			 @Pre-Condition- No input
-			 @Post-Condition- Sets up the state
-			 */
-			 void setOreType(string oreType);
-			
 			/**
 			 breakdown
 			 @Pre-Condition- No input

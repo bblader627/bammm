@@ -46,12 +46,13 @@ namespace bammm
 		MeleeWeapon* weapon = _actor->getMeleeWeapon();
 		string attackerName = _actor->getName();
 		string targetName = _target->getName();
-		if(weapon->canAttack())
+		if (weapon->canAttack())
 		{
 			int damage = weapon->attack();
 			_target->reduceHealth(damage);
-			cout << attackerName << " hits " << targetName << " for " << damage << " damage. \n";
-			if(_target->getHealth() <= 0)
+			cout << attackerName << " hits " << targetName << " for " << damage
+					<< " damage. \n";
+			if (_target->getHealth() <= 0)
 			{
 				cout << attackerName << " has slain " << targetName << ".\n";
 			}

@@ -33,7 +33,8 @@ namespace bammm
 
 		public:
 			SearchState(Actor& actor);
-			SearchState(Actor& actor, IStateCallback& stateMachine, Grid3D<Actor*>& sceneGraph);
+			SearchState(Actor& actor, IStateCallback& stateMachine,
+					Grid3D<Actor*>& sceneGraph);
 
 			/**
 			 Update this to take a Vector3D once we get rid of circular
@@ -49,7 +50,7 @@ namespace bammm
 			 @Post-Condition- Sets up the state with a string target
 			 */
 			virtual void setTarget(string target);
-			
+
 			/**
 			 breakdown
 			 @Pre-Condition- No input

@@ -46,7 +46,7 @@ namespace bammm
 			 @Post-Condition- Sets up the state with an Actor
 			 */
 			void setTarget(Actor& target);
-			
+
 			/**
 			 breakdown
 			 @Pre-Condition- No input

@@ -29,12 +29,12 @@ namespace bammm
 	}
 
 	/*void MineState::setup(DynamicArray<string>* args)
-	{
-		_successChance = 30;
-		_maximumGold = 100;
-		_amountToMine = atoi(args->get(1).c_str());
-		_oreType = args->get(2);
-	}*/
+	 {
+	 _successChance = 30;
+	 _maximumGold = 100;
+	 _amountToMine = atoi(args->get(1).c_str());
+	 _oreType = args->get(2);
+	 }*/
 
 	void MineState::setup()
 	{

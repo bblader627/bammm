@@ -28,8 +28,8 @@ namespace bammm
 	}
 
 	/*void CombatState::setup(DynamicArray<string>* args)
-	{
-	}*/
+	 {
+	 }*/
 
 	void CombatState::setup()
 	{
