@@ -500,8 +500,9 @@ namespace bammm
 				}
 				else
 				{
-					string symbol = atLocation->get(0)->getSymbol();
-					string color = atLocation->get(0)->getColor();
+					int size = atLocation->getSize() - 1;
+					string symbol = atLocation->get(size)->getSymbol();
+					string color = atLocation->get(size)->getColor();
 					gridString = gridString + Color::colorText(symbol, color)  + " ";
 				}
 			}
