@@ -103,7 +103,6 @@ namespace bammm
 				 _meleeCombat->setup(*_actor, *closestEnemy);
 				 }*/
 			}
-			cout << "poop" << endl;
 			newState->setup();
 			currentStates.add(newState);
 		}

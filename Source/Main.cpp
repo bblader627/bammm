@@ -1,6 +1,7 @@
 #include <iostream>
 #include "SceneManager/SceneManager.h"
 #include "Controllers/PlayerController.h"
+#include <unistd.h>
 #include <random>
 #include <exception>
 
@@ -99,11 +100,18 @@ int main()
 			{
 				controller.input(input, dTime);
 				sceneManager.tick(0);
+				if (loopCounter > 0)
+				{
+					loopCounter--;
+				}
 			}
 		}
 		else	//looping
 		{
+			unsigned int pause = 1;
+			sleep(pause);
 			loopCounter--;
+			cout << sceneManager.getSceneGraph().toString() << "\n";
 			sceneManager.tick(0);
 		}
 
