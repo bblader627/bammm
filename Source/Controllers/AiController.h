@@ -18,10 +18,7 @@
 #include "Controller.h"
 #include <random>
 #include "../Interfaces/ITickable.h"
-
-#ifndef NULL
-#define NULL ((void *)0)
-#endif
+#include "../Resources/Constant.h"
 
 using namespace std;
 

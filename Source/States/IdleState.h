@@ -17,11 +17,6 @@
 
 #include "State.h"
 
-#ifndef UINT
-#define UINT
-typedef unsigned int UINT;
-#endif
-
 namespace bammm
 {
 	class IdleState: public State
@@ -35,7 +30,7 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			virtual void setup(DynamicArray<string>* args);
+			//virtual void setup(DynamicArray<string>* args);
 
 			/**
 			 breakdown

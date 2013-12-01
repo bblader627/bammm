@@ -28,17 +28,28 @@ namespace bammm
 		registerTransitionCallback(stateMachine);
 	}
 
-	void MineState::setup(DynamicArray<string>* args)
+	/*void MineState::setup(DynamicArray<string>* args)
 	{
 		_successChance = 30;
 		_maximumGold = 100;
 		_amountToMine = atoi(args->get(1).c_str());
 		_oreType = args->get(2);
-	}
+	}*/
 
 	void MineState::setup()
 	{
+		_successChance = 30;
+		_maximumGold = 100;
+	}
 
+	void MineState::setAmount(int amountToMine)
+	{
+		_amountToMine = amountToMine;
+	}
+
+	void MineState::setOreType(string oreType)
+	{
+		_oreType = oreType;
 	}
 
 	void MineState::breakdown()

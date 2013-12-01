@@ -37,6 +37,8 @@ namespace bammm
 		_staminaBar = 50;
 		_attack = 4;
 		_defense = 2;
+		_symbol = "D";
+		_color = "white";
 	}
 
 	Actor::Actor(string name, string type, AllianceType alliance)
@@ -101,7 +103,10 @@ namespace bammm
 		_defense = info->getDefense();
 
 		_behavior = info->getBehavior();
-		_alliance = ally;
+		_alliance = info->getAlliance();
+		_collision = info->getCollision();
+		_symbol = info->getSymbol();
+		_color = info->getColor();
 	}
 
 	void Actor::setMeleeWeapon(MeleeWeapon* weapon)
@@ -137,6 +142,16 @@ namespace bammm
 	void Actor::setLocation(Vector3D* location)
 	{
 		_location = location;
+	}
+
+	void Actor::setSymbol(string symbol)
+	{
+		_symbol = symbol;
+	}
+
+	void Actor::setColor(string color)
+	{
+		_color = color;
 	}
 
 	void Actor::increaseHealth(int amount)
@@ -325,6 +340,16 @@ namespace bammm
 	int Actor::getAlliance()
 	{
 		return _alliance;
+	}
+
+	string Actor::getSymbol()
+	{
+		return _symbol;
+	}
+
+	string Actor::getColor()
+	{
+		return _color;
 	}
 
 	int Actor::getEnemyAlliance()

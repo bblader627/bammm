@@ -8,38 +8,53 @@
  *	Matt Witkowski
  *	Bradley Crusco
  * Description:
- * DrinkState header file.
+ * ChopState header file.
  *
  */
 
-#ifndef DRINKSTATE_H_
-#define DRINKSTATE_H_
+#ifndef CHOPSTATE_H_
+#define CHOPSTATE_H_
 
+#include <iostream>
 #include "State.h"
-
-using namespace std;
 
 namespace bammm
 {
-	class DrinkState: public State
+	class ChopState: public State
 	{
 		private:
-			static const uint _stoutSize = 5;
-			uint _stoutLife;
+			int _successChance;
+			int _maximumWood;
+			int _amountToChop;
+			string _treeType;
 
 		public:
-			DrinkState(Actor& actor);
-			DrinkState(Actor& actor, IStateCallback& stateMachine);
+			ChopState(Actor& actor);
+			ChopState(Actor& actor, IStateCallback& stateMachine);
 
 			/**
 			 setup
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			//void setup(DynamicArray<string>* args);
-
+			//virtual void setup(DynamicArray<string>* args);
 			void setup();
 
+
+			/**
+			 setup
+			 @Pre-Condition- No input
+			 @Post-Condition- Sets up the state
+			 */
+			 void setAmount(int amountToChop);
+
+			/**
+			 setup
+			 @Pre-Condition- No input
+			 @Post-Condition- Sets up the state
+			 */
+			 void setTreeType(string treeType);
+			
 			/**
 			 breakdown
 			 @Pre-Condition- No input

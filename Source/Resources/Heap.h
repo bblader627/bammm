@@ -16,11 +16,7 @@
 #define HEAP_H_
 
 #include "DynamicArray.h"
-
-#ifndef UINT
-#define UINT
-typedef unsigned int uint;
-#endif
+#include "Constant.h"
 
 namespace bammm
 {

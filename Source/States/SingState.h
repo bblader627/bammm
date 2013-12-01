@@ -18,11 +18,6 @@
 #include <iostream>
 #include "State.h"
 
-#ifndef UINT
-#define UINT
-typedef unsigned int UINT;
-#endif
-
 namespace bammm
 {
 	class SingState: public State
@@ -40,8 +35,7 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			void setup(DynamicArray<string>* args);
-
+			//void setup(DynamicArray<string>* args);
 			void setup();
 
 			/**

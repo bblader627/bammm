@@ -19,11 +19,6 @@
 #include "State.h"
 #include "../SceneManager/Grid3D.h"
 
-#ifndef UINT
-#define UINT
-typedef unsigned int UINT;
-#endif
-
 using namespace std;
 
 namespace bammm
@@ -44,23 +39,22 @@ namespace bammm
 			 @Pre-Condition- Takes nothing
 			 @Post-Condition- Sets up the state
 			 */
-			void setup(DynamicArray<string>* args);
+			virtual void setup();
 
 			/**
 			 setup
 			 @Pre-Condition- Takes a Vector to determine the direction
 			 @Post-Condition- Sets up the state with a direction
 			 */
-			virtual void setup(Vector3D direction);
+			void setDirection(Vector3D direction);
 			
-			virtual void setup();
 
 			/**
 			 breakdown
 			 @Pre-Condition- No input
 			 @Post-Condition- Performs a breakdown on the state
 			 */
-			void breakdown();
+			virtual void breakdown();
 
 			/**
 			 tick

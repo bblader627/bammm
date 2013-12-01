@@ -19,10 +19,6 @@
 #include "State.h"
 #include "../SceneManager/Grid3D.h"
 #include "../Resources/Stack.h"
-#ifndef UINT
-#define UINT
-typedef unsigned int UINT;
-#endif
 
 using namespace std;
 
@@ -52,7 +48,7 @@ namespace bammm
 			 @Pre-Condition- Takes a target to search for
 			 @Post-Condition- Sets up the state with a string target
 			 */
-			virtual void setup(string target);
+			virtual void setTarget(string target);
 			
 			/**
 			 breakdown

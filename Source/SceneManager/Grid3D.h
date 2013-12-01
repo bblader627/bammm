@@ -20,12 +20,9 @@
 #include "Vector3D.h"
 #include "../Resources/Stack.h"
 #include "../Actors/Actor.h"
-
+#include "../Resources/Constant.h"
+#include "../Resources/Color.h"
 using namespace std;
-
-#ifndef NULL
-#define NULL (void *)0
-#endif
 
 namespace bammm
 {
@@ -476,38 +473,14 @@ namespace bammm
 
 				if (atLocation->getSize() <= 0)
 				{
-					gridString = gridString + "- ";
+					gridString = gridString + Color::colorText(". ", "green");
 				}
 				else
 				{
-					if (atLocation->get(0)->getType() == "dwarf")
-					{
-						gridString = gridString + "O ";
-					}
-					else if (atLocation->get(0)->getType() == "orc")
-					{
-						gridString = gridString + "X ";
-					}
-					else if (atLocation->get(0)->getType() == "wall")
-					{
-						gridString = gridString + "W ";
-					}
-					else if (atLocation->get(0)->getType() == "building")
-					{
-						gridString = gridString + "B ";
-					}
-					else if (atLocation->get(0)->getType() == "tree")
-					{
-						gridString = gridString + "T ";
-					}
-					else if (atLocation->get(0)->getType() == "ore")
-					{
-						gridString = gridString + "M ";
-					}
-					else
-					{
-						gridString = gridString + "? ";
-					}
+					int size = atLocation->getSize() - 1;
+					string symbol = atLocation->get(size)->getSymbol();
+					string color = atLocation->get(size)->getColor();
+					gridString = gridString + Color::colorText(symbol, color)  + " ";
 				}
 			}
 			gridString = gridString + "\n";
@@ -571,7 +544,6 @@ namespace bammm
 		DynamicArray<DynamicArray<T>*>* tiles = access(&location, 0);
 		DynamicArray<T>* allOnTile = tiles->get(0);
 		int size = allOnTile->getSize();
-
 		for(int i = 0; i < size; i++)
 		{
 			if(allOnTile->get(i)->getCollision() == true)

@@ -19,18 +19,7 @@
 #include <cstring>
 #include <cassert>
 #include <typeinfo>
-
-using namespace std;
-
-#ifndef UINT
-#define UINT
-typedef unsigned int uint;
-#endif
-
-#ifndef NULL
-#define NULL ((void*)0)
-#endif
-
+#include "Constant.h"
 using namespace std;
 
 namespace bammm

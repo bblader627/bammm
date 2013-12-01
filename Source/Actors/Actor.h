@@ -20,6 +20,7 @@
 #include "../Weapons/MeleeWeapon.h"
 #include "../Weapons/RangedWeapon.h"
 #include "ActorInfo.h"
+#include "../Resources/Constant.h"
 
 using namespace std;
 
@@ -29,13 +30,6 @@ namespace bammm
 
 	class Actor
 	{
-		public:
-			enum AllianceType
-			{
-				enemy = -1, neutral = 0, ally = 1
-			};
-		
-
 		protected:
 			float _rotation;
 			string _name;
@@ -56,8 +50,9 @@ namespace bammm
 			float _BAC;
 
 			bool _collision;
-
 			AllianceType _alliance;
+			string _symbol;
+			string _color;
 
 			MeleeWeapon *_meleeWeapon;
 			RangedWeapon *_rangedWeapon;
@@ -118,6 +113,20 @@ namespace bammm
 			 */
 			void setLocation(Vector3D* location);
 
+			/**
+			 setSymbol
+			 @Pre-Condition- takes the string to set
+			 @Post-Condition- returns nothing
+			 */
+			void setSymbol(string symbol);
+			
+			/**
+			 setColor
+			 @Pre-Condition- takes the color to set
+			 @Post-Condition- returns nothing
+			 */
+			void setColor(string color);
+			
 			/**
 			 increaseHealth
 			 @Pre-Condition- Takes an float amount
@@ -321,6 +330,20 @@ namespace bammm
 			 @Post-Condition- Returns _alliance
 			 */
 			int getAlliance();
+
+			/**
+			 getSymbol
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _symbol
+			 */
+			string getSymbol();
+
+			/**
+			 getColor
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _color
+			 */
+			string getColor();
 
 			/**
 			 getEnemyAlliance

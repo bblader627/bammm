@@ -21,11 +21,7 @@
 #include "../Interfaces/ITickable.h"
 #include "../Actors/Actor.h"
 #include "../SceneManager/Vector3D.h"
-
-#ifndef NULL
-#define NULL (void *)0
-#endif
-
+#include "../Resources/Constant.h"
 using namespace std;
 
 namespace bammm
@@ -46,29 +42,7 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			virtual void setup(DynamicArray<string>* args);
 			virtual void setup();
-			
-			/**
-			 setup
-			 @Pre-Condition- Takes a Vector3D reference
-			 @Post-Condition- Sets up the state
-			 */
-			virtual void setup(Vector3D direction);
-
-			/**
-			 setup
-			 @Pre-Condition- Takes an Actor reference
-			 @Post-Condition- Sets up the state
-			 */
-			virtual void setup(Actor& target);
-			
-			/**
-			 setup
-			 @Pre-Condition- Takes the actor's name
-			 @Post-Condition- Sets up the state
-			 */
-			virtual void setup(string target);
 			
 			/**
 			 breakdown

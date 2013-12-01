@@ -15,10 +15,7 @@
 #define HASHNODE_H_
 
 #include <string>
-
-#ifndef NULL
-#define NULL ((void*)0)
-#endif
+#include "Constant.h"
 
 using namespace std;
 

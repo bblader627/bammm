@@ -18,11 +18,6 @@
 #include <iostream>
 #include "State.h"
 
-#ifndef UINT
-#define UINT
-typedef unsigned int UINT;
-#endif
-
 namespace bammm
 {
 	class MineState: public State
@@ -42,10 +37,24 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			virtual void setup(DynamicArray<string>* args);
-
+			//virtual void setup(DynamicArray<string>* args);
 			void setup();
 
+
+			/**
+			 setup
+			 @Pre-Condition- No input
+			 @Post-Condition- Sets up the state
+			 */
+			 void setAmount(int amountToMine);
+
+			/**
+			 setup
+			 @Pre-Condition- No input
+			 @Post-Condition- Sets up the state
+			 */
+			 void setOreType(string oreType);
+			
 			/**
 			 breakdown
 			 @Pre-Condition- No input

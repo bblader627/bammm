@@ -16,6 +16,7 @@
 
 #include <iostream>
 #include "../SceneManager/Vector3D.h"
+#include "../Resources/Constant.h"
 
 using namespace std;
 
@@ -33,11 +34,13 @@ namespace bammm
 			int _defense;
 			string _behavior;
 			Vector3D* _location;
-
+			AllianceType _alliance;
+			string _symbol;
+			string _color;
 
 		public:
 			ActorInfo();
-			ActorInfo(string type, string name, int health, int stamina, int attack, int defense, string behavior, bool collision);
+			ActorInfo(string type, string name, int health, int stamina, int attack, int defense, string behavior, bool collision, AllianceType alliance, string symbol, string color);
 
 			/**
 			 getType
@@ -96,12 +99,33 @@ namespace bammm
 			Vector3D* getLocation();
 
 			/**
-			 getLocation
+			 getCollision
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _collision
 			 */
 			bool getCollision();
 
+			/**
+			 getAlliance
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _alliance
+			 */
+			AllianceType getAlliance();
+
+			/**
+			 getSymbol
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _symbol
+			 */
+			string getSymbol();
+
+			/**
+			 getSymbol
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _color
+			 */
+			string getColor();
+			
 			/**
 			 setType
 			 @Pre-Condition- takes type
@@ -165,6 +189,19 @@ namespace bammm
 			 */
 			void setCollision(bool collision);
 
+			/**
+			 setAlliance
+			 @Pre-Condition- takes an Alliance to set the alliance
+			 @Post-Condition- returns nothing
+			 */
+			void setAlliance(AllianceType alliance);
+			
+			/**
+			 setSymbol
+			 @Pre-Condition- takes a string to set the symbol
+			 @Post-Condition- returns nothing
+			 */
+			void setSymbol(string symbol);
 	};
 
 }

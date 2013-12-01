@@ -18,10 +18,7 @@
 #include <math.h>
 #include <iostream>
 #include <string>
-
-#ifndef NULL
-#define NULL (void *)0
-#endif
+#include "../Resources/Constant.h"
 
 using namespace std;
 
