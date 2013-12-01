@@ -119,14 +119,14 @@ namespace bammm
 			 @Post-Condition- returns nothing
 			 */
 			void setSymbol(string symbol);
-			
+
 			/**
 			 setColor
 			 @Pre-Condition- takes the color to set
 			 @Post-Condition- returns nothing
 			 */
 			void setColor(string color);
-			
+
 			/**
 			 increaseHealth
 			 @Pre-Condition- Takes an float amount
@@ -197,7 +197,7 @@ namespace bammm
 			 @Post-Condition- Returns _gold
 			 */
 			int getGold();
-			
+
 			/**
 			 getMeleeWeapon
 			 @Pre-Condition- No input

@@ -1,8 +1,18 @@
-#include <iostream>
-#include "ActorInfo.h"
-#include "../SceneManager/Vector3D.h"
+/*
+ * CS585
+ *
+ * Team Bammm
+ * 	Alvaro Home
+ * 	Matt Konstantinou
+ * 	Michael Abramo
+ *	Matt Witkowski
+ *  Bradley Crusco
+ * Description:
+ * ActorInfo cpp file.
+ *
+ */
 
-using namespace std;
+#include "ActorInfo.h"
 
 namespace bammm
 {
@@ -22,7 +32,9 @@ namespace bammm
 		_color = "white";
 	}
 
-	ActorInfo::ActorInfo(string type, string name, int health, int stamina, int attack, int defense, string behavior, bool collision, AllianceType alliance, string symbol, string color)
+	ActorInfo::ActorInfo(string type, string name, int health, int stamina,
+			int attack, int defense, string behavior, bool collision,
+			AllianceType alliance, string symbol, string color)
 	{
 		_type = type;
 		_name = name;

@@ -13,9 +13,6 @@
  */
 
 #include "Actor.h"
-#include "../SceneManager/Vector3D.h"
-
-using namespace std;
 
 namespace bammm
 {
