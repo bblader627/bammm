@@ -78,7 +78,7 @@ namespace bammm
 		State* newState;
 		if(enemy)
 		{
-			_stateMachine.addState(newState, new DynamicArray<string>());
+			//_stateMachine.addState(newState, new DynamicArray<string>());
 			cout << "I want to fight\n";
 			newState = _states.getValue("damage");
 			

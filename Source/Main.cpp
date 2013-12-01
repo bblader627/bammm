@@ -18,8 +18,6 @@ int main()
 	bool printMap = true;
 
 	SceneManager sceneManager;
-	Factory* actorFactory;
-	actorFactory.setup();
 	Factory* actorFactory = new Factory(&sceneManager);
 	actorFactory->setup();
 

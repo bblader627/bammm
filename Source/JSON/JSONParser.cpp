@@ -278,33 +278,19 @@ namespace bammm
 
 						while (!input.eof() && current != ' ')
 						{
-							value += current;
 							current = (char) input.get();
+							value += current;
 						}
 
-						if (value == "false")
+						bool boolVal;
+
+						if (value == "false ")
 						{
-							if (isArray)
-							{
-								currentNode->addChild(*(new JSONPrimitive(name, false, JSON_BOOL)));
-							}
-							else
-							{
-								currentNode = new JSONPrimitive(name, false,
-										JSON_BOOL);
-							}
+							boolVal = false;
 						}
-						else if (value == "true")
+						else if (value == "true ")
 						{
-							if (isArray)
-							{
-								currentNode->addChild(*(new JSONPrimitive(name, true, JSON_BOOL)));
-							}
-							else
-							{
-								currentNode = new JSONPrimitive(name, true,
-										JSON_BOOL);
-							}
+							boolVal = true;
 						}
 						else
 						{
@@ -312,6 +298,17 @@ namespace bammm
 							cout.flush();
 							return false;
 						}
+
+
+						if (isArray)
+						{
+							currentNode->addChild(*(new JSONPrimitive(name, boolVal, JSON_BOOL)));
+						}
+						else
+						{
+							currentNode = new JSONPrimitive(name, boolVal, JSON_BOOL);
+						}
+
 					}
 					else if (isdigit(current))
 					{

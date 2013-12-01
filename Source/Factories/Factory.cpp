@@ -53,7 +53,7 @@ namespace bammm
 	}
 
 	Actor Factory::getActor(string type, string name, int health, int stamina,
-			int attack, int defense, string behavior)
+			int attack, int defense, string behavior, bool collision)
 	{
 		Actor* newActor = new Actor(type, name, health, stamina, attack,
 				defense, behavior, Actor::AllianceType::enemy);
@@ -79,31 +79,18 @@ namespace bammm
 			int attack = child->getChild("attack")->getIntValue();
 			int defense = child->getChild("defense")->getIntValue();
 			string behavior = child->getChild("behavior")->getStringValue();
+			bool collision = child->getChild("collision")->getBoolValue();
 
 			float x = (float)child->getChild("x")->getIntValue();
 			float y = (float)child->getChild("y")->getIntValue();
 			float z = (float)child->getChild("z")->getIntValue();
-
-			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack, defense, behavior);
-			info->setLocation(new Vector3D(x, y, z));
-
-			//cout << name << " " << health << " " << stamina  << " " << attack  << " " << defense  << " " << behavior
-			//		 << " " << x  << " " << y  << " " << z << endl;
-			
 			//////////////This was added/////////////
 			//JSON* collision = rootNode[i]["collision"];
 			/////////////////////////////////////////
 
-			JSON* x = rootNode[i]["x"];
-			JSON* y = rootNode[i]["y"];
-			JSON* z = rootNode[i]["z"];
 
-	
-			ActorInfo* info = new ActorInfo(type, name, health, stamina,
-					attack, defense, behavior);
-					// !!collision->getIntValue());
-
-			info->setLocation(new Vector3D(x, y, z),
+			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack, defense, behavior, collision);
+			info->setLocation(new Vector3D(x, y, z));
 
 			string i_str = "" + i;
 			map->add(type + i_str, *info);
