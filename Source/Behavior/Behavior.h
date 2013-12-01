@@ -15,6 +15,38 @@
 #ifndef BEHAVIOR_H
 #define BEHAVIOR_H
 
+using namespace std;
+#include <iostream>
+#include "../Resources/HashMap.h"
 
+namespace bammm
+{
+	class Behavior
+	{
+		private:
+			HashMap<int> _desireTable;
+
+		public:
+			Behavior();
+
+			/**
+			 addBehavior
+			 @Pre-Condition- Takes a behavior and a base desire level
+			 @Post-Condition- returns nothing
+			 */
+			void addBehavior(string behavior, int baseDesire);
+
+			/**
+			 printTable
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- prints the desire table
+			 */
+			void printTable();
+
+
+			
+			
+	}
+}
 
 #endif
