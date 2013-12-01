@@ -28,7 +28,6 @@
 #include "../SceneManager/SceneManager.h"
 #include "../Resources/Constant.h"
 
-using namespace bammm;
 using namespace std;
 
 namespace bammm
@@ -53,7 +52,6 @@ namespace bammm
 		public:
 			//Add default constructor where scene is instantiated
 			Factory(SceneManager* manager);
-
 
 			/*
 			 getActor

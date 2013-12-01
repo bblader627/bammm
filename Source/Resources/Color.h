@@ -16,6 +16,7 @@
 #define COLOR_H_
 
 #include <iostream>
+
 using namespace std;
 
 namespace bammm

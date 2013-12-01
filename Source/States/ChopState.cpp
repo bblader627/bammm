@@ -29,12 +29,12 @@ namespace bammm
 	}
 
 	/*void ChopState::setup(DynamicArray<string>* args)
-	{
-		_successChance = 30;
-		_maximumWood = 100;
-		_amountToChop = atoi(args->get(1).c_str());
-		_treeType = args->get(2);
-	}*/
+	 {
+	 _successChance = 30;
+	 _maximumWood = 100;
+	 _amountToChop = atoi(args->get(1).c_str());
+	 _treeType = args->get(2);
+	 }*/
 
 	void ChopState::setup()
 	{

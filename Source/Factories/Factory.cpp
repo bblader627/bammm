@@ -20,6 +20,7 @@ namespace bammm
 	{
 		scene = manager;
 	}
+
 	void Factory::setup()
 	{
 		string actorJSON;
@@ -49,7 +50,7 @@ namespace bammm
 
 		JSON* ore = rootChildren->getValue("ore");
 		this->parseToActorInfo(ore, "ore", &blockData);
-		
+
 		JSON* water = rootChildren->getValue("water");
 		this->parseToActorInfo(water, "water", &blockData);
 
@@ -68,9 +69,9 @@ namespace bammm
 	void Factory::parseToActorInfo(JSON* rootNode, string type,
 			HashMap<ActorInfo>* map)
 	{
-
 		int numberOfChildren = rootNode->sizeOfChildren();
-		DynamicArray<JSON*>* rootChildren = rootNode->getAllChildren()->getAllValues();
+		DynamicArray<JSON*>* rootChildren =
+				rootNode->getAllChildren()->getAllValues();
 
 		for (int i = 0; i < numberOfChildren; i++)
 		{
@@ -83,9 +84,9 @@ namespace bammm
 			int defense = child->getChild("defense")->getIntValue();
 			string behavior = child->getChild("behavior")->getStringValue();
 			bool collision = child->getChild("collision")->getBoolValue();
-			float x = (float)child->getChild("x")->getIntValue();
-			float y = (float)child->getChild("y")->getIntValue();
-			float z = (float)child->getChild("z")->getIntValue();
+			float x = (float) child->getChild("x")->getIntValue();
+			float y = (float) child->getChild("y")->getIntValue();
+			float z = (float) child->getChild("z")->getIntValue();
 			int parsedAlliance = child->getChild("alliance")->getIntValue();
 			string symbol = child->getChild("symbol")->getStringValue();
 			string color = child->getChild("color")->getStringValue();
@@ -94,11 +95,11 @@ namespace bammm
 			int iron = 0;
 
 			AllianceType alliance;
-			if(parsedAlliance == 0)
+			if (parsedAlliance == 0)
 			{
 				alliance = AllianceType::neutral;
 			}
-			else if(parsedAlliance == 1)
+			else if (parsedAlliance == 1)
 			{
 				alliance = AllianceType::ally;
 			}
@@ -107,15 +108,15 @@ namespace bammm
 				alliance = AllianceType::enemy;
 			}
 
-
-			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack, defense, behavior, collision, alliance, symbol, color, gold, coal, iron);
+			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack,
+					defense, behavior, collision, alliance, symbol, color,
+					gold, coal, iron);
 			info->setLocation(new Vector3D(x, y, z));
 
 			string i_str = "" + i;
 			map->add(type + i_str, *info);
 			Actor* myActor = new Actor(info);
 			scene->addActor(myActor);
-
 		}
 	}
 }

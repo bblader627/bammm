@@ -18,17 +18,17 @@ int main()
 	bool printMap = true;
 
 	/*
-	Factory* actorFactory = new Factory();
-	actorFactory->setup();
-	SceneManager sceneManager;
+	 Factory* actorFactory = new Factory();
+	 actorFactory->setup();
+	 SceneManager sceneManager;
 
-	MeleeCombat meleeCombat;
-	sceneManager.setMeleeCombat(meleeCombat);
+	 MeleeCombat meleeCombat;
+	 sceneManager.setMeleeCombat(meleeCombat);
 
-	////Move to SceneManager?
-	PlayerController controller;
-	//controller.setup(*bob, meleeCombat, sceneManager.getSceneGraph());
-	*/
+	 ////Move to SceneManager?
+	 PlayerController controller;
+	 //controller.setup(*bob, meleeCombat, sceneManager.getSceneGraph());
+	 */
 
 	bool playGame = true;
 	bool doTick = true;
@@ -95,7 +95,6 @@ int main()
 				playGame = false;
 			}
 
-
 			if (!playGame)
 			{
 				break;
@@ -125,7 +124,8 @@ void printWelcome()
 {
 	cout << "================================================" << "\n";
 	cout << "Welcome to BAMMM -  Alpha v0.2" << "\n";
-	cout << "Creators: \tAlvaro Home - Matthew Konstantinou - Matthew Witkowski\n\t\tBradley Crusco - Michael Abramo"
+	cout
+			<< "Creators: \tAlvaro Home - Matthew Konstantinou - Matthew Witkowski\n\t\tBradley Crusco - Michael Abramo"
 			<< "\n";
 	cout << "================================================" << "\n";
 }
@@ -148,7 +148,7 @@ DynamicArray<string>* parseInput(string input)
 	{
 		current = input[i];
 
-		if ( i == input.size()-1)
+		if (i == input.size() - 1)
 		{
 			builder += current;
 			result->add(builder);

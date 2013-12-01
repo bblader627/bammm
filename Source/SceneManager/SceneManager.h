@@ -21,6 +21,7 @@
 #include "../Controllers/AiController.h"
 #include "../Interfaces/ITickable.h"
 #include "../Weapons/MeleeCombat.h"
+#include "../Controllers/PlayerController.h"
 
 using namespace std;
 

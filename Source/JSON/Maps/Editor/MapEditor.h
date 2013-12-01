@@ -142,19 +142,39 @@ namespace bammm
 			string createJSONObject(int x, int y, int z, string name,
 					string walkable);
 
-			//TODO: Implement and add docstyle comments
+			/**
+			 createJSON
+			 @Pre-Condition- No input
+			 @Post-Condition- Creates and returns our JSON
+			 */
 			string createJSON();
 
-			//TODO: Implement and add docstyle comments
+			/**
+			 createWaterJSON
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a JSON object for water
+			 */
 			string createWaterJSON();
 
-			//TODO: Implement and add docstyle comments
+			/**
+			 createBarrierJSON
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a JSON object for barrier
+			 */
 			string createBarrierJSON();
 
-			//TODO: Implement and add docstyle comments
+			/**
+			 createMineJSON
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a JSON object for mine
+			 */
 			string createMineJSON();
 
-			//TODO: Implement and add docstyle comments
+			/**
+			 createBuildingJSON
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a JSON object for building
+			 */
 			string createBuildingJSON();
 
 			/**

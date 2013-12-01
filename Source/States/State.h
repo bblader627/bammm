@@ -43,7 +43,7 @@ namespace bammm
 			 @Post-Condition- Sets up the state
 			 */
 			virtual void setup();
-			
+
 			/**
 			 breakdown
 			 @Pre-Condition- No input
@@ -63,7 +63,8 @@ namespace bammm
 			 @Pre-Condition- Takes in a IStateCallback& state machine
 			 @Post-Condition- A transition callback is registered
 			 */
-			virtual void registerTransitionCallback(IStateCallback& stateMachine);
+			virtual void registerTransitionCallback(
+					IStateCallback& stateMachine);
 
 			/**
 			 switchState

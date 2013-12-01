@@ -44,14 +44,14 @@ namespace bammm
 
 	void MoveState::tick(float deltaTime)
 	{
-		Vector3D temp(0,0,0);
+		Vector3D temp(0, 0, 0);
 		temp += *_actor->getLocation();
 		temp += _direction;
 		float x = temp.getX();
 		float y = temp.getY();
 		float z = temp.getZ();
 		Vector3D* newLoc = new Vector3D(x, y, z);
-		
+
 		_sceneGraph->move(_actor, newLoc);
 		switchState("null");
 	}

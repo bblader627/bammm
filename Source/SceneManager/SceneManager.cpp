@@ -13,7 +13,6 @@
  */
 
 #include "SceneManager.h"
-#include "../Controllers/PlayerController.h"
 
 namespace bammm
 {
@@ -37,7 +36,7 @@ namespace bammm
 		_allActors.add(actor);
 		_sceneGraph.add(actor->getLocation(), actor);
 
-		if(actor->getType() == "dwarf")
+		if (actor->getType() == "dwarf")
 		{
 			PlayerController* controller = new PlayerController();
 			controller->setup(*actor, *_meleeCombat, _sceneGraph);
@@ -49,7 +48,6 @@ namespace bammm
 			controller->setup(*actor, *_meleeCombat, _sceneGraph);
 			this->addTickable(controller);
 		}
-
 
 	}
 
