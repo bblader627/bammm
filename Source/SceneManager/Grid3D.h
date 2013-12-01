@@ -21,6 +21,7 @@
 #include "../Resources/Stack.h"
 #include "../Actors/Actor.h"
 #include "../Resources/Constant.h"
+#include "../Resources/Color.h"
 using namespace std;
 
 namespace bammm
@@ -495,12 +496,13 @@ namespace bammm
 
 				if (atLocation->getSize() <= 0)
 				{
-					gridString = gridString + "- ";
+					gridString = gridString + Color::colorText(". ", "green");
 				}
 				else
 				{
 					string symbol = atLocation->get(0)->getSymbol();
-					gridString = gridString + symbol + " ";
+					string color = atLocation->get(0)->getColor();
+					gridString = gridString + Color::colorText(symbol, color)  + " ";
 				}
 			}
 			gridString = gridString + "\n";

@@ -49,6 +49,9 @@ namespace bammm
 
 		JSON* ore = rootChildren->getValue("ore");
 		this->parseToActorInfo(ore, "ore", &blockData);
+		
+		JSON* water = rootChildren->getValue("water");
+		this->parseToActorInfo(water, "water", &blockData);
 
 	}
 
@@ -85,6 +88,7 @@ namespace bammm
 			float z = (float)child->getChild("z")->getIntValue();
 			int parsedAlliance = child->getChild("alliance")->getIntValue();
 			string symbol = child->getChild("symbol")->getStringValue();
+			string color = child->getChild("color")->getStringValue();
 
 			AllianceType alliance;
 			if(parsedAlliance == 0)
@@ -101,7 +105,7 @@ namespace bammm
 			}
 
 
-			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack, defense, behavior, collision, alliance, symbol);
+			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack, defense, behavior, collision, alliance, symbol, color);
 			info->setLocation(new Vector3D(x, y, z));
 
 			string i_str = "" + i;

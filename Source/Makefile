@@ -12,7 +12,7 @@ States/SingState.cpp States/SleepState.cpp States/State.cpp States/StateMachine.
 States/DamageState.cpp States/SearchState.cpp\
 \
 Resources/DynamicArray.h Resources/HashMap.h Resources/HashNode.h \
-Resources/Heap.h Resources/Queue.h Resources/Stack.h \
+Resources/Heap.h Resources/Queue.h Resources/Stack.h Resources/Color.cpp \
 \
 Weapons/WeaponData.cpp Weapons/MeleeWeapon.cpp \
 Interfaces/IWeaponType.h Weapons/MeleeCombat.cpp \

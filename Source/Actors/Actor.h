@@ -52,6 +52,7 @@ namespace bammm
 			bool _collision;
 			AllianceType _alliance;
 			string _symbol;
+			string _color;
 
 			MeleeWeapon *_meleeWeapon;
 			RangedWeapon *_rangedWeapon;
@@ -118,6 +119,13 @@ namespace bammm
 			 @Post-Condition- returns nothing
 			 */
 			void setSymbol(string symbol);
+			
+			/**
+			 setColor
+			 @Pre-Condition- takes the color to set
+			 @Post-Condition- returns nothing
+			 */
+			void setColor(string color);
 			
 			/**
 			 increaseHealth
@@ -329,6 +337,13 @@ namespace bammm
 			 @Post-Condition- Returns _symbol
 			 */
 			string getSymbol();
+
+			/**
+			 getColor
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _color
+			 */
+			string getColor();
 
 			/**
 			 getEnemyAlliance
