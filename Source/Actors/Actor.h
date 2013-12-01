@@ -35,6 +35,7 @@ namespace bammm
 				enemy = -1, neutral = 0, ally = 1
 			};
 		
+
 		protected:
 			float _rotation;
 			string _name;
