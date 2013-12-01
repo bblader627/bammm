@@ -35,6 +35,23 @@ namespace bammm
 		cout << "wrong setup" << "\n";
 	}
 
+	void State::setup(Vector3D direction)
+	{
+	}
+
+	void State::setup(Actor& target)
+	{
+	}
+
+	void State::setup(string target)
+	{
+	}
+
+	void State::setup()
+	{
+
+	}
+
 	void State::breakdown()
 	{
 		cout << "wrong breakdown" << "\n";

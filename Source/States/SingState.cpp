@@ -33,6 +33,11 @@ namespace bammm
 		cout << _actor->getName() << " begins to sing. ";
 	}
 
+	void SingState::setup()
+	{
+
+	}
+
 	void SingState::breakdown()
 	{
 	}

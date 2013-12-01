@@ -32,6 +32,11 @@ namespace bammm
 		_timeSlept = 0;
 	}
 
+	void SleepState::setup()
+	{
+
+	}
+
 	void SleepState::breakdown()
 	{
 	}

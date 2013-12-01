@@ -42,6 +42,8 @@ namespace bammm
 			 */
 			void setup(DynamicArray<string>* args);
 
+			void setup();
+
 			/**
 			 breakdown
 			 @Pre-Condition- No input

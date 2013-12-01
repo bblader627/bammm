@@ -31,6 +31,10 @@ namespace bammm
 	{
 	}
 
+	void BrawlState::setup()
+	{
+	}
+
 	void BrawlState::breakdown()
 	{
 	}

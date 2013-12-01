@@ -24,7 +24,7 @@
 #include "../Resources/HashMap.h"
 #include "../Actors/Actor.h"
 #include "../Actors/ActorInfo.h"
-#include "../Weapons/IWeaponType.h"
+#include "../Interfaces/IWeaponType.h"
 #include "../SceneManager/SceneManager.h"
 
 using namespace bammm;

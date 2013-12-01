@@ -31,6 +31,11 @@ namespace bammm
 	{
 	}
 
+	void CombatState::setup()
+	{
+
+	}
+
 	void CombatState::breakdown()
 	{
 	}

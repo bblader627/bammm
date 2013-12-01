@@ -56,7 +56,7 @@ namespace bammm
 			int attack, int defense, string behavior)
 	{
 		Actor* newActor = new Actor(type, name, health, stamina, attack,
-				defense, behavior);
+				defense, behavior, Actor::AllianceType::enemy);
 		newActor->setLocation(new Vector3D(0.0f, 0.0f, 0.0f));
 		return *newActor;
 
@@ -85,11 +85,25 @@ namespace bammm
 			float z = (float)child->getChild("z")->getIntValue();
 
 			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack, defense, behavior);
-
 			info->setLocation(new Vector3D(x, y, z));
 
 			//cout << name << " " << health << " " << stamina  << " " << attack  << " " << defense  << " " << behavior
 			//		 << " " << x  << " " << y  << " " << z << endl;
+			
+			//////////////This was added/////////////
+			//JSON* collision = rootNode[i]["collision"];
+			/////////////////////////////////////////
+
+			JSON* x = rootNode[i]["x"];
+			JSON* y = rootNode[i]["y"];
+			JSON* z = rootNode[i]["z"];
+
+	
+			ActorInfo* info = new ActorInfo(type, name, health, stamina,
+					attack, defense, behavior);
+					// !!collision->getIntValue());
+
+			info->setLocation(new Vector3D(x, y, z),
 
 			string i_str = "" + i;
 			map->add(type + i_str, *info);

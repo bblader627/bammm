@@ -29,6 +29,12 @@ namespace bammm
 
 	class Actor
 	{
+		public:
+			enum AllianceType
+			{
+				enemy = -1, neutral = 0, ally = 1
+			};
+		
 		protected:
 			float _rotation;
 			string _name;
@@ -48,10 +54,8 @@ namespace bammm
 			int _gold;
 			float _BAC;
 
-			enum AllianceType
-			{
-				enemy = -1, neutral = 0, ally = 1
-			};
+			bool _collision;
+
 			AllianceType _alliance;
 
 			MeleeWeapon *_meleeWeapon;
@@ -59,9 +63,9 @@ namespace bammm
 
 		public:
 			Actor();
-			Actor(string name, string type);
+			Actor(string name, string type, AllianceType alliance);
 			Actor(string type, string name, int health, int stamina, int attack,
-					int defense, string behavior);
+					int defense, string behavior, AllianceType alliance);
 			Actor(ActorInfo* info);
 
 			/**
@@ -183,6 +187,13 @@ namespace bammm
 			 @Post-Condition- Returns _gold
 			 */
 			int getGold();
+			
+			/**
+			 getMeleeWeapon
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _collision
+			 */
+			bool getCollision();
 
 			/**
 			 getMeleeWeapon
@@ -313,7 +324,7 @@ namespace bammm
 			/**
 			 getEnemyAlliance
 			 @Pre-Condition- No input
-			 @Post-Condition- Returns _alliance * -1
+			 @Post-Condition- Returns the enemy's alliance
 			 */
 			int getEnemyAlliance();
 

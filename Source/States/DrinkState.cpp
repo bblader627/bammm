@@ -33,6 +33,11 @@ namespace bammm
 		_stoutLife = _stoutSize;
 	}
 
+	void DrinkState::setup()
+	{
+		_stoutLife = _stoutSize;
+	}
+
 	void DrinkState::breakdown()
 	{
 		double BAC = _actor->getBAC();

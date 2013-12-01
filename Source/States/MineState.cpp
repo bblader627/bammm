@@ -36,6 +36,11 @@ namespace bammm
 		_oreType = args->get(2);
 	}
 
+	void MineState::setup()
+	{
+
+	}
+
 	void MineState::breakdown()
 	{
 	}

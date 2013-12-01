@@ -6,15 +6,16 @@ RM = rm -f
 SRCPATH = .
 SRC = Actors/Actor.cpp Actors/ActorInfo.cpp \
 Controllers/AiController.cpp Controllers/Controller.cpp Controllers/PlayerController.cpp \
-States/BrawlState.cpp States/DrinkState.cpp States/MovementState.cpp \
+States/BrawlState.cpp States/DrinkState.cpp States/MoveState.cpp \
 States/IdleState.cpp Interfaces/IStateCallback.cpp States/MineState.cpp States/CombatState.cpp \
 States/SingState.cpp States/SleepState.cpp States/State.cpp States/StateMachine.cpp \
+States/DamageState.cpp States/SearchState.cpp\
 \
 Resources/DynamicArray.h Resources/HashMap.h Resources/HashNode.h \
 Resources/Heap.h Resources/Queue.h Resources/Stack.h \
 \
-Weapons/IWeaponType.h Weapons/WeaponData.cpp Weapons/MeleeWeapon.cpp \
-Weapons/MeleeCombat.cpp \
+Weapons/WeaponData.cpp Weapons/MeleeWeapon.cpp \
+Interfaces/IWeaponType.h Weapons/MeleeCombat.cpp \
 \
 SceneManager/Vector3D.cpp SceneManager/Grid3D.h SceneManager/SceneManager.cpp  \
 Factories/Factory.cpp \

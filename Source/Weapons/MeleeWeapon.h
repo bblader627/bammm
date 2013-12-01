@@ -15,7 +15,13 @@
 #ifndef MELEEWEAPON_H_
 #define MELEEWEAPON_H_
 
-#include "IWeaponType.h"
+#include "../Interfaces/IWeaponType.h"
+#include "../TestSuite/Time.h"
+
+#ifndef UINT
+#define UINT
+typedef unsigned int uint;
+#endif
 
 namespace bammm
 {
@@ -26,10 +32,13 @@ namespace bammm
 	class MeleeWeapon
 	{
 		protected:
-			WeaponData* _weaponData;
+			WeaponData _weaponData;
+			uint _timer;
+			Time _time;
 
 		public:
 			MeleeWeapon();
+			MeleeWeapon(WeaponData weaponData);
 			virtual ~MeleeWeapon();
 
 			/**

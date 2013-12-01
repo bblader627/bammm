@@ -8,7 +8,7 @@
  *	Matt Witkowski
  *	Bradley Crusco
  * Description:
- * MovementState header file.
+ * MoveState header file.
  *
  */
 
@@ -28,15 +28,15 @@ using namespace std;
 
 namespace bammm
 {
-	class MovementState: public State
+	class MoveState: public State
 	{
 		private:
-			Vector3D* _direction;
+			Vector3D _direction;
 			Grid3D<Actor*>* _sceneGraph;
 
 		public:
-			MovementState(Actor& actor);
-			MovementState(Actor& actor, IStateCallback& stateMachine, Grid3D<Actor*>& sceneGraph);
+			MoveState(Actor& actor);
+			MoveState(Actor& actor, IStateCallback& stateMachine, Grid3D<Actor*>& sceneGraph);
 
 			/**
 			 Update this to take a Vector3D once we get rid of circular
@@ -45,6 +45,15 @@ namespace bammm
 			 @Post-Condition- Sets up the state
 			 */
 			void setup(DynamicArray<string>* args);
+
+			/**
+			 setup
+			 @Pre-Condition- Takes a Vector to determine the direction
+			 @Post-Condition- Sets up the state with a direction
+			 */
+			virtual void setup(Vector3D direction);
+			
+			virtual void setup();
 
 			/**
 			 breakdown
@@ -65,7 +74,7 @@ namespace bammm
 			 @Pre-Condition- Takes in a string nextState
 			 @Post-Condition- The current state is switched to the given nextState
 			 */
-			void switchState(string nextState);
+			virtual void switchState(string nextState);
 
 			/**
 			 toString

@@ -8,44 +8,49 @@
  *	Matt Witkowski
  *	Bradley Crusco
  * Description:
- * MineState header file.
+ * DamageState header file.
  *
  */
 
-#ifndef MINESTATE_H_
-#define MINESTATE_H_
+#ifndef DAMAGESTATE_H_
+#define DAMAGESTATE_H_
 
 #include <iostream>
 #include "State.h"
-
+#include "../Weapons/MeleeWeapon.h"
 #ifndef UINT
 #define UINT
 typedef unsigned int UINT;
 #endif
 
+using namespace std;
+
 namespace bammm
 {
-	class MineState: public State
+	class DamageState: public State
 	{
 		private:
-			int _successChance;
-			int _maximumGold;
-			int _amountToMine;
-			string _oreType;
+			Actor* _target;
 
 		public:
-			MineState(Actor& actor);
-			MineState(Actor& actor, IStateCallback& stateMachine);
+			DamageState(Actor& actor);
+			DamageState(Actor& actor, IStateCallback& stateMachine);
+
+			/**
+			 Update this to take a Vector3D once we get rid of circular
+			 setup
+			 @Pre-Condition- Takes nothing
+			 @Post-Condition- Sets up the state
+			 */
+			virtual void setup();
 
 			/**
 			 setup
-			 @Pre-Condition- No input
-			 @Post-Condition- Sets up the state
+			 @Pre-Condition- Takes an Actor to apply damage to
+			 @Post-Condition- Sets up the state with an Actor
 			 */
-			virtual void setup(DynamicArray<string>* args);
-
-			void setup();
-
+			virtual void setup(Actor& target);
+			
 			/**
 			 breakdown
 			 @Pre-Condition- No input
@@ -65,7 +70,7 @@ namespace bammm
 			 @Pre-Condition- Takes in a string nextState
 			 @Post-Condition- The current state is switched to the given nextState
 			 */
-			void switchState(string nextState);
+			virtual void switchState(string nextState);
 
 			/**
 			 toString
