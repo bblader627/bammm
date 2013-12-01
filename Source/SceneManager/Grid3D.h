@@ -349,23 +349,14 @@ namespace bammm
 					path->pop();
 					path->push(UP);
 					//If you can't go up
-					if (!(directionOfPrevious == UP)
-							|| !(getPath(actorPos,
-									new Vector3D(
-											convertToVector(
-													currentPosition + _width)),
-									DOWN, path)))
+					if (!(directionOfPrevious == UP) ||
+							!( getPath(actorPos, new Vector3D( convertToVector(currentPosition + _width) ), DOWN, path) ))
 					{
 						path->pop();
 						path->push(DOWN);
 						//If you can't go down
-						if (!(directionOfPrevious == DOWN)
-								|| !(getPath(actorPos,
-										new Vector3D(
-												convertToVector(
-														currentPosition
-																- _width)), UP,
-										path)))
+						if (!(directionOfPrevious == DOWN) ||
+								!(getPath(actorPos,	new Vector3D( convertToVector(currentPosition- _width)), UP,path)))
 						{
 							path->pop();
 							return false;
@@ -377,32 +368,19 @@ namespace bammm
 			else
 			{
 				path->push(DOWN);
-				if (!(directionOfPrevious == DOWN)
-						|| !(getPath(actorPos,
-								new Vector3D(
-										convertToVector(
-												currentPosition - _width)), UP,
-								path)))
+				if (!(directionOfPrevious == DOWN) ||
+						!(getPath(actorPos,new Vector3D(convertToVector(currentPosition - _width)), UP,path)))
 				{
 					path->pop();
 					path->push(LEFT);
-					if (!(directionOfPrevious == LEFT)
-							|| !(getPath(actorPos,
-									new Vector3D(
-											convertToVector(
-													currentPosition - 1)),
-									RIGHT, path)))
+					if (!(directionOfPrevious == LEFT) ||
+							!(getPath(actorPos,new Vector3D(convertToVector(currentPosition - 1)),RIGHT, path)))
 					{
 						path->pop();
 						path->push(UP);
 						//If you can't go up
-						if (!(directionOfPrevious == UP)
-								|| !(getPath(actorPos,
-										new Vector3D(
-												convertToVector(
-														currentPosition
-																+ _width)),
-										DOWN, path)))
+						if (!(directionOfPrevious == UP) ||
+								!(getPath(actorPos,new Vector3D(convertToVector(currentPosition+ _width)),DOWN, path)))
 						{
 							path->pop();
 							return false;
@@ -418,8 +396,7 @@ namespace bammm
 			{
 				path->push(RIGHT);
 				if (!(getPath(actorPos,
-						new Vector3D(convertToVector(currentPosition + 1)),
-						LEFT, path)))
+						new Vector3D(convertToVector(currentPosition + 1)),LEFT, path)))
 				{
 					path->pop();
 					path->push(UP);
