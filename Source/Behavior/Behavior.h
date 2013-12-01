@@ -18,16 +18,19 @@
 using namespace std;
 #include <iostream>
 #include "../Resources/HashMap.h"
+#include "../Resources/DynamicArray.h"
 
 namespace bammm
 {
 	class Behavior
 	{
 		private:
-			HashMap<int> _desireTable;
+			HashMap<int> _baseDesireTable;
+			HashMap<int> _currentDesireTable;
+			DynamicArray<string> *_baseBehaviors;
 
 		public:
-			Behavior();
+			Behavior(DynamicArray<string> *baseBehaviors);
 
 			/**
 			 addBehavior
@@ -41,12 +44,9 @@ namespace bammm
 			 @Pre-Condition- takes no arguments
 			 @Post-Condition- prints the desire table
 			 */
-			void printTable();
-
-
+			void printTable();	
 			
-			
-	}
+	};
 }
 
 #endif
