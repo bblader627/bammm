@@ -38,4 +38,9 @@ namespace bammm
 		cout << _desireTable.getAllKeys()->toString() << endl;
 		cout << _desireTable.getAllValues()->toString() << endl;
 	}
+	
+	DynamicArray<string>*  Behavior::getBaseBehaviors()
+	{
+		return _baseBasehaviors
+	}
 }
