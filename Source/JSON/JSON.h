@@ -152,7 +152,6 @@ namespace bammm
 			 */
 			JSON operator[](const unsigned int & rhs);
 
-			//TODO: Can this implementation be moved to JSON.cpp?
 			/**
 			 operator[]
 			 @Pre-Condition-  const string key
