@@ -12,13 +12,6 @@
  */
 
 #include "JSONParser.h"
-#include "JSONPrimitive.h"
-#include "../Resources/DynamicArray.h"
-#include "JSON.h"
-#include "JSONArray.h"
-#include <stdlib.h>
-
-using namespace std;
 
 namespace bammm
 {
@@ -112,8 +105,8 @@ namespace bammm
 						{
 							isNewArrayObject = true;
 						}
-						parentNode = arrayRootNode;		//parent should be dwarves array
-						currentNode = new JSON();		//Children will be attributes
+						parentNode = arrayRootNode;	//parent should be dwarves array
+						currentNode = new JSON();//Children will be attributes
 						currentNode->setParent(*parentNode);
 
 					}
@@ -263,7 +256,9 @@ namespace bammm
 
 						if (isArray)
 						{
-							currentNode->addChild(*(new JSONPrimitive(name, value, JSON_STRING)));
+							currentNode->addChild(
+									*(new JSONPrimitive(name, value,
+											JSON_STRING)));
 
 						}
 						else
@@ -299,20 +294,22 @@ namespace bammm
 							return false;
 						}
 
-
 						if (isArray)
 						{
-							currentNode->addChild(*(new JSONPrimitive(name, boolVal, JSON_BOOL)));
+							currentNode->addChild(
+									*(new JSONPrimitive(name, boolVal,
+											JSON_BOOL)));
 						}
 						else
 						{
-							currentNode = new JSONPrimitive(name, boolVal, JSON_BOOL);
+							currentNode = new JSONPrimitive(name, boolVal,
+									JSON_BOOL);
 						}
 
 					}
 					else if (isdigit(current))
 					{
-						while (!input.eof() && current != ','&& current != '}')
+						while (!input.eof() && current != ',' && current != '}')
 						{
 							current = (char) input.get();
 							value += current;
@@ -347,7 +344,8 @@ namespace bammm
 					}
 					else
 					{
-						cout  << "Error parsing value. Invalid character found. \n";
+						cout
+								<< "Error parsing value. Invalid character found. \n";
 						return false;
 					}
 
