@@ -80,10 +80,10 @@ namespace bammm
 
 			/**
 			 addState
-			 @Pre-Condition- Takes in a pointer to a State state and DynamicArray of args
+			 @Pre-Condition- Takes in a pointer to a State state
 			 @Post-Condition- Adds the given State state to the state machine
 			 */
-			void addState(State* newState, DynamicArray<string>* args);
+			//void addState(State* newState);
 
 			/**			 
 			 removeState

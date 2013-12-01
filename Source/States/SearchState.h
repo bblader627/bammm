@@ -52,7 +52,7 @@ namespace bammm
 			 @Pre-Condition- Takes a target to search for
 			 @Post-Condition- Sets up the state with a string target
 			 */
-			virtual void setup(string target);
+			virtual void setTarget(string target);
 			
 			/**
 			 breakdown

@@ -57,7 +57,7 @@ namespace bammm
 	void PlayerController::input(DynamicArray<string>* commandString,
 			float deltaTime)
 	{
-		string newState = commandString->get(0);
+		/*string newState = commandString->get(0);
 		bool doTick = true;
 
 		DynamicArray<string>* oreType = new DynamicArray<string>();
@@ -151,7 +151,7 @@ namespace bammm
 			State* stateToAdd = _states.getValue(newState);
 			_stateMachine.addState(stateToAdd, commandString);
 			_stateMachine.tick(deltaTime);
-		}
+		}*/
 	}
 
 	void PlayerController::input(string command, float deltaTime)

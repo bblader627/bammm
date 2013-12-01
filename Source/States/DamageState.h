@@ -49,7 +49,7 @@ namespace bammm
 			 @Pre-Condition- Takes an Actor to apply damage to
 			 @Post-Condition- Sets up the state with an Actor
 			 */
-			virtual void setup(Actor& target);
+			void setTarget(Actor& target);
 			
 			/**
 			 breakdown

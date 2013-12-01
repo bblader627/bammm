@@ -28,7 +28,7 @@ namespace bammm
 		registerTransitionCallback(stateMachine);
 	}
 
-	void SearchState::setup(string target)
+	void SearchState::setTarget(string target)
 	{
 		_target = target;
 		//_path = _sceneGraph->getPath(_actor, _target);

@@ -29,14 +29,9 @@ namespace bammm
 		registerTransitionCallback(stateMachine);
 	}
 
-	void MoveState::setup(Vector3D direction)
+	void MoveState::setDirection(Vector3D direction)
 	{
 		_direction = direction;
-	}
-
-	void MoveState::setup(DynamicArray<string>* args)
-	{
-
 	}
 
 	void MoveState::setup()

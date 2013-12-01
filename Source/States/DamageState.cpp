@@ -27,7 +27,7 @@ namespace bammm
 		registerTransitionCallback(stateMachine);
 	}
 
-	void DamageState::setup(Actor& target)
+	void DamageState::setTarget(Actor& target)
 	{
 		_target = &target;
 	}

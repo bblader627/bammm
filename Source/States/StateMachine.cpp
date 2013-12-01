@@ -41,7 +41,7 @@ namespace bammm
 
 	void StateMachine::initialState(State* initial)
 	{
-		initial->setup(new DynamicArray<string>());
+		initial->setup();
 		currentStates.add(initial);
 	}
 
@@ -56,7 +56,7 @@ namespace bammm
 	void StateMachine::switchState(State& current, State& newState)
 	{
 		removeState(&current);
-		addState(&newState, new DynamicArray<string>());
+		addState(&newState);
 	}
 
 	void StateMachine::switchState(State& current, string newStateString)
@@ -104,12 +104,12 @@ namespace bammm
 				 }*/
 			}
 			cout << "poop" << endl;
-			newState->setup(new DynamicArray<string>());
+			newState->setup();
 			currentStates.add(newState);
 		}
 	}
 
-	void StateMachine::addState(State* newState, DynamicArray<string>* args)
+	/*void StateMachine::addState(State* newState)
 	{
 		if (currentStates.contains(newState))
 		{
@@ -137,16 +137,16 @@ namespace bammm
 			//Special case for combat state
 			if (newState->toString() == "combat")
 			{
-				/*Actor* closestEnemy = SceneManager::getSceneGraph().getEnemy(_actor->getLocation(), _actor);
+				Actor* closestEnemy = SceneManager::getSceneGraph().getEnemy(_actor->getLocation(), _actor);
 				 if(closestEnemy)
 				 {
 				 _meleeCombat->setup(*_actor, *closestEnemy);
-				 }*/
+				 }
 			}
-			newState->setup(args);
+			newState->setup();
 			currentStates.add(newState);
 		}
-	}
+	}*/
 	void StateMachine::removeState(State* oldState)
 	{
 		oldState->breakdown();

@@ -86,8 +86,8 @@ namespace bammm
 			{
 				_stateMachine.addState(newState);
 			}
-
-			newState->setup(*enemy);
+			DamageState* castedState = static_cast<DamageState*>(newState);
+			castedState->setTarget(*enemy);
 		}
 		else
 		{
@@ -107,24 +107,25 @@ namespace bammm
 
 			//Pick a random direction
 			int random = randomDistribution(generator);
-			Vector3D newLoc(0,0,0);
+			Vector3D newLocation(0,0,0);
 			if(random == 0)
 			{
-				newLoc.set(1,0,0);
+				newLocation.set(1,0,0);
 			}
 			else if(random == 1)
 			{
-				newLoc.set(-1,0,0);
+				newLocation.set(-1,0,0);
 			}
 			else if(random == 2)
 			{
-				newLoc.set(0,1,0);
+				newLocation.set(0,1,0);
 			}
 			else if(random == 3)
 			{
-				newLoc.set(0,-1,0);
+				newLocation.set(0,-1,0);
 			}
-			newState->setup(newLoc);
+			MoveState* castedState = static_cast<MoveState*>(newState);
+			castedState->setDirection(newLocation);
 		}
 		_stateMachine.tick(deltaTime);
 	}
