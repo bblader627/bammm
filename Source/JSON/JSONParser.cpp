@@ -308,7 +308,7 @@ namespace bammm
 						{
 							currentNode = new JSONPrimitive(name, boolVal, JSON_BOOL);
 						}
-g
+
 					}
 					else if (isdigit(current))
 					{
