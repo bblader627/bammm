@@ -12,6 +12,12 @@
  *
  */
 
+/*
+	
+*/
+
+
+
 #ifndef BEHAVIOR_H
 #define BEHAVIOR_H
 
@@ -30,7 +36,7 @@ namespace bammm
 			DynamicArray<string> *_baseBehaviors;
 
 		public:
-			Behavior(DynamicArray<string> *baseBehaviors);
+			Behavior(DynamicArray<string> *baseBehaviors,DynamicArray<string> *baseValues);
 
 			/**
 			 addBehavior
