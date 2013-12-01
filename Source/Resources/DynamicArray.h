@@ -20,6 +20,7 @@
 #include <cassert>
 #include <typeinfo>
 #include "Constant.h"
+
 using namespace std;
 
 namespace bammm
@@ -546,10 +547,10 @@ namespace bammm
 
 namespace std
 {
-	to_string(string str)
-	{
-		return str;
-	}
+to_string(string str)
+{
+	return str;
+}
 }
 
 #endif
