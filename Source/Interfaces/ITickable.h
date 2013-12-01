@@ -12,8 +12,12 @@
  *
  */
 
+#include <string>
+
 #ifndef ITICKABLE_H_
 #define ITICKABLE_H_
+
+using namespace std;
 
 namespace bammm
 {
@@ -27,6 +31,8 @@ namespace bammm
 
 			//TODO: Add doc style comment
 			virtual bool canDelete();
+
+			virtual string toString()=0;
 	};
 }
 

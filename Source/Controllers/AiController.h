@@ -52,6 +52,8 @@ namespace bammm
 			 */
 			virtual bool canDelete();
 
+			virtual string toString();
+
 	};
 }
 

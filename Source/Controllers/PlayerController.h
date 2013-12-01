@@ -66,6 +66,8 @@ namespace bammm
 			virtual bool canDelete();
 
 			virtual void tick(float deltaTime);
+
+			virtual string toString();
 	};
 }
 

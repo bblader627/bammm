@@ -252,4 +252,9 @@ namespace bammm
 		_stateMachine.tick(deltaTime);
 	}
 
+	string PlayerController::toString()
+	{
+		return "PlayerController";
+	}
+
 }
