@@ -15,8 +15,8 @@
 #ifndef AICONTROLLER_H_
 #define AICONTROLLER_H_
 
-#include "Controller.h"
 #include <random>
+#include "Controller.h"
 #include "../Interfaces/ITickable.h"
 #include "../Resources/Constant.h"
 
@@ -52,8 +52,12 @@ namespace bammm
 			 */
 			virtual bool canDelete();
 
+			/**
+			 toString
+			 @Pre-Condition- Takes nothing
+			 @Post-Condition- Returns a string representation of AiController
+			 */
 			virtual string toString();
-
 	};
 }
 
