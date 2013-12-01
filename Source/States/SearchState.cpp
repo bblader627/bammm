@@ -31,6 +31,7 @@ namespace bammm
 	void SearchState::setup(string target)
 	{
 		_target = target;
+		//_path = _sceneGraph->getPath(_actor, _target);
 	}
 
 	void SearchState::setup()
@@ -43,6 +44,14 @@ namespace bammm
 
 	void SearchState::tick(float deltaTime)
 	{
+		if(_path->isEmpty())
+		{
+			switchState("null");
+		}
+		else
+		{
+			_sceneGraph->move(_actor, _path->pop());
+		}
 	}
 
 	void SearchState::switchState(string nextState)

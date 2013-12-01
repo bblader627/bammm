@@ -18,6 +18,7 @@
 #include <iostream>
 #include "State.h"
 #include "../SceneManager/Grid3D.h"
+#include "../Resources/Stack.h"
 #ifndef UINT
 #define UINT
 typedef unsigned int UINT;
@@ -32,6 +33,7 @@ namespace bammm
 		private:
 			string _target;
 			Grid3D<Actor*>* _sceneGraph;
+			Stack<Vector3D*>* _path;
 
 		public:
 			SearchState(Actor& actor);
