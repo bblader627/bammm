@@ -35,11 +35,12 @@ namespace bammm
 			string _behavior;
 			Vector3D* _location;
 			AllianceType _alliance;
+			string _symbol;
 
 
 		public:
 			ActorInfo();
-			ActorInfo(string type, string name, int health, int stamina, int attack, int defense, string behavior, bool collision, AllianceType alliance);
+			ActorInfo(string type, string name, int health, int stamina, int attack, int defense, string behavior, bool collision, AllianceType alliance, string symbol);
 
 			/**
 			 getType
@@ -112,6 +113,13 @@ namespace bammm
 			AllianceType getAlliance();
 
 			/**
+			 getSymbol
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _symbol
+			 */
+			string getSymbol();
+
+			/**
 			 setType
 			 @Pre-Condition- takes type
 			 @Post-Condition- returns void
@@ -180,6 +188,13 @@ namespace bammm
 			 @Post-Condition- returns nothing
 			 */
 			void setAlliance(AllianceType alliance);
+			
+			/**
+			 setSymbol
+			 @Pre-Condition- takes a string to set the symbol
+			 @Post-Condition- returns nothing
+			 */
+			void setSymbol(string symbol);
 	};
 
 }

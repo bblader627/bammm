@@ -50,8 +50,8 @@ namespace bammm
 			float _BAC;
 
 			bool _collision;
-
 			AllianceType _alliance;
+			string _symbol;
 
 			MeleeWeapon *_meleeWeapon;
 			RangedWeapon *_rangedWeapon;
@@ -112,6 +112,13 @@ namespace bammm
 			 */
 			void setLocation(Vector3D* location);
 
+			/**
+			 setSymbol
+			 @Pre-Condition- takes the string to set
+			 @Post-Condition- returns nothing
+			 */
+			void setSymbol(string symbol);
+			
 			/**
 			 increaseHealth
 			 @Pre-Condition- Takes an float amount
@@ -315,6 +322,13 @@ namespace bammm
 			 @Post-Condition- Returns _alliance
 			 */
 			int getAlliance();
+
+			/**
+			 getSymbol
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _symbol
+			 */
+			string getSymbol();
 
 			/**
 			 getEnemyAlliance

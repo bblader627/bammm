@@ -84,8 +84,9 @@ namespace bammm
 			float y = (float)child->getChild("y")->getIntValue();
 			float z = (float)child->getChild("z")->getIntValue();
 			int parsedAlliance = child->getChild("alliance")->getIntValue();
-			AllianceType alliance;
+			string symbol = child->getChild("symbol")->getStringValue();
 
+			AllianceType alliance;
 			if(parsedAlliance == 0)
 			{
 				alliance = AllianceType::neutral;
@@ -100,7 +101,7 @@ namespace bammm
 			}
 
 
-			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack, defense, behavior, collision, alliance);
+			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack, defense, behavior, collision, alliance, symbol);
 			info->setLocation(new Vector3D(x, y, z));
 
 			string i_str = "" + i;

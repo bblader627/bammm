@@ -1,16 +1,16 @@
 {
 	"dwarves": [
-		{ "name":"Bob", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":0, "y":1, "z":0, "alliance":1, "collision":false },
-		{ "name":"Jim", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"sing", "x":2, "y":4, "z":0, "alliance":1, "collision":false  },
-		{ "name":"Joe", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":4, "y":1, "z":0, "alliance":1, "collision":false  },
-		{ "name":"Phil", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"drink", "x":3, "y":5, "z":0, "alliance":1, "collision":false },
-		{ "name":"Frank", "health":100, "stamina":15, "attack":20, "defense":20, "behavior":"brawl", "x":0, "y":4, "z":0, "alliance":1, "collision":false }
+		{ "name":"Bob", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":0, "y":1, "z":0, "alliance":1, "symbol":"D", "collision":false },
+		{ "name":"Jim", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"sing", "x":2, "y":4, "z":0, "alliance":1, "symbol":"D", "collision":false  },
+		{ "name":"Joe", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":4, "y":1, "z":0, "alliance":1, "symbol":"D", "collision":false  },
+		{ "name":"Phil", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"drink", "x":3, "y":5, "z":0, "alliance":1, "symbol":"D", "collision":false },
+		{ "name":"Frank", "health":100, "stamina":15, "attack":20, "defense":20, "behavior":"brawl", "x":0, "y":4, "z":0, "alliance":1, "symbol":"D", "collision":false }
 	],
 	
 	"orcs": [
-		{ "name":"Urguk", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":0, "y":8, "z":0, "alliance":2, "collision":false },
-		{ "name":"Ghorbash", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"sing", "x":2, "y":7, "z":0, "alliance":2, "collision":false  },
-		{ "name":"Grogmar", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":5, "y":9, "z":0, "alliance":2, "collision":false  }
+		{ "name":"Urguk", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":0, "y":8, "z":0, "alliance":2, "symbol":"O", "collision":false },
+		{ "name":"Ghorbash", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"sing", "x":2, "y":7, "z":0, "alliance":2, "symbol":"O", "collision":false  },
+		{ "name":"Grogmar", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":5, "y":9, "z":0, "alliance":2, "symbol":"O", "collision":false  }
 	],
 
 	"dimensions": [
@@ -18,35 +18,35 @@
 	],
 	
 	"wall": [
-		{ "name":"Wall1", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":5, "y":0, "z":0, "alliance":0, "collision":true },
-		{ "name":"Wall2", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":5, "y":1, "z":0, "alliance":0, "collision":true },
-		{ "name":"Wall3", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":5, "y":2, "z":0, "alliance":0, "collision":true },
-		{ "name":"Gate", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"gate", "x":5, "y":3, "z":0, "alliance":0, "collision":false },
-		{ "name":"Wall4", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":5, "y":4, "z":0, "alliance":0, "collision":true },
-		{ "name":"Wall5", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":5, "y":5, "z":0, "alliance":0, "collision":true },
-		{ "name":"Wall6", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":5, "y":6, "z":0, "alliance":0, "collision":true },
-		{ "name":"Wall7", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":4, "y":6, "z":0, "alliance":0, "collision":true },
-		{ "name":"Wall8", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":3, "y":6, "z":0, "alliance":0, "collision":true },
-		{ "name":"Wall9", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":2, "y":6, "z":0, "alliance":0, "collision":true },
-		{ "name":"Wall10", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":1, "y":6, "z":0, "alliance":0, "collision":true },
-		{ "name":"Wall11", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":0, "y":6, "z":0, "alliance":0, "collision":true }
+		{ "name":"Wall1", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":5, "y":0, "z":0, "alliance":0, "symbol":"#", "collision":true },
+		{ "name":"Wall2", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":5, "y":1, "z":0, "alliance":0, "symbol":"#", "collision":true },
+		{ "name":"Wall3", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":5, "y":2, "z":0, "alliance":0, "symbol":"#", "collision":true },
+		{ "name":"Gate", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"gate", "x":5, "y":3, "z":0, "alliance":0, "symbol":"#", "collision":false },
+		{ "name":"Wall4", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":5, "y":4, "z":0, "alliance":0, "symbol":"#", "collision":true },
+		{ "name":"Wall5", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":5, "y":5, "z":0, "alliance":0, "symbol":"#", "collision":true },
+		{ "name":"Wall6", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":5, "y":6, "z":0, "alliance":0, "symbol":"#", "collision":true },
+		{ "name":"Wall7", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":4, "y":6, "z":0, "alliance":0, "symbol":"#", "collision":true },
+		{ "name":"Wall8", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":3, "y":6, "z":0, "alliance":0, "symbol":"#", "collision":true },
+		{ "name":"Wall9", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":2, "y":6, "z":0, "alliance":0, "symbol":"#", "collision":true },
+		{ "name":"Wall10", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":1, "y":6, "z":0, "alliance":0, "symbol":"#", "collision":true },
+		{ "name":"Wall11", "health":100, "stamina":0, "attack":0, "defense":20, "behavior":"block", "x":0, "y":6, "z":0, "alliance":0, "symbol":"#", "collision":true }
 	],
 	
 	"buildings": [
-		{ "name":"Pub", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":1, "y":2, "z":0, "alliance":0, "collision":true },
-		{ "name":"Inn", "health":100, "stamina":0, "attack":0, "defense":12, "behavior":"block", "x":3, "y":4, "z":0, "alliance":0, "collision":true }
+		{ "name":"Pub", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":1, "y":2, "z":0, "alliance":0, "symbol":"P", "collision":true },
+		{ "name":"Inn", "health":100, "stamina":0, "attack":0, "defense":12, "behavior":"block", "x":3, "y":4, "z":0, "alliance":0, "symbol":"I", "collision":true }
 	],
 	
 	"trees": [
-		{ "name":"Oak", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":7, "y":3, "z":0, "alliance":0, "collision":false },
-		{ "name":"Birch", "health":20, "stamina":0, "attack":0, "defense":8, "behavior":"block", "x":8, "y":7, "z":0, "alliance":0, "collision":false },
-		{ "name":"Redwood", "health":20, "stamina":0, "attack":0, "defense":12, "behavior":"block", "x":4, "y":8, "z":0, "alliance":0, "collision":false }
+		{ "name":"Oak", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":7, "y":3, "z":0, "alliance":0, "symbol":"+", "collision":false },
+		{ "name":"Birch", "health":20, "stamina":0, "attack":0, "defense":8, "behavior":"block", "x":8, "y":7, "z":0, "alliance":0, "symbol":"+", "collision":false },
+		{ "name":"Redwood", "health":20, "stamina":0, "attack":0, "defense":12, "behavior":"block", "x":4, "y":8, "z":0, "alliance":0, "symbol":"+", "collision":false }
 	],
 	
 	"ore": [
-		{ "name":"Iron1", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":8, "y":0, "z":0, "alliance":0, "collision":false },
-		{ "name":"Iron2", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":9, "y":0, "z":0, "alliance":0, "collision":false },
-		{ "name":"Iron3", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":9, "y":1, "z":0, "alliance":0, "collision":false }
+		{ "name":"Iron1", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":8, "y":0, "z":0, "alliance":0, "symbol":"^", "collision":false },
+		{ "name":"Iron2", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":9, "y":0, "z":0, "alliance":0, "symbol":"^", "collision":false },
+		{ "name":"Iron3", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":9, "y":1, "z":0, "alliance":0, "symbol":"^", "collision":false }
 	]
 	
 }
