@@ -17,8 +17,15 @@ using namespace std;
 
 namespace bammm
 {
-	Behavior::Behavior()
+	Behavior::Behavior(DynamicArray<string> *baseBehaviors,DynamicArray<string> *baseValues)
 	{
+		int i;
+		_baseBehaviors = baseBehaviors;
+		
+		for(i = 0; i < baseBehaviors->getSize(); i++)
+		{
+			
+		}
 	}
 
 	void Behavior::addBehavior(string behavior, int baseDesire)
@@ -28,7 +35,7 @@ namespace bammm
 
 	void Behavior::printTable()
 	{
-		cout << _desireTable.getAllKeys()->toString() << endl;
-		cout << _desireTable.getAllValues()->toString() << endl;
+		cout << _currentDesireTable.getAllKeys()->toString() << endl;
+		cout << _currentDesireTable.getAllValues()->toString() << endl;
 	}
 }

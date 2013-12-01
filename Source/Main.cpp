@@ -19,14 +19,13 @@ int main()
 
 	SceneManager sceneManager;
 	Factory* actorFactory = new Factory(&sceneManager);
-	actorFactory->setup();
-
 	MeleeCombat meleeCombat;
+
+	actorFactory->setup();
 	sceneManager.setMeleeCombat(meleeCombat);
 
-	////Move to SceneManager?
+	//Will be deleted; controllers are added for each new actor created in factory
 	PlayerController controller;
-	//controller.setup(*bob, meleeCombat, sceneManager.getSceneGraph());
 
 	bool playGame = true;
 	bool doTick = true;
@@ -111,8 +110,8 @@ int main()
 	}
 	delete input;
 
-	cout << "Thanks for playing!  Press enter to quit." << "\n";
-	return 0;
+	cout << "Thanks for playing!" << "\n";
+	return 1;
 }
 
 void printWelcome()
