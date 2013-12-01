@@ -19,7 +19,7 @@ namespace bammm
 		_collision = true;
 	}
 
-	ActorInfo::ActorInfo(string type, string name, int health, int stamina, int attack, int defense, string behavior, bool collision)
+	ActorInfo::ActorInfo(string type, string name, int health, int stamina, int attack, int defense, string behavior, bool collision, AllianceType alliance)
 	{
 		_type = type;
 		_name = name;
@@ -29,6 +29,7 @@ namespace bammm
 		_defense = defense;
 		_behavior = behavior;
 		_collision = collision;
+		_alliance = alliance;
 	}
 
 	string ActorInfo::getType()
@@ -76,6 +77,10 @@ namespace bammm
 		return _collision;
 	}
 
+	AllianceType ActorInfo::getAlliance()
+	{
+		return _alliance;
+	}
 	void ActorInfo::setType(string type)
 	{
 		_type = type;
@@ -119,5 +124,10 @@ namespace bammm
 	void ActorInfo::setCollision(bool collision)
 	{
 		_collision = collision;
+	}
+
+	void ActorInfo::setAlliance(AllianceType alliance)
+	{
+		_alliance = alliance;
 	}
 }

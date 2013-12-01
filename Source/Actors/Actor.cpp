@@ -101,7 +101,7 @@ namespace bammm
 		_defense = info->getDefense();
 
 		_behavior = info->getBehavior();
-		_alliance = ally;
+		_alliance = info->getAlliance();
 		_collision = info->getCollision();
 	}
 

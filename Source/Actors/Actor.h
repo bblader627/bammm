@@ -20,6 +20,7 @@
 #include "../Weapons/MeleeWeapon.h"
 #include "../Weapons/RangedWeapon.h"
 #include "ActorInfo.h"
+#include "../Resources/Constant.h"
 
 using namespace std;
 
@@ -29,13 +30,6 @@ namespace bammm
 
 	class Actor
 	{
-		public:
-			enum AllianceType
-			{
-				enemy = -1, neutral = 0, ally = 1
-			};
-		
-
 		protected:
 			float _rotation;
 			string _name;
