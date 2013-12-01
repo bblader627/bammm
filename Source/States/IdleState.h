@@ -17,11 +17,6 @@
 
 #include "State.h"
 
-#ifndef UINT
-#define UINT
-typedef unsigned int UINT;
-#endif
-
 namespace bammm
 {
 	class IdleState: public State

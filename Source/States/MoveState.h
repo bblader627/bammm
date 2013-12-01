@@ -19,11 +19,6 @@
 #include "State.h"
 #include "../SceneManager/Grid3D.h"
 
-#ifndef UINT
-#define UINT
-typedef unsigned int UINT;
-#endif
-
 using namespace std;
 
 namespace bammm

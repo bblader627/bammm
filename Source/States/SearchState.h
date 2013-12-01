@@ -19,10 +19,6 @@
 #include "State.h"
 #include "../SceneManager/Grid3D.h"
 #include "../Resources/Stack.h"
-#ifndef UINT
-#define UINT
-typedef unsigned int UINT;
-#endif
 
 using namespace std;
 

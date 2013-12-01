@@ -18,11 +18,6 @@
 #include <iostream>
 #include "State.h"
 
-#ifndef UINT
-#define UINT
-typedef unsigned int UINT;
-#endif
-
 namespace bammm
 {
 	class SingState: public State

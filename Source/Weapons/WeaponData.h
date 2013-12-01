@@ -15,11 +15,7 @@
 #ifndef WEAPONDATA_H_
 #define WEAPONDATA_H_
 
-#ifndef UINT
-#define UINT
-typedef unsigned int uint;
-#endif
-
+#include "../Resources/Constant.h"
 #include <iostream>
 
 using namespace std;

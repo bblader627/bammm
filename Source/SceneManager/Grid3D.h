@@ -20,12 +20,8 @@
 #include "Vector3D.h"
 #include "../Resources/Stack.h"
 #include "../Actors/Actor.h"
-
+#include "../Resources/Constant.h"
 using namespace std;
-
-#ifndef NULL
-#define NULL (void *)0
-#endif
 
 namespace bammm
 {

@@ -17,11 +17,7 @@
 
 #include "../Interfaces/IWeaponType.h"
 #include "../TestSuite/Time.h"
-
-#ifndef UINT
-#define UINT
-typedef unsigned int uint;
-#endif
+#include "../Resources/Constant.h"
 
 namespace bammm
 {

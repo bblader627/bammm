@@ -21,11 +21,7 @@
 #include "../Interfaces/ITickable.h"
 #include "../Actors/Actor.h"
 #include "../SceneManager/Vector3D.h"
-
-#ifndef NULL
-#define NULL (void *)0
-#endif
-
+#include "../Resources/Constant.h"
 using namespace std;
 
 namespace bammm

@@ -26,13 +26,10 @@
 #include "../Actors/ActorInfo.h"
 #include "../Interfaces/IWeaponType.h"
 #include "../SceneManager/SceneManager.h"
+#include "../Resources/Constant.h"
 
 using namespace bammm;
 using namespace std;
-
-#ifndef NULL
-#define NULL ((void *)0)
-#endif
 
 namespace bammm
 {

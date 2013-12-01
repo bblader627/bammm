@@ -17,11 +17,6 @@
 
 #include "State.h"
 
-#ifndef UINT
-#define UINT
-typedef unsigned int UINT;
-#endif
-
 using namespace std;
 
 namespace bammm

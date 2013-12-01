@@ -22,10 +22,7 @@
 #include "../Resources/HashMap.h"
 #include "JSON.h"
 #include "JSONPrimitive.h"
-
-#ifndef NULL
-#define NULL (void *) 0
-#endif
+#include "../Resources/Constant.h"
 
 using namespace std;
 

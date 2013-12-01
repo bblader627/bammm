@@ -22,10 +22,7 @@
 #include "../Interfaces/ITickable.h"
 #include "State.h"
 #include "../Weapons/MeleeCombat.h"
-
-#ifndef NULL
-#define NULL (void *)0
-#endif
+#include "../Resources/Constant.h"
 
 using namespace std;
 
