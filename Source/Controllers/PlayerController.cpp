@@ -58,100 +58,100 @@ namespace bammm
 			float deltaTime)
 	{
 		/*string newState = commandString->get(0);
-		bool doTick = true;
+		 bool doTick = true;
 
-		DynamicArray<string>* oreType = new DynamicArray<string>();
-		oreType->add("iron");
-		oreType->add("coal");
-		oreType->add("gold");
-
-
-		if (newState == "mine")
-		{
-			//mine [#] [ore-type]
-			int numOre;
-			string type;
-
-			if (commandString->getSize() == 3)
-			{
-				string number_str = commandString->get(1);
-
-				numOre = atoi(number_str.c_str());
-				if (numOre == 0)
-				{
-					cout << "Invalid argument\n";
-					doTick = false;
-				}
-				numOre = 0;
-				type = commandString->get(2);
-				if (!(oreType->contains(type)))
-				{
-					cout << type << " is not a valid ore type\n";
-					doTick = false;
-				}
-				//Add to controllerinput
-
-			}
-			else
-			{
-				cout << "Invalid input\n";
-				doTick = false;
-			}
-
-		}
-		else if (newState == "sing")
-		{
-			//sing [songname]
-			string songname;
-			if (commandString->getSize() >= 2)
-			{
-				for (unsigned int i = 1; i < commandString->getSize(); i++)
-				{
-					songname += commandString->get(i);
-				}
-			}
-			else
-			{
-				cout << "Invalid input\n";
-				doTick = false;
-			}
-		}
-		else if (newState == "brawl")
-		{
-			//how even
-
-		}
-		else if (newState == "attack")
-		{
-			//attack [actor name]
-
-		}
-		else if (newState == "drink")
-		{
-			//drink [beverage name]
-			string beverage;
-			try
-			{
-				beverage = commandString->get(1);
-			}
-			catch (exception& e)
-			{
-				cout << "Invalid beverage name.\n";
-			}
-		}
-		else
-		{
-			cout << "Invalid input\n";
-			doTick = false;
-		}
+		 DynamicArray<string>* oreType = new DynamicArray<string>();
+		 oreType->add("iron");
+		 oreType->add("coal");
+		 oreType->add("gold");
 
 
-		if (doTick)
-		{
-			State* stateToAdd = _states.getValue(newState);
-			_stateMachine.addState(stateToAdd, commandString);
-			_stateMachine.tick(deltaTime);
-		}*/
+		 if (newState == "mine")
+		 {
+		 //mine [#] [ore-type]
+		 int numOre;
+		 string type;
+
+		 if (commandString->getSize() == 3)
+		 {
+		 string number_str = commandString->get(1);
+
+		 numOre = atoi(number_str.c_str());
+		 if (numOre == 0)
+		 {
+		 cout << "Invalid argument\n";
+		 doTick = false;
+		 }
+		 numOre = 0;
+		 type = commandString->get(2);
+		 if (!(oreType->contains(type)))
+		 {
+		 cout << type << " is not a valid ore type\n";
+		 doTick = false;
+		 }
+		 //Add to controllerinput
+
+		 }
+		 else
+		 {
+		 cout << "Invalid input\n";
+		 doTick = false;
+		 }
+
+		 }
+		 else if (newState == "sing")
+		 {
+		 //sing [songname]
+		 string songname;
+		 if (commandString->getSize() >= 2)
+		 {
+		 for (unsigned int i = 1; i < commandString->getSize(); i++)
+		 {
+		 songname += commandString->get(i);
+		 }
+		 }
+		 else
+		 {
+		 cout << "Invalid input\n";
+		 doTick = false;
+		 }
+		 }
+		 else if (newState == "brawl")
+		 {
+		 //how even
+
+		 }
+		 else if (newState == "attack")
+		 {
+		 //attack [actor name]
+
+		 }
+		 else if (newState == "drink")
+		 {
+		 //drink [beverage name]
+		 string beverage;
+		 try
+		 {
+		 beverage = commandString->get(1);
+		 }
+		 catch (exception& e)
+		 {
+		 cout << "Invalid beverage name.\n";
+		 }
+		 }
+		 else
+		 {
+		 cout << "Invalid input\n";
+		 doTick = false;
+		 }
+
+
+		 if (doTick)
+		 {
+		 State* stateToAdd = _states.getValue(newState);
+		 _stateMachine.addState(stateToAdd, commandString);
+		 _stateMachine.tick(deltaTime);
+		 }*/
 	}
 
 	void PlayerController::input(string command, float deltaTime)
@@ -166,7 +166,6 @@ namespace bammm
 	{
 		DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
 		//cout << "What would you like your villagers to do?\n  To run the simulation, enter \"wait [number of iterations]\"." << endl;
-
 
 		//MAKE THIS SMARTER
 		cout << "Select an activity for your dwarf:" << "\n";
@@ -256,5 +255,4 @@ namespace bammm
 	{
 		return "PlayerController";
 	}
-
 }

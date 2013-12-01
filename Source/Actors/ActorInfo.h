@@ -11,6 +11,7 @@
  * ActorInfo header file.
  *
  */
+
 #ifndef ACTORINFO_H_
 #define ACTORINFO_H_
 
@@ -40,7 +41,9 @@ namespace bammm
 
 		public:
 			ActorInfo();
-			ActorInfo(string type, string name, int health, int stamina, int attack, int defense, string behavior, bool collision, AllianceType alliance, string symbol, string color);
+			ActorInfo(string type, string name, int health, int stamina,
+					int attack, int defense, string behavior, bool collision,
+					AllianceType alliance, string symbol, string color);
 
 			/**
 			 getType
@@ -125,7 +128,7 @@ namespace bammm
 			 @Post-Condition- Returns _color
 			 */
 			string getColor();
-			
+
 			/**
 			 setType
 			 @Pre-Condition- takes type
@@ -181,7 +184,7 @@ namespace bammm
 			 @Post-Condition- returns nothing
 			 */
 			void setLocation(Vector3D* location);
-			
+
 			/**
 			 setCollision
 			 @Pre-Condition- takes a boolean to set the collision
@@ -195,7 +198,7 @@ namespace bammm
 			 @Post-Condition- returns nothing
 			 */
 			void setAlliance(AllianceType alliance);
-			
+
 			/**
 			 setSymbol
 			 @Pre-Condition- takes a string to set the symbol
@@ -203,7 +206,6 @@ namespace bammm
 			 */
 			void setSymbol(string symbol);
 	};
-
 }
 
 #endif
