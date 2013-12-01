@@ -24,7 +24,7 @@ namespace bammm
 		
 		for(i = 0; i < baseBehaviors->getSize(); i++)
 		{
-			
+			addBehavior(_baseBehaviors->get(i),baseValues->get(i));
 		}
 	}
 
@@ -35,7 +35,7 @@ namespace bammm
 
 	void Behavior::printTable()
 	{
-		cout << _currentDesireTable.getAllKeys()->toString() << endl;
-		cout << _currentDesireTable.getAllValues()->toString() << endl;
+		cout << _desireTable.getAllKeys()->toString() << endl;
+		cout << _desireTable.getAllValues()->toString() << endl;
 	}
 }
