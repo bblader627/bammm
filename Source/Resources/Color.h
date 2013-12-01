@@ -1,3 +1,17 @@
+/*
+ * CS585
+ *
+ * Team Bammm
+ *  Alvaro Home
+ *  Matt Konstantinou
+ *  Michael Abramo
+ *  Matt Witkowski  
+ *  Bradley Crusco
+ * Description:
+ * Color header file.
+ *
+ */
+
 #ifndef COLOR_H_
 #define COLOR_H_
 
@@ -19,6 +33,11 @@ namespace bammm
 		static const string _startColor = "\033[";
 		static const string _defaultText = "0m";
 
+		/**
+		 colorText
+		 @Pre-Condition- Takes text and a color
+		 @Post-Condition- A formatted string that uses color
+		 */
 		string colorText(string text, string color);
 	}
 }
