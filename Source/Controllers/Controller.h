@@ -38,7 +38,7 @@ using namespace std;
 
 namespace bammm
 {
-	class Controller : public ITickable
+	class Controller: public ITickable
 	{
 		protected:
 			HashMap<State*> _states;
@@ -52,7 +52,6 @@ namespace bammm
 			Controller();
 			virtual ~Controller();
 
-			//TODO: Fix
 			/**
 			 setup
 			 @Pre-Condition- Takes an Actor, MeleeCombat, and Grid3D as input
@@ -70,6 +69,11 @@ namespace bammm
 			 */
 			virtual bool canDelete()=0;
 
+			/**
+			 toString
+			 @Pre-Condition- Takes nothing
+			 @Post-Condition- Returns a string representation of Controller
+			 */
 			virtual string toString()=0;
 	};
 }
