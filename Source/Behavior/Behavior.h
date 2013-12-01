@@ -31,8 +31,7 @@ namespace bammm
 	class Behavior
 	{
 		private:
-			HashMap<int> _baseDesireTable;
-			HashMap<int> _currentDesireTable;
+			HashMap<int> _desireTable;
 			DynamicArray<string> *_baseBehaviors;
 
 		public:
@@ -43,14 +42,21 @@ namespace bammm
 			 @Pre-Condition- Takes a behavior and a base desire level
 			 @Post-Condition- returns nothing
 			 */
-			void addBehavior(string behavior, int baseDesire);
+			void addBehavior(string behavior, int desireLevel);
 
 			/**
 			 printTable
 			 @Pre-Condition- takes no arguments
 			 @Post-Condition- prints the desire table
 			 */
-			void printTable();	
+			void printTable();
+
+			/**
+			 getBaseBehaviors
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns DynamicArray of the Base behaviors
+			 */
+			DynamicArray<string>*  getBaseBehaviors();		
 			
 	};
 }
