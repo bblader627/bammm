@@ -22,6 +22,7 @@
 #include "../Actors/Actor.h"
 #include "../Resources/Constant.h"
 #include "../Resources/Color.h"
+
 using namespace std;
 
 namespace bammm
@@ -152,7 +153,7 @@ namespace bammm
 			 @Post-Condition- The ordered object is told to move towards the new location
 			 */
 			void moveTowards(T ordered, Vector3D* newLocation);
-			
+
 			/*
 			 isWalkable
 			 @Pre-Condition- Takes a location/vector
@@ -346,14 +347,23 @@ namespace bammm
 					path->pop();
 					path->push(UP);
 					//If you can't go up
-					if (!(directionOfPrevious == UP) ||
-							!( getPath(actorPos, new Vector3D( convertToVector(currentPosition + _width) ), DOWN, path) ))
+					if (!(directionOfPrevious == UP)
+							|| !(getPath(actorPos,
+									new Vector3D(
+											convertToVector(
+													currentPosition + _width)),
+									DOWN, path)))
 					{
 						path->pop();
 						path->push(DOWN);
 						//If you can't go down
-						if (!(directionOfPrevious == DOWN) ||
-								!(getPath(actorPos,	new Vector3D( convertToVector(currentPosition- _width)), UP,path)))
+						if (!(directionOfPrevious == DOWN)
+								|| !(getPath(actorPos,
+										new Vector3D(
+												convertToVector(
+														currentPosition
+																- _width)), UP,
+										path)))
 						{
 							path->pop();
 							return false;
@@ -365,19 +375,32 @@ namespace bammm
 			else
 			{
 				path->push(DOWN);
-				if (!(directionOfPrevious == DOWN) ||
-						!(getPath(actorPos,new Vector3D(convertToVector(currentPosition - _width)), UP,path)))
+				if (!(directionOfPrevious == DOWN)
+						|| !(getPath(actorPos,
+								new Vector3D(
+										convertToVector(
+												currentPosition - _width)), UP,
+								path)))
 				{
 					path->pop();
 					path->push(LEFT);
-					if (!(directionOfPrevious == LEFT) ||
-							!(getPath(actorPos,new Vector3D(convertToVector(currentPosition - 1)),RIGHT, path)))
+					if (!(directionOfPrevious == LEFT)
+							|| !(getPath(actorPos,
+									new Vector3D(
+											convertToVector(
+													currentPosition - 1)),
+									RIGHT, path)))
 					{
 						path->pop();
 						path->push(UP);
 						//If you can't go up
-						if (!(directionOfPrevious == UP) ||
-								!(getPath(actorPos,new Vector3D(convertToVector(currentPosition+ _width)),DOWN, path)))
+						if (!(directionOfPrevious == UP)
+								|| !(getPath(actorPos,
+										new Vector3D(
+												convertToVector(
+														currentPosition
+																+ _width)),
+										DOWN, path)))
 						{
 							path->pop();
 							return false;
@@ -393,7 +416,8 @@ namespace bammm
 			{
 				path->push(RIGHT);
 				if (!(getPath(actorPos,
-						new Vector3D(convertToVector(currentPosition + 1)),LEFT, path)))
+						new Vector3D(convertToVector(currentPosition + 1)),
+						LEFT, path)))
 				{
 					path->pop();
 					path->push(UP);
@@ -480,7 +504,8 @@ namespace bammm
 					int size = atLocation->getSize() - 1;
 					string symbol = atLocation->get(size)->getSymbol();
 					string color = atLocation->get(size)->getColor();
-					gridString = gridString + Color::colorText(symbol, color)  + " ";
+					gridString = gridString + Color::colorText(symbol, color)
+							+ " ";
 				}
 			}
 			gridString = gridString + "\n";
@@ -513,7 +538,7 @@ namespace bammm
 	template<class T>
 	void Grid3D<T>::move(T actor, Vector3D* newLocation)
 	{
-		if(isWalkable(*newLocation))
+		if (isWalkable(*newLocation))
 		{
 			remove(actor->getLocation(), actor);
 			delete actor->getLocation();
@@ -529,13 +554,14 @@ namespace bammm
 	bool Grid3D<T>::isWalkable(Vector3D location)
 	{
 		//Checks for in grid bounds
-		if(location.getX() < 0 || location.getY() < 0 || location.getZ() < 0)
+		if (location.getX() < 0 || location.getY() < 0 || location.getZ() < 0)
 		{
 			return false;
 		}
-		
+
 		//Checks for in grid bounds
-		if(location.getX() >= _width || location.getY() >= _length || location.getZ() >= _height)
+		if (location.getX() >= _width || location.getY() >= _length
+				|| location.getZ() >= _height)
 		{
 			return false;
 		}
@@ -544,9 +570,9 @@ namespace bammm
 		DynamicArray<DynamicArray<T>*>* tiles = access(&location, 0);
 		DynamicArray<T>* allOnTile = tiles->get(0);
 		int size = allOnTile->getSize();
-		for(int i = 0; i < size; i++)
+		for (int i = 0; i < size; i++)
 		{
-			if(allOnTile->get(i)->getCollision() == true)
+			if (allOnTile->get(i)->getCollision() == true)
 			{
 				return false;
 			}
