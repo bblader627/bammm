@@ -13,24 +13,24 @@
  */
 
 #include "Behavior.h"
-using namespace std;
 
 namespace bammm
 {
-	Behavior::Behavior(DynamicArray<string> *baseBehaviors,DynamicArray<string> *baseValues)
+	Behavior::Behavior(DynamicArray<string> *baseBehaviors,
+			DynamicArray<string> *baseValues)
 	{
 		int i;
 		_baseBehaviors = baseBehaviors;
-		
-		for(i = 0; i < baseBehaviors->getSize(); i++)
+
+		for (i = 0; i < baseBehaviors->getSize(); i++)
 		{
-			addBehavior(_baseBehaviors->get(i),baseValues->get(i));
+			addBehavior(_baseBehaviors->get(i), baseValues->get(i));
 		}
 	}
 
 	void Behavior::addBehavior(string behavior, int baseDesire)
 	{
-		_desireTable.add(behavior,baseDesire);
+		_desireTable.add(behavior, baseDesire);
 	}
 
 	void Behavior::printTable()
@@ -38,9 +38,9 @@ namespace bammm
 		cout << _desireTable.getAllKeys()->toString() << endl;
 		cout << _desireTable.getAllValues()->toString() << endl;
 	}
-	
-	DynamicArray<string>*  Behavior::getBaseBehaviors()
+
+	DynamicArray<string>* Behavior::getBaseBehaviors()
 	{
-		return _baseBasehaviors
-	}
+	return _baseBasehaviors
+}
 }

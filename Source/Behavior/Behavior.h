@@ -12,19 +12,14 @@
  *
  */
 
-/*
-	
-*/
-
-
-
 #ifndef BEHAVIOR_H
 #define BEHAVIOR_H
 
-using namespace std;
 #include <iostream>
 #include "../Resources/HashMap.h"
 #include "../Resources/DynamicArray.h"
+
+using namespace std;
 
 namespace bammm
 {
@@ -35,7 +30,8 @@ namespace bammm
 			DynamicArray<string> *_baseBehaviors;
 
 		public:
-			Behavior(DynamicArray<string> *baseBehaviors,DynamicArray<string> *baseValues);
+			Behavior(DynamicArray<string> *baseBehaviors,
+					DynamicArray<string> *baseValues);
 
 			/**
 			 addBehavior
@@ -56,8 +52,7 @@ namespace bammm
 			 @Pre-Condition- takes no arguments
 			 @Post-Condition- returns DynamicArray of the Base behaviors
 			 */
-			DynamicArray<string>*  getBaseBehaviors();		
-			
+			DynamicArray<string>* getBaseBehaviors();
 	};
 }
 
