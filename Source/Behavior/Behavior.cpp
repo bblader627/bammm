@@ -41,6 +41,6 @@ namespace bammm
 	
 	DynamicArray<string>*  Behavior::getBaseBehaviors()
 	{
-		return _baseBasehaviors
+		return _baseBasehaviors;
 	}
 }
