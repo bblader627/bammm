@@ -54,6 +54,14 @@ namespace bammm
 		_value.d = newValue;
 		_type = newType;
 	}
+	
+	JSONPrimitive::JSONPrimitive(string newName, bool newValue,
+			JSON_TYPE newType)
+	{
+		_name = newName;
+		_value.b = newValue;
+		_type = newType;
+	}
 
 	JSONPrimitive::~JSONPrimitive()
 	{

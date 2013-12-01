@@ -594,7 +594,6 @@ namespace bammm
 		DynamicArray<DynamicArray<T>*>* tiles = access(&location, 0);
 		DynamicArray<T>* allOnTile = tiles->get(0);
 		int size = allOnTile->getSize();
-
 		for(int i = 0; i < size; i++)
 		{
 			if(allOnTile->get(i)->getCollision() == true)

@@ -102,6 +102,7 @@ namespace bammm
 
 		_behavior = info->getBehavior();
 		_alliance = ally;
+		_collision = info->getCollision();
 	}
 
 	void Actor::setMeleeWeapon(MeleeWeapon* weapon)

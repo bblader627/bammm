@@ -80,7 +80,6 @@ namespace bammm
 			int defense = child->getChild("defense")->getIntValue();
 			string behavior = child->getChild("behavior")->getStringValue();
 			bool collision = child->getChild("collision")->getBoolValue();
-
 			float x = (float)child->getChild("x")->getIntValue();
 			float y = (float)child->getChild("y")->getIntValue();
 			float z = (float)child->getChild("z")->getIntValue();

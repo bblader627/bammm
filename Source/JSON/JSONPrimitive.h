@@ -36,6 +36,7 @@ namespace bammm
 			JSONPrimitive(string newName, value_t newValue, JSON_TYPE newType);
 			JSONPrimitive(string newName, string newValue, JSON_TYPE newType);
 			JSONPrimitive(string newName, int newValue, JSON_TYPE newType);
+			JSONPrimitive(string newName, bool newValue, JSON_TYPE newType);
 			JSONPrimitive(string newName, double newValue, JSON_TYPE newType);
 			~JSONPrimitive();
 

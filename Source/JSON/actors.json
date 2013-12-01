@@ -38,15 +38,15 @@
 	],
 	
 	"trees": [
-		{ "name":"Oak", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":7, "y":3, "z":0, "collision":true },
-		{ "name":"Birch", "health":20, "stamina":0, "attack":0, "defense":8, "behavior":"block", "x":8, "y":7, "z":0, "collision":true },
-		{ "name":"Redwood", "health":20, "stamina":0, "attack":0, "defense":12, "behavior":"block", "x":4, "y":8, "z":0, "collision":true }
+		{ "name":"Oak", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":7, "y":3, "z":0, "collision":false },
+		{ "name":"Birch", "health":20, "stamina":0, "attack":0, "defense":8, "behavior":"block", "x":8, "y":7, "z":0, "collision":false },
+		{ "name":"Redwood", "health":20, "stamina":0, "attack":0, "defense":12, "behavior":"block", "x":4, "y":8, "z":0, "collision":false }
 	],
 	
 	"ore": [
-		{ "name":"Iron1", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":8, "y":0, "z":0, "collision":true },
-		{ "name":"Iron2", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":9, "y":0, "z":0, "collision":true },
-		{ "name":"Iron3", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":9, "y":1, "z":0, "collision":true }
+		{ "name":"Iron1", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":8, "y":0, "z":0, "collision":false },
+		{ "name":"Iron2", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":9, "y":0, "z":0, "collision":false },
+		{ "name":"Iron3", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":9, "y":1, "z":0, "collision":false }
 	]
 	
 }
