@@ -30,7 +30,7 @@ namespace bammm
 
 	}
 
-	void State::setup()
+	void State::setup(DynamicArray<string>* args)
 	{
 		cout << "wrong setup" << "\n";
 	}
@@ -45,6 +45,11 @@ namespace bammm
 
 	void State::setup(string target)
 	{
+	}
+
+	void State::setup()
+	{
+
 	}
 
 	void State::breakdown()

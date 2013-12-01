@@ -73,6 +73,13 @@ namespace bammm
 			int sizeOfChildren();
 
 			/**
+			 getAllChildren
+			 @Pre-Condition- takes no arguemtn
+			 @Post-Condition- returns _children
+			 */
+			HashMap<JSON*>* getAllChildren();
+
+			/**
 			 setName
 			 @Pre-Condition-  Takes a string argument
 			 @Post-Condition- sets this JSON Nodes name equal to the string argument. Returns void.
@@ -151,10 +158,14 @@ namespace bammm
 			 @Pre-Condition-  const string key
 			 @Post-Condition- Returns a JSON
 			 */
-			JSON* operator[](const string key)
-			{
-				return _children.getValue(key);
-			}
+			JSON* operator[](string key);
+
+			/**
+			 getChild
+			 @Pre-Condition- string key
+			 @Post-Condition- returns JSON*
+			 */
+			JSON* getChild(string key);
 	};
 }
 

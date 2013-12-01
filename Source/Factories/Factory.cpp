@@ -16,6 +16,10 @@
 
 namespace bammm
 {
+	Factory::Factory(SceneManager* manager)
+	{
+		scene = manager;
+	}
 	void Factory::setup()
 	{
 		string actorJSON;
@@ -24,38 +28,32 @@ namespace bammm
 		parser->parseFile(filename);
 
 		// Parsing dwarves
-		JSON* dwarves = parser->getRootNode("dwarves");
+		JSON* root = parser->getRootNode("root");
+
+		HashMap<JSON*>* rootChildren = root->getAllChildren();
+
+		JSON* dwarves = rootChildren->getValue("dwarves");
 		this->parseToActorInfo(dwarves, "dwarf", &actorData);
 
-		// Parsing orcs
-		JSON* orcs = parser->getRootNode("orcs");
+		JSON* orcs = rootChildren->getValue("orcs");
 		this->parseToActorInfo(orcs, "orc", &actorData);
+		//===========MAP=========//
+		JSON* wall = rootChildren->getValue("wall");
+		this->parseToActorInfo(wall, "wall", &blockData);
 
-		/*
-		//Parsing Map info
-		JSON* map = parser->getRootNode("map");
-		//JSON* x = map["x"];
-		//JSON* y = map["y"];
-		//JSON* z = map["z"];
+		JSON* buildings = rootChildren->getValue("buildings");
+		this->parseToActorInfo(buildings, "building", &blockData);
 
+		JSON* trees = rootChildren->getValue("trees");
+		this->parseToActorInfo(trees, "tree", &blockData);
 
-		JSON* wall = map["Wall"];
-		this->parseToActorInfo(wall, "Wall", &blockData);
-
-		JSON* buildings = map["Buildings"];
-		this->parseToActorInfo(buildings, "Building", &blockData);
-
-		JSON* trees = map["Trees"];
-		this->parseToActorInfo(trees, "Tree", &blockData);
-
-		JSON* ore = map["Ore"];
-		this->parseToActorInfo(ore, "Ore", &blockData);
-		 */
+		JSON* ore = rootChildren->getValue("ore");
+		this->parseToActorInfo(ore, "ore", &blockData);
 
 	}
 
 	Actor Factory::getActor(string type, string name, int health, int stamina,
-			int attack, int defense, string behavior)
+			int attack, int defense, string behavior, bool collision)
 	{
 		Actor* newActor = new Actor(type, name, health, stamina, attack,
 				defense, behavior, Actor::AllianceType::enemy);
@@ -67,36 +65,38 @@ namespace bammm
 	void Factory::parseToActorInfo(JSON* rootNode, string type,
 			HashMap<ActorInfo>* map)
 	{
-		for (int i = 0; i < rootNode->sizeOfChildren(); i++)
+
+		int numberOfChildren = rootNode->sizeOfChildren();
+		DynamicArray<JSON*>* rootChildren = rootNode->getAllChildren()->getAllValues();
+
+		for (int i = 0; i < numberOfChildren; i++)
 		{
-			JSON* name = rootNode[i]["name"];
-			JSON* health = rootNode[i]["health"];
-			JSON* stamina = rootNode[i]["stamina"];
-			JSON* attack = rootNode[i]["attack"];
-			JSON* defense = rootNode[i]["defense"];
-			JSON* behavior = rootNode[i]["behavior"];
+			JSON* child = rootChildren->get(i);
+
+			string name = child->getChild("name")->getStringValue();
+			int health = child->getChild("health")->getIntValue();
+			int stamina = child->getChild("stamina")->getIntValue();
+			int attack = child->getChild("attack")->getIntValue();
+			int defense = child->getChild("defense")->getIntValue();
+			string behavior = child->getChild("behavior")->getStringValue();
+			bool collision = child->getChild("collision")->getBoolValue();
+
+			float x = (float)child->getChild("x")->getIntValue();
+			float y = (float)child->getChild("y")->getIntValue();
+			float z = (float)child->getChild("z")->getIntValue();
 			//////////////This was added/////////////
-			JSON* collision = rootNode[i]["collision"];
+			//JSON* collision = rootNode[i]["collision"];
 			/////////////////////////////////////////
 
-			JSON* x = rootNode[i]["x"];
-			JSON* y = rootNode[i]["y"];
-			JSON* z = rootNode[i]["z"];
 
-	
-			ActorInfo* info = new ActorInfo(type, name->getStringValue(),
-					health->getIntValue(), stamina->getIntValue(),
-					attack->getIntValue(), defense->getIntValue(),
-					behavior->getStringValue(), !!collision->getIntValue());
-
-			info->setLocation(
-					new Vector3D((float) (x->getDoubleValue()),
-							(float) (y->getDoubleValue()),
-							(float) (z->getDoubleValue())));
+			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack, defense, behavior, collision);
+			info->setLocation(new Vector3D(x, y, z));
 
 			string i_str = "" + i;
 			map->add(type + i_str, *info);
-			scene->addActor(new Actor(info));
+			Actor* myActor = new Actor(info);
+			scene->addActor(myActor);
+
 		}
 	}
 }

@@ -34,6 +34,11 @@ namespace bammm
 		_direction = direction;
 	}
 
+	void MoveState::setup(DynamicArray<string>* args)
+	{
+
+	}
+
 	void MoveState::setup()
 	{
 	}

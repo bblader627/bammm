@@ -28,6 +28,11 @@ namespace bammm
 		registerTransitionCallback(stateMachine);
 	}
 
+	void DrinkState::setup(DynamicArray<string>* args)
+	{
+		_stoutLife = _stoutSize;
+	}
+
 	void DrinkState::setup()
 	{
 		_stoutLife = _stoutSize;

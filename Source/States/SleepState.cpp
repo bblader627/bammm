@@ -27,9 +27,14 @@ namespace bammm
 		registerTransitionCallback(stateMachine);
 	}
 
-	void SleepState::setup()
+	void SleepState::setup(DynamicArray<string>* args)
 	{
 		_timeSlept = 0;
+	}
+
+	void SleepState::setup()
+	{
+
 	}
 
 	void SleepState::breakdown()

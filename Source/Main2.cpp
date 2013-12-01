@@ -48,12 +48,6 @@ int main()
 	string attack = "combat";
 	string wait = "wait";
 
-	DynamicArray<string>* oreType = new DynamicArray<string>();
-	oreType->add("iron");
-	oreType->add("coal");
-	oreType->add("gold");
-
-
 	float dTime = 0;
 	while (playGame)
 	{
@@ -95,79 +89,11 @@ int main()
 				}
 
 			}
-			else if (command == mine)
-			{
-				//mine [#] [ore-type]
-				int numOre;
-				string type;
 
-				if (input->getSize() == 3)
-				{
-					string number_str = input->get(1);
-					numOre = atoi(number_str.c_str());
-					type = input->get(2);
-					if (!(oreType->contains(type)))
-					{
-						cout << type << " is not a valid ore type\n";
-						doTick = false;
-					}
-					//Add to controllerinput
-				}
-				else
-				{
-					cout << "Invalid input\n";
-					doTick = false;
-				}
-
-			}
-			else if (command == sing)
-			{
-				//sing [songname]
-				string songname;
-				if (input->getSize() == 2)
-				{
-					songname = input->get(1);
-				}
-				else
-				{
-					cout << "Invalid input\n";
-					doTick = false;
-				}
-			}
-			else if (command == brawl)
-			{
-				//how even
-
-			}
-			else if (command == attack)
-			{
-				//attack [actor name]
-
-			}
-			else if (command == drink)
-			{
-				//drink [beverage name]
-				string beverage;
-				try
-				{
-					beverage = input->get(1);
-				}
-				catch (exception& e)
-				{
-					cout << "Invalid beverage name.\n";
-					doTick = false;
-				}
-			}
 			else if (command == "exit")
 			{
 				playGame = false;
 			}
-			else
-			{
-				cout << "Invalid input\n";
-				doTick = false;
-			}
-
 
 
 			if (!playGame)

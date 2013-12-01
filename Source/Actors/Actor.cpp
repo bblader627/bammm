@@ -89,7 +89,7 @@ namespace bammm
 		_name = info->getName();
 		_rotation = 0;
 		_velocity = new Vector3D();
-		_location = new Vector3D();
+		_location = info->getLocation();
 
 		MAX_HEALTH = info->getHealth();
 		MAX_STAMINA = info->getStamina();

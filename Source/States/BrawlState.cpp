@@ -27,6 +27,10 @@ namespace bammm
 		registerTransitionCallback(stateMachine);
 	}
 
+	void BrawlState::setup(DynamicArray<string>* args)
+	{
+	}
+
 	void BrawlState::setup()
 	{
 	}

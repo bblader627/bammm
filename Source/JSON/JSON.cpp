@@ -51,17 +51,18 @@ namespace bammm
 
 	JSON * JSON::getParent()
 	{
-		if (_parent == NULL)
-		{
-			cout << "Parent is null\n";
-			cout.flush();
-		}
+
 		return _parent;
 	}
 
 	int JSON::sizeOfChildren()
 	{
 		return _children.getNumerOfNodes();
+	}
+
+	HashMap<JSON*>* JSON::getAllChildren()
+	{
+		return &_children;
 	}
 
 	void JSON::setName(string newName)
@@ -93,7 +94,6 @@ namespace bammm
 			cout.flush();
 			return;
 		}
-		cout << "Adding Child \n";
 		_children.add(newNode.getName(), &newNode);
 	}
 
@@ -120,5 +120,15 @@ namespace bammm
 	JSON JSON::operator[](const unsigned int & rhs)
 	{
 		return *this;
+	}
+
+	JSON* JSON::operator[](string key)
+	{
+		return _children.getValue(key);
+	}
+
+	JSON* JSON::getChild(string key)
+	{
+		return _children.getValue(key);
 	}
 }

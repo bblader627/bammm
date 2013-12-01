@@ -44,7 +44,7 @@ namespace bammm
 			 @Pre-Condition- Takes nothing
 			 @Post-Condition- Sets up the state
 			 */
-			virtual void setup();
+			void setup(DynamicArray<string>* args);
 
 			/**
 			 setup
@@ -53,6 +53,8 @@ namespace bammm
 			 */
 			virtual void setup(Vector3D direction);
 			
+			virtual void setup();
+
 			/**
 			 breakdown
 			 @Pre-Condition- No input

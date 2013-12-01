@@ -54,6 +54,9 @@ namespace bammm
 					HashMap<ActorInfo>* map);
 
 		public:
+			//Add default constructor where scene is instantiated
+			Factory(SceneManager* manager);
+
 
 			/*
 			 getActor
@@ -61,7 +64,7 @@ namespace bammm
 			 @Post-Condition- returns new actor
 			 */
 			Actor getActor(string type, string name, int health, int stamina,
-					int attack, int defense, string behavior);
+					int attack, int defense, string behavior, bool collision);
 
 			/*
 			 setup

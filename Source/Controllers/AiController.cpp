@@ -26,7 +26,7 @@ namespace bammm
 		_sceneGraph = &sceneGraph;
 		_meleeCombat = &meleeCombat;
 		_actor = &actor;
-		_stateMachine.setup(actor, _states);
+		_stateMachine.setup(actor, _states, _meleeCombat);
 
 		//Create the states
 		DrinkState* drinkState = new DrinkState(actor, _stateMachine);
@@ -78,6 +78,7 @@ namespace bammm
 		State* newState;
 		if(enemy)
 		{
+			//_stateMachine.addState(newState, new DynamicArray<string>());
 			cout << "I want to fight\n";
 			newState = _states.getValue("damage");
 			

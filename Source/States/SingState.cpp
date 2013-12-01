@@ -27,10 +27,15 @@ namespace bammm
 		registerTransitionCallback(stateMachine);
 	}
 
-	void SingState::setup()
+	void SingState::setup(DynamicArray<string>* args)
 	{
 		_singLine = 0;
 		cout << _actor->getName() << " begins to sing. ";
+	}
+
+	void SingState::setup()
+	{
+
 	}
 
 	void SingState::breakdown()

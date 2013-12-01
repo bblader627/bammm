@@ -21,6 +21,7 @@
 #include "../Interfaces/IStateCallback.h"
 #include "../Interfaces/ITickable.h"
 #include "State.h"
+#include "../Weapons/MeleeCombat.h"
 
 #ifndef NULL
 #define NULL (void *)0
@@ -35,6 +36,7 @@ namespace bammm
 		private:
 			DynamicArray<State*> currentStates;
 			HashMap<State*>* _allStates;
+			MeleeCombat* _meleeCombat;
 			Actor* _actor;
 		public:
 			StateMachine();
@@ -74,7 +76,14 @@ namespace bammm
 			 @Pre-Condition- Takes in a pointer to a State state
 			 @Post-Condition- Adds the given State state to the state machine
 			 */
-			void addState(State* state);
+			void addState(State* newState);
+
+			/**
+			 addState
+			 @Pre-Condition- Takes in a pointer to a State state and DynamicArray of args
+			 @Post-Condition- Adds the given State state to the state machine
+			 */
+			void addState(State* newState, DynamicArray<string>* args);
 
 			/**			 
 			 removeState
@@ -89,7 +98,7 @@ namespace bammm
 			 @Post-Condition- Returns all the current states in the state machine
 			 */
 			DynamicArray<State*>& getCurrentStates();
-			void setup(Actor&, HashMap<State*>&);
+			void setup(Actor&, HashMap<State*>&, MeleeCombat*);
 			string toString();
 
 	};
