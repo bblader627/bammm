@@ -26,64 +26,30 @@ namespace bammm
 		JSONParser* parser = new JSONParser();
 		string filename = "JSON/actors.json";
 		parser->parseFile(filename);
-		cout << "file parsed" << endl;
 
 		// Parsing dwarves
-
 		parser->printAllRoots();
-
-		//segfault on getRootNode
 		JSON* root = parser->getRootNode("root");
 
 		HashMap<JSON*>* rootChildren = root->getAllChildren();
 
 		JSON* dwarves = rootChildren->getValue("dwarves");
 		this->parseToActorInfo(dwarves, "dwarf", &actorData);
-		cout << "Dwarves Parsed" << endl;
 
 		JSON* orcs = rootChildren->getValue("orcs");
 		this->parseToActorInfo(orcs, "orc", &actorData);
-		cout << "Orcs parsed" << endl;
-
 		//===========MAP=========//
 		JSON* wall = rootChildren->getValue("wall");
 		this->parseToActorInfo(wall, "wall", &blockData);
-		cout << "Wall parsed" << endl;
 
 		JSON* buildings = rootChildren->getValue("buildings");
 		this->parseToActorInfo(buildings, "building", &blockData);
-		cout << "Buildings parsed" << endl;
 
 		JSON* trees = rootChildren->getValue("trees");
 		this->parseToActorInfo(trees, "tree", &blockData);
-		cout << "Trees parsed" << endl;
 
 		JSON* ore = rootChildren->getValue("ore");
 		this->parseToActorInfo(ore, "ore", &blockData);
-		cout << "Ore parsed" << endl;
-
-		// Parsing orcs
-
-		/*
-		//Parsing Map info
-		JSON* map = parser->getRootNode("map");
-		//JSON* x = map["x"];
-		//JSON* y = map["y"];
-		//JSON* z = map["z"];
-
-
-		JSON* wall = map["Wall"];
-		this->parseToActorInfo(wall, "Wall", &blockData);
-
-		JSON* buildings = map["Buildings"];
-		this->parseToActorInfo(buildings, "Building", &blockData);
-
-		JSON* trees = map["Trees"];
-		this->parseToActorInfo(trees, "Tree", &blockData);
-
-		JSON* ore = map["Ore"];
-		this->parseToActorInfo(ore, "Ore", &blockData);
-		 */
 
 	}
 
@@ -101,10 +67,7 @@ namespace bammm
 			HashMap<ActorInfo>* map)
 	{
 
-		cout << "in parseToActorInfo" << endl;
 		int numberOfChildren = rootNode->sizeOfChildren();
-		cout << "numberOfChildren: " << numberOfChildren << endl;
-
 		DynamicArray<JSON*>* rootChildren = rootNode->getAllChildren()->getAllValues();
 
 		for (int i = 0; i < numberOfChildren; i++)
@@ -118,17 +81,18 @@ namespace bammm
 			int defense = child->getChild("defense")->getIntValue();
 			string behavior = child->getChild("behavior")->getStringValue();
 
-			int x = child->getChild("x")->getIntValue();
-			int y = child->getChild("y")->getIntValue();
-			int z = child->getChild("z")->getIntValue();
+			float x = (float)child->getChild("x")->getIntValue();
+			float y = (float)child->getChild("y")->getIntValue();
+			float z = (float)child->getChild("z")->getIntValue();
 
 			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack, defense, behavior);
 
-			info->setLocation(new Vector3D((float)x, (float)y, (float)z));
+			info->setLocation(new Vector3D(x, y, z));
 
-			cout << name << " " << health << " " << stamina  << " " << attack  << " " << defense  << " " << behavior
-					 << " " << x  << " " << y  << " " << z << endl;
+			//cout << name << " " << health << " " << stamina  << " " << attack  << " " << defense  << " " << behavior
+			//		 << " " << x  << " " << y  << " " << z << endl;
 
+			cout << type << " added" << endl;
 			string i_str = "" + i;
 			map->add(type + i_str, *info);
 			Actor* myActor = new Actor(info);
