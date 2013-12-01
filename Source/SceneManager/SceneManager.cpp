@@ -19,12 +19,15 @@ namespace bammm
 	SceneManager::SceneManager() :
 			_sceneGraph(SCENE_X, SCENE_Y, SCENE_Z)
 	{
+		/*
 		Vector3D* temp;
 		//Random number generator
 		random_device rd;
 		mt19937 generator(rd());
 
 		//Pick random number of orcs
+
+
 		int minOrc = 1;
 		int maxOrc = 10;
 		uniform_int_distribution<int> orcDistribution(minOrc, maxOrc);
@@ -49,6 +52,7 @@ namespace bammm
 			getSceneGraph().add(temp, (_allActors.get(i)));
 			addTickable(newAi);
 		}
+		*/
 	}
 
 	SceneManager::~SceneManager()
@@ -63,6 +67,7 @@ namespace bammm
 	void SceneManager::addActor(Actor* actor)
 	{
 		_allActors.add(actor);
+		_sceneGraph.add(actor->getLocation(), actor);
 	}
 
 	void SceneManager::removeActor(Actor* actor)

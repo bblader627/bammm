@@ -496,13 +496,33 @@ namespace bammm
 				}
 				else
 				{
-					if (atLocation->get(0)->getName() == "Orc")
+					if (atLocation->get(0)->getType() == "dwarf")
 					{
 						gridString = gridString + "O ";
 					}
-					else
+					else if (atLocation->get(0)->getType() == "orc")
 					{
 						gridString = gridString + "X ";
+					}
+					else if (atLocation->get(0)->getType() == "wall")
+					{
+						gridString = gridString + "W ";
+					}
+					else if (atLocation->get(0)->getType() == "building")
+					{
+						gridString = gridString + "B ";
+					}
+					else if (atLocation->get(0)->getType() == "tree")
+					{
+						gridString = gridString + "T ";
+					}
+					else if (atLocation->get(0)->getType() == "ore")
+					{
+						gridString = gridString + "M ";
+					}
+					else
+					{
+						gridString = gridString + "? ";
 					}
 				}
 			}
