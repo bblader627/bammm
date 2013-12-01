@@ -12,7 +12,6 @@
  *
  */
 
-
 #include "Color.h"
 
 namespace bammm
@@ -22,35 +21,35 @@ namespace bammm
 		string colorText(string text, string color)
 		{
 			string selectedColor;
-			if(color == "black")
+			if (color == "black")
 			{
 				selectedColor = _blackText;
 			}
-			else if(color == "red")
+			else if (color == "red")
 			{
 				selectedColor = _redText;
 			}
-			else if(color == "green")
+			else if (color == "green")
 			{
 				selectedColor = _greenText;
 			}
-			else if(color == "yellow")
+			else if (color == "yellow")
 			{
 				selectedColor = _yellowText;
 			}
-			else if(color == "blue")
+			else if (color == "blue")
 			{
 				selectedColor = _blueText;
 			}
-			else if(color == "purple")
+			else if (color == "purple")
 			{
 				selectedColor = _purpleText;
 			}
-			else if(color == "cyan")
+			else if (color == "cyan")
 			{
 				selectedColor = _cyanText;
 			}
-			else if(color == "white")
+			else if (color == "white")
 			{
 				selectedColor = _whiteText;
 			}
@@ -59,7 +58,8 @@ namespace bammm
 				selectedColor = _defaultText;
 			}
 
-			string colorString = _startColor + selectedColor + text + _startColor + _defaultText;
+			string colorString = _startColor + selectedColor + text
+					+ _startColor + _defaultText;
 			return colorString;
 		}
 	}
