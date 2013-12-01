@@ -38,12 +38,15 @@ namespace bammm
 			AllianceType _alliance;
 			string _symbol;
 			string _color;
+			int _gold;
+			int _coal;
+			int _iron;
 
 		public:
 			ActorInfo();
 			ActorInfo(string type, string name, int health, int stamina,
 					int attack, int defense, string behavior, bool collision,
-					AllianceType alliance, string symbol, string color);
+					AllianceType alliance, string symbol, string color, int gold, int coal, int iron);
 
 			/**
 			 getType
@@ -123,11 +126,32 @@ namespace bammm
 			string getSymbol();
 
 			/**
-			 getSymbol
+			 getColor
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _color
 			 */
 			string getColor();
+
+			/**
+			 getColor
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _gold
+			 */
+			int getGold();
+			
+			/**
+			 getColor
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _coal
+			 */
+			int getCoal();
+			
+			/**
+			 getIron
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _iron
+			 */
+			int getIron();
 
 			/**
 			 setType

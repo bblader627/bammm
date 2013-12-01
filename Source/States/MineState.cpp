@@ -19,12 +19,10 @@ namespace bammm
 	MineState::MineState(Actor& actor)
 	{
 		_actor = &actor;
-		_maximumGold = 15;
 	}
 	MineState::MineState(Actor& actor, IStateCallback& stateMachine)
 	{
 		_actor = &actor;
-		_maximumGold = 15;
 		registerTransitionCallback(stateMachine);
 	}
 
@@ -39,7 +37,6 @@ namespace bammm
 	void MineState::setup()
 	{
 		_successChance = 30;
-		_maximumGold = 100;
 	}
 
 	void MineState::setAmount(int amountToMine)
@@ -47,9 +44,9 @@ namespace bammm
 		_amountToMine = amountToMine;
 	}
 
-	void MineState::setOreType(string oreType)
+	void MineState::setOre(Actor& ore)
 	{
-		_oreType = oreType;
+		_ore = &ore;
 	}
 
 	void MineState::breakdown()
@@ -58,31 +55,48 @@ namespace bammm
 
 	void MineState::tick(float deltaTime)
 	{
-		if (_actor->getGold() > _maximumGold || _amountToMine <= 0)
+		if (canMine())
 		{
+			if (_actor->getBAC() > .4)
+			{
+				cout << _actor->getName()
+						<< " drunkenly swings the pickaxe, hits himself in the foot, and decides not to do that anymore."
+						<< "\n";
+				switchState("null"); //Ends this state;
+			}
+			else
+			{
+				string oreName = _ore->getName();
+				if (_ore->getName() == "Gold")
+				{
+					_actor->setGold(_actor->getGold() + 1);
+					_ore->setGold(_ore->getGold() - 1);
+				}
+				else if (_ore->getName() == "Iron")
+				{
+					_actor->setIron(_actor->getIron() + 1);
+					_ore->setIron(_ore->getIron() - 1);
+				}
+				else if (_ore->getName() == "Coal")
+				{
+					_actor->setCoal(_actor->getCoal() + 1);
+					_ore->setCoal(_ore->getCoal() - 1);
+				}
+				_actor->reduceStamina(1);
 
+				cout << _actor->getName()
+						<< " lifts his pickaxe, and swings it at the rock. " << "\n";
+				cout << _actor->getName() 
+						<< " successfully mines a piece of " << _ore->getName() << "\n";
+				_amountToMine--;
+			}
+		}
+		else
+		{
 			cout << _actor->getName() << " is finished mining!" << "\n";
 			_amountToMine = 0;
 			switchState("null");
-			return;
 		}
-
-		if (_actor->getBAC() > 0.4)
-		{
-			cout << _actor->getName()
-					<< " drunkenly swings the pickaxe, hits himself in the foot, and decides not to do that anymore."
-					<< "\n";
-			switchState("null"); //Ends this state;
-			return;
-		}
-
-		_actor->reduceStamina(1);
-		_actor->addGold(1);
-
-		cout << _actor->getName()
-				<< " lifts his pickaxe, and swings it at the rock. " << "\n";
-		cout << _actor->getGold() << "\n";
-
 	}
 
 	void MineState::switchState(string nextState)
@@ -93,5 +107,30 @@ namespace bammm
 	string MineState::toString()
 	{
 		return "mine";
+	}
+
+	bool MineState::canMine()
+	{
+		int canMine = 0;
+		
+		if(_amountToMine > 0)
+		{
+			if(_ore->getGold() > 0)
+			{
+				canMine++;
+			}
+			
+			if(_ore->getIron() > 0)
+			{
+				canMine++;
+			}
+			
+			if(_ore->getCoal() > 0)
+			{
+				canMine++;
+			}
+		}
+
+		return !!canMine;
 	}
 }

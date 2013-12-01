@@ -24,9 +24,15 @@ namespace bammm
 	{
 		private:
 			int _successChance;
-			int _maximumGold;
 			int _amountToMine;
-			string _oreType;
+			Actor* _ore;
+
+			/**
+			 canMine
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns true if the node contains ore.
+			 */
+			bool canMine();
 
 		public:
 			MineState(Actor& actor);
@@ -53,7 +59,7 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			 void setOreType(string oreType);
+			 void setOre(Actor& oreType);
 			
 			/**
 			 breakdown

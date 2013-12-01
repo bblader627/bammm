@@ -34,7 +34,7 @@ namespace bammm
 
 	ActorInfo::ActorInfo(string type, string name, int health, int stamina,
 			int attack, int defense, string behavior, bool collision,
-			AllianceType alliance, string symbol, string color)
+			AllianceType alliance, string symbol, string color, int gold, int coal, int iron)
 	{
 		_type = type;
 		_name = name;
@@ -47,6 +47,9 @@ namespace bammm
 		_alliance = alliance;
 		_symbol = symbol;
 		_color = color;
+		_gold = gold;
+		_coal = coal;
+		_iron = iron;
 	}
 
 	string ActorInfo::getType()
@@ -107,6 +110,21 @@ namespace bammm
 	string ActorInfo::getColor()
 	{
 		return _color;
+	}
+
+	int ActorInfo::getGold()
+	{
+		return _gold;
+	}
+
+	int ActorInfo::getCoal()
+	{
+		return _coal;
+	}
+
+	int ActorInfo::getIron()
+	{
+		return _iron;
 	}
 
 	void ActorInfo::setType(string type)

@@ -47,6 +47,8 @@ namespace bammm
 			int _defense;
 
 			int _gold;
+			int _coal;
+			int _iron;
 			float _BAC;
 
 			bool _collision;
@@ -126,7 +128,28 @@ namespace bammm
 			 @Post-Condition- returns nothing
 			 */
 			void setColor(string color);
+			
+			/**
+			 setGold
+			 @Pre-Condition- The amount to set the Actor's gold to
+			 @Post-Condition- Returns nothing
+			 */
+			void setGold(int gold);
 
+			/**
+			 setGold
+			 @Pre-Condition- The amount to set the Actor's iron to
+			 @Post-Condition- Returns nothing
+			 */
+			void setIron(int iron);
+			
+			/**
+			 setCoal
+			 @Pre-Condition- The amount to set the Actor's coal to
+			 @Post-Condition- Returns nothing
+			 */
+			void setCoal(int coal);
+			
 			/**
 			 increaseHealth
 			 @Pre-Condition- Takes an float amount
@@ -190,13 +213,6 @@ namespace bammm
 			 @Post-Condition- decrements gold and returns true if there is enough, returns false if not
 			 */
 			bool spendGold(int amount);
-
-			/**
-			 getGold
-			 @Pre-Condition- No input
-			 @Post-Condition- Returns _gold
-			 */
-			int getGold();
 
 			/**
 			 getMeleeWeapon
@@ -344,6 +360,27 @@ namespace bammm
 			 @Post-Condition- Returns _color
 			 */
 			string getColor();
+
+			/**
+			 getGold
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the amount of gold the player has
+			 */
+			int getGold();
+
+			/**
+			 getIron
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the amount of iron the player has
+			 */
+			int getIron();
+
+			/**
+			 getCoal
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the amount of coal the player has
+			 */
+			int getCoal();
 
 			/**
 			 getEnemyAlliance
