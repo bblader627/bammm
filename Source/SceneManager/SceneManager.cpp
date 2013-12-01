@@ -36,9 +36,21 @@ namespace bammm
 	{
 		_allActors.add(actor);
 		_sceneGraph.add(actor->getLocation(), actor);
-		PlayerController* controller = new PlayerController();
-		controller->setup(*actor, *_meleeCombat, _sceneGraph);
-		this->addTickable(controller);
+
+		if(actor->getType() == "dwarf")
+		{
+			PlayerController* controller = new PlayerController();
+			controller->setup(*actor, *_meleeCombat, _sceneGraph);
+			this->addTickable(controller);
+		}
+		else if (actor->getType() == "orc")
+		{
+			AiController* controller = new AiController();
+			controller->setup(*actor, *_meleeCombat, _sceneGraph);
+			this->addTickable(controller);
+		}
+
+
 	}
 
 	void SceneManager::removeActor(Actor* actor)
