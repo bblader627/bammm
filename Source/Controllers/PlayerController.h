@@ -67,6 +67,8 @@ namespace bammm
 			 @Post-Condition- Returns a boolean representing if the Controller can be deleted or not.
 			 */
 			virtual bool canDelete();
+
+			virtual void tick(float deltaTime);
 	};
 }
 

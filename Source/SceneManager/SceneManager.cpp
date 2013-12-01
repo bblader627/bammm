@@ -13,50 +13,14 @@
  */
 
 #include "SceneManager.h"
+#include "../Controllers/PlayerController.h"
 
 namespace bammm
 {
 	SceneManager::SceneManager() :
 			_sceneGraph(SCENE_X, SCENE_Y, SCENE_Z)
 	{
-		/*
-		Vector3D* temp;
-		//Random number generator
-		random_device rd;
-		mt19937 generator(rd());
 
-		//Pick random number of orcs
-
-
-		int minOrc = 1;
-		int maxOrc = 10;
-		uniform_int_distribution<int> orcDistribution(minOrc, maxOrc);
-		int orcCount = orcDistribution(generator);
-
-		//Create the orcs
-		uniform_int_distribution<int> xDistribution(0,
-				getSceneGraph().getX() - 1);
-		uniform_int_distribution<int> yDistribution(0,
-				getSceneGraph().getY() - 1);
-		for (int i = 0; i < orcCount; i++)
-		{
-			int randomX = xDistribution(generator);
-			int randomY = yDistribution(generator);
-			temp = new Vector3D(randomX, randomY, 0);
-
-			Actor* newOrc = new Actor("Mr. Orc", "orc", Actor::AllianceType::enemy);
-			newOrc->setLocation(temp);
-			//We need factory to create our weapons
-			WeaponData weaponData(10, 2, "", "");
-			newOrc->setMeleeWeapon(new MeleeWeapon(weaponData));
-			///////////////////////////////////////
-			addActor(newOrc);
-
-			AiController* newAi = new AiController();
-			newAi->setup(*_allActors.get(i), *_meleeCombat, _sceneGraph);
-			addTickable(newAi);
-		}
-		*/
 	}
 
 	SceneManager::~SceneManager()
@@ -72,6 +36,21 @@ namespace bammm
 	{
 		_allActors.add(actor);
 		_sceneGraph.add(actor->getLocation(), actor);
+
+		if(actor->getType() == "dwarf")
+		{
+			PlayerController* controller = new PlayerController();
+			controller->setup(*actor, *_meleeCombat, _sceneGraph);
+			this->addTickable(controller);
+		}
+		else if (actor->getType() == "orc")
+		{
+			AiController* controller = new AiController();
+			controller->setup(*actor, *_meleeCombat, _sceneGraph);
+			this->addTickable(controller);
+		}
+
+
 	}
 
 	void SceneManager::removeActor(Actor* actor)

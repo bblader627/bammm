@@ -246,4 +246,10 @@ namespace bammm
 
 		return false;
 	}
+
+	void PlayerController::tick(float deltaTime)
+	{
+		_stateMachine.tick(deltaTime);
+	}
+
 }

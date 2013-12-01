@@ -16,6 +16,7 @@
 #define CONTROLLER_H_
 
 #include <string>
+#include "../Interfaces/ITickable.h"
 #include "../States/State.h"
 #include "../States/IdleState.h"
 #include "../States/DrinkState.h"
@@ -37,7 +38,7 @@ using namespace std;
 
 namespace bammm
 {
-	class Controller
+	class Controller : public ITickable
 	{
 		protected:
 			HashMap<State*> _states;
@@ -59,6 +60,8 @@ namespace bammm
 			 */
 			virtual void setup(Actor& actor, MeleeCombat& meleeCombat,
 					Grid3D<Actor*>& sceneGraph)=0;
+
+			virtual void tick(float deltaTime)=0;
 
 			/**
 			 canDelete
