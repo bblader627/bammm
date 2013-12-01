@@ -51,11 +51,7 @@ namespace bammm
 
 	JSON * JSON::getParent()
 	{
-		if (_parent == NULL)
-		{
-			cout << "Parent is null\n";
-			cout.flush();
-		}
+
 		return _parent;
 	}
 

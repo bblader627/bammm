@@ -21,8 +21,6 @@ int main()
 	Factory* actorFactory = new Factory(&sceneManager);
 	actorFactory->setup();
 
-	cout << "factory done" << endl;
-
 	MeleeCombat meleeCombat;
 	sceneManager.setMeleeCombat(meleeCombat);
 

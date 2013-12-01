@@ -29,9 +29,7 @@ namespace bammm
 
 	void JSONParser::addRoot(JSON & newNode)
 	{
-		cout << "adding root \n";
 		_rootMap.add(newNode.getName(), &newNode);
-		cout << "root added \n";
 	}
 
 	void JSONParser::addChild(JSON & rootNode, JSON & newNode)
@@ -84,8 +82,8 @@ namespace bammm
 			return false;
 		}
 
-		cout << "File found and opened. Beginning parse. \n";
-		cout.flush();
+		//cout << "File found and opened. Beginning parse. \n";
+		//cout.flush();
 
 		while (!input.eof())
 		{
@@ -95,23 +93,17 @@ namespace bammm
 			}
 			skipGet = false;
 
-			if (current == '[')
-			{
-				cout << "found [" << endl;
-			}
-
 			switch (current)
 			{
 
 				case '{':
-					cout << "\n\nParsing { \n";
-					cout.flush();
+					//cout << "\n\nParsing { \n";
+					//cout.flush();
 
 					if (currentNode == NULL)
 					{
 						currentNode = new JSON("root");
 						addRoot(*currentNode);
-						cout.flush();
 					}
 
 					if (isArray)
@@ -123,7 +115,6 @@ namespace bammm
 						parentNode = arrayRootNode;		//parent should be dwarves array
 						currentNode = new JSON();		//Children will be attributes
 						currentNode->setParent(*parentNode);
-						//parentNode->addChild(*currentNode);
 
 					}
 
@@ -133,30 +124,19 @@ namespace bammm
 					break;
 
 				case '}':
-					cout << "Parsing } \n";
-					cout.flush();
-
 					if (parentNode == NULL)
 					{
 						/* This will be the final output of the parser. This should not output before completion. */
-						cout << "Completed parsing " << filename << ". \n";
+						//cout << "Completed parsing " << filename << ". \n";
 						input.close();
 
 						currentNode = NULL;
 					}
 					else if (isArray)
 					{
-						//TODO: UNDO THIS SHIT
-						cout << "\n================ENDING ARRAY OBJECT===============" << endl;
-						cout << "Parent: " << currentNode->getParent()->getName() << " current: " << currentNode->getName() << endl;
-
-
-						//parentNode = currentNode->getParent()->getParent();		//parent should be dwarves array
 						arrayRootNode->addChild(*currentNode->getParent());
 						parentNode = arrayRootNode;
 						currentNode = arrayRootNode;
-						//currentNode = currentNode->getParent();		//Children will be attributes
-						//currentNode->setParent(*parentNode);
 					}
 					else
 					{
@@ -169,8 +149,6 @@ namespace bammm
 					break;
 
 				case '[':
-					cout << "Parsing [ \n";
-					cout.flush();
 					isArray = true;
 					if (currentNode == NULL)
 					{
@@ -186,16 +164,9 @@ namespace bammm
 					break;
 
 				case ']':
-					cout << "Parsing ] \n";
-					cout.flush();
-
-					cout << "Array root node: " << arrayRootNode->getName() << endl;
 					currentNode = arrayRootNode;
 					parentNode = parentNode->getParent();
 					arrayRootNode = parentNode;
-					cout << "Current at end of array: " << currentNode->getName() << endl;
-					cout << "Parent at end of array: " << parentNode->getName() << endl;
-
 
 					isKey = true;
 					isArray = false;
@@ -203,9 +174,6 @@ namespace bammm
 					break;
 
 				case '"':
-					cout << "Parsing \"";
-					cout.flush();
-
 					current = (char) input.get();
 					name = "";
 					value = "";
@@ -225,8 +193,6 @@ namespace bammm
 					break;
 
 				case ':':
-					cout << "Parsing : \n";
-					cout.flush();
 
 					isKey = false;
 					isValue = true;
@@ -259,7 +225,6 @@ namespace bammm
 					}
 					else if (current == '[')
 					{
-						//parentNode = currentNode->getParent()->getParent();
 						if (isArray)
 						{
 							currentNode->addChild(*(new JSONArray(name)));
@@ -273,7 +238,6 @@ namespace bammm
 						isArray = true;
 						currentNode->setParent(*parentNode);
 						parentNode->addChild(*currentNode);
-						//parentNode = currentNode;
 
 						isKey = true;
 						isValue = false;
@@ -401,14 +365,11 @@ namespace bammm
 						parentNode->addChild(*currentNode);
 					}
 
-					cout << "\tName: " << name << " Value: " << value
-							<< " Parent: " << currentNode->getParent()->getName() << endl;
+					//cout << "\tName: " << name << " Value: " << value
+					//		<< " Parent: " << currentNode->getParent()->getName() << endl;
 					break;
 
 				case ',':
-					cout << "Parsing ," << "\n";
-					cout.flush();
-
 					/* reset node to parent so next key/value may be added as a child to parent */
 					currentNode = currentNode->getParent();
 					parentNode = currentNode->getParent();
@@ -421,8 +382,8 @@ namespace bammm
 			}
 		}
 
-		cout << "End of file reached \n";
-		cout.flush();
+		//cout << "End of file reached \n";
+		//cout.flush();
 
 		currentNode = NULL;
 		parentNode = NULL;

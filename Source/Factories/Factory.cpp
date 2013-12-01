@@ -28,7 +28,6 @@ namespace bammm
 		parser->parseFile(filename);
 
 		// Parsing dwarves
-		parser->printAllRoots();
 		JSON* root = parser->getRootNode("root");
 
 		HashMap<JSON*>* rootChildren = root->getAllChildren();
@@ -92,7 +91,6 @@ namespace bammm
 			//cout << name << " " << health << " " << stamina  << " " << attack  << " " << defense  << " " << behavior
 			//		 << " " << x  << " " << y  << " " << z << endl;
 
-			cout << type << " added" << endl;
 			string i_str = "" + i;
 			map->add(type + i_str, *info);
 			Actor* myActor = new Actor(info);
