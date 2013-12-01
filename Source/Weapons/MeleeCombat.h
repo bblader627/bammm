@@ -16,7 +16,7 @@
 #define MELEECOMBAT_H_
 
 #include "../Actors/Actor.h"
-#include "../Resources/Constant.h"
+
 
 namespace bammm
 {
