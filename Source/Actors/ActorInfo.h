@@ -27,6 +27,9 @@ namespace bammm
 	class ActorInfo
 	{
 		private:
+			int MAX_HEALTH = 100;
+			int MAX_STAMINA = 50;
+
 			string _name;
 			string _type;
 			int _health;
@@ -47,7 +50,7 @@ namespace bammm
 
 		public:
 			ActorInfo();
-			ActorInfo(string type, string name, int health, int stamina,
+			ActorInfo(string type, string name,
 					int attack, int defense, Behavior behaviors, bool collision,
 					AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood, float BAC);
 

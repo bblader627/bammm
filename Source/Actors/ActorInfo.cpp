@@ -21,8 +21,8 @@ namespace bammm
 	{
 		_type = "none";
 		_name = "n/a";
-		_health = 10;
-		_stamina = 5;
+		_health = MAX_HEALTH;
+		_stamina = MAX_STAMINA;
 		_attack = 10;
 		_defense = 10;
 		_collision = true;
@@ -36,14 +36,14 @@ namespace bammm
 		_BAC = 0;
 	}
 
-	ActorInfo::ActorInfo(string type, string name, int health, int stamina,
+	ActorInfo::ActorInfo(string type, string name,
 			int attack, int defense, Behavior behaviors, bool collision,
 			AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood, float BAC)
 	{
 		_type = type;
 		_name = name;
-		_health = health;
-		_stamina = stamina;
+		_health = MAX_HEALTH;
+		_stamina = MAX_STAMINA;
 		_attack = attack;
 		_defense = defense;
 		_behaviors = behaviors;
@@ -205,58 +205,58 @@ namespace bammm
 
 	void ActorInfo::increaseHealth(int amount)
 	{
-		if (_healthBar >= MAX_HEALTH)
+		if (_health >= MAX_HEALTH)
 		{
-			_healthBar = MAX_HEALTH;
+			_health = MAX_HEALTH;
 			return;
 		}
 		else
 		{
-			_healthBar += amount;
+			_health += amount;
 		}
 	}
 
 	void ActorInfo::increaseStamina(int amount)
 	{
-		if (_staminaBar >= MAX_STAMINA)
+		if (_stamina >= MAX_STAMINA)
 		{
-			_staminaBar = MAX_STAMINA;
+			_stamina = MAX_STAMINA;
 			return;
 		}
 		else
 		{
-			_staminaBar += amount;
+			_stamina += amount;
 		}
 	}
 
 	void ActorInfo::reduceHealth(int amount)
 	{
-		if (_healthBar > 0)
+		if (_health > 0)
 		{
-			_healthBar -= amount;
+			_health -= amount;
 		}
 		else
 		{
-			_healthBar = 0;
+			_health = 0;
 			return;
 		}
 	}
 
 	void ActorInfo::reduceStamina(int amount)
 	{
-		if (_staminaBar > 0)
+		if (_stamina > 0)
 		{
-			_staminaBar -= amount;
+			_stamina -= amount;
 		}
 		else
 		{
-			_staminaBar = 0;
+			_stamina = 0;
 		}
 	}
 
 	bool ActorInfo::isFullyRested()
 	{
-		if (_healthBar == MAX_HEALTH && _staminaBar == MAX_STAMINA)
+		if (_health == MAX_HEALTH && _stamina == MAX_STAMINA)
 		{
 			return true;
 		}
