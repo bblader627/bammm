@@ -12,6 +12,7 @@ using namespace std;
 
 void printWelcome();
 void printOptions();
+void printStory();
 DynamicArray<string>* parseInput(string);
 
 int main()
