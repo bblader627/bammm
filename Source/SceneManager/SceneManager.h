@@ -59,7 +59,7 @@ namespace bammm
 			 @Pre-Condition- Takes in an actor
 			 @Post-Condition- Removes the given actor from the scene
 			 */
-			void removeActor(Actor* actor);
+			Actor* removeActor(Actor* actor);
 
 			/**
 			 addTickable

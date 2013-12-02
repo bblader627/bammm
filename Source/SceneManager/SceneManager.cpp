@@ -57,10 +57,11 @@ namespace bammm
 
 	}
 
-	void SceneManager::removeActor(Actor* actor)
+	Actor* SceneManager::removeActor(Actor* actor)
 	{
 		_allActors.removeElement(actor);
 		_sceneGraph.remove(actor->getLocation(), actor);
+		return actor;
 	}
 
 	void SceneManager::addTickable(ITickable* tickable)
@@ -95,9 +96,16 @@ namespace bammm
 		cout << "Size: " << size << "\n";
 		for (int i = 0; i < size; i++)
 		{
-			_allTickables.get(i)->tick(deltaTime);
+			ITickable* tickable = _allTickables.get(i);
+			tickable->tick(deltaTime);
 			if (_allTickables.get(i)->canDelete())
 			{
+				PlayerController* playerController = static_cast<PlayerController*>(tickable);
+				AiController* aiController = static_cast<AiController*>(tickable);
+				size--;
+				_allPlayerControllers.removeElement(playerController);
+				_allAiControllers.removeElement(aiController);
+				delete removeActor(_allActors.get(i));
 				delete removeTickable(_allTickables.get(i));
 			}
 		}
