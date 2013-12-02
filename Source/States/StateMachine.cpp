@@ -36,7 +36,6 @@ namespace bammm
 		_actor = &actor;
 		_allStates = &allStates;
 		_meleeCombat = meleeCombat;
-
 	}
 
 	void StateMachine::initialState(State* initial)
