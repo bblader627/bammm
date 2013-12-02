@@ -17,6 +17,7 @@
 
 #include "TreeNode.h"
 #include "DynamicArray.h"
+#include "Queue.h"
 #include <string>
 #include <cmath>
 
@@ -32,8 +33,8 @@ namespace bammm
 		private:
 			int _numberOfNodes;
 			//TreeNode<T>** tree;
-			DynamicArray<TreeNode<T>*>* tree;
-
+			//DynamicArray<TreeNode<T>*>* tree;
+			Queue<TreeNode<T>*>* tree;
 		public:
 			Tree<T>();
 			virtual ~Tree();
@@ -71,14 +72,14 @@ namespace bammm
 			 @Pre-Condition- Takes a string key
 			 @Post-Condition- Remove the node that corresponds to the given key and returns true on success
 			 */
-			bool remove(T& value);
+			//bool remove(T& value);
 
 			/**
 			 removeAll
 			 @Pre-Condition- No input
 			 @Post-Condition- Removes all the nodes in the map
 			 */
-			void removeAll();
+			//void removeAll();
 
 			/**
 			 getNode
@@ -94,15 +95,17 @@ namespace bammm
 			 */
 			T& getValue(T& value);
 
-			TreeNode<T>* getAt(int index);
+			TreeNode<T>* get();
 
-			T getValueAt(int index);
+			bool isEmpty();
+
+			//T getValueAt(int index);
 	};
 
 	template<class T>
 	Tree<T>::Tree()
 	{
-		tree = new DynamicArray<TreeNode<T>*>();
+		tree = new Queue<TreeNode<T>*>();
 		_numberOfNodes = 0;
 
 	}
@@ -110,14 +113,14 @@ namespace bammm
 	template<class T>
 	Tree<T>::~Tree()
 	{
-		removeAll();
+		//removeAll();
 		delete[] tree;
 	}
 
 	template<class T>
 	int Tree<T>::getSize()
 	{
-			return _numberOfNodes;
+			return tree->getSize();
 	}
 
 	template<class T>
@@ -138,6 +141,7 @@ namespace bammm
 		return true;
 	}
 
+	/*
 	template<class T>
 	bool Tree<T>::remove(T& value)
 	{
@@ -152,6 +156,7 @@ namespace bammm
 		}
 		return false;
 	}
+
 
 	template<class T>
 	void Tree<T>::removeAll()
@@ -186,24 +191,34 @@ namespace bammm
 	{
 		return NULL;
 	}
-
+*/
 	template<class T>
-	TreeNode<T>* Tree<T>::getAt(int index)
+	TreeNode<T>* Tree<T>::get()
 	{
+		/*
 		if (index < tree->getSize())
 		{
 			return tree->get(index);
 		}
 		cout << "RETURNING NULL" << endl;
 		return NULL;
+		*/
+		return tree->remove();
 	}
 
+	/*
 	template<class T>
 	T Tree<T>::getValueAt(int index)
 	{
 		return getAt(index)->getValue();
 	}
+	*/
 
+	template<class T>
+	bool Tree<T>::isEmpty()
+	{
+		return tree->isEmpty();
+	}
 
 }
 
