@@ -25,7 +25,6 @@ namespace bammm
 		_stamina = 5;
 		_attack = 10;
 		_defense = 10;
-		_behavior = "drink";
 		_collision = true;
 		_alliance = AllianceType::ally;
 		_symbol = "?";
@@ -37,7 +36,7 @@ namespace bammm
 	}
 
 	ActorInfo::ActorInfo(string type, string name, int health, int stamina,
-			int attack, int defense, string behavior, bool collision,
+			int attack, int defense, Behavior behaviors, bool collision,
 			AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood)
 	{
 		_type = type;
@@ -46,7 +45,7 @@ namespace bammm
 		_stamina = stamina;
 		_attack = attack;
 		_defense = defense;
-		_behavior = behavior;
+		_behaviors = behaviors;
 		_collision = collision;
 		_alliance = alliance;
 		_symbol = symbol;
@@ -87,9 +86,9 @@ namespace bammm
 		return _name;
 	}
 
-	string ActorInfo::getBehavior()
+	DynamicArray<string>* ActorInfo::getBaseBehaviors()
 	{
-		return _behavior;
+		return _behaviors.getBaseBehaviors();
 	}
 
 	Vector3D* ActorInfo::getLocation()
@@ -165,11 +164,6 @@ namespace bammm
 	void ActorInfo::setDefense(int defense)
 	{
 		_defense = defense;
-	}
-
-	void ActorInfo::setBehavior(string behavior)
-	{
-		_behavior = behavior;
 	}
 
 	void ActorInfo::setLocation(Vector3D* location)
