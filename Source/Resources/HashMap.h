@@ -241,7 +241,6 @@ namespace bammm
 	{
 		DynamicArray<string>* keys;
 		keys = new DynamicArray<string>(_numberOfNodes);
-
 		for (int i = 0; i < _mapSize; i++)
 		{
 			HashNode<T>* temporary = hashMap[i];
@@ -251,7 +250,7 @@ namespace bammm
 				temporary = &(temporary->getNextNode());
 			}
 		}
-
+		cout << "Size of keys" << keys->getSize() << endl;
 		return keys;
 	}
 
@@ -285,17 +284,16 @@ namespace bammm
 	{
 		int bucket = hashString(key);
 		HashNode<T>* temporary = hashMap[bucket];
-
 		while (temporary != NULL)
 		{
+			cout << "getKey: " << temporary->getKey() << endl;
 			if (key.compare(temporary->getKey()) == 0)
 			{
 				return temporary->getValue();
 			}
-
 			temporary = &(temporary->getNextNode());
-		}
 
+		}
 		T *ret = NULL;
 		return *ret;
 	}
