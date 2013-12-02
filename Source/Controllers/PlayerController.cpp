@@ -110,11 +110,13 @@ namespace bammm
 			}
 			else
 			{
+				/*
 				cout << _states.contains("search") << endl;
 				SearchState* search = static_cast<SearchState*>(_states.getValue("search"));
 				search->setTarget(type);
 				search->setDestState(stateToAdd);
 				_stateMachine.addState(search);
+				*/
 			}
 
 
