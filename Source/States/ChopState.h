@@ -24,9 +24,15 @@ namespace bammm
 	{
 		private:
 			int _successChance;
-			int _maximumWood;
 			int _amountToChop;
-			string _treeType;
+			Actor* _tree;
+
+			/**
+			 canMine
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns true if the node contains ore.
+			 */
+			bool canChop();
 
 		public:
 			ChopState(Actor& actor);
@@ -40,20 +46,21 @@ namespace bammm
 			//virtual void setup(DynamicArray<string>* args);
 			void setup();
 
-			/**
-			 setup
-			 @Pre-Condition- No input
-			 @Post-Condition- Sets up the state
-			 */
-			void setAmount(int amountToChop);
 
 			/**
 			 setup
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			void setTreeType(string treeType);
+			 void setAmount(int amountToChop);
 
+			/**
+			 setup
+			 @Pre-Condition- No input
+			 @Post-Condition- Sets up the state
+			 */
+			 void setTree(Actor& treeType);
+			
 			/**
 			 breakdown
 			 @Pre-Condition- No input
