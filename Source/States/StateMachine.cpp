@@ -75,7 +75,7 @@ namespace bammm
 		{
 			if (newState->toString() == "combat")
 			{
-				//test for fight hapening
+				//test for fight happening
 				if (!_meleeCombat->fightHappening())
 				{
 					this->removeState(newState);
