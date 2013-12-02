@@ -32,7 +32,31 @@ namespace bammm
 	void SearchState::setTarget(string target)
 	{
 		_target = target;
-		//_path = _sceneGraph->getPath(_actor, _target);
+		_path = _sceneGraph->getPath(_actor, _target);
+		/*
+		cout << "PRINTING PATHFINDING" << endl;
+
+		while (_path->getSize() > 0)
+		{
+			Vector3D* dir = _path->pop();
+			if (dir == _sceneGraph->UP)
+			{
+				cout << "UP" << endl;
+			}
+			else if (dir == _sceneGraph->DOWN)
+			{
+				cout << "DOWN" << endl;
+			}
+			else if (dir == _sceneGraph->LEFT)
+			{
+				cout << "LEFT" << endl;
+			}
+			else if (dir == _sceneGraph->RIGHT)
+			{
+				cout << "RIGHT" << endl;
+			}
+		}
+		*/
 	}
 
 	void SearchState::setDestState(State* goal)
@@ -58,12 +82,27 @@ namespace bammm
 		}
 		else
 		{
-			_sceneGraph->move(_actor, _path->pop());
+			Vector3D* loc = new Vector3D(0,0,0);
+			Vector3D newloc = *(_actor->getLocation()) + *(_path->pop());
+
+			loc->set(newloc.getX(), newloc.getY(), newloc.getZ());
+			_sceneGraph->move(_actor, loc);
+		}
+
+		Vector3D* targetActor = _sceneGraph->findInGrid(_target);
+
+		if (_actor->getLocation()->getX() == targetActor->getX() &&
+				_actor->getLocation()->getY() == targetActor->getY() &&
+				_actor->getLocation()->getZ() == targetActor->getZ())
+		{
+			cout << "found" << endl;
+			switchState(_goalState->toString());
 		}
 	}
 
 	void SearchState::switchState(string nextState)
 	{
+		cout << "switch" << endl;
 		_stateMachine->switchState(this, nextState);
 	}
 
