@@ -225,7 +225,7 @@ namespace bammm
 			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack,
 					defense, behavior, collision, alliance, symbol, color, gold,
 					coal, iron, wood);
-			info->setLocation(new Vector3D(x, y, z));
+			info->setLocation(new Vector3D(y, x, z));
 
 			string i_str = "" + i;
 			map->add(type + i_str, *info);

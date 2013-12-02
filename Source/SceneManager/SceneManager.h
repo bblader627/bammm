@@ -37,9 +37,9 @@ namespace bammm
 			DynamicArray<PlayerController*> _allPlayerControllers;
 			DynamicArray<AiController*> _allAiControllers;
 
-			static const int SCENE_X = 10;
-			static const int SCENE_Y = 10;
-			static const int SCENE_Z = 10;
+			static const int SCENE_X = 20;
+			static const int SCENE_Y = 20;
+			static const int SCENE_Z = 20;
 			Grid3D<Actor*> _sceneGraph;
 			PlayerController* findController(string command);
 
