@@ -22,6 +22,8 @@
 #include "../Actors/Actor.h"
 #include "../Resources/Constant.h"
 #include "../Resources/Color.h"
+#include "../Resources/Tree.h"
+#include "../Resources/TreeNode.h"
 
 using namespace std;
 
@@ -292,6 +294,133 @@ namespace bammm
 	template<class T>
 	Stack<Vector3D*>* Grid3D<T>::getPath(Actor* actor, string destination)
 	{
+
+		Vector3D* target = findInGrid(destination);
+		Vector3D* actorLocation = actor->getLocation();
+		int actorLocInt = convertToPosition(actorLocation);
+
+		cout << actorLocInt << endl;
+
+		DynamicArray<DynamicArray<bool>*>* visited = new DynamicArray<DynamicArray<bool>*>();
+
+		cout << "populating visisted array" << endl;
+		for (unsigned int i = 0; i < _width; i++)
+		{
+			visited->add(new DynamicArray<bool>());
+			for (unsigned int j= 0; j < _length; j++)
+			{
+				visited->get(i)->add(false);
+			}
+		}
+
+		Tree<Vector3D*>* mapTree = new Tree<Vector3D*>();
+		TreeNode<Vector3D*>* rootNode = new TreeNode<Vector3D*>(target);
+		mapTree->add(&target, rootNode);
+		TreeNode<Vector3D*>* current;
+
+		unsigned int i = 0;
+		while (i < mapTree->getSize())
+		{
+			current = mapTree->getAt(i);
+			Vector3D* currentLocation = current->getValue();
+			int currentLocInt = convertToPosition(currentLocation);
+			visited->get(currentLocation->getX())->get(currentLocation->getY()) = true;
+
+			cout << currentLocation->getX() << ", " << currentLocation->getY() << endl;
+
+			if (currentLocInt == actorLocInt)
+			{
+				cout << "FOUND!!" << endl;
+				break;
+			}
+
+			//Start adding if possible
+			Vector3D newLoc1;
+			bool hasVisited;
+
+			newLoc1 = *currentLocation + *UP;
+			if (isWalkable(newLoc1))
+			{
+				Vector3D* newLocation = new Vector3D(newLoc1.getX(), newLoc1.getY(), newLoc1.getZ());
+				hasVisited = visited->get(newLocation->getX())->get(newLocation->getY());
+				if (!hasVisited)
+				{
+					//cout << "===Goign up at at " << newLocation->getX() << ", " << newLocation->getY() << endl;
+					cout << "Adding " << newLocation->getX() << ", " << newLocation->getY() << endl;
+					//visited->get(newLocation->getX())->get(newLocation->getY()) = true;
+					mapTree->add(&newLocation, current);
+				}
+			}
+			else
+			{
+				//cout << "~~~Can't go up at " << newLoc.getX() << ", " << newLoc.getY() << endl;
+			}
+
+			Vector3D newLoc2 = *currentLocation + *RIGHT;
+			if (isWalkable(newLoc2))
+			{
+				Vector3D* newLocation = new Vector3D(newLoc2.getX(), newLoc2.getY(), newLoc2.getZ());
+				hasVisited = visited->get(newLocation->getX())->get(newLocation->getY());
+				if (!hasVisited)
+				{
+					cout << "Adding " << newLocation->getX() << ", " << newLocation->getY() << endl;
+					//visited->get(newLocation->getX())->get(newLocation->getY()) = true;
+					mapTree->add(&newLocation, current);
+				}
+			}
+			else
+			{
+				//cout << "~~~Can't go right at " << newLoc.getX() << ", " << newLoc.getY() << endl;
+			}
+
+			Vector3D newLoc3 = *currentLocation + *DOWN;
+			if (isWalkable(newLoc3))
+			{
+				Vector3D* newLocation = new Vector3D(newLoc3.getX(), newLoc3.getY(), newLoc3.getZ());
+				hasVisited = visited->get(newLocation->getX())->get(newLocation->getY());
+				if (!hasVisited)
+				{
+					cout << "Adding " << newLocation->getX() << ", " << newLocation->getY() << endl;
+					//visited->get(newLocation->getX())->get(newLocation->getY()) = true;
+					mapTree->add(&newLocation, current);
+				}
+			}
+			else
+			{
+				//cout << "~~~Can't go down at " << newLoc.getX() << ", " << newLoc.getY() << endl;
+			}
+
+			Vector3D newLoc4 = *currentLocation + *LEFT;
+			if (isWalkable(newLoc4))
+			{
+				Vector3D* newLocation = new Vector3D(newLoc4.getX(), newLoc4.getY(), newLoc4.getZ());
+				hasVisited = visited->get(newLocation->getX())->get(newLocation->getY());
+				if (!hasVisited)
+				{
+					cout << "Adding " << newLocation->getX() << ", " << newLocation->getY() << endl;
+					//visited->get(newLocation->getX())->get(newLocation->getY()) = true;
+					mapTree->add(&newLocation, current);
+				}
+			}
+			else
+			{
+				//cout << "~~~Can't go left at " << newLoc.getX() << ", " << newLoc.getY() << endl;
+			}
+			i++;
+		}
+
+		for (unsigned int i = 0; i < _width; i++)
+		{
+			visited->add(new DynamicArray<bool>());
+			for (unsigned int j= 0; j < _length; j++)
+			{
+					cout << visited->get(i)->get(j);
+			}
+			cout << endl;
+		}
+
+
+/*
 		cout << "==============IN getPath================" << endl;
 		Vector3D* target = findInGrid(destination);
 		cout << target->getX() << ", " << target->getY() << ", " << target->getZ() << endl;
@@ -322,25 +451,18 @@ namespace bammm
 
 		if (getPath(actorLocation, target, path, visited))
 		{
-			for (unsigned int i = 0; i < visited->getSize(); i++)
-			{
-				for (unsigned int j = 0; j < visited->get(i)->getSize(); j++)
-				{
-					cout << visited->get(i)->get(j) << " ";
-				}
-				cout << endl;
-			}
 			return path;
 		}
-		/*
+
 		else
 		{
 			cout << "Path not found" << "\n";
 			return new Stack<Vector3D*>*;
 		}
-		*/
-		return path;
 
+		return path;
+		*/
+		return new Stack<Vector3D*>();
 	}
 
 	template<class T>
@@ -449,7 +571,7 @@ namespace bammm
 		}
 
 		cout << "END PATHFINDING" << endl;
-		return true;
+		return false;
 	}
 
 	template<class T>
@@ -463,6 +585,7 @@ namespace bammm
 				T actor = cell->get(cellIndex);
 				if (actor->toString() == target)
 				{
+					cout << "GRIDINDEX" << gridIndex << endl;
 					return convertToVector(gridIndex);
 				}
 			}
@@ -559,7 +682,7 @@ namespace bammm
 		int size = allOnTile->getSize();
 		for (int i = 0; i < size; i++)
 		{
-			if (allOnTile->get(i)->getCollision() == true)
+			if (allOnTile->get(i)->getCollision() == 1)
 			{
 				return false;
 			}
@@ -670,7 +793,7 @@ namespace bammm
 	Vector3D* Grid3D<T>::convertToVector(int position)
 	{
 		int z = (position - (position % (_length * _width)))/(_length * _width);
-		int y = _length - (position - (position - (position % _length)));
+		int y = position / _length;
 		int x = position % _length;
 		return new Vector3D(x, y, z);
 	}
