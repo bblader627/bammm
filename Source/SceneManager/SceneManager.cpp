@@ -40,7 +40,7 @@ namespace bammm
 		_allActors.add(actor);
 		_sceneGraph.add(actor->getLocation(), actor);
 
-		if(actor->getType() == "dwarf")
+		if (actor->getType() == "dwarf")
 		{
 			PlayerController* controller = new PlayerController();
 			controller->setup(*actor, *_meleeCombat, _sceneGraph);

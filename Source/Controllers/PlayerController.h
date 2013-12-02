@@ -16,7 +16,6 @@
 #define PLAYERCONTROLLER_H_
 
 #include "Controller.h"
-//#include "../Factories/Factory.h"
 #include "../Resources/Constant.h"
 
 using namespace std;
@@ -65,12 +64,18 @@ namespace bammm
 			 */
 			virtual bool canDelete();
 
+			/**
+			 tick
+			 @Pre-Condition- Takes a float deltaTime
+			 @Post-Condition- Ticks for deltaTime
+			 */
 			virtual void tick(float deltaTime);
 
 			/**
 			 toString
 			 @Pre-Condition- Takes nothing
 			 @Post-Condition- Returns type of controller
+			 @Post-Condition- Returns a string representation of a PlayerController
 			 */
 			virtual string toString();
 
