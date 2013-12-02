@@ -34,13 +34,13 @@ namespace bammm
 		_stateMachine.setup(actor, _states, _meleeCombat);
 
 		//Create the states
-		DrinkState* drinkState = new DrinkState(actor, _stateMachine);
-		MineState* mineState = new MineState(actor, _stateMachine);
-		SingState* singState = new SingState(actor, _stateMachine);
-		BrawlState* brawlState = new BrawlState(actor, _stateMachine);
-		SleepState* sleepState = new SleepState(actor, _stateMachine);
-		IdleState* idleState = new IdleState(actor, _stateMachine);
-		CombatState* combatState = new CombatState(actor, _stateMachine);
+		DrinkState* drinkState = new DrinkState(actor, &_stateMachine);
+		MineState* mineState = new MineState(actor, &_stateMachine);
+		SingState* singState = new SingState(actor, &_stateMachine);
+		BrawlState* brawlState = new BrawlState(actor, &_stateMachine);
+		SleepState* sleepState = new SleepState(actor, &_stateMachine);
+		IdleState* idleState = new IdleState(actor, &_stateMachine);
+		CombatState* combatState = new CombatState(actor, &_stateMachine);
 
 		_states.add(idleState->toString(), idleState);
 		_states.add(mineState->toString(), mineState);

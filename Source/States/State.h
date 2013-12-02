@@ -64,7 +64,7 @@ namespace bammm
 			 @Post-Condition- A transition callback is registered
 			 */
 			virtual void registerTransitionCallback(
-					IStateCallback& stateMachine);
+					IStateCallback* stateMachine);
 
 			/**
 			 switchState

@@ -117,6 +117,9 @@ namespace bammm
 			string i_str = "" + i;
 			map->add(type + i_str, *info);
 			Actor* myActor = new Actor(info);
+			WeaponData weaponData(10,2,"","");
+			MeleeWeapon* meleeWeapon = new MeleeWeapon(weaponData);
+			myActor->setMeleeWeapon(meleeWeapon);
 			scene->addActor(myActor);
 		}
 	}

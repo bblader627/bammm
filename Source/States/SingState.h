@@ -28,7 +28,7 @@ namespace bammm
 
 		public:
 			SingState(Actor& actor);
-			SingState(Actor& actor, IStateCallback& stateMachine);
+			SingState(Actor& actor, IStateCallback* stateMachine);
 
 			/**
 			 setup

@@ -36,7 +36,7 @@ namespace bammm
 
 		public:
 			ChopState(Actor& actor);
-			ChopState(Actor& actor, IStateCallback& stateMachine);
+			ChopState(Actor& actor, IStateCallback* stateMachine);
 
 			/**
 			 setup

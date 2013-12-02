@@ -23,7 +23,7 @@ namespace bammm
 	{
 		public:
 			IdleState(Actor& actor);
-			IdleState(Actor& actor, IStateCallback& stateMachine);
+			IdleState(Actor& actor, IStateCallback* stateMachine);
 
 			/**
 			 setup

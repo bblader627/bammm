@@ -22,7 +22,7 @@ namespace bammm
 
 	}
 
-	DrinkState::DrinkState(Actor& actor, IStateCallback& stateMachine)
+	DrinkState::DrinkState(Actor& actor, IStateCallback* stateMachine)
 	{
 		_actor = &actor;
 		registerTransitionCallback(stateMachine);

@@ -21,7 +21,7 @@ namespace bammm
 		_actor = &actor;
 	}
 
-	SleepState::SleepState(Actor& actor, IStateCallback& stateMachine)
+	SleepState::SleepState(Actor& actor, IStateCallback* stateMachine)
 	{
 		_actor = &actor;
 		registerTransitionCallback(stateMachine);

@@ -21,7 +21,7 @@ namespace bammm
 		_actor = &actor;
 	}
 
-	CombatState::CombatState(Actor& actor, IStateCallback& stateMachine)
+	CombatState::CombatState(Actor& actor, IStateCallback* stateMachine)
 	{
 		_actor = &actor;
 		registerTransitionCallback(stateMachine);

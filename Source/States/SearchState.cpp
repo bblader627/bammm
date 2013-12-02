@@ -21,7 +21,7 @@ namespace bammm
 		_actor = &actor;
 	}
 
-	SearchState::SearchState(Actor& actor, IStateCallback& stateMachine,
+	SearchState::SearchState(Actor& actor, IStateCallback* stateMachine,
 			Grid3D<Actor*>& sceneGraph)
 	{
 		_sceneGraph = &sceneGraph;

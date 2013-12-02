@@ -60,14 +60,14 @@ namespace bammm
 			 @Pre-Condition- Takes in two State references, the current state and the newState
 			 @Post-Condition- The current state is switched to the given newState
 			 */
-			void switchState(State& current, State& newState);
+			void switchState(State* current, State* newState);
 
 			/**
 			 switchState
 			 @Pre-Condition- Takes in a reference to the current State and a string representing new state
 			 @Post-Condition- The current state is switched to the state specified by the string newStateString
 			 */
-			void switchState(State& current, string newStateString);
+			void switchState(State* current, string newStateString);
 
 			/**
 			 addState
