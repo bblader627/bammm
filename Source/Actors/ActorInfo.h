@@ -43,12 +43,13 @@ namespace bammm
 			int _coal;
 			int _iron;
 			int _wood;
+			float _BAC;
 
 		public:
 			ActorInfo();
 			ActorInfo(string type, string name, int health, int stamina,
 					int attack, int defense, Behavior behaviors, bool collision,
-					AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood);
+					AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood, float BAC);
 
 			/**
 			 getType
@@ -231,6 +232,28 @@ namespace bammm
 			 @Post-Condition- returns nothing
 			 */
 			void setSymbol(string symbol);
+
+			/**
+			 getBAC
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _BAC
+			 */
+			float getBAC();
+
+			/**
+			 increaseBAC
+			 @Pre-Condition- no parameters;
+			 @Post-Condition- increments BAC by .05;
+			 */
+			void incrementBAC();
+
+			/*
+			 resetBAC
+			 @Pre-Condition- no parameters;
+			 @Post-Condition- sets BAC back to 0
+			 */
+			void resetBAC();
+
 	};
 }
 

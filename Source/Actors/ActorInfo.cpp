@@ -33,11 +33,12 @@ namespace bammm
 		_iron = 0;
 		_coal = 0;
 		_wood = 0;
+		_BAC = 0;
 	}
 
 	ActorInfo::ActorInfo(string type, string name, int health, int stamina,
 			int attack, int defense, Behavior behaviors, bool collision,
-			AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood)
+			AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood, float BAC)
 	{
 		_type = type;
 		_name = name;
@@ -54,6 +55,7 @@ namespace bammm
 		_coal = coal;
 		_iron = iron;
 		_wood = wood;
+		_BAC = BAC;
 	}
 
 	string ActorInfo::getType()
@@ -185,4 +187,22 @@ namespace bammm
 	{
 		_symbol = symbol;
 	}
+
+	float ActorInfo::getBAC()
+	{
+		return _BAC;
+	}
+
+	void ActorInfo::incrementBAC()
+	{
+		_BAC += .01;
+	}
+
+	void resetBAC();
+	{
+		_BAC = 0;
+	}
+
+
+
 }
