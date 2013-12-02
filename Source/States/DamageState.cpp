@@ -13,6 +13,7 @@
  */
 
 #include "DamageState.h"
+#include "../Resources/Color.h"
 
 namespace bammm
 {
@@ -49,11 +50,12 @@ namespace bammm
 		{
 			int damage = weapon->attack();
 			_target->reduceHealth(damage);
-			cout << attackerName << " hits " << targetName << " for " << damage
-					<< " damage. \n";
+			cout << attackerName << " hits " << targetName << " for " << Color::colorText(to_string(damage), "red")
+					<< " damage. ";
+			cout << targetName << " has " << Color::colorText(to_string(_target->getHealth()), "green") << " health.\n";
 			if (_target->getHealth() <= 0)
 			{
-				cout << attackerName << " has slain " << targetName << ".\n";
+				cout << attackerName << Color::colorText(" has slain ", "red") << targetName << ".\n";
 			}
 		}
 		else

@@ -116,7 +116,6 @@ namespace bammm
 			}
 
 			Vector3D* oreLocation = _sceneGraph->findInGrid(type);
-			cout << "found in grid" << endl;
 			State* stateToAdd = _states.getValue(newState);
 
 			if (_actor->getLocation() == oreLocation)

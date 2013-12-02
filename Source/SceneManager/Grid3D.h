@@ -304,10 +304,10 @@ namespace bammm
 		DynamicArray<DynamicArray<bool>*>* visited = new DynamicArray<DynamicArray<bool>*>();
 
 		cout << "populating visisted array" << endl;
-		for (unsigned int i = 0; i < _width; i++)
+		for (uint i = 0; i < (uint)_width; i++)
 		{
 			visited->add(new DynamicArray<bool>());
-			for (unsigned int j= 0; j < _length; j++)
+			for (uint j= 0; j < (uint)_length; j++)
 			{
 				visited->get(i)->add(false);
 			}
@@ -318,8 +318,8 @@ namespace bammm
 		mapTree->add(&target, rootNode);
 		TreeNode<Vector3D*>* current;
 
-		unsigned int i = 0;
-		while (i < mapTree->getSize())
+		uint i = 0;
+		while (i < (uint)mapTree->getSize())
 
 		{
 			current = mapTree->getAt(i);
@@ -410,10 +410,10 @@ namespace bammm
 			i++;
 		}
 
-		for (unsigned int i = 0; i < _width; i++)
+		for (uint i = 0; i < (uint)_width; i++)
 		{
 			visited->add(new DynamicArray<bool>());
-			for (unsigned int j= 0; j < _length; j++)
+			for (uint j= 0; j < (uint)_length; j++)
 			{
 					cout << visited->get(i)->get(j);
 			}
@@ -441,10 +441,10 @@ namespace bammm
 		DynamicArray<DynamicArray<bool>*>* visited = new DynamicArray<DynamicArray<bool>*>();
 
 		cout << "populating visisted array" << endl;
-		for (unsigned int i = 0; i < _width; i++)
+		for (uint i = 0; i < _width; i++)
 		{
 			visited->add(new DynamicArray<bool>());
-			for (unsigned int j= 0; j < _length; j++)
+			for (uint j= 0; j < _length; j++)
 			{
 				visited->get(i)->add(false);
 			}
@@ -578,15 +578,14 @@ namespace bammm
 	template<class T>
 	Vector3D* Grid3D<T>::findInGrid(string target)
 	{
-		for (unsigned int gridIndex = 0; gridIndex < _grid->getSize(); gridIndex++)
+		for (uint gridIndex = 0; gridIndex < _grid->getSize(); gridIndex++)
 		{
 			DynamicArray<T>* cell = _grid->get(gridIndex);
-			for (unsigned int cellIndex = 0; cellIndex < cell->getSize(); cellIndex++)
+			for (uint cellIndex = 0; cellIndex < cell->getSize(); cellIndex++)
 			{
 				T actor = cell->get(cellIndex);
 				if (actor->toString() == target)
 				{
-					cout << "GRIDINDEX" << gridIndex << endl;
 					return convertToVector(gridIndex);
 				}
 			}

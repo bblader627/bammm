@@ -134,7 +134,6 @@ namespace bammm
 
 		if (newState == "mine")
 		{
-			cout << "Sending mine to actor" << endl;
 			controller->input(args, deltaTime);
 			/*mine [#] [ore-type]
 			int numOre;

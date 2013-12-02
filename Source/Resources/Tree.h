@@ -19,6 +19,7 @@
 #include "DynamicArray.h"
 #include <string>
 #include <cmath>
+#include "Constant.h"
 
 #define DEFAULT_MAPSIZE 1000
 
@@ -190,7 +191,7 @@ namespace bammm
 	template<class T>
 	TreeNode<T>* Tree<T>::getAt(int index)
 	{
-		if (index < tree->getSize())
+		if ((uint)index < tree->getSize())
 		{
 			return tree->get(index);
 		}
