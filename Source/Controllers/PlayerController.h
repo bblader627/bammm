@@ -16,7 +16,7 @@
 #define PLAYERCONTROLLER_H_
 
 #include "Controller.h"
-#include "../Factories/Factory.h"
+//#include "../Factories/Factory.h"
 #include "../Resources/Constant.h"
 
 using namespace std;
@@ -67,7 +67,33 @@ namespace bammm
 
 			virtual void tick(float deltaTime);
 
+			/**
+			 toString
+			 @Pre-Condition- Takes nothing
+			 @Post-Condition- Returns type of controller
+			 */
 			virtual string toString();
+
+			/**
+			numberOfStates
+			@Pre-Condition- Takes nothing
+			@Post-Condition- returns number of current running states in _stateMachine
+			*/
+			int numberOfStates();
+
+			/**
+			runningStates
+			@Pre-Condition- Takes nothing
+			@Post-Condition- returns current running states in _stateMachine
+			*/
+			DynamicArray<State*>& runningStates();
+
+			/**
+			allStates
+			@Pre-Condition- Takes nothing
+			@Post-Condition- returns current all states in _stateMachine
+			*/
+			HashMap<State*>& allStates();
 	};
 }
 

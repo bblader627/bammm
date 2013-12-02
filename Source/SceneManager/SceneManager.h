@@ -19,6 +19,7 @@
 #include "Grid3D.h"
 #include "../Actors/Actor.h"
 #include "../Controllers/AiController.h"
+#include "../Controllers/PlayerController.h"
 #include "../Interfaces/ITickable.h"
 #include "../Weapons/MeleeCombat.h"
 
@@ -32,10 +33,14 @@ namespace bammm
 			DynamicArray<Actor*> _allActors;
 			MeleeCombat* _meleeCombat;
 			DynamicArray<ITickable*> _allTickables;
+			DynamicArray<PlayerController*> _allPlayerControllers;
+			DynamicArray<AiController*> _allAiControllers;
+
 			static const int SCENE_X = 10;
 			static const int SCENE_Y = 10;
 			static const int SCENE_Z = 10;
 			Grid3D<Actor*> _sceneGraph;
+			PlayerController* findController(string command);
 
 		public:
 			SceneManager();
@@ -61,6 +66,20 @@ namespace bammm
 			 @Post-Condition- Adds the given tickable to the scene
 			 */
 			void addTickable(ITickable* tickable);
+
+			/**
+			 addPlayerController
+			 @Pre-Condition- Takes in a PlayerController
+			 @Post-Condition- Adds the given PlayerController to list of PlayerControllers
+			 */
+			void addPlayerController(PlayerController* controller);
+
+			/**
+			 addAiController
+			 @Pre-Condition- Takes in a AiController
+			 @Post-Condition- Adds the given AiController to list of AiControllers
+			 */
+			void addAiController(AiController* controller);
 
 			/**
 			 removeTickable
@@ -96,6 +115,13 @@ namespace bammm
 			 @Post-Condition- Ticks the scene for the duration of deltaTime
 			 */
 			virtual void tick(float deltaTime);
+
+			/**
+			 input
+			 @Pre-Condition- takes list of arguments
+			 @Post-Condition- sends input to not busy PlayerController
+			 */
+			void input(DynamicArray<string>* args, float deltaTime);
 	};
 }
 

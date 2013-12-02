@@ -12,8 +12,11 @@
  *
  */
 
+#include <string>
 #include "SceneManager.h"
 #include "../Controllers/PlayerController.h"
+
+using namespace std;
 
 namespace bammm
 {
@@ -42,15 +45,15 @@ namespace bammm
 			PlayerController* controller = new PlayerController();
 			controller->setup(*actor, *_meleeCombat, _sceneGraph);
 			this->addTickable(controller);
+			this->addPlayerController(controller);
 		}
 		else if (actor->getType() == "orc")
 		{
 			AiController* controller = new AiController();
 			controller->setup(*actor, *_meleeCombat, _sceneGraph);
 			this->addTickable(controller);
+			this->addAiController(controller);
 		}
-
-
 	}
 
 	void SceneManager::removeActor(Actor* actor)
@@ -62,6 +65,16 @@ namespace bammm
 	void SceneManager::addTickable(ITickable* tickable)
 	{
 		_allTickables.add(tickable);
+	}
+
+	void SceneManager::addPlayerController(PlayerController* controller)
+	{
+		_allPlayerControllers.add(controller);
+	}
+
+	void SceneManager::addAiController(AiController* controller)
+	{
+		_allAiControllers.add(controller);
 	}
 
 	ITickable* SceneManager::removeTickable(ITickable* tickable)
@@ -89,8 +102,152 @@ namespace bammm
 		}
 	}
 
+	void SceneManager::input(DynamicArray<string>* args, float deltaTime)
+	{
+		string newState = args->get(0);
+		//bool doTick = true;
+
+
+		DynamicArray<string> oreType = *(new DynamicArray<string>());
+		oreType.add("iron");
+		oreType.add("coal");
+		oreType.add("gold");
+
+
+		PlayerController* controller = this->findController(newState);
+		if (controller == NULL)
+		{
+			return;
+		}
+
+		if (newState == "mine")
+		{
+			cout << "Sending mine to actor" << endl;
+			controller->input(args, deltaTime);
+			/*mine [#] [ore-type]
+			int numOre;
+			string type;
+
+			if (args->getSize() == 3)
+			{
+				string number_str = args->get(1);
+
+				numOre = atoi(number_str.c_str());
+				if (numOre == 0)
+				{
+					cout << "Invalid argument\n";
+					doTick = false;
+				}
+				numOre = 0;
+				type = args->get(2);
+				if (!(oreType->contains(type)))
+				{
+					cout << type << " is not a valid ore type\n";
+					doTick = false;
+				}
+				//Add to controllerinput
+
+				//
+			}
+			else
+			{
+				cout << "Invalid input\n";
+				//doTick = false;
+			}*/
+
+		}
+		/*
+		else if (newState == "sing")
+		{
+			//sing [songname]
+			string songname;
+			if (commandString->getSize() >= 2)
+			{
+				for (unsigned int i = 1; i < commandString->getSize(); i++)
+				{
+					songname += commandString->get(i);
+				}
+			}
+			else
+			{
+				cout << "Invalid input\n";
+				doTick = false;
+			}
+		}
+		else if (newState == "brawl")
+		{
+			//how even
+
+		}
+		else if (newState == "attack")
+		{
+			//attack [actor name]
+
+		}
+		else if (newState == "drink")
+		{
+			//drink [beverage name]
+			string beverage;
+			try
+			{
+				beverage = commandString->get(1);
+			}
+			catch (exception& e)
+			{
+				cout << "Invalid beverage name.\n";
+			}
+		}
+		else
+		{
+			cout << "Invalid input\n";
+			doTick = false;
+		}
+
+
+		if (doTick)
+		{
+			State* stateToAdd = _states.getValue(newState);
+			_stateMachine.addState(stateToAdd, commandString);
+			_stateMachine.tick(deltaTime);
+		}
+		*/
+	}
+
 	string SceneManager::toString()
 	{
 		return "";
 	}
+
+	PlayerController* SceneManager::findController(string command)
+	{
+		PlayerController* current;
+
+		for (unsigned int i = 0; i < _allPlayerControllers.getSize(); i++)
+		{
+			current = _allPlayerControllers.get(i);
+			DynamicArray<State*> runningStates = current->runningStates();
+			HashMap<State*> allStates = current->allStates();
+
+			if (current->numberOfStates()==0)  //return *current
+			{
+				return current;
+			}
+			else if (runningStates.contains(allStates.getValue(command)))
+			{
+				return current;
+			}
+			else if ((runningStates.contains(allStates.getValue("drink"))) ||
+						(runningStates.contains(allStates.getValue("sing"))) ||
+						(runningStates.contains(allStates.getValue("sleep"))) ||
+						(runningStates.contains(allStates.getValue("idle")))
+					)
+			{
+				return current;
+			}
+
+		}
+
+		return NULL;
+	}
+
 }
