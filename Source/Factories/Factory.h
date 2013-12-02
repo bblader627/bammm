@@ -27,6 +27,10 @@
 #include "../Interfaces/IWeaponType.h"
 #include "../SceneManager/SceneManager.h"
 #include "../Resources/Constant.h"
+#include "../Weapons/MeleeWeaponType.h"
+#include "../Weapons/MeleeWeapon.h"
+#include "../Weapons/RangedWeapon.h"
+#include "../Weapons/WeaponData.h"
 
 using namespace std;
 
@@ -62,6 +66,20 @@ namespace bammm
 					int attack, int defense, string behavior, bool collision);
 
 			/*
+			 getMeleeWeapon
+			 @Pre-Condition- Takes in a MeleeWeaponType type
+			 @Post-Condition- Returns a MeleeWeapon
+			 */
+			MeleeWeapon getMeleeWeapon(MeleeWeaponType type);
+
+			/*
+			 getRangedWeapon
+			 @Pre-Condition- Takes in a Ranged type
+			 @Post-Condition- Returns a RangedWeapon
+			 */
+			RangedWeapon getRangedWeapon(string type);
+
+			/*
 			 setup
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up factory
@@ -76,7 +94,6 @@ namespace bammm
 			void setupArmor();
 
 			/*
-			 * Weapon getWeapon(string type);
 			 * Item getItem(string type);
 			 * BehaviorMap getBehavior(string type);
 			 */
