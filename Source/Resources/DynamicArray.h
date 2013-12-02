@@ -545,12 +545,4 @@ namespace bammm
 	}
 }
 
-namespace std
-{
-	string to_string(string str)
-	{
-		return str;
-	}
-}
-
 #endif

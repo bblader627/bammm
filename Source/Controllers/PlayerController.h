@@ -16,7 +16,6 @@
 #define PLAYERCONTROLLER_H_
 
 #include "Controller.h"
-#include "../Factories/Factory.h"
 #include "../Resources/Constant.h"
 
 using namespace std;
