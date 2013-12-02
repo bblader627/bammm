@@ -468,13 +468,13 @@ namespace bammm
 	template<class T>
 	Vector3D* Grid3D<T>::findInGrid(string target)
 	{
-		for (int gridIndex = 0; gridIndex < _grid->_size; gridIndex++)
+		for (unsigned int gridIndex = 0; gridIndex < _grid->getSize(); gridIndex++)
 		{
 			DynamicArray<T>* cell = _grid->get(gridIndex);
-			for (int cellIndex = 0; cellIndex < cell->_size; cellIndex++)
+			for (unsigned int cellIndex = 0; cellIndex < cell->getSize(); cellIndex++)
 			{
-				T* actor = cell->get(cellIndex);
-				if (actor->to_string() == target)
+				T actor = cell->get(cellIndex);
+				if (actor->toString() == target)
 				{
 					return convertToVector(gridIndex);
 				}

@@ -12,12 +12,14 @@ using namespace std;
 
 void printWelcome();
 void printOptions();
+void printStory();
 DynamicArray<string>* parseInput(string);
 
 int main()
 {
 
 	printWelcome();
+	printStory();
 	bool printMap = true;
 
 	SceneManager sceneManager;
@@ -50,6 +52,7 @@ int main()
 	while (playGame)
 	{
 		doTick = true;
+		bool doInput = true;
 		if (loopCounter == 0)
 		{
 			input->clear();
@@ -67,15 +70,18 @@ int main()
 
 			if (command == "wait")
 			{
+
 				//Wait [#]
 
 				if (input->getSize() == 2)
 				{
 					string number_str = input->get(1);
 					loopCounter = atoi(number_str.c_str());
+					doInput = false;
 				}
 				else
 				{
+
 					cout << "Invalid input\n";
 					doTick = false;
 				}
@@ -104,9 +110,12 @@ int main()
 
 			if (doTick)
 			{
-				//controller.input(input, dTime);
-				sceneManager.input(input, dTime);
+				if (doInput)
+				{
+					sceneManager.input(input, dTime);
+				}
 				sceneManager.tick(0);
+
 				if (loopCounter > 0)
 				{
 					loopCounter--;
@@ -137,6 +146,14 @@ void printWelcome()
 			<< "Creators: \tAlvaro Home - Matthew Konstantinou - Matthew Witkowski\n\t\tBradley Crusco - Michael Abramo"
 			<< "\n";
 	cout << "================================================" << "\n";
+}
+
+void printStory()
+{
+	cout<< "The year is 13 of the Third Age. \n\n";
+	cout << "The realm of Sojo has erupted into turmoil. Orcs of the LA offices are beginning their march upon the Dwarves of New York. \n";
+	cout << "The Orcs want to implement a new networking system in our fortress, but FUCK THAT! I've seen their code. \n";
+	cout << "Here, in our fortress of New York, we make our final stand against their bullshit... \n\n";
 }
 
 bool createActor()

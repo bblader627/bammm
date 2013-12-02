@@ -41,6 +41,7 @@ namespace bammm
 		SleepState* sleepState = new SleepState(actor, &_stateMachine);
 		IdleState* idleState = new IdleState(actor, &_stateMachine);
 		CombatState* combatState = new CombatState(actor, &_stateMachine);
+		SearchState* searchState = new SearchState(actor, &_stateMachine, *_sceneGraph);
 
 		_states.add(idleState->toString(), idleState);
 		_states.add(mineState->toString(), mineState);
@@ -49,6 +50,7 @@ namespace bammm
 		_states.add(brawlState->toString(), brawlState);
 		_states.add(sleepState->toString(), sleepState);
 		_states.add(combatState->toString(), combatState);
+		_states.add(searchState->toString(), searchState);
 
 		//Put actor in idle state
 		_stateMachine.initialState(_states.getValue(idleState->toString()));
@@ -98,8 +100,24 @@ namespace bammm
 				//doTick = false;
 			}
 
+			Vector3D* oreLocation = _sceneGraph->findInGrid(type);
+			cout << "found in grid" << endl;
 			State* stateToAdd = _states.getValue(newState);
-			_stateMachine.addState(stateToAdd);
+
+			if (_actor->getLocation() == oreLocation)
+			{
+				_stateMachine.addState(stateToAdd);
+			}
+			else
+			{
+				cout << _states.contains("search") << endl;
+				SearchState* search = static_cast<SearchState*>(_states.getValue("search"));
+				search->setTarget(type);
+				search->setDestState(stateToAdd);
+				_stateMachine.addState(search);
+			}
+
+
 			//_stateMachine.tick(deltaTime);
 		}
 		/*

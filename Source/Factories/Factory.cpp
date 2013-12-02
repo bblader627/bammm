@@ -53,7 +53,6 @@ namespace bammm
 
 		JSON* water = rootChildren->getValue("water");
 		this->parseToActorInfo(water, "water", &blockData);
-
 	}
 
 	Actor Factory::getActor(string type, string name, int health, int stamina,
@@ -63,7 +62,49 @@ namespace bammm
 				defense, behavior, AllianceType::enemy);
 		newActor->setLocation(new Vector3D(0.0f, 0.0f, 0.0f));
 		return *newActor;
+	}
 
+	MeleeWeapon getMeleeWeapon(MeleeWeaponType type)
+	{
+		int damage;
+
+		if (type == "stein")
+		{
+			damage = 2;
+		}
+		else if (type == "greatSword")
+		{
+			damage = 10;
+		}
+		else if (type == "battleAxe")
+		{
+			damage = 10;
+		}
+		else if (type == "chainSaw")
+		{
+			damage = 10;
+		}
+		else if (type == "katana")
+		{
+			damage = 10;
+		}
+		else if (type == "swordOf1000Truths")
+		{
+			damage = 110;
+		}
+		else if (type == "practiceSword")
+		{
+			damage = 1;
+		}
+		else
+		{
+			damage = 10;
+		}
+
+		WeaponData* weaponData = new WeaponData(0, 0, damage, 0, 0, "", type);
+		MeleeWeapon* newWeapon = new MeleeWeapon(weaponData);
+
+		return *newWeapon;
 	}
 
 	void Factory::parseToActorInfo(JSON* rootNode, string type,
@@ -110,8 +151,8 @@ namespace bammm
 			}
 
 			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack,
-					defense, behavior, collision, alliance, symbol, color,
-					gold, coal, iron, wood);
+					defense, behavior, collision, alliance, symbol, color, gold,
+					coal, iron, wood);
 			info->setLocation(new Vector3D(x, y, z));
 
 			string i_str = "" + i;
