@@ -26,7 +26,7 @@ namespace bammm
 	{
 		public:
 			CombatState(Actor& actor);
-			CombatState(Actor& actor, IStateCallback& stateMachine);
+			CombatState(Actor& actor, IStateCallback* stateMachine);
 
 			/**
 			 setup

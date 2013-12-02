@@ -41,7 +41,6 @@ namespace bammm
 	bool MeleeWeapon::canAttack()
 	{
 		_time = _time.current();
-		cout << _time.getSeconds() << " < " << _timer << "\n";
 		if (_time.getSeconds() < _timer)
 		{
 			return false;

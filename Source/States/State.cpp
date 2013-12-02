@@ -45,9 +45,9 @@ namespace bammm
 		cout << "In parent state\n";
 	}
 
-	void State::registerTransitionCallback(IStateCallback& stateMachine)
+	void State::registerTransitionCallback(IStateCallback* stateMachine)
 	{
-		_stateMachine = &stateMachine;
+		_stateMachine = stateMachine;
 	}
 
 	void State::switchState(string nextState)

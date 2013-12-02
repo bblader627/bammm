@@ -21,7 +21,7 @@ namespace bammm
 		_actor = &actor;
 	}
 
-	DamageState::DamageState(Actor& actor, IStateCallback& stateMachine)
+	DamageState::DamageState(Actor& actor, IStateCallback* stateMachine)
 	{
 		_actor = &actor;
 		registerTransitionCallback(stateMachine);

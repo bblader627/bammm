@@ -14,7 +14,6 @@
 
 #include "PlayerController.h"
 
-
 namespace bammm
 {
 	PlayerController::PlayerController()
@@ -35,14 +34,14 @@ namespace bammm
 		_stateMachine.setup(actor, _states, _meleeCombat);
 
 		//Create the states
-		DrinkState* drinkState = new DrinkState(actor, _stateMachine);
-		MineState* mineState = new MineState(actor, _stateMachine);
-		SingState* singState = new SingState(actor, _stateMachine);
-		BrawlState* brawlState = new BrawlState(actor, _stateMachine);
-		SleepState* sleepState = new SleepState(actor, _stateMachine);
-		IdleState* idleState = new IdleState(actor, _stateMachine);
-		CombatState* combatState = new CombatState(actor, _stateMachine);
-		SearchState* searchState = new SearchState(actor, _stateMachine, *_sceneGraph);
+		DrinkState* drinkState = new DrinkState(actor, &_stateMachine);
+		MineState* mineState = new MineState(actor, &_stateMachine);
+		SingState* singState = new SingState(actor, &_stateMachine);
+		BrawlState* brawlState = new BrawlState(actor, &_stateMachine);
+		SleepState* sleepState = new SleepState(actor, &_stateMachine);
+		IdleState* idleState = new IdleState(actor, &_stateMachine);
+		CombatState* combatState = new CombatState(actor, &_stateMachine);
+		SearchState* searchState = new SearchState(actor, &_stateMachine, *_sceneGraph);
 
 		_states.add(idleState->toString(), idleState);
 		_states.add(mineState->toString(), mineState);
@@ -111,11 +110,13 @@ namespace bammm
 			}
 			else
 			{
+				/*
 				cout << _states.contains("search") << endl;
 				SearchState* search = static_cast<SearchState*>(_states.getValue("search"));
 				search->setTarget(type);
 				search->setDestState(stateToAdd);
 				_stateMachine.addState(search);
+				*/
 			}
 
 

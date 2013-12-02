@@ -24,10 +24,11 @@ namespace bammm
 	class RangedWeapon
 	{
 		private:
-			WeaponData* _weaponData;
+			WeaponData _weaponData;
 
 		public:
 			RangedWeapon();
+			RangedWeapon(WeaponData weaponData);
 			virtual ~RangedWeapon();
 
 			/**
@@ -35,21 +36,21 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Attack is executed
 			 */
-			virtual int attack();
+			int attack();
 
 			/**
 			 canAttack
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns true if weapon can attack
 			 */
-			virtual bool canAttack();
+			bool canAttack();
 
 			/**
 			 getRange
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns the distance between the weapon user and their target
 			 */
-			virtual int getRange();
+			int getRange();
 	};
 }
 

@@ -34,7 +34,7 @@ namespace bammm
 
 		public:
 			SearchState(Actor& actor);
-			SearchState(Actor& actor, IStateCallback& stateMachine,
+			SearchState(Actor& actor, IStateCallback* stateMachine,
 					Grid3D<Actor*>& sceneGraph);
 
 			/**

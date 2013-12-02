@@ -53,7 +53,6 @@ namespace bammm
 
 		JSON* water = rootChildren->getValue("water");
 		this->parseToActorInfo(water, "water", &blockData);
-
 	}
 
 	Actor Factory::getActor(string type, string name, int health, int stamina,
@@ -63,7 +62,121 @@ namespace bammm
 				defense, behavior, AllianceType::enemy);
 		newActor->setLocation(new Vector3D(0.0f, 0.0f, 0.0f));
 		return *newActor;
+	}
 
+	MeleeWeapon getMeleeWeapon(string type)
+	{
+		int damage;
+
+		if (type == "stein")
+		{
+			damage = 2;
+		}
+		else if (type == "greatSword")
+		{
+			damage = 10;
+		}
+		else if (type == "battleAxe")
+		{
+			damage = 10;
+		}
+		else if (type == "chainSaw")
+		{
+			damage = 10;
+		}
+		else if (type == "katana")
+		{
+			damage = 10;
+		}
+		else if (type == "swordOf1000Truths")
+		{
+			damage = 110;
+		}
+		else if (type == "practiceSword")
+		{
+			damage = 1;
+		}
+		else
+		{
+			damage = 10;
+		}
+
+		WeaponData weaponData(0, 0, damage, 0, 0, "", type);
+		MeleeWeapon* newWeapon = new MeleeWeapon(weaponData);
+
+		return *newWeapon;
+	}
+
+	RangedWeapon getRangedWeapon(string type)
+	{
+		int range;
+		int clipCapacity;
+		int damage;
+		float reloadSpeed;
+		uint fireRate;
+
+		if (type == "boomStick")
+		{
+			range = 2;
+			clipCapacity = 10;
+			damage = 15;
+			reloadSpeed = 4;
+			fireRate = 2.5;
+		}
+		else if (type == "bowAndArrow")
+		{
+			range = 3;
+			clipCapacity = 50;
+			damage = 10;
+			reloadSpeed = 1;
+			fireRate = 1;
+		}
+		else if (type == "chain")
+		{
+			range = 2;
+			clipCapacity = 1;
+			damage = 10;
+			reloadSpeed = 1;
+			fireRate = 2.5;
+		}
+		else if (type == "BFG")
+		{
+			range = 4;
+			clipCapacity = 10;
+			damage = 110;
+			reloadSpeed = 4;
+			fireRate = 5;
+		}
+		else if (type == "shuriken")
+		{
+			range = 3;
+			clipCapacity = 10;
+			damage = 15;
+			reloadSpeed = 4;
+			fireRate = 3;
+		}
+		else if (type == "bolas")
+		{
+			range = 3;
+			clipCapacity = 5;
+			damage = 8;
+			reloadSpeed = 5;
+			fireRate = 3;
+		}
+		else
+		{
+			range = 3;
+			clipCapacity = 5;
+			damage = 10;
+			reloadSpeed = 5;
+			fireRate = 3;
+		}
+
+		WeaponData weaponData(range, clipCapacity, damage,
+				reloadSpeed, fireRate, "", type);
+		RangedWeapon* newWeapon = new RangedWeapon(weaponData);
+
+		return *newWeapon;
 	}
 
 	void Factory::parseToActorInfo(JSON* rootNode, string type,
@@ -110,13 +223,16 @@ namespace bammm
 			}
 
 			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack,
-					defense, behavior, collision, alliance, symbol, color,
-					gold, coal, iron, wood);
-			info->setLocation(new Vector3D(x, y, z));
+					defense, behavior, collision, alliance, symbol, color, gold,
+					coal, iron, wood);
+			info->setLocation(new Vector3D(y, x, z));
 
 			string i_str = "" + i;
 			map->add(type + i_str, *info);
 			Actor* myActor = new Actor(info);
+			WeaponData weaponData(10,2,"","");
+			MeleeWeapon* meleeWeapon = new MeleeWeapon(weaponData);
+			myActor->setMeleeWeapon(meleeWeapon);
 			scene->addActor(myActor);
 		}
 	}

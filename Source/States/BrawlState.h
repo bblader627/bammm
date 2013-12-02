@@ -23,7 +23,7 @@ namespace bammm
 	{
 		public:
 			BrawlState(Actor& actor);
-			BrawlState(Actor& actor, IStateCallback& stateMachine);
+			BrawlState(Actor& actor, IStateCallback* stateMachine);
 
 			/**
 			 setup

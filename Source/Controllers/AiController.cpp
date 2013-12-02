@@ -29,15 +29,15 @@ namespace bammm
 		_stateMachine.setup(actor, _states, _meleeCombat);
 
 		//Create the states
-		DrinkState* drinkState = new DrinkState(actor, _stateMachine);
-		MineState* mineState = new MineState(actor, _stateMachine);
-		SingState* singState = new SingState(actor, _stateMachine);
-		BrawlState* brawlState = new BrawlState(actor, _stateMachine);
-		SleepState* sleepState = new SleepState(actor, _stateMachine);
-		IdleState* idleState = new IdleState(actor, _stateMachine);
-		CombatState* combatState = new CombatState(actor, _stateMachine);
-		DamageState* damageState = new DamageState(actor, _stateMachine);
-		MoveState* moveState = new MoveState(actor, _stateMachine, sceneGraph);
+		DrinkState* drinkState = new DrinkState(actor, &_stateMachine);
+		MineState* mineState = new MineState(actor, &_stateMachine);
+		SingState* singState = new SingState(actor, &_stateMachine);
+		BrawlState* brawlState = new BrawlState(actor, &_stateMachine);
+		SleepState* sleepState = new SleepState(actor, &_stateMachine);
+		IdleState* idleState = new IdleState(actor, &_stateMachine);
+		CombatState* combatState = new CombatState(actor, &_stateMachine);
+		DamageState* damageState = new DamageState(actor, &_stateMachine);
+		MoveState* moveState = new MoveState(actor, &_stateMachine, sceneGraph);
 
 		_states.add(idleState->toString(), idleState);
 		_states.add(mineState->toString(), mineState);
@@ -102,7 +102,7 @@ namespace bammm
 			random_device rd;
 			mt19937 generator(rd());
 
-			uniform_int_distribution<int> randomDistribution(0, 4);
+			uniform_int_distribution<int> randomDistribution(0, 3);
 
 			//Pick a random direction
 			int random = randomDistribution(generator);

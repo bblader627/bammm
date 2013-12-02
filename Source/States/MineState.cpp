@@ -21,7 +21,7 @@ namespace bammm
 		_actor = &actor;
 	}
 
-	MineState::MineState(Actor& actor, IStateCallback& stateMachine)
+	MineState::MineState(Actor& actor, IStateCallback* stateMachine)
 	{
 		_actor = &actor;
 		registerTransitionCallback(stateMachine);

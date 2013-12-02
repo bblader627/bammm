@@ -37,7 +37,7 @@ namespace bammm
 		public:
 			virtual ~MineState();
 			MineState(Actor& actor);
-			MineState(Actor& actor, IStateCallback& stateMachine);
+			MineState(Actor& actor, IStateCallback* stateMachine);
 
 			/**
 			 setup

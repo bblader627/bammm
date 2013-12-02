@@ -30,7 +30,7 @@ namespace bammm
 
 		public:
 			SleepState(Actor& actor);
-			SleepState(Actor& actor, IStateCallback& stateMachine);
+			SleepState(Actor& actor, IStateCallback* stateMachine);
 
 			/**
 			 setup

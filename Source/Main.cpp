@@ -12,12 +12,14 @@ using namespace std;
 
 void printWelcome();
 void printOptions();
+void printStory();
 DynamicArray<string>* parseInput(string);
 
 int main()
 {
 
 	printWelcome();
+	printStory();
 	bool printMap = true;
 
 	SceneManager sceneManager;
@@ -36,7 +38,6 @@ int main()
 	unsigned int loopCounter = 0;
 
 	DynamicArray<string>* input = new DynamicArray<string>();
-
 
 	DynamicArray<string> validCommands = *(new DynamicArray<string>());
 	//string sleep = "sleep";
@@ -139,17 +140,22 @@ int main()
 void printWelcome()
 {
 	cout << "================================================" << "\n";
-	cout << "Welcome to BAMMM -  Alpha v0.2" << "\n";
+	cout << "Welcome to BAMMM - Alpha v0.2.1.1.2.3.400 " << "\n";
 	cout
 			<< "Creators: \tAlvaro Home - Matthew Konstantinou - Matthew Witkowski\n\t\tBradley Crusco - Michael Abramo"
 			<< "\n";
 	cout << "================================================" << "\n";
 }
 
-bool createActor()
+void printStory()
 {
-
-	return false;
+	cout << "The year is 13 of the Third Age. \n\n";
+	cout
+			<< "The realm of Sojo has erupted into turmoil. Orcs of the LA offices are beginning their march upon the Dwarves of New York. \n";
+	cout
+			<< "The Orcs want to implement a new networking system in our fortress, but FUCK THAT! I've seen their code. \n";
+	cout
+			<< "Here, in our fortress of New York, we make our final stand against their bullshit... \n\n";
 }
 
 DynamicArray<string>* parseInput(string input)

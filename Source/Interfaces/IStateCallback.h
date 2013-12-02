@@ -44,6 +44,8 @@ namespace bammm
 			 @Post-Condition- The current state is switched to the state specified by the string newStateString
 			 */
 			virtual void switchState(State* current, string newStateString);
+
+			virtual string toString();
 	};
 }
 
