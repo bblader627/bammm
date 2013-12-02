@@ -305,6 +305,9 @@ namespace bammm
 		Vector3D* actorLocation = actor->getLocation();
 		Stack<Vector3D*>* path = new Stack<Vector3D*>();
 
+		cout << "Actor: " << actorLocation->getX() << ", " << actorLocation->getY() << ", " << actorLocation->getZ() << endl;
+		cout << destination << ": " << target->getX() << ", " << target->getY() << ", " << target->getZ() << endl;
+
 		DynamicArray<DynamicArray<bool>*>* visited = new DynamicArray<DynamicArray<bool>*>();
 
 		cout << "populating visisted array" << endl;
@@ -319,6 +322,14 @@ namespace bammm
 
 		if (getPath(actorLocation, target, path, visited))
 		{
+			for (unsigned int i = 0; i < visited->getSize(); i++)
+			{
+				for (unsigned int j = 0; j < visited->get(i)->getSize(); j++)
+				{
+					cout << visited->get(i)->get(j) << " ";
+				}
+				cout << endl;
+			}
 			return path;
 		}
 		/*
@@ -337,12 +348,15 @@ namespace bammm
 			Stack<Vector3D*>* path, DynamicArray<DynamicArray<bool>*>* visited)
 	{
 		//Base Case
-		if (actorPos == currentPos)
+		int actorPosInt = convertToPosition(actorPos);
+		int currentPosInt = convertToPosition(currentPos);
+
+		if (actorPosInt == currentPosInt)
 		{
+			cout << "SUCCESS" << endl;
 			return true;
 		}
 
-		int currentPosInt = convertToPosition(currentPos);
 
 		//Collision testing
 		if (_grid->get(currentPosInt)->getSize() > 0)
@@ -372,7 +386,7 @@ namespace bammm
 
 			newLoc = *currentPos + *UP;
 			if (newLoc.getY() == currentPos->getY() &&			//If no overflow
-					visited->get(newLoc.getX())->get(newLoc.getY()) == false)	//And if hasn't been visited
+					visited->get(newLoc.getX())->get(newLoc.getY()) == 0)	//And if hasn't been visited
 			{
 				cout << "Move up" << endl;
 
@@ -389,7 +403,7 @@ namespace bammm
 		if (currentPosInt > _width)
 		{
 			newLoc = *currentPos + *LEFT;
-			if (visited->get(newLoc.getX())->get(newLoc.getY()) == false)	//And if hasn't been visited
+			if (visited->get(newLoc.getX())->get(newLoc.getY()) == 0)	//And if hasn't been visited
 			{
 				cout << "Move Left" << endl;
 

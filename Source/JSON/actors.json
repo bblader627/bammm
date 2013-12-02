@@ -44,9 +44,9 @@
 	],
 	
 	"ore": [
-		{ "name":"Coal", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":8, "y":0, "z":0, "alliance":0, "color":"black", "symbol":"^", "collision":false },
-		{ "name":"Gold", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":9, "y":0, "z":0, "alliance":0, "color":"yellow", "symbol":"^", "collision":false },
-		{ "name":"Iron", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":9, "y":1, "z":0, "alliance":0, "color":"white", "symbol":"^", "collision":false }
+		{ "name":"coal", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":8, "y":0, "z":0, "alliance":0, "color":"black", "symbol":"^", "collision":false },
+		{ "name":"gold", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":9, "y":0, "z":0, "alliance":0, "color":"yellow", "symbol":"^", "collision":false },
+		{ "name":"iron", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":9, "y":1, "z":0, "alliance":0, "color":"white", "symbol":"^", "collision":false }
 	],
 	"water": [
 		{ "name":"Water1", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":9, "y":6, "z":0, "alliance":0, "color":"blue", "symbol":"~", "collision":false },
