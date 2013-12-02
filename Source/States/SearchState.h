@@ -30,6 +30,7 @@ namespace bammm
 			string _target;
 			Grid3D<Actor*>* _sceneGraph;
 			Stack<Vector3D*>* _path;
+			State* _goalState;
 
 		public:
 			SearchState(Actor& actor);
@@ -45,11 +46,18 @@ namespace bammm
 			virtual void setup();
 
 			/**
-			 setup
+			 setTarget
 			 @Pre-Condition- Takes a target to search for
 			 @Post-Condition- Sets up the state with a string target
 			 */
 			virtual void setTarget(string target);
+
+			/**
+			 setDestState
+			 @Pre-Condition- Takes state to switch to
+			 @Pre-Condition
+			 */
+			virtual void setDestState(State* goal);
 
 			/**
 			 breakdown
@@ -71,6 +79,7 @@ namespace bammm
 			 @Post-Condition- The current state is switched to the given nextState
 			 */
 			virtual void switchState(string nextState);
+			virtual void switchState(State* nextState);
 
 			/**
 			 toString
