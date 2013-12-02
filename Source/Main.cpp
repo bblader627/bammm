@@ -50,6 +50,7 @@ int main()
 	while (playGame)
 	{
 		doTick = true;
+		bool doInput = true;
 		if (loopCounter == 0)
 		{
 			input->clear();
@@ -67,15 +68,18 @@ int main()
 
 			if (command == "wait")
 			{
+
 				//Wait [#]
 
 				if (input->getSize() == 2)
 				{
 					string number_str = input->get(1);
 					loopCounter = atoi(number_str.c_str());
+					doInput = false;
 				}
 				else
 				{
+
 					cout << "Invalid input\n";
 					doTick = false;
 				}
@@ -104,9 +108,12 @@ int main()
 
 			if (doTick)
 			{
-				//controller.input(input, dTime);
-				sceneManager.input(input, dTime);
+				if (doInput)
+				{
+					sceneManager.input(input, dTime);
+				}
 				sceneManager.tick(0);
+
 				if (loopCounter > 0)
 				{
 					loopCounter--;
