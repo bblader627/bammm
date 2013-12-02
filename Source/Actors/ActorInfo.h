@@ -34,7 +34,7 @@ namespace bammm
 			int _stamina;
 			int _attack;
 			int _defense;
-			Behavior _behavior;
+			Behavior _behaviors;
 			Vector3D* _location;
 			AllianceType _alliance;
 			string _symbol;
@@ -47,7 +47,7 @@ namespace bammm
 		public:
 			ActorInfo();
 			ActorInfo(string type, string name, int health, int stamina,
-					int attack, int defense, Behavior behavior, bool collision,
+					int attack, int defense, Behavior behaviors, bool collision,
 					AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood);
 
 			/**
@@ -93,11 +93,11 @@ namespace bammm
 			int getDefense();
 
 			/**
-			 getBehavior
+			 getBaseBehaviors
 			 @Pre-Condition- takes no arguments
 			 @Post-Condition- returns behavior
 			 */
-			Behavior getBehavior();
+			DynamicArray<string>* getBaseBehaviors();
 
 			/**
 			 getLocation
