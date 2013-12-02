@@ -271,12 +271,6 @@ namespace bammm
 		return values;
 	}
 
-	/**
-	 * HashMap<T>::getValue(string key)
-	 * @brief Returns the value that corresponds to the given key, or a NULL cast as T otherwise.
-	 * @param key The key to look up in the HashMap.
-	 * @return T
-	 */
 	template<class T>
 	T& HashMap<T>::getValue(string key)
 	{
