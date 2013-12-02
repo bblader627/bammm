@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Factories/Factory.h"
 #include "SceneManager/SceneManager.h"
 #include "Controllers/PlayerController.h"
 #include <unistd.h>
@@ -35,13 +36,14 @@ int main()
 
 	DynamicArray<string>* input = new DynamicArray<string>();
 
+
+	DynamicArray<string> validCommands = *(new DynamicArray<string>());
 	//string sleep = "sleep";
-	string mine = "mine";
-	string drink = "drink";
-	string sing = "sing";
-	string brawl = "brawl";
-	string attack = "combat";
-	string wait = "wait";
+	validCommands.add("mine");
+	validCommands.add("drink");
+	validCommands.add("sing");
+	validCommands.add("brawl");
+	validCommands.add("attack");
 
 	float dTime = 0;
 	while (playGame)
@@ -62,7 +64,7 @@ int main()
 			input = parseInput(command);
 			command = input->get(0);
 
-			if (command == wait)
+			if (command == "wait")
 			{
 				//Wait [#]
 
@@ -84,10 +86,14 @@ int main()
 				}
 
 			}
-
 			else if (command == "exit")
 			{
 				playGame = false;
+			}
+			else if (!(validCommands.contains(command)))
+			{
+				cout << "Invalid argument" << endl;
+				doTick = false;
 			}
 
 
@@ -98,7 +104,8 @@ int main()
 
 			if (doTick)
 			{
-				controller.input(input, dTime);
+				//controller.input(input, dTime);
+				sceneManager.input(input, dTime);
 				sceneManager.tick(0);
 				if (loopCounter > 0)
 				{
