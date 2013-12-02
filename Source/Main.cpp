@@ -18,6 +18,7 @@ int main()
 {
 
 	printWelcome();
+	printStory();
 	bool printMap = true;
 
 	SceneManager sceneManager;
@@ -144,6 +145,14 @@ void printWelcome()
 			<< "Creators: \tAlvaro Home - Matthew Konstantinou - Matthew Witkowski\n\t\tBradley Crusco - Michael Abramo"
 			<< "\n";
 	cout << "================================================" << "\n";
+}
+
+void printStory()
+{
+	cout<< "The year is 13 of the Third Age. \n\n";
+	cout << "The realm of Sojo has erupted into turmoil. Orcs of the LA offices are beginning their march upon the Dwarves of New York. \n";
+	cout << "The Orcs want to implement a new networking system in our fortress, but FUCK THAT! I've seen their code. \n";
+	cout << "Here, in our fortress of New York, we make our final stand against their bullshit... \n\n";
 }
 
 bool createActor()
