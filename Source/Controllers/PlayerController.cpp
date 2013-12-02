@@ -42,6 +42,7 @@ namespace bammm
 		IdleState* idleState = new IdleState(actor, &_stateMachine);
 		CombatState* combatState = new CombatState(actor, &_stateMachine);
 		SearchState* searchState = new SearchState(actor, &_stateMachine, *_sceneGraph);
+		DamageState* damageState = new DamageState(actor, &_stateMachine);
 
 		_states.add(idleState->toString(), idleState);
 		_states.add(mineState->toString(), mineState);
@@ -51,6 +52,7 @@ namespace bammm
 		_states.add(sleepState->toString(), sleepState);
 		_states.add(combatState->toString(), combatState);
 		_states.add(searchState->toString(), searchState);
+		_states.add(damageState->toString(), damageState);
 
 		//Put actor in idle state
 		_stateMachine.initialState(_states.getValue(idleState->toString()));
@@ -67,7 +69,20 @@ namespace bammm
 		oreType->add("coal");
 		oreType->add("gold");
 
-		
+		/*Actor* enemy = _sceneGraph->getEnemy(_actor->getLocation(), _actor);
+		DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
+		if(enemy)
+		{
+			cout << "Made it enemy\n";
+			State* tempState = _states.getValue("damage");
+			if (!currentStates.contains(tempState))
+			{
+				_stateMachine.addState(tempState);
+			}
+
+			DamageState* castedState = static_cast<DamageState*>(tempState);
+			castedState->setTarget(*enemy);
+		}*/
 		if (newState == "mine")
 		{
 			//mine [#] [ore-type]
@@ -205,6 +220,19 @@ namespace bammm
 
 	void PlayerController::tick(float deltaTime)
 	{
+		Actor* enemy = _sceneGraph->getEnemy(_actor->getLocation(), _actor);
+		DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
+		if(enemy)
+		{
+			State* tempState = _states.getValue("damage");
+			if (!currentStates.contains(tempState))
+			{
+				_stateMachine.addState(tempState);
+			}
+
+			DamageState* castedState = static_cast<DamageState*>(tempState);
+			castedState->setTarget(*enemy);
+		}
 		_stateMachine.tick(deltaTime);
 	}
 

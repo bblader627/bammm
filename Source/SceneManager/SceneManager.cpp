@@ -93,20 +93,23 @@ namespace bammm
 	void SceneManager::tick(float deltaTime)
 	{
 		int size = _allTickables.getSize();
-		cout << "Size: " << size << "\n";
 		for (int i = 0; i < size; i++)
 		{
 			ITickable* tickable = _allTickables.get(i);
-			tickable->tick(deltaTime);
-			if (_allTickables.get(i)->canDelete())
+			if (tickable->canDelete())
 			{
 				PlayerController* playerController = static_cast<PlayerController*>(tickable);
 				AiController* aiController = static_cast<AiController*>(tickable);
 				size--;
 				_allPlayerControllers.removeElement(playerController);
 				_allAiControllers.removeElement(aiController);
-				delete removeActor(_allActors.get(i));
-				delete removeTickable(_allTickables.get(i));
+				removeActor(_allActors.get(i));
+				removeTickable(tickable);
+				i--;
+			}
+			else
+			{
+				tickable->tick(deltaTime);
 			}
 		}
 	}

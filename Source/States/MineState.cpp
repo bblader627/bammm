@@ -29,7 +29,6 @@ namespace bammm
 
 	MineState::~MineState()
 	{
-		cout << "Calling deconstructor\n";
 	}
 
 	/*void MineState::setup(DynamicArray<string>* args)
