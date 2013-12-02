@@ -35,6 +35,11 @@ namespace bammm
 		//_path = _sceneGraph->getPath(_actor, _target);
 	}
 
+	void SearchState::setDestState(State* goal)
+	{
+		_goalState = goal;
+	}
+
 	void SearchState::setup()
 	{
 	}
@@ -45,9 +50,11 @@ namespace bammm
 
 	void SearchState::tick(float deltaTime)
 	{
+		cout << "Ticking search state!" << endl;
 		if (_path->isEmpty())
 		{
 			switchState("null");
+
 		}
 		else
 		{
@@ -56,6 +63,11 @@ namespace bammm
 	}
 
 	void SearchState::switchState(string nextState)
+	{
+		_stateMachine->switchState(this, nextState);
+	}
+
+	void SearchState::switchState(State* nextState)
 	{
 		_stateMachine->switchState(this, nextState);
 	}

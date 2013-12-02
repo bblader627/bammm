@@ -46,7 +46,6 @@ namespace bammm
 
 	void StateMachine::tick(float deltaTime)
 	{
-		cout << "In StateMachine's tick;" << endl;
 		for (int i = 0; i < (int) currentStates.getSize(); i++)
 		{
 			currentStates.get(i)->tick(deltaTime);

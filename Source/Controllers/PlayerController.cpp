@@ -14,6 +14,7 @@
 
 #include "PlayerController.h"
 
+
 namespace bammm
 {
 	PlayerController::PlayerController()
@@ -41,6 +42,7 @@ namespace bammm
 		SleepState* sleepState = new SleepState(actor, _stateMachine);
 		IdleState* idleState = new IdleState(actor, _stateMachine);
 		CombatState* combatState = new CombatState(actor, _stateMachine);
+		SearchState* searchState = new SearchState(actor, _stateMachine, *_sceneGraph);
 
 		_states.add(idleState->toString(), idleState);
 		_states.add(mineState->toString(), mineState);
@@ -49,6 +51,7 @@ namespace bammm
 		_states.add(brawlState->toString(), brawlState);
 		_states.add(sleepState->toString(), sleepState);
 		_states.add(combatState->toString(), combatState);
+		_states.add(searchState->toString(), searchState);
 
 		//Put actor in idle state
 		_stateMachine.initialState(_states.getValue(idleState->toString()));
@@ -98,11 +101,25 @@ namespace bammm
 				//doTick = false;
 			}
 
-			cout << "newState: " << newState << "\n";
+			Vector3D* oreLocation = _sceneGraph->findInGrid(type);
+			cout << "found in grid" << endl;
 			State* stateToAdd = _states.getValue(newState);
-			cout << "Poop" << endl;
-			_stateMachine.addState(stateToAdd);
-			_stateMachine.tick(deltaTime);
+
+			if (_actor->getLocation() == oreLocation)
+			{
+				_stateMachine.addState(stateToAdd);
+			}
+			else
+			{
+				cout << _states.contains("search") << endl;
+				SearchState* search = static_cast<SearchState*>(_states.getValue("search"));
+				search->setTarget(type);
+				search->setDestState(stateToAdd);
+				_stateMachine.addState(search);
+			}
+
+
+			//_stateMachine.tick(deltaTime);
 		}
 		/*
 		else if (newState == "sing")
@@ -172,74 +189,6 @@ namespace bammm
 	{
 		//DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
 		cout << "What would you like your villagers to do?\n  To run the simulation, enter \"wait [number of iterations]\"." << endl;
-		/*
-		//MAKE THIS SMARTER
-		cout << "Select an activity for your dwarf:" << "\n";
-
-		//Mining gold options
-		if (currentStates.contains(_states.getValue("mine")))
-		{
-			cout << "1. Stop mining gold" << "\n";
-		}
-		else
-		{
-			cout << "1. Mine Gold" << "\n";
-		}
-
-		//Drinking options
-		if (currentStates.contains(_states.getValue("drink")))
-		{
-			cout << "2. Stop drinking ale" << "\n";
-		}
-		else
-		{
-			cout << "2. Drink ale" << "\n";
-		}
-
-		//Singing options
-		if (currentStates.contains(_states.getValue("sing")))
-		{
-			cout << "3. Stop singing" << "\n";
-		}
-		else
-		{
-			cout << "3. Sing a song" << "\n";
-		}
-
-		//Fighting options
-		if (currentStates.contains(_states.getValue("brawl")))
-		{
-			cout << "4. Stop fighting" << "\n";
-		}
-		else
-		{
-			cout << "4. Fight a dwarf" << "\n";
-		}
-
-		//Sleeping options
-		if (currentStates.contains(_states.getValue("sleep")))
-		{
-			cout << "5. Wake up" << "\n";
-		}
-		else
-		{
-			cout << "5. Go to sleep" << "\n";
-		}
-
-		//Combat options
-		if (currentStates.contains(_states.getValue("combat")))
-		{
-			cout << "6. Attack" << "\n";
-		}
-		else
-		{
-			cout << "6. Fight Orc" << "\n";
-		}
-
-		cout << "7. Continue" << "\n";
-
-		cout << "0. Quit" << "\n";
-		*/
 
 	}
 
