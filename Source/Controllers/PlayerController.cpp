@@ -43,6 +43,7 @@ namespace bammm
 		CombatState* combatState = new CombatState(actor, &_stateMachine);
 		SearchState* searchState = new SearchState(actor, &_stateMachine, *_sceneGraph);
 		DamageState* damageState = new DamageState(actor, &_stateMachine);
+		MoveState* moveState = new MoveState(actor, &_stateMachine, sceneGraph);
 
 		_states.add(idleState->toString(), idleState);
 		_states.add(mineState->toString(), mineState);
@@ -53,6 +54,7 @@ namespace bammm
 		_states.add(combatState->toString(), combatState);
 		_states.add(searchState->toString(), searchState);
 		_states.add(damageState->toString(), damageState);
+		_states.add(moveState->toString(), moveState);
 
 		//Put actor in idle state
 		_stateMachine.initialState(_states.getValue(idleState->toString()));
@@ -231,6 +233,45 @@ namespace bammm
 
 			DamageState* castedState = static_cast<DamageState*>(tempState);
 			castedState->setTarget(*enemy);
+		}
+		else
+		{
+		    State* newState = _states.getValue("movement");
+
+		    //all currently running states
+		    if (!currentStates.contains(newState))
+		    {
+		        _stateMachine.addState(newState);
+		    }
+
+		    //Random number generator
+		    random_device rd;
+		    mt19937 generator(rd());
+
+		    uniform_int_distribution<int> randomDistribution(0, 3);
+
+		    //Pick a random direction
+		    int random = randomDistribution(generator);
+		    Vector3D newLocation(0, 0, 0);
+		    if (random == 0)
+		    {
+		        newLocation.set(1, 0, 0);
+		    }
+		    else if (random == 1)
+		    {
+		        newLocation.set(-1, 0, 0);
+		    }
+		    else if (random == 2)
+		    {
+		        newLocation.set(0, 1, 0);
+		    }
+		    else if (random == 3)
+		    {
+		        newLocation.set(0, -1, 0);
+		    }
+		    MoveState* castedState = static_cast<MoveState*>(newState);
+		    castedState->setDirection(newLocation);
+			newState = _states.getValue("movement");
 		}
 		_stateMachine.tick(deltaTime);
 	}
