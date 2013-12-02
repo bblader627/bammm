@@ -67,14 +67,14 @@ namespace bammm
 
 			/*
 			 getMeleeWeapon
-			 @Pre-Condition- Takes in a MeleeWeaponType type
+			 @Pre-Condition- Takes in a string type
 			 @Post-Condition- Returns a MeleeWeapon
 			 */
-			MeleeWeapon getMeleeWeapon(MeleeWeaponType type);
+			MeleeWeapon getMeleeWeapon(string type);
 
 			/*
 			 getRangedWeapon
-			 @Pre-Condition- Takes in a Ranged type
+			 @Pre-Condition- Takes in a string type
 			 @Post-Condition- Returns a RangedWeapon
 			 */
 			RangedWeapon getRangedWeapon(string type);

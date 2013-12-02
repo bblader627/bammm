@@ -64,7 +64,7 @@ namespace bammm
 		return *newActor;
 	}
 
-	MeleeWeapon getMeleeWeapon(MeleeWeaponType type)
+	MeleeWeapon getMeleeWeapon(string type)
 	{
 		int damage;
 
@@ -103,6 +103,78 @@ namespace bammm
 
 		WeaponData* weaponData = new WeaponData(0, 0, damage, 0, 0, "", type);
 		MeleeWeapon* newWeapon = new MeleeWeapon(weaponData);
+
+		return *newWeapon;
+	}
+
+	RangedWeapon getRangedWeapon(string type)
+	{
+		int range;
+		int clipCapacity;
+		int damage;
+		float reloadSpeed;
+		uint fireRate;
+
+		if (type == "boomStick")
+		{
+			range = 2;
+			clipCapacity = 10;
+			damage = 15;
+			reloadSpeed = 4;
+			fireRate = 2.5;
+		}
+		else if (type == "bowAndArrow")
+		{
+			range = 3;
+			clipCapacity = 50;
+			damage = 10;
+			reloadSpeed = 1;
+			fireRate = 1;
+		}
+		else if (type == "chain")
+		{
+			range = 2;
+			clipCapacity = 1;
+			damage = 10;
+			reloadSpeed = 1;
+			fireRate = 2.5;
+		}
+		else if (type == "BFG")
+		{
+			range = 4;
+			clipCapacity = 10;
+			damage = 110;
+			reloadSpeed = 4;
+			fireRate = 5;
+		}
+		else if (type == "shuriken")
+		{
+			range = 3;
+			clipCapacity = 10;
+			damage = 15;
+			reloadSpeed = 4;
+			fireRate = 3;
+		}
+		else if (type == "bolas")
+		{
+			range = 3;
+			clipCapacity = 5;
+			damage = 8;
+			reloadSpeed = 5;
+			fireRate = 3;
+		}
+		else
+		{
+			range = 3;
+			clipCapacity = 5;
+			damage = 10;
+			reloadSpeed = 5;
+			fireRate = 3;
+		}
+
+		WeaponData* weaponData = new WeaponData(range, clipCapacity, damage,
+				reloadSpeed, fireRate, "", type);
+		RangedWeapon* newWeapon = new RangedWeapon(weaponData);
 
 		return *newWeapon;
 	}
