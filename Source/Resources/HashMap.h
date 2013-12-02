@@ -283,6 +283,7 @@ namespace bammm
 	{
 		int bucket = hashString(key);
 		HashNode<T>* temporary = hashMap[bucket];
+
 		while (temporary != NULL)
 		{
 			cout << "getKey: " << temporary->getKey() << endl;
@@ -290,8 +291,8 @@ namespace bammm
 			{
 				return temporary->getValue();
 			}
-			temporary = &(temporary->getNextNode());
 
+			temporary = &(temporary->getNextNode());
 		}
 		T *ret = NULL;
 		return *ret;
