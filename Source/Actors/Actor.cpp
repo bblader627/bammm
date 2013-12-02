@@ -18,93 +18,32 @@ namespace bammm
 {
 	Actor::Actor()
 	{
-		_type = "dwarf";
-		_name = "DefaultName";
-		_rotation = 0;
-
-		_velocity = new Vector3D();
-		_location = new Vector3D();
-		_collision = false;
-
-		MAX_HEALTH = 100;
-		MAX_STAMINA = 50;
-		_healthBar = MAX_HEALTH;
-		_staminaBar = MAX_STAMINA;
-		_healthBar = 100;
-		_staminaBar = 50;
-		_attack = 4;
-		_defense = 2;
-		_symbol = "D";
-		_color = "white";
-	}
-
-	Actor::Actor(string name, string type, AllianceType alliance)
-	{
-		_collision = false;
-		_name = name;
-		_type = type;
 		_rotation = 0;
 		_velocity = new Vector3D();
 		_location = new Vector3D();
-
-		MAX_HEALTH = 100;
-		MAX_STAMINA = 50;
-		_healthBar = MAX_HEALTH;
-		_staminaBar = MAX_STAMINA;
-		_healthBar = 100;
-		_staminaBar = 50;
-		_attack = 4;
-		_defense = 2;
-		_alliance = alliance;
-	}
-
-	Actor::Actor(string type, string name, int health, int stamina, int attack,
-			int defense, string behavior, AllianceType alliance)
-	{
-		_type = type;
-		_name = name;
-
-		_rotation = 0;
-		_velocity = new Vector3D();
-		_location = new Vector3D();
-
-		MAX_HEALTH = health;
-		MAX_STAMINA = stamina;
-		_healthBar = MAX_HEALTH;
-		_staminaBar = MAX_STAMINA;
-		_healthBar = health;
-		_staminaBar = stamina;
-		_attack = attack;
-		_defense = defense;
-
-		_behavior = behavior;
 		_collision = false;
-		_alliance = alliance;
+		_stats = new ActorInfo();
 	}
 
 	Actor::Actor(ActorInfo* info)
 	{
-		_type = info->getType();
-		_name = info->getName();
+		_stats->setType(info->getType());
+		_stats->setName(info->getName());
 		_rotation = 0;
 		_velocity = new Vector3D();
 		_location = info->getLocation();
 
-		MAX_HEALTH = info->getHealth();
-		MAX_STAMINA = info->getStamina();
-		_healthBar = MAX_HEALTH;
-		_staminaBar = MAX_STAMINA;
-		_healthBar = info->getHealth();
-		_staminaBar = info->getStamina();
-		_attack = info->getAttack();
-		_defense = info->getDefense();
+		_stats->setHealth(info->getHealth());
+		_stats->setStamina(info->getStamina());
+		_stats->setAttack(info->getAttack());
+		_stats->setDefense(info->getDefense());
 
-		_behavior = info->getBehavior();
-		_alliance = info->getAlliance();
-		_collision = info->getCollision();
-		_symbol = info->getSymbol();
-		_color = info->getColor();
-		_wood = info->getWood();
+		_stats->setBehavior(info->getBehavior());
+		_stats->setAlliance(info->getAlliance());
+		_stats->setCollision(info->getCollision());
+		_stats->setSymbol(info->getSymbol());
+		_stats->setColor(info->getColor());
+		_stats->setWood(info->getWood());
 	}
 
 	void Actor::setMeleeWeapon(MeleeWeapon* weapon)
@@ -124,17 +63,12 @@ namespace bammm
 
 	void Actor::setName(string name)
 	{
-		_name = name;
+		_stats->setName(name);
 	}
 
 	void Actor::setType(string type)
 	{
-		_type = type;
-	}
-
-	void Actor::setBehavior(string behavior)
-	{
-		_behavior = behavior;
+		_stats->setType(type);
 	}
 
 	void Actor::setLocation(Vector3D* location)
@@ -144,145 +78,97 @@ namespace bammm
 
 	void Actor::setSymbol(string symbol)
 	{
-		_symbol = symbol;
+		_stats->setSymbol(symbol);
 	}
 
 	void Actor::setColor(string color)
 	{
-		_color = color;
+		_stats->setColor(color);
 	}
 
 	void Actor::setGold(int gold)
 	{
-		_gold = gold;
+		_stats->setGold(gold);
 	}
 
 	void Actor::setIron(int iron)
 	{
-		_iron = iron;
+		_stats->setIron(iron);
 	}
 
 	void Actor::setCoal(int coal)
 	{
-		_coal = coal;
+		_stats->setCoal(coal);
 	}
 
 	void Actor::setWood(int wood)
 	{
-		_wood = wood;
+		_stats->setWood(wood);
 	}
 
 	void Actor::increaseHealth(int amount)
 	{
-		if (_healthBar >= MAX_HEALTH)
-		{
-			_healthBar = MAX_HEALTH;
-			return;
-		}
-		else
-		{
-			_healthBar += amount;
-		}
+		_stats->increaseHealth(amount);
 	}
 
 	void Actor::increaseStamina(int amount)
 	{
-		if (_staminaBar >= MAX_STAMINA)
-		{
-			_staminaBar = MAX_STAMINA;
-			return;
-		}
-		else
-		{
-			_staminaBar += amount;
-		}
+		_stats->increaseStamina(amount);
 	}
 
 	void Actor::reduceHealth(int amount)
 	{
-		if (_healthBar > 0)
-		{
-			_healthBar -= amount;
-		}
-		else
-		{
-			_healthBar = 0;
-			return;
-		}
+		_stats->reduceHealth(amount);
 	}
 
 	void Actor::reduceStamina(int amount)
 	{
-		if (_staminaBar > 0)
-		{
-			_staminaBar -= amount;
-		}
-		else
-		{
-			_staminaBar = 0;
-		}
+		_stats->reduceStamina(amount);
 	}
 
 	bool Actor::isFullyRested()
 	{
-		if (_healthBar == MAX_HEALTH && _staminaBar == MAX_STAMINA)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return _stats->isFullyRested();
 	}
 
 	void Actor::incrementBAC()
 	{
-		_BAC += .01;
-		return;
+		_stats->incrementBAC();
 	}
 
 	int Actor::addGold(int amount)
 	{
-		_gold += amount;
-		return _gold;
+		return _stats->addGold(amount);
 	}
 
 	bool Actor::spendGold(int amount)
 	{
-		if (_gold < amount)
-		{
-			return false;
-		}
-		else
-		{
-			_gold -= amount;
-			return true;
-		}
+		return _stats->spendGold(amount);
 	}
 
 	int Actor::getGold()
 	{
-		return _gold;
+		return _stats->getGold();
 	}
 
 	int Actor::getWood()
 	{
-		return _wood;
+		return _stats->getWood();
 	}
 
 	int Actor::getCoal()
 	{
-		return _coal;
+		return _stats->getCoal();
 	}
 
 	int Actor::getIron()
 	{
-		return _iron;
+		return _stats->getIron();
 	}
 
 	bool Actor::getCollision()
 	{
-		return _collision;
+		return _stats->getCollision();
 	}
 
 	MeleeWeapon* Actor::getMeleeWeapon()
@@ -297,7 +183,7 @@ namespace bammm
 
 	float Actor::getBAC()
 	{
-		return _BAC;
+		return _stats->getBAC();
 	}
 
 	float Actor::getRotation()
@@ -307,7 +193,7 @@ namespace bammm
 
 	string Actor::getName()
 	{
-		return _name;
+		return _stats->getName();
 	}
 
 	string Actor::getVelocity()
@@ -322,32 +208,32 @@ namespace bammm
 
 	int Actor::getHealth()
 	{
-		return _healthBar;
+		return _stats->getHealth();
 	}
 
 	int Actor::getStamina()
 	{
-		return _staminaBar;
+		return _stats->getStamina();
 	}
 
 	int Actor::getAttack()
 	{
-		return _attack;
+		return _stats->getAttack();
 	}
 
 	int Actor::getDefense()
 	{
-		return _defense;
+		return _stats->getDefense();
 	}
 
 	string Actor::getType()
 	{
-		return _type;
+		return _stats->getType();
 	}
 
-	string Actor::getBehavior()
+	DynamicArray<string>* Actor::getBaseBehaviors()
 	{
-		return _behavior;
+		return _stats->getBaseBehaviors();
 	}
 
 	int Actor::getX()
@@ -370,28 +256,28 @@ namespace bammm
 		return _location;
 	}
 
-	int Actor::getAlliance()
+	AllianceType Actor::getAlliance()
 	{
-		return _alliance;
+		return _stats->getAlliance();
 	}
 
 	string Actor::getSymbol()
 	{
-		return _symbol;
+		return _stats->getSymbol();
 	}
 
 	string Actor::getColor()
 	{
-		return _color;
+		return _stats->getColor();
 	}
 
 	int Actor::getEnemyAlliance()
 	{
-		return _alliance * -1;
+		return _stats->getEnemyAlliance();
 	}
 
 	string Actor::toString()
 	{
-		return _name;
+		return _stats->getName();
 	}
 }

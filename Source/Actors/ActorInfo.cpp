@@ -34,10 +34,11 @@ namespace bammm
 		_coal = 0;
 		_wood = 0;
 		_BAC = 0;
+		_behaviors = new Behavior();
 	}
 
 	ActorInfo::ActorInfo(string type, string name,
-			int attack, int defense, Behavior behaviors, bool collision,
+			int attack, int defense, Behavior *behaviors, bool collision,
 			AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood, float BAC)
 	{
 		_type = type;
@@ -90,7 +91,7 @@ namespace bammm
 
 	DynamicArray<string>* ActorInfo::getBaseBehaviors()
 	{
-		return _behaviors.getBaseBehaviors();
+		return _behaviors->getBaseBehaviors();
 	}
 
 	Vector3D* ActorInfo::getLocation()
@@ -198,7 +199,7 @@ namespace bammm
 		_BAC += .01;
 	}
 
-	void ActorInfo::resetBAC();
+	void ActorInfo::resetBAC()
 	{
 		_BAC = 0;
 	}
@@ -265,5 +266,65 @@ namespace bammm
 			return false;
 		}
 	}
+
+	void ActorInfo::setColor(string color)
+	{
+		_color = color;
+	}
+
+	void ActorInfo::setGold(int gold)
+	{
+		_gold = gold;
+	}
+
+	void ActorInfo::setIron(int iron)
+	{
+		_iron = iron;
+	}
+
+	void ActorInfo::setCoal(int coal)
+	{
+		_coal = coal;
+	}
+
+	void ActorInfo::setWood(int wood)
+	{
+		_wood = wood;
+	}
+
+	int ActorInfo::addGold(int amount)
+	{
+		_gold += amount;
+		return _gold;
+	}
+
+	bool ActorInfo::spendGold(int amount)
+	{
+		if (_gold < amount)
+		{
+			return false;
+		}
+		else
+		{
+			_gold -= amount;
+			return true;
+		}
+	}
+
+	int ActorInfo::getEnemyAlliance()
+	{
+		return _alliance * -1;
+	}
+	
+	void ActorInfo::setBehavior(Behavior *behaviors)
+	{
+		_behaviors = behaviors;
+	}
+
+	Behavior* ActorInfo::getBehavior()
+	{
+		return _behaviors;
+	}
+
 
 }

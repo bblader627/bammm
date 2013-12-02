@@ -37,7 +37,7 @@ namespace bammm
 			int _stamina;
 			int _attack;
 			int _defense;
-			Behavior _behaviors;
+			Behavior *_behaviors;
 			Vector3D* _location;
 			AllianceType _alliance;
 			string _symbol;
@@ -51,7 +51,7 @@ namespace bammm
 		public:
 			ActorInfo();
 			ActorInfo(string type, string name,
-					int attack, int defense, Behavior behaviors, bool collision,
+					int attack, int defense, Behavior *behaviors, bool collision,
 					AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood, float BAC);
 
 			/**
@@ -292,6 +292,76 @@ namespace bammm
 			 returns false otherwise;
 			 */
 			bool isFullyRested();
+
+			/**
+			 setColor
+			 @Pre-Condition- takes the color to set
+			 @Post-Condition- returns nothing
+			 */
+			void setColor(string color);
+			
+			/**
+			 setGold
+			 @Pre-Condition- The amount to set the Actor's gold to
+			 @Post-Condition- Returns nothing
+			 */
+			void setGold(int gold);
+
+			/**
+			 setGold
+			 @Pre-Condition- The amount to set the Actor's iron to
+			 @Post-Condition- Returns nothing
+			 */
+			void setIron(int iron);
+			
+			/**
+			 setCoal
+			 @Pre-Condition- The amount to set the Actor's coal to
+			 @Post-Condition- Returns nothing
+			 */
+			void setCoal(int coal);
+			
+			/**
+			 setWood
+			 @Pre-Condition- The amount to set the Actor's wood to
+			 @Post-Condition- Returns nothing
+			 */
+			void setWood(int wood);
+
+			/**
+			 addGold
+			 @Pre-Condition- takes amount of gold to add
+			 @Post-Condition- returns total amount of gold
+			 */
+			int addGold(int amount);
+
+			/**
+			 resetBAC
+			 @Pre-Condition- takes amount of gold to spend;
+			 @Post-Condition- decrements gold and returns true if there is enough, returns false if not
+			 */
+			bool spendGold(int amount);
+
+			/**
+			 getEnemyAlliance
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the enemy's alliance
+			 */
+			int getEnemyAlliance();
+
+			/**
+			 getEnemyAlliance
+			 @Pre-Condition- takes in a behavior
+			 @Post-Condition- sets Behavior table to behavior
+			 */
+			void setBehavior(Behavior *behaviors);
+
+			/**
+			 getEnemyAlliance
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the behavior structure for an actor
+			 */
+			Behavior* getBehavior();
 
 	};
 }

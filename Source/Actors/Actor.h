@@ -32,39 +32,18 @@ namespace bammm
 	{
 		protected:
 			float _rotation;
-			string _name;
-			string _type;
-			string _behavior;
 			Vector3D *_velocity;
 			Vector3D *_location;
 
-			int _healthBar;
-			int _staminaBar;
-			int MAX_HEALTH;
-			int MAX_STAMINA;
-
-			int _attack;
-			int _defense;
-
-			int _gold;
-			int _coal;
-			int _iron;
-			int _wood;
-			float _BAC;
-
 			bool _collision;
-			AllianceType _alliance;
-			string _symbol;
-			string _color;
 
 			MeleeWeapon *_meleeWeapon;
 			RangedWeapon *_rangedWeapon;
 
+			ActorInfo *_stats;
+
 		public:
 			Actor();
-			Actor(string name, string type, AllianceType alliance);
-			Actor(string type, string name, int health, int stamina, int attack,
-					int defense, string behavior, AllianceType alliance);
 			Actor(ActorInfo* info);
 
 			/**
@@ -279,11 +258,11 @@ namespace bammm
 			string getType();
 
 			/**
-			 getBehavior
-			 @Pre-Condition- No input
-			 @Post-Condition- Returns _behavior
+			 getBaseBehaviors
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns behavior
 			 */
-			string getBehavior();
+			DynamicArray<string>* getBaseBehaviors();
 
 			/**
 			 getVelocity
@@ -360,7 +339,7 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _alliance
 			 */
-			int getAlliance();
+			 AllianceType getAlliance();
 
 			/**
 			 getSymbol
