@@ -1,6 +1,7 @@
 #include <iostream>
 #include "SceneManager/SceneManager.h"
 #include "Controllers/PlayerController.h"
+#include "Factories/Factory.h"
 #include <unistd.h>
 #include <random>
 #include <exception>
