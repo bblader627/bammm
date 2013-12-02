@@ -17,6 +17,9 @@
 
 namespace bammm
 {
+	/*
+	 * Add new record types here.
+	 */
 	enum class RecordType
 	{
 		Invalid, Attacking

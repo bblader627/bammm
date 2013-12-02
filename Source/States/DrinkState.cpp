@@ -29,9 +29,9 @@ namespace bammm
 	}
 
 	/*void DrinkState::setup(DynamicArray<string>* args)
-	{
-		_stoutLife = _stoutSize;
-	}*/
+	 {
+	 _stoutLife = _stoutSize;
+	 }*/
 
 	void DrinkState::setup()
 	{

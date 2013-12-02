@@ -14,7 +14,6 @@
 
 #include "StateMachine.h"
 
-
 namespace bammm
 {
 	StateMachine::StateMachine()
@@ -31,7 +30,8 @@ namespace bammm
 		_allStates = &allStates;
 	}
 
-	void StateMachine::setup(Actor& actor, HashMap<State*>& allStates, MeleeCombat* meleeCombat)
+	void StateMachine::setup(Actor& actor, HashMap<State*>& allStates,
+			MeleeCombat* meleeCombat)
 	{
 		_actor = &actor;
 		_allStates = &allStates;
@@ -45,14 +45,12 @@ namespace bammm
 		currentStates.add(initial);
 	}
 
-	void StateMachine::tick(float dTime)
+	void StateMachine::tick(float deltaTime)
 	{
 		cout << "In StateMachine's tick;" << endl;
 		for (int i = 0; i < (int) currentStates.getSize(); i++)
 		{
-			cout << "tick " << currentStates.get(i)->toString() << endl;
-			currentStates.get(i)->tick(dTime);
-			cout << "End tick" << endl;
+			currentStates.get(i)->tick(deltaTime);
 		}
 	}
 
@@ -111,6 +109,44 @@ namespace bammm
 		}
 	}
 
+	/*void StateMachine::addState(State* newState)
+	 {
+	 if (currentStates.contains(newState))
+	 {
+	 if (newState->toString() == "combat")
+	 {
+	 //test for fight hapening
+	 if (!_meleeCombat->fightHappening())
+	 {
+	 this->removeState(newState);
+
+	 }
+	 else
+	 {
+	 _meleeCombat->useTurn();
+	 }
+	 }
+	 else
+	 {
+	 //breakdown and setup are not calling the correct functions
+	 this->removeState(newState);
+	 }
+	 }
+	 else
+	 {
+	 //Special case for combat state
+	 if (newState->toString() == "combat")
+	 {
+	 Actor* closestEnemy = SceneManager::getSceneGraph().getEnemy(_actor->getLocation(), _actor);
+	 if(closestEnemy)
+	 {
+	 _meleeCombat->setup(*_actor, *closestEnemy);
+	 }
+	 }
+	 newState->setup();
+	 currentStates.add(newState);
+	 }
+	 }*/
 
 	void StateMachine::removeState(State* oldState)
 	{

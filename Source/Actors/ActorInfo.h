@@ -11,6 +11,7 @@
  * ActorInfo header file.
  *
  */
+
 #ifndef ACTORINFO_H_
 #define ACTORINFO_H_
 
@@ -37,10 +38,15 @@ namespace bammm
 			AllianceType _alliance;
 			string _symbol;
 			string _color;
+			int _gold;
+			int _coal;
+			int _iron;
 
 		public:
 			ActorInfo();
-			ActorInfo(string type, string name, int health, int stamina, int attack, int defense, string behavior, bool collision, AllianceType alliance, string symbol, string color);
+			ActorInfo(string type, string name, int health, int stamina,
+					int attack, int defense, string behavior, bool collision,
+					AllianceType alliance, string symbol, string color, int gold, int coal, int iron);
 
 			/**
 			 getType
@@ -120,12 +126,33 @@ namespace bammm
 			string getSymbol();
 
 			/**
-			 getSymbol
+			 getColor
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _color
 			 */
 			string getColor();
+
+			/**
+			 getColor
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _gold
+			 */
+			int getGold();
 			
+			/**
+			 getColor
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _coal
+			 */
+			int getCoal();
+			
+			/**
+			 getIron
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _iron
+			 */
+			int getIron();
+
 			/**
 			 setType
 			 @Pre-Condition- takes type
@@ -181,7 +208,7 @@ namespace bammm
 			 @Post-Condition- returns nothing
 			 */
 			void setLocation(Vector3D* location);
-			
+
 			/**
 			 setCollision
 			 @Pre-Condition- takes a boolean to set the collision
@@ -195,7 +222,7 @@ namespace bammm
 			 @Post-Condition- returns nothing
 			 */
 			void setAlliance(AllianceType alliance);
-			
+
 			/**
 			 setSymbol
 			 @Pre-Condition- takes a string to set the symbol
@@ -203,7 +230,6 @@ namespace bammm
 			 */
 			void setSymbol(string symbol);
 	};
-
 }
 
 #endif

@@ -15,6 +15,8 @@
 #ifndef RANGEDCOMBAT_H_
 #define RANGEDCOMBAT_H_
 
+#include "../Resources/Constant.h"
+
 namespace bammm
 {
 	class RangedCombat

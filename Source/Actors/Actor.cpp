@@ -13,9 +13,6 @@
  */
 
 #include "Actor.h"
-#include "../SceneManager/Vector3D.h"
-
-using namespace std;
 
 namespace bammm
 {
@@ -154,6 +151,21 @@ namespace bammm
 		_color = color;
 	}
 
+	void Actor::setGold(int gold)
+	{
+		_gold = gold;
+	}
+
+	void Actor::setIron(int iron)
+	{
+		_iron = iron;
+	}
+
+	void Actor::setCoal(int coal)
+	{
+		_coal = coal;
+	}
+
 	void Actor::increaseHealth(int amount)
 	{
 		if (_healthBar >= MAX_HEALTH)
@@ -245,6 +257,16 @@ namespace bammm
 	int Actor::getGold()
 	{
 		return _gold;
+	}
+
+	int Actor::getCoal()
+	{
+		return _coal;
+	}
+
+	int Actor::getIron()
+	{
+		return _iron;
 	}
 
 	bool Actor::getCollision()

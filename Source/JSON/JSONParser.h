@@ -18,17 +18,19 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-
+#include <stdlib.h>
 #include "../Resources/HashMap.h"
 #include "JSON.h"
 #include "JSONPrimitive.h"
 #include "../Resources/Constant.h"
+#include "JSONParser.h"
+#include "../Resources/DynamicArray.h"
+#include "JSONArray.h"
 
 using namespace std;
 
 namespace bammm
 {
-
 	class JSONParser
 	{
 		private:
@@ -72,10 +74,13 @@ namespace bammm
 			 */
 			JSON* getRootNode(string key);
 
-
+			/**
+			 printAllRoots
+			 @Pre-Condition- No input
+			 @Post-Condition- Prints all the roots
+			 */
 			void printAllRoots();
 
-			//TODO: Can this implementation be moved to the cpp file?
 			/**
 			 operator[]
 			 @Pre-Condition- Takes in const string key

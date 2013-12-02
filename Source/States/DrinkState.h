@@ -37,7 +37,6 @@ namespace bammm
 			 @Post-Condition- Sets up the state
 			 */
 			//void setup(DynamicArray<string>* args);
-
 			void setup();
 
 			/**

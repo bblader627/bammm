@@ -54,6 +54,7 @@ namespace bammm
 			this->addTickable(controller);
 			this->addAiController(controller);
 		}
+
 	}
 
 	void SceneManager::removeActor(Actor* actor)

@@ -28,9 +28,9 @@ namespace bammm
 	}
 
 	/*void SleepState::setup(DynamicArray<string>* args)
-	{
-		_timeSlept = 0;
-	}*/
+	 {
+	 _timeSlept = 0;
+	 }*/
 
 	void SleepState::setup()
 	{

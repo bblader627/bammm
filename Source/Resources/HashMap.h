@@ -26,7 +26,6 @@ using namespace std;
 
 namespace bammm
 {
-
 	template<class T>
 	class HashMap
 	{

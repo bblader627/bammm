@@ -37,8 +37,7 @@ namespace bammm
 		IdleState* idleState = new IdleState(actor, _stateMachine);
 		CombatState* combatState = new CombatState(actor, _stateMachine);
 		DamageState* damageState = new DamageState(actor, _stateMachine);
-		MoveState* moveState = new MoveState(actor, _stateMachine,
-				sceneGraph);
+		MoveState* moveState = new MoveState(actor, _stateMachine, sceneGraph);
 
 		_states.add(idleState->toString(), idleState);
 		_states.add(mineState->toString(), mineState);
@@ -76,13 +75,13 @@ namespace bammm
 		Actor* enemy = _sceneGraph->getEnemy(_actor->getLocation(), _actor);
 		DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
 		State* newState;
-		if(enemy)
+		if (enemy)
 		{
 			//_stateMachine.addState(newState, new DynamicArray<string>());
 			cout << "I want to fight\n";
 			newState = _states.getValue("damage");
-			
-			if(!currentStates.contains(newState))
+
+			if (!currentStates.contains(newState))
 			{
 				_stateMachine.addState(newState);
 			}
@@ -92,7 +91,7 @@ namespace bammm
 		else
 		{
 			newState = _states.getValue("movement");
-		
+
 			//all currently running states
 			if (!currentStates.contains(newState))
 			{
@@ -103,26 +102,26 @@ namespace bammm
 			random_device rd;
 			mt19937 generator(rd());
 
-			uniform_int_distribution<int> randomDistribution(0,4);
+			uniform_int_distribution<int> randomDistribution(0, 4);
 
 			//Pick a random direction
 			int random = randomDistribution(generator);
-			Vector3D newLocation(0,0,0);
-			if(random == 0)
+			Vector3D newLocation(0, 0, 0);
+			if (random == 0)
 			{
-				newLocation.set(1,0,0);
+				newLocation.set(1, 0, 0);
 			}
-			else if(random == 1)
+			else if (random == 1)
 			{
-				newLocation.set(-1,0,0);
+				newLocation.set(-1, 0, 0);
 			}
-			else if(random == 2)
+			else if (random == 2)
 			{
-				newLocation.set(0,1,0);
+				newLocation.set(0, 1, 0);
 			}
-			else if(random == 3)
+			else if (random == 3)
 			{
-				newLocation.set(0,-1,0);
+				newLocation.set(0, -1, 0);
 			}
 			MoveState* castedState = static_cast<MoveState*>(newState);
 			castedState->setDirection(newLocation);

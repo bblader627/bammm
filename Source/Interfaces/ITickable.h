@@ -26,12 +26,25 @@ namespace bammm
 		public:
 			virtual ~ITickable();
 
-			//TODO: Add doc style comment
+			/**
+			 tick
+			 @Pre-Condition- Takes a float deltaTime
+			 @Post-Condition- Ticks for deltaTime
+			 */
 			virtual void tick(float deltaTime)=0;
 
-			//TODO: Add doc style comment
+			/**
+			 canDelete
+			 @Pre-Condition- Takes nothing
+			 @Post-Condition- Returns a boolean representing if the tickable can be deleted or not.
+			 */
 			virtual bool canDelete();
 
+			/**
+			 toString
+			 @Pre-Condition- Takes nothing
+			 @Post-Condition- Returns a string representation of a tickable
+			 */
 			virtual string toString()=0;
 	};
 }

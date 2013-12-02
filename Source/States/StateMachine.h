@@ -35,10 +35,11 @@ namespace bammm
 			HashMap<State*>* _allStates;
 			MeleeCombat* _meleeCombat;
 			Actor* _actor;
+
 		public:
 			StateMachine();
 			StateMachine(Actor& actor, HashMap<State*>& allStates);
-			virtual ~StateMachine();		
+			virtual ~StateMachine();
 
 			/**
 			 setup
@@ -52,22 +53,22 @@ namespace bammm
 			 @Pre-Condition- Takes in a float deltaTime
 			 @Post-Condition- Executes a tick of length deltaTime
 			 */
-			void tick(float dTime);
-		
+			void tick(float deltaTime);
+
 			/**
 			 switchState
 			 @Pre-Condition- Takes in two State references, the current state and the newState
 			 @Post-Condition- The current state is switched to the given newState
 			 */
 			void switchState(State& current, State& newState);
-		
+
 			/**
 			 switchState
 			 @Pre-Condition- Takes in a reference to the current State and a string representing new state
 			 @Post-Condition- The current state is switched to the state specified by the string newStateString
 			 */
 			void switchState(State& current, string newStateString);
-		
+
 			/**
 			 addState
 			 @Pre-Condition- Takes in a pointer to a State state
@@ -91,13 +92,25 @@ namespace bammm
 
 			/**
 			 getCurrentStates
-		 	 @Pre-Condition- No input
+			 @Pre-Condition- No input
 			 @Post-Condition- Returns all the current states in the state machine
 			 */
 			DynamicArray<State*>& getCurrentStates();
-			void setup(Actor&, HashMap<State*>&, MeleeCombat*);
-			string toString();
 
+			/**
+			 setup
+			 @Pre-Condition- Takes in Actor&, HashMap<State*>& of all the states, and MeleeCombat*
+			 @Post-Condition- Sets up the state machine
+			 */
+			void setup(Actor& actor, HashMap<State*>& allStates,
+					MeleeCombat* meleeCombat);
+
+			/**
+			 toString
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a string representation of the state machine
+			 */
+			string toString();
 	};
 }
 #endif

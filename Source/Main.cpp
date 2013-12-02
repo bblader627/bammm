@@ -2,6 +2,7 @@
 #include "Factories/Factory.h"
 #include "SceneManager/SceneManager.h"
 #include "Controllers/PlayerController.h"
+#include "Factories/Factory.h"
 #include <unistd.h>
 #include <random>
 #include <exception>
@@ -96,7 +97,6 @@ int main()
 				doTick = false;
 			}
 
-
 			if (!playGame)
 			{
 				break;
@@ -133,7 +133,8 @@ void printWelcome()
 {
 	cout << "================================================" << "\n";
 	cout << "Welcome to BAMMM -  Alpha v0.2" << "\n";
-	cout << "Creators: \tAlvaro Home - Matthew Konstantinou - Matthew Witkowski\n\t\tBradley Crusco - Michael Abramo"
+	cout
+			<< "Creators: \tAlvaro Home - Matthew Konstantinou - Matthew Witkowski\n\t\tBradley Crusco - Michael Abramo"
 			<< "\n";
 	cout << "================================================" << "\n";
 }
@@ -156,7 +157,7 @@ DynamicArray<string>* parseInput(string input)
 	{
 		current = input[i];
 
-		if ( i == input.size()-1)
+		if (i == input.size() - 1)
 		{
 			builder += current;
 			result->add(builder);

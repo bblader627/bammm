@@ -21,7 +21,8 @@ namespace bammm
 		_actor = &actor;
 	}
 
-	SearchState::SearchState(Actor& actor, IStateCallback& stateMachine, Grid3D<Actor*>& sceneGraph)
+	SearchState::SearchState(Actor& actor, IStateCallback& stateMachine,
+			Grid3D<Actor*>& sceneGraph)
 	{
 		_sceneGraph = &sceneGraph;
 		_actor = &actor;
@@ -44,7 +45,7 @@ namespace bammm
 
 	void SearchState::tick(float deltaTime)
 	{
-		if(_path->isEmpty())
+		if (_path->isEmpty())
 		{
 			switchState("null");
 		}
