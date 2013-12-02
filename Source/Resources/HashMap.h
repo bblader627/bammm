@@ -249,7 +249,6 @@ namespace bammm
 				temporary = &(temporary->getNextNode());
 			}
 		}
-		cout << "Size of keys" << keys->getSize() << endl;
 		return keys;
 	}
 
@@ -286,7 +285,6 @@ namespace bammm
 
 		while (temporary != NULL)
 		{
-			cout << "getKey: " << temporary->getKey() << endl;
 			if (key.compare(temporary->getKey()) == 0)
 			{
 				return temporary->getValue();

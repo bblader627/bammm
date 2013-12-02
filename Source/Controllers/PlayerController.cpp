@@ -98,11 +98,9 @@ namespace bammm
 				//doTick = false;
 			}
 
-			cout << "newState: " << newState << "\n";
 			State* stateToAdd = _states.getValue(newState);
-			cout << "Poop" << endl;
 			_stateMachine.addState(stateToAdd);
-			_stateMachine.tick(deltaTime);
+			//_stateMachine.tick(deltaTime);
 		}
 		/*
 		else if (newState == "sing")
