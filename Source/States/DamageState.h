@@ -30,7 +30,7 @@ namespace bammm
 
 		public:
 			DamageState(Actor& actor);
-			DamageState(Actor& actor, IStateCallback& stateMachine);
+			DamageState(Actor& actor, IStateCallback* stateMachine);
 
 			/**
 			 Update this to take a Vector3D once we get rid of circular

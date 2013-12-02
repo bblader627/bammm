@@ -20,7 +20,7 @@ namespace bammm
 	{
 		_actor = &actor;
 	}
-	ChopState::ChopState(Actor& actor, IStateCallback& stateMachine)
+	ChopState::ChopState(Actor& actor, IStateCallback* stateMachine)
 	{
 		_actor = &actor;
 		registerTransitionCallback(stateMachine);

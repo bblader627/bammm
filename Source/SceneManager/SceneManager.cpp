@@ -91,8 +91,8 @@ namespace bammm
 
 	void SceneManager::tick(float deltaTime)
 	{
-		cout << "I was ticked\n";
 		int size = _allTickables.getSize();
+		cout << "Size: " << size << "\n";
 		for (int i = 0; i < size; i++)
 		{
 			_allTickables.get(i)->tick(deltaTime);

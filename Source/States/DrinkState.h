@@ -29,7 +29,7 @@ namespace bammm
 
 		public:
 			DrinkState(Actor& actor);
-			DrinkState(Actor& actor, IStateCallback& stateMachine);
+			DrinkState(Actor& actor, IStateCallback* stateMachine);
 
 			/**
 			 setup

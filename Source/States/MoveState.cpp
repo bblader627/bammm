@@ -21,7 +21,7 @@ namespace bammm
 		_actor = &actor;
 	}
 
-	MoveState::MoveState(Actor& actor, IStateCallback& stateMachine,
+	MoveState::MoveState(Actor& actor, IStateCallback* stateMachine,
 			Grid3D<Actor*>& sceneGraph)
 	{
 		_sceneGraph = &sceneGraph;

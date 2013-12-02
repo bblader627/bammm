@@ -52,20 +52,20 @@ namespace bammm
 		}
 	}
 
-	void StateMachine::switchState(State& current, State& newState)
+	void StateMachine::switchState(State* current, State* newState)
 	{
-		removeState(&current);
-		addState(&newState);
+		removeState(current);
+		addState(newState);
 	}
 
-	void StateMachine::switchState(State& current, string newStateString)
+	void StateMachine::switchState(State* current, string newStateString)
 	{
 		if (newStateString == "null")
 		{
-			removeState(&current);
+			removeState(current);
 			return;
 		}
-		switchState(current, *_allStates->getValue(newStateString));
+		switchState(current, _allStates->getValue(newStateString));
 	}
 
 	void StateMachine::addState(State* newState)

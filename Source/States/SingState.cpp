@@ -21,7 +21,7 @@ namespace bammm
 		_actor = &actor;
 	}
 
-	SingState::SingState(Actor& actor, IStateCallback& stateMachine)
+	SingState::SingState(Actor& actor, IStateCallback* stateMachine)
 	{
 		_actor = &actor;
 		registerTransitionCallback(stateMachine);

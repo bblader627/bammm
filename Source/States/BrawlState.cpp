@@ -21,7 +21,7 @@ namespace bammm
 		_actor = &actor;
 	}
 
-	BrawlState::BrawlState(Actor& actor, IStateCallback& stateMachine)
+	BrawlState::BrawlState(Actor& actor, IStateCallback* stateMachine)
 	{
 		_actor = &actor;
 		registerTransitionCallback(stateMachine);

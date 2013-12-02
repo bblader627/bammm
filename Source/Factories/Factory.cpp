@@ -101,7 +101,7 @@ namespace bammm
 			damage = 10;
 		}
 
-		WeaponData* weaponData = new WeaponData(0, 0, damage, 0, 0, "", type);
+		WeaponData weaponData(0, 0, damage, 0, 0, "", type);
 		MeleeWeapon* newWeapon = new MeleeWeapon(weaponData);
 
 		return *newWeapon;
@@ -172,7 +172,7 @@ namespace bammm
 			fireRate = 3;
 		}
 
-		WeaponData* weaponData = new WeaponData(range, clipCapacity, damage,
+		WeaponData weaponData(range, clipCapacity, damage,
 				reloadSpeed, fireRate, "", type);
 		RangedWeapon* newWeapon = new RangedWeapon(weaponData);
 
@@ -230,6 +230,9 @@ namespace bammm
 			string i_str = "" + i;
 			map->add(type + i_str, *info);
 			Actor* myActor = new Actor(info);
+			WeaponData weaponData(10,2,"","");
+			MeleeWeapon* meleeWeapon = new MeleeWeapon(weaponData);
+			myActor->setMeleeWeapon(meleeWeapon);
 			scene->addActor(myActor);
 		}
 	}

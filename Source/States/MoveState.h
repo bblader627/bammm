@@ -31,7 +31,7 @@ namespace bammm
 
 		public:
 			MoveState(Actor& actor);
-			MoveState(Actor& actor, IStateCallback& stateMachine,
+			MoveState(Actor& actor, IStateCallback* stateMachine,
 					Grid3D<Actor*>& sceneGraph);
 
 			/**
