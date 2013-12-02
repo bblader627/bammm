@@ -362,33 +362,6 @@ namespace bammm
 	}
 
 	template<class T>
-	string DynamicArray<T>::toString()
-	{
-		if (_array == NULL)
-		{
-			errorMessage("Array is null.");
-			return "";
-		}
-
-		string output = "[";
-
-		for (uint i = 0; i < _size; i++)
-		{
-			if (i != _size - 1)
-			{
-				output = output + to_string((_array[i])) + ", ";
-			}
-			else
-			{
-				output = output + to_string((_array[i]));
-			}
-		}
-
-		output = output + "]\n";
-		return output;
-	}
-
-	template<class T>
 	int DynamicArray<T>::indexOf(T element)
 	{
 		if (_array == NULL)
