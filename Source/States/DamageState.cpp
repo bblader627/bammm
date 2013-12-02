@@ -38,7 +38,7 @@ namespace bammm
 
 	void DamageState::breakdown()
 	{
-		cout << "State is broken\n";
+		//cout << "State is broken\n";
 	}
 
 	void DamageState::tick(float deltaTime)
