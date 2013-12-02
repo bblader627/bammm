@@ -254,6 +254,42 @@ namespace bammm
 			 */
 			void resetBAC();
 
+			/**
+			 increaseHealth
+			 @Pre-Condition- Takes an float amount
+			 @Post-Condition- Increases health by said amount
+			 */
+			void increaseHealth(int amount);
+
+			/**
+			 increaseStamina
+			 @Pre-Condition- Takes an float amount
+			 @Post-Condition- Increases stamina by said amount
+			 */
+			void increaseStamina(int amount);
+
+			/**
+			 reduceHealth
+			 @Pre-Condition- Takes an float amount
+			 @Post-Condition- Decreases health by said amount
+			 */
+			void reduceHealth(int amount);
+
+			/*
+			 reduceHealth
+			 @Pre-Condition- Takes an float amount
+			 @Post-Condition- Decreases stamina by said amount
+			 */
+			void reduceStamina(int amount);
+
+			/**
+			 isFullyRested
+			 @Pre-Condition- no parameters
+			 @Post-Condition- returns true if healthBar and staminaBar are equal to 								MAX_HEALTH and MAX_STAMINA
+			 returns false otherwise;
+			 */
+			bool isFullyRested();
+
 	};
 }
 

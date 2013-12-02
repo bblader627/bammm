@@ -198,11 +198,72 @@ namespace bammm
 		_BAC += .01;
 	}
 
-	void resetBAC();
+	void ActorInfo::resetBAC();
 	{
 		_BAC = 0;
 	}
 
+	void ActorInfo::increaseHealth(int amount)
+	{
+		if (_healthBar >= MAX_HEALTH)
+		{
+			_healthBar = MAX_HEALTH;
+			return;
+		}
+		else
+		{
+			_healthBar += amount;
+		}
+	}
 
+	void ActorInfo::increaseStamina(int amount)
+	{
+		if (_staminaBar >= MAX_STAMINA)
+		{
+			_staminaBar = MAX_STAMINA;
+			return;
+		}
+		else
+		{
+			_staminaBar += amount;
+		}
+	}
+
+	void ActorInfo::reduceHealth(int amount)
+	{
+		if (_healthBar > 0)
+		{
+			_healthBar -= amount;
+		}
+		else
+		{
+			_healthBar = 0;
+			return;
+		}
+	}
+
+	void ActorInfo::reduceStamina(int amount)
+	{
+		if (_staminaBar > 0)
+		{
+			_staminaBar -= amount;
+		}
+		else
+		{
+			_staminaBar = 0;
+		}
+	}
+
+	bool ActorInfo::isFullyRested()
+	{
+		if (_healthBar == MAX_HEALTH && _staminaBar == MAX_STAMINA)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 }
