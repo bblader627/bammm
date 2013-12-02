@@ -34,7 +34,6 @@ namespace bammm
 			//TreeNode<T>** tree;
 			DynamicArray<TreeNode<T>*>* tree;
 
-
 		public:
 			Tree<T>();
 			virtual ~Tree();

@@ -320,6 +320,7 @@ namespace bammm
 
 		unsigned int i = 0;
 		while (i < mapTree->getSize())
+
 		{
 			current = mapTree->getAt(i);
 			Vector3D* currentLocation = current->getValue();
