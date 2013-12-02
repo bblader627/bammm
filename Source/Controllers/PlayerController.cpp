@@ -225,7 +225,7 @@ namespace bammm
 			}
 			DamageState* castedState = static_cast<DamageState*>(newState);
 			castedState->setTarget(*enemy);
-		*/
+			 */
 		}
 		else
 		{
