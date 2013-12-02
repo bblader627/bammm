@@ -65,7 +65,7 @@ namespace bammm
 		oreType->add("coal");
 		oreType->add("gold");
 
-
+		
 		if (newState == "mine")
 		{
 			//mine [#] [ore-type]
@@ -98,7 +98,7 @@ namespace bammm
 				//doTick = false;
 			}
 
-
+			cout << "newState: " << newState << "\n";
 			State* stateToAdd = _states.getValue(newState);
 			cout << "Poop" << endl;
 			_stateMachine.addState(stateToAdd);

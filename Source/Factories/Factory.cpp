@@ -93,6 +93,7 @@ namespace bammm
 			int gold = 0;
 			int coal = 0;
 			int iron = 0;
+			int wood = 0;
 
 			AllianceType alliance;
 			if (parsedAlliance == 0)
@@ -110,7 +111,7 @@ namespace bammm
 
 			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack,
 					defense, behavior, collision, alliance, symbol, color,
-					gold, coal, iron);
+					gold, coal, iron, wood);
 			info->setLocation(new Vector3D(x, y, z));
 
 			string i_str = "" + i;

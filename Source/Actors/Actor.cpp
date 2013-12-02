@@ -104,6 +104,7 @@ namespace bammm
 		_collision = info->getCollision();
 		_symbol = info->getSymbol();
 		_color = info->getColor();
+		_wood = info->getWood();
 	}
 
 	void Actor::setMeleeWeapon(MeleeWeapon* weapon)
@@ -164,6 +165,11 @@ namespace bammm
 	void Actor::setCoal(int coal)
 	{
 		_coal = coal;
+	}
+
+	void Actor::setWood(int wood)
+	{
+		_wood = wood;
 	}
 
 	void Actor::increaseHealth(int amount)
@@ -257,6 +263,11 @@ namespace bammm
 	int Actor::getGold()
 	{
 		return _gold;
+	}
+
+	int Actor::getWood()
+	{
+		return _wood;
 	}
 
 	int Actor::getCoal()

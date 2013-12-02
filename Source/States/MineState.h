@@ -35,6 +35,7 @@ namespace bammm
 			bool canMine();
 
 		public:
+			virtual ~MineState();
 			MineState(Actor& actor);
 			MineState(Actor& actor, IStateCallback& stateMachine);
 
