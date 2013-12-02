@@ -93,7 +93,6 @@ namespace bammm
 	void SceneManager::tick(float deltaTime)
 	{
 		int size = _allTickables.getSize();
-		cout << "Size: " << size << "\n";
 		for (int i = 0; i < size; i++)
 		{
 			ITickable* tickable = _allTickables.get(i);
