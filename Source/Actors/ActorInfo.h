@@ -18,6 +18,7 @@
 #include <iostream>
 #include "../SceneManager/Vector3D.h"
 #include "../Resources/Constant.h"
+#include "../Behavior/Behavior.h"
 
 using namespace std;
 
@@ -33,7 +34,7 @@ namespace bammm
 			int _stamina;
 			int _attack;
 			int _defense;
-			string _behavior;
+			Behavior _behavior;
 			Vector3D* _location;
 			AllianceType _alliance;
 			string _symbol;
@@ -46,7 +47,7 @@ namespace bammm
 		public:
 			ActorInfo();
 			ActorInfo(string type, string name, int health, int stamina,
-					int attack, int defense, string behavior, bool collision,
+					int attack, int defense, Behavior behavior, bool collision,
 					AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood);
 
 			/**
@@ -96,7 +97,7 @@ namespace bammm
 			 @Pre-Condition- takes no arguments
 			 @Post-Condition- returns behavior
 			 */
-			string getBehavior();
+			Behavior getBehavior();
 
 			/**
 			 getLocation
@@ -202,13 +203,6 @@ namespace bammm
 			 @Post-Condition- returns void
 			 */
 			void setDefense(int defense);
-
-			/**
-			 setDefense
-			 @Pre-Condition- takes in defense
-			 @Post-Condition- returns void
-			 */
-			void setBehavior(string behavior);
 
 			/**
 			 setLocation
