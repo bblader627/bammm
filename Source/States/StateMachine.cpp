@@ -36,7 +36,6 @@ namespace bammm
 		_actor = &actor;
 		_allStates = &allStates;
 		_meleeCombat = meleeCombat;
-
 	}
 
 	void StateMachine::initialState(State* initial)
@@ -76,7 +75,7 @@ namespace bammm
 		{
 			if (newState->toString() == "combat")
 			{
-				//test for fight hapening
+				//test for fight happening
 				if (!_meleeCombat->fightHappening())
 				{
 					this->removeState(newState);
@@ -109,44 +108,6 @@ namespace bammm
 		}
 	}
 
-	/*void StateMachine::addState(State* newState)
-	 {
-	 if (currentStates.contains(newState))
-	 {
-	 if (newState->toString() == "combat")
-	 {
-	 //test for fight hapening
-	 if (!_meleeCombat->fightHappening())
-	 {
-	 this->removeState(newState);
-
-	 }
-	 else
-	 {
-	 _meleeCombat->useTurn();
-	 }
-	 }
-	 else
-	 {
-	 //breakdown and setup are not calling the correct functions
-	 this->removeState(newState);
-	 }
-	 }
-	 else
-	 {
-	 //Special case for combat state
-	 if (newState->toString() == "combat")
-	 {
-	 Actor* closestEnemy = SceneManager::getSceneGraph().getEnemy(_actor->getLocation(), _actor);
-	 if(closestEnemy)
-	 {
-	 _meleeCombat->setup(*_actor, *closestEnemy);
-	 }
-	 }
-	 newState->setup();
-	 currentStates.add(newState);
-	 }
-	 }*/
 
 	void StateMachine::removeState(State* oldState)
 	{
