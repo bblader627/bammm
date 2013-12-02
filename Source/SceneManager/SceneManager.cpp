@@ -226,8 +226,8 @@ namespace bammm
 		for (unsigned int i = 0; i < _allPlayerControllers.getSize(); i++)
 		{
 			current = _allPlayerControllers.get(i);
-			DynamicArray<State*> runningStates = current->runningStates();
-			HashMap<State*> allStates = current->allStates();
+			DynamicArray<State*>& runningStates = current->runningStates();
+			HashMap<State*>& allStates = current->allStates();
 
 			if (current->numberOfStates()==0)  //return *current
 			{

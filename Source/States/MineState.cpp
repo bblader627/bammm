@@ -20,10 +20,16 @@ namespace bammm
 	{
 		_actor = &actor;
 	}
+
 	MineState::MineState(Actor& actor, IStateCallback& stateMachine)
 	{
 		_actor = &actor;
 		registerTransitionCallback(stateMachine);
+	}
+
+	MineState::~MineState()
+	{
+		cout << "Calling deconstructor\n";
 	}
 
 	/*void MineState::setup(DynamicArray<string>* args)

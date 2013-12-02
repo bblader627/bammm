@@ -67,21 +67,8 @@ namespace bammm
 			else
 			{
 				string treeName = _tree->getName();
-				if (_tree->getName() == "Gold")
-				{
-					//_actor->setGold(_actor->getGold() + 1);
-					//_tree->setGold(_tree->getGold() - 1);
-				}
-				else if (_tree->getName() == "Iron")
-				{
-					//_actor->setIron(_actor->getIron() + 1);
-					//_tree->setIron(_tree->getIron() - 1);
-				}
-				else if (_tree->getName() == "Coal")
-				{
-					//_actor->setCoal(_actor->getCoal() + 1);
-					//_tree->setCoal(_tree->getCoal() - 1);
-				}
+				_actor->setWood(_actor->getWood() + 1);
+				_tree->setWood(_tree->getWood() - 1);
 				_actor->reduceStamina(1);
 
 				cout << _actor->getName()
@@ -115,17 +102,7 @@ namespace bammm
 		
 		if(_amountToChop > 0)
 		{
-			if(_tree->getGold() > 0)
-			{
-				canChop++;
-			}
-			
-			if(_tree->getIron() > 0)
-			{
-				canChop++;
-			}
-			
-			if(_tree->getCoal() > 0)
+			if(_tree->getWood() > 0)
 			{
 				canChop++;
 			}

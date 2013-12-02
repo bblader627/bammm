@@ -49,6 +49,7 @@ namespace bammm
 			int _gold;
 			int _coal;
 			int _iron;
+			int _wood;
 			float _BAC;
 
 			bool _collision;
@@ -151,6 +152,13 @@ namespace bammm
 			void setCoal(int coal);
 			
 			/**
+			 setWood
+			 @Pre-Condition- The amount to set the Actor's wood to
+			 @Post-Condition- Returns nothing
+			 */
+			void setWood(int wood);
+
+			/**
 			 increaseHealth
 			 @Pre-Condition- Takes an float amount
 			 @Post-Condition- Increases health by said amount
@@ -220,6 +228,13 @@ namespace bammm
 			 @Post-Condition- Returns _collision
 			 */
 			bool getCollision();
+
+			/**
+			 getWood
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _wood
+			 */
+			int getWood();
 
 			/**
 			 getMeleeWeapon
