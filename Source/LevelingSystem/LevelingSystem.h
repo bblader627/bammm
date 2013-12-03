@@ -15,18 +15,30 @@
 #ifndef LEVELINGSYSTEM_H_
 #define LEVELINGSYSTEM_H_
 
-namespace bammmm
+#include "../Actors/Actor.h"
+
+namespace bammm
 {
 	class LevelingSystem
 	{
-			//static everything
 		private:
-			//return actor?
-			static void levelUP();
-		public:
-			//return actor?
-			static void gainExperience();
+			/**
+			 levelUP
+			 @Pre-Condition- Takes in an Actor* actor
+			 @Post-Condition- Does all the required tasks for when an actor levels up, and returns the modified actor
+			 */
+			static Actor* levelUP(Actor* actor);
 
+		public:
+			LevelingSystem();
+			virtual ~LevelingSystem();
+
+			/**
+			 gainExperience
+			 @Pre-Condition- Takes in an Actor* actor
+			 @Post-Condition- Increments the actors experience, and checks if it should level up. Returns modified actor
+			 */
+			static Actor* gainExperience(Actor* actor);
 	};
 }
 
