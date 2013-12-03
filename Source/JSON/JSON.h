@@ -135,15 +135,19 @@ namespace bammm
 			 */
 			virtual string getStringValue();
 
-			//TODO: Can this be removed?
-			/*
-			 JSON * operator[](int index)
-			 {
-			 DynamicArray<JSON*>* childrenArray = _children.getAllValues();
-			 return childrenArray->get(index);
-			 //return _children.getValue(key);
-			 }
+			/**
+			 getFloatValue
+			 @Pre-Condition-  No input
+			 @Post-Condition- Returns a float value
 			 */
+			virtual float getFloatValue();
+
+			/**
+			 getUIntValue
+			 @Pre-Condition-  No input
+			 @Post-Condition- Returns a uint value
+			 */
+			virtual uint getUIntValue();
 
 			/**
 			 operator[]
