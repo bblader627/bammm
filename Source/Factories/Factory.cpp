@@ -32,11 +32,13 @@ namespace bammm
 
 		HashMap<JSON*>* weaponRootChildren = weaponRoot->getAllChildren();
 
+		//Parse the melee weapons
 		JSON* meleeWeapons = weaponRootChildren->getValue("meleeWeapons");
-		this->parseMeleeWeaponToWeaponData(meleeWeapons, "meleeWeapons",
-				&_meleeWeaponData);
+		this->parseMeleeWeaponToWeaponData(meleeWeapons, &_meleeWeaponData);
 
+		//parse the ranged weapons
 		JSON* rangedWeapons = weaponRootChildren->getValue("rangedWeapons");
+		this->parseRangedWeaponToWeaponData(rangedWeapons, &_rangedWeaponData);
 
 		JSONParser* actorParser = new JSONParser();
 		string actorFilename = "JSON/actors.json";
