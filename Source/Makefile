@@ -4,7 +4,7 @@
 
 RM = rm -f
 SRCPATH = .
-SRC = Actors/Actor.cpp Actors/ActorInfo.cpp \
+SRC = Behavior/Behavior.cpp LevelingSystem/LevelingSystem.cpp Actors/Actor.cpp Actors/ActorInfo.cpp \
 Controllers/AiController.cpp Controllers/Controller.cpp Controllers/PlayerController.cpp \
 States/BrawlState.cpp States/DrinkState.cpp States/MoveState.cpp \
 States/IdleState.cpp Interfaces/IStateCallback.cpp States/MineState.cpp States/CombatState.cpp \

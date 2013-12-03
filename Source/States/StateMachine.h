@@ -82,7 +82,6 @@ namespace bammm
 			 @Post-Condition- Adds the given State state to the state machine
 			 */
 			//void addState(State* newState);
-
 			/**			 
 			 removeState
 			 @Pre-Condition- Takes in a pointer to a State state
