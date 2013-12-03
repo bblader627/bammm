@@ -1,0 +1,25 @@
+{
+	"boomStick": [
+		{ "type":"Boom Stick", "range":2, "clipCapacity":10, "damage":15, "reloadSpeed":4, "fireRate":2.5 }
+	],
+	
+	"bowAndArrow": [
+		{ "type":"Bow and Arrow", "range":3, "clipCapacity":50, "damage":10, "reloadSpeed":1, "fireRate":1 }
+	],
+	
+	"chain": [
+		{ "type":"Chain", "range":2, "clipCapacity":1, "damage":10, "reloadSpeed":1, "fireRate":2.5 }
+	],
+	
+	"BFG": [
+		{ "type":"BFG", "range":4, "clipCapacity":10, "damage":110, "reloadSpeed":4, "fireRate":5 }
+	],
+	
+	"shuriken": [
+		{ "type":"Shuriken", "range":3, "clipCapacity":10, "damage":15, "reloadSpeed":4, "fireRate":3 }
+	],
+	
+	"bolas": [
+		{ "type":"Bolas", "range":3, "clipCapacity":5, "damage":8, "reloadSpeed":5, "fireRate":3 }
+	]
+}
