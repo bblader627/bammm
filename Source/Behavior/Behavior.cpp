@@ -24,7 +24,7 @@ namespace bammm
 	Behavior::Behavior(DynamicArray<string> *baseBehaviors,
 			DynamicArray<int> *baseValues)
 	{
-		int i;
+		unsigned int i;
 		_baseBehaviors = baseBehaviors;
 
 		for (i = 0; i < (int) baseBehaviors->getSize(); i++)
