@@ -37,9 +37,10 @@ namespace bammm
 		_behaviors = new Behavior();
 	}
 
-	ActorInfo::ActorInfo(string type, string name,
-			int attack, int defense, Behavior *behaviors, bool collision,
-			AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood, float BAC)
+	ActorInfo::ActorInfo(string type, string name, int attack, int defense,
+			Behavior *behaviors, bool collision, AllianceType alliance,
+			string symbol, string color, int gold, int coal, int iron, int wood,
+			float BAC)
 	{
 		_type = type;
 		_name = name;
@@ -315,7 +316,7 @@ namespace bammm
 	{
 		return _alliance * -1;
 	}
-	
+
 	void ActorInfo::setBehavior(Behavior *behaviors)
 	{
 		_behaviors = behaviors;
@@ -324,5 +325,35 @@ namespace bammm
 	Behavior* ActorInfo::getBehavior()
 	{
 		return _behaviors;
+	}
+
+	int ActorInfo::getLevel()
+	{
+		return _level;
+	}
+
+	void ActorInfo::setLevel(int newLevel)
+	{
+		_level = newLevel;
+	}
+
+	int ActorInfo::getExperience()
+	{
+		return _experience;
+	}
+
+	void ActorInfo::setExperience(int newExperience)
+	{
+		_experience = newExperience;
+	}
+
+	int ActorInfo::getTotalExperienceThisLevel()
+	{
+		return _totalExperienceThisLevel;
+	}
+
+	void ActorInfo::setTotalExperienceThisLevel(int newTotalExperienceThisLevel)
+	{
+		_totalExperienceThisLevel = newTotalExperienceThisLevel;
 	}
 }
