@@ -23,35 +23,49 @@ namespace bammm
 
 	void Factory::setup()
 	{
-		string actorJSON;
-		JSONParser* parser = new JSONParser();
-		string filename = "JSON/actors.json";
-		parser->parseFile(filename);
+		//Parsing weapon data in
+		JSONParser* weaponParser = new JSONParser();
+		string weaponFilename = "JSON/weapons.json";
+		weaponParser->parseFile(weaponFilename);
+
+		JSON* weaponRoot = weaponParser->getRootNode("root");
+
+		HashMap<JSON*>* weaponRootChildren = weaponRoot->getAllChildren();
+
+		JSON* meleeWeapons = weaponRootChildren->getValue("meleeWeapons");
+		this->parseMeleeWeaponToWeaponData(meleeWeapons, "meleeWeapons",
+				&_meleeWeaponData);
+
+		JSON* rangedWeapons = weaponRootChildren->getValue("rangedWeapons");
+
+		JSONParser* actorParser = new JSONParser();
+		string actorFilename = "JSON/actors.json";
+		actorParser->parseFile(actorFilename);
 
 		// Parsing dwarves
-		JSON* root = parser->getRootNode("root");
+		JSON* actorRoot = actorParser->getRootNode("root");
 
-		HashMap<JSON*>* rootChildren = root->getAllChildren();
+		HashMap<JSON*>* actorRootChildren = actorRoot->getAllChildren();
 
-		JSON* dwarves = rootChildren->getValue("dwarves");
+		JSON* dwarves = actorRootChildren->getValue("dwarves");
 		this->parseToActorInfo(dwarves, "dwarf", &_actorData);
 
-		JSON* orcs = rootChildren->getValue("orcs");
+		JSON* orcs = actorRootChildren->getValue("orcs");
 		this->parseToActorInfo(orcs, "orc", &_actorData);
 		//===========MAP=========//
-		JSON* wall = rootChildren->getValue("wall");
+		JSON* wall = actorRootChildren->getValue("wall");
 		this->parseToActorInfo(wall, "wall", &_blockData);
 
-		JSON* buildings = rootChildren->getValue("buildings");
+		JSON* buildings = actorRootChildren->getValue("buildings");
 		this->parseToActorInfo(buildings, "building", &_blockData);
 
-		JSON* trees = rootChildren->getValue("trees");
+		JSON* trees = actorRootChildren->getValue("trees");
 		this->parseToActorInfo(trees, "tree", &_blockData);
 
-		JSON* ore = rootChildren->getValue("ore");
+		JSON* ore = actorRootChildren->getValue("ore");
 		this->parseToActorInfo(ore, "ore", &_blockData);
 
-		JSON* water = rootChildren->getValue("water");
+		JSON* water = actorRootChildren->getValue("water");
 		this->parseToActorInfo(water, "water", &_blockData);
 	}
 
@@ -243,28 +257,52 @@ namespace bammm
 		}
 	}
 
-	void Factory::parseMeleeWeaponToWeaponData(JSON* rootNode, string type,
+	void Factory::parseMeleeWeaponToWeaponData(JSON* rootNode,
 			HashMap<WeaponData>* map)
 	{
 		int numberOfChildren = rootNode->sizeOfChildren();
 		DynamicArray<JSON*>* rootChildren =
 				rootNode->getAllChildren()->getAllValues();
 
+		//Cycle through every weapon type
 		for (int i = 0; i < numberOfChildren; i++)
 		{
 			JSON* child = rootChildren->get(i);
 
 			string type = child->getChild("type")->getStringValue();
-			int damage = child->getChild("damage")->getStringValue();
+			int damage = child->getChild("damage")->getIntValue();
 
-			WeaponData weaponData(0, 0, damage, 0, 0, "", type);
-			MeleeWeapon* newWeapon = new MeleeWeapon(weaponData);
+			//Create the data specifying this melee weapon
+			WeaponData* weaponData = new weaponData(0, 0, damage, 0, 0, "",
+					type);
+
+			map->add(type, *weaponData); //Save this data in the map.
 		}
 	}
 
-	void Factory::parseRangedWeaponToWeaponData(JSON* rootNode, string type,
+	void Factory::parseRangedWeaponToWeaponData(JSON* rootNode,
 			HashMap<WeaponData>* map)
 	{
+		int numberOfChildren = rootNode->sizeOfChildren();
+		DynamicArray<JSON*>* rootChildren =
+				rootNode->getAllChildren()->getAllValues();
+		//Cycle through every weapon type
+		for (int i = 0; i < numberOfChildren; i++)
+		{
+			JSON* child = rootChildren->get(i);
+			string type = child->getChild("type")->getStringValue();
+			int range = child->getChild("range")->getIntValue();
+			int clipCapacity = child->getChild("clipCapacity")->getIntValue();
+			int ammoCount = clipCapacity; //full clip
+			int damage = child->getChild("damage")->getIntValue();
+			float reloadSpeed = child->getChild("reloadSpeed")->getFloatValue();
+			uint fireRate = child->getChild("fireRate")->getUIntValue();
 
+			//Create the data specifying this ranged weapon
+			WeaponData* weaponData = new weaponData(range, clipCapacity, damage,
+					reloadSpeed, fireRate, "", type);
+
+			map->add(type, *weaponData); //Save this data in the map.
+		}
 	}
 }

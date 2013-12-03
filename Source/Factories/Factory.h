@@ -59,7 +59,7 @@ namespace bammm
 			 @Pre-Condition- accepts pointer to root JSON node and type string and map
 			 @Post-Condition- Data is parsed and stored in map
 			 */
-			void parseMeleeWeaponToWeaponData(JSON* rootNode, string type,
+			void parseMeleeWeaponToWeaponData(JSON* rootNode,
 					HashMap<WeaponData>* map);
 
 			/*
@@ -67,7 +67,7 @@ namespace bammm
 			 @Pre-Condition- accepts pointer to root JSON node and type string and map
 			 @Post-Condition- Data is parsed and stored in map
 			 */
-			void parseRangedWeaponToWeaponData(JSON* rootNode, string type,
+			void parseRangedWeaponToWeaponData(JSON* rootNode,
 					HashMap<WeaponData>* map);
 
 		public:
