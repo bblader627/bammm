@@ -33,7 +33,7 @@ namespace bammm
 		protected:
 			Actor* _actor;
 			IStateCallback* _stateMachine;
-			static LevelingSystem _levelingSystem;
+			LevelingSystem _levelingSystem;
 
 		public:
 			State();
