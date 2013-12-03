@@ -193,7 +193,7 @@ namespace bammm
 			string name = child->getChild("name")->getStringValue();
 			int attack = child->getChild("attack")->getIntValue();
 			int defense = child->getChild("defense")->getIntValue();
-			string behaviorstr = child->getChild("behavior")->getStringValue();
+			string behaviorString = child->getChild("behavior")->getStringValue();
 			int behaviorValue = child->getChild("behaviorValue")->getIntValue();
 			bool collision = child->getChild("collision")->getBoolValue();
 			float x = (float) child->getChild("x")->getIntValue();
@@ -222,7 +222,7 @@ namespace bammm
 			}
 
 			Behavior* behavior = new Behavior();
-			behavior->addBaseBehavior(behaviorstr, behaviorValue);
+			behavior->addBaseBehavior(behaviorString, behaviorValue);
 
 			ActorInfo* info = new ActorInfo(type, name, attack, defense,
 					behavior, collision, alliance, symbol, color, gold, coal,
