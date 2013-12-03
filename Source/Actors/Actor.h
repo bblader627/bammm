@@ -395,7 +395,7 @@ namespace bammm
 			 @Pre-Condition- Takes an int of new level
 			 @Post-Condition- Sets the level to the given input
 			 */
-			int setLevel(int newLevel);
+			void setLevel(int newLevel);
 
 			/**
 			 getExperience
@@ -409,7 +409,7 @@ namespace bammm
 			 @Pre-Condition- Takes an int of newExperience
 			 @Post-Condition- Sets the experience to the given input
 			 */
-			int setExperience(int newExperience);
+			void setExperience(int newExperience);
 
 			/**
 			 getTotalExperienceThisLevel
@@ -423,7 +423,7 @@ namespace bammm
 			 @Pre-Condition- Takes an int of newTotalExperienceThisLevel
 			 @Post-Condition- Sets the experience to the given input
 			 */
-			int setTotalExperienceThisLevel(int newTotalExperienceThisLevel);
+			void setTotalExperienceThisLevel(int newTotalExperienceThisLevel);
 
 			/**
 			 toString
