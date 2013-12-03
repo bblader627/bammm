@@ -56,13 +56,13 @@ namespace bammm
 	}
 
 	/*Actor Factory::getActor(string type, string name, int health, int stamina,
-			int attack, int defense, string behavior, bool collision)
-	{
-		Actor* newActor = new Actor(type, name, health, stamina, attack,
-				defense, behavior, AllianceType::enemy);
-		newActor->setLocation(new Vector3D(0.0f, 0.0f, 0.0f));
-		return *newActor;
-	}*/
+	 int attack, int defense, string behavior, bool collision)
+	 {
+	 Actor* newActor = new Actor(type, name, health, stamina, attack,
+	 defense, behavior, AllianceType::enemy);
+	 newActor->setLocation(new Vector3D(0.0f, 0.0f, 0.0f));
+	 return *newActor;
+	 }*/
 
 	MeleeWeapon getMeleeWeapon(string type)
 	{
@@ -172,8 +172,8 @@ namespace bammm
 			fireRate = 3;
 		}
 
-		WeaponData weaponData(range, clipCapacity, damage,
-				reloadSpeed, fireRate, "", type);
+		WeaponData weaponData(range, clipCapacity, damage, reloadSpeed,
+				fireRate, "", type);
 		RangedWeapon* newWeapon = new RangedWeapon(weaponData);
 
 		return *newWeapon;
@@ -221,18 +221,18 @@ namespace bammm
 				alliance = AllianceType::enemy;
 			}
 
-			Behavior  *behavior = new Behavior();
-			behavior->addBaseBehavior(behaviorstr,behaviorValue);
+			Behavior* behavior = new Behavior();
+			behavior->addBaseBehavior(behaviorstr, behaviorValue);
 
-			ActorInfo* info = new ActorInfo(type, name,attack,
-					defense, behavior, collision, alliance, symbol, color, gold,
-					coal, iron, wood, 0); //that zero is for BAC
+			ActorInfo* info = new ActorInfo(type, name, attack, defense,
+					behavior, collision, alliance, symbol, color, gold, coal,
+					iron, wood, 0); //that zero is for BAC
 			info->setLocation(new Vector3D(x, y, z));
 
 			string i_str = "" + i;
 			map->add(type + i_str, *info);
 			Actor* myActor = new Actor(info);
-			WeaponData weaponData(10,2,"","");
+			WeaponData weaponData(10, 2, "", "");
 			MeleeWeapon* meleeWeapon = new MeleeWeapon(weaponData);
 			myActor->setMeleeWeapon(meleeWeapon);
 			scene->addActor(myActor);
