@@ -216,6 +216,26 @@ namespace bammm
 		return _stats->getStamina();
 	}
 
+	int Actor::getMaximumHealth()
+	{
+		return _stats->_maximumHealth;
+	}
+
+	int Actor::getMaximumStamina()
+	{
+		return _stats->_maximumStamina;
+	}
+
+	void Actor::setMaximumHealth(int maximumHealth)
+	{
+		_stats->_maximumHealth = maximumHealth;
+	}
+
+	void Actor::setMaximumStamina(int maximumStamina)
+	{
+		_stats->_maximumStamina = maximumStamina;
+	}
+
 	int Actor::getAttack()
 	{
 		return _stats->getAttack();
