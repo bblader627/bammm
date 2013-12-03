@@ -69,7 +69,6 @@ namespace bammm
 					HashMap<WeaponData>* map);
 
 		public:
-			//Add default constructor where scene is instantiated
 			Factory(SceneManager* manager);
 
 			/*
