@@ -70,9 +70,19 @@ namespace bammm
 		return _health;
 	}
 
+	int ActorInfo::getMaximumHealth()
+	{
+		return _maximumHealth;
+	}
+
 	int ActorInfo::getStamina()
 	{
 		return _stamina;
+	}
+
+	int ActorInfo::getMaximumStamina()
+	{
+		return _maximumStamina;
 	}
 
 	int ActorInfo::getAttack()
