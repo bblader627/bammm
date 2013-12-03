@@ -80,119 +80,32 @@ namespace bammm
 	 return *newActor;
 	 }*/
 
-	MeleeWeapon getMeleeWeapon(string type)
+	MeleeWeapon Factory::getMeleeWeapon(string type)
 	{
-		int damage;
-
-		if (type == "stein")
+		WeaponData* weaponData;
+		if ((weaponData = _meleeWeaponData.getValue(type)) != NULL)
 		{
-			damage = 2;
-		}
-		else if (type == "greatSword")
-		{
-			damage = 10;
-		}
-		else if (type == "battleAxe")
-		{
-			damage = 10;
-		}
-		else if (type == "chainSaw")
-		{
-			damage = 10;
-		}
-		else if (type == "katana")
-		{
-			damage = 10;
-		}
-		else if (type == "swordOf1000Truths")
-		{
-			damage = 110;
-		}
-		else if (type == "practiceSword")
-		{
-			damage = 1;
+			MeleeWeapon* newWeapon = new MeleeWeapon(weaponData);
+			return *newWeapon;
 		}
 		else
 		{
-			damage = 10;
+			return NULL;
 		}
-
-		WeaponData weaponData(0, 0, damage, 0, 0, "", type);
-		MeleeWeapon* newWeapon = new MeleeWeapon(weaponData);
-
-		return *newWeapon;
 	}
 
-	RangedWeapon getRangedWeapon(string type)
+	RangedWeapon Factory::getRangedWeapon(string type)
 	{
-		int range;
-		int clipCapacity;
-		int damage;
-		float reloadSpeed;
-		uint fireRate;
-
-		if (type == "boomStick")
+		WeaponData* weaponData;
+		if ((weaponData = _rangedWeaponData.getValue(type)) != NULL)
 		{
-			range = 2;
-			clipCapacity = 10;
-			damage = 15;
-			reloadSpeed = 4;
-			fireRate = 2.5;
-		}
-		else if (type == "bowAndArrow")
-		{
-			range = 3;
-			clipCapacity = 50;
-			damage = 10;
-			reloadSpeed = 1;
-			fireRate = 1;
-		}
-		else if (type == "chain")
-		{
-			range = 2;
-			clipCapacity = 1;
-			damage = 10;
-			reloadSpeed = 1;
-			fireRate = 2.5;
-		}
-		else if (type == "BFG")
-		{
-			range = 4;
-			clipCapacity = 10;
-			damage = 110;
-			reloadSpeed = 4;
-			fireRate = 5;
-		}
-		else if (type == "shuriken")
-		{
-			range = 3;
-			clipCapacity = 10;
-			damage = 15;
-			reloadSpeed = 4;
-			fireRate = 3;
-		}
-		else if (type == "bolas")
-		{
-			range = 3;
-			clipCapacity = 5;
-			damage = 8;
-			reloadSpeed = 5;
-			fireRate = 3;
+			RangedWeapon* newWeapon = new RangedWeapon(weaponData);
+			return *newWeapon;
 		}
 		else
 		{
-			range = 3;
-			clipCapacity = 5;
-			damage = 10;
-			reloadSpeed = 5;
-			fireRate = 3;
+			return NULL;
 		}
-
-		WeaponData weaponData(range, clipCapacity, damage, reloadSpeed,
-				fireRate, "", type);
-		RangedWeapon* newWeapon = new RangedWeapon(weaponData);
-
-		return *newWeapon;
 	}
 
 	void Factory::parseToActorInfo(JSON* rootNode, string type,
@@ -251,6 +164,7 @@ namespace bammm
 			Actor* myActor = new Actor(info);
 
 			//TODO: This needs to be redone to use the factory... so we ahve to parse weapon data first?
+			//The Actor JSON needs to specify what weapon it wants..?
 			WeaponData weaponData(10, 2, "", "");
 			MeleeWeapon* meleeWeapon = new MeleeWeapon(weaponData);
 			myActor->setMeleeWeapon(meleeWeapon);
