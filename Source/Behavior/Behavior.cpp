@@ -27,7 +27,7 @@ namespace bammm
 		int i;
 		_baseBehaviors = baseBehaviors;
 
-		for (i = 0; i < baseBehaviors->getSize(); i++)
+		for (i = 0; i < (int) baseBehaviors->getSize(); i++)
 		{
 			addBehavior(_baseBehaviors->get(i), baseValues->get(i));
 		}
