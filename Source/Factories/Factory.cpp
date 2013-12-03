@@ -36,7 +36,7 @@ namespace bammm
 		JSON* meleeWeapons = weaponRootChildren->getValue("meleeWeapons");
 		this->parseMeleeWeaponToWeaponData(meleeWeapons, &_meleeWeaponData);
 
-		//parse the ranged weapons
+		//Parse the ranged weapons
 		JSON* rangedWeapons = weaponRootChildren->getValue("rangedWeapons");
 		this->parseRangedWeaponToWeaponData(rangedWeapons, &_rangedWeaponData);
 
@@ -44,7 +44,7 @@ namespace bammm
 		string actorFilename = "JSON/actors.json";
 		actorParser->parseFile(actorFilename);
 
-		// Parsing dwarves
+		//Parsing dwarves
 		JSON* actorRoot = actorParser->getRootNode("root");
 
 		HashMap<JSON*>* actorRootChildren = actorRoot->getAllChildren();
