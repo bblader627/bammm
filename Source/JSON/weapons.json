@@ -1,5 +1,5 @@
 {
-	"meleeWeapon": [
+	"meleeWeapons": [
 		{ "type":"Stein", "damage":2 },
 		{ "type":"Great Sword", "damage":10 },
 		{ "type":"Battle Axe", "damage":10 },
@@ -9,7 +9,7 @@
 		{ "type":"Practice Sword", "damage":1 }
 	],
 	
-	"rangedWeapon": [
+	"rangedWeapons": [
 		{ "type":"Boom Stick", "range":2, "clipCapacity":10, "damage":15, "reloadSpeed":4, "fireRate":2.5 },
 		{ "type":"Bow and Arrow", "range":3, "clipCapacity":50, "damage":10, "reloadSpeed":1, "fireRate":1 },
 		{ "type":"Chain", "range":2, "clipCapacity":1, "damage":10, "reloadSpeed":1, "fireRate":2.5 },
