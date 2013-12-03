@@ -35,6 +35,9 @@ namespace bammm
 		_wood = 0;
 		_BAC = 0;
 		_behaviors = new Behavior();
+		_level = 1;
+		_experience = 0;
+		_totalExperienceThisLevel = 1;
 	}
 
 	ActorInfo::ActorInfo(string type, string name, int attack, int defense,
@@ -58,6 +61,9 @@ namespace bammm
 		_iron = iron;
 		_wood = wood;
 		_BAC = BAC;
+		_level = 1;
+		_experience = 0;
+		_totalExperienceThisLevel = 1;
 	}
 
 	string ActorInfo::getType()
