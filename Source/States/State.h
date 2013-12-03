@@ -22,6 +22,8 @@
 #include "../Actors/Actor.h"
 #include "../SceneManager/Vector3D.h"
 #include "../Resources/Constant.h"
+#include "../LevelingSystem/LevelingSystem.h"
+
 using namespace std;
 
 namespace bammm
@@ -31,6 +33,7 @@ namespace bammm
 		protected:
 			Actor* _actor;
 			IStateCallback* _stateMachine;
+			static LevelingSystem _levelingSystem;
 
 		public:
 			State();

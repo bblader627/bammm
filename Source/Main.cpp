@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <random>
 #include <exception>
+#include "LevelingSystem/LevelingSystem.h"
 
 using namespace bammm;
 using namespace std;
