@@ -27,7 +27,7 @@ namespace bammm
 	{
 		private:
 			HashMap<int> _desireTable;
-			DynamicArray<string> *_baseBehaviors;
+			DynamicArray<string>* _baseBehaviors;
 
 		public:
 			Behavior();
