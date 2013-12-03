@@ -48,11 +48,17 @@ namespace bammm
 			int _wood;
 			float _BAC;
 
+			//Leveling
+			int _level;
+			int _experience;
+			int _totalExperienceThisLevel;
+
 		public:
 			ActorInfo();
-			ActorInfo(string type, string name,
-					int attack, int defense, Behavior *behaviors, bool collision,
-					AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood, float BAC);
+			ActorInfo(string type, string name, int attack, int defense,
+					Behavior *behaviors, bool collision, AllianceType alliance,
+					string symbol, string color, int gold, int coal, int iron,
+					int wood, float BAC);
 
 			/**
 			 getType
@@ -144,21 +150,21 @@ namespace bammm
 			 @Post-Condition- Returns _gold
 			 */
 			int getGold();
-			
+
 			/**
 			 getWood
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _wood
 			 */
 			int getWood();
-			
+
 			/**
 			 getColor
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _coal
 			 */
 			int getCoal();
-			
+
 			/**
 			 getIron
 			 @Pre-Condition- No input
@@ -299,7 +305,7 @@ namespace bammm
 			 @Post-Condition- returns nothing
 			 */
 			void setColor(string color);
-			
+
 			/**
 			 setGold
 			 @Pre-Condition- The amount to set the Actor's gold to
@@ -313,14 +319,14 @@ namespace bammm
 			 @Post-Condition- Returns nothing
 			 */
 			void setIron(int iron);
-			
+
 			/**
 			 setCoal
 			 @Pre-Condition- The amount to set the Actor's coal to
 			 @Post-Condition- Returns nothing
 			 */
 			void setCoal(int coal);
-			
+
 			/**
 			 setWood
 			 @Pre-Condition- The amount to set the Actor's wood to
@@ -363,6 +369,47 @@ namespace bammm
 			 */
 			Behavior* getBehavior();
 
+			/**
+			 getLevel
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the current level
+			 */
+			int getLevel();
+
+			/**
+			 setLevel
+			 @Pre-Condition- Takes an int of new level
+			 @Post-Condition- Sets the level to the given input
+			 */
+			int setLevel(int newLevel);
+
+			/**
+			 getExperience
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the current experience
+			 */
+			int getExperience();
+
+			/**
+			 setExperience
+			 @Pre-Condition- Takes an int of newExperience
+			 @Post-Condition- Sets the experience to the given input
+			 */
+			int setExperience(int newExperience);
+
+			/**
+			 getTotalExperienceThisLevel
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the current totalExperienceThisLevel
+			 */
+			int getTotalExperienceThisLevel();
+
+			/**
+			 setTotalExperienceThisLevel
+			 @Pre-Condition- Takes an int of newTotalExperienceThisLevel
+			 @Post-Condition- Sets the experience to the given input
+			 */
+			int setTotalExperienceThisLevel(int newTotalExperienceThisLevel);
 	};
 }
 
