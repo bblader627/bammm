@@ -39,10 +39,12 @@ namespace bammm
 	class Factory
 	{
 		private:
-			HashMap<ActorInfo> actorData;
-			HashMap<ActorInfo> blockData;
-			HashMap<ActorInfo> mapData;
-			SceneManager* scene;
+			HashMap<ActorInfo> _actorData;
+			HashMap<ActorInfo> _blockData;
+			HashMap<ActorInfo> _mapData;
+			HashMap<WeaponData> _meleeWeaponData;
+			HashMap<WeaponData> _rangedWeaponData;
+			SceneManager* _scene;
 
 			/*
 			 parseToActorInfo

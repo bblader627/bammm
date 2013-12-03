@@ -18,7 +18,7 @@ namespace bammm
 {
 	Factory::Factory(SceneManager* manager)
 	{
-		scene = manager;
+		_scene = manager;
 	}
 
 	void Factory::setup()
@@ -34,25 +34,25 @@ namespace bammm
 		HashMap<JSON*>* rootChildren = root->getAllChildren();
 
 		JSON* dwarves = rootChildren->getValue("dwarves");
-		this->parseToActorInfo(dwarves, "dwarf", &actorData);
+		this->parseToActorInfo(dwarves, "dwarf", &_actorData);
 
 		JSON* orcs = rootChildren->getValue("orcs");
-		this->parseToActorInfo(orcs, "orc", &actorData);
+		this->parseToActorInfo(orcs, "orc", &_actorData);
 		//===========MAP=========//
 		JSON* wall = rootChildren->getValue("wall");
-		this->parseToActorInfo(wall, "wall", &blockData);
+		this->parseToActorInfo(wall, "wall", &_blockData);
 
 		JSON* buildings = rootChildren->getValue("buildings");
-		this->parseToActorInfo(buildings, "building", &blockData);
+		this->parseToActorInfo(buildings, "building", &_blockData);
 
 		JSON* trees = rootChildren->getValue("trees");
-		this->parseToActorInfo(trees, "tree", &blockData);
+		this->parseToActorInfo(trees, "tree", &_blockData);
 
 		JSON* ore = rootChildren->getValue("ore");
-		this->parseToActorInfo(ore, "ore", &blockData);
+		this->parseToActorInfo(ore, "ore", &_blockData);
 
 		JSON* water = rootChildren->getValue("water");
-		this->parseToActorInfo(water, "water", &blockData);
+		this->parseToActorInfo(water, "water", &_blockData);
 	}
 
 	/*Actor Factory::getActor(string type, string name, int health, int stamina,
@@ -193,7 +193,8 @@ namespace bammm
 			string name = child->getChild("name")->getStringValue();
 			int attack = child->getChild("attack")->getIntValue();
 			int defense = child->getChild("defense")->getIntValue();
-			string behaviorString = child->getChild("behavior")->getStringValue();
+			string behaviorString =
+					child->getChild("behavior")->getStringValue();
 			int behaviorValue = child->getChild("behaviorValue")->getIntValue();
 			bool collision = child->getChild("collision")->getBoolValue();
 			float x = (float) child->getChild("x")->getIntValue();
@@ -232,10 +233,38 @@ namespace bammm
 			string i_str = "" + i;
 			map->add(type + i_str, *info);
 			Actor* myActor = new Actor(info);
+
+			//TODO: This needs to be redone to use the factory... so we ahve to parse weapon data first?
 			WeaponData weaponData(10, 2, "", "");
 			MeleeWeapon* meleeWeapon = new MeleeWeapon(weaponData);
 			myActor->setMeleeWeapon(meleeWeapon);
-			scene->addActor(myActor);
+
+			_scene->addActor(myActor);
 		}
+	}
+
+	void Factory::parseMeleeWeaponToWeaponData(JSON* rootNode, string type,
+			HashMap<WeaponData>* map)
+	{
+		int numberOfChildren = rootNode->sizeOfChildren();
+		DynamicArray<JSON*>* rootChildren =
+				rootNode->getAllChildren()->getAllValues();
+
+		for (int i = 0; i < numberOfChildren; i++)
+		{
+			JSON* child = rootChildren->get(i);
+
+			string type = child->getChild("type")->getStringValue();
+			int damage = child->getChild("damage")->getStringValue();
+
+			WeaponData weaponData(0, 0, damage, 0, 0, "", type);
+			MeleeWeapon* newWeapon = new MeleeWeapon(weaponData);
+		}
+	}
+
+	void Factory::parseRangedWeaponToWeaponData(JSON* rootNode, string type,
+			HashMap<WeaponData>* map)
+	{
+
 	}
 }
