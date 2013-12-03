@@ -93,6 +93,16 @@ namespace bammm
 		return _value.str;
 	}
 
+	float JSONPrimitive::getFloatValue()
+	{
+		return _value.f;
+	}
+
+	uint JSONPrimitive::getUIntValue()
+	{
+		return _value.u;
+	}
+
 	void JSONPrimitive::setValue(int newValue)
 	{
 		_value.i = newValue;
