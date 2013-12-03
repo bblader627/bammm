@@ -21,8 +21,8 @@ namespace bammm
 	{
 		_type = "none";
 		_name = "n/a";
-		_health = MAX_HEALTH;
-		_stamina = MAX_STAMINA;
+		_health = _maximumHealth;
+		_stamina = _maximumStamina;
 		_attack = 10;
 		_defense = 10;
 		_collision = true;
@@ -44,8 +44,8 @@ namespace bammm
 	{
 		_type = type;
 		_name = name;
-		_health = MAX_HEALTH;
-		_stamina = MAX_STAMINA;
+		_health = _maximumHealth;
+		_stamina = _maximumStamina;
 		_attack = attack;
 		_defense = defense;
 		_behaviors = behaviors;
@@ -207,9 +207,9 @@ namespace bammm
 
 	void ActorInfo::increaseHealth(int amount)
 	{
-		if (_health >= MAX_HEALTH)
+		if (_health >= _maximumHealth)
 		{
-			_health = MAX_HEALTH;
+			_health = _maximumHealth;
 			return;
 		}
 		else
@@ -220,9 +220,9 @@ namespace bammm
 
 	void ActorInfo::increaseStamina(int amount)
 	{
-		if (_stamina >= MAX_STAMINA)
+		if (_stamina >= _maximumStamina)
 		{
-			_stamina = MAX_STAMINA;
+			_stamina = _maximumStamina;
 			return;
 		}
 		else
@@ -258,7 +258,7 @@ namespace bammm
 
 	bool ActorInfo::isFullyRested()
 	{
-		if (_health == MAX_HEALTH && _stamina == MAX_STAMINA)
+		if (_health == _maximumHealth && _stamina == _maximumStamina)
 		{
 			return true;
 		}

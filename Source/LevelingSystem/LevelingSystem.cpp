@@ -28,10 +28,12 @@ namespace bammm
 
 	static Actor* LevelingSystem::levelUP(Actor* actor)
 	{
-		actor->_stats->_experience = 0;
-		actor->_stats->_totalExperienceThisLevel *= 2;
-		actor->_stats->MAX_HEALTH += 10;
-		actor->_stats->_health = actor->_stats->MAX_HEALTH;
+		actor->setExperience = 0;
+		actor->setTotalExperienceThisLevel(
+				actor->getTotalExperienceThisLevel() * 2);
+
+		actor->_stats->_maximumHealth += 10;
+		actor->_stats->_health = actor->_stats->_maximumHealth;
 		actor->_stats->_attack += 10;
 		actor->_stats->_defense += 10;
 		actor->_stats->_level++;

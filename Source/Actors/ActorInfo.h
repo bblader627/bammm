@@ -27,8 +27,8 @@ namespace bammm
 	class ActorInfo
 	{
 		private:
-			int MAX_HEALTH = 100;
-			int MAX_STAMINA = 50;
+			int _maximumHealth = 100;
+			int _maximumStamina = 50;
 
 			string _name;
 			string _type;
@@ -82,11 +82,25 @@ namespace bammm
 			int getHealth();
 
 			/**
+			 getMaximumHealth
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns maximumHealth
+			 */
+			int getMaximumHealth();
+
+			/**
 			 getStamina
 			 @Pre-Condition- takes no arguments
 			 @Post-Condition- returns stamina
 			 */
 			int getStamina();
+
+			/**
+			 getMaximumStamina
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns maximumStamina
+			 */
+			int getMaximumStamina();
 
 			/**
 			 getAttack
@@ -194,11 +208,25 @@ namespace bammm
 			void setHealth(int health);
 
 			/**
+			 setMaximumHealth
+			 @Pre-Condition- takes in maximumHealth to set
+			 @Post-Condition- returns void
+			 */
+			void setMaximumHealth(int maximumHealth);
+
+			/**
 			 setStamina
 			 @Pre-Condition- takes in stamina to set
 			 @Post-Condition- returns void
 			 */
 			void setStamina(int stamina);
+
+			/**
+			 setMaximumStamina
+			 @Pre-Condition- takes in maximumStamina to set
+			 @Post-Condition- returns void
+			 */
+			void setMaximumStamina(int maximumStamina);
 
 			/**
 			 setAttack
