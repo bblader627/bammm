@@ -165,9 +165,19 @@ namespace bammm
 		_health = health;
 	}
 
+	void ActorInfo::setMaximumHealth(int maximumHealth)
+	{
+		_maximumHealth = maximumHealth;
+	}
+
 	void ActorInfo::setStamina(int stamina)
 	{
 		_stamina = stamina;
+	}
+
+	void ActorInfo::setMaximumStamina(int maximumStamina)
+	{
+		_maximumStamina = maximumStamina;
 	}
 
 	void ActorInfo::setAttack(int attack)
