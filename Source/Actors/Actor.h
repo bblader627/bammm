@@ -316,7 +316,7 @@ namespace bammm
 			/**
 			 setHealth
 			 @Pre-Condition- Takes in an int newHealth
-			 @Post-Condition- Returns sets _health to newHealth
+			 @Post-Condition- Sets _health to newHealth
 			 */
 			void setHealth(int newHealth);
 
@@ -335,11 +335,25 @@ namespace bammm
 			int getAttack();
 
 			/**
+			 setAttack
+			 @Pre-Condition- Takes in int newAttack
+			 @Post-Condition- Sets attack to newAttack
+			 */
+			void setAttack(int newAttack);
+
+			/**
 			 getDefense
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _defense
 			 */
 			int getDefense();
+
+			/**
+			 setDefense
+			 @Pre-Condition- Takes in int newDefense
+			 @Post-Condition- Sets defense to newDefense
+			 */
+			void setDefense(int newDefense);
 
 			/**
 			 getX

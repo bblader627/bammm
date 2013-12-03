@@ -246,9 +246,19 @@ namespace bammm
 		return _stats->getAttack();
 	}
 
+	void Actor::setAttack(int newAttack)
+	{
+		_stats->setAttack(newAttack);
+	}
+
 	int Actor::getDefense()
 	{
 		return _stats->getDefense();
+	}
+
+	void Actor::setDefense(int newDefense)
+	{
+		_stats->setDefense(newDefense);
 	}
 
 	string Actor::getType()
