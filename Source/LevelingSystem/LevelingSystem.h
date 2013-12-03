@@ -27,7 +27,7 @@ namespace bammm
 			 @Pre-Condition- Takes in an Actor* actor
 			 @Post-Condition- Does all the required tasks for when an actor levels up, and returns the modified actor
 			 */
-			static Actor* levelUP(Actor* actor);
+			Actor* levelUP(Actor* actor);
 
 		public:
 			LevelingSystem();
@@ -38,7 +38,7 @@ namespace bammm
 			 @Pre-Condition- Takes in an Actor* actor
 			 @Post-Condition- Increments the actors experience, and checks if it should level up. Returns modified actor
 			 */
-			static Actor* gainExperience(Actor* actor);
+			Actor* gainExperience(Actor* actor);
 	};
 }
 
