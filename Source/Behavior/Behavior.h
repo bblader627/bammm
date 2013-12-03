@@ -32,7 +32,7 @@ namespace bammm
 		public:
 			Behavior();
 			Behavior(DynamicArray<string> *baseBehaviors,
-					DynamicArray<string> *baseValues);
+					DynamicArray<int> *baseValues);
 
 			/**
 			 addBehavior

@@ -22,7 +22,7 @@ namespace bammm
 	}
 
 	Behavior::Behavior(DynamicArray<string> *baseBehaviors,
-			DynamicArray<string> *baseValues)
+			DynamicArray<int> *baseValues)
 	{
 		int i;
 		_baseBehaviors = baseBehaviors;
