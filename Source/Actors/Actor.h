@@ -138,6 +138,34 @@ namespace bammm
 			void setWood(int wood);
 
 			/**
+			 getMaximumHealth
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns maximumHealth
+			 */
+			int getMaximumHealth();
+
+			/**
+			 setMaximumHealth
+			 @Pre-Condition- takes in maximumHealth to set
+			 @Post-Condition- returns void
+			 */
+			void setMaximumHealth(int maximumHealth);
+
+			/**
+			 getMaximumStamina
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns maximumStamina
+			 */
+			int getMaximumStamina();
+
+			/**
+			 setMaximumStamina
+			 @Pre-Condition- takes in maximumStamina to set
+			 @Post-Condition- returns void
+			 */
+			void setMaximumStamina(int maximumStamina);
+
+			/**
 			 increaseHealth
 			 @Pre-Condition- Takes an float amount
 			 @Post-Condition- Increases health by said amount
