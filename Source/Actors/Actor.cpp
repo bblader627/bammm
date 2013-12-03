@@ -276,6 +276,36 @@ namespace bammm
 		return _stats->getEnemyAlliance();
 	}
 
+	int Actor::getLevel()
+	{
+		return _stats->getLevel();
+	}
+
+	void Actor::setLevel(int newLevel)
+	{
+		_stats->setLevel(newLevel);
+	}
+
+	int Actor::getExperience()
+	{
+		return _stats->getExperience();
+	}
+
+	void Actor::setExperience(int newExperience)
+	{
+		_stats->setExperience(newExperience);
+	}
+
+	int Actor::getTotalExperienceThisLevel()
+	{
+		return _stats->getTotalExperienceThisLevel();
+	}
+
+	void Actor::setTotalExperienceThisLevel(int newTotalExperienceThisLevel)
+	{
+		_stats->setTotalExperienceThisLevel(newTotalExperienceThisLevel);
+	}
+
 	string Actor::toString()
 	{
 		return _stats->getName();
