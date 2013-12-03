@@ -42,16 +42,31 @@ namespace bammm
 			HashMap<ActorInfo> actorData;
 			HashMap<ActorInfo> blockData;
 			HashMap<ActorInfo> mapData;
-			//HashMap<ArmorInfo> armorData;
 			SceneManager* scene;
 
 			/*
-			 parseToInfo
+			 parseToActorInfo
 			 @Pre-Condition- accepts pointer to root JSON node and type string
 			 @Post-Condition- returns void
 			 */
 			void parseToActorInfo(JSON* rootNode, string type,
 					HashMap<ActorInfo>* map);
+
+			/*
+			 parseMeleeWeaponToWeaponData
+			 @Pre-Condition- accepts pointer to root JSON node and type string and map
+			 @Post-Condition- Data is parsed and stored in map
+			 */
+			void parseMeleeWeaponToWeaponData(JSON* rootNode, string type,
+					HashMap<WeaponData>* map);
+
+			/*
+			 parseRangedWeapontoWeaponData
+			 @Pre-Condition- accepts pointer to root JSON node and type string and map
+			 @Post-Condition- Data is parsed and stored in map
+			 */
+			void parseRangedWeapontoWeaponData(JSON* rootNode, string type,
+					HashMap<WeaponData>* map);
 
 		public:
 			//Add default constructor where scene is instantiated
