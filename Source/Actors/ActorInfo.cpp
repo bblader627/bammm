@@ -325,6 +325,4 @@ namespace bammm
 	{
 		return _behaviors;
 	}
-
-
 }
