@@ -31,22 +31,21 @@ namespace bammm
 		actor->setExperience = 0;
 		actor->setTotalExperienceThisLevel(
 				actor->getTotalExperienceThisLevel() * 2);
-
-		actor->_stats->_maximumHealth += 10;
-		actor->_stats->_health = actor->_stats->_maximumHealth;
-		actor->_stats->_attack += 10;
-		actor->_stats->_defense += 10;
-		actor->_stats->_level++;
+		actor->setMaximumHealth(actor->getMaximumHealth() + 10);
+		actor->setHealth(actor->getMaximumHealth());
+		actor->setAttack(actor->getAttack() + 10);
+		actor->setDefense(actor->getDefense() + 10);
+		actor->setLevel(actor->getLevel() + 1);
 
 		cout
-				<< "DING! " + actor->_stats->_name + " has reached level "
-						+ actor->_stats->_level + "!" << endl;
+				<< "DING! " + actor->getName() + " has reached level "
+						+ actor->getLevel() + "!" << endl;
 		cout
-				<< "His powers have improved: " + actor->_stats->_health + " "
-						+ actor->_stats->_attack + " " + actor->_stats->_defense
+				<< "His powers have improved: " + actor->getHealth() + " "
+						+ actor->getAttack() + " " + actor->getDefense()
 				<< endl;
 		cout
-				<< actor->_stats->_totalExperienceThisLevel
+				<< actor->getTotalExperienceThisLevel()
 						+ " more kills till next level." << endl;
 
 		return actor;
@@ -54,10 +53,9 @@ namespace bammm
 
 	static Actor* LevelingSystem::gainExperience(Actor* actor)
 	{
-		actor->_stats->_experience++;
+		actor->setExperience(actor->getExperience() + 1);
 
-		if (actor->_stats->_experience
-				== actor->_stats->_totalExperienceThisLevel)
+		if (actor->getExperience() == actor->getTotalExperienceThisLevel())
 		{
 			actor = levelUP(actor);
 			return actor;
