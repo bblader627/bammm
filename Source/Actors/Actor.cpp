@@ -211,9 +211,34 @@ namespace bammm
 		return _stats->getHealth();
 	}
 
+	void Actor::setHealth(int newHealth)
+	{
+		_stats->setHealth(newHealth);
+	}
+
 	int Actor::getStamina()
 	{
 		return _stats->getStamina();
+	}
+
+	int Actor::getMaximumHealth()
+	{
+		return _stats->getMaximumHealth();
+	}
+
+	int Actor::getMaximumStamina()
+	{
+		return _stats->getMaximumStamina();
+	}
+
+	void Actor::setMaximumHealth(int maximumHealth)
+	{
+		_stats->setMaximumHealth(maximumHealth);
+	}
+
+	void Actor::setMaximumStamina(int maximumStamina)
+	{
+		_stats->setMaximumStamina(maximumStamina);
 	}
 
 	int Actor::getAttack()
@@ -221,9 +246,19 @@ namespace bammm
 		return _stats->getAttack();
 	}
 
+	void Actor::setAttack(int newAttack)
+	{
+		_stats->setAttack(newAttack);
+	}
+
 	int Actor::getDefense()
 	{
 		return _stats->getDefense();
+	}
+
+	void Actor::setDefense(int newDefense)
+	{
+		_stats->setDefense(newDefense);
 	}
 
 	string Actor::getType()
@@ -274,6 +309,36 @@ namespace bammm
 	int Actor::getEnemyAlliance()
 	{
 		return _stats->getEnemyAlliance();
+	}
+
+	int Actor::getLevel()
+	{
+		return _stats->getLevel();
+	}
+
+	void Actor::setLevel(int newLevel)
+	{
+		_stats->setLevel(newLevel);
+	}
+
+	int Actor::getExperience()
+	{
+		return _stats->getExperience();
+	}
+
+	void Actor::setExperience(int newExperience)
+	{
+		_stats->setExperience(newExperience);
+	}
+
+	int Actor::getTotalExperienceThisLevel()
+	{
+		return _stats->getTotalExperienceThisLevel();
+	}
+
+	void Actor::setTotalExperienceThisLevel(int newTotalExperienceThisLevel)
+	{
+		_stats->setTotalExperienceThisLevel(newTotalExperienceThisLevel);
 	}
 
 	string Actor::toString()

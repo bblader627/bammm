@@ -21,8 +21,8 @@ namespace bammm
 	{
 		_type = "none";
 		_name = "n/a";
-		_health = MAX_HEALTH;
-		_stamina = MAX_STAMINA;
+		_health = _maximumHealth;
+		_stamina = _maximumStamina;
 		_attack = 10;
 		_defense = 10;
 		_collision = true;
@@ -35,16 +35,20 @@ namespace bammm
 		_wood = 0;
 		_BAC = 0;
 		_behaviors = new Behavior();
+		_level = 1;
+		_experience = 0;
+		_totalExperienceThisLevel = 1;
 	}
 
-	ActorInfo::ActorInfo(string type, string name,
-			int attack, int defense, Behavior *behaviors, bool collision,
-			AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood, float BAC)
+	ActorInfo::ActorInfo(string type, string name, int attack, int defense,
+			Behavior *behaviors, bool collision, AllianceType alliance,
+			string symbol, string color, int gold, int coal, int iron, int wood,
+			float BAC)
 	{
 		_type = type;
 		_name = name;
-		_health = MAX_HEALTH;
-		_stamina = MAX_STAMINA;
+		_health = _maximumHealth;
+		_stamina = _maximumStamina;
 		_attack = attack;
 		_defense = defense;
 		_behaviors = behaviors;
@@ -57,6 +61,9 @@ namespace bammm
 		_iron = iron;
 		_wood = wood;
 		_BAC = BAC;
+		_level = 1;
+		_experience = 0;
+		_totalExperienceThisLevel = 1;
 	}
 
 	string ActorInfo::getType()
@@ -69,9 +76,19 @@ namespace bammm
 		return _health;
 	}
 
+	int ActorInfo::getMaximumHealth()
+	{
+		return _maximumHealth;
+	}
+
 	int ActorInfo::getStamina()
 	{
 		return _stamina;
+	}
+
+	int ActorInfo::getMaximumStamina()
+	{
+		return _maximumStamina;
 	}
 
 	int ActorInfo::getAttack()
@@ -154,9 +171,19 @@ namespace bammm
 		_health = health;
 	}
 
+	void ActorInfo::setMaximumHealth(int maximumHealth)
+	{
+		_maximumHealth = maximumHealth;
+	}
+
 	void ActorInfo::setStamina(int stamina)
 	{
 		_stamina = stamina;
+	}
+
+	void ActorInfo::setMaximumStamina(int maximumStamina)
+	{
+		_maximumStamina = maximumStamina;
 	}
 
 	void ActorInfo::setAttack(int attack)
@@ -206,9 +233,9 @@ namespace bammm
 
 	void ActorInfo::increaseHealth(int amount)
 	{
-		if (_health >= MAX_HEALTH)
+		if (_health >= _maximumHealth)
 		{
-			_health = MAX_HEALTH;
+			_health = _maximumHealth;
 			return;
 		}
 		else
@@ -219,9 +246,9 @@ namespace bammm
 
 	void ActorInfo::increaseStamina(int amount)
 	{
-		if (_stamina >= MAX_STAMINA)
+		if (_stamina >= _maximumStamina)
 		{
-			_stamina = MAX_STAMINA;
+			_stamina = _maximumStamina;
 			return;
 		}
 		else
@@ -257,7 +284,7 @@ namespace bammm
 
 	bool ActorInfo::isFullyRested()
 	{
-		if (_health == MAX_HEALTH && _stamina == MAX_STAMINA)
+		if (_health == _maximumHealth && _stamina == _maximumStamina)
 		{
 			return true;
 		}
@@ -315,7 +342,7 @@ namespace bammm
 	{
 		return _alliance * -1;
 	}
-	
+
 	void ActorInfo::setBehavior(Behavior *behaviors)
 	{
 		_behaviors = behaviors;
@@ -326,5 +353,33 @@ namespace bammm
 		return _behaviors;
 	}
 
+	int ActorInfo::getLevel()
+	{
+		return _level;
+	}
 
+	void ActorInfo::setLevel(int newLevel)
+	{
+		_level = newLevel;
+	}
+
+	int ActorInfo::getExperience()
+	{
+		return _experience;
+	}
+
+	void ActorInfo::setExperience(int newExperience)
+	{
+		_experience = newExperience;
+	}
+
+	int ActorInfo::getTotalExperienceThisLevel()
+	{
+		return _totalExperienceThisLevel;
+	}
+
+	void ActorInfo::setTotalExperienceThisLevel(int newTotalExperienceThisLevel)
+	{
+		_totalExperienceThisLevel = newTotalExperienceThisLevel;
+	}
 }

@@ -27,8 +27,8 @@ namespace bammm
 	class ActorInfo
 	{
 		private:
-			int MAX_HEALTH = 100;
-			int MAX_STAMINA = 50;
+			int _maximumHealth = 100;
+			int _maximumStamina = 50;
 
 			string _name;
 			string _type;
@@ -48,11 +48,17 @@ namespace bammm
 			int _wood;
 			float _BAC;
 
+			//Leveling
+			int _level;
+			int _experience;
+			int _totalExperienceThisLevel;
+
 		public:
 			ActorInfo();
-			ActorInfo(string type, string name,
-					int attack, int defense, Behavior *behaviors, bool collision,
-					AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood, float BAC);
+			ActorInfo(string type, string name, int attack, int defense,
+					Behavior *behaviors, bool collision, AllianceType alliance,
+					string symbol, string color, int gold, int coal, int iron,
+					int wood, float BAC);
 
 			/**
 			 getType
@@ -76,11 +82,25 @@ namespace bammm
 			int getHealth();
 
 			/**
+			 getMaximumHealth
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns maximumHealth
+			 */
+			int getMaximumHealth();
+
+			/**
 			 getStamina
 			 @Pre-Condition- takes no arguments
 			 @Post-Condition- returns stamina
 			 */
 			int getStamina();
+
+			/**
+			 getMaximumStamina
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns maximumStamina
+			 */
+			int getMaximumStamina();
 
 			/**
 			 getAttack
@@ -144,21 +164,21 @@ namespace bammm
 			 @Post-Condition- Returns _gold
 			 */
 			int getGold();
-			
+
 			/**
 			 getWood
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _wood
 			 */
 			int getWood();
-			
+
 			/**
 			 getColor
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _coal
 			 */
 			int getCoal();
-			
+
 			/**
 			 getIron
 			 @Pre-Condition- No input
@@ -188,11 +208,25 @@ namespace bammm
 			void setHealth(int health);
 
 			/**
+			 setMaximumHealth
+			 @Pre-Condition- takes in maximumHealth to set
+			 @Post-Condition- returns void
+			 */
+			void setMaximumHealth(int maximumHealth);
+
+			/**
 			 setStamina
 			 @Pre-Condition- takes in stamina to set
 			 @Post-Condition- returns void
 			 */
 			void setStamina(int stamina);
+
+			/**
+			 setMaximumStamina
+			 @Pre-Condition- takes in maximumStamina to set
+			 @Post-Condition- returns void
+			 */
+			void setMaximumStamina(int maximumStamina);
 
 			/**
 			 setAttack
@@ -299,7 +333,7 @@ namespace bammm
 			 @Post-Condition- returns nothing
 			 */
 			void setColor(string color);
-			
+
 			/**
 			 setGold
 			 @Pre-Condition- The amount to set the Actor's gold to
@@ -313,14 +347,14 @@ namespace bammm
 			 @Post-Condition- Returns nothing
 			 */
 			void setIron(int iron);
-			
+
 			/**
 			 setCoal
 			 @Pre-Condition- The amount to set the Actor's coal to
 			 @Post-Condition- Returns nothing
 			 */
 			void setCoal(int coal);
-			
+
 			/**
 			 setWood
 			 @Pre-Condition- The amount to set the Actor's wood to
@@ -363,6 +397,47 @@ namespace bammm
 			 */
 			Behavior* getBehavior();
 
+			/**
+			 getLevel
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the current level
+			 */
+			int getLevel();
+
+			/**
+			 setLevel
+			 @Pre-Condition- Takes an int of new level
+			 @Post-Condition- Sets the level to the given input
+			 */
+			void setLevel(int newLevel);
+
+			/**
+			 getExperience
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the current experience
+			 */
+			int getExperience();
+
+			/**
+			 setExperience
+			 @Pre-Condition- Takes an int of newExperience
+			 @Post-Condition- Sets the experience to the given input
+			 */
+			void setExperience(int newExperience);
+
+			/**
+			 getTotalExperienceThisLevel
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the current totalExperienceThisLevel
+			 */
+			int getTotalExperienceThisLevel();
+
+			/**
+			 setTotalExperienceThisLevel
+			 @Pre-Condition- Takes an int of newTotalExperienceThisLevel
+			 @Post-Condition- Sets the experience to the given input
+			 */
+			void setTotalExperienceThisLevel(int newTotalExperienceThisLevel);
 	};
 }
 
