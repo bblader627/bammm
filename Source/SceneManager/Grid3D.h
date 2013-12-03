@@ -304,10 +304,10 @@ namespace bammm
 		DynamicArray<DynamicArray<bool>*>* visited = new DynamicArray<DynamicArray<bool>*>();
 
 		cout << "populating visisted array" << endl;
-		for (unsigned int i = 0; i < _width; i++)
+		for (uint i = 0; i < (uint)_width; i++)
 		{
 			visited->add(new DynamicArray<bool>());
-			for (unsigned int j= 0; j < _length; j++)
+			for (uint j= 0; j < (uint)_length; j++)
 			{
 				visited->get(i)->add(false);
 			}
@@ -323,16 +323,20 @@ namespace bammm
 		bool isFound = false;
 
 		while (!mapTree->isEmpty())
-
 		{
 			current = mapTree->get();
+
+			//Get location as vector and integer
 			Vector3D* currentLocation = current->getValue();
 			int currentLocInt = convertToPosition(currentLocation);
+
+			//Set current location to visited
 			visited->get(currentLocation->getX())->get(currentLocation->getY()) = true;
 
+			//If found
 			if (currentLocInt == actorLocInt)
 			{
-				cout << "FOUND!!" << endl;
+				cout << "Path found" << endl;
 				isFound = true;
 				foundActor = current;
 				break;
@@ -342,12 +346,13 @@ namespace bammm
 			Vector3D newLoc1;
 			bool hasVisited;
 
+			//add UP to mapTree
 			newLoc1 = *currentLocation + *UP;
-			if (isWalkable(newLoc1))
+			if (isWalkable(newLoc1))		//If not a ollision object
 			{
 				Vector3D* newLocation = new Vector3D(newLoc1.getX(), newLoc1.getY(), newLoc1.getZ());
 				hasVisited = visited->get(newLocation->getX())->get(newLocation->getY());
-				if (!hasVisited)
+				if (!hasVisited)			//If hasn't been visited
 				{
 					cout << "Adding " << newLocation->getX() << ", " << newLocation->getY() << endl;
 					visited->get(newLocation->getX())->get(newLocation->getY()) = true;
@@ -355,36 +360,39 @@ namespace bammm
 				}
 			}
 
+			//add RIGHT to mapTree
 			Vector3D newLoc2 = *currentLocation + *RIGHT;
-			if (isWalkable(newLoc2))
+			if (isWalkable(newLoc2))		//If not a ollision object
 			{
 				Vector3D* newLocation = new Vector3D(newLoc2.getX(), newLoc2.getY(), newLoc2.getZ());
 				hasVisited = visited->get(newLocation->getX())->get(newLocation->getY());
-				if (!hasVisited)
+				if (!hasVisited)			//If hasn't been visited
 				{
 					visited->get(newLocation->getX())->get(newLocation->getY()) = true;
 					mapTree->add(&newLocation, current);
 				}
 			}
 
+			//add DOWN to mapTree
 			Vector3D newLoc3 = *currentLocation + *DOWN;
-			if (isWalkable(newLoc3))
+			if (isWalkable(newLoc3))			//If not a ollision object
 			{
 				Vector3D* newLocation = new Vector3D(newLoc3.getX(), newLoc3.getY(), newLoc3.getZ());
 				hasVisited = visited->get(newLocation->getX())->get(newLocation->getY());
-				if (!hasVisited)
+				if (!hasVisited)				//If hasn't been visited
 				{
 					visited->get(newLocation->getX())->get(newLocation->getY()) = true;
 					mapTree->add(&newLocation, current);
 				}
 			}
 
+			//add LEFT to mapTree
 			Vector3D newLoc4 = *currentLocation + *LEFT;
-			if (isWalkable(newLoc4))
+			if (isWalkable(newLoc4))			//If not a ollision object
 			{
 				Vector3D* newLocation = new Vector3D(newLoc4.getX(), newLoc4.getY(), newLoc4.getZ());
 				hasVisited = visited->get(newLocation->getX())->get(newLocation->getY());
-				if (!hasVisited)
+				if (!hasVisited)				//If hasn't been visited
 				{
 					visited->get(newLocation->getX())->get(newLocation->getY()) = true;
 					mapTree->add(&newLocation, current);
@@ -392,15 +400,17 @@ namespace bammm
 			}
 		}
 
-		for (unsigned int i = 0; i < _width; i++)
+		/*
+		for (uint i = 0; i < (uint)_width; i++)
 		{
 			visited->add(new DynamicArray<bool>());
-			for (unsigned int j= 0; j < _length; j++)
+			for (uint j= 0; j < (uint)_length; j++)
 			{
 					cout << visited->get(i)->get(j);
 			}
 			cout << endl;
 		}
+		*/
 
 
 
@@ -412,6 +422,14 @@ namespace bammm
 
 		if (isFound)
 		{
+			Vector3D* currentVector = foundActor->getValue();
+			while(currentVector != NULL)
+			{
+				currentVector = foundActor->getValue();
+				cout << currentVector->getX() << ", " << currentVector->getY() << ": ";
+				foundActor = &(foundActor->getParent());
+			}
+
 			/*
 			Vector3D* currentVector = foundActor->getValue();
 			Vector3D* parentVector = current->getParent().getParent().getValue();
@@ -420,7 +438,7 @@ namespace bammm
 			cout << parentVector->getX() << ", " << parentVector->getY() << endl;
 
 			while (!(*currentVector == *parentVector))
-			{
+
 				cout << currentVector->getX() << ", " << currentVector->getY() << ": ";
 				cout << parentVector->getX() << ", " << parentVector->getY() << endl;
 
@@ -554,15 +572,14 @@ namespace bammm
 	template<class T>
 	Vector3D* Grid3D<T>::findInGrid(string target)
 	{
-		for (unsigned int gridIndex = 0; gridIndex < _grid->getSize(); gridIndex++)
+		for (uint gridIndex = 0; gridIndex < _grid->getSize(); gridIndex++)
 		{
 			DynamicArray<T>* cell = _grid->get(gridIndex);
-			for (unsigned int cellIndex = 0; cellIndex < cell->getSize(); cellIndex++)
+			for (uint cellIndex = 0; cellIndex < cell->getSize(); cellIndex++)
 			{
 				T actor = cell->get(cellIndex);
 				if (actor->toString() == target)
 				{
-					cout << "GRIDINDEX" << gridIndex << endl;
 					return convertToVector(gridIndex);
 				}
 			}

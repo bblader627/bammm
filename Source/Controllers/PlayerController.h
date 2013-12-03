@@ -17,6 +17,7 @@
 
 #include "Controller.h"
 #include "../Resources/Constant.h"
+#include <random>
 
 using namespace std;
 

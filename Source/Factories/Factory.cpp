@@ -66,6 +66,9 @@ namespace bammm
 
 	MeleeWeapon getMeleeWeapon(string type)
 	{
+		//Why not get the parsed weapons from json?
+		//Automatically parse them so you can just do weaponData.getValue(type);
+
 		int damage;
 
 		if (type == "stein")

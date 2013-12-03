@@ -71,7 +71,20 @@ namespace bammm
 		oreType->add("coal");
 		oreType->add("gold");
 
-		
+		/*Actor* enemy = _sceneGraph->getEnemy(_actor->getLocation(), _actor);
+		DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
+		if(enemy)
+		{
+			cout << "Made it enemy\n";
+			State* tempState = _states.getValue("damage");
+			if (!currentStates.contains(tempState))
+			{
+				_stateMachine.addState(tempState);
+			}
+
+			DamageState* castedState = static_cast<DamageState*>(tempState);
+			castedState->setTarget(*enemy);
+		}*/
 		if (newState == "mine")
 		{
 			//mine [#] [ore-type]
@@ -105,7 +118,6 @@ namespace bammm
 			}
 
 			Vector3D* oreLocation = _sceneGraph->findInGrid(type);
-			cout << "found in grid" << endl;
 			State* stateToAdd = _states.getValue(newState);
 
 			if (_actor->getLocation() == oreLocation)
@@ -267,8 +279,21 @@ namespace bammm
 			MoveState* castedState = static_cast<MoveState*>(newState);
 			castedState->setDirection(newLocation);
 
-		}
+			Actor* enemy = _sceneGraph->getEnemy(_actor->getLocation(), _actor);
+			DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
+			if(enemy)
+			{
+				State* tempState = _states.getValue("damage");
+				if (!currentStates.contains(tempState))
+				{
+					_stateMachine.addState(tempState);
+				}
+
+				DamageState* castedState = static_cast<DamageState*>(tempState);
+				castedState->setTarget(*enemy);
+			}
 		_stateMachine.tick(deltaTime);
+		}
 	}
 
 	string PlayerController::toString()

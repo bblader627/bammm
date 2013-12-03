@@ -96,16 +96,20 @@ namespace bammm
 		for (int i = 0; i < size; i++)
 		{
 			ITickable* tickable = _allTickables.get(i);
-			tickable->tick(deltaTime);
-			if (_allTickables.get(i)->canDelete())
+			if (tickable->canDelete())
 			{
 				PlayerController* playerController = static_cast<PlayerController*>(tickable);
 				AiController* aiController = static_cast<AiController*>(tickable);
 				size--;
 				_allPlayerControllers.removeElement(playerController);
 				_allAiControllers.removeElement(aiController);
-				delete removeActor(_allActors.get(i));
-				delete removeTickable(_allTickables.get(i));
+				removeActor(_allActors.get(i));
+				removeTickable(tickable);
+				i--;
+			}
+			else
+			{
+				tickable->tick(deltaTime);
 			}
 		}
 	}
@@ -130,7 +134,6 @@ namespace bammm
 
 		if (newState == "mine")
 		{
-			cout << "Sending mine to actor" << endl;
 			controller->input(args, deltaTime);
 			/*mine [#] [ore-type]
 			int numOre;

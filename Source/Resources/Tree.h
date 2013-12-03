@@ -20,6 +20,7 @@
 #include "Queue.h"
 #include <string>
 #include <cmath>
+#include "Constant.h"
 
 #define DEFAULT_MAPSIZE 1000
 
@@ -197,6 +198,7 @@ namespace bammm
 	{
 		/*
 		if (index < tree->getSize())
+		if ((uint)index < tree->getSize())
 		{
 			return tree->get(index);
 		}
