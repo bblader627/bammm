@@ -211,6 +211,11 @@ namespace bammm
 		return _stats->getHealth();
 	}
 
+	void Actor::setHealth(int newHealth)
+	{
+		_stats->setHealth(newHealth);
+	}
+
 	int Actor::getStamina()
 	{
 		return _stats->getStamina();

@@ -314,6 +314,13 @@ namespace bammm
 			int getHealth();
 
 			/**
+			 setHealth
+			 @Pre-Condition- Takes in an int newHealth
+			 @Post-Condition- Returns sets _health to newHealth
+			 */
+			void setHealth(int newHealth);
+
+			/**
 			 getStamina
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _staminaBar
