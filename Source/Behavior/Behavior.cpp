@@ -16,6 +16,11 @@
 
 namespace bammm
 {
+	Behavior::Behavior()
+	{
+		_baseBehaviors = new DynamicArray<string>();
+	}
+
 	Behavior::Behavior(DynamicArray<string> *baseBehaviors,
 			DynamicArray<string> *baseValues)
 	{
@@ -31,6 +36,12 @@ namespace bammm
 	void Behavior::addBehavior(string behavior, int baseDesire)
 	{
 		_desireTable.add(behavior, baseDesire);
+	}
+
+	void Behavior::addBaseBehavior(string behavior, int baseDesire)
+	{
+		_desireTable.add(behavior, baseDesire);
+		_baseBehaviors->add(behavior);
 	}
 
 	void Behavior::printTable()

@@ -55,14 +55,14 @@ namespace bammm
 		this->parseToActorInfo(water, "water", &blockData);
 	}
 
-	Actor Factory::getActor(string type, string name, int health, int stamina,
+	/*Actor Factory::getActor(string type, string name, int health, int stamina,
 			int attack, int defense, string behavior, bool collision)
 	{
 		Actor* newActor = new Actor(type, name, health, stamina, attack,
 				defense, behavior, AllianceType::enemy);
 		newActor->setLocation(new Vector3D(0.0f, 0.0f, 0.0f));
 		return *newActor;
-	}
+	}*/
 
 	MeleeWeapon getMeleeWeapon(string type)
 	{
@@ -191,11 +191,10 @@ namespace bammm
 			JSON* child = rootChildren->get(i);
 
 			string name = child->getChild("name")->getStringValue();
-			int health = child->getChild("health")->getIntValue();
-			int stamina = child->getChild("stamina")->getIntValue();
 			int attack = child->getChild("attack")->getIntValue();
 			int defense = child->getChild("defense")->getIntValue();
-			string behavior = child->getChild("behavior")->getStringValue();
+			string behaviorstr = child->getChild("behavior")->getStringValue();
+			int behaviorValue = child->getChild("behaviorValue")->getIntValue();
 			bool collision = child->getChild("collision")->getBoolValue();
 			float x = (float) child->getChild("x")->getIntValue();
 			float y = (float) child->getChild("y")->getIntValue();
@@ -222,9 +221,12 @@ namespace bammm
 				alliance = AllianceType::enemy;
 			}
 
-			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack,
+			Behavior  *behavior = new Behavior();
+			behavior->addBaseBehavior(behaviorstr,behaviorValue);
+
+			ActorInfo* info = new ActorInfo(type, name,attack,
 					defense, behavior, collision, alliance, symbol, color, gold,
-					coal, iron, wood);
+					coal, iron, wood, 0); //that zero is for BAC
 			info->setLocation(new Vector3D(x, y, z));
 
 			string i_str = "" + i;
