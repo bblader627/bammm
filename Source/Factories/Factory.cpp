@@ -83,35 +83,39 @@ namespace bammm
 	MeleeWeapon Factory::getMeleeWeapon(string type)
 	{
 		WeaponData* weaponData;
+		MeleeWeapon* newWeapon;
 		if ((weaponData = _meleeWeaponData.getValue(type)) != NULL)
 		{
-			MeleeWeapon* newWeapon = new MeleeWeapon(weaponData);
+			newWeapon = new MeleeWeapon(weaponData);
 			return *newWeapon;
 		}
 		else
 		{
 			//If they ask for some weapon that doesn't exist, give some weapon that exists
-			MeleeWeapon* newWeapon = new MeleeWeapon(
+			newWeapon = new MeleeWeapon(
 					_meleeWeaponData.getAllValues()->get(0));
-			return *newWeapon;
 		}
+
+		return *newWeapon;
 	}
 
 	RangedWeapon Factory::getRangedWeapon(string type)
 	{
 		WeaponData* weaponData;
+		RangedWeapon* newWeapon;
 		if ((weaponData = _rangedWeaponData.getValue(type)) != NULL)
 		{
-			RangedWeapon* newWeapon = new RangedWeapon(weaponData);
+			newWeapon = new RangedWeapon(weaponData);
 			return *newWeapon;
 		}
 		else
 		{
 			//If they ask for some weapon that doesn't exist, give some weapon that exists
-			RangedWeapon* newWeapon = new RangedWeapon(
+			newWeapon = new RangedWeapon(
 					_rangedWeaponData.getAllValues()->get(0));
-			return *newWeapon;
 		}
+
+		return *newWeapon;
 	}
 
 	void Factory::parseToActorInfo(JSON* rootNode, string type,
