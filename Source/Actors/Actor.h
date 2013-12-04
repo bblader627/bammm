@@ -432,13 +432,20 @@ namespace bammm
 			 @Post-Condition- Returns the enemy's alliance
 			 */
 			int getEnemyAlliance();
-			
+
 			/**
 			 getInventory
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns the actor's inventory
 			 */
 			Inventory& getInventory();
+
+			/**
+			 getLevel
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns actor's level
+			 */
+			int getLevel();
 
 			/**
 			 setLevel

@@ -45,9 +45,9 @@ namespace bammm
 		_stats->setSymbol(info->getSymbol());
 		_stats->setColor(info->getColor());
 		_stats->setWood(info->getWood());
-		_iron = info->getIron();
-		_gold = info->getGold();
-		_coal = info->getCoal();
+		_stats->setIron(info->getIron());
+		_stats->setGold(info->getGold());
+		_stats->setCoal(info->getCoal());
 		_BAC = 0;
 	}
 
@@ -315,10 +315,15 @@ namespace bammm
 	{
 		return _stats->getEnemyAlliance();
 	}
-	
+
 	Inventory& Actor::getInventory()
 	{
 		return _inventory;
+	}
+
+	int Actor::getLevel()
+	{
+		return _stats->getLevel();
 	}
 
 	void Actor::setLevel(int newLevel)
