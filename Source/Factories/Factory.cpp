@@ -33,8 +33,7 @@ namespace bammm
 
 		HashMap<JSON*>* rootChildren = root->getAllChildren();
 
-		JSON* dwarves = rootChildren->getValue("dwarves");
-		this->parseToActorInfo(dwarves, "dwarf", &actorData);
+
 
 		JSON* orcs = rootChildren->getValue("orcs");
 		this->parseToActorInfo(orcs, "orc", &actorData);
@@ -53,6 +52,9 @@ namespace bammm
 
 		JSON* water = rootChildren->getValue("water");
 		this->parseToActorInfo(water, "water", &blockData);
+
+		JSON* dwarves = rootChildren->getValue("dwarves");
+		this->parseToActorInfo(dwarves, "dwarf", &actorData);
 	}
 
 	Actor Factory::getActor(string type, string name, int health, int stamina,
