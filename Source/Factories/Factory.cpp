@@ -211,6 +211,10 @@ namespace bammm
 			int gold = 100;
 			int coal = 100;
 			int iron = 100;
+			int birch = 100;
+			int cedar = 100;
+			int oak = 100;
+			int redwood = 100;
 			int wood = 100;
 
 			AllianceType alliance;
@@ -251,6 +255,71 @@ namespace bammm
 				}
 			}
 
+			if(name.find("gold") != string::npos)
+			{
+				Inventory& inventory = myActor->getInventory();
+				inventory.setSlots(100);
+				for(int j = 0; j < gold; j++)
+				{
+					Item* item = new Item("Gold");
+					inventory.addItem(item);
+				}
+			}
+
+			if(name.find("coal") != string::npos)
+			{
+				Inventory& inventory = myActor->getInventory();
+				inventory.setSlots(100);
+				for(int j = 0; j < coal; j++)
+				{
+					Item* item = new Item("Coal");
+					inventory.addItem(item);
+				}
+			}
+
+			if(name.find("birch") != string::npos)
+			{
+				Inventory& inventory = myActor->getInventory();
+				inventory.setSlots(100);
+				for(int j = 0; j < birch; j++)
+				{
+					Item* item = new Item("Birch logs");
+					inventory.addItem(item);
+				}
+			}
+			
+			if(name.find("oak") != string::npos)
+			{
+				Inventory& inventory = myActor->getInventory();
+				inventory.setSlots(100);
+				for(int j = 0; j < oak; j++)
+				{
+					Item* item = new Item("Oak logs");
+					inventory.addItem(item);
+				}
+			}
+			
+			if(name.find("cedar") != string::npos)
+			{
+				Inventory& inventory = myActor->getInventory();
+				inventory.setSlots(100);
+				for(int j = 0; j < cedar; j++)
+				{
+					Item* item = new Item("Cedar logs");
+					inventory.addItem(item);
+				}
+			}
+			
+			if(name.find("redwood") != string::npos)
+			{
+				Inventory& inventory = myActor->getInventory();
+				inventory.setSlots(100);
+				for(int j = 0; j < redwood; j++)
+				{
+					Item* item = new Item("Redwood logs");
+					inventory.addItem(item);
+				}
+			}
 			scene->addActor(myActor);
 		}
 	}
