@@ -54,12 +54,15 @@ int main()
 		bool doInput = true;
 		if (loopCounter == 0)
 		{
+
 			input->clear();
 
 			if (printMap)
 			{
 				cout << sceneManager.getSceneGraph().toString() << "\n";
 			}
+
+			cout << "What would you like your dwarves to do? ";
 
 			//controller.printOptions();
 			getline(cin, command);
