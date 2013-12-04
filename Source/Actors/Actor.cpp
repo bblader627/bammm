@@ -48,7 +48,7 @@ namespace bammm
 		_stats->setIron(info->getIron());
 		_stats->setGold(info->getGold());
 		_stats->setCoal(info->getCoal());
-		_BAC = 0;
+		_stats->setBAC(0);
 	}
 
 	void Actor::setMeleeWeapon(MeleeWeapon* weapon)

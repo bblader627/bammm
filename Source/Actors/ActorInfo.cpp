@@ -221,6 +221,11 @@ namespace bammm
 		return _BAC;
 	}
 
+	void ActorInfo::setBAC(float BAC)
+	{
+		_BAC = BAC;
+	}
+
 	void ActorInfo::incrementBAC()
 	{
 		_BAC += .01;

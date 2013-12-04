@@ -278,6 +278,13 @@ namespace bammm
 			float getBAC();
 
 			/**
+			 setBAC
+			 @Pre-Condition- Takes in a float BAC
+			 @Post-Condition- Sets the BAC
+			 */
+			void setBAC(float BAC);
+
+			/**
 			 increaseBAC
 			 @Pre-Condition- no parameters;
 			 @Post-Condition- increments BAC by .05;
