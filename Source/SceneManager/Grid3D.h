@@ -16,6 +16,7 @@
 #define GRID3D_H_
 
 #include <iostream>
+#include <string>
 #include "../Resources/DynamicArray.h"
 #include "Vector3D.h"
 #include "../Resources/Stack.h"
@@ -426,7 +427,8 @@ namespace bammm
 			for (uint cellIndex = 0; cellIndex < cell->getSize(); cellIndex++)
 			{
 				T actor = cell->get(cellIndex);
-				if (actor->toString() == target)
+				//if (actor->toString() == target)
+				if (actor->toString().find(target)!=string::npos)
 				{
 					return actor;
 				}

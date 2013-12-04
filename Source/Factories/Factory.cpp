@@ -206,10 +206,10 @@ namespace bammm
 			int parsedAlliance = child->getChild("alliance")->getIntValue();
 			string symbol = child->getChild("symbol")->getStringValue();
 			string color = child->getChild("color")->getStringValue();
-			int gold = 0;
-			int coal = 0;
-			int iron = 10;
-			int wood = 0;
+			int gold = 100;
+			int coal = 100;
+			int iron = 100;
+			int wood = 100;
 
 			AllianceType alliance;
 			if (parsedAlliance == 0)

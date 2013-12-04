@@ -30,10 +30,10 @@ namespace bammm
 		_alliance = AllianceType::ally;
 		_symbol = "?";
 		_color = "white";
-		_gold = 0;
-		_iron = 0;
-		_coal = 0;
-		_wood = 0;
+		_gold = 100;
+		_iron = 100;
+		_coal = 100;
+		_wood = 100;
 	}
 
 	ActorInfo::ActorInfo(string type, string name, int health, int stamina,

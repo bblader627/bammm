@@ -28,6 +28,7 @@
 #include "../States/DamageState.h"
 #include "../States/MoveState.h"
 #include "../States/SearchState.h"
+#include "../States/ChopState.h"
 #include "../Resources/HashMap.h"
 #include "../Actors/Actor.h"
 #include "../States/StateMachine.h"

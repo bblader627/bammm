@@ -44,9 +44,9 @@ namespace bammm
 		_amountToChop = amountToChop;
 	}
 
-	void ChopState::setTree(Actor& tree)
+	void ChopState::setTree(Actor* tree)
 	{
-		_tree = &tree;
+		_tree = tree;
 	}
 
 	void ChopState::breakdown()
