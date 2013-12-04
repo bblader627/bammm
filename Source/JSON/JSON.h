@@ -28,7 +28,9 @@ namespace bammm
 		JSON_INT,
 		JSON_DOUBLE,
 		JSON_BOOL,
-		JSON_OBJECT
+		JSON_OBJECT,
+		JSON_FLOAT,
+		JSON_UNIT
 	};
 
 	class JSON
