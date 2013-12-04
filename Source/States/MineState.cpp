@@ -62,7 +62,6 @@ namespace bammm
 	{
 		if (canMine())
 		{
-			cout << "Can mine!\n";
 			if (_actor->getBAC() > .4)
 			{
 				cout << _actor->getName()
@@ -121,7 +120,6 @@ namespace bammm
 			
 		if(_amountToMine > 0)
 		{
-			cout << "_amountToMine > 0\n";
 			if(_ore->getGold() > 0)
 			{
 				canMine++;
@@ -129,7 +127,6 @@ namespace bammm
 			
 			if(_ore->getIron() > 0)
 			{
-				cout << "Correct amount of iron\n";
 				canMine++;
 			}
 			else
@@ -141,10 +138,6 @@ namespace bammm
 			{
 				canMine++;
 			}
-		}
-		else
-		{
-			cout << "Invalid amount to Mine!\n";
 		}
 
 		return !!canMine;

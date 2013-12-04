@@ -69,14 +69,12 @@ namespace bammm
 				_actor->getLocation()->getY() == targetActor->getY() &&
 				_actor->getLocation()->getZ() == targetActor->getZ())
 		{
-			cout << "found" << endl;
 			switchState(_goalState->toString());
 		}
 	}
 
 	void SearchState::switchState(string nextState)
 	{
-		cout << "switch" << endl;
 		_stateMachine->switchState(this, nextState);
 	}
 

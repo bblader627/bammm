@@ -87,7 +87,7 @@ namespace bammm
 				numOre = atoi(number_str.c_str());
 				if (numOre == 0)
 				{
-					cout << "Invalid argument\n";
+					cout << "Invalid argument number\n";
 					//doTick = false;
 				}
 				//numOre = 0;
