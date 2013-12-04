@@ -80,40 +80,22 @@ namespace bammm
 	 return *newActor;
 	 }*/
 
+	//NOTE: Right now there's no checking, cause of type issues. Have to know it exists.
+	//TODO:^^Make this not the case.
 	MeleeWeapon Factory::getMeleeWeapon(string type)
 	{
-		WeaponData* weaponData;
-		MeleeWeapon* newWeapon;
-		if ((weaponData = _meleeWeaponData.getValue(type)) != NULL)
-		{
-			newWeapon = new MeleeWeapon(weaponData);
-			return *newWeapon;
-		}
-		else
-		{
-			//If they ask for some weapon that doesn't exist, give some weapon that exists
-			newWeapon = new MeleeWeapon(
-					_meleeWeaponData.getAllValues()->get(0));
-		}
+		WeaponData weaponData = _meleeWeaponData.getValue(type);
+		MeleeWeapon* newWeapon = new MeleeWeapon(weaponData);
 
 		return *newWeapon;
 	}
 
+	//NOTE: Right now there's no checking, cause of type issues. Have to know it exists.
+	//TODO:^^Make this not the case.
 	RangedWeapon Factory::getRangedWeapon(string type)
 	{
-		WeaponData* weaponData;
-		RangedWeapon* newWeapon;
-		if ((weaponData = _rangedWeaponData.getValue(type)) != NULL)
-		{
-			newWeapon = new RangedWeapon(weaponData);
-			return *newWeapon;
-		}
-		else
-		{
-			//If they ask for some weapon that doesn't exist, give some weapon that exists
-			newWeapon = new RangedWeapon(
-					_rangedWeaponData.getAllValues()->get(0));
-		}
+		WeaponData weaponData = _rangedWeaponData.getValue(type);
+		RangedWeapon* newWeapon = new RangedWeapon(weaponData);
 
 		return *newWeapon;
 	}
