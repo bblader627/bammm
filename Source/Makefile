@@ -24,7 +24,9 @@ Interfaces/ITickable.cpp \
 JSON/JSON.cpp JSON/JSONParser.cpp JSON/JSONArray.cpp \
 JSON/JSONPrimitive.cpp \
 \
-TestSuite/Time.cpp
+TestSuite/Time.cpp \
+\
+Inventory/Item.cpp Inventory/Inventory.cpp
 TESTNAME = test
 TESTSRC = Main.cpp
 
