@@ -42,8 +42,8 @@ namespace bammm
 		IdleState* idleState = new IdleState(actor, &_stateMachine);
 		CombatState* combatState = new CombatState(actor, &_stateMachine);
 		SearchState* searchState = new SearchState(actor, &_stateMachine, *_sceneGraph);
-		MoveState* moveState = new MoveState(actor, &_stateMachine, *_sceneGraph);
 		DamageState* damageState = new DamageState(actor, &_stateMachine);
+		MoveState* moveState = new MoveState(actor, &_stateMachine, sceneGraph);
 
 		_states.add(idleState->toString(), idleState);
 		_states.add(mineState->toString(), mineState);
@@ -53,8 +53,8 @@ namespace bammm
 		_states.add(sleepState->toString(), sleepState);
 		_states.add(combatState->toString(), combatState);
 		_states.add(searchState->toString(), searchState);
-		_states.add(moveState->toString(), moveState);
 		_states.add(damageState->toString(), damageState);
+		_states.add(moveState->toString(), moveState);
 
 		//Put actor in idle state
 		_stateMachine.initialState(_states.getValue(idleState->toString()));
@@ -223,27 +223,21 @@ namespace bammm
 		//_stateMachine.tick(deltaTime);
 		Actor* enemy = _sceneGraph->getEnemy(_actor->getLocation(), _actor);
 		DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
-		State* newState;
 		if (enemy)
 		{
-			/*
-			//_stateMachine.addState(newState, new DynamicArray<string>());
-			cout << "I want to fight\n";
-			newState = _states.getValue("damage");
+			State* tempState = _states.getValue("damage");
 
-			if (!currentStates.contains(newState))
+			if (!currentStates.contains(tempState))
 			{
-				_stateMachine.addState(newState);
+				_stateMachine.addState(tempState);
 			}
-			DamageState* castedState = static_cast<DamageState*>(newState);
+			DamageState* castedState = static_cast<DamageState*>(tempState);
 			castedState->setTarget(*enemy);
-			 */
 		}
 		else
 		{
 
-
-			newState = _states.getValue("movement");
+			State* newState = _states.getValue("movement");
 
 			//all currently running states
 			if (!currentStates.contains(newState))
@@ -278,22 +272,10 @@ namespace bammm
 			}
 			MoveState* castedState = static_cast<MoveState*>(newState);
 			castedState->setDirection(newLocation);
-
-			Actor* enemy = _sceneGraph->getEnemy(_actor->getLocation(), _actor);
-			DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
-			if(enemy)
-			{
-				State* tempState = _states.getValue("damage");
-				if (!currentStates.contains(tempState))
-				{
-					_stateMachine.addState(tempState);
-				}
-
-				DamageState* castedState = static_cast<DamageState*>(tempState);
-				castedState->setTarget(*enemy);
-			}
-		_stateMachine.tick(deltaTime);
+		 	State* newState = _states.getValue("movement");
 		}
+
+		_stateMachine.tick(deltaTime);
 	}
 
 	string PlayerController::toString()
