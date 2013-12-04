@@ -66,7 +66,7 @@ namespace bammm
 			 @Pre-Condition- Takes a string key and a T value
 			 @Post-Condition- Adds the key value pair as a node to the map and returns true on success
 			 */
-			bool add(T* value, TreeNode<T>* parent);
+			bool add(T value, TreeNode<T>* parent);
 
 			/**
 			 remove
@@ -131,10 +131,10 @@ namespace bammm
 	}
 
 	template<class T>
-	bool Tree<T>::add(T* value, TreeNode<T>* parent)
+	bool Tree<T>::add(T value, TreeNode<T>* parent)
 	{
 		TreeNode<T>* node;
-		node = new TreeNode<T>(*value, *parent);
+		node = new TreeNode<T>(value, parent);
 
 		tree->add(node);
 

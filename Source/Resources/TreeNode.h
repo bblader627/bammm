@@ -25,13 +25,13 @@ namespace bammm
 	class TreeNode
 	{
 		private:
-			T* _value;
+			T _value;
 			TreeNode* _parentNode;
 
 		public:
 			TreeNode();
-			TreeNode(T& value);
-			TreeNode(T& value, TreeNode<T>& parent);
+			TreeNode(T value);
+			TreeNode(T value, TreeNode<T>* parent);
 			virtual ~TreeNode();
 
 			/**
@@ -46,14 +46,14 @@ namespace bammm
 			 @Pre-Condition- Takes a T value
 			 @Post-Condition- Sets _value to the given value
 			 */
-			void setValue(T& value);
+			void setValue(T value);
 
 			/**
 			 getNextNode
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _parentNode
 			 */
-			TreeNode& getParent();
+			TreeNode* getParent();
 
 			/**
 			 setParent
@@ -71,17 +71,17 @@ namespace bammm
 	}
 
 	template<class T>
-	TreeNode<T>::TreeNode(T& value)
+	TreeNode<T>::TreeNode(T value)
 	{
-		_value = &value;
+		_value = value;
 		_parentNode = NULL;
 	}
 
 	template<class T>
-	TreeNode<T>::TreeNode(T& value, TreeNode<T>& parent)
+	TreeNode<T>::TreeNode(T value, TreeNode<T>* parent)
 	{
-		_value = &value;
-		_parentNode = &parent;
+		_value = value;
+		_parentNode = parent;
 	}
 
 	template<class T>
@@ -93,19 +93,19 @@ namespace bammm
 	template<class T>
 	T& TreeNode<T>::getValue()
 	{
-		return *_value;
+		return _value;
 	}
 
 	template<class T>
-	void TreeNode<T>::setValue(T& value)
+	void TreeNode<T>::setValue(T value)
 	{
 		_value = value;
 	}
 
 	template<class T>
-	TreeNode<T>& TreeNode<T>::getParent()
+	TreeNode<T>* TreeNode<T>::getParent()
 	{
-		return *(_parentNode);
+		return _parentNode;
 	}
 
 	template<class T>
