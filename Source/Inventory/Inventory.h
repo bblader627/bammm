@@ -27,16 +27,20 @@ namespace bammm
 		private:
 			DynamicArray<Item*> _inventory;
 			uint _slots;
+			uint _usedSlots;
 
 		public:
 			Inventory();
 			Inventory(uint slots);
 			bool addItem(Item* item);
-			bool addItem(Item* item, uint amount);
+			uint addItem(Item* item, uint amount);
 			bool removeItem(Item* item);
-			bool removeItem(Item* item, uint amount);
+			uint removeItem(Item* item, uint amount);
 			bool contains(Item* item);
 			bool contains(Item* item, uint amount);
+			void setSlots(uint slots);
+			uint getSlots();
+			uint getUsedSlots();
 	};
 }
 

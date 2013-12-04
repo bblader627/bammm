@@ -32,31 +32,84 @@ namespace bammm
 
 	bool Inventory::addItem(Item* item)
 	{
+		if(_inventory.getSize() >= _slots)
+		{
+			return false;
+		}
+		
+		_inventory.add(item);
 		return true;
 	}
 
-	bool Inventory::addItem(Item* item, uint amount)
+	uint Inventory::addItem(Item* item, uint amount)
 	{
-		return true;
+		uint added = 0;
+
+		for(uint i = 0; i < amount; i++)
+		{
+			if(!addItem(item))
+			{
+				break;
+			}
+
+			added++;
+		}
+
+		return added;
 	}
 
 	bool Inventory::removeItem(Item* item)
 	{
-		return true;
+		return _inventory.removeElement(item);
 	}
 
-	bool Inventory::removeItem(Item* item, uint amount)
+	uint Inventory::removeItem(Item* item, uint amount)
 	{
-		return true;
+		uint removed = 0;
+
+		for(uint i = 0; i < amount; i++)
+		{
+			if(!removeItem(item))
+			{
+				break;
+			}
+
+			removed++;
+		}
+
+		return removed;
 	}
 
 	bool Inventory::contains(Item* item)
 	{
-		return true;
+		return _inventory.contains(item);
 	}
 
 	bool Inventory::contains(Item* item, uint amount)
 	{
+		for(uint i = 0; i < amount; i++)
+		{
+			if(!contains(item))
+			{
+				return false;
+			}
+		}
+
 		return true;
+	}
+
+	void Inventory::setSlots(uint slots)
+	{
+		_slots = slots;
+	}
+
+	uint Inventory::getSlots()
+	{
+		return _slots;
+	}
+
+	uint Inventory::getUsedSlots()
+	{
+		return _inventory.getSize();
 	}
 }
