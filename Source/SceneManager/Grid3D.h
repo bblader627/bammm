@@ -398,29 +398,18 @@ namespace bammm
 			}
 		}
 
-		for (uint i = 0; i < (uint)_width; i++)
-		{
-			visited->add(new DynamicArray<bool>());
-			for (uint j= 0; j < (uint)_length; j++)
-			{
-					cout << visited->get(i)->get(j);
-			}
-			cout << endl;
-		}
 
-		//Building Stack---------------------------------------
+		//Building Queue---------------------------------------
 
 		Queue<Vector3D*>* path = new Queue<Vector3D*>();
 		current = foundActor;
 
 		if (isFound)
 		{
-			cout << "getting vector" << endl;
 			Vector3D* currentVector = foundActor->getParent()->getValue();
 			while(foundActor != NULL)
 			{
 				path->add(currentVector);
-
 				foundActor = foundActor->getParent();
 				if (foundActor != NULL)
 				{
@@ -428,9 +417,7 @@ namespace bammm
 				}
 
 			}
-			cout << "Finished" << endl;
 		}
-
 		return path;
 	}
 
