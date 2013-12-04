@@ -295,7 +295,6 @@ namespace bammm
 
 		DynamicArray<DynamicArray<bool>*>* visited = new DynamicArray<DynamicArray<bool>*>();
 
-		cout << "populating visisted array" << endl;
 		for (uint i = 0; i < (uint)_width; i++)
 		{
 			visited->add(new DynamicArray<bool>());
@@ -331,7 +330,6 @@ namespace bammm
 			//If found
 			if (currentLocInt == actorLocInt)
 			{
-				cout << "Path found" << endl;
 				isFound = true;
 				foundActor = current;
 				break;
@@ -406,15 +404,12 @@ namespace bammm
 
 		if (isFound)
 		{
-			Vector3D* currentVector = foundActor->getParent()->getValue();
+			Vector3D* currentVector;
 			while(foundActor != NULL)
 			{
+				currentVector = foundActor->getValue();
 				path->add(currentVector);
 				foundActor = foundActor->getParent();
-				if (foundActor != NULL)
-				{
-					currentVector = foundActor->getValue();
-				}
 
 			}
 		}
