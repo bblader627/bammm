@@ -213,6 +213,21 @@ namespace bammm
 
 	void PlayerController::tick(float deltaTime)
 	{
+		Actor* enemy = _sceneGraph->getEnemy(_actor->getLocation(), _actor);
+		DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
+		State* newState;
+
+		if (enemy)
+		{
+			newState = _states.getValue("damage");
+
+			if(!currentStates.contains(newState))
+			{
+				_stateMachine.addState(newState);
+				DamageState* castedState = static_cast<DamageState*>(newState);
+				castedState->setTarget(*enemy);
+			}
+		}
 
 		_stateMachine.tick(deltaTime);
 	}
