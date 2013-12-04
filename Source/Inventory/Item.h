@@ -27,12 +27,16 @@ namespace bammm
 	{
 		private:
 			string _name;
+			string _color;
+			string _description;
 			//IAction* _action;
 			uint _amount;
 
 		public:
 			Item();
 			Item(string name);
+			Item(string name, string color);
+			Item(string name, int amount, string color);
 			Item(string name, int amount);
 			virtual ~Item();
 
@@ -71,6 +75,34 @@ namespace bammm
 			 */
 			void setName(string name);
 
+			/**
+			 setColor
+			 Pre-Condition- A string for the new color
+			 Post-Condition- Sets the color of the item
+			 */
+			void setColor(string color);
+			
+			/**
+			 getColor
+			 Pre-Condition- None
+			 Post-Condition- Gets the color of the item
+			 */
+			string getColor();
+			
+			/**
+			 setDescription
+			 Pre-Condition- A string for the new description
+			 Post-Condition- Sets the description of the item
+			 */
+			void setDescription(string description);
+			
+			/**
+			 getDescription
+			 Pre-Condition- None
+			 Post-Condition- Gets the description of the item
+			 */
+			string getDescription();
+			
 			/**
 			 operator==
 			 Pre-Condition- A reference to an Item

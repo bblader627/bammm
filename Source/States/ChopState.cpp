@@ -66,15 +66,48 @@ namespace bammm
 			}
 			else
 			{
+				bool canPickup = true;
 				string treeName = _tree->getName();
-				_actor->setWood(_actor->getWood() + 1);
-				_tree->setWood(_tree->getWood() - 1);
+				Item* removedItem;
+
+				if(treeName.find("redwood") != string::npos)
+				{
+					Item redwood("Redwood logs");
+					removedItem = _tree->getInventory().removeItem(redwood);
+				}
+				else if(treeName.find("oak") != string::npos)
+				{
+					Item oak("Oak logs");
+					removedItem = _tree->getInventory().removeItem(oak);
+				}
+				else if(treeName.find("birch") != string::npos)
+				{
+					Item birch("Birch logs");
+					removedItem = _tree->getInventory().removeItem(birch);
+				}
+				else if(treeName.find("cedar") != string::npos)
+				{
+					Item cedar("Cedar logs");
+					removedItem = _tree->getInventory().removeItem(cedar);
+				}
 				_actor->reduceStamina(1);
+				
+				string coloredName = Color::colorText(removedItem->getName(), removedItem->getColor());
 
 				cout << _actor->getName()
-						<< " lifts his hatchet, and swings it at the rock. " << "\n";
+						<< " lifts his hatchet, and swings it at the tree. " << "\n";
 				cout << _actor->getName() 
-						<< " successfully chops a piece of " << _tree->getName() << "\n";
+						<< " successfully chops some " << coloredName << "\n";
+				
+				canPickup = _actor->getInventory().addItem(removedItem);
+				if(!canPickup)
+				{
+					delete removedItem;
+					cout << _actor->getName()
+						<< " has a full inventory, and drops " << coloredName
+						<< " on the ground.\n";
+				}
+
 				_amountToChop--;
 			}
 		}
@@ -102,7 +135,26 @@ namespace bammm
 		
 		if(_amountToChop > 0)
 		{
-			if(_tree->getWood() > 0)
+			Item redwood("Redwood logs");
+			if(_tree->getInventory().contains(redwood))
+			{
+				canChop++;
+			}
+
+			Item birch("Birch logs");
+			if(_tree->getInventory().contains(birch))
+			{
+				canChop++;
+			}
+
+			Item oak("Oak logs");
+			if(_tree->getInventory().contains(oak))
+			{
+				canChop++;
+			}
+
+			Item cedar("Cedar logs");
+			if(_tree->getInventory().contains(cedar))
 			{
 				canChop++;
 			}

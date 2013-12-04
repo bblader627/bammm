@@ -76,37 +76,38 @@ namespace bammm
 				bool canPickup = true;
 				string oreName = _ore->getName();
 				Item* removedItem;
-				if (oreName == "gold")
+				if (oreName.find("gold") != string::npos)
 				{
 					Item gold("Gold");
 					removedItem = _ore->getInventory().removeItem(gold);
-					canPickup = _actor->getInventory().addItem(removedItem);
 				}
-				else if (oreName == "iron")
+				else if (oreName.find("iron") != string::npos)
 				{
 					Item iron("Iron ore");
 					removedItem = _ore->getInventory().removeItem(iron);
-					canPickup = _actor->getInventory().addItem(removedItem);
 				}
-				else if (oreName == "coal")
+				else if (oreName.find("coal") != string::npos)
 				{
 					Item coal("Coal");
 					removedItem = _ore->getInventory().removeItem(coal);
-					canPickup = _actor->getInventory().addItem(removedItem);
 				}
 				_actor->reduceStamina(1);
 
+				string coloredName = Color::colorText(removedItem->getName(), removedItem->getColor());
 				cout << _actor->getName()
 						<< " lifts his pickaxe, and swings it at the rock. " << "\n";
 				cout << _actor->getName() 
-						<< " successfully mines some " << removedItem->getName() << "\n";
+						<< " successfully mines some " << coloredName << "\n";
 
+				canPickup = _actor->getInventory().addItem(removedItem);
 				if(!canPickup)
 				{
 					delete removedItem;
 					cout << _actor->getName()
-						<< " has a full inventory, and drops it on the ground.\n";
+						<< " has a full inventory, and drops " << coloredName 
+						<< " on the ground.\n";
 				}
+
 				_amountToMine--;
 			}
 		}
