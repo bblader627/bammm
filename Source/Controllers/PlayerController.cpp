@@ -71,20 +71,7 @@ namespace bammm
 		oreType->add("coal");
 		oreType->add("gold");
 
-		/*Actor* enemy = _sceneGraph->getEnemy(_actor->getLocation(), _actor);
-		DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
-		if(enemy)
-		{
-			cout << "Made it enemy\n";
-			State* tempState = _states.getValue("damage");
-			if (!currentStates.contains(tempState))
-			{
-				_stateMachine.addState(tempState);
-			}
 
-			DamageState* castedState = static_cast<DamageState*>(tempState);
-			castedState->setTarget(*enemy);
-		}*/
 		if (newState == "mine")
 		{
 			//mine [#] [ore-type]
@@ -220,7 +207,8 @@ namespace bammm
 
 	void PlayerController::tick(float deltaTime)
 	{
-		//_stateMachine.tick(deltaTime);
+		/*
+		_stateMachine.tick(deltaTime);
 		Actor* enemy = _sceneGraph->getEnemy(_actor->getLocation(), _actor);
 		DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
 		if (enemy)
@@ -274,6 +262,7 @@ namespace bammm
 			castedState->setDirection(newLocation);
 		 	newState = _states.getValue("movement");
 		}
+		*/
 
 		_stateMachine.tick(deltaTime);
 	}
