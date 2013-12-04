@@ -58,8 +58,8 @@ namespace bammm
 		_states.add(moveState->toString(), moveState);
 		_states.add(chopState->toString(), chopState);
 
-		//Put actor in idle state
-		_stateMachine.initialState(_states.getValue(idleState->toString()));
+		//Put actor in default behavior state
+		_stateMachine.initialState(_states.getValue(searchState->toString()));
 	}
 
 	void PlayerController::input(DynamicArray<string>* commandString,

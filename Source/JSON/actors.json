@@ -1,10 +1,10 @@
 {
 	"dwarves": [
-		{ "name":"Bob", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":1, "y":0, "z":0, "alliance":1, "color":"white", "symbol":"D", "collision":false },
-		{ "name":"Jim", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"sing", "x":4, "y":2, "z":0, "alliance":1, "color":"white", "symbol":"D", "collision":false  },
-		{ "name":"Joe", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":1, "y":4, "z":0, "alliance":1, "color":"white", "symbol":"D", "collision":false  },
-		{ "name":"Phil", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"drink", "x":5, "y":3, "z":0, "alliance":1, "color":"white", "symbol":"D", "collision":false },
-		{ "name":"Frank", "health":100, "stamina":15, "attack":20, "defense":20, "behavior":"brawl", "x":4, "y":0, "z":0, "alliance":1, "color":"white", "symbol":"D", "collision":false }
+		{ "name":"Bob", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"sleep", "x":1, "y":0, "z":0, "alliance":1, "color":"white", "symbol":"B", "collision":false },
+		{ "name":"Jim", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"sing", "x":4, "y":2, "z":0, "alliance":1, "color":"white", "symbol":"J", "collision":false  },
+		{ "name":"Joe", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"drink", "x":1, "y":4, "z":0, "alliance":1, "color":"white", "symbol":"J", "collision":false  },
+		{ "name":"Phil", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"drink", "x":5, "y":3, "z":0, "alliance":1, "color":"white", "symbol":"P", "collision":false },
+		{ "name":"Frank", "health":100, "stamina":15, "attack":20, "defense":20, "behavior":"brawl", "x":4, "y":0, "z":0, "alliance":1, "color":"white", "symbol":"F", "collision":false }
 	],
 	
 	"orcs": [
