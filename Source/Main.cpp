@@ -46,6 +46,7 @@ int main()
 	validCommands.add("sing");
 	validCommands.add("brawl");
 	validCommands.add("attack");
+	validCommands.add("chop");
 
 	float dTime = 0;
 	while (playGame)
@@ -70,9 +71,9 @@ int main()
 			input = parseInput(command);
 			command = input->get(0);
 
+			//Check for valid input
 			if (command == "wait")
 			{
-
 				//Wait [#]
 
 				if (input->getSize() == 2)
@@ -105,11 +106,13 @@ int main()
 				doTick = false;
 			}
 
+			//Is game over?
 			if (!playGame)
 			{
 				break;
 			}
 
+			//Was the command valid?
 			if (doTick)
 			{
 				if (doInput)
