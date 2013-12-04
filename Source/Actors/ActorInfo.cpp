@@ -348,14 +348,14 @@ namespace bammm
 		return _alliance * -1;
 	}
 
-	void ActorInfo::setBehavior(Behavior *behaviors)
+	void ActorInfo::setBehavior(string behavior)
 	{
-		_behaviors = behaviors;
+		_behavior = behavior;
 	}
 
-	Behavior* ActorInfo::getBehavior()
+	string ActorInfo::getBehavior()
 	{
-		return _behaviors;
+		return _behavior;
 	}
 
 	int ActorInfo::getLevel()

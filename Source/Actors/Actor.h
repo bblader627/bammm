@@ -87,7 +87,7 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns behavior
 			 */
-			Behavior* getBehavior();
+			string getBehavior();
 
 			/**
 			 setBehavior

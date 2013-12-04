@@ -76,9 +76,14 @@ namespace bammm
 		_stats->setType(type);
 	}
 
-	Behavior* Actor::getBehavior()
+	string Actor::getBehavior()
 	{
 		return _stats->getBehavior();
+	}
+
+	void Actor::setBehavior(string behavior)
+	{
+		_stats->setBehavior(behavior);
 	}
 
 	void Actor::setLocation(Vector3D* location)
