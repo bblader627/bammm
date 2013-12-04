@@ -221,7 +221,7 @@ namespace bammm
 			uint fireRate = child->getChild("fireRate")->getUIntValue();
 
 			//Create the data specifying this ranged weapon
-			WeaponData* weaponData = new weaponData(range, clipCapacity, damage,
+			WeaponData* weaponData = new WeaponData(range, clipCapacity, damage,
 					reloadSpeed, fireRate, "", type);
 
 			map->add(type, *weaponData); //Save this data in the map.
