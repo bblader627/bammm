@@ -272,7 +272,7 @@ namespace bammm
 			}
 			MoveState* castedState = static_cast<MoveState*>(newState);
 			castedState->setDirection(newLocation);
-		 	State* newState = _states.getValue("movement");
+		 	newState = _states.getValue("movement");
 		}
 
 		_stateMachine.tick(deltaTime);
