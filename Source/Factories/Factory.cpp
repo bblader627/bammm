@@ -13,6 +13,8 @@
  */
 
 #include "Factory.h"
+#include "../Inventory/Inventory.h"
+#include "../Inventory/Item.h"
 
 namespace bammm
 {
@@ -32,8 +34,6 @@ namespace bammm
 		JSON* root = parser->getRootNode("root");
 
 		HashMap<JSON*>* rootChildren = root->getAllChildren();
-
-
 
 		JSON* orcs = rootChildren->getValue("orcs");
 		this->parseToActorInfo(orcs, "orc", &actorData);
@@ -235,9 +235,22 @@ namespace bammm
 			string i_str = "" + i;
 			map->add(type + i_str, *info);
 			Actor* myActor = new Actor(info);
+
 			WeaponData weaponData(10,2,"","");
 			MeleeWeapon* meleeWeapon = new MeleeWeapon(weaponData);
 			myActor->setMeleeWeapon(meleeWeapon);
+
+			if(name.find("iron") != string::npos)
+			{
+				Inventory& inventory = myActor->getInventory();
+				inventory.setSlots(100);
+				for(int j = 0; j < iron; j++)
+				{
+					Item* item = new Item("Iron ore");
+					inventory.addItem(item);
+				}
+			}
+
 			scene->addActor(myActor);
 		}
 	}

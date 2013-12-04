@@ -13,6 +13,7 @@
  */
 
 #include "Actor.h"
+#include "../Inventory/Inventory.h"
 
 namespace bammm
 {
@@ -392,6 +393,11 @@ namespace bammm
 	int Actor::getEnemyAlliance()
 	{
 		return _alliance * -1;
+	}
+	
+	Inventory& Actor::getInventory()
+	{
+		return _inventory;
 	}
 
 	string Actor::toString()

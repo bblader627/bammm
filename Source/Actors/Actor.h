@@ -21,6 +21,7 @@
 #include "../Weapons/RangedWeapon.h"
 #include "ActorInfo.h"
 #include "../Resources/Constant.h"
+#include "../Inventory/Inventory.h"
 
 using namespace std;
 
@@ -59,7 +60,7 @@ namespace bammm
 
 			MeleeWeapon *_meleeWeapon;
 			RangedWeapon *_rangedWeapon;
-
+			Inventory _inventory;
 		public:
 			Actor();
 			Actor(string name, string type, AllianceType alliance);
@@ -403,6 +404,13 @@ namespace bammm
 			 @Post-Condition- Returns the enemy's alliance
 			 */
 			int getEnemyAlliance();
+			
+			/**
+			 getInventory
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the actor's inventory
+			 */
+			Inventory& getInventory();
 
 			/**
 			 toString

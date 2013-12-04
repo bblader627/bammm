@@ -16,10 +16,9 @@
 #define INVENTORY_H_
 
 #include "../Resources/Constant.h"
-class DynamicArray;
-class Item;
+#include "Item.h"
+#include "../Resources/DynamicArray.h"
 using namespace std;
-
 namespace bammm
 {
 	class Inventory

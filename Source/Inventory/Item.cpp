@@ -14,8 +14,8 @@
 
 #include <iostream>
 #include "../Resources/Constant.h"
-#include "../Actors/Actor.h"
-#include "../Interfaces/IAction.h"
+//#include "../Actors/Actor.h"
+//#include "../Interfaces/IAction.h"
 #include "Item.h"
 using namespace std;
 
@@ -43,10 +43,10 @@ namespace bammm
 	{
 	}
 
-	void Item::action(Actor* target, int amount)
+	/*void Item::action(Actor* target, int amount)
 	{
 		_action->action(target, amount);
-	}
+	}*/
 	
 	uint Item::getAmount()
 	{

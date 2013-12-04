@@ -17,8 +17,8 @@
 
 #include <iostream>
 #include "../Resources/Constant.h"
-class IAction;
-class Actor;
+//#include "../Interfaces/IAction.h"
+//#include "../Actors/Actor.h"
 using namespace std;
 
 namespace bammm
@@ -27,7 +27,7 @@ namespace bammm
 	{
 		private:
 			string _name;
-			IAction* _action;
+			//IAction* _action;
 			uint _amount;
 
 		public:
@@ -41,7 +41,7 @@ namespace bammm
 			 Pre-Condition- A pointer to an Actor, and an int amount
 			 Post-Condition- Uses the item's action
 			 */
-			void action(Actor* target, int amount);
+			//void action(Actor* target, int amount);
 
 			/**
 			 getAmount
