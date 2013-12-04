@@ -54,14 +54,6 @@ namespace bammm
 			 */
 			Vector3D* convertToVector(int position);
 
-			/*
-			 * getPath
-			 * @Pre-Condition- takes Position of actor to be found, current location, and stack of directions
-			 * @Post-Condition- returns true if path is found
-			 */
-			bool getPath(Vector3D* actorPos, Vector3D* currentLoc,
-					Stack<Vector3D*>* path, DynamicArray<DynamicArray<bool>*>* visited);
-
 		public:
 			Vector3D* UP;
 			Vector3D* DOWN;
@@ -119,9 +111,9 @@ namespace bammm
 			/*
 			 * getPath
 			 * @Pre-Condition- takes current Actor, destination string
-			 * @Post-Condition- returns stack of directions
+			 * @Post-Condition- returns queue of directions
 			 */
-			Stack<Vector3D*>* getPath(Actor* actor, string destination);
+			Queue<Vector3D*>* getPath(Actor* actor, string destination);
 
 			/*
 			 findInGrid
@@ -292,7 +284,7 @@ namespace bammm
 	}
 
 	template<class T>
-	Stack<Vector3D*>* Grid3D<T>::getPath(Actor* actor, string destination)
+	Queue<Vector3D*>* Grid3D<T>::getPath(Actor* actor, string destination)
 	{
 
 		Vector3D* target = findInGrid(destination);
@@ -314,9 +306,10 @@ namespace bammm
 		}
 
 		Tree<Vector3D*>* mapTree = new Tree<Vector3D*>();
-		//TreeNode<Vector3D*>* rootNode = new TreeNode<Vector3D*>(target);
 		TreeNode<Vector3D*>* rootNode = NULL;
-		mapTree->add(&target, rootNode);
+		mapTree->add(target, rootNode);
+
+
 		TreeNode<Vector3D*>* current;
 		TreeNode<Vector3D*>* foundActor;
 
@@ -325,10 +318,12 @@ namespace bammm
 		while (!mapTree->isEmpty())
 		{
 			current = mapTree->get();
-
 			//Get location as vector and integer
 			Vector3D* currentLocation = current->getValue();
 			int currentLocInt = convertToPosition(currentLocation);
+
+
+			//cout << currentLocation->getX() << ", " << currentLocation->getY() << endl;
 
 			//Set current location to visited
 			visited->get(currentLocation->getX())->get(currentLocation->getY()) = true;
@@ -354,9 +349,9 @@ namespace bammm
 				hasVisited = visited->get(newLocation->getX())->get(newLocation->getY());
 				if (!hasVisited)			//If hasn't been visited
 				{
-					cout << "Adding " << newLocation->getX() << ", " << newLocation->getY() << endl;
+					//cout << newLocation->getX() << ", " << newLocation->getY() << endl;
 					visited->get(newLocation->getX())->get(newLocation->getY()) = true;
-					mapTree->add(&newLocation, current);
+					mapTree->add(newLocation, current);
 				}
 			}
 
@@ -368,8 +363,9 @@ namespace bammm
 				hasVisited = visited->get(newLocation->getX())->get(newLocation->getY());
 				if (!hasVisited)			//If hasn't been visited
 				{
+					//cout << newLocation->getX() << ", " << newLocation->getY() << endl;
 					visited->get(newLocation->getX())->get(newLocation->getY()) = true;
-					mapTree->add(&newLocation, current);
+					mapTree->add(newLocation, current);
 				}
 			}
 
@@ -381,8 +377,9 @@ namespace bammm
 				hasVisited = visited->get(newLocation->getX())->get(newLocation->getY());
 				if (!hasVisited)				//If hasn't been visited
 				{
+					//cout << newLocation->getX() << ", " << newLocation->getY() << endl;
 					visited->get(newLocation->getX())->get(newLocation->getY()) = true;
-					mapTree->add(&newLocation, current);
+					mapTree->add(newLocation, current);
 				}
 			}
 
@@ -394,13 +391,13 @@ namespace bammm
 				hasVisited = visited->get(newLocation->getX())->get(newLocation->getY());
 				if (!hasVisited)				//If hasn't been visited
 				{
+					//cout << newLocation->getX() << ", " << newLocation->getY() << endl;
 					visited->get(newLocation->getX())->get(newLocation->getY()) = true;
-					mapTree->add(&newLocation, current);
+					mapTree->add(newLocation, current);
 				}
 			}
 		}
 
-		/*
 		for (uint i = 0; i < (uint)_width; i++)
 		{
 			visited->add(new DynamicArray<bool>());
@@ -410,164 +407,33 @@ namespace bammm
 			}
 			cout << endl;
 		}
-		*/
-
-
 
 		//Building Stack---------------------------------------
 
-		Stack<Vector3D*>* path = new Stack<Vector3D*>();
-
+		Queue<Vector3D*>* path = new Queue<Vector3D*>();
 		current = foundActor;
 
 		if (isFound)
 		{
-			Vector3D* currentVector = foundActor->getValue();
-			while(currentVector != NULL)
+			cout << "getting vector" << endl;
+			Vector3D* currentVector = foundActor->getParent()->getValue();
+			while(foundActor != NULL)
 			{
-				currentVector = foundActor->getValue();
-				cout << currentVector->getX() << ", " << currentVector->getY() << ": ";
-				foundActor = &(foundActor->getParent());
-			}
+				path->add(currentVector);
 
-			/*
-			Vector3D* currentVector = foundActor->getValue();
-			Vector3D* parentVector = current->getParent().getParent().getValue();
-
-			cout << currentVector->getX() << ", " << currentVector->getY() << ": ";
-			cout << parentVector->getX() << ", " << parentVector->getY() << endl;
-
-			while (!(*currentVector == *parentVector))
-
-				cout << currentVector->getX() << ", " << currentVector->getY() << ": ";
-				cout << parentVector->getX() << ", " << parentVector->getY() << endl;
-
-
-				Vector3D direction = *parentVector - *currentVector;
-				path->push(&direction);
-
-				current = &(current->getParent());
-				currentVector = current->getValue();
-				parentVector = current->getParent().getValue();
+				foundActor = foundActor->getParent();
+				if (foundActor != NULL)
+				{
+					currentVector = foundActor->getValue();
+				}
 
 			}
-
-			cout << "Path created" << endl;
-			*/
-
+			cout << "Finished" << endl;
 		}
 
 		return path;
 	}
 
-	template<class T>
-	bool Grid3D<T>::getPath(Vector3D* actorPos, Vector3D* currentPos,
-			Stack<Vector3D*>* path, DynamicArray<DynamicArray<bool>*>* visited)
-	{
-		//Base Case
-		int actorPosInt = convertToPosition(actorPos);
-		int currentPosInt = convertToPosition(currentPos);
-
-		if (actorPosInt == currentPosInt)
-		{
-			cout << "SUCCESS" << endl;
-			return true;
-		}
-
-
-		//Collision testing
-		if (_grid->get(currentPosInt)->getSize() > 0)
-		{
-			Actor* actor = static_cast<Actor*>(_grid->get(currentPosInt)->get(0));
-			if (actor->getCollision())
-			{
-				cout << "pop" << endl;
-				path->pop();
-				return false;
-			}
-		}
-
-		//Out of Bounds
-		if (currentPosInt > (_length * _width))
-		{
-			cout << "pop" << endl;
-			path->pop();
-			return false;
-		}
-
-		Vector3D newLoc;
-
-		//Begin Recursion
-		if (!(currentPosInt % _width == 0))
-		{
-
-			newLoc = *currentPos + *UP;
-			if (newLoc.getY() == currentPos->getY() &&			//If no overflow
-					visited->get(newLoc.getX())->get(newLoc.getY()) == 0)	//And if hasn't been visited
-			{
-				cout << "Move up" << endl;
-
-				path->push(DOWN);
-				visited->get(newLoc.getX())->get(newLoc.getY()) = true;
-				if (getPath(actorPos, &newLoc, path, visited))
-				{
-					return true;
-				}
-
-			}
-		}
-
-		if (currentPosInt > _width)
-		{
-			newLoc = *currentPos + *LEFT;
-			if (visited->get(newLoc.getX())->get(newLoc.getY()) == 0)	//And if hasn't been visited
-			{
-				cout << "Move Left" << endl;
-
-				path->push(RIGHT);
-				visited->get(newLoc.getX())->get(newLoc.getY()) = true;
-				if (getPath(actorPos, &newLoc, path, visited))
-				{
-					return true;
-				}
-
-			}
-		}
-
-		if (currentPosInt < (_length * _width)-_length)
-		{
-			newLoc = *currentPos + *RIGHT;
-			if (visited->get(newLoc.getX())->get(newLoc.getY()) == false)	//And if hasn't been visited
-			{
-				cout << "Move Right" << endl;
-
-				path->push(LEFT);
-				visited->get(newLoc.getX())->get(newLoc.getY()) = true;
-				if (getPath(actorPos, &newLoc, path, visited))
-				{
-					return true;
-				}
-
-			}
-		}
-		newLoc = *currentPos + *DOWN;
-		if (newLoc.getY() == currentPos->getY() &&			//If no overflow
-						visited->get(newLoc.getX())->get(newLoc.getY()) == false)	//And if hasn't been visited
-		{
-			cout << "Move Down" << endl;
-
-			path->push(UP);
-			visited->get(newLoc.getX())->get(newLoc.getY()) = true;
-			if (getPath(actorPos, &newLoc, path, visited))
-			{
-				return true;
-			}
-
-		}
-
-		cout << "END PATHFINDING" << endl;
-		return false;
-	}
 
 	template<class T>
 	Vector3D* Grid3D<T>::findInGrid(string target)
