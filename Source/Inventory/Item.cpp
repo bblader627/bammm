@@ -15,8 +15,8 @@
 #include <iostream>
 #include "../Resources/Constant.h"
 #include "../Actors/Actor.h"
+#include "../Interfaces/IAction.h"
 #include "Item.h"
-#include "IAction.h"
 using namespace std;
 
 namespace bammm

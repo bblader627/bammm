@@ -26,7 +26,7 @@ JSON/JSONPrimitive.cpp \
 \
 TestSuite/Time.cpp \
 \
-Inventory/Item.cpp
+Inventory/Item.cpp Inventory/Inventory.cpp
 TESTNAME = test
 TESTSRC = Main.cpp
 

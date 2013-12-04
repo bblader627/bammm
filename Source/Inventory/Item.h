@@ -17,7 +17,8 @@
 
 #include <iostream>
 #include "../Resources/Constant.h"
-#include "IAction.h"
+//#include "../Interfaces/IAction.h"
+class IAction;
 class Actor;
 using namespace std;
 
