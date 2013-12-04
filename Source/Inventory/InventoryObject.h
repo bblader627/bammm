@@ -23,10 +23,24 @@ namespace bammm
 {
 	class InventoryObject
 	{
+		private:
+			string _type;
+			int _amount;
 		public:
-			string id;
-
 			InventoryObject(string id);
+
+			/*
+				
+			*/
+			void setType(string type);
+			
+			void setAmount(int amount);
+			
+			void increaseAmount(int amount);
+
+			void decreaseAmount(int amount);
+
+			string toString();
 	};
 }
 
