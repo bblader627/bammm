@@ -215,7 +215,6 @@ namespace bammm
 			string type = child->getChild("type")->getStringValue();
 			int range = child->getChild("range")->getIntValue();
 			int clipCapacity = child->getChild("clipCapacity")->getIntValue();
-			int ammoCount = clipCapacity; //full clip
 			int damage = child->getChild("damage")->getIntValue();
 			float reloadSpeed = child->getChild("reloadSpeed")->getFloatValue();
 			uint fireRate = child->getChild("fireRate")->getUIntValue();
