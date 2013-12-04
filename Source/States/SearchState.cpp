@@ -33,30 +33,7 @@ namespace bammm
 	{
 		_target = target;
 		_path = _sceneGraph->getPath(_actor, _target);
-		/*
-		cout << "PRINTING PATHFINDING" << endl;
 
-		while (_path->getSize() > 0)
-		{
-			Vector3D* dir = _path->pop();
-			if (dir == _sceneGraph->UP)
-			{
-				cout << "UP" << endl;
-			}
-			else if (dir == _sceneGraph->DOWN)
-			{
-				cout << "DOWN" << endl;
-			}
-			else if (dir == _sceneGraph->LEFT)
-			{
-				cout << "LEFT" << endl;
-			}
-			else if (dir == _sceneGraph->RIGHT)
-			{
-				cout << "RIGHT" << endl;
-			}
-		}
-		*/
 	}
 
 	void SearchState::setDestState(State* goal)
@@ -82,11 +59,8 @@ namespace bammm
 		}
 		else
 		{
-			Vector3D* loc = new Vector3D(0,0,0);
-			Vector3D newloc = *(_actor->getLocation()) + *(_path->pop());
-
-			loc->set(newloc.getX(), newloc.getY(), newloc.getZ());
-			_sceneGraph->move(_actor, loc);
+			Vector3D* newloc = _path->remove();
+			_sceneGraph->move(_actor, newloc);
 		}
 
 		Vector3D* targetActor = _sceneGraph->findInGrid(_target);
