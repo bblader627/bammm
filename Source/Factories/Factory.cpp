@@ -90,7 +90,10 @@ namespace bammm
 		}
 		else
 		{
-			return NULL;
+			//If they ask for some weapon that doesn't exist, give some weapon that exists
+			MeleeWeapon* newWeapon = new MeleeWeapon(
+					_meleeWeaponData.getAllValues()->get(0));
+			return *newWeapon;
 		}
 	}
 
@@ -104,7 +107,10 @@ namespace bammm
 		}
 		else
 		{
-			return NULL;
+			//If they ask for some weapon that doesn't exist, give some weapon that exists
+			RangedWeapon* newWeapon = new RangedWeapon(
+					_rangedWeaponData.getAllValues()->get(0));
+			return *newWeapon;
 		}
 	}
 
@@ -189,7 +195,7 @@ namespace bammm
 			int damage = child->getChild("damage")->getIntValue();
 
 			//Create the data specifying this melee weapon
-			WeaponData* weaponData = new weaponData(0, 0, damage, 0, 0, "",
+			WeaponData* weaponData = new WeaponData(0, 0, damage, 0, 0, "",
 					type);
 
 			map->add(type, *weaponData); //Save this data in the map.
