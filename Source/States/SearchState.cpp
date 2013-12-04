@@ -68,7 +68,7 @@ namespace bammm
 				_actor->getLocation()->getY() == targetActor->getY() &&
 				_actor->getLocation()->getZ() == targetActor->getZ())
 		{
-			switchState(_goalState->toString());
+			switchState(_goalState);
 		}
 	}
 
