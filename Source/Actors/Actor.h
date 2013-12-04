@@ -83,6 +83,13 @@ namespace bammm
 			void setType(string type);
 
 			/**
+			 getBehavior
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns behavior
+			 */
+			Behavior* getBehavior();
+
+			/**
 			 setBehavior
 			 @Pre-Condition- takes behavior
 			 @Post-Condition- returns void
