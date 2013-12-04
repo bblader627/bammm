@@ -112,4 +112,8 @@ namespace bammm
 	{
 		return _inventory.getSize();
 	}
+
+	Inventory::~Inventory()
+	{
+	}
 }

@@ -17,7 +17,6 @@
 
 #include <iostream>
 #include "../Resources/Constant.h"
-//#include "../Interfaces/IAction.h"
 class IAction;
 class Actor;
 using namespace std;
@@ -36,6 +35,7 @@ namespace bammm
 			Item();
 			Item(string name);
 			Item(string name, int amount);
+			~Item();
 			void action(Actor* target, int amount);
 			uint getAmount();
 			void setAmount(uint amount);

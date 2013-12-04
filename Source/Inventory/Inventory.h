@@ -32,6 +32,7 @@ namespace bammm
 		public:
 			Inventory();
 			Inventory(uint slots);
+			virtual ~Inventory();
 			bool addItem(Item* item);
 			uint addItem(Item* item, uint amount);
 			bool removeItem(Item* item);

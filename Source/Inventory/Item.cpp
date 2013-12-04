@@ -39,6 +39,10 @@ namespace bammm
 		_amount = amount;
 	}
 
+	Item::~Item()
+	{
+	}
+
 	void Item::action(Actor* target, int amount)
 	{
 		_action->action(target, amount);
