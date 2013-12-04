@@ -8,27 +8,24 @@
  *	Matt Witkowski
  *  Bradley Crusco
  * Description:
- * InventoryObject header file.
+ * IAction header file.
  *
  */
 
-#ifndef INVENTORYOBJECT_H_
-#define INVENTORYOBJECT_H_
+#ifndef IACTION_H_
+#define IACTION_H_
 
 #include <iostream>
-
+class Actor;
 using namespace std;
 
 namespace bammm
 {
-	class InventoryObject
+	class IAction
 	{
 		public:
-			string id;
-
-			InventoryObject(string id);
+			virtual void action(Actor* target, int amount)=0;
 	};
 }
 
 #endif
-
