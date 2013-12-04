@@ -69,6 +69,7 @@ namespace bammm
 
 	void DrinkState::tick(float deltaTime)
 	{
+
 		string name = _actor->getName();
 		if (_stoutLife == 0)
 		{

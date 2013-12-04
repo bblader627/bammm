@@ -13,6 +13,7 @@
  */
 
 #include "Actor.h"
+#include "../Inventory/Inventory.h"
 
 namespace bammm
 {
@@ -44,6 +45,10 @@ namespace bammm
 		_stats->setSymbol(info->getSymbol());
 		_stats->setColor(info->getColor());
 		_stats->setWood(info->getWood());
+		_iron = info->getIron();
+		_gold = info->getGold();
+		_coal = info->getCoal();
+		_BAC = 0;
 	}
 
 	void Actor::setMeleeWeapon(MeleeWeapon* weapon)
@@ -310,10 +315,10 @@ namespace bammm
 	{
 		return _stats->getEnemyAlliance();
 	}
-
-	int Actor::getLevel()
+	
+	Inventory& Actor::getInventory()
 	{
-		return _stats->getLevel();
+		return _inventory;
 	}
 
 	void Actor::setLevel(int newLevel)

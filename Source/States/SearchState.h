@@ -18,7 +18,7 @@
 #include <iostream>
 #include "State.h"
 #include "../SceneManager/Grid3D.h"
-#include "../Resources/Stack.h"
+#include "../Resources/Queue.h"
 
 using namespace std;
 
@@ -29,7 +29,7 @@ namespace bammm
 		private:
 			string _target;
 			Grid3D<Actor*>* _sceneGraph;
-			Stack<Vector3D*>* _path;
+			Queue<Vector3D*>* _path;
 			State* _goalState;
 
 		public:

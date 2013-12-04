@@ -21,6 +21,7 @@
 #include "../Weapons/RangedWeapon.h"
 #include "ActorInfo.h"
 #include "../Resources/Constant.h"
+#include "../Inventory/Inventory.h"
 
 using namespace std;
 
@@ -39,7 +40,7 @@ namespace bammm
 
 			MeleeWeapon *_meleeWeapon;
 			RangedWeapon *_rangedWeapon;
-
+			Inventory _inventory;
 			ActorInfo *_stats;
 
 		public:
@@ -431,13 +432,13 @@ namespace bammm
 			 @Post-Condition- Returns the enemy's alliance
 			 */
 			int getEnemyAlliance();
-
+			
 			/**
-			 getLevel
+			 getInventory
 			 @Pre-Condition- No input
-			 @Post-Condition- Returns the current level
+			 @Post-Condition- Returns the actor's inventory
 			 */
-			int getLevel();
+			Inventory& getInventory();
 
 			/**
 			 setLevel

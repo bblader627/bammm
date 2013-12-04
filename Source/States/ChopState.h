@@ -59,7 +59,7 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			 void setTree(Actor& treeType);
+			 void setTree(Actor* treeType);
 			
 			/**
 			 breakdown

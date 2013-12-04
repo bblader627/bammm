@@ -57,10 +57,11 @@ namespace bammm
 
 	}
 
-	void SceneManager::removeActor(Actor* actor)
+	Actor* SceneManager::removeActor(Actor* actor)
 	{
 		_allActors.removeElement(actor);
 		_sceneGraph.remove(actor->getLocation(), actor);
+		return actor;
 	}
 
 	void SceneManager::addTickable(ITickable* tickable)
@@ -92,71 +93,39 @@ namespace bammm
 	void SceneManager::tick(float deltaTime)
 	{
 		int size = _allTickables.getSize();
-		cout << "Size: " << size << "\n";
 		for (int i = 0; i < size; i++)
 		{
-			_allTickables.get(i)->tick(deltaTime);
-			if (_allTickables.get(i)->canDelete())
+			ITickable* tickable = _allTickables.get(i);
+			if (tickable->canDelete())
 			{
-				delete removeTickable(_allTickables.get(i));
+				PlayerController* playerController = static_cast<PlayerController*>(tickable);
+				AiController* aiController = static_cast<AiController*>(tickable);
+				size--;
+				_allPlayerControllers.removeElement(playerController);
+				_allAiControllers.removeElement(aiController);
+				removeActor(_allActors.get(i));
+				removeTickable(tickable);
+				i--;
+			}
+			else
+			{
+				tickable->tick(deltaTime);
 			}
 		}
 	}
 
 	void SceneManager::input(DynamicArray<string>* args, float deltaTime)
 	{
+
 		string newState = args->get(0);
 		//bool doTick = true;
-
-
-		DynamicArray<string> oreType = *(new DynamicArray<string>());
-		oreType.add("iron");
-		oreType.add("coal");
-		oreType.add("gold");
-
 
 		PlayerController* controller = this->findController(newState);
 		if (controller == NULL)
 		{
 			return;
 		}
-
-		if (newState == "mine")
-		{
-			cout << "Sending mine to actor" << endl;
-			controller->input(args, deltaTime);
-			/*mine [#] [ore-type]
-			int numOre;
-			string type;
-
-			if (args->getSize() == 3)
-			{
-				string number_str = args->get(1);
-
-				numOre = atoi(number_str.c_str());
-				if (numOre == 0)
-				{
-					cout << "Invalid argument\n";
-					doTick = false;
-				}
-				numOre = 0;
-				type = args->get(2);
-				if (!(oreType->contains(type)))
-				{
-					cout << type << " is not a valid ore type\n";
-					doTick = false;
-				}
-				//Add to controllerinput
-
-				//
-			}
-			else
-			{
-				cout << "Invalid input\n";
-				//doTick = false;
-			}*/
-
-		}
+		controller->input(args, deltaTime);
 		/*
 		else if (newState == "sing")
 		{
@@ -233,16 +202,14 @@ namespace bammm
 			{
 				return current;
 			}
-			else if (runningStates.contains(allStates.getValue(command)))
-			{
-				return current;
-			}
-			else if ((runningStates.contains(allStates.getValue("drink"))) ||
+			else if ((runningStates.getSize() == 1) &&
+						((runningStates.contains(allStates.getValue("drink"))) ||
 						(runningStates.contains(allStates.getValue("sing"))) ||
 						(runningStates.contains(allStates.getValue("sleep"))) ||
-						(runningStates.contains(allStates.getValue("idle")))
+						(runningStates.contains(allStates.getValue("idle"))))
 					)
 			{
+				cout << "interruptable" << endl;
 				return current;
 			}
 

@@ -13,6 +13,7 @@ States/DamageState.cpp States/SearchState.cpp States/ChopState.cpp\
 \
 Resources/DynamicArray.h Resources/HashMap.h Resources/HashNode.h \
 Resources/Heap.h Resources/Queue.h Resources/Stack.h Resources/Color.cpp \
+Resources/TreeNode.h Resources/Tree.h \
 \
 Weapons/WeaponData.cpp Weapons/MeleeWeapon.cpp Weapons/RangedWeapon.cpp \
 Interfaces/IWeaponType.h Weapons/MeleeCombat.cpp \
@@ -23,7 +24,9 @@ Interfaces/ITickable.cpp \
 JSON/JSON.cpp JSON/JSONParser.cpp JSON/JSONArray.cpp \
 JSON/JSONPrimitive.cpp \
 \
-TestSuite/Time.cpp
+TestSuite/Time.cpp \
+\
+Inventory/Item.cpp Inventory/Inventory.cpp
 TESTNAME = test
 TESTSRC = Main.cpp
 

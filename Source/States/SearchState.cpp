@@ -32,7 +32,7 @@ namespace bammm
 	void SearchState::setTarget(string target)
 	{
 		_target = target;
-		//_path = _sceneGraph->getPath(_actor, _target);
+
 	}
 
 	void SearchState::setDestState(State* goal)
@@ -42,6 +42,24 @@ namespace bammm
 
 	void SearchState::setup()
 	{
+		if (_target == "")
+		{
+			string behavior = _actor->getBehavior();
+			if (behavior == "drink")
+			{
+				_target = "Pub";
+			}
+			else if (behavior == "sleep")
+			{
+				_target = "Inn";
+			}
+			else
+			{
+				_target = "Inn";
+			}
+		}
+
+		_path = _sceneGraph->getPath(_actor, _target);
 	}
 
 	void SearchState::breakdown()
@@ -50,7 +68,6 @@ namespace bammm
 
 	void SearchState::tick(float deltaTime)
 	{
-		cout << "Ticking search state!" << endl;
 		if (_path->isEmpty())
 		{
 			switchState("null");
@@ -58,7 +75,24 @@ namespace bammm
 		}
 		else
 		{
-			_sceneGraph->move(_actor, _path->pop());
+			Vector3D* newloc = _path->remove();
+			_sceneGraph->move(_actor, newloc);
+		}
+
+		Vector3D* targetActor = _sceneGraph->findInGrid(_target)->getLocation();
+
+		if (_actor->getLocation()->getX() == targetActor->getX() &&
+				_actor->getLocation()->getY() == targetActor->getY() &&
+				_actor->getLocation()->getZ() == targetActor->getZ())
+		{
+			if (_goalState != NULL)
+			{
+				switchState(_goalState);
+			}
+			else
+			{
+				switchState(_actor->getBehavior());
+			}
 		}
 	}
 

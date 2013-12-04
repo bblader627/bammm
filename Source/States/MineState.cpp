@@ -13,6 +13,8 @@
  */
 
 #include "MineState.h"
+#include "../Inventory/Inventory.h"
+#include "../Inventory/Item.h"
 
 namespace bammm
 {
@@ -29,7 +31,6 @@ namespace bammm
 
 	MineState::~MineState()
 	{
-		cout << "Calling deconstructor\n";
 	}
 
 	/*void MineState::setup(DynamicArray<string>* args)
@@ -50,9 +51,9 @@ namespace bammm
 		_amountToMine = amountToMine;
 	}
 
-	void MineState::setOre(Actor& ore)
+	void MineState::setOre(Actor* ore)
 	{
-		_ore = &ore;
+		_ore = ore;
 	}
 
 	void MineState::breakdown()
@@ -72,28 +73,40 @@ namespace bammm
 			}
 			else
 			{
+				bool canPickup = true;
 				string oreName = _ore->getName();
-				if (_ore->getName() == "Gold")
+				Item* removedItem;
+				if (oreName == "gold")
 				{
-					_actor->setGold(_actor->getGold() + 1);
-					_ore->setGold(_ore->getGold() - 1);
+					Item gold("Gold");
+					removedItem = _ore->getInventory().removeItem(gold);
+					canPickup = _actor->getInventory().addItem(removedItem);
 				}
-				else if (_ore->getName() == "Iron")
+				else if (oreName == "iron")
 				{
-					_actor->setIron(_actor->getIron() + 1);
-					_ore->setIron(_ore->getIron() - 1);
+					Item iron("Iron ore");
+					removedItem = _ore->getInventory().removeItem(iron);
+					canPickup = _actor->getInventory().addItem(removedItem);
 				}
-				else if (_ore->getName() == "Coal")
+				else if (oreName == "coal")
 				{
-					_actor->setCoal(_actor->getCoal() + 1);
-					_ore->setCoal(_ore->getCoal() - 1);
+					Item coal("Coal");
+					removedItem = _ore->getInventory().removeItem(coal);
+					canPickup = _actor->getInventory().addItem(removedItem);
 				}
 				_actor->reduceStamina(1);
 
 				cout << _actor->getName()
 						<< " lifts his pickaxe, and swings it at the rock. " << "\n";
 				cout << _actor->getName() 
-						<< " successfully mines a piece of " << _ore->getName() << "\n";
+						<< " successfully mines some " << removedItem->getName() << "\n";
+
+				if(!canPickup)
+				{
+					delete removedItem;
+					cout << _actor->getName()
+						<< " has a full inventory, and drops it on the ground.\n";
+				}
 				_amountToMine--;
 			}
 		}
@@ -118,20 +131,23 @@ namespace bammm
 	bool MineState::canMine()
 	{
 		int canMine = 0;
-		
+			
 		if(_amountToMine > 0)
 		{
-			if(_ore->getGold() > 0)
+			Item gold("Gold");
+			if(_ore->getInventory().contains(gold))
 			{
 				canMine++;
 			}
 			
-			if(_ore->getIron() > 0)
+			Item iron("Iron ore");
+			if(_ore->getInventory().contains(iron))
 			{
 				canMine++;
 			}
 			
-			if(_ore->getCoal() > 0)
+			Item coal("Coal");
+			if(_ore->getInventory().contains(coal))
 			{
 				canMine++;
 			}

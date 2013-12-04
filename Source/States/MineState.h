@@ -60,7 +60,7 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			 void setOre(Actor& oreType);
+			 void setOre(Actor* oreType);
 			
 			/**
 			 breakdown
