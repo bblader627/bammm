@@ -51,7 +51,6 @@ namespace bammm
 
 	void SearchState::tick(float deltaTime)
 	{
-		cout << "Ticking search state!" << endl;
 		if (_path->isEmpty())
 		{
 			switchState("null");
