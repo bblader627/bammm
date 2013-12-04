@@ -116,27 +116,16 @@ namespace bammm
 
 	void SceneManager::input(DynamicArray<string>* args, float deltaTime)
 	{
+
 		string newState = args->get(0);
 		//bool doTick = true;
-
-
-		DynamicArray<string> oreType = *(new DynamicArray<string>());
-		oreType.add("iron");
-		oreType.add("coal");
-		oreType.add("gold");
-
 
 		PlayerController* controller = this->findController(newState);
 		if (controller == NULL)
 		{
 			return;
 		}
-
-		if (newState == "mine")
-		{
-			controller->input(args, deltaTime);
-
-		}
+		controller->input(args, deltaTime);
 		/*
 		else if (newState == "sing")
 		{
@@ -213,16 +202,14 @@ namespace bammm
 			{
 				return current;
 			}
-			else if (runningStates.contains(allStates.getValue(command)))
-			{
-				return current;
-			}
-			else if ((runningStates.contains(allStates.getValue("drink"))) ||
+			else if ((runningStates.getSize() == 1) &&
+						((runningStates.contains(allStates.getValue("drink"))) ||
 						(runningStates.contains(allStates.getValue("sing"))) ||
 						(runningStates.contains(allStates.getValue("sleep"))) ||
-						(runningStates.contains(allStates.getValue("idle")))
+						(runningStates.contains(allStates.getValue("idle"))))
 					)
 			{
+				cout << "interruptable" << endl;
 				return current;
 			}
 
