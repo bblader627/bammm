@@ -135,36 +135,6 @@ namespace bammm
 		if (newState == "mine")
 		{
 			controller->input(args, deltaTime);
-			/*mine [#] [ore-type]
-			int numOre;
-			string type;
-
-			if (args->getSize() == 3)
-			{
-				string number_str = args->get(1);
-
-				numOre = atoi(number_str.c_str());
-				if (numOre == 0)
-				{
-					cout << "Invalid argument\n";
-					doTick = false;
-				}
-				numOre = 0;
-				type = args->get(2);
-				if (!(oreType->contains(type)))
-				{
-					cout << type << " is not a valid ore type\n";
-					doTick = false;
-				}
-				//Add to controllerinput
-
-				//
-			}
-			else
-			{
-				cout << "Invalid input\n";
-				//doTick = false;
-			}*/
 
 		}
 		/*
