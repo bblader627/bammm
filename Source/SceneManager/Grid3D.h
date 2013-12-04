@@ -287,9 +287,9 @@ namespace bammm
 	template<class T>
 	Queue<Vector3D*>* Grid3D<T>::getPath(Actor* actor, string destination)
 	{
-
 		Vector3D* target = findInGrid(destination)->getLocation();
 		Vector3D* actorLocation = actor->getLocation();
+
 		int actorLocInt = convertToPosition(actorLocation);
 
 		cout << actorLocInt << endl;

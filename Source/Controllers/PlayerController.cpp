@@ -110,13 +110,14 @@ namespace bammm
 				//Add to controllerinput
 				Actor* ore = _sceneGraph->findInGrid(type);
 				stateToAdd = _states.getValue(newState);
-				MineState* tempMine = static_cast<MineState*>(stateToAdd);
-				tempMine->setAmount(numOre);
-				tempMine->setOre(ore);
+				MineState* tempState = static_cast<MineState*>(stateToAdd);
+				tempState->setAmount(numOre);
+				tempState->setOre(ore);
 
+				cout << _actor->getName() << " has been sent to mine " << type << "!" << endl;
 				SearchState* search = static_cast<SearchState*>(_states.getValue("search"));
 				search->setTarget(type);
-				search->setDestState(stateToAdd);
+				search->setDestState(tempState);
 				_stateMachine.addState(search);
 
 			}
@@ -156,13 +157,14 @@ namespace bammm
 				//Add to controllerinput
 				Actor* ore = _sceneGraph->findInGrid(type);
 				stateToAdd = _states.getValue(newState);
-				ChopState* tempMine = static_cast<ChopState*>(stateToAdd);
-				tempMine->setAmount(numWood);
-				tempMine->setTree(ore);
+				ChopState* tempState = static_cast<ChopState*>(stateToAdd);
+				tempState->setAmount(numWood);
+				tempState->setTree(ore);
 
+				cout << _actor->getName() << " has been sent to chop " << type << "!" << endl;
 				SearchState* search = static_cast<SearchState*>(_states.getValue("search"));
 				search->setTarget(type);
-				search->setDestState(stateToAdd);
+				search->setDestState(tempState);
 				_stateMachine.addState(search);
 
 			}
@@ -170,6 +172,16 @@ namespace bammm
 			{
 				cout << "Invalid input\n";
 			}
+		}
+		else if (newState == "drink")
+		{
+			cout << _actor->getName() << " has been sent to drink at the Pub!" << endl;
+
+			stateToAdd = _states.getValue(newState);
+			SearchState* search = static_cast<SearchState*>(_states.getValue("search"));
+			search->setTarget("Pub");
+			search->setDestState(stateToAdd);
+			_stateMachine.addState(search);
 		}
 
 	}
