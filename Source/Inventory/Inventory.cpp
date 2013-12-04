@@ -15,7 +15,9 @@
 #include <iostream>
 #include "../Resources/Constant.h"
 #include "../Resources/DynamicArray.h"
+#include "Item.h"
 #include "Inventory.h"
+#include "Item.h"
 using namespace std;
 
 namespace bammm
@@ -41,51 +43,38 @@ namespace bammm
 		return true;
 	}
 
-	uint Inventory::addItem(Item* item, uint amount)
+	Item* Inventory::removeItem(Item& item)
 	{
-		uint added = 0;
-
-		for(uint i = 0; i < amount; i++)
+		uint usedSlots = _inventory.getSize();
+		for(uint i = 0; i < usedSlots; i++)
 		{
-			if(!addItem(item))
+			Item currentItem = *_inventory.get(i);
+			if(currentItem == item)
 			{
-				break;
+				return _inventory.remove(i);
 			}
-
-			added++;
 		}
 
-		return added;
+		return NULL;
 	}
 
-	bool Inventory::removeItem(Item* item)
+	bool Inventory::contains(Item& item)
 	{
-		return _inventory.removeElement(item);
-	}
-
-	uint Inventory::removeItem(Item* item, uint amount)
-	{
-		uint removed = 0;
-
-		for(uint i = 0; i < amount; i++)
+		uint usedSlots = _inventory.getSize();
+		
+		for(uint i = 0; i < usedSlots; i++)
 		{
-			if(!removeItem(item))
+			Item currentItem = *_inventory.get(i);
+			if(currentItem == item)
 			{
-				break;
+				return true;	
 			}
-
-			removed++;
 		}
 
-		return removed;
+		return false;
 	}
 
-	bool Inventory::contains(Item* item)
-	{
-		return _inventory.contains(item);
-	}
-
-	bool Inventory::contains(Item* item, uint amount)
+	bool Inventory::contains(Item& item, uint amount)
 	{
 		for(uint i = 0; i < amount; i++)
 		{

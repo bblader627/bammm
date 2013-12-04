@@ -67,4 +67,14 @@ namespace bammm
 	{
 		_name = name;
 	}
+
+	bool Item::operator==(const Item& item)
+	{
+		if(_name == item._name)
+		{
+			return true;
+		}
+
+		return false;
+	}
 }

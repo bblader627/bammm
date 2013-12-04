@@ -33,14 +33,54 @@ namespace bammm
 			Inventory();
 			Inventory(uint slots);
 			virtual ~Inventory();
+			
+			/**
+			 addItem
+			 @Pre-Condition- A pointer to an item
+			 @Post-Condition- Returns if the add was successful
+			 */
 			bool addItem(Item* item);
-			uint addItem(Item* item, uint amount);
-			bool removeItem(Item* item);
-			uint removeItem(Item* item, uint amount);
-			bool contains(Item* item);
-			bool contains(Item* item, uint amount);
+			
+			/**
+			 removeItem
+			 @Pre-Condition- A reference to an item
+			 @Post-Condition- Returns the removed item if found
+			 */
+			Item* removeItem(Item& item);
+			
+			/**
+			 contains
+			 @Pre-Condition- A reference to an item
+			 @Post-Condition- Returns true if the item was found
+			 */
+			bool contains(Item& item);
+			
+			/**
+			 contains
+			 @Pre-Condition- A reference to an item, and an amount
+			 @Post-Condition- Returns true if all items are found
+			 */
+			bool contains(Item& item, uint amount);
+			
+			/**
+			 setSlots
+			 @Pre-Condition- A uint for the amount of slots
+			 @Post-Condition- Changes the amount of slots
+			 */
 			void setSlots(uint slots);
+			
+			/**
+			 getSlots
+			 @Pre-Condition- None
+			 @Post-Condition- Returns the amount of slots
+			 */
 			uint getSlots();
+			
+			/**
+			 getUsedSlots
+			 @Pre-Condition- None
+			 @Post-Condition- Returns the amount of used slots
+			 */
 			uint getUsedSlots();
 	};
 }
