@@ -17,7 +17,6 @@
 #include "../Resources/DynamicArray.h"
 #include "Item.h"
 #include "Inventory.h"
-#include "Item.h"
 using namespace std;
 
 namespace bammm
@@ -76,15 +75,22 @@ namespace bammm
 
 	bool Inventory::contains(Item& item, uint amount)
 	{
+		uint count = 0;
+
 		for(uint i = 0; i < amount; i++)
 		{
-			if(!contains(item))
+			if(contains(item))
 			{
-				return false;
+				count++;
 			}
 		}
 
-		return true;
+		if(count >= amount)
+		{
+			return true;
+		}
+
+		return false;
 	}
 
 	void Inventory::setSlots(uint slots)
