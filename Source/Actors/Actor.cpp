@@ -105,6 +105,10 @@ namespace bammm
 		_symbol = info->getSymbol();
 		_color = info->getColor();
 		_wood = info->getWood();
+		_iron = info->getIron();
+		_gold = info->getGold();
+		_coal = info->getCoal();
+		_BAC = 0;
 	}
 
 	void Actor::setMeleeWeapon(MeleeWeapon* weapon)

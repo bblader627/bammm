@@ -65,6 +65,7 @@ namespace bammm
 	{
 		string newState = commandString->get(0);
 		//bool doTick = true;
+		State* stateToAdd;
 
 		DynamicArray<string>* oreType = new DynamicArray<string>();
 		oreType->add("iron");
@@ -77,6 +78,7 @@ namespace bammm
 			//mine [#] [ore-type]
 			int numOre;
 			string type;
+			_states.getValue(newState);
 
 			if (commandString->getSize() == 3)
 			{
@@ -88,7 +90,7 @@ namespace bammm
 					cout << "Invalid argument\n";
 					//doTick = false;
 				}
-				numOre = 0;
+				//numOre = 0;
 				type = commandString->get(2);
 				if (!(oreType->contains(type)))
 				{
@@ -96,6 +98,11 @@ namespace bammm
 					//doTick = false;
 				}
 				//Add to controllerinput
+				Actor* ore = _sceneGraph->findInGrid(type);
+				stateToAdd = _states.getValue(newState);
+				MineState* tempMine = static_cast<MineState*>(stateToAdd);
+				tempMine->setAmount(5);
+				tempMine->setOre(ore);
 
 			}
 			else
@@ -104,22 +111,18 @@ namespace bammm
 				//doTick = false;
 			}
 
-			Vector3D* oreLocation = _sceneGraph->findInGrid(type);
-			State* stateToAdd = _states.getValue(newState);
-
-			if (_actor->getLocation() == oreLocation)
+			/*if (_actor->getLocation() == oreLocation)
 			{
 				_stateMachine.addState(stateToAdd);
 			}
 			else
-			{
-
+			{*/
 				SearchState* search = static_cast<SearchState*>(_states.getValue("search"));
 				search->setTarget(type);
 				search->setDestState(stateToAdd);
 				_stateMachine.addState(search);
 
-			}
+			//}
 
 
 			//_stateMachine.tick(deltaTime);

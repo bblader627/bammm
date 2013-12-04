@@ -117,10 +117,10 @@ namespace bammm
 
 			/*
 			 findInGrid
-			 @Pre-Condition- Takes a string target
-			 @Post-Condition- Returns the vector3D location of the target's position in the grid
+			 @Pre-Condition- Takes an Actor*
+			 @Post-Condition- Returns the Actor of the target's type.
 			 */
-			Vector3D* findInGrid(string target);
+			T findInGrid(string target);
 
 			/*
 			 toString
@@ -287,7 +287,7 @@ namespace bammm
 	Queue<Vector3D*>* Grid3D<T>::getPath(Actor* actor, string destination)
 	{
 
-		Vector3D* target = findInGrid(destination);
+		Vector3D* target = findInGrid(destination)->getLocation();
 		Vector3D* actorLocation = actor->getLocation();
 		int actorLocInt = convertToPosition(actorLocation);
 
@@ -423,7 +423,7 @@ namespace bammm
 
 
 	template<class T>
-	Vector3D* Grid3D<T>::findInGrid(string target)
+	T Grid3D<T>::findInGrid(string target)
 	{
 		for (uint gridIndex = 0; gridIndex < _grid->getSize(); gridIndex++)
 		{
@@ -433,7 +433,7 @@ namespace bammm
 				T actor = cell->get(cellIndex);
 				if (actor->toString() == target)
 				{
-					return convertToVector(gridIndex);
+					return actor;
 				}
 			}
 		}

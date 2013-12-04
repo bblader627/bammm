@@ -8,8 +8,8 @@
 	],
 	
 	"orcs": [
-		{ "name":"Urguk", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":0, "y":0, "z":0, "alliance":2, "color":"red", "symbol":"O", "collision":false },
-		{ "name":"Ghorbash", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"sing", "x":7, "y":2, "z":0, "alliance":2, "color":"red", "symbol":"O", "collision":false  },
+		{ "name":"Urguk", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":0, "y":11, "z":0, "alliance":2, "color":"red", "symbol":"O", "collision":false },
+		{ "name":"Ghorbash", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"sing", "x":7, "y":11, "z":0, "alliance":2, "color":"red", "symbol":"O", "collision":false  },
 		{ "name":"Grogmar", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":9, "y":5, "z":0, "alliance":2, "color":"red", "symbol":"O", "collision":false  }
 	],
 

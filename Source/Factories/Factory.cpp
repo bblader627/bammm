@@ -208,7 +208,7 @@ namespace bammm
 			string color = child->getChild("color")->getStringValue();
 			int gold = 0;
 			int coal = 0;
-			int iron = 0;
+			int iron = 10;
 			int wood = 0;
 
 			AllianceType alliance;

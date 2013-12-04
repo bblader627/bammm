@@ -49,9 +49,9 @@ namespace bammm
 		_amountToMine = amountToMine;
 	}
 
-	void MineState::setOre(Actor& ore)
+	void MineState::setOre(Actor* ore)
 	{
-		_ore = &ore;
+		_ore = ore;
 	}
 
 	void MineState::breakdown()
@@ -62,6 +62,7 @@ namespace bammm
 	{
 		if (canMine())
 		{
+			cout << "Can mine!\n";
 			if (_actor->getBAC() > .4)
 			{
 				cout << _actor->getName()
@@ -72,17 +73,17 @@ namespace bammm
 			else
 			{
 				string oreName = _ore->getName();
-				if (_ore->getName() == "Gold")
+				if (_ore->getName() == "gold")
 				{
 					_actor->setGold(_actor->getGold() + 1);
 					_ore->setGold(_ore->getGold() - 1);
 				}
-				else if (_ore->getName() == "Iron")
+				else if (_ore->getName() == "iron")
 				{
 					_actor->setIron(_actor->getIron() + 1);
 					_ore->setIron(_ore->getIron() - 1);
 				}
-				else if (_ore->getName() == "Coal")
+				else if (_ore->getName() == "coal")
 				{
 					_actor->setCoal(_actor->getCoal() + 1);
 					_ore->setCoal(_ore->getCoal() - 1);
@@ -117,9 +118,10 @@ namespace bammm
 	bool MineState::canMine()
 	{
 		int canMine = 0;
-		
+			
 		if(_amountToMine > 0)
 		{
+			cout << "_amountToMine > 0\n";
 			if(_ore->getGold() > 0)
 			{
 				canMine++;
@@ -127,13 +129,22 @@ namespace bammm
 			
 			if(_ore->getIron() > 0)
 			{
+				cout << "Correct amount of iron\n";
 				canMine++;
+			}
+			else
+			{
+				cout << "No iron\n";
 			}
 			
 			if(_ore->getCoal() > 0)
 			{
 				canMine++;
 			}
+		}
+		else
+		{
+			cout << "Invalid amount to Mine!\n";
 		}
 
 		return !!canMine;
