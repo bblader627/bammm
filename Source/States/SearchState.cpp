@@ -32,7 +32,6 @@ namespace bammm
 	void SearchState::setTarget(string target)
 	{
 		_target = target;
-		_path = _sceneGraph->getPath(_actor, _target);
 
 	}
 
@@ -43,6 +42,24 @@ namespace bammm
 
 	void SearchState::setup()
 	{
+		if (_target == "")
+		{
+			string behavior = _actor->getBehavior();
+			if (behavior == "drink")
+			{
+				_target = "Pub";
+			}
+			else if (behavior == "sleep")
+			{
+				_target = "Inn";
+			}
+			else
+			{
+				_target = "Inn";
+			}
+		}
+
+		_path = _sceneGraph->getPath(_actor, _target);
 	}
 
 	void SearchState::breakdown()
@@ -68,7 +85,14 @@ namespace bammm
 				_actor->getLocation()->getY() == targetActor->getY() &&
 				_actor->getLocation()->getZ() == targetActor->getZ())
 		{
-			switchState(_goalState);
+			if (_goalState != NULL)
+			{
+				switchState(_goalState);
+			}
+			else
+			{
+				switchState(_actor->getBehavior());
+			}
 		}
 	}
 

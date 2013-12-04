@@ -292,8 +292,6 @@ namespace bammm
 
 		int actorLocInt = convertToPosition(actorLocation);
 
-		cout << actorLocInt << endl;
-
 		DynamicArray<DynamicArray<bool>*>* visited = new DynamicArray<DynamicArray<bool>*>();
 
 		for (uint i = 0; i < (uint)_width; i++)
