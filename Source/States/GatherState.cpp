@@ -57,13 +57,14 @@ namespace bammm
 
 	void GatherState::tick(float deltaTime)
 	{
+		string success;
+		string start;
 		if (canGather())
 		{
 			if (_actor->getBAC() > .4)
 			{
 				cout << _actor->getName()
 						<< " drunkenly swings the tool, hits himself in the foot, and decides not to do that anymore."
-						<< " drunkenly swings the pickaxe, hits himself in the foot, and decides not to do that anymore."
 						<< "\n";
 				switchState("null"); //Ends this state;
 			}
@@ -76,16 +77,22 @@ namespace bammm
 				{
 					Item gold("gold", _target->getColor(), true);
 					removedItem = _target->getInventory().removeItem(gold);
+					start = " lifts his pickaxe, and swings it at the rock.";
+					success = " successfully mines some ";
 				}
 				else if (typeName.find("iron") != string::npos)
 				{
 					Item iron("iron", _target->getColor(), true);
 					removedItem = _target->getInventory().removeItem(iron);
+					start = " lifts his pickaxe, and swings it at the rock.";
+					success = " successfully mines some ";
 				}
 				else if (typeName.find("coal") != string::npos)
 				{
 					Item coal("coal", _target->getColor(), true);
 					removedItem = _target->getInventory().removeItem(coal);
+					start = " lifts his pickaxe, and swings it at the rock.";
+					success = " successfully mines some ";
 				}
 				else if (typeName.find("redwood") != string::npos ||
 						typeName.find("oak") != string::npos ||
@@ -94,11 +101,15 @@ namespace bammm
 				{
 					Item wood("wood", _target->getColor(), true);
 					removedItem = _target->getInventory().removeItem(wood);
+					start = " takes out his hatchet, and swings it at the tree.";
+					success = " successfully chops some ";
 				}
 				else if (typeName.find("dock") != string::npos)
 				{
 					Item fish("fish", _target->getColor(), true);
 					removedItem = _target->getInventory().removeItem(fish);
+					start = " pulls out his harpoon, and jabs it at the water.";
+					success = " successfully catches some ";
 				}
 
 
@@ -108,11 +119,10 @@ namespace bammm
 				string coloredName = Color::colorText(removedItem->getName(), removedItem->getColor());
 				canPickup = _actor->getInventory().addItem(removedItem);
 				cout << _actor->getName()
-						<< " lifts his pickaxe, and swings it at the rock. " << "\n";
+						<< start << "\n";
 				cout << _actor->getName()
-						<< " successfully mines some " << coloredName << "\n";
+						<< success << coloredName << "\n";
 
-				cout << "Can pickup: " << canPickup << "\n";
 				if(!canPickup)
 				{
 					delete removedItem;
