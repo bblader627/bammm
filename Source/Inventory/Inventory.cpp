@@ -15,6 +15,7 @@
 #include <iostream>
 #include "../Resources/Constant.h"
 #include "../Resources/DynamicArray.h"
+#include "../Resources/Color.h"
 #include "Item.h"
 #include "Inventory.h"
 using namespace std;
@@ -106,6 +107,28 @@ namespace bammm
 	uint Inventory::getUsedSlots()
 	{
 		return _inventory.getSize();
+	}
+
+	string Inventory::toString()
+	{
+		string inventory = "Inventory: ";
+		uint usedSlots = getUsedSlots();
+		for(uint i = 0; i < usedSlots; i++)
+		{
+			Item* item = _inventory.get(i);
+			string itemName = item->getName();
+			uint amount = _inventory.get(i)->getAmount();
+			string trueName = itemName + " (" + to_string(amount) + ")";
+			string coloredName = Color::colorText(trueName, item->getColor());
+			inventory = inventory + coloredName;
+			
+			if(i < usedSlots - 1)
+			{
+				inventory = inventory + ", ";
+			}
+		}
+
+		return inventory;
 	}
 
 	Inventory::~Inventory()

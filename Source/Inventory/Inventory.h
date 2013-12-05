@@ -81,6 +81,13 @@ namespace bammm
 			 @Post-Condition- Returns the amount of used slots
 			 */
 			uint getUsedSlots();
+			
+			/**
+			 toString
+			 @Pre-Condition- None
+			 @Post-Condition- Returns the sring representation of the inventory
+			 */
+			string toString();
 	};
 }
 
