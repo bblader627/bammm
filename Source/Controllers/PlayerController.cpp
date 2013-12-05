@@ -108,7 +108,7 @@ namespace bammm
 					//doTick = false;
 				}
 				//Add to controllerinput
-				Actor* ore = _sceneGraph->findInGrid(type);
+				Actor* ore = _sceneGraph->findClosestInGrid(_actor, type);
 				stateToAdd = _states.getValue(newState);
 				MineState* tempState = static_cast<MineState*>(stateToAdd);
 				tempState->setAmount(numOre);
@@ -155,7 +155,7 @@ namespace bammm
 					//doTick = false;
 				}
 				//Add to controllerinput
-				Actor* ore = _sceneGraph->findInGrid(type);
+				Actor* ore = _sceneGraph->findClosestInGrid(_actor, type);
 				stateToAdd = _states.getValue(newState);
 				ChopState* tempState = static_cast<ChopState*>(stateToAdd);
 				tempState->setAmount(numWood);
