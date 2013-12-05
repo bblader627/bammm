@@ -47,10 +47,12 @@ int main()
 	validCommands.add("brawl");
 	validCommands.add("attack");
 	validCommands.add("chop");
+	validCommands.add("fish");
 
 	float dTime = 0;
 	while (playGame)
 	{
+		command = "";
 		doTick = true;
 		bool doInput = true;
 		if (loopCounter == 0)
@@ -63,11 +65,12 @@ int main()
 				cout << sceneManager.getSceneGraph().toString() << "\n";
 			}
 
-			cout << "What would you like your dwarves to do? ";
-
 			//controller.printOptions();
-			getline(cin, command);
-
+			while (command == "")
+			{
+				cout << "What would you like your dwarves to do? ";
+				getline(cin, command);
+			}
 			input = parseInput(command);
 			command = input->get(0);
 
@@ -140,7 +143,7 @@ int main()
 	delete input;
 
 	cout << "Thanks for playing!" << "\n";
-	return 1;
+	return 0;
 }
 
 void printWelcome()
