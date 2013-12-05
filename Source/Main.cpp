@@ -12,6 +12,7 @@ using namespace bammm;
 using namespace std;
 
 void printWelcome();
+void printTutorial();
 void printOptions();
 void printStory();
 DynamicArray<string>* parseInput(string);
@@ -152,6 +153,11 @@ void printWelcome()
 			<< "Creators: \tAlvaro Home - Matthew Konstantinou - Matthew Witkowski\n\t\tBradley Crusco - Michael Abramo"
 			<< "\n";
 	cout << "================================================" << "\n";
+}
+
+void printTutorial()
+{
+
 }
 
 void printStory()
