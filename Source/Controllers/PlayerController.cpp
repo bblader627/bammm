@@ -147,6 +147,10 @@ namespace bammm
 			search->setDestState(stateToAdd);
 			_stateMachine.addState(search);
 		}
+		else if (newState == "inventory")
+		{
+			cout << _actor->getInventory().toString() << endl;
+		}
 		else
 		{
 			cout << "Invalid command" << endl;

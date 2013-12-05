@@ -53,6 +53,7 @@ int main()
 	validCommands.add("fish");
 	validCommands.add("focus");
 	validCommands.add("lose");
+	validCommands.add("inventory");
 
 	float deltaTime = 0;
 	while (playGame)

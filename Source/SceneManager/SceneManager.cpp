@@ -155,6 +155,11 @@ namespace bammm
 				cout << "Invalid arguments" << endl;
 			}
 		}
+		else if (newState == "inventory" && _focus == NULL)
+		{
+			cout << "Invalid input: Must be focused on a Dwarf to use this command." << endl;
+			return;
+		}
 
 		PlayerController* controller;
 

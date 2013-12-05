@@ -33,18 +33,11 @@ namespace bammm
 	{
 	}
 
-	/*void GatherState::setup(DynamicArray<string>* args)
-	 {
-	 _successChance = 30;
-	 _maximumGold = 100;
-	 _amountToMine = atoi(args->get(1).c_str());
-	 _amount = atoi(args->get(1).c_str());
-	 _targetType = args->get(2);
-	 }*/
-
 	void GatherState::setup()
 	{
 		_successChance = 30;
+		cout << _actor->getName() << " began gathering!" << "\n";
+
 	}
 
 	void GatherState::setAmount(int amount)
@@ -106,31 +99,8 @@ namespace bammm
 				{
 					Item fish("fish");
 					removedItem = _target->getInventory().removeItem(fish);
-				if (typeName == "gold")
-				{
-					Item item("Gold");
-					removedItem = _target->getInventory().removeItem(item);
 				}
-				else if (typeName == "iron")
-				{
-					Item item("Iron ore");
-					removedItem = _target->getInventory().removeItem(item);
-				}
-				else if (typeName == "coal")
-				{
-					Item item("Coal");
-					removedItem = _target->getInventory().removeItem(item);
-				}
-				else if (typeName == "birch" || typeName == "oak" || typeName == "redwood")
-				{
-					Item item("Wood");
-					removedItem = _target->getInventory().removeItem(item);
-				}
-				else if (typeName == "shore")		//Fishing state will send dwarves to shore blocks to fish
-				{
-					Item item("Fish");
-					removedItem = _target->getInventory().removeItem(item);
-				}
+
 
 
 				_actor->reduceStamina(1);
@@ -153,11 +123,10 @@ namespace bammm
 					switchState("null");
 				}
 				_amount--;
-				}
-
 			}
 
 		}
+
 		else
 		{
 			//cout << _actor->getName() << " is finished gathering!" << "\n";
