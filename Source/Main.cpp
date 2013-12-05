@@ -15,6 +15,7 @@ void printWelcome();
 void printTutorial();
 void printOptions();
 void printStory();
+void clearTerminal();
 DynamicArray<string>* parseInput(string);
 
 int main()
@@ -37,6 +38,7 @@ int main()
 
 	bool playGame = true;
 	bool doTick = true;
+	bool justStarted = true;
 	string command;
 	uint loopCounter = 0;
 
@@ -67,8 +69,14 @@ int main()
 
 			if (printMap)
 			{
+				if(!justStarted)
+				{
+					clearTerminal();
+				}
 				cout << sceneManager.getSceneGraph().toString() << "\n";
 			}
+
+			justStarted = false;
 
 			//controller.printOptions();
 			while (command == "")
@@ -139,6 +147,7 @@ int main()
 			uint pause = 1;
 			sleep(pause);
 			loopCounter--;
+			clearTerminal();
 			cout << sceneManager.getSceneGraph().toString() << "\n";
 			sceneManager.tick(0);
 		}
@@ -160,6 +169,11 @@ void printWelcome()
 	cout << "================================================" << "\n";
 }
 
+void clearTerminal()
+{
+	cout << "\033[2J";
+}
+
 void printTutorial()
 {
 
@@ -167,6 +181,7 @@ void printTutorial()
 
 void printStory()
 {
+	clearTerminal();
 	cout << "The year is 13 of the Third Age. \n\n";
 	cout
 			<< "The realm of Sojo has erupted into turmoil. Orcs of the LA offices are beginning their march upon the Dwarves of New York. \n";
