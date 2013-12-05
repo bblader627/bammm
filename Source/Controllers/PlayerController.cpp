@@ -111,7 +111,7 @@ namespace bammm
 				}
 				else if ( (newState == "fish" && !(fishType->contains(type))) )
 				{
-					cout << "Invalid fish type" << endl;
+					cout << "Invalid fish type" << endl;	
 					return;
 				}
 
@@ -127,6 +127,8 @@ namespace bammm
 				tempState->setTarget(target);
 
 				cout << _actor->getName() << " has been sent to " << newState << " " << type << "!" << endl;
+				//Add to controllerinput
+
 				SearchState* search = static_cast<SearchState*>(_states.getValue("search"));
 				search->setTarget(type);
 				search->setDestState(tempState);
@@ -178,6 +180,21 @@ namespace bammm
 
 	void PlayerController::tick(float deltaTime)
 	{
+		Actor* enemy = _sceneGraph->getEnemy(_actor->getLocation(), _actor);
+		DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
+		State* newState;
+
+		if (enemy)
+		{
+			newState = _states.getValue("damage");
+
+			if(!currentStates.contains(newState))
+			{
+				_stateMachine.addState(newState);
+				DamageState* castedState = static_cast<DamageState*>(newState);
+				castedState->setTarget(*enemy);
+			}
+		}
 
 		_stateMachine.tick(deltaTime);
 	}
