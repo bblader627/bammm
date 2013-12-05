@@ -1,16 +1,16 @@
 {
 	"dwarves": [
-		{ "name":"Bob", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"sleep", "x":1, "y":0, "z":0, "alliance":1, "color":"white", "symbol":"B", "weapon":"Practice Sword", "collision":false },
-		{ "name":"Jim", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"sing", "x":4, "y":2, "z":0, "alliance":1, "color":"white", "symbol":"J", "weapon":"Practice Sword", "collision":false },
-		{ "name":"Joe", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"drink", "x":1, "y":4, "z":0, "alliance":1, "color":"white", "symbol":"J", "weapon":"Practice Sword", "collision":false },
-		{ "name":"Phil", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"drink", "x":5, "y":3, "z":0, "alliance":1, "color":"white", "symbol":"P", "weapon":"Practice Sword", "collision":false },
-		{ "name":"Frank", "health":100, "stamina":15, "attack":20, "defense":20, "behavior":"brawl", "x":4, "y":0, "z":0, "alliance":1, "color":"white", "symbol":"F", "weapon":"Practice Sword", "collision":false }
+		{ "name":"Bob", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"sleep", "x":1, "y":0, "z":0, "alliance":1, "color":"white", "symbol":"B", "weapon":"Sword of a Thousand Truths", "collision":false },
+		{ "name":"Jim", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"sing", "x":4, "y":2, "z":0, "alliance":1, "color":"white", "symbol":"J", "weapon":"Sword of a Thousand Truths", "collision":false },
+		{ "name":"Joe", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"drink", "x":1, "y":4, "z":0, "alliance":1, "color":"white", "symbol":"J", "weapon":"Sword of a Thousand Truths", "collision":false },
+		{ "name":"Phil", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"drink", "x":5, "y":3, "z":0, "alliance":1, "color":"white", "symbol":"P", "weapon":"Sword of a Thousand Truths", "collision":false },
+		{ "name":"Frank", "health":100, "stamina":15, "attack":20, "defense":20, "behavior":"brawl", "x":4, "y":0, "z":0, "alliance":1, "color":"white", "symbol":"F", "weapon":"Sword of a Thousand Truths", "collision":false }
 	],
 	
 	"orcs": [
-		{ "name":"Urguk", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":14, "y":9, "z":0, "alliance":2, "color":"red", "symbol":"O", "weapon":"Sword of a Thousand Truths", "collision":false },
-		{ "name":"Ghorbash", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"sing", "x":7, "y":11, "z":0, "alliance":2, "color":"red", "symbol":"O", "weapon":"Sword of a Thousand Truths", "collision":false },
-		{ "name":"Grogmar", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":9, "y":14, "z":0, "alliance":2, "color":"red", "symbol":"O", "weapon":"Sword of a Thousand Truths", "collision":false }
+		{ "name":"Urguk", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":14, "y":9, "z":0, "alliance":2, "color":"red", "symbol":"O", "weapon":"Practice Sword", "collision":false },
+		{ "name":"Ghorbash", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"sing", "x":7, "y":11, "z":0, "alliance":2, "color":"red", "symbol":"O", "weapon":"Practice Sword", "collision":false },
+		{ "name":"Grogmar", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":9, "y":14, "z":0, "alliance":2, "color":"red", "symbol":"O", "weapon":"Practice Sword", "collision":false }
 	],
 
 	"dimensions": [
@@ -33,8 +33,8 @@
 	],
 	
 	"buildings": [
-		{ "name":"Pub", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":2, "y":1, "z":0, "alliance":0, "color":"purple", "symbol":"P", "collision":true },
-		{ "name":"Inn", "health":100, "stamina":0, "attack":0, "defense":12, "behavior":"block", "x":4, "y":3, "z":0, "alliance":0, "color":"purple", "symbol":"I", "collision":true }
+		{ "name":"Pub", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":2, "y":1, "z":0, "alliance":0, "color":"purple", "symbol":"P", "collision":false },
+		{ "name":"Inn", "health":100, "stamina":0, "attack":0, "defense":12, "behavior":"block", "x":4, "y":3, "z":0, "alliance":0, "color":"purple", "symbol":"I", "collision":false }
 	],
 	
 	"trees": [
