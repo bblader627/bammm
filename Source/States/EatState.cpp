@@ -52,8 +52,8 @@ namespace bammm
 		{
 			if (_food == "fish")
 			{
-				Item iron("fish");
-				Item* removedItem = _actor->getInventory().removeItem(iron);
+				Item fish("fish", true);
+				Item* removedItem = _actor->getInventory().removeItem(fish);
 				if (removedItem == NULL)
 				{
 					switchState("null");
@@ -98,7 +98,7 @@ namespace bammm
 
 		if (_amount > 0)
 		{
-			Item fish("fish");
+			Item fish("fish", true);
 			if(_actor->getInventory().contains(fish))
 			{
 				canEat++;
