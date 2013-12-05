@@ -131,9 +131,6 @@ namespace bammm
 		string newState = args->get(0);
 
 		if (newState == "focus")
-		PlayerController* controller = this->findController(newState);
-
-		if (controller == NULL)
 		{
 			if (args->getSize() == 2)
 			{
