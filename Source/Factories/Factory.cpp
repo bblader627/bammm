@@ -50,6 +50,9 @@ namespace bammm
 		JSON* ore = rootChildren->getValue("ore");
 		this->parseToActorInfo(ore, "ore", &blockData);
 
+		JSON* dock = rootChildren->getValue("dock");
+		this->parseToActorInfo(dock, "dock", &blockData);
+
 		JSON* water = rootChildren->getValue("water");
 		this->parseToActorInfo(water, "water", &blockData);
 
@@ -216,6 +219,7 @@ namespace bammm
 			int oak = 100;
 			int redwood = 100;
 			int wood = 100;
+			int fish = 100;
 
 			AllianceType alliance;
 			if (parsedAlliance == 0)
@@ -250,7 +254,7 @@ namespace bammm
 				inventory.setSlots(100);
 				for(int j = 0; j < iron; j++)
 				{
-					Item* item = new Item("Iron ore", color);
+					Item* item = new Item("iron", color);
 					inventory.addItem(item);
 				}
 			}
@@ -261,7 +265,7 @@ namespace bammm
 				inventory.setSlots(100);
 				for(int j = 0; j < gold; j++)
 				{
-					Item* item = new Item("Gold", color);
+					Item* item = new Item("gold", color);
 					inventory.addItem(item);
 				}
 			}
@@ -272,7 +276,7 @@ namespace bammm
 				inventory.setSlots(100);
 				for(int j = 0; j < coal; j++)
 				{
-					Item* item = new Item("Coal", color);
+					Item* item = new Item("coal", color);
 					inventory.addItem(item);
 				}
 			}
@@ -283,7 +287,7 @@ namespace bammm
 				inventory.setSlots(100);
 				for(int j = 0; j < birch; j++)
 				{
-					Item* item = new Item("Birch logs", color);
+					Item* item = new Item("wood", color);
 					inventory.addItem(item);
 				}
 			}
@@ -294,7 +298,7 @@ namespace bammm
 				inventory.setSlots(100);
 				for(int j = 0; j < oak; j++)
 				{
-					Item* item = new Item("Oak logs", color);
+					Item* item = new Item("wood", color);
 					inventory.addItem(item);
 				}
 			}
@@ -305,7 +309,7 @@ namespace bammm
 				inventory.setSlots(100);
 				for(int j = 0; j < cedar; j++)
 				{
-					Item* item = new Item("Cedar logs", color);
+					Item* item = new Item("wood", color);
 					inventory.addItem(item);
 				}
 			}
@@ -316,10 +320,23 @@ namespace bammm
 				inventory.setSlots(100);
 				for(int j = 0; j < redwood; j++)
 				{
-					Item* item = new Item("Redwood logs", color);
+					Item* item = new Item("wood", color);
 					inventory.addItem(item);
 				}
 			}
+
+			if(name.find("dock") != string::npos)
+			{
+				Inventory& inventory = myActor->getInventory();
+				inventory.setSlots(100);
+				for(int j = 0; j < fish; j++)
+				{
+					Item* item = new Item("fish", color);
+					inventory.addItem(item);
+				}
+			}
+
+
 			scene->addActor(myActor);
 		}
 	}
