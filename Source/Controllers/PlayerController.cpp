@@ -44,6 +44,7 @@ namespace bammm
 		DamageState* damageState = new DamageState(actor, &_stateMachine);
 		MoveState* moveState = new MoveState(actor, &_stateMachine, sceneGraph);
 		GatherState* gatherState = new GatherState(actor, &_stateMachine);
+		EatState* eatState = new EatState(actor, &_stateMachine);
 
 		_states.add(idleState->toString(), idleState);
 		_states.add(drinkState->toString(), drinkState);
@@ -55,6 +56,7 @@ namespace bammm
 		_states.add(damageState->toString(), damageState);
 		_states.add(moveState->toString(), moveState);
 		_states.add(gatherState->toString(), gatherState);
+		_states.add(eatState->toString(), eatState);
 
 		//Put actor in default behavior state
 		_stateMachine.initialState(_states.getValue(idleState->toString()));
@@ -81,6 +83,9 @@ namespace bammm
 		fishType->add("swordfish");
 		fishType->add("tuna");
 		fishType->add("salmon");
+
+		DynamicArray<string>* foodTypes = new DynamicArray<string>();
+		foodTypes->add("fish");
 
 		if (newState == "mine" || newState == "chop" || newState == "fish")
 		{
@@ -147,10 +152,35 @@ namespace bammm
 			search->setDestState(stateToAdd);
 			_stateMachine.addState(search);
 		}
+		else if (commandString->getSize() == 3 && newState == "eat")
+		{
+			string arg1 = commandString->get(1);
+			int numToEat = atoi(arg1.c_str());
+
+			if (numToEat == 0)
+			{
+				cout << "Invalid argument number \n";
+				return;
+			}
+
+			string type = commandString->get(2);
+			if (!(foodTypes->contains(type)))
+			{
+				cout << "Invalid argument number \n";
+				return;
+			}
+
+
+			EatState* tempState = static_cast<EatState*>(_states.getValue(newState));
+			tempState->setAmount(numToEat);
+			tempState->setType(type);
+			_stateMachine.addState(tempState);
+		}
 		else if (newState == "inventory")
 		{
 			cout << _actor->getInventory().toString() << endl;
 		}
+
 		else
 		{
 			cout << "Invalid command" << endl;

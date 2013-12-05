@@ -8,45 +8,36 @@
  *	Matt Witkowski
  *	Bradley Crusco
  * Description:
- * GatherState header file.
+ * EatState header file.
  *
  */
 
-#ifndef GATHERSTATE_H_
-#define GATHERSTATE_H_
+#ifndef EATSTATE_H_
+#define EATSTATE_H_
 
-#include <iostream>
 #include "State.h"
+
+using namespace std;
 
 namespace bammm
 {
-	class GatherState: public State
+	class EatState: public State
 	{
 		private:
-			int _successChance;
 			int _amount;
-			Actor* _target;
-
-			/**
-			 canMine
-			 @Pre-Condition- No input
-			 @Post-Condition- Returns true if the node contains ore.
-			 */
-			bool canGather();
+			string _food;
 
 		public:
-			virtual ~GatherState();
-			GatherState(Actor& actor);
-			GatherState(Actor& actor, IStateCallback* stateMachine);
+			EatState(Actor& actor);
+			EatState(Actor& actor, IStateCallback* stateMachine);
 
 			/**
 			 setup
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			//virtual void setup(DynamicArray<string>* args);
+			//void setup(DynamicArray<string>* args);
 			void setup();
-
 
 			/**
 			 setAmount
@@ -55,12 +46,12 @@ namespace bammm
 			 */
 			 void setAmount(int amount);
 
-			/**
-			 setTarget
-			 @Pre-Condition- takes Actor
-			 @Post-Condition- assigns _target
+			 /**
+			 setFood
+			 @Pre-Condition- takes string
+			 @Post-Condition- sets _food
 			 */
-			 void setTarget(Actor* target);
+			 void setType(string type);
 
 			/**
 			 breakdown
@@ -89,6 +80,13 @@ namespace bammm
 			 @Post-Condition- Returns a string representation of the state
 			 */
 			string toString();
+
+			/*
+			 canEat
+			 @Pre-Condition- No input
+			 @Post-Condition- returns true if player has food and health is not max
+			 */
+			bool canEat();
 	};
 }
 
