@@ -54,13 +54,13 @@ namespace bammm
 			this->addTickable(controller);
 			this->addAiController(controller);
 		}
-
 	}
 
 	Actor* SceneManager::removeActor(Actor* actor)
 	{
 		_allActors.removeElement(actor);
 		_sceneGraph.remove(actor->getLocation(), actor);
+
 		return actor;
 	}
 
@@ -82,6 +82,7 @@ namespace bammm
 	ITickable* SceneManager::removeTickable(ITickable* tickable)
 	{
 		_allTickables.removeElement(tickable);
+
 		return tickable;
 	}
 
@@ -93,16 +94,27 @@ namespace bammm
 	void SceneManager::tick(float deltaTime)
 	{
 		int size = _allTickables.getSize();
+
 		for (int i = 0; i < size; i++)
 		{
 			ITickable* tickable = _allTickables.get(i);
-			if (tickable->canDelete())
+			PlayerController* playerController =
+					static_cast<PlayerController*>(tickable);
+			AiController* aiController = static_cast<AiController*>(tickable);
+
+			if (playerController->canDelete())
 			{
-				PlayerController* playerController = static_cast<PlayerController*>(tickable);
-				AiController* aiController = static_cast<AiController*>(tickable);
 				size--;
-				_allPlayerControllers.removeElement(playerController);
-				_allAiControllers.removeElement(aiController);
+				//_allPlayerControllers.removeElement(playerController);
+				removeActor(_allActors.get(i));
+				removeTickable(tickable);
+				i--;
+			}
+			else if (aiController->canDelete())
+			{
+
+				size--;
+				//_allAiControllers.removeElement(aiController);
 				removeActor(_allActors.get(i));
 				removeTickable(tickable);
 				i--;
@@ -116,17 +128,15 @@ namespace bammm
 
 	void SceneManager::input(DynamicArray<string>* args, float deltaTime)
 	{
-
 		string newState = args->get(0);
-		//bool doTick = true;
-
 		PlayerController* controller = this->findController(newState);
+
 		if (controller == NULL)
 		{
 			return;
 		}
-		controller->input(args, deltaTime);
 
+		controller->input(args, deltaTime);
 	}
 
 	string SceneManager::toString()
@@ -144,23 +154,25 @@ namespace bammm
 			DynamicArray<State*>& runningStates = current->runningStates();
 			HashMap<State*>& allStates = current->allStates();
 
-			if (current->numberOfStates()==0)  //return *current
+			if (current->numberOfStates() == 0)  //return *current
 			{
 				return current;
 			}
-			else if ((runningStates.getSize() == 1) &&
-						((runningStates.contains(allStates.getValue("drink"))) ||
-						(runningStates.contains(allStates.getValue("sing"))) ||
-						(runningStates.contains(allStates.getValue("sleep"))) ||
-						(runningStates.contains(allStates.getValue("idle"))))
-					)
+			else if ((runningStates.getSize() == 1)
+					&& ((runningStates.contains(allStates.getValue("drink")))
+							|| (runningStates.contains(
+									allStates.getValue("sing")))
+							|| (runningStates.contains(
+									allStates.getValue("sleep")))
+							|| (runningStates.contains(
+									allStates.getValue("idle")))))
 			{
 				return current;
 			}
 
 		}
 		cout << "Sorry, all your dwarves are busy!" << endl;
+
 		return NULL;
 	}
-
 }
