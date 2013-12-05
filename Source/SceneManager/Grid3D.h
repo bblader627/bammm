@@ -39,9 +39,6 @@ namespace bammm
 			int _length;
 			int _height;
 
-			//Directions
-
-
 			/*
 			 convertToPosition
 			 @Pre-Condition- Takes a Vector3D vector

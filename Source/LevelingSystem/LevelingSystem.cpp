@@ -28,6 +28,9 @@ namespace bammm
 
 	Actor* LevelingSystem::levelUP(Actor* actor)
 	{
+
+		cout << "actor is leveling up" << endl;
+
 		actor->setExperience(0);
 		actor->setTotalExperienceThisLevel(
 				actor->getTotalExperienceThisLevel() * 2);
@@ -49,7 +52,12 @@ namespace bammm
 
 	Actor* LevelingSystem::gainExperience(Actor* actor)
 	{
+		cout << "in gainExperience" << endl;
+
 		actor->setExperience(actor->getExperience() + 1);
+		cout << "experience was set to " << actor->getExperience() << endl;
+
+		cout << "total experience for this level is " << actor->getTotalExperienceThisLevel() << endl;
 
 		if (actor->getExperience() == actor->getTotalExperienceThisLevel())
 		{
