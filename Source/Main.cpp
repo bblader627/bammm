@@ -51,6 +51,8 @@ int main()
 	validCommands.add("attack");
 	validCommands.add("chop");
 	validCommands.add("fish");
+	validCommands.add("focus");
+	validCommands.add("lose");
 
 	float deltaTime = 0;
 	while (playGame)
