@@ -142,7 +142,7 @@ int main()
 	delete input;
 
 	cout << "Thanks for playing!" << "\n";
-	return 1;
+	exit(1);
 }
 
 void printWelcome()
