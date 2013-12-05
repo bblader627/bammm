@@ -46,11 +46,13 @@ int main()
 	//string sleep = "sleep";
 	validCommands.add("mine");
 	validCommands.add("drink");
-	validCommands.add("sing");
+	validCommands.add("Inventory");
 	validCommands.add("brawl");
 	validCommands.add("attack");
 	validCommands.add("chop");
 	validCommands.add("fish");
+	validCommands.add("focus");
+	validCommands.add("lose");
 
 	float deltaTime = 0;
 	while (playGame)

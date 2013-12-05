@@ -220,4 +220,9 @@ namespace bammm
 		return _states;
 	}
 
+	Actor* PlayerController::getActor()
+	{
+		return _actor;
+	}
+
 }
