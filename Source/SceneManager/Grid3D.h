@@ -486,12 +486,12 @@ namespace bammm
 	{
 		string gridString = "";
 
-		for (int i = 0; i < _length; i++)
+		for (int y = 0; y < _length; y++)
 		{
-			for (int i2 = 0; i2 < _width; i2++)
+			for (int x = 0; x < _width; x++)
 			{
 				DynamicArray<T>* atLocation;
-				atLocation = access(i, i2, 0);
+				atLocation = access(x, y, 0);
 
 				if (atLocation->getSize() <= 0)
 				{
