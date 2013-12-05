@@ -74,6 +74,8 @@ namespace bammm
 
 			void craft();
 
+			bool canCraft();
+
 	};
 
 }

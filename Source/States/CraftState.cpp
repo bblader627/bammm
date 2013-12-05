@@ -41,10 +41,12 @@ namespace bammm
 
 	void CraftState::tick(float deltaTime)
 	{
+		cout << _actor.getName() << " is beginning to craft. \n";
 
+		if(!canCraft){
+			cout << _actor.getName() << " cannot craft " << _craftableItem.getName() << "\n";
 
-
-
+		}
 	}
 
 	void CraftState::switchState(string nextState)
@@ -65,6 +67,11 @@ namespace bammm
 	void CraftState::setAmount(int craftableAmount)
 	{
 		_craftableAmount = craftableAmount;
+	}
+
+	bool canCraft()
+	{
+
 	}
 
 }
