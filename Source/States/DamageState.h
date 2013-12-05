@@ -18,6 +18,7 @@
 #include <iostream>
 #include "State.h"
 #include "../Weapons/MeleeWeapon.h"
+#include "../LevelingSystem/LevelingSystem.h"
 
 using namespace std;
 

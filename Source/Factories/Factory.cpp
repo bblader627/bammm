@@ -13,178 +13,95 @@
  */
 
 #include "Factory.h"
-#include "../Inventory/Inventory.h"
-#include "../Inventory/Item.h"
 
 namespace bammm
 {
 	Factory::Factory(SceneManager* manager)
 	{
-		scene = manager;
+		_scene = manager;
 	}
 
 	void Factory::setup()
 	{
-		string actorJSON;
-		JSONParser* parser = new JSONParser();
-		string filename = "JSON/actors.json";
-		parser->parseFile(filename);
+		//Parsing weapon data in
+		JSONParser* weaponParser = new JSONParser();
+		string weaponFilename = "JSON/weapons.json";
+		weaponParser->parseFile(weaponFilename);
 
-		// Parsing dwarves
-		JSON* root = parser->getRootNode("root");
+		JSON* weaponRoot = weaponParser->getRootNode("root");
+		HashMap<JSON*>* weaponRootChildren = weaponRoot->getAllChildren();
 
-		HashMap<JSON*>* rootChildren = root->getAllChildren();
+		//Parse the melee weapons
+		JSON* meleeWeapons = weaponRootChildren->getValue("meleeWeapons");
+		this->parseMeleeWeaponToWeaponData(meleeWeapons, &_meleeWeaponData);
 
-		JSON* orcs = rootChildren->getValue("orcs");
-		this->parseToActorInfo(orcs, "orc", &actorData);
-		//===========MAP=========//
-		JSON* wall = rootChildren->getValue("wall");
-		this->parseToActorInfo(wall, "wall", &blockData);
+		//Parse the ranged weapons
+		JSON* rangedWeapons = weaponRootChildren->getValue("rangedWeapons");
+		this->parseRangedWeaponToWeaponData(rangedWeapons, &_rangedWeaponData);
 
-		JSON* buildings = rootChildren->getValue("buildings");
-		this->parseToActorInfo(buildings, "building", &blockData);
+		JSONParser* actorParser = new JSONParser();
+		string actorFilename = "JSON/actors.json";
+		actorParser->parseFile(actorFilename);
 
-		JSON* trees = rootChildren->getValue("trees");
-		this->parseToActorInfo(trees, "tree", &blockData);
+		JSON* actorRoot = actorParser->getRootNode("root");
 
-		JSON* ore = rootChildren->getValue("ore");
-		this->parseToActorInfo(ore, "ore", &blockData);
+		HashMap<JSON*>* actorRootChildren = actorRoot->getAllChildren();
 
 		JSON* dock = rootChildren->getValue("dock");
 		this->parseToActorInfo(dock, "dock", &blockData);
 
 		JSON* water = rootChildren->getValue("water");
 		this->parseToActorInfo(water, "water", &blockData);
+		
+		JSON* orcs = actorRootChildren->getValue("orcs");
+		this->parseToActorInfo(orcs, "orc", &_actorData);
+		//===========MAP=========//
+		JSON* wall = actorRootChildren->getValue("wall");
+		this->parseToActorInfo(wall, "wall", &_blockData);
 
-		JSON* dwarves = rootChildren->getValue("dwarves");
-		this->parseToActorInfo(dwarves, "dwarf", &actorData);
+		JSON* buildings = actorRootChildren->getValue("buildings");
+		this->parseToActorInfo(buildings, "building", &_blockData);
+
+		JSON* trees = actorRootChildren->getValue("trees");
+		this->parseToActorInfo(trees, "tree", &_blockData);
+
+		JSON* ore = actorRootChildren->getValue("ore");
+		this->parseToActorInfo(ore, "ore", &_blockData);
+
+		JSON* water = actorRootChildren->getValue("water");
+		this->parseToActorInfo(water, "water", &_blockData);
+
+		JSON* dwarves = actorRootChildren->getValue("dwarves");
+		this->parseToActorInfo(dwarves, "dwarf", &_actorData);
 	}
 
-	Actor Factory::getActor(string type, string name, int health, int stamina,
-			int attack, int defense, string behavior, bool collision)
+	/*Actor Factory::getActor(string type, string name, int health, int stamina,
+	 int attack, int defense, string behavior, bool collision)
+	 {
+	 Actor* newActor = new Actor(type, name, health, stamina, attack,
+	 defense, behavior, AllianceType::enemy);
+	 newActor->setLocation(new Vector3D(0.0f, 0.0f, 0.0f));
+	 return *newActor;
+	 }*/
+
+	//NOTE: Right now there's no checking, cause of type issues. Have to know it exists.
+	//TODO:^^Make this not the case.
+	MeleeWeapon* Factory::getMeleeWeapon(string type)
 	{
-		Actor* newActor = new Actor(type, name, health, stamina, attack,
-				defense, behavior, AllianceType::enemy);
-		newActor->setLocation(new Vector3D(0.0f, 0.0f, 0.0f));
-		return *newActor;
-	}
-
-	MeleeWeapon getMeleeWeapon(string type)
-	{
-		//Why not get the parsed weapons from json?
-		//Automatically parse them so you can just do weaponData.getValue(type);
-
-		int damage;
-
-		if (type == "stein")
-		{
-			damage = 2;
-		}
-		else if (type == "greatSword")
-		{
-			damage = 10;
-		}
-		else if (type == "battleAxe")
-		{
-			damage = 10;
-		}
-		else if (type == "chainSaw")
-		{
-			damage = 10;
-		}
-		else if (type == "katana")
-		{
-			damage = 10;
-		}
-		else if (type == "swordOf1000Truths")
-		{
-			damage = 110;
-		}
-		else if (type == "practiceSword")
-		{
-			damage = 1;
-		}
-		else
-		{
-			damage = 10;
-		}
-
-		WeaponData weaponData(0, 0, damage, 0, 0, "", type);
+		WeaponData weaponData = _meleeWeaponData.getValue(type);
 		MeleeWeapon* newWeapon = new MeleeWeapon(weaponData);
 
-		return *newWeapon;
+		return newWeapon;
 	}
 
-	RangedWeapon getRangedWeapon(string type)
+	//NOTE: Right now there's no checking, cause of type issues. Have to know it exists.
+	//TODO:^^Make this not the case.
+	RangedWeapon* Factory::getRangedWeapon(string type)
 	{
-		int range;
-		int clipCapacity;
-		int damage;
-		float reloadSpeed;
-		uint fireRate;
-
-		if (type == "boomStick")
-		{
-			range = 2;
-			clipCapacity = 10;
-			damage = 15;
-			reloadSpeed = 4;
-			fireRate = 2.5;
-		}
-		else if (type == "bowAndArrow")
-		{
-			range = 3;
-			clipCapacity = 50;
-			damage = 10;
-			reloadSpeed = 1;
-			fireRate = 1;
-		}
-		else if (type == "chain")
-		{
-			range = 2;
-			clipCapacity = 1;
-			damage = 10;
-			reloadSpeed = 1;
-			fireRate = 2.5;
-		}
-		else if (type == "BFG")
-		{
-			range = 4;
-			clipCapacity = 10;
-			damage = 110;
-			reloadSpeed = 4;
-			fireRate = 5;
-		}
-		else if (type == "shuriken")
-		{
-			range = 3;
-			clipCapacity = 10;
-			damage = 15;
-			reloadSpeed = 4;
-			fireRate = 3;
-		}
-		else if (type == "bolas")
-		{
-			range = 3;
-			clipCapacity = 5;
-			damage = 8;
-			reloadSpeed = 5;
-			fireRate = 3;
-		}
-		else
-		{
-			range = 3;
-			clipCapacity = 5;
-			damage = 10;
-			reloadSpeed = 5;
-			fireRate = 3;
-		}
-
-		WeaponData weaponData(range, clipCapacity, damage,
-				reloadSpeed, fireRate, "", type);
+		WeaponData weaponData = _rangedWeaponData.getValue(type);
 		RangedWeapon* newWeapon = new RangedWeapon(weaponData);
 
-		return *newWeapon;
+		return newWeapon;
 	}
 
 	void Factory::parseToActorInfo(JSON* rootNode, string type,
@@ -234,91 +151,107 @@ namespace bammm
 			{
 				alliance = AllianceType::enemy;
 			}
+//
+//			Behavior* behavior = new Behavior();
+//			behavior->addBaseBehavior(behaviorString, behaviorValue);
 
 			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack,
 					defense, behavior, collision, alliance, symbol, color, gold,
 					coal, iron, wood);
+
 			info->setLocation(new Vector3D(x, y, z));
 
 			string i_str = "" + i;
 			map->add(type + i_str, *info);
+
 			Actor* myActor = new Actor(info);
 
-			WeaponData weaponData(10,2,"","");
-			MeleeWeapon* meleeWeapon = new MeleeWeapon(weaponData);
-			myActor->setMeleeWeapon(meleeWeapon);
+			if (type == "dwarf" || type == "orc")
+			{
+				string weaponType = child->getChild("weapon")->getStringValue();
+				MeleeWeapon* meleeWeapon = getMeleeWeapon(weaponType);
+				myActor->setMeleeWeapon(meleeWeapon);
+			}
+			else
+			{
+				//TODO: This needs to be redone to use the factory... so we ahve to parse weapon data first?
+				//The Actor JSON needs to specify what weapon it wants..?
+				WeaponData weaponData(10, 2, "", "");
+				MeleeWeapon* meleeWeapon = new MeleeWeapon(weaponData);
+				myActor->setMeleeWeapon(meleeWeapon);
+			}
 
-			if(name.find("iron") != string::npos)
+			if (name.find("iron") != string::npos)
 			{
 				Inventory& inventory = myActor->getInventory();
 				inventory.setSlots(100);
-				for(int j = 0; j < iron; j++)
+				for (int j = 0; j < iron; j++)
 				{
 					Item* item = new Item("iron", color);
 					inventory.addItem(item);
 				}
 			}
 
-			if(name.find("gold") != string::npos)
+			if (name.find("gold") != string::npos)
 			{
 				Inventory& inventory = myActor->getInventory();
 				inventory.setSlots(100);
-				for(int j = 0; j < gold; j++)
+				for (int j = 0; j < gold; j++)
 				{
 					Item* item = new Item("gold", color);
 					inventory.addItem(item);
 				}
 			}
 
-			if(name.find("coal") != string::npos)
+			if (name.find("coal") != string::npos)
 			{
 				Inventory& inventory = myActor->getInventory();
 				inventory.setSlots(100);
-				for(int j = 0; j < coal; j++)
+				for (int j = 0; j < coal; j++)
 				{
 					Item* item = new Item("coal", color);
 					inventory.addItem(item);
 				}
 			}
 
-			if(name.find("birch") != string::npos)
+			if (name.find("birch") != string::npos)
 			{
 				Inventory& inventory = myActor->getInventory();
 				inventory.setSlots(100);
-				for(int j = 0; j < birch; j++)
+				for (int j = 0; j < birch; j++)
 				{
 					Item* item = new Item("wood", color);
 					inventory.addItem(item);
 				}
 			}
-			
-			if(name.find("oak") != string::npos)
+
+			if (name.find("oak") != string::npos)
 			{
 				Inventory& inventory = myActor->getInventory();
 				inventory.setSlots(100);
-				for(int j = 0; j < oak; j++)
+				for (int j = 0; j < oak; j++)
 				{
 					Item* item = new Item("wood", color);
 					inventory.addItem(item);
 				}
 			}
-			
-			if(name.find("cedar") != string::npos)
+
+			if (name.find("cedar") != string::npos)
 			{
 				Inventory& inventory = myActor->getInventory();
 				inventory.setSlots(100);
-				for(int j = 0; j < cedar; j++)
+				for (int j = 0; j < cedar; j++)
 				{
 					Item* item = new Item("wood", color);
 					inventory.addItem(item);
 				}
 			}
-			
-			if(name.find("redwood") != string::npos)
+
+			if (name.find("redwood") != string::npos)
 			{
 				Inventory& inventory = myActor->getInventory();
 				inventory.setSlots(100);
-				for(int j = 0; j < redwood; j++)
+				for (int j = 0; j < redwood; j++)
 				{
 					Item* item = new Item("wood", color);
 					inventory.addItem(item);
@@ -338,6 +271,55 @@ namespace bammm
 
 
 			scene->addActor(myActor);
+			_scene->addActor(myActor);
+		}
+	}
+
+	void Factory::parseMeleeWeaponToWeaponData(JSON* rootNode,
+			HashMap<WeaponData>* map)
+	{
+		int numberOfChildren = rootNode->sizeOfChildren();
+		DynamicArray<JSON*>* rootChildren =
+				rootNode->getAllChildren()->getAllValues();
+
+		//Cycle through every weapon type
+		for (int i = 0; i < numberOfChildren; i++)
+		{
+			JSON* child = rootChildren->get(i);
+
+			string type = child->getChild("type")->getStringValue();
+			int damage = child->getChild("damage")->getIntValue();
+
+			//Create the data specifying this melee weapon
+			WeaponData* weaponData = new WeaponData(0, 0, damage, 0, 0, "",
+					type);
+
+			map->add(type, *weaponData); //Save this data in the map.
+		}
+	}
+
+	void Factory::parseRangedWeaponToWeaponData(JSON* rootNode,
+			HashMap<WeaponData>* map)
+	{
+		int numberOfChildren = rootNode->sizeOfChildren();
+		DynamicArray<JSON*>* rootChildren =
+				rootNode->getAllChildren()->getAllValues();
+		//Cycle through every weapon type
+		for (int i = 0; i < numberOfChildren; i++)
+		{
+			JSON* child = rootChildren->get(i);
+			string type = child->getChild("type")->getStringValue();
+			int range = child->getChild("range")->getIntValue();
+			int clipCapacity = child->getChild("clipCapacity")->getIntValue();
+			int damage = child->getChild("damage")->getIntValue();
+			float reloadSpeed = child->getChild("reloadSpeed")->getFloatValue();
+			uint fireRate = child->getChild("fireRate")->getUIntValue();
+
+			//Create the data specifying this ranged weapon
+			WeaponData* weaponData = new WeaponData(range, clipCapacity, damage,
+					reloadSpeed, fireRate, "", type);
+
+			map->add(type, *weaponData); //Save this data in the map.
 		}
 	}
 }

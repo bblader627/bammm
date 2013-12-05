@@ -1,0 +1,20 @@
+{
+	"meleeWeapons": [
+		{ "type":"Stein", "damage":2 },
+		{ "type":"Great Sword", "damage":10 },
+		{ "type":"Battle Axe", "damage":10 },
+		{ "type":"Chain Saw", "damage":11 },
+		{ "type":"Katana", "damage":10 },
+		{ "type":"Sword of a Thousand Truths", "damage":110 },
+		{ "type":"Practice Sword", "damage":1 }
+	],
+	
+	"rangedWeapons": [
+		{ "type":"Boom Stick", "range":2, "clipCapacity":10, "damage":15, "reloadSpeed":4, "fireRate":2 },
+		{ "type":"Bow and Arrow", "range":3, "clipCapacity":50, "damage":10, "reloadSpeed":1, "fireRate":1 },
+		{ "type":"Chain", "range":2, "clipCapacity":1, "damage":10, "reloadSpeed":1, "fireRate":2 },
+		{ "type":"BFG", "range":4, "clipCapacity":10, "damage":110, "reloadSpeed":4, "fireRate":5 },
+		{ "type":"Shuriken", "range":3, "clipCapacity":10, "damage":15, "reloadSpeed":4, "fireRate":3 },
+		{ "type":"Bolas", "range":3, "clipCapacity":5, "damage":8, "reloadSpeed":5, "fireRate":3 }
+	]
+}

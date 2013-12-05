@@ -38,6 +38,7 @@ namespace bammm
 	 _successChance = 30;
 	 _maximumGold = 100;
 	 _amountToMine = atoi(args->get(1).c_str());
+	 _amount = atoi(args->get(1).c_str());
 	 _targetType = args->get(2);
 	 }*/
 
@@ -68,6 +69,7 @@ namespace bammm
 			{
 				cout << _actor->getName()
 						<< " drunkenly swings the tool, hits himself in the foot, and decides not to do that anymore."
+						<< " drunkenly swings the pickaxe, hits himself in the foot, and decides not to do that anymore."
 						<< "\n";
 				switchState("null"); //Ends this state;
 			}
@@ -103,6 +105,35 @@ namespace bammm
 				{
 					Item fish("fish");
 					removedItem = _target->getInventory().removeItem(fish);
+				if (typeName == "gold")
+				{
+					Item item("Gold");
+					removedItem = _target->getInventory().removeItem(item);
+					canPickup = _actor->getInventory().addItem(removedItem);
+				}
+				else if (typeName == "iron")
+				{
+					Item item("Iron ore");
+					removedItem = _target->getInventory().removeItem(item);
+					canPickup = _actor->getInventory().addItem(removedItem);
+				}
+				else if (typeName == "coal")
+				{
+					Item item("Coal");
+					removedItem = _target->getInventory().removeItem(item);
+					canPickup = _actor->getInventory().addItem(removedItem);
+				}
+				else if (typeName == "birch" || typeName == "oak" || typeName == "redwood")
+				{
+					Item item("Wood");
+					removedItem = _target->getInventory().removeItem(item);
+					canPickup = _actor->getInventory().addItem(removedItem);
+				}
+				else if (typeName == "shore")		//Fishing state will send dwarves to shore blocks to fish
+				{
+					Item item("Fish");
+					removedItem = _target->getInventory().removeItem(item);
+					canPickup = _actor->getInventory().addItem(removedItem);
 				}
 
 
@@ -115,21 +146,37 @@ namespace bammm
 						<< " successfully gathers some " << coloredName << "\n";
 
 				canPickup = _actor->getInventory().addItem(removedItem);
+				cout << _actor->getName()
+						<< " lifts his pickaxe, and swings it at the rock. " << "\n";
+				cout << _actor->getName()
+						<< " successfully mines some " << removedItem->getName() << "\n";
+
+>>>>>>> master
 				if(!canPickup)
 				{
 					delete removedItem;
 					cout << _actor->getName()
+<<<<<<< HEAD
 						<< " has a full inventory, and drops " << coloredName
 						<< " on the ground.\n";
 				}
 
+=======
+						<< " has a full inventory, and drops it on the ground.\n";
+				}
+>>>>>>> master
 				_amount--;
 			}
 		}
 		else
 		{
+<<<<<<< HEAD
 			cout << _actor->getName() << " is finished gathering!" << "\n";
 			_amount= 0;
+=======
+			cout << _actor->getName() << " is finished mining!" << "\n";
+			_amount = 0;
+>>>>>>> master
 			switchState("null");
 		}
 	}
@@ -141,11 +188,16 @@ namespace bammm
 
 	string GatherState::toString()
 	{
+<<<<<<< HEAD
 		return "gather";
+=======
+		return "mine";
+>>>>>>> master
 	}
 
 	bool GatherState::canGather()
 	{
+<<<<<<< HEAD
 		int canMine = 0;
 
 		if(_amount > 0)
@@ -182,5 +234,16 @@ namespace bammm
 		}
 
 		return !!canMine;
+=======
+		int canGather = 0;
+
+		if(_amount > 0)
+		{
+			Item item(_target->getName());
+
+		}
+
+		return !!canGather;
+>>>>>>> master
 	}
 }

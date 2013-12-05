@@ -29,6 +29,8 @@ namespace bammm
 					int i;
 					double d;
 					bool b;
+					float f;
+					uint u;
 			} _value;
 
 		public:
@@ -95,6 +97,20 @@ namespace bammm
 			 @Post-Condition- returns a string that is equal to the value of this JSON Node
 			 */
 			string getStringValue();
+
+			/**
+			 getFloatValue
+			 @Pre-Condition-  Takes no argument
+			 @Post-Condition- returns a float that is equal to the value of this JSON Node
+			 */
+			float getFloatValue();
+
+			/**
+			 getUIntValue
+			 @Pre-Condition-  Takes no argument
+			 @Post-Condition- returns a uint that is equal to the value of this JSON Node
+			 */
+			uint getUIntValue();
 
 			/**
 			 operator[]

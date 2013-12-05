@@ -57,6 +57,8 @@ namespace bammm
 			if (_target->getHealth() <= 0)
 			{
 				cout << attackerName << Color::colorText(" has slain ", "red") << targetName << ".\n";
+
+				_actor = _levelingSystem.gainExperience(_actor);
 			}
 		}
 		else

@@ -27,12 +27,12 @@ namespace bammm
 		_location = new Vector3D();
 		_collision = false;
 
-		MAX_HEALTH = 100;
-		MAX_STAMINA = 50;
-		_healthBar = MAX_HEALTH;
-		_staminaBar = MAX_STAMINA;
-		_healthBar = 100;
-		_staminaBar = 50;
+		_maximumHealth = 100;
+		_maximumStamina = 50;
+		_health = _maximumHealth;
+		_stamina = _maximumStamina;
+		_health = 100;
+		_stamina = 50;
 		_attack = 4;
 		_defense = 2;
 		_symbol = "D";
@@ -48,12 +48,12 @@ namespace bammm
 		_velocity = new Vector3D();
 		_location = new Vector3D();
 
-		MAX_HEALTH = 100;
-		MAX_STAMINA = 50;
-		_healthBar = MAX_HEALTH;
-		_staminaBar = MAX_STAMINA;
-		_healthBar = 100;
-		_staminaBar = 50;
+		_maximumHealth = 100;
+		_maximumStamina = 50;
+		_health = _maximumHealth;
+		_stamina = _maximumStamina;
+		_health = 100;
+		_stamina = 50;
 		_attack = 4;
 		_defense = 2;
 		_alliance = alliance;
@@ -69,12 +69,12 @@ namespace bammm
 		_velocity = new Vector3D();
 		_location = new Vector3D();
 
-		MAX_HEALTH = health;
-		MAX_STAMINA = stamina;
-		_healthBar = MAX_HEALTH;
-		_staminaBar = MAX_STAMINA;
-		_healthBar = health;
-		_staminaBar = stamina;
+		_maximumHealth = health;
+		_maximumStamina = stamina;
+		_health = _maximumHealth;
+		_stamina = _maximumStamina;
+		_health = health;
+		_stamina = stamina;
 		_attack = attack;
 		_defense = defense;
 
@@ -91,12 +91,12 @@ namespace bammm
 		_velocity = new Vector3D();
 		_location = info->getLocation();
 
-		MAX_HEALTH = info->getHealth();
-		MAX_STAMINA = info->getStamina();
-		_healthBar = MAX_HEALTH;
-		_staminaBar = MAX_STAMINA;
-		_healthBar = info->getHealth();
-		_staminaBar = info->getStamina();
+		_maximumHealth = info->getHealth();
+		_maximumStamina = info->getStamina();
+		_health = _maximumHealth;
+		_stamina = _maximumStamina;
+		_health = info->getHealth();
+		_stamina = info->getStamina();
 		_attack = info->getAttack();
 		_defense = info->getDefense();
 
@@ -179,58 +179,58 @@ namespace bammm
 
 	void Actor::increaseHealth(int amount)
 	{
-		if (_healthBar >= MAX_HEALTH)
+		if (_health >= _maximumHealth)
 		{
-			_healthBar = MAX_HEALTH;
+			_health = _maximumHealth;
 			return;
 		}
 		else
 		{
-			_healthBar += amount;
+			_health += amount;
 		}
 	}
 
 	void Actor::increaseStamina(int amount)
 	{
-		if (_staminaBar >= MAX_STAMINA)
+		if (_stamina >= _maximumStamina)
 		{
-			_staminaBar = MAX_STAMINA;
+			_stamina = _maximumStamina;
 			return;
 		}
 		else
 		{
-			_staminaBar += amount;
+			_stamina += amount;
 		}
 	}
 
 	void Actor::reduceHealth(int amount)
 	{
-		if (_healthBar > 0)
+		if (_health > 0)
 		{
-			_healthBar -= amount;
+			_health -= amount;
 		}
 		else
 		{
-			_healthBar = 0;
+			_health = 0;
 			return;
 		}
 	}
 
 	void Actor::reduceStamina(int amount)
 	{
-		if (_staminaBar > 0)
+		if (_stamina > 0)
 		{
-			_staminaBar -= amount;
+			_stamina -= amount;
 		}
 		else
 		{
-			_staminaBar = 0;
+			_stamina = 0;
 		}
 	}
 
 	bool Actor::isFullyRested()
 	{
-		if (_healthBar == MAX_HEALTH && _staminaBar == MAX_STAMINA)
+		if (_health == _maximumHealth && _stamina == _maximumStamina)
 		{
 			return true;
 		}
@@ -327,12 +327,17 @@ namespace bammm
 
 	int Actor::getHealth()
 	{
-		return _healthBar;
+		return _health;
+	}
+
+	void Actor::setHealth(int health)
+	{
+		_health = health;
 	}
 
 	int Actor::getStamina()
 	{
-		return _staminaBar;
+		return _stamina;
 	}
 
 	int Actor::getAttack()
@@ -340,9 +345,19 @@ namespace bammm
 		return _attack;
 	}
 
+	void Actor::setAttack(int attack)
+	{
+		_attack = attack;
+	}
+
 	int Actor::getDefense()
 	{
 		return _defense;
+	}
+
+	void Actor::setDefense(int defense)
+	{
+		_defense = defense;
 	}
 
 	string Actor::getType()
@@ -394,10 +409,55 @@ namespace bammm
 	{
 		return _alliance * -1;
 	}
-	
+
 	Inventory& Actor::getInventory()
 	{
 		return _inventory;
+	}
+
+	int Actor::getLevel()
+	{
+		return _level;
+	}
+
+	void Actor::setLevel(int newLevel)
+	{
+		_level = newLevel;
+	}
+
+	int Actor::getExperience()
+	{
+		return _experience;
+	}
+
+	void Actor::setExperience(int newExperience)
+	{
+		_experience = newExperience;
+	}
+
+	int Actor::getTotalExperienceThisLevel()
+	{
+		return _totalExperienceThisLevel;
+	}
+
+	void Actor::setTotalExperienceThisLevel(int newTotalExperienceThisLevel)
+	{
+		_totalExperienceThisLevel = newTotalExperienceThisLevel;
+	}
+
+	int Actor::getMaximumHealth()
+	{
+		return _maximumHealth;
+	}
+
+	void Actor::setMaximumHealth(int maximumHealth)
+	{
+		_maximumHealth = maximumHealth;
+	}
+
+	void Actor::setMaximumStamina(int maximumStamina)
+	{
+		_maximumStamina = maximumStamina;
 	}
 
 	string Actor::toString()

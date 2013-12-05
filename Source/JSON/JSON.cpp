@@ -117,6 +117,16 @@ namespace bammm
 		return "";
 	}
 
+	float JSON::getFloatValue()
+	{
+		return 0.0;
+	}
+
+	uint JSON::getUIntValue()
+	{
+		return 0;
+	}
+
 	JSON JSON::operator[](const unsigned int & rhs)
 	{
 		return *this;

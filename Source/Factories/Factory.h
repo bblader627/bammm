@@ -30,6 +30,9 @@
 #include "../Weapons/MeleeWeapon.h"
 #include "../Weapons/RangedWeapon.h"
 #include "../Weapons/WeaponData.h"
+#include "../Behavior/Behavior.h"
+#include "../Inventory/Inventory.h"
+#include "../Inventory/Item.h"
 
 using namespace std;
 
@@ -38,22 +41,38 @@ namespace bammm
 	class Factory
 	{
 		private:
-			HashMap<ActorInfo> actorData;
-			HashMap<ActorInfo> blockData;
-			HashMap<ActorInfo> mapData;
-			//HashMap<ArmorInfo> armorData;
-			SceneManager* scene;
+			HashMap<ActorInfo> _actorData;
+			HashMap<ActorInfo> _blockData;
+			HashMap<ActorInfo> _mapData;
+			HashMap<WeaponData> _meleeWeaponData;
+			HashMap<WeaponData> _rangedWeaponData;
+			SceneManager* _scene;
 
 			/*
-			 parseToInfo
+			 parseToActorInfo
 			 @Pre-Condition- accepts pointer to root JSON node and type string
 			 @Post-Condition- returns void
 			 */
 			void parseToActorInfo(JSON* rootNode, string type,
 					HashMap<ActorInfo>* map);
 
+			/*
+			 parseMeleeWeaponToWeaponData
+			 @Pre-Condition- accepts pointer to root JSON node and type string and map
+			 @Post-Condition- Data is parsed and stored in map
+			 */
+			void parseMeleeWeaponToWeaponData(JSON* rootNode,
+					HashMap<WeaponData>* map);
+
+			/*
+			 parseRangedWeapontoWeaponData
+			 @Pre-Condition- accepts pointer to root JSON node and type string and map
+			 @Post-Condition- Data is parsed and stored in map
+			 */
+			void parseRangedWeaponToWeaponData(JSON* rootNode,
+					HashMap<WeaponData>* map);
+
 		public:
-			//Add default constructor where scene is instantiated
 			Factory(SceneManager* manager);
 
 			/*
@@ -69,14 +88,14 @@ namespace bammm
 			 @Pre-Condition- Takes in a string type
 			 @Post-Condition- Returns a MeleeWeapon
 			 */
-			MeleeWeapon getMeleeWeapon(string type);
+			MeleeWeapon* getMeleeWeapon(string type);
 
 			/*
 			 getRangedWeapon
 			 @Pre-Condition- Takes in a string type
 			 @Post-Condition- Returns a RangedWeapon
 			 */
-			RangedWeapon getRangedWeapon(string type);
+			RangedWeapon* getRangedWeapon(string type);
 
 			/*
 			 setup

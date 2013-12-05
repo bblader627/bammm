@@ -139,21 +139,21 @@ namespace bammm
 			 @Post-Condition- Returns _gold
 			 */
 			int getGold();
-			
+
 			/**
 			 getWood
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _wood
 			 */
 			int getWood();
-			
+
 			/**
 			 getColor
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _coal
 			 */
 			int getCoal();
-			
+
 			/**
 			 getIron
 			 @Pre-Condition- No input

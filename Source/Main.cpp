@@ -6,11 +6,13 @@
 #include <unistd.h>
 #include <random>
 #include <exception>
+#include "LevelingSystem/LevelingSystem.h"
 
 using namespace bammm;
 using namespace std;
 
 void printWelcome();
+void printTutorial();
 void printOptions();
 void printStory();
 DynamicArray<string>* parseInput(string);
@@ -27,6 +29,7 @@ int main()
 	MeleeCombat meleeCombat;
 
 	actorFactory->setup();
+
 	sceneManager.setMeleeCombat(meleeCombat);
 
 	//Will be deleted; controllers are added for each new actor created in factory
@@ -49,7 +52,7 @@ int main()
 	validCommands.add("chop");
 	validCommands.add("fish");
 
-	float dTime = 0;
+	float deltaTime = 0;
 	while (playGame)
 	{
 		command = "";
@@ -87,7 +90,6 @@ int main()
 				}
 				else
 				{
-
 					cout << "Invalid input\n";
 					doTick = false;
 				}
@@ -120,7 +122,7 @@ int main()
 			{
 				if (doInput)
 				{
-					sceneManager.input(input, dTime);
+					sceneManager.input(input, deltaTime);
 				}
 				sceneManager.tick(0);
 
@@ -154,6 +156,11 @@ void printWelcome()
 			<< "Creators: \tAlvaro Home - Matthew Konstantinou - Matthew Witkowski\n\t\tBradley Crusco - Michael Abramo"
 			<< "\n";
 	cout << "================================================" << "\n";
+}
+
+void printTutorial()
+{
+
 }
 
 void printStory()

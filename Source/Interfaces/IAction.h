@@ -23,8 +23,24 @@ namespace bammm
 {
 	class IAction
 	{
+		private:
+			string _type;
+			int _amount;
 		public:
 			virtual void action(Actor* target, int amount)=0;
+
+			/*
+				
+			*/
+			void setType(string type);
+			
+			void setAmount(int amount);
+			
+			void increaseAmount(int amount);
+
+			void decreaseAmount(int amount);
+
+			string toString();
 	};
 }
 

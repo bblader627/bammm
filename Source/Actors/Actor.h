@@ -39,10 +39,10 @@ namespace bammm
 			Vector3D *_velocity;
 			Vector3D *_location;
 
-			int _healthBar;
-			int _staminaBar;
-			int MAX_HEALTH;
-			int MAX_STAMINA;
+			int _health;
+			int _stamina;
+			int _maximumHealth;
+			int _maximumStamina;
 
 			int _attack;
 			int _defense;
@@ -61,6 +61,11 @@ namespace bammm
 			MeleeWeapon *_meleeWeapon;
 			RangedWeapon *_rangedWeapon;
 			Inventory _inventory;
+
+			int _level;
+			int _experience;
+			int _totalExperienceThisLevel;
+
 		public:
 			Actor();
 			Actor(string name, string type, AllianceType alliance);
@@ -130,7 +135,7 @@ namespace bammm
 			 @Post-Condition- returns nothing
 			 */
 			void setColor(string color);
-			
+
 			/**
 			 setGold
 			 @Pre-Condition- The amount to set the Actor's gold to
@@ -144,14 +149,14 @@ namespace bammm
 			 @Post-Condition- Returns nothing
 			 */
 			void setIron(int iron);
-			
+
 			/**
 			 setCoal
 			 @Pre-Condition- The amount to set the Actor's coal to
 			 @Post-Condition- Returns nothing
 			 */
 			void setCoal(int coal);
-			
+
 			/**
 			 setWood
 			 @Pre-Condition- The amount to set the Actor's wood to
@@ -308,6 +313,13 @@ namespace bammm
 			int getHealth();
 
 			/**
+			 setHealth
+			 @Pre-Condition- takes in health to set
+			 @Post-Condition- returns void
+			 */
+			void setHealth(int health);
+
+			/**
 			 getStamina
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _staminaBar
@@ -322,11 +334,25 @@ namespace bammm
 			int getAttack();
 
 			/**
+			 setAttack
+			 @Pre-Condition- Takes in int newAttack
+			 @Post-Condition- Sets attack to newAttack
+			 */
+			void setAttack(int newAttack);
+
+			/**
 			 getDefense
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _defense
 			 */
 			int getDefense();
+
+			/**
+			 setDefense
+			 @Pre-Condition- Takes in int newDefense
+			 @Post-Condition- Sets defense to newDefense
+			 */
+			void setDefense(int newDefense);
 
 			/**
 			 getX
@@ -404,13 +430,83 @@ namespace bammm
 			 @Post-Condition- Returns the enemy's alliance
 			 */
 			int getEnemyAlliance();
-			
+
 			/**
 			 getInventory
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns the actor's inventory
 			 */
 			Inventory& getInventory();
+
+			/**
+			 getLevel
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns actor's level
+			 */
+			int getLevel();
+
+			/**
+			 setLevel
+			 @Pre-Condition- Takes an int of new level
+			 @Post-Condition- Sets the level to the given input
+			 */
+			void setLevel(int newLevel);
+
+			/**
+			 getExperience
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the current experience
+			 */
+			int getExperience();
+
+			/**
+			 setExperience
+			 @Pre-Condition- Takes an int of newExperience
+			 @Post-Condition- Sets the experience to the given input
+			 */
+			void setExperience(int newExperience);
+
+			/**
+			 getTotalExperienceThisLevel
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns the current totalExperienceThisLevel
+			 */
+			int getTotalExperienceThisLevel();
+
+			/**
+			 setTotalExperienceThisLevel
+			 @Pre-Condition- Takes an int of newTotalExperienceThisLevel
+			 @Post-Condition- Sets the experience to the given input
+			 */
+			void setTotalExperienceThisLevel(int newTotalExperienceThisLevel);
+
+			/**
+			 getMaximumHealth
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns maximumHealth
+			 */
+			int getMaximumHealth();
+
+			/**
+			 setMaximumHealth
+			 @Pre-Condition- takes in maximumHealth to set
+			 @Post-Condition- returns void
+			 */
+			void setMaximumHealth(int maximumHealth);
+
+			/**
+			 getMaximumStamina
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns maximumStamina
+			 */
+			int getMaximumStamina();
+
+			/**
+			 setMaximumStamina
+			 @Pre-Condition- takes in maximumStamina to set
+			 @Post-Condition- returns void
+			 */
+			void setMaximumStamina(int maximumStamina);
 
 			/**
 			 toString
