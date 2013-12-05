@@ -34,27 +34,60 @@ namespace bammm
 
 	bool Inventory::addItem(Item* item)
 	{
-		if(_inventory.getSize() >= _slots)
+		bool canAdd = false;
+		bool isStackable = item->getStackable();
+		bool containsNewItem = contains(*item);
+		bool canStore = _inventory.getSize() < _slots;
+
+		//Can put new item
+		if(canStore && !isStackable)
 		{
-			return false;
+			_inventory.add(item);
+			canAdd = true;
 		}
-		
-		_inventory.add(item);
-		return true;
+		//Can put new stackable
+		else if(isStackable && !containsNewItem && canStore)
+		{
+			_inventory.add(item);
+			canAdd = true;
+		}
+		//Add to previous item
+		else if(isStackable && containsNewItem)
+		{
+			int index = getInventoryIndex(*item);
+			Item* foundItem = _inventory.get(index);
+			foundItem->setAmount(foundItem->getAmount() + item->getAmount());
+			delete item;
+			canAdd = true;
+		}
+
+		return canAdd;
 	}
 
 	Item* Inventory::removeItem(Item& item)
 	{
+		cout << "Start of removeItem\n";
 		uint usedSlots = _inventory.getSize();
 		for(uint i = 0; i < usedSlots; i++)
 		{
 			Item currentItem = *_inventory.get(i);
 			if(currentItem == item)
 			{
-				return _inventory.remove(i);
+				//Return last stackable/item
+				if(currentItem.getAmount() == 1)
+				{
+					cout << "End of removeItem amount 1";
+					return _inventory.remove(i);
+				}
+				else
+				{
+					currentItem.setAmount(currentItem.getAmount() - 1);
+					return currentItem.getStackableCopy();
+					cout << "End of removeItem copy";
+				}
 			}
 		}
-
+		cout << "End of removeItem";
 		return NULL;
 	}
 
@@ -73,6 +106,21 @@ namespace bammm
 
 		return false;
 	}
+	
+	int Inventory::getInventoryIndex(Item& item)
+	{
+		uint usedSlots = _inventory.getSize();
+		
+		for(uint i = 0; i < usedSlots; i++)
+		{
+			Item currentItem = *_inventory.get(i);
+			if(currentItem == item)
+			{
+				return i;	
+			}
+		}
+		return -1;
+	}
 
 	bool Inventory::contains(Item& item, uint amount)
 	{
@@ -82,7 +130,8 @@ namespace bammm
 		{
 			if(contains(item))
 			{
-				count++;
+				int index = getInventoryIndex(item);
+				count += _inventory.get(index)->getAmount();
 			}
 		}
 

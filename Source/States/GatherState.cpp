@@ -74,17 +74,17 @@ namespace bammm
 				Item* removedItem;
 				if (typeName.find("gold") != string::npos)
 				{
-					Item gold("gold");
+					Item gold("gold", _target->getColor(), true);
 					removedItem = _target->getInventory().removeItem(gold);
 				}
 				else if (typeName.find("iron") != string::npos)
 				{
-					Item iron("iron");
+					Item iron("iron", _target->getColor(), true);
 					removedItem = _target->getInventory().removeItem(iron);
 				}
 				else if (typeName.find("coal") != string::npos)
 				{
-					Item coal("coal");
+					Item coal("coal", _target->getColor(), true);
 					removedItem = _target->getInventory().removeItem(coal);
 				}
 				else if (typeName.find("redwood") != string::npos ||
@@ -92,12 +92,12 @@ namespace bammm
 						typeName.find("birch") != string::npos
 						)
 				{
-					Item wood("wood");
+					Item wood("wood", _target->getColor(), true);
 					removedItem = _target->getInventory().removeItem(wood);
 				}
 				else if (typeName.find("dock") != string::npos)
 				{
-					Item fish("fish");
+					Item fish("fish", _target->getColor(), true);
 					removedItem = _target->getInventory().removeItem(fish);
 				}
 
@@ -111,7 +111,7 @@ namespace bammm
 				cout << _actor->getName()
 						<< " lifts his pickaxe, and swings it at the rock. " << "\n";
 				cout << _actor->getName()
-						<< " successfully mines some " << removedItem->getName() << "\n";
+						<< " successfully mines some " << coloredName << "\n";
 
 				if(!canPickup)
 				{
@@ -152,31 +152,31 @@ namespace bammm
 
 		if(_amount > 0)
 		{
-			Item gold("gold");
+			Item gold("gold", true);
 			if(_target->getInventory().contains(gold))
 			{
 				canMine++;
 			}
 
-			Item iron("iron");
+			Item iron("iron", true);
 			if(_target->getInventory().contains(iron))
 			{
 				canMine++;
 			}
 
-			Item coal("coal");
+			Item coal("coal", true);
 			if(_target->getInventory().contains(coal))
 			{
 				canMine++;
 			}
 
-			Item wood("wood");
+			Item wood("wood", true);
 			if(_target->getInventory().contains(coal))
 			{
 				canMine++;
 			}
 
-			Item fish("fish");
+			Item fish("fish", true);
 			if(_target->getInventory().contains(coal))
 			{
 				canMine++;
