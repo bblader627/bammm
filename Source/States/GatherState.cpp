@@ -106,13 +106,13 @@ namespace bammm
 				_actor->reduceStamina(1);
 
 				string coloredName = Color::colorText(removedItem->getName(), removedItem->getColor());
-
 				canPickup = _actor->getInventory().addItem(removedItem);
 				cout << _actor->getName()
 						<< " lifts his pickaxe, and swings it at the rock. " << "\n";
 				cout << _actor->getName()
 						<< " successfully mines some " << coloredName << "\n";
 
+				cout << "Can pickup: " << canPickup << "\n";
 				if(!canPickup)
 				{
 					delete removedItem;

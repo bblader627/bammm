@@ -302,6 +302,10 @@ namespace bammm
 		Vector3D* target = findClosestInGrid(actor, destination)->getLocation();
 		Vector3D* actorLocation = actor->getLocation();
 
+		if(*target == *actorLocation)
+		{
+			return new Queue<Vector3D*>();
+		}
 		int actorLocInt = convertToPosition(actorLocation);
 
 		DynamicArray<DynamicArray<bool>*>* visited = new DynamicArray<DynamicArray<bool>*>();
