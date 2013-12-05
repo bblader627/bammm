@@ -59,6 +59,7 @@ namespace bammm
 
 	void GatherState::breakdown()
 	{
+		cout << _actor->getName() << " is finished gathering!" << "\n";
 	}
 
 	void GatherState::tick(float deltaTime)
@@ -124,6 +125,8 @@ namespace bammm
 					cout << _actor->getName()
 						<< " has a full inventory, and drops " << coloredName
 						<< " on the ground.\n";
+					_amount = 0;
+					switchState("null");
 				}
 				_amount--;
 			}
@@ -131,7 +134,7 @@ namespace bammm
 		}
 		else
 		{
-			cout << _actor->getName() << " is finished gathering!" << "\n";
+			//cout << _actor->getName() << " is finished gathering!" << "\n";
 			_amount= 0;
 
 			switchState("null");

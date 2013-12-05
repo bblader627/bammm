@@ -168,6 +168,10 @@ namespace bammm
 		else
 		{
 			controller = _focus;
+			while (controller->runningStates().getSize()>0)
+			{
+				controller->runningStates().remove(0);
+			}
 		}
 		
 		controller->input(args, deltaTime);
@@ -201,6 +205,7 @@ namespace bammm
 							|| (runningStates.contains(
 									allStates.getValue("idle")))))
 			{
+				runningStates.remove(0);
 				return current;
 			}
 

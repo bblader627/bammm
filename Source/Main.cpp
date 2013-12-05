@@ -33,7 +33,7 @@ int main()
 	sceneManager.setMeleeCombat(meleeCombat);
 
 	//Will be deleted; controllers are added for each new actor created in factory
-	PlayerController controller;
+	//PlayerController controller;
 
 	bool playGame = true;
 	bool doTick = true;
