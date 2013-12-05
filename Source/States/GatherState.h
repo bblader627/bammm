@@ -49,16 +49,16 @@ namespace bammm
 
 
 			/**
-			 setup
-			 @Pre-Condition- No input
-			 @Post-Condition- Sets up the state
+			 setAmount
+			 @Pre-Condition- takes int
+			 @Post-Condition- sets _amount
 			 */
 			 void setAmount(int amount);
 
 			/**
-			 setup
-			 @Pre-Condition- No input
-			 @Post-Condition- Sets up the state
+			 setTarget
+			 @Pre-Condition- takes Actor
+			 @Post-Condition- assigns _target
 			 */
 			 void setTarget(Actor* target);
 
