@@ -58,7 +58,6 @@ namespace bammm
 			{
 				cout << attackerName << Color::colorText(" has slain ", "red") << targetName << ".\n";
 
-
 				_actor = _levelingSystem.gainExperience(_actor);
 			}
 		}
