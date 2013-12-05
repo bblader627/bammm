@@ -111,7 +111,7 @@ namespace bammm
 				cout << _actor->getName()
 						<< " lifts his pickaxe, and swings it at the rock. " << "\n";
 				cout << _actor->getName()
-						<< " successfully mines some " << removedItem->getName() << "\n";
+						<< " successfully mines some " << coloredName << "\n";
 
 				if(!canPickup)
 				{
