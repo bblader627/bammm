@@ -78,17 +78,17 @@ namespace bammm
 				Item* removedItem;
 				if (oreName.find("gold") != string::npos)
 				{
-					Item gold("Gold");
+					Item gold("gold");
 					removedItem = _ore->getInventory().removeItem(gold);
 				}
 				else if (oreName.find("iron") != string::npos)
 				{
-					Item iron("Iron ore");
+					Item iron("iron ore");
 					removedItem = _ore->getInventory().removeItem(iron);
 				}
 				else if (oreName.find("coal") != string::npos)
 				{
-					Item coal("Coal");
+					Item coal("coal");
 					removedItem = _ore->getInventory().removeItem(coal);
 				}
 				_actor->reduceStamina(1);
@@ -135,19 +135,19 @@ namespace bammm
 			
 		if(_amountToMine > 0)
 		{
-			Item gold("Gold");
+			Item gold("gold");
 			if(_ore->getInventory().contains(gold))
 			{
 				canMine++;
 			}
 			
-			Item iron("Iron ore");
+			Item iron("iron");
 			if(_ore->getInventory().contains(iron))
 			{
 				canMine++;
 			}
 			
-			Item coal("Coal");
+			Item coal("coal");
 			if(_ore->getInventory().contains(coal))
 			{
 				canMine++;
