@@ -115,6 +115,9 @@ namespace bammm
 					return;
 				}
 
+				cout << _actor->getName() << " has been sent to " << newState << " " << type << "!" << endl;
+
+
 				if (newState == "fish")
 				{
 					type = "dock";
@@ -126,9 +129,7 @@ namespace bammm
 				tempState->setAmount(numToGather);
 				tempState->setTarget(target);
 
-				cout << _actor->getName() << " has been sent to " << newState << " " << type << "!" << endl;
 				//Add to controllerinput
-
 				SearchState* search = static_cast<SearchState*>(_states.getValue("search"));
 				search->setTarget(type);
 				search->setDestState(tempState);
