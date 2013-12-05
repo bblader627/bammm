@@ -105,35 +105,6 @@ namespace bammm
 				{
 					Item fish("fish");
 					removedItem = _target->getInventory().removeItem(fish);
-				if (typeName == "gold")
-				{
-					Item item("Gold");
-					removedItem = _target->getInventory().removeItem(item);
-					canPickup = _actor->getInventory().addItem(removedItem);
-				}
-				else if (typeName == "iron")
-				{
-					Item item("Iron ore");
-					removedItem = _target->getInventory().removeItem(item);
-					canPickup = _actor->getInventory().addItem(removedItem);
-				}
-				else if (typeName == "coal")
-				{
-					Item item("Coal");
-					removedItem = _target->getInventory().removeItem(item);
-					canPickup = _actor->getInventory().addItem(removedItem);
-				}
-				else if (typeName == "birch" || typeName == "oak" || typeName == "redwood")
-				{
-					Item item("Wood");
-					removedItem = _target->getInventory().removeItem(item);
-					canPickup = _actor->getInventory().addItem(removedItem);
-				}
-				else if (typeName == "shore")		//Fishing state will send dwarves to shore blocks to fish
-				{
-					Item item("Fish");
-					removedItem = _target->getInventory().removeItem(item);
-					canPickup = _actor->getInventory().addItem(removedItem);
 				}
 
 
@@ -146,10 +117,6 @@ namespace bammm
 						<< " successfully gathers some " << coloredName << "\n";
 
 				canPickup = _actor->getInventory().addItem(removedItem);
-				cout << _actor->getName()
-						<< " lifts his pickaxe, and swings it at the rock. " << "\n";
-				cout << _actor->getName()
-						<< " successfully mines some " << removedItem->getName() << "\n";
 
 				if(!canPickup)
 				{
@@ -159,8 +126,6 @@ namespace bammm
 						<< " on the ground.\n";
 				}
 				_amount--;
-				}
-
 			}
 
 		}
@@ -168,8 +133,7 @@ namespace bammm
 		{
 			cout << _actor->getName() << " is finished gathering!" << "\n";
 			_amount= 0;
-			cout << _actor->getName() << " is finished mining!" << "\n";
-			_amount = 0;
+
 			switchState("null");
 		}
 	}
@@ -209,13 +173,13 @@ namespace bammm
 			}
 
 			Item wood("wood");
-			if(_target->getInventory().contains(coal))
+			if(_target->getInventory().contains(wood))
 			{
 				canMine++;
 			}
 
 			Item fish("fish");
-			if(_target->getInventory().contains(coal))
+			if(_target->getInventory().contains(fish))
 			{
 				canMine++;
 			}
