@@ -69,6 +69,13 @@ namespace bammm
 			 @Post-Condition- Returns a boolean representing fi the Controller can be deleted or not.
 			 */
 			virtual bool canDelete()=0;
+			
+			/**
+			 getActor
+			 @Pre-Condition- Takes nothing
+			 @Post-Condition- Returns the actor the controller uses
+			 */
+			virtual Actor* getActor()=0;
 
 			/**
 			 toString

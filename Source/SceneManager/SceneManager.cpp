@@ -60,7 +60,7 @@ namespace bammm
 	{
 		_allActors.removeElement(actor);
 		_sceneGraph.remove(actor->getLocation(), actor);
-
+		cout << "Removing: " << actor->getName() << "\n";
 		return actor;
 	}
 
@@ -82,7 +82,6 @@ namespace bammm
 	ITickable* SceneManager::removeTickable(ITickable* tickable)
 	{
 		_allTickables.removeElement(tickable);
-
 		return tickable;
 	}
 
@@ -104,19 +103,21 @@ namespace bammm
 
 			if (playerController->canDelete())
 			{
-				size--;
-				//_allPlayerControllers.removeElement(playerController);
-				removeActor(_allActors.get(i));
+				Actor* removedActor = playerController->getActor();
+				_allPlayerControllers.removeElement(playerController);
+				removeActor(removedActor);
 				removeTickable(tickable);
+				size--;
 				i--;
 			}
 			else if (aiController->canDelete())
 			{
 
-				size--;
-				//_allAiControllers.removeElement(aiController);
-				removeActor(_allActors.get(i));
+				Actor* removedActor = aiController->getActor();
+				_allAiControllers.removeElement(aiController);
+				removeActor(removedActor);
 				removeTickable(tickable);
+				size--;
 				i--;
 			}
 			else

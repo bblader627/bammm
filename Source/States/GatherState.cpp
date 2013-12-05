@@ -109,31 +109,26 @@ namespace bammm
 				{
 					Item item("Gold");
 					removedItem = _target->getInventory().removeItem(item);
-					canPickup = _actor->getInventory().addItem(removedItem);
 				}
 				else if (typeName == "iron")
 				{
 					Item item("Iron ore");
 					removedItem = _target->getInventory().removeItem(item);
-					canPickup = _actor->getInventory().addItem(removedItem);
 				}
 				else if (typeName == "coal")
 				{
 					Item item("Coal");
 					removedItem = _target->getInventory().removeItem(item);
-					canPickup = _actor->getInventory().addItem(removedItem);
 				}
 				else if (typeName == "birch" || typeName == "oak" || typeName == "redwood")
 				{
 					Item item("Wood");
 					removedItem = _target->getInventory().removeItem(item);
-					canPickup = _actor->getInventory().addItem(removedItem);
 				}
 				else if (typeName == "shore")		//Fishing state will send dwarves to shore blocks to fish
 				{
 					Item item("Fish");
 					removedItem = _target->getInventory().removeItem(item);
-					canPickup = _actor->getInventory().addItem(removedItem);
 				}
 
 

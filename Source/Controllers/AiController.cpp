@@ -132,4 +132,9 @@ namespace bammm
 	{
 		return "AiController";
 	}
+
+	Actor* AiController::getActor()
+	{
+		return _actor;
+	}
 }
