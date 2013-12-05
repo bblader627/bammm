@@ -151,32 +151,25 @@ namespace bammm
 				cout << _actor->getName()
 						<< " successfully mines some " << removedItem->getName() << "\n";
 
->>>>>>> master
 				if(!canPickup)
 				{
 					delete removedItem;
 					cout << _actor->getName()
-<<<<<<< HEAD
 						<< " has a full inventory, and drops " << coloredName
 						<< " on the ground.\n";
 				}
-
-=======
-						<< " has a full inventory, and drops it on the ground.\n";
-				}
->>>>>>> master
 				_amount--;
+				}
+
 			}
+
 		}
 		else
 		{
-<<<<<<< HEAD
 			cout << _actor->getName() << " is finished gathering!" << "\n";
 			_amount= 0;
-=======
 			cout << _actor->getName() << " is finished mining!" << "\n";
 			_amount = 0;
->>>>>>> master
 			switchState("null");
 		}
 	}
@@ -188,16 +181,11 @@ namespace bammm
 
 	string GatherState::toString()
 	{
-<<<<<<< HEAD
 		return "gather";
-=======
-		return "mine";
->>>>>>> master
 	}
 
 	bool GatherState::canGather()
 	{
-<<<<<<< HEAD
 		int canMine = 0;
 
 		if(_amount > 0)
@@ -234,16 +222,6 @@ namespace bammm
 		}
 
 		return !!canMine;
-=======
-		int canGather = 0;
 
-		if(_amount > 0)
-		{
-			Item item(_target->getName());
-
-		}
-
-		return !!canGather;
->>>>>>> master
 	}
 }
