@@ -80,22 +80,22 @@ namespace bammm
 
 	//NOTE: Right now there's no checking, cause of type issues. Have to know it exists.
 	//TODO:^^Make this not the case.
-	MeleeWeapon Factory::getMeleeWeapon(string type)
+	MeleeWeapon* Factory::getMeleeWeapon(string type)
 	{
 		WeaponData weaponData = _meleeWeaponData.getValue(type);
 		MeleeWeapon* newWeapon = new MeleeWeapon(weaponData);
 
-		return *newWeapon;
+		return newWeapon;
 	}
 
 	//NOTE: Right now there's no checking, cause of type issues. Have to know it exists.
 	//TODO:^^Make this not the case.
-	RangedWeapon Factory::getRangedWeapon(string type)
+	RangedWeapon* Factory::getRangedWeapon(string type)
 	{
 		WeaponData weaponData = _rangedWeaponData.getValue(type);
 		RangedWeapon* newWeapon = new RangedWeapon(weaponData);
 
-		return *newWeapon;
+		return newWeapon;
 	}
 
 	void Factory::parseToActorInfo(JSON* rootNode, string type,
@@ -159,11 +159,20 @@ namespace bammm
 
 			Actor* myActor = new Actor(info);
 
-			//TODO: This needs to be redone to use the factory... so we ahve to parse weapon data first?
-			//The Actor JSON needs to specify what weapon it wants..?
-			WeaponData weaponData(10, 2, "", "");
-			MeleeWeapon* meleeWeapon = new MeleeWeapon(weaponData);
-			myActor->setMeleeWeapon(meleeWeapon);
+			if (type == "dwarf" || type == "orc")
+			{
+				string weaponType = child->getChild("weapon")->getStringValue();
+				MeleeWeapon* meleeWeapon = getMeleeWeapon(weaponType);
+				myActor->setMeleeWeapon(meleeWeapon);
+			}
+			else
+			{
+				//TODO: This needs to be redone to use the factory... so we ahve to parse weapon data first?
+				//The Actor JSON needs to specify what weapon it wants..?
+				WeaponData weaponData(10, 2, "", "");
+				MeleeWeapon* meleeWeapon = new MeleeWeapon(weaponData);
+				myActor->setMeleeWeapon(meleeWeapon);
+			}
 
 			if (name.find("iron") != string::npos)
 			{
