@@ -498,7 +498,7 @@ namespace bammm
 		}
 		else
 		{
-			delete newLocation;
+			//delete newLocation;
 		}
 	}
 
