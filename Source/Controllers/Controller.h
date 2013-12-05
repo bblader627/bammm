@@ -29,6 +29,7 @@
 #include "../States/MoveState.h"
 #include "../States/SearchState.h"
 #include "../States/GatherState.h"
+#include "../States/CraftState.h"
 #include "../Resources/HashMap.h"
 #include "../Actors/Actor.h"
 #include "../States/StateMachine.h"

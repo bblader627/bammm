@@ -56,6 +56,7 @@ int main()
 	validCommands.add("lose");
 	validCommands.add("inventory");
 	validCommands.add("eat");
+	validCommands.add("craft");
 
 	float deltaTime = 0;
 	while (playGame)
