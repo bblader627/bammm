@@ -28,6 +28,7 @@ int main()
 	MeleeCombat meleeCombat;
 
 	actorFactory->setup();
+
 	sceneManager.setMeleeCombat(meleeCombat);
 
 	//Will be deleted; controllers are added for each new actor created in factory
@@ -49,7 +50,7 @@ int main()
 	validCommands.add("attack");
 	validCommands.add("chop");
 
-	float dTime = 0;
+	float deltaTime = 0;
 	while (playGame)
 	{
 		doTick = true;
@@ -85,7 +86,6 @@ int main()
 				}
 				else
 				{
-
 					cout << "Invalid input\n";
 					doTick = false;
 				}
@@ -118,7 +118,7 @@ int main()
 			{
 				if (doInput)
 				{
-					sceneManager.input(input, dTime);
+					sceneManager.input(input, deltaTime);
 				}
 				sceneManager.tick(0);
 

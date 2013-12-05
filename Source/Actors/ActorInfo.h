@@ -18,433 +18,226 @@
 #include <iostream>
 #include "../SceneManager/Vector3D.h"
 #include "../Resources/Constant.h"
-#include "../Behavior/Behavior.h"
 
 using namespace std;
 
-namespace bammm {
-class ActorInfo {
-private:
-	int _maximumHealth = 100;
-	int _maximumStamina = 50;
+namespace bammm
+{
+	class ActorInfo
+	{
+		private:
+			string _name;
+			string _type;
+			int _health;
+			bool _collision;
+			int _stamina;
+			int _attack;
+			int _defense;
+			string _behavior;
+			Vector3D* _location;
+			AllianceType _alliance;
+			string _symbol;
+			string _color;
+			int _gold;
+			int _coal;
+			int _iron;
+			int _wood;
 
-	string _name;
-	string _type;
-	int _health;
-	bool _collision;
-	int _stamina;
-	int _attack;
-	int _defense;
-	//Behavior*_behaviors;
-	string _behavior;
-	Vector3D* _location;
-	AllianceType _alliance;
-	string _symbol;
-	string _color;
-	int _gold;
-	int _coal;
-	int _iron;
-	int _wood;
-	float _BAC;
+		public:
+			ActorInfo();
+			ActorInfo(string type, string name, int health, int stamina,
+					int attack, int defense, string behavior, bool collision,
+					AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood);
 
-	//Leveling
-	int _level;
-	int _experience;
-	int _totalExperienceThisLevel;
+			/**
+			 getType
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns type
+			 */
+			string getType();
 
-public:
-	ActorInfo();
-	ActorInfo(string type, string name, int attack, int defense,
-			string behavior, bool collision, AllianceType alliance,
-			string symbol, string color, int gold, int coal, int iron, int wood,
-			float BAC);
+			/**
+			 getName
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns name
+			 */
+			string getName();
 
-	/**
-	 getType
-	 @Pre-Condition- takes no arguments
-	 @Post-Condition- returns type
-	 */
-	string getType();
+			/**
+			 getHealth
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns health
+			 */
+			int getHealth();
 
-	/**
-	 getName
-	 @Pre-Condition- takes no arguments
-	 @Post-Condition- returns name
-	 */
-	string getName();
+			/**
+			 getStamina
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns stamina
+			 */
+			int getStamina();
 
-	/**
-	 getHealth
-	 @Pre-Condition- takes no arguments
-	 @Post-Condition- returns health
-	 */
-	int getHealth();
+			/**
+			 getAttack
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns attack
+			 */
+			int getAttack();
 
-	/**
-	 getMaximumHealth
-	 @Pre-Condition- takes no arguments
-	 @Post-Condition- returns maximumHealth
-	 */
-	int getMaximumHealth();
+			/**
+			 getDefense
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns defense
+			 */
+			int getDefense();
 
-	/**
-	 getStamina
-	 @Pre-Condition- takes no arguments
-	 @Post-Condition- returns stamina
-	 */
-	int getStamina();
+			/**
+			 getBehavior
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns behavior
+			 */
+			string getBehavior();
 
-	/**
-	 getMaximumStamina
-	 @Pre-Condition- takes no arguments
-	 @Post-Condition- returns maximumStamina
-	 */
-	int getMaximumStamina();
+			/**
+			 getLocation
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _location
+			 */
+			Vector3D* getLocation();
 
-	/**
-	 getAttack
-	 @Pre-Condition- takes no arguments
-	 @Post-Condition- returns attack
-	 */
-	int getAttack();
+			/**
+			 getCollision
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _collision
+			 */
+			bool getCollision();
 
-	/**
-	 getDefense
-	 @Pre-Condition- takes no arguments
-	 @Post-Condition- returns defense
-	 */
-	int getDefense();
+			/**
+			 getAlliance
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _alliance
+			 */
+			AllianceType getAlliance();
 
-	/**
-	 getBaseBehaviors
-	 @Pre-Condition- takes no arguments
-	 @Post-Condition- returns behavior
-	 */
-	DynamicArray<string>* getBaseBehaviors();
+			/**
+			 getSymbol
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _symbol
+			 */
+			string getSymbol();
 
-	/**
-	 getLocation
-	 @Pre-Condition- No input
-	 @Post-Condition- Returns _location
-	 */
-	Vector3D* getLocation();
+			/**
+			 getColor
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _color
+			 */
+			string getColor();
 
-	/**
-	 getCollision
-	 @Pre-Condition- No input
-	 @Post-Condition- Returns _collision
-	 */
-	bool getCollision();
+			/**
+			 getColor
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _gold
+			 */
+			int getGold();
 
-	/**
-	 getAlliance
-	 @Pre-Condition- No input
-	 @Post-Condition- Returns _alliance
-	 */
-	AllianceType getAlliance();
+			/**
+			 getWood
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _wood
+			 */
+			int getWood();
 
-	/**
-	 getSymbol
-	 @Pre-Condition- No input
-	 @Post-Condition- Returns _symbol
-	 */
-	string getSymbol();
+			/**
+			 getColor
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _coal
+			 */
+			int getCoal();
 
-	/**
-	 getColor
-	 @Pre-Condition- No input
-	 @Post-Condition- Returns _color
-	 */
-	string getColor();
+			/**
+			 getIron
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _iron
+			 */
+			int getIron();
 
-	/**
-	 getColor
-	 @Pre-Condition- No input
-	 @Post-Condition- Returns _gold
-	 */
-	int getGold();
+			/**
+			 setType
+			 @Pre-Condition- takes type
+			 @Post-Condition- returns void
+			 */
+			void setType(string type);
 
-	/**
-	 getWood
-	 @Pre-Condition- No input
-	 @Post-Condition- Returns _wood
-	 */
-	int getWood();
+			/**
+			 setName
+			 @Pre-Condition- takes in name to set
+			 @Post-Condition- returns void
+			 */
+			void setName(string name);
 
-	/**
-	 getColor
-	 @Pre-Condition- No input
-	 @Post-Condition- Returns _coal
-	 */
-	int getCoal();
+			/**
+			 setHealth
+			 @Pre-Condition- takes in health to set
+			 @Post-Condition- returns void
+			 */
+			void setHealth(int health);
 
-	/**
-	 getIron
-	 @Pre-Condition- No input
-	 @Post-Condition- Returns _iron
-	 */
-	int getIron();
+			/**
+			 setStamina
+			 @Pre-Condition- takes in stamina to set
+			 @Post-Condition- returns void
+			 */
+			void setStamina(int stamina);
 
-	/**
-	 setType
-	 @Pre-Condition- takes type
-	 @Post-Condition- returns void
-	 */
-	void setType(string type);
+			/**
+			 setAttack
+			 @Pre-Condition- takes in attack
+			 @Post-Condition- returns void
+			 */
+			void setAttack(int attack);
 
-	/**
-	 setName
-	 @Pre-Condition- takes in name to set
-	 @Post-Condition- returns void
-	 */
-	void setName(string name);
+			/**
+			 setDefense
+			 @Pre-Condition- takes in defense
+			 @Post-Condition- returns void
+			 */
+			void setDefense(int defense);
 
-	/**
-	 setHealth
-	 @Pre-Condition- takes in health to set
-	 @Post-Condition- returns void
-	 */
-	void setHealth(int health);
+			/**
+			 setDefense
+			 @Pre-Condition- takes in defense
+			 @Post-Condition- returns void
+			 */
+			void setBehavior(string behavior);
 
-	/**
-	 setMaximumHealth
-	 @Pre-Condition- takes in maximumHealth to set
-	 @Post-Condition- returns void
-	 */
-	void setMaximumHealth(int maximumHealth);
+			/**
+			 setLocation
+			 @Pre-Condition- takes the location to set
+			 @Post-Condition- returns nothing
+			 */
+			void setLocation(Vector3D* location);
 
-	/**
-	 setStamina
-	 @Pre-Condition- takes in stamina to set
-	 @Post-Condition- returns void
-	 */
-	void setStamina(int stamina);
+			/**
+			 setCollision
+			 @Pre-Condition- takes a boolean to set the collision
+			 @Post-Condition- returns nothing
+			 */
+			void setCollision(bool collision);
 
-	/**
-	 setMaximumStamina
-	 @Pre-Condition- takes in maximumStamina to set
-	 @Post-Condition- returns void
-	 */
-	void setMaximumStamina(int maximumStamina);
+			/**
+			 setAlliance
+			 @Pre-Condition- takes an Alliance to set the alliance
+			 @Post-Condition- returns nothing
+			 */
+			void setAlliance(AllianceType alliance);
 
-	/**
-	 setAttack
-	 @Pre-Condition- takes in attack
-	 @Post-Condition- returns void
-	 */
-	void setAttack(int attack);
-
-	/**
-	 setDefense
-	 @Pre-Condition- takes in defense
-	 @Post-Condition- returns void
-	 */
-	void setDefense(int defense);
-
-	/**
-	 setLocation
-	 @Pre-Condition- takes the location to set
-	 @Post-Condition- returns nothing
-	 */
-	void setLocation(Vector3D* location);
-
-	/**
-	 setCollision
-	 @Pre-Condition- takes a boolean to set the collision
-	 @Post-Condition- returns nothing
-	 */
-	void setCollision(bool collision);
-
-	/**
-	 setAlliance
-	 @Pre-Condition- takes an Alliance to set the alliance
-	 @Post-Condition- returns nothing
-	 */
-	void setAlliance(AllianceType alliance);
-
-	/**
-	 setSymbol
-	 @Pre-Condition- takes a string to set the symbol
-	 @Post-Condition- returns nothing
-	 */
-	void setSymbol(string symbol);
-
-	/**
-	 getBAC
-	 @Pre-Condition- No input
-	 @Post-Condition- Returns _BAC
-	 */
-	float getBAC();
-
-	/**
-	 setBAC
-	 @Pre-Condition- Takes in a float BAC
-	 @Post-Condition- Sets the BAC
-	 */
-	void setBAC(float BAC);
-
-	/**
-	 increaseBAC
-	 @Pre-Condition- no parameters;
-	 @Post-Condition- increments BAC by .05;
-	 */
-	void incrementBAC();
-
-	/*
-	 resetBAC
-	 @Pre-Condition- no parameters;
-	 @Post-Condition- sets BAC back to 0
-	 */
-	void resetBAC();
-
-	/**
-	 increaseHealth
-	 @Pre-Condition- Takes an float amount
-	 @Post-Condition- Increases health by said amount
-	 */
-	void increaseHealth(int amount);
-
-	/**
-	 increaseStamina
-	 @Pre-Condition- Takes an float amount
-	 @Post-Condition- Increases stamina by said amount
-	 */
-	void increaseStamina(int amount);
-
-	/**
-	 reduceHealth
-	 @Pre-Condition- Takes an float amount
-	 @Post-Condition- Decreases health by said amount
-	 */
-	void reduceHealth(int amount);
-
-	/*
-	 reduceHealth
-	 @Pre-Condition- Takes an float amount
-	 @Post-Condition- Decreases stamina by said amount
-	 */
-	void reduceStamina(int amount);
-
-	/**
-	 isFullyRested
-	 @Pre-Condition- no parameters
-	 @Post-Condition- returns true if healthBar and staminaBar are equal to 								MAX_HEALTH and MAX_STAMINA
-	 returns false otherwise;
-	 */
-	bool isFullyRested();
-
-	/**
-	 setColor
-	 @Pre-Condition- takes the color to set
-	 @Post-Condition- returns nothing
-	 */
-	void setColor(string color);
-
-	/**
-	 setGold
-	 @Pre-Condition- The amount to set the Actor's gold to
-	 @Post-Condition- Returns nothing
-	 */
-	void setGold(int gold);
-
-	/**
-	 setGold
-	 @Pre-Condition- The amount to set the Actor's iron to
-	 @Post-Condition- Returns nothing
-	 */
-	void setIron(int iron);
-
-	/**
-	 setCoal
-	 @Pre-Condition- The amount to set the Actor's coal to
-	 @Post-Condition- Returns nothing
-	 */
-	void setCoal(int coal);
-
-	/**
-	 setWood
-	 @Pre-Condition- The amount to set the Actor's wood to
-	 @Post-Condition- Returns nothing
-	 */
-	void setWood(int wood);
-
-	/**
-	 addGold
-	 @Pre-Condition- takes amount of gold to add
-	 @Post-Condition- returns total amount of gold
-	 */
-	int addGold(int amount);
-
-	/**
-	 resetBAC
-	 @Pre-Condition- takes amount of gold to spend;
-	 @Post-Condition- decrements gold and returns true if there is enough, returns false if not
-	 */
-	bool spendGold(int amount);
-
-	/**
-	 getEnemyAlliance
-	 @Pre-Condition- No input
-	 @Post-Condition- Returns the enemy's alliance
-	 */
-	int getEnemyAlliance();
-
-	/**
-	 setBehavior
-	 @Pre-Condition- takes in a string behavior
-	 @Post-Condition- sets _behavior to behavior
-	 */
-	void setBehavior(string behavior);
-
-	/**
-	 getBehavior
-	 @Pre-Condition- No input
-	 @Post-Condition- Returns the behavior
-	 */
-	string getBehavior();
-
-	/**
-	 getLevel
-	 @Pre-Condition- No input
-	 @Post-Condition- Returns the current level
-	 */
-	int getLevel();
-
-	/**
-	 setLevel
-	 @Pre-Condition- Takes an int of new level
-	 @Post-Condition- Sets the level to the given input
-	 */
-	void setLevel(int newLevel);
-
-	/**
-	 getExperience
-	 @Pre-Condition- No input
-	 @Post-Condition- Returns the current experience
-	 */
-	int getExperience();
-
-	/**
-	 setExperience
-	 @Pre-Condition- Takes an int of newExperience
-	 @Post-Condition- Sets the experience to the given input
-	 */
-	void setExperience(int newExperience);
-
-	/**
-	 getTotalExperienceThisLevel
-	 @Pre-Condition- No input
-	 @Post-Condition- Returns the current totalExperienceThisLevel
-	 */
-	int getTotalExperienceThisLevel();
-
-	/**
-	 setTotalExperienceThisLevel
-	 @Pre-Condition- Takes an int of newTotalExperienceThisLevel
-	 @Post-Condition- Sets the experience to the given input
-	 */
-	void setTotalExperienceThisLevel(int newTotalExperienceThisLevel);
-};
+			/**
+			 setSymbol
+			 @Pre-Condition- takes a string to set the symbol
+			 @Post-Condition- returns nothing
+			 */
+			void setSymbol(string symbol);
+	};
 }
 
 #endif

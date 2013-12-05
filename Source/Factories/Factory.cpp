@@ -29,7 +29,6 @@ namespace bammm
 		weaponParser->parseFile(weaponFilename);
 
 		JSON* weaponRoot = weaponParser->getRootNode("root");
-
 		HashMap<JSON*>* weaponRootChildren = weaponRoot->getAllChildren();
 
 		//Parse the melee weapons
@@ -44,13 +43,9 @@ namespace bammm
 		string actorFilename = "JSON/actors.json";
 		actorParser->parseFile(actorFilename);
 
-		//Parsing dwarves
 		JSON* actorRoot = actorParser->getRootNode("root");
 
 		HashMap<JSON*>* actorRootChildren = actorRoot->getAllChildren();
-
-		JSON* dwarves = actorRootChildren->getValue("dwarves");
-		this->parseToActorInfo(dwarves, "dwarf", &_actorData);
 
 		JSON* orcs = actorRootChildren->getValue("orcs");
 		this->parseToActorInfo(orcs, "orc", &_actorData);
@@ -69,6 +64,9 @@ namespace bammm
 
 		JSON* water = actorRootChildren->getValue("water");
 		this->parseToActorInfo(water, "water", &_blockData);
+
+		JSON* dwarves = actorRootChildren->getValue("dwarves");
+		this->parseToActorInfo(dwarves, "dwarf", &_actorData);
 	}
 
 	/*Actor Factory::getActor(string type, string name, int health, int stamina,
@@ -112,11 +110,11 @@ namespace bammm
 			JSON* child = rootChildren->get(i);
 
 			string name = child->getChild("name")->getStringValue();
+			int health = child->getChild("health")->getIntValue();
+			int stamina = child->getChild("stamina")->getIntValue();
 			int attack = child->getChild("attack")->getIntValue();
 			int defense = child->getChild("defense")->getIntValue();
-			string behaviorString =
-					child->getChild("behavior")->getStringValue();
-			int behaviorValue = child->getChild("behaviorValue")->getIntValue();
+			string behavior = child->getChild("behavior")->getStringValue();
 			bool collision = child->getChild("collision")->getBoolValue();
 			float x = (float) child->getChild("x")->getIntValue();
 			float y = (float) child->getChild("y")->getIntValue();
@@ -124,10 +122,14 @@ namespace bammm
 			int parsedAlliance = child->getChild("alliance")->getIntValue();
 			string symbol = child->getChild("symbol")->getStringValue();
 			string color = child->getChild("color")->getStringValue();
-			int gold = 0;
-			int coal = 0;
-			int iron = 0;
-			int wood = 0;
+			int gold = 100;
+			int coal = 100;
+			int iron = 100;
+			int birch = 100;
+			int cedar = 100;
+			int oak = 100;
+			int redwood = 100;
+			int wood = 100;
 
 			AllianceType alliance;
 			if (parsedAlliance == 0)
@@ -142,17 +144,19 @@ namespace bammm
 			{
 				alliance = AllianceType::enemy;
 			}
+//
+//			Behavior* behavior = new Behavior();
+//			behavior->addBaseBehavior(behaviorString, behaviorValue);
 
-			Behavior* behavior = new Behavior();
-			behavior->addBaseBehavior(behaviorString, behaviorValue);
+			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack,
+					defense, behavior, collision, alliance, symbol, color, gold,
+					coal, iron, wood);
 
-			ActorInfo* info = new ActorInfo(type, name, attack, defense,
-					behavior, collision, alliance, symbol, color, gold, coal,
-					iron, wood, 0); //that zero is for BAC
 			info->setLocation(new Vector3D(x, y, z));
 
 			string i_str = "" + i;
 			map->add(type + i_str, *info);
+
 			Actor* myActor = new Actor(info);
 
 			//TODO: This needs to be redone to use the factory... so we ahve to parse weapon data first?
@@ -160,6 +164,83 @@ namespace bammm
 			WeaponData weaponData(10, 2, "", "");
 			MeleeWeapon* meleeWeapon = new MeleeWeapon(weaponData);
 			myActor->setMeleeWeapon(meleeWeapon);
+
+			if (name.find("iron") != string::npos)
+			{
+				Inventory& inventory = myActor->getInventory();
+				inventory.setSlots(100);
+				for (int j = 0; j < iron; j++)
+				{
+					Item* item = new Item("Iron ore");
+					inventory.addItem(item);
+				}
+			}
+
+			if (name.find("gold") != string::npos)
+			{
+				Inventory& inventory = myActor->getInventory();
+				inventory.setSlots(100);
+				for (int j = 0; j < gold; j++)
+				{
+					Item* item = new Item("Gold");
+					inventory.addItem(item);
+				}
+			}
+
+			if (name.find("coal") != string::npos)
+			{
+				Inventory& inventory = myActor->getInventory();
+				inventory.setSlots(100);
+				for (int j = 0; j < coal; j++)
+				{
+					Item* item = new Item("Coal");
+					inventory.addItem(item);
+				}
+			}
+
+			if (name.find("birch") != string::npos)
+			{
+				Inventory& inventory = myActor->getInventory();
+				inventory.setSlots(100);
+				for (int j = 0; j < birch; j++)
+				{
+					Item* item = new Item("Birch logs");
+					inventory.addItem(item);
+				}
+			}
+
+			if (name.find("oak") != string::npos)
+			{
+				Inventory& inventory = myActor->getInventory();
+				inventory.setSlots(100);
+				for (int j = 0; j < oak; j++)
+				{
+					Item* item = new Item("Oak logs");
+					inventory.addItem(item);
+				}
+			}
+
+			if (name.find("cedar") != string::npos)
+			{
+				Inventory& inventory = myActor->getInventory();
+				inventory.setSlots(100);
+				for (int j = 0; j < cedar; j++)
+				{
+					Item* item = new Item("Cedar logs");
+					inventory.addItem(item);
+				}
+			}
+
+			if (name.find("redwood") != string::npos)
+			{
+				Inventory& inventory = myActor->getInventory();
+				inventory.setSlots(100);
+				for (int j = 0; j < redwood; j++)
+				{
+					Item* item = new Item("Redwood logs");
+					inventory.addItem(item);
+				}
+			}
 
 			_scene->addActor(myActor);
 		}
