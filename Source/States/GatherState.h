@@ -8,7 +8,7 @@
  *	Matt Witkowski
  *	Bradley Crusco
  * Description:
- * MineState header file.
+ * GatherState header file.
  *
  */
 

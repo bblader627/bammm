@@ -126,61 +126,7 @@ namespace bammm
 			return;
 		}
 		controller->input(args, deltaTime);
-		/*
-		else if (newState == "sing")
-		{
-			//sing [songname]
-			string songname;
-			if (commandString->getSize() >= 2)
-			{
-				for (unsigned int i = 1; i < commandString->getSize(); i++)
-				{
-					songname += commandString->get(i);
-				}
-			}
-			else
-			{
-				cout << "Invalid input\n";
-				doTick = false;
-			}
-		}
-		else if (newState == "brawl")
-		{
-			//how even
 
-		}
-		else if (newState == "attack")
-		{
-			//attack [actor name]
-
-		}
-		else if (newState == "drink")
-		{
-			//drink [beverage name]
-			string beverage;
-			try
-			{
-				beverage = commandString->get(1);
-			}
-			catch (exception& e)
-			{
-				cout << "Invalid beverage name.\n";
-			}
-		}
-		else
-		{
-			cout << "Invalid input\n";
-			doTick = false;
-		}
-
-
-		if (doTick)
-		{
-			State* stateToAdd = _states.getValue(newState);
-			_stateMachine.addState(stateToAdd, commandString);
-			_stateMachine.tick(deltaTime);
-		}
-		*/
 	}
 
 	string SceneManager::toString()
@@ -209,12 +155,11 @@ namespace bammm
 						(runningStates.contains(allStates.getValue("idle"))))
 					)
 			{
-				cout << "interruptable" << endl;
 				return current;
 			}
 
 		}
-
+		cout << "Sorry, all your dwarves are busy!" << endl;
 		return NULL;
 	}
 
