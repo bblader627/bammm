@@ -46,9 +46,17 @@ namespace bammm
 		JSON* actorRoot = actorParser->getRootNode("root");
 
 		HashMap<JSON*>* actorRootChildren = actorRoot->getAllChildren();
-		
+
 		JSON* orcs = actorRootChildren->getValue("orcs");
 		this->parseToActorInfo(orcs, "orc", &_actorData);
+
+		//Parse craftable item database//
+		JSONParser* craftableParser = new JSONParser();
+		string craftableFilename = "JSON/craftables.json";
+		craftableParser->parseFile(craftableFilename);
+
+		JSON* craftableRoot = craftableParser->getRootNode("root");
+
 		//===========MAP=========//
 		JSON* wall = actorRootChildren->getValue("wall");
 		this->parseToActorInfo(wall, "wall", &_blockData);
@@ -255,11 +263,11 @@ namespace bammm
 				}
 			}
 
-			if(name.find("dock") != string::npos)
+			if (name.find("dock") != string::npos)
 			{
 				Inventory& inventory = myActor->getInventory();
 				inventory.setSlots(100);
-				for(int j = 0; j < fish; j++)
+				for (int j = 0; j < fish; j++)
 				{
 					Item* item = new Item("fish", color, true);
 					inventory.addItem(item);

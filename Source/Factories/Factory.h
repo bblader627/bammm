@@ -46,6 +46,7 @@ namespace bammm
 			HashMap<ActorInfo> _mapData;
 			HashMap<WeaponData> _meleeWeaponData;
 			HashMap<WeaponData> _rangedWeaponData;
+			HashMap<Item> _craftableData;
 			SceneManager* _scene;
 
 			/*
