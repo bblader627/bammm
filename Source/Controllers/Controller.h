@@ -25,6 +25,7 @@
 #include "../States/SingState.h"
 #include "../States/CombatState.h"
 #include "../States/DamageState.h"
+#include "../States/EatState.h"
 #include "../States/MoveState.h"
 #include "../States/SearchState.h"
 #include "../States/GatherState.h"

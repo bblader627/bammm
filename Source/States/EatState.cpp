@@ -75,6 +75,11 @@ namespace bammm
 				}
 			}
 		}
+		else
+		{
+			cout << _actor->getName() << " doesn't have any " << _food << "!" << endl;
+			switchState("null");
+		}
 	}
 
 	void EatState::switchState(string nextState)
@@ -84,7 +89,7 @@ namespace bammm
 
 	string EatState::toString()
 	{
-		return "drink";
+		return "eat";
 	}
 
 	bool EatState::canEat()

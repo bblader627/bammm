@@ -46,14 +46,13 @@ int main()
 	//string sleep = "sleep";
 	validCommands.add("mine");
 	validCommands.add("drink");
-	validCommands.add("Inventory");
 	validCommands.add("brawl");
-	validCommands.add("attack");
 	validCommands.add("chop");
 	validCommands.add("fish");
 	validCommands.add("focus");
 	validCommands.add("lose");
 	validCommands.add("inventory");
+	validCommands.add("eat");
 
 	float deltaTime = 0;
 	while (playGame)
@@ -175,6 +174,8 @@ void printStory()
 			<< "The Orcs want to implement a new networking system in our fortress, but FUCK THAT! I've seen their code. \n";
 	cout
 			<< "Here, in our fortress of New York, we make our final stand against their bullshit... \n\n";
+	cout
+			<< "You have control over the actions of Bob, Jim, Joe, Phil, and Frank.\n\n";
 }
 
 DynamicArray<string>* parseInput(string input)

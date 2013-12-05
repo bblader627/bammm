@@ -10,6 +10,7 @@ States/BrawlState.cpp States/DrinkState.cpp States/MoveState.cpp \
 States/IdleState.cpp Interfaces/IStateCallback.cpp States/CombatState.cpp \
 States/SingState.cpp States/SleepState.cpp States/State.cpp States/StateMachine.cpp \
 States/DamageState.cpp States/SearchState.cpp States/GatherState.cpp \
+States/EatState.cpp \
 \
 Resources/DynamicArray.h Resources/HashMap.h Resources/HashNode.h \
 Resources/Heap.h Resources/Queue.h Resources/Stack.h Resources/Color.cpp \
