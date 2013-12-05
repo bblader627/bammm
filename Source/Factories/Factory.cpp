@@ -52,7 +52,6 @@ namespace bammm
 		//===========MAP=========//
 		JSON* wall = actorRootChildren->getValue("wall");
 		this->parseToActorInfo(wall, "wall", &_blockData);
-		cout << "wall" << endl;
 
 		JSON* buildings = actorRootChildren->getValue("buildings");
 		this->parseToActorInfo(buildings, "building", &_blockData);
@@ -62,13 +61,13 @@ namespace bammm
 
 		JSON* ore = actorRootChildren->getValue("ore");
 		this->parseToActorInfo(ore, "ore", &_blockData);
-		cout << "after ore" << endl;
+
 		JSON* water = actorRootChildren->getValue("water");
 		this->parseToActorInfo(water, "water", &_blockData);
 
 		JSON* dock = actorRootChildren->getValue("dock");
 		this->parseToActorInfo(dock, "dock", &_blockData);
-		cout << "after dock " << endl;
+
 		JSON* dwarves = actorRootChildren->getValue("dwarves");
 		this->parseToActorInfo(dwarves, "dwarf", &_actorData);
 	}
@@ -167,11 +166,8 @@ namespace bammm
 			if (type == "dwarf" || type == "orc")
 			{
 				string weaponType = child->getChild("weapon")->getStringValue();
-				cout << "thing" << endl;
-
 				MeleeWeapon* meleeWeapon = getMeleeWeapon(weaponType);
 				myActor->setMeleeWeapon(meleeWeapon);
-				cout << "myactor" << endl;
 			}
 			else
 			{
@@ -181,8 +177,6 @@ namespace bammm
 				MeleeWeapon* meleeWeapon = new MeleeWeapon(weaponData);
 				myActor->setMeleeWeapon(meleeWeapon);
 			}
-
-			cout << "before name stuff" << endl;
 
 			if (name.find("iron") != string::npos)
 			{
@@ -271,7 +265,6 @@ namespace bammm
 					inventory.addItem(item);
 				}
 			}
-			cout << "after name shit" << endl;
 
 			_scene->addActor(myActor);
 		}
