@@ -59,6 +59,7 @@ namespace bammm
 
 	void GatherState::breakdown()
 	{
+		cout << _actor->getName() << " is finished gathering!" << "\n";
 	}
 
 	void GatherState::tick(float deltaTime)
@@ -135,10 +136,6 @@ namespace bammm
 				_actor->reduceStamina(1);
 
 				string coloredName = Color::colorText(removedItem->getName(), removedItem->getColor());
-				cout << _actor->getName()
-						<< " lifts his pickaxe, and swings it at the " << typeName << ". " << "\n";
-				cout << _actor->getName()
-						<< " successfully gathers some " << coloredName << "\n";
 
 				canPickup = _actor->getInventory().addItem(removedItem);
 				cout << _actor->getName()
@@ -152,6 +149,8 @@ namespace bammm
 					cout << _actor->getName()
 						<< " has a full inventory, and drops " << coloredName
 						<< " on the ground.\n";
+					_amount = 0;
+					switchState("null");
 				}
 				_amount--;
 				}
@@ -161,10 +160,9 @@ namespace bammm
 		}
 		else
 		{
-			cout << _actor->getName() << " is finished gathering!" << "\n";
+			//cout << _actor->getName() << " is finished gathering!" << "\n";
 			_amount= 0;
-			cout << _actor->getName() << " is finished mining!" << "\n";
-			_amount = 0;
+
 			switchState("null");
 		}
 	}

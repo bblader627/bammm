@@ -23,7 +23,7 @@ namespace bammm
 	SceneManager::SceneManager() :
 			_sceneGraph(SCENE_X, SCENE_Y, SCENE_Z)
 	{
-
+		_focus = NULL;
 	}
 
 	SceneManager::~SceneManager()
@@ -130,13 +130,51 @@ namespace bammm
 	void SceneManager::input(DynamicArray<string>* args, float deltaTime)
 	{
 		string newState = args->get(0);
-		PlayerController* controller = this->findController(newState);
 
-		if (controller == NULL)
+		if (newState == "focus")
 		{
-			return;
+			if (args->getSize() == 2)
+			{
+				_focus = getControllerByActor(args->get(1));
+				return;
+			}
+			else
+			{
+				cout << "Invalid arguments" << endl;
+			}
+		}
+		else if (newState == "lose")
+		{
+			if (args->getSize() == 2 && args->get(1) == "focus")
+			{
+				_focus = NULL;
+				return;
+			}
+			else
+			{
+				cout << "Invalid arguments" << endl;
+			}
 		}
 
+		PlayerController* controller;
+
+		if (_focus == NULL)
+		{
+			controller = this->findController(newState);
+			if (controller == NULL)
+			{
+				return;
+			}
+		}
+		else
+		{
+			controller = _focus;
+			while (controller->runningStates().getSize()>0)
+			{
+				controller->runningStates().remove(0);
+			}
+		}
+		
 		controller->input(args, deltaTime);
 	}
 
@@ -168,6 +206,7 @@ namespace bammm
 							|| (runningStates.contains(
 									allStates.getValue("idle")))))
 			{
+				runningStates.remove(0);
 				return current;
 			}
 
@@ -176,4 +215,21 @@ namespace bammm
 
 		return NULL;
 	}
+
+	PlayerController* SceneManager::getControllerByActor(string name)
+	{
+		PlayerController* current;
+		for (unsigned int i = 0; i < _allPlayerControllers.getSize(); i++)
+		{
+			current = _allPlayerControllers.get(i);
+			if (current->getActor()->getName() == name)
+			{
+				cout << "Focused on " << name << "!" << endl;
+				return current;
+			}
+		}
+		cout << "A Dwarf by the name of " << name << " was not found." << endl;
+		return NULL;
+	}
+
 }
