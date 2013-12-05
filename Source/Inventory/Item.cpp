@@ -27,36 +27,41 @@ namespace bammm
 		_description = "L shaped thing";
 		_color = "white";
 		_amount = 0;
+		_stackable = false;
 	}
 
-	Item::Item(string name)
+	Item::Item(string name, bool stackable)
 	{
 		_name = name;
 		_color = "white";
 		_description = "No description";
 		_amount = 1;
+		_stackable = stackable;
 	}
 
-	Item::Item(string name, string color)
+	Item::Item(string name, string color, bool stackable)
 	{
 		_name = name;
 		_color = color;
 		_description = "No description";
 		_amount = 1;
+		_stackable = stackable;
 	}
 
-	Item::Item(string name, int amount, string color)
+	Item::Item(string name, int amount, string color, bool stackable)
 	{
 		_name = name;
 		_color = color;
 		_amount = amount;
 		_description = "No description";
+		_stackable = stackable;
 	}
 	
-	Item::Item(string name, int amount)
+	Item::Item(string name, int amount, bool stackable)
 	{
 		_name = name;
 		_amount = amount;
+		_stackable = stackable;
 	}
 
 	Item::~Item()
@@ -116,5 +121,22 @@ namespace bammm
 		}
 
 		return false;
+	}
+
+	bool Item::getStackable()
+	{
+		return _stackable;
+	}
+	
+	void Item::setStackable(bool stackable)
+	{
+		_stackable = stackable;
+	}
+
+	Item* Item::getStackableCopy()
+	{
+		Item* newItem = new Item(_name, 1, _color, _stackable);
+		newItem->setDescription(_description);
+		return newItem;
 	}
 }

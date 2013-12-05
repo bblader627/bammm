@@ -29,15 +29,16 @@ namespace bammm
 			string _name;
 			string _color;
 			string _description;
+			bool _stackable;
 			//IAction* _action;
 			uint _amount;
 
 		public:
 			Item();
-			Item(string name);
-			Item(string name, string color);
-			Item(string name, int amount, string color);
-			Item(string name, int amount);
+			Item(string name, bool stackable);
+			Item(string name, string color, bool stackable);
+			Item(string name, int amount, string color, bool stackable);
+			Item(string name, int amount, bool stackable);
 			virtual ~Item();
 
 			/**
@@ -102,6 +103,27 @@ namespace bammm
 			 Post-Condition- Gets the description of the item
 			 */
 			string getDescription();
+			
+			/**
+			 getDescription
+			 Pre-Condition- None
+			 Post-Condition- Checks if the item is stackable
+			 */
+			bool getStackable();
+			
+			/**
+			 setStackable
+			 Pre-Condition- A bool for the new stackable setting
+			 Post-Condition- Sets stackable
+			 */
+			void setStackable(bool stackable);
+			
+			/**
+			 setStackable
+			 Pre-Condition- None
+			 Post-Condition- Returns a copy of this item with amount = 1
+			 */
+			Item* getStackableCopy();
 			
 			/**
 			 operator==

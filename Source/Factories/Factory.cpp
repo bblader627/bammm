@@ -184,7 +184,7 @@ namespace bammm
 				inventory.setSlots(100);
 				for (int j = 0; j < iron; j++)
 				{
-					Item* item = new Item("iron", color);
+					Item* item = new Item("iron", color, true);
 					inventory.addItem(item);
 				}
 			}
@@ -195,7 +195,7 @@ namespace bammm
 				inventory.setSlots(100);
 				for (int j = 0; j < gold; j++)
 				{
-					Item* item = new Item("gold", color);
+					Item* item = new Item("gold", color, true);
 					inventory.addItem(item);
 				}
 			}
@@ -206,7 +206,7 @@ namespace bammm
 				inventory.setSlots(100);
 				for (int j = 0; j < coal; j++)
 				{
-					Item* item = new Item("coal", color);
+					Item* item = new Item("coal", color, true);
 					inventory.addItem(item);
 				}
 			}
@@ -217,7 +217,7 @@ namespace bammm
 				inventory.setSlots(100);
 				for (int j = 0; j < birch; j++)
 				{
-					Item* item = new Item("wood", color);
+					Item* item = new Item("wood", color, true);
 					inventory.addItem(item);
 				}
 			}
@@ -228,7 +228,7 @@ namespace bammm
 				inventory.setSlots(100);
 				for (int j = 0; j < oak; j++)
 				{
-					Item* item = new Item("wood", color);
+					Item* item = new Item("wood", color, true);
 					inventory.addItem(item);
 				}
 			}
@@ -239,7 +239,7 @@ namespace bammm
 				inventory.setSlots(100);
 				for (int j = 0; j < cedar; j++)
 				{
-					Item* item = new Item("wood", color);
+					Item* item = new Item("wood", color, true);
 					inventory.addItem(item);
 				}
 			}
@@ -250,7 +250,7 @@ namespace bammm
 				inventory.setSlots(100);
 				for (int j = 0; j < redwood; j++)
 				{
-					Item* item = new Item("wood", color);
+					Item* item = new Item("wood", color, true);
 					inventory.addItem(item);
 				}
 			}
@@ -261,7 +261,7 @@ namespace bammm
 				inventory.setSlots(100);
 				for(int j = 0; j < fish; j++)
 				{
-					Item* item = new Item("fish", color);
+					Item* item = new Item("fish", color, true);
 					inventory.addItem(item);
 				}
 			}

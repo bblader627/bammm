@@ -34,13 +34,32 @@ namespace bammm
 
 	bool Inventory::addItem(Item* item)
 	{
-		if(_inventory.getSize() >= _slots)
+		bool isStackable = item->getStackable();
+		bool containsNewItem = contains(*item);
+		bool canStore = _inventory.getSize() < _slots;
+
+		//Can put new item
+		if(canStore && !isStackable)
 		{
-			return false;
+			_inventory.add(item);
+			return true;
+		}
+		//Can put new stackable
+		else if(isStackable && !containsNewItem && canStore)
+		{
+			_inventory.add(item);
+			return true;
+		}
+		else if(isStackable && containsNewItem)
+		{
+			int index = _inventory.getInventoryIndex(item);
+			cout << "addItem: " << index << "\n";
+			Item* foundItem = _inventory.get(index);
+			foundItem->setAmount(foundItem->getAmount() + item->getAmount());
+			delete item;
 		}
 		
-		_inventory.add(item);
-		return true;
+		return false;
 	}
 
 	Item* Inventory::removeItem(Item& item)
@@ -48,10 +67,20 @@ namespace bammm
 		uint usedSlots = _inventory.getSize();
 		for(uint i = 0; i < usedSlots; i++)
 		{
+			cout << "removeItem: " << i << "\n";
 			Item currentItem = *_inventory.get(i);
 			if(currentItem == item)
 			{
-				return _inventory.remove(i);
+				//Return last stackable/item
+				if(currentItem.getAmount() == 1)
+				{
+					return _inventory.remove(i);
+				}
+				else
+				{
+					currentItem.setAmount(currentItem.getAmount() - 1);
+					return currentItem.getStackableCopy();
+				}
 			}
 		}
 
@@ -64,6 +93,7 @@ namespace bammm
 		
 		for(uint i = 0; i < usedSlots; i++)
 		{
+			cout << "contains: " << i << "\n";
 			Item currentItem = *_inventory.get(i);
 			if(currentItem == item)
 			{
@@ -72,6 +102,23 @@ namespace bammm
 		}
 
 		return false;
+	}
+	
+	int Inventory::getInventoryIndex(Item& item)
+	{
+		uint usedSlots = _inventory.getSize();
+		
+		for(uint i = 0; i < usedSlots; i++)
+		{
+			cout << "inventoryIndex: " << i << "\n";
+			Item currentItem = *_inventory.get(i);
+			if(currentItem == item)
+			{
+				return i;	
+			}
+		}
+		cout << "Does not contain: " << item.getName() << "\n";
+		return -1;
 	}
 
 	bool Inventory::contains(Item& item, uint amount)
@@ -82,7 +129,8 @@ namespace bammm
 		{
 			if(contains(item))
 			{
-				count++;
+				int index = getInventoryIndex(item);
+				count += _inventory.get(index)->getAmount();
 			}
 		}
 
