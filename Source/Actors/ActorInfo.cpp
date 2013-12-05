@@ -21,10 +21,11 @@ namespace bammm
 	{
 		_type = "none";
 		_name = "n/a";
-		_health = _maximumHealth;
-		_stamina = _maximumStamina;
+		_health = 10;
+		_stamina = 5;
 		_attack = 10;
 		_defense = 10;
+		_behavior = "drink";
 		_collision = true;
 		_alliance = AllianceType::ally;
 		_symbol = "?";
@@ -33,25 +34,19 @@ namespace bammm
 		_iron = 100;
 		_coal = 100;
 		_wood = 100;
-		_BAC = 0;
-		_behaviors = new Behavior();
-		_level = 1;
-		_experience = 0;
-		_totalExperienceThisLevel = 1;
 	}
 
-	ActorInfo::ActorInfo(string type, string name, int attack, int defense,
-			Behavior *behaviors, bool collision, AllianceType alliance,
-			string symbol, string color, int gold, int coal, int iron, int wood,
-			float BAC)
+	ActorInfo::ActorInfo(string type, string name, int health, int stamina,
+			int attack, int defense, string behavior, bool collision,
+			AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood)
 	{
 		_type = type;
 		_name = name;
-		_health = _maximumHealth;
-		_stamina = _maximumStamina;
+		_health = health;
+		_stamina = stamina;
 		_attack = attack;
 		_defense = defense;
-		_behaviors = behaviors;
+		_behavior = behavior;
 		_collision = collision;
 		_alliance = alliance;
 		_symbol = symbol;
@@ -60,10 +55,6 @@ namespace bammm
 		_coal = coal;
 		_iron = iron;
 		_wood = wood;
-		_BAC = BAC;
-		_level = 1;
-		_experience = 0;
-		_totalExperienceThisLevel = 1;
 	}
 
 	string ActorInfo::getType()
@@ -76,19 +67,9 @@ namespace bammm
 		return _health;
 	}
 
-	int ActorInfo::getMaximumHealth()
-	{
-		return _maximumHealth;
-	}
-
 	int ActorInfo::getStamina()
 	{
 		return _stamina;
-	}
-
-	int ActorInfo::getMaximumStamina()
-	{
-		return _maximumStamina;
 	}
 
 	int ActorInfo::getAttack()
@@ -106,9 +87,9 @@ namespace bammm
 		return _name;
 	}
 
-	DynamicArray<string>* ActorInfo::getBaseBehaviors()
+	string ActorInfo::getBehavior()
 	{
-		return _behaviors->getBaseBehaviors();
+		return _behavior;
 	}
 
 	Vector3D* ActorInfo::getLocation()
@@ -171,19 +152,9 @@ namespace bammm
 		_health = health;
 	}
 
-	void ActorInfo::setMaximumHealth(int maximumHealth)
-	{
-		_maximumHealth = maximumHealth;
-	}
-
 	void ActorInfo::setStamina(int stamina)
 	{
 		_stamina = stamina;
-	}
-
-	void ActorInfo::setMaximumStamina(int maximumStamina)
-	{
-		_maximumStamina = maximumStamina;
 	}
 
 	void ActorInfo::setAttack(int attack)
@@ -194,6 +165,11 @@ namespace bammm
 	void ActorInfo::setDefense(int defense)
 	{
 		_defense = defense;
+	}
+
+	void ActorInfo::setBehavior(string behavior)
+	{
+		_behavior = behavior;
 	}
 
 	void ActorInfo::setLocation(Vector3D* location)
@@ -214,177 +190,5 @@ namespace bammm
 	void ActorInfo::setSymbol(string symbol)
 	{
 		_symbol = symbol;
-	}
-
-	float ActorInfo::getBAC()
-	{
-		return _BAC;
-	}
-
-	void ActorInfo::setBAC(float BAC)
-	{
-		_BAC = BAC;
-	}
-
-	void ActorInfo::incrementBAC()
-	{
-		_BAC += .01;
-	}
-
-	void ActorInfo::resetBAC()
-	{
-		_BAC = 0;
-	}
-
-	void ActorInfo::increaseHealth(int amount)
-	{
-		if (_health >= _maximumHealth)
-		{
-			_health = _maximumHealth;
-			return;
-		}
-		else
-		{
-			_health += amount;
-		}
-	}
-
-	void ActorInfo::increaseStamina(int amount)
-	{
-		if (_stamina >= _maximumStamina)
-		{
-			_stamina = _maximumStamina;
-			return;
-		}
-		else
-		{
-			_stamina += amount;
-		}
-	}
-
-	void ActorInfo::reduceHealth(int amount)
-	{
-		if (_health > 0)
-		{
-			_health -= amount;
-		}
-		else
-		{
-			_health = 0;
-			return;
-		}
-	}
-
-	void ActorInfo::reduceStamina(int amount)
-	{
-		if (_stamina > 0)
-		{
-			_stamina -= amount;
-		}
-		else
-		{
-			_stamina = 0;
-		}
-	}
-
-	bool ActorInfo::isFullyRested()
-	{
-		if (_health == _maximumHealth && _stamina == _maximumStamina)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	void ActorInfo::setColor(string color)
-	{
-		_color = color;
-	}
-
-	void ActorInfo::setGold(int gold)
-	{
-		_gold = gold;
-	}
-
-	void ActorInfo::setIron(int iron)
-	{
-		_iron = iron;
-	}
-
-	void ActorInfo::setCoal(int coal)
-	{
-		_coal = coal;
-	}
-
-	void ActorInfo::setWood(int wood)
-	{
-		_wood = wood;
-	}
-
-	int ActorInfo::addGold(int amount)
-	{
-		_gold += amount;
-		return _gold;
-	}
-
-	bool ActorInfo::spendGold(int amount)
-	{
-		if (_gold < amount)
-		{
-			return false;
-		}
-		else
-		{
-			_gold -= amount;
-			return true;
-		}
-	}
-
-	int ActorInfo::getEnemyAlliance()
-	{
-		return _alliance * -1;
-	}
-
-	void ActorInfo::setBehavior(string behavior)
-	{
-		_behavior = behavior;
-	}
-
-	string ActorInfo::getBehavior()
-	{
-		return _behavior;
-	}
-
-	int ActorInfo::getLevel()
-	{
-		return _level;
-	}
-
-	void ActorInfo::setLevel(int newLevel)
-	{
-		_level = newLevel;
-	}
-
-	int ActorInfo::getExperience()
-	{
-		return _experience;
-	}
-
-	void ActorInfo::setExperience(int newExperience)
-	{
-		_experience = newExperience;
-	}
-
-	int ActorInfo::getTotalExperienceThisLevel()
-	{
-		return _totalExperienceThisLevel;
-	}
-
-	void ActorInfo::setTotalExperienceThisLevel(int newTotalExperienceThisLevel)
-	{
-		_totalExperienceThisLevel = newTotalExperienceThisLevel;
 	}
 }

@@ -31,6 +31,8 @@
 #include "../Weapons/RangedWeapon.h"
 #include "../Weapons/WeaponData.h"
 #include "../Behavior/Behavior.h"
+#include "../Inventory/Inventory.h"
+#include "../Inventory/Item.h"
 
 using namespace std;
 
@@ -86,14 +88,14 @@ namespace bammm
 			 @Pre-Condition- Takes in a string type
 			 @Post-Condition- Returns a MeleeWeapon
 			 */
-			MeleeWeapon getMeleeWeapon(string type);
+			MeleeWeapon* getMeleeWeapon(string type);
 
 			/*
 			 getRangedWeapon
 			 @Pre-Condition- Takes in a string type
 			 @Post-Condition- Returns a RangedWeapon
 			 */
-			RangedWeapon getRangedWeapon(string type);
+			RangedWeapon* getRangedWeapon(string type);
 
 			/*
 			 setup

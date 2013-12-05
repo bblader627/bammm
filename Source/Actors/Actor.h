@@ -33,18 +33,44 @@ namespace bammm
 	{
 		protected:
 			float _rotation;
+			string _name;
+			string _type;
+			string _behavior;
 			Vector3D *_velocity;
 			Vector3D *_location;
 
+			int _health;
+			int _stamina;
+			int _maximumHealth;
+			int _maximumStamina;
+
+			int _attack;
+			int _defense;
+
+			int _gold;
+			int _coal;
+			int _iron;
+			int _wood;
+			float _BAC;
+
 			bool _collision;
+			AllianceType _alliance;
+			string _symbol;
+			string _color;
 
 			MeleeWeapon *_meleeWeapon;
 			RangedWeapon *_rangedWeapon;
 			Inventory _inventory;
-			ActorInfo *_stats;
+
+			int _level;
+			int _experience;
+			int _totalExperienceThisLevel;
 
 		public:
 			Actor();
+			Actor(string name, string type, AllianceType alliance);
+			Actor(string type, string name, int health, int stamina, int attack,
+					int defense, string behavior, AllianceType alliance);
 			Actor(ActorInfo* info);
 
 			/**
@@ -81,13 +107,6 @@ namespace bammm
 			 @Post-Condition- returns void
 			 */
 			void setType(string type);
-
-			/**
-			 getBehavior
-			 @Pre-Condition- No input
-			 @Post-Condition- Returns behavior
-			 */
-			string getBehavior();
 
 			/**
 			 setBehavior
@@ -144,34 +163,6 @@ namespace bammm
 			 @Post-Condition- Returns nothing
 			 */
 			void setWood(int wood);
-
-			/**
-			 getMaximumHealth
-			 @Pre-Condition- takes no arguments
-			 @Post-Condition- returns maximumHealth
-			 */
-			int getMaximumHealth();
-
-			/**
-			 setMaximumHealth
-			 @Pre-Condition- takes in maximumHealth to set
-			 @Post-Condition- returns void
-			 */
-			void setMaximumHealth(int maximumHealth);
-
-			/**
-			 getMaximumStamina
-			 @Pre-Condition- takes no arguments
-			 @Post-Condition- returns maximumStamina
-			 */
-			int getMaximumStamina();
-
-			/**
-			 setMaximumStamina
-			 @Pre-Condition- takes in maximumStamina to set
-			 @Post-Condition- returns void
-			 */
-			void setMaximumStamina(int maximumStamina);
 
 			/**
 			 increaseHealth
@@ -294,11 +285,11 @@ namespace bammm
 			string getType();
 
 			/**
-			 getBaseBehaviors
-			 @Pre-Condition- takes no arguments
-			 @Post-Condition- returns behavior
+			 getBehavior
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns _behavior
 			 */
-			DynamicArray<string>* getBaseBehaviors();
+			string getBehavior();
 
 			/**
 			 getVelocity
@@ -323,10 +314,10 @@ namespace bammm
 
 			/**
 			 setHealth
-			 @Pre-Condition- Takes in an int newHealth
-			 @Post-Condition- Sets _health to newHealth
+			 @Pre-Condition- takes in health to set
+			 @Post-Condition- returns void
 			 */
-			void setHealth(int newHealth);
+			void setHealth(int health);
 
 			/**
 			 getStamina
@@ -396,7 +387,7 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns _alliance
 			 */
-			AllianceType getAlliance();
+			int getAlliance();
 
 			/**
 			 getSymbol
@@ -488,6 +479,34 @@ namespace bammm
 			 @Post-Condition- Sets the experience to the given input
 			 */
 			void setTotalExperienceThisLevel(int newTotalExperienceThisLevel);
+
+			/**
+			 getMaximumHealth
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns maximumHealth
+			 */
+			int getMaximumHealth();
+
+			/**
+			 setMaximumHealth
+			 @Pre-Condition- takes in maximumHealth to set
+			 @Post-Condition- returns void
+			 */
+			void setMaximumHealth(int maximumHealth);
+
+			/**
+			 getMaximumStamina
+			 @Pre-Condition- takes no arguments
+			 @Post-Condition- returns maximumStamina
+			 */
+			int getMaximumStamina();
+
+			/**
+			 setMaximumStamina
+			 @Pre-Condition- takes in maximumStamina to set
+			 @Post-Condition- returns void
+			 */
+			void setMaximumStamina(int maximumStamina);
 
 			/**
 			 toString
