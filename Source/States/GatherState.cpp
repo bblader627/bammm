@@ -43,7 +43,6 @@ namespace bammm
 
 	void GatherState::setup()
 	{
-		cout << "gather!" << endl;
 		_successChance = 30;
 	}
 
@@ -151,19 +150,31 @@ namespace bammm
 
 		if(_amount > 0)
 		{
-			Item gold("Gold");
+			Item gold("gold");
 			if(_target->getInventory().contains(gold))
 			{
 				canMine++;
 			}
 
-			Item iron("Iron ore");
+			Item iron("iron");
 			if(_target->getInventory().contains(iron))
 			{
 				canMine++;
 			}
 
-			Item coal("Coal");
+			Item coal("coal");
+			if(_target->getInventory().contains(coal))
+			{
+				canMine++;
+			}
+
+			Item wood("wood");
+			if(_target->getInventory().contains(coal))
+			{
+				canMine++;
+			}
+
+			Item fish("fish");
 			if(_target->getInventory().contains(coal))
 			{
 				canMine++;
