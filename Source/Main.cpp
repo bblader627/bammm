@@ -3,9 +3,9 @@
 #include "SceneManager/SceneManager.h"
 #include "Controllers/PlayerController.h"
 #include "Factories/Factory.h"
+#include "Resources/Constant.h"
 #include <unistd.h>
 #include <random>
-#include <exception>
 #include "LevelingSystem/LevelingSystem.h"
 
 using namespace bammm;
@@ -38,7 +38,7 @@ int main()
 	bool playGame = true;
 	bool doTick = true;
 	string command;
-	unsigned int loopCounter = 0;
+	uint loopCounter = 0;
 
 	DynamicArray<string>* input = new DynamicArray<string>();
 
@@ -136,7 +136,7 @@ int main()
 		}
 		else	//looping
 		{
-			unsigned int pause = 1;
+			uint pause = 1;
 			sleep(pause);
 			loopCounter--;
 			cout << sceneManager.getSceneGraph().toString() << "\n";
@@ -186,7 +186,7 @@ DynamicArray<string>* parseInput(string input)
 	string builder = "";
 	DynamicArray<string>* result = new DynamicArray<string>();
 
-	for (unsigned int i = 0; i < input.size(); i++)
+	for (uint i = 0; i < input.size(); i++)
 	{
 		current = input[i];
 

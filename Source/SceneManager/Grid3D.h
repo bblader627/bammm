@@ -441,7 +441,7 @@ namespace bammm
 			for (uint cellIndex = 0; cellIndex < cell->getSize(); cellIndex++)
 			{
 				T actor = cell->get(cellIndex);
-				//if (actor->toString() == target)
+				
 				if (actor->toString().find(target)!=string::npos)
 				{
 					return actor;
@@ -467,6 +467,7 @@ namespace bammm
 					float distance = getDistance(*unit->getLocation(), *actor->getLocation());
 					if(distance < minDistance && !(unit == actor))
 					{
+						minDistance = distance;
 						closest = actor;
 					}
 				}
