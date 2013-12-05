@@ -46,7 +46,7 @@ int main()
 	//string sleep = "sleep";
 	validCommands.add("mine");
 	validCommands.add("drink");
-	validCommands.add("sing");
+	validCommands.add("Inventory");
 	validCommands.add("brawl");
 	validCommands.add("attack");
 	validCommands.add("chop");
