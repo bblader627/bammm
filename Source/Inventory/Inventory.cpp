@@ -34,6 +34,7 @@ namespace bammm
 
 	bool Inventory::addItem(Item* item)
 	{
+		bool canAdd = false;
 		bool isStackable = item->getStackable();
 		bool containsNewItem = contains(*item);
 		bool canStore = _inventory.getSize() < _slots;
@@ -42,48 +43,51 @@ namespace bammm
 		if(canStore && !isStackable)
 		{
 			_inventory.add(item);
-			return true;
+			canAdd = true;
 		}
 		//Can put new stackable
 		else if(isStackable && !containsNewItem && canStore)
 		{
 			_inventory.add(item);
-			return true;
+			canAdd = true;
 		}
+		//Add to previous item
 		else if(isStackable && containsNewItem)
 		{
-			int index = _inventory.getInventoryIndex(item);
-			cout << "addItem: " << index << "\n";
+			int index = getInventoryIndex(*item);
 			Item* foundItem = _inventory.get(index);
 			foundItem->setAmount(foundItem->getAmount() + item->getAmount());
 			delete item;
+			canAdd = true;
 		}
-		
-		return false;
+
+		return canAdd;
 	}
 
 	Item* Inventory::removeItem(Item& item)
 	{
+		cout << "Start of removeItem\n";
 		uint usedSlots = _inventory.getSize();
 		for(uint i = 0; i < usedSlots; i++)
 		{
-			cout << "removeItem: " << i << "\n";
 			Item currentItem = *_inventory.get(i);
 			if(currentItem == item)
 			{
 				//Return last stackable/item
 				if(currentItem.getAmount() == 1)
 				{
+					cout << "End of removeItem amount 1";
 					return _inventory.remove(i);
 				}
 				else
 				{
 					currentItem.setAmount(currentItem.getAmount() - 1);
 					return currentItem.getStackableCopy();
+					cout << "End of removeItem copy";
 				}
 			}
 		}
-
+		cout << "End of removeItem";
 		return NULL;
 	}
 
@@ -93,7 +97,6 @@ namespace bammm
 		
 		for(uint i = 0; i < usedSlots; i++)
 		{
-			cout << "contains: " << i << "\n";
 			Item currentItem = *_inventory.get(i);
 			if(currentItem == item)
 			{
@@ -110,14 +113,12 @@ namespace bammm
 		
 		for(uint i = 0; i < usedSlots; i++)
 		{
-			cout << "inventoryIndex: " << i << "\n";
 			Item currentItem = *_inventory.get(i);
 			if(currentItem == item)
 			{
 				return i;	
 			}
 		}
-		cout << "Does not contain: " << item.getName() << "\n";
 		return -1;
 	}
 
