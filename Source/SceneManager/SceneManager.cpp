@@ -60,7 +60,6 @@ namespace bammm
 	{
 		_allActors.removeElement(actor);
 		_sceneGraph.remove(actor->getLocation(), actor);
-		cout << "Removing: " << actor->getName() << "\n";
 		return actor;
 	}
 
@@ -157,7 +156,9 @@ namespace bammm
 		}
 		else if (newState == "inventory" && _focus == NULL)
 		{
-			cout << "Invalid input: Must be focused on a Dwarf to use this command." << endl;
+			cout
+					<< "Invalid input: Must be focused on a Dwarf to use this command."
+					<< endl;
 			return;
 		}
 
@@ -174,12 +175,12 @@ namespace bammm
 		else
 		{
 			controller = _focus;
-			while (controller->runningStates().getSize()>0)
+			while (controller->runningStates().getSize() > 0)
 			{
 				controller->runningStates().remove(0);
 			}
 		}
-		
+
 		controller->input(args, deltaTime);
 	}
 
