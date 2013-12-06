@@ -97,10 +97,10 @@ namespace bammm
 			string name = allChildren->get(i)->getChild("name")->getStringValue();
 			int amount = allChildren->get(i)->getChild("amount")->getIntValue();
 
-			Item* item = new Item(name, true);
+			Item item(name, true);
 			while (amount > 0)
 			{
-				_actor->getInventory().removeItem(*item);
+				_actor->getInventory().removeItem(item);
 				amount--;
 			}
 		}
@@ -121,9 +121,9 @@ namespace bammm
 
 		for (unsigned int i = 0; i < allChildren->getSize(); i++)
 		{
-			Item* item = new Item(allChildren->get(i)->getChild("name")->getStringValue(), true);
+			Item item(allChildren->get(i)->getChild("name")->getStringValue(), true);
 			int amount = allChildren->get(i)->getChild("amount")->getIntValue();
-			if (_actor->getInventory().contains(*item, amount))
+			if (_actor->getInventory().contains(item, amount))
 			{
 				continue;
 			}

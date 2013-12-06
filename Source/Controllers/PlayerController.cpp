@@ -231,12 +231,6 @@ namespace bammm
 		{
 			cout << "Invalid command" << endl;
 		}
-
-		delete oreType;
-		delete fishType;
-		delete foodTypes;
-		delete woodType;
-		delete craftableItems;
 	}
 
 	void PlayerController::printOptions()

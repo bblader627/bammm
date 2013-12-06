@@ -282,5 +282,4 @@ namespace bammm
 	{
 		return _craftables;
 	}
-
 }
