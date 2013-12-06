@@ -97,7 +97,8 @@ namespace bammm
 				}
 				else if (typeName.find("redwood") != string::npos
 						|| typeName.find("oak") != string::npos
-						|| typeName.find("birch") != string::npos)
+						|| typeName.find("birch") != string::npos
+						|| typeName.find("cedar") != string::npos)
 				{
 					Item wood("wood", _target->getColor(), true);
 					removedItem = _target->getInventory().removeItem(wood);
