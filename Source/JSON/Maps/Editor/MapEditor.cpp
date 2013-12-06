@@ -21,6 +21,42 @@ namespace bammm
 		_cursorZ = 0;
 		_cursorX = 0;
 		_cursorY = 0;
+
+		_grass.setSymbol(".");
+		_grass.addColor("green");
+
+		_water.setSymbol("~");
+		_water.removeColor("green");
+		_water.addColor("blue");
+		
+		_tree.setSymbol("+");
+		_tree.addColor("red");
+		_tree.addColor("black");
+		_tree.addColor("blue");
+		
+		_wall.setSymbol("#");
+		_wall.removeColor("green");
+		_wall.addColor("black");
+		_wall.addColor("yellow");
+		
+		_bridge.setSymbol("=");
+		_bridge.removeColor("green");
+		_bridge.addColor("yellow");
+		
+		_mine.setSymbol("^");
+		_mine.removeColor("green");
+		_mine.addColor("white");
+		_mine.addColor("yellow");
+		_mine.addColor("black");
+		
+		_pub.setSymbol("P");
+		_pub.removeColor("green");
+		_pub.addColor("purple");
+		
+		_inn.setSymbol("I");
+		_inn.removeColor("green");
+		_inn.addColor("purple");
+
 	}
 
 	MapEditor::~MapEditor()
@@ -62,16 +98,16 @@ namespace bammm
 		_y = y;
 		_z = z;
 
-		_grid = new char**[_y];
+		_grid = new TerrainSquare**[_y];
 		for (int i = 0; i < _y; i++)
 		{
-			_grid[i] = new char*[_x];
+			_grid[i] = new TerrainSquare*[_x];
 			for (int j = 0; j < _x; j++)
 			{
-				_grid[i][j] = new char[_z];
+				_grid[i][j] = new TerrainSquare[_z];
 				for (int k = 0; k < _z; k++)
 				{
-					_grid[i][j][k] = '.';
+					_grid[i][j][k] = _grass;
 				}
 			}
 		}
@@ -162,31 +198,31 @@ namespace bammm
 			}
 			else if (convertedChoice == '1')
 			{
-				addItem(_cursorX, _cursorY, _cursorZ, '~');
+				addItem(_cursorX, _cursorY, _cursorZ, _water);
 			}
 			else if (convertedChoice == '2')
 			{
-				addItem(_cursorX, _cursorY, _cursorZ, '#');
+				addItem(_cursorX, _cursorY, _cursorZ, _wall);
 			}
 			else if (convertedChoice == '3')
 			{
-				addItem(_cursorX, _cursorY, _cursorZ, 'F');
+				addItem(_cursorX, _cursorY, _cursorZ, _mine);
 			}
 			else if (convertedChoice == '4')
 			{
-				addItem(_cursorX, _cursorY, _cursorZ, 'A');
+				addItem(_cursorX, _cursorY, _cursorZ, _bridge);
 			}
 			else if (convertedChoice == '5')
 			{
-				addItem(_cursorX, _cursorY, _cursorZ, 'G');
+				addItem(_cursorX, _cursorY, _cursorZ, _tree);
 			}
 			else if (convertedChoice == '6')
 			{
-				addItem(_cursorX, _cursorY, _cursorZ, '^');
+				addItem(_cursorX, _cursorY, _cursorZ, _pub);
 			}
 			else if (convertedChoice == '7')
 			{
-				addItem(_cursorX, _cursorY, _cursorZ, 'S');
+				addItem(_cursorX, _cursorY, _cursorZ, _inn);
 			}
 		}
 
@@ -195,10 +231,10 @@ namespace bammm
 
 	void MapEditor::removeItem(int x, int y, int z)
 	{
-		_grid[y][x][z] = '.';
+		_grid[y][x][z] = _grass;
 	}
 
-	void MapEditor::addItem(int x, int y, int z, char item)
+	void MapEditor::addItem(int x, int y, int z, TerrainSquare& item)
 	{
 		_grid[y][x][z] = item;
 	}
@@ -211,62 +247,18 @@ namespace bammm
 			{
 				if (i == _cursorY && j == _cursorX)
 				{
-					cout << colorSymbol(_grid[i][j][_cursorZ], true);
+					_grid[i][j][_cursorZ].selectSquare(true);
+					cout << _grid[i][j][_cursorZ].toString();
 				}
 				else
 				{
-					cout << colorSymbol(_grid[i][j][_cursorZ], false);
+					_grid[i][j][_cursorZ].selectSquare(false);
+					cout << _grid[i][j][_cursorZ].toString();
 				}
 				cout << " ";
 			}
 			cout << "\n";
 		}
-	}
-
-	string MapEditor::colorSymbol(char symbol, bool selected)
-	{
-		string convertedSymbol = "";
-		const string DEFAULT_COLOR = "0m";
-		const string START_COLOR = "\033[";
-		const string GREEN_TEXT = "32m";
-		const string BLUE_TEXT = "34m";
-		const string BLACK_TEXT = "30m";
-		const string RED_TEXT = "31m";
-		const string YELLOW_TEXT = "33m";
-		const string PURPLE_TEXT = "34m";
-		const string CYAN_TEXT = "36m";
-		const string WHITE_TEXT = "37m";
-		const string HIGHLIGHT = "7;";
-
-		string color = START_COLOR;
-		if (selected)
-		{
-			color = color + HIGHLIGHT;
-		}
-
-		if (symbol == '.')
-		{
-			color = color + GREEN_TEXT;
-		}
-		else if (symbol == '~')
-		{
-			color = color + BLUE_TEXT;
-		}
-		else if (symbol == '#')
-		{
-			color = color + BLACK_TEXT;
-		}
-		else if (symbol == '^')
-		{
-			color = color + WHITE_TEXT;
-		}
-		else
-		{
-			color = color + WHITE_TEXT;
-		}
-
-		convertedSymbol = color + symbol + START_COLOR + DEFAULT_COLOR;
-		return convertedSymbol;
 	}
 
 	void MapEditor::displayCoordinates()
@@ -288,11 +280,11 @@ namespace bammm
 		cout << "r. Remove" << "\n";
 		cout << "1. Water" << "\n";
 		cout << "2. Block" << "\n";
-		cout << "3. Fire pit" << "\n";
-		cout << "4. Armory" << "\n";
-		cout << "5. Gym" << "\n";
-		cout << "6. Mine" << "\n";
-		cout << "7. Blacksmith" << "\n";
+		cout << "3. Mine" << "\n";
+		cout << "4. Bridge" << "\n";
+		cout << "5. Tree" << "\n";
+		cout << "6. Pub" << "\n";
+		cout << "7. Inn" << "\n";
 		cout << "Press enter to continue" << "\n";
 		cin.ignore();
 		cin.get();
@@ -388,7 +380,7 @@ namespace bammm
 
 	string MapEditor::createWaterJSON()
 	{
-		char item = '~';
+		string item = "~";
 		bool firstItem = true;
 		string name = "Water Objects";
 		string jsonString = "\"" + name + "\":\n";
@@ -399,7 +391,7 @@ namespace bammm
 			{
 				for (int z = 0; z < _z; z++)
 				{
-					if (_grid[y][x][z] == item)
+					if (_grid[y][x][z].getSymbol() == item)
 					{
 						if (!firstItem)
 						{
@@ -418,7 +410,7 @@ namespace bammm
 
 	string MapEditor::createBarrierJSON()
 	{
-		char item = '#';
+		string item = "#";
 		bool firstItem = true;
 		string name = "Barrier Objects";
 		string jsonString = "\"" + name + "\":\n";
@@ -429,7 +421,7 @@ namespace bammm
 			{
 				for (int z = 0; z < _z; z++)
 				{
-					if (_grid[y][x][z] == item)
+					if (_grid[y][x][z].getSymbol() == item)
 					{
 						if (!firstItem)
 						{
@@ -449,7 +441,7 @@ namespace bammm
 
 	string MapEditor::createMineJSON()
 	{
-		char item = '^';
+		string item = "^";
 		bool firstItem = true;
 		string name = "Mine Objects";
 		string jsonString = "\"" + name + "\":\n";
@@ -460,7 +452,7 @@ namespace bammm
 			{
 				for (int z = 0; z < _z; z++)
 				{
-					if (_grid[y][x][z] == item)
+					if (_grid[y][x][z].getSymbol() == item)
 					{
 						if (!firstItem)
 						{
@@ -480,10 +472,10 @@ namespace bammm
 
 	string MapEditor::createBuildingJSON()
 	{
-		char gym = 'G';
-		char fire = 'F';
-		char smith = 'S';
-		char armory = 'A';
+		string gym = "G";
+		string fire = "F";
+		string smith = "S";
+		string armory = "A";
 		bool matched = false;
 		string buildingName = "";
 		bool firstItem = true;
@@ -496,22 +488,22 @@ namespace bammm
 			{
 				for (int z = 0; z < _z; z++)
 				{
-					if (_grid[y][x][z] == gym)
+					if (_grid[y][x][z].getSymbol() == gym)
 					{
 						buildingName = "Gym";
 						matched = true;
 					}
-					if (_grid[y][x][z] == fire)
+					if (_grid[y][x][z].getSymbol() == fire)
 					{
 						buildingName = "Fire pit";
 						matched = true;
 					}
-					if (_grid[y][x][z] == smith)
+					if (_grid[y][x][z].getSymbol() == smith)
 					{
 						buildingName = "Blacksmith";
 						matched = true;
 					}
-					if (_grid[y][x][z] == armory)
+					if (_grid[y][x][z].getSymbol() == armory)
 					{
 						buildingName = "Armory";
 						matched = true;

@@ -17,8 +17,8 @@
 
 #include <iostream>
 #include <fstream>
-#include <string>
 #include "../../JSONParser.h"
+#include "TerrainSquare.h"
 
 namespace bammm
 {
@@ -32,9 +32,18 @@ namespace bammm
 			int _cursorY;
 			int _cursorZ;
 			string _name;
-			char*** _grid;
+			TerrainSquare*** _grid;
 			//JSONParser _parser;
 			ofstream _fileOutput;
+
+			TerrainSquare _grass;
+			TerrainSquare _water;
+			TerrainSquare _tree;
+			TerrainSquare _wall;
+			TerrainSquare _bridge;
+			TerrainSquare _mine;
+			TerrainSquare _pub;
+			TerrainSquare _inn;
 
 			/**
 			 loadMap
@@ -69,7 +78,7 @@ namespace bammm
 			 @Pre-Condition- Takes in three ints: x, y, and z and a char item.
 			 @Post-Condition- Adds the item at the given coordinates
 			 */
-			void addItem(int x, int y, int z, char item);
+			void addItem(int x, int y, int z, TerrainSquare& item);
 
 			/**
 			 displayMap
@@ -176,13 +185,6 @@ namespace bammm
 			 @Post-Condition- Returns a JSON object for building
 			 */
 			string createBuildingJSON();
-
-			/**
-			 colorSymbol
-			 @Pre-Condition- Takes in a char symbol and a bool determining whether or not the single is selected
-			 @Post-Condition- Changes the color of the symbol in accordance with the input
-			 */
-			string colorSymbol(char symbol, bool selected);
 
 		public:
 			MapEditor();
