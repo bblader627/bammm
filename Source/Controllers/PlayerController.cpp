@@ -78,6 +78,7 @@ namespace bammm
 		woodType->add("redwood");
 		woodType->add("birch");
 		woodType->add("oak");
+		woodType->add("cedar");
 
 		DynamicArray<string>* fishType = new DynamicArray<string>();
 		fishType->add("swordfish");

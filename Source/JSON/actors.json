@@ -8,7 +8,7 @@
 	],
 	
 	"orcs": [
-		{ "name":"Urguk", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":0, "y":0, "z":0, "alliance":2, "color":"red", "symbol":"O", "weapon":"Practice Sword", "collision":false },
+		{ "name":"Urguk", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":14, "y":9, "z":0, "alliance":2, "color":"red", "symbol":"O", "weapon":"Practice Sword", "collision":false },
 		{ "name":"Ghorbash", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"sing", "x":7, "y":11, "z":0, "alliance":2, "color":"red", "symbol":"O", "weapon":"Practice Sword", "collision":false },
 		{ "name":"Grogmar", "health":100, "stamina":50, "attack":20, "defense":20, "behavior":"mine", "x":9, "y":14, "z":0, "alliance":2, "color":"red", "symbol":"O", "weapon":"Practice Sword", "collision":false }
 	],

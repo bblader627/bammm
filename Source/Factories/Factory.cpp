@@ -73,6 +73,9 @@ namespace bammm
 
 		JSON* dwarves = actorRootChildren->getValue("dwarves");
 		this->parseToActorInfo(dwarves, "dwarf", &_actorData);
+
+		delete actorParser;
+		delete weaponParser;
 	}
 
 	MeleeWeapon* Factory::getMeleeWeapon(string type)
