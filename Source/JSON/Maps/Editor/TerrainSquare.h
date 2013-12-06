@@ -105,6 +105,13 @@ namespace bammm
 			 @Post-Condition- Makes this TerrainSquare the same as the passed in one
 			 */
 			void operator=(TerrainSquare& terrainSquare);
+			
+			/**
+			 operator==
+			 @Pre-Condition- A constant TerrainSquare reference
+			 @Post-Condition- Checks if terrainSquare is the same as this
+			 */
+			bool operator==(TerrainSquare& terrainSquare);
 	};
 }
 

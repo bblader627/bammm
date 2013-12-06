@@ -236,7 +236,14 @@ namespace bammm
 
 	void MapEditor::addItem(int x, int y, int z, TerrainSquare& item)
 	{
-		_grid[y][x][z] = item;
+		if(_grid[y][x][z] == item)
+		{
+			_grid[y][x][z].nextColor();
+		}
+		else
+		{
+			_grid[y][x][z] = item;
+		}
 	}
 
 	void MapEditor::displayMap()
@@ -285,6 +292,7 @@ namespace bammm
 		cout << "5. Tree" << "\n";
 		cout << "6. Pub" << "\n";
 		cout << "7. Inn" << "\n";
+		cout << "Placing the same object on the same space will cycle through the types." << "\n";
 		cout << "Press enter to continue" << "\n";
 		cin.ignore();
 		cin.get();

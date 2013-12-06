@@ -114,4 +114,9 @@ namespace bammm
 			_colors.add(terrainSquare.getColors().get(i));
 		}
 	}
+	
+	bool TerrainSquare::operator==(TerrainSquare& terrainSquare)
+	{
+		return _symbol == terrainSquare._symbol;
+	}
 }
