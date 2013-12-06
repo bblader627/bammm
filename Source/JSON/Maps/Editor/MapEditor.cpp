@@ -425,6 +425,7 @@ namespace bammm
 		jsonString += createWaterJSON();
 		jsonString += createMineJSON();
 		jsonString += createTreeJSON();
+		jsonString += createDockJSON();
 		jsonString += createBuildingJSON();
 		jsonString += "\n}";
 		return jsonString;
@@ -521,6 +522,51 @@ namespace bammm
 							collision = false;
 						}
 
+						if (!firstItem)
+						{
+							content += ",\n";
+						}
+						firstItem = false;
+
+
+						content += createJSONObjectNew(name + to_string(id), health, stamina, attack, defense, behavior, x, y, z, alliance, current.getCurrentColor(), current.getSymbol(), collision);
+						
+						id++;
+					}
+				}
+			}
+		}
+		
+		string closeValue = "\t],\n";
+		return sectionValue + content + closeValue;
+	}
+	
+	string MapEditor::createDockJSON()
+	{
+		string sectionName = "dock";
+		string symbol = "-";
+		string sectionValue = "\t\"" + sectionName + "\": [\n";
+		string content = "";
+		string name = "dock";
+		int health = 100;
+		int stamina = 0;
+		int attack = 0;
+		int defense = 20;
+		string behavior = "block";
+		int alliance = 0;
+		bool collision = false;
+		bool firstItem = true;
+		int id = 1;
+
+		for (int x = 0; x < _x; x++)
+		{
+			for (int y = 0; y < _y; y++)
+			{
+				for (int z = 0; z < _z; z++)
+				{
+					TerrainSquare& current = _grid[y][x][z];
+					if (current.getSymbol() == symbol)
+					{
 						if (!firstItem)
 						{
 							content += ",\n";

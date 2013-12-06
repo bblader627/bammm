@@ -188,6 +188,13 @@ namespace bammm
 			string createWallJSON();
 			
 			/**
+			 createDockJSON
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a JSON object for docks
+			 */
+			string createDockJSON();
+			
+			/**
 			 createTreeJSON
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns a JSON object for trees
