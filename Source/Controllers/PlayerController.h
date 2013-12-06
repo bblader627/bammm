@@ -36,13 +36,6 @@ namespace bammm
 			void input(DynamicArray<string>* commandString, float deltaTime);
 
 			/**
-			 input
-			 @Pre-Condition- Takes a single command and a deltaTime
-			 @Post-Condition- The command is executed.
-			 */
-			void input(string command, float deltaTime);
-
-			/**
 			 setup
 			 @Pre-Condition- Takes an Actor, and Grid3D as input
 			 @Post-Condition- Sets up the controller with the passed Actor, and Grid3D.

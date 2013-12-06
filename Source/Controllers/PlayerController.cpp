@@ -66,6 +66,9 @@ namespace bammm
 		string newState = commandString->get(0);
 		State* stateToAdd;
 
+		/*
+		 * Sanitizes input to avoid segfaults in hashmap->getValue();
+		 */
 		DynamicArray<string>* oreType = new DynamicArray<string>();
 		oreType->add("iron");
 		oreType->add("coal");
@@ -82,7 +85,17 @@ namespace bammm
 		fishType->add("salmon");
 
 		DynamicArray<string>* foodTypes = new DynamicArray<string>();
-		foodTypes->add("fish");
+		foodTypes->add("cooked_fish");
+
+		DynamicArray<string>* craftableItems = new DynamicArray<string>();
+		craftableItems->add("cooked_fish");
+		craftableItems->add("sword");
+		craftableItems->add("axe");
+		craftableItems->add("necklace");
+		craftableItems->add("armor");
+		craftableItems->add("boots");
+		craftableItems->add("helmet");
+
 
 		if (newState == "mine" || newState == "chop" || newState == "fish")
 		{
@@ -191,6 +204,12 @@ namespace bammm
 			}
 
 			string type = commandString->get(2);
+			if (!(craftableItems->contains(type)))
+			{
+				cout << type << " is not a craftable item. " << endl;
+				return;
+			}
+
 			Item* itemToMake = new Item(type, true);
 
 			CraftState* tempState = static_cast<CraftState*>(_states.getValue(
@@ -209,14 +228,12 @@ namespace bammm
 			cout << "Invalid command" << endl;
 		}
 
-	}
+		delete oreType;
+		delete fishType;
+		delete foodTypes;
+		delete woodType;
+		delete craftableItems;
 
-	void PlayerController::input(string command, float deltaTime)
-	{
-		DynamicArray<string>* passValue = new DynamicArray<string>();
-		passValue->add(command);
-		input(passValue, deltaTime);
-		delete passValue;
 	}
 
 	void PlayerController::printOptions()
