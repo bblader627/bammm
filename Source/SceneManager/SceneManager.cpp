@@ -30,11 +30,6 @@ namespace bammm
 	{
 	}
 
-	void SceneManager::setMeleeCombat(MeleeCombat& meleeCombat)
-	{
-		_meleeCombat = &meleeCombat;
-	}
-
 	void SceneManager::addActor(Actor* actor)
 	{
 		_allActors.add(actor);
@@ -43,14 +38,14 @@ namespace bammm
 		if (actor->getType() == "dwarf")
 		{
 			PlayerController* controller = new PlayerController();
-			controller->setup(*actor, *_meleeCombat, _sceneGraph);
+			controller->setup(*actor, _sceneGraph);
 			this->addTickable(controller);
 			this->addPlayerController(controller);
 		}
 		else if (actor->getType() == "orc")
 		{
 			AiController* controller = new AiController();
-			controller->setup(*actor, *_meleeCombat, _sceneGraph);
+			controller->setup(*actor, _sceneGraph);
 			this->addTickable(controller);
 			this->addAiController(controller);
 		}
@@ -60,6 +55,7 @@ namespace bammm
 	{
 		_allActors.removeElement(actor);
 		_sceneGraph.remove(actor->getLocation(), actor);
+
 		return actor;
 	}
 
@@ -111,7 +107,6 @@ namespace bammm
 			}
 			else if (aiController->canDelete())
 			{
-
 				Actor* removedActor = aiController->getActor();
 				_allAiControllers.removeElement(aiController);
 				removeActor(removedActor);
@@ -135,6 +130,7 @@ namespace bammm
 			if (args->getSize() == 2)
 			{
 				_focus = getControllerByActor(args->get(1));
+
 				return;
 			}
 			else
@@ -147,6 +143,7 @@ namespace bammm
 			if (args->getSize() == 2 && args->get(1) == "focus")
 			{
 				_focus = NULL;
+
 				return;
 			}
 			else
@@ -154,11 +151,13 @@ namespace bammm
 				cout << "Invalid arguments" << endl;
 			}
 		}
-		else if ((newState == "eat" || newState == "craft" || newState == "inventory") && _focus == NULL)
+		else if ((newState == "eat" || newState == "craft"
+				|| newState == "inventory") && _focus == NULL)
 		{
 			cout
 					<< "Invalid input: Must be focused on a Dwarf to use this command."
 					<< endl;
+
 			return;
 		}
 
@@ -175,6 +174,7 @@ namespace bammm
 		else
 		{
 			controller = _focus;
+
 			while (controller->runningStates().getSize() > 0)
 			{
 				controller->runningStates().remove(0);
@@ -213,6 +213,7 @@ namespace bammm
 									allStates.getValue("idle")))))
 			{
 				runningStates.remove(0);
+
 				return current;
 			}
 
@@ -231,11 +232,12 @@ namespace bammm
 			if (current->getActor()->getName() == name)
 			{
 				cout << "Focused on " << name << "!" << endl;
+
 				return current;
 			}
 		}
 		cout << "A Dwarf by the name of " << name << " was not found." << endl;
+
 		return NULL;
 	}
-
 }

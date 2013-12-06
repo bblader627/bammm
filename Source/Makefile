@@ -4,7 +4,7 @@
 
 RM = rm -f
 SRCPATH = .
-SRC = Behavior/Behavior.cpp LevelingSystem/LevelingSystem.cpp Actors/Actor.cpp Actors/ActorInfo.cpp \
+SRC = LevelingSystem/LevelingSystem.cpp Actors/Actor.cpp Actors/ActorInfo.cpp \
 Controllers/AiController.cpp Controllers/Controller.cpp Controllers/PlayerController.cpp \
 States/BrawlState.cpp States/DrinkState.cpp States/MoveState.cpp \
 States/IdleState.cpp Interfaces/IStateCallback.cpp States/CombatState.cpp \
@@ -16,8 +16,8 @@ Resources/DynamicArray.h Resources/HashMap.h Resources/HashNode.h \
 Resources/Heap.h Resources/Queue.h Resources/Stack.h Resources/Color.cpp \
 Resources/TreeNode.h Resources/Tree.h \
 \
-Weapons/WeaponData.cpp Weapons/MeleeWeapon.cpp Weapons/RangedWeapon.cpp \
-Interfaces/IWeaponType.h Weapons/MeleeCombat.cpp \
+Weapons/WeaponData.cpp Weapons/MeleeWeapon.cpp \
+Interfaces/IWeaponType.h \
 \
 SceneManager/Vector3D.cpp SceneManager/Grid3D.h SceneManager/SceneManager.cpp  \
 Factories/Factory.cpp \

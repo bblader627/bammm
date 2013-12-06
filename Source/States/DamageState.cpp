@@ -51,13 +51,20 @@ namespace bammm
 		if (weapon->canAttack())
 		{
 			int damage = weapon->attack();
+
 			_target->reduceHealth(damage);
-			cout << attackerName << " hits " << targetName << " with " << weaponName << " for " << Color::colorText(to_string(damage), "red")
+			cout << attackerName << " hits " << targetName << " with "
+					<< weaponName << " for "
+					<< Color::colorText(to_string(damage), "red")
 					<< " damage. ";
-			cout << targetName << " has " << Color::colorText(to_string(_target->getHealth()), "green") << " health.\n";
+			cout << targetName << " has "
+					<< Color::colorText(to_string(_target->getHealth()),
+							"green") << " health.\n";
+
 			if (_target->getHealth() <= 0)
 			{
-				cout << attackerName << Color::colorText(" has slain ", "red") << targetName << ".\n";
+				cout << attackerName << Color::colorText(" has slain ", "red")
+						<< targetName << ".\n";
 
 				_actor = _levelingSystem.gainExperience(_actor);
 

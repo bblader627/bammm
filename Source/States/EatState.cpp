@@ -54,22 +54,26 @@ namespace bammm
 			{
 				Item fish("fish", true);
 				Item* removedItem = _actor->getInventory().removeItem(fish);
+
 				if (removedItem == NULL)
 				{
 					switchState("null");
+
 					return;
 				}
 				else
 				{
 					_actor->increaseHealth(5);
 					_actor->increaseStamina(5);
-					cout << _actor->getName() << " takes a bite of " << _food << "! "
-							<<  "His health and stamina increased by 5" << endl;
+					cout << _actor->getName() << " takes a bite of " << _food
+							<< "! " << "His health and stamina increased by 5"
+							<< endl;
 
 					if (_actor->getHealth() >= _actor->getMaximumHealth())
 					{
 						_actor->setHealth(_actor->getMaximumHealth());
-						cout << _actor->getName() << " is too full to continue eating." << endl;
+						cout << _actor->getName()
+								<< " is too full to continue eating." << endl;
 						switchState("null");
 					}
 				}
@@ -77,7 +81,8 @@ namespace bammm
 		}
 		else
 		{
-			cout << _actor->getName() << " doesn't have any " << _food << "!" << endl;
+			cout << _actor->getName() << " doesn't have any " << _food << "!"
+					<< endl;
 			switchState("null");
 		}
 	}
@@ -99,7 +104,7 @@ namespace bammm
 		if (_amount > 0)
 		{
 			Item fish("fish", true);
-			if(_actor->getInventory().contains(fish))
+			if (_actor->getInventory().contains(fish))
 			{
 				canEat++;
 			}

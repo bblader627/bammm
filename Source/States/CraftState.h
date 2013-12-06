@@ -24,12 +24,10 @@ namespace bammm
 	{
 
 		private:
-
 			int _craftableAmount;
 			Item* _craftableItem;
 
 		public:
-
 			CraftState(Actor& actor);
 			CraftState(Actor& actor, IStateCallback* stateMachine);
 
@@ -68,16 +66,34 @@ namespace bammm
 			 */
 			string toString();
 
+			/**
+			 setCraftable
+			 @Pre-Condition- Takes in craftableItem
+			 @Post-Condition- Returns void
+			 */
 			void setCraftable(Item& craftableItem);
 
+			/**
+			 setAmount
+			 @Pre-Condition- Takes in craftableAmount
+			 @Post-Condition- Returns void
+			 */
 			void setAmount(int craftableAmount);
 
+			/**
+			 craft
+			 @Pre-Condition- No input
+			 @Post-Condition- Crafts
+			 */
 			void craft();
 
+			/**
+			 canCraft
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns true if can craft, false otherwise.
+			 */
 			bool canCraft();
-
 	};
-
 }
 
 #endif

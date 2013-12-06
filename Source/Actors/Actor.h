@@ -18,7 +18,6 @@
 #include <iostream>
 #include "../SceneManager/Vector3D.h"
 #include "../Weapons/MeleeWeapon.h"
-#include "../Weapons/RangedWeapon.h"
 #include "ActorInfo.h"
 #include "../Resources/Constant.h"
 #include "../Inventory/Inventory.h"
@@ -54,7 +53,6 @@ namespace bammm
 			string _symbol;
 			string _color;
 			MeleeWeapon* _meleeWeapon;
-			RangedWeapon* _rangedWeapon;
 			Inventory _inventory;
 			int _level;
 			int _experience;
@@ -73,13 +71,6 @@ namespace bammm
 			 @Post-Condition- sets the weapon to weapon
 			 */
 			void setMeleeWeapon(MeleeWeapon* weapon);
-
-			/**
-			 setRangedWeapon
-			 @Pre-Condition- takes no arguments
-			 @Post-Condition- sets the weapon to w
-			 */
-			void setRangedWeapon(RangedWeapon* weapon);
 
 			/**
 			 setRotation
@@ -242,13 +233,6 @@ namespace bammm
 			 @Post-Condition- Returns _meleeWeapon
 			 */
 			MeleeWeapon* getMeleeWeapon();
-
-			/**
-			 getRangedWeapon
-			 @Pre-Condition- No input
-			 @Post-Condition- Returns _rangedWeapon
-			 */
-			RangedWeapon* getRangedWeapon();
 
 			/**
 			 getBAC

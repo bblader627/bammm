@@ -59,6 +59,7 @@ namespace bammm
 	{
 		string success;
 		string start;
+
 		if (canGather())
 		{
 			if (_actor->getBAC() > .4)
@@ -66,7 +67,7 @@ namespace bammm
 				cout << _actor->getName()
 						<< " drunkenly swings the tool, hits himself in the foot, and decides not to do that anymore."
 						<< "\n";
-				switchState("null"); //Ends this state;
+				switchState("null");
 			}
 			else
 			{
@@ -94,14 +95,14 @@ namespace bammm
 					start = " lifts his pickaxe, and swings it at the rock.";
 					success = " successfully mines some ";
 				}
-				else if (typeName.find("redwood") != string::npos ||
-						typeName.find("oak") != string::npos ||
-						typeName.find("birch") != string::npos
-						)
+				else if (typeName.find("redwood") != string::npos
+						|| typeName.find("oak") != string::npos
+						|| typeName.find("birch") != string::npos)
 				{
 					Item wood("wood", _target->getColor(), true);
 					removedItem = _target->getInventory().removeItem(wood);
-					start = " takes out his hatchet, and swings it at the tree.";
+					start =
+							" takes out his hatchet, and swings it at the tree.";
 					success = " successfully chops some ";
 				}
 				else if (typeName.find("dock") != string::npos)
@@ -112,26 +113,24 @@ namespace bammm
 					success = " successfully catches some ";
 				}
 
-
-
 				_actor->reduceStamina(1);
 
-				string coloredName = Color::colorText(removedItem->getName(), removedItem->getColor());
+				string coloredName = Color::colorText(removedItem->getName(),
+						removedItem->getColor());
 				canPickup = _actor->getInventory().addItem(removedItem);
-				cout << _actor->getName()
-						<< start << "\n";
-				cout << _actor->getName()
-						<< success << coloredName << "\n";
+				cout << _actor->getName() << start << "\n";
+				cout << _actor->getName() << success << coloredName << "\n";
 
-				if(!canPickup)
+				if (!canPickup)
 				{
 					delete removedItem;
 					cout << _actor->getName()
-						<< " has a full inventory, and drops " << coloredName
-						<< " on the ground.\n";
+							<< " has a full inventory, and drops "
+							<< coloredName << " on the ground.\n";
 					_amount = 0;
 					switchState("null");
 				}
+
 				_amount--;
 			}
 
@@ -139,8 +138,7 @@ namespace bammm
 
 		else
 		{
-			//cout << _actor->getName() << " is finished gathering!" << "\n";
-			_amount= 0;
+			_amount = 0;
 
 			switchState("null");
 		}
@@ -160,40 +158,44 @@ namespace bammm
 	{
 		int canMine = 0;
 
-		if(_amount > 0)
+		if (_amount > 0)
 		{
 			Item gold("gold", true);
-			if(_target->getInventory().contains(gold))
+
+			if (_target->getInventory().contains(gold))
 			{
 				canMine++;
 			}
 
 			Item iron("iron", true);
-			if(_target->getInventory().contains(iron))
+
+			if (_target->getInventory().contains(iron))
 			{
 				canMine++;
 			}
 
 			Item coal("coal", true);
-			if(_target->getInventory().contains(coal))
+
+			if (_target->getInventory().contains(coal))
 			{
 				canMine++;
 			}
 
 			Item wood("wood", true);
-			if(_target->getInventory().contains(wood))
+
+			if (_target->getInventory().contains(wood))
 			{
 				canMine++;
 			}
 
 			Item fish("fish", true);
-			if(_target->getInventory().contains(fish))
+
+			if (_target->getInventory().contains(fish))
 			{
 				canMine++;
 			}
 		}
 
 		return !!canMine;
-
 	}
 }

@@ -26,12 +26,6 @@ namespace bammm
 			IdleState(Actor& actor, IStateCallback* stateMachine);
 
 			/**
-			 setup
-			 @Pre-Condition- No input
-			 @Post-Condition- Sets up the state
-			 */
-			//virtual void setup(DynamicArray<string>* args);
-			/**
 			 breakdown
 			 @Pre-Condition- No input
 			 @Post-Condition- Performs a breakdown on the state

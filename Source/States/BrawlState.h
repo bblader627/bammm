@@ -30,7 +30,6 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			//void setup(DynamicArray<string>* args);
 			void setup();
 
 			/**

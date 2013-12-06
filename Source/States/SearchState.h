@@ -38,7 +38,6 @@ namespace bammm
 					Grid3D<Actor*>& sceneGraph);
 
 			/**
-			 Update this to take a Vector3D once we get rid of circular
 			 setup
 			 @Pre-Condition- Takes nothing
 			 @Post-Condition- Sets up the state

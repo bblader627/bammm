@@ -20,13 +20,11 @@ namespace bammm
 	{
 	}
 
-	void AiController::setup(Actor& actor, MeleeCombat& meleeCombat,
-			Grid3D<Actor*>& sceneGraph)
+	void AiController::setup(Actor& actor, Grid3D<Actor*>& sceneGraph)
 	{
 		_sceneGraph = &sceneGraph;
-		_meleeCombat = &meleeCombat;
 		_actor = &actor;
-		_stateMachine.setup(actor, _states, _meleeCombat);
+		_stateMachine.setup(actor, _states);
 
 		DrinkState* drinkState = new DrinkState(actor, &_stateMachine);
 		SingState* singState = new SingState(actor, &_stateMachine);

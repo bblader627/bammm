@@ -129,6 +129,7 @@ namespace bammm
 			errorMessage("Index out of bounds.");
 			assert(0);
 		}
+
 		return _queue->remove(0);
 	}
 
@@ -136,6 +137,7 @@ namespace bammm
 	T Queue<T>::add(T element)
 	{
 		_queue->add(element);
+
 		return element;
 	}
 
