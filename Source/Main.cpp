@@ -71,7 +71,7 @@ int main()
 			{
 				if (!justStarted)
 				{
-					clearTerminal();
+					//clearTerminal();
 				}
 
 				cout << sceneManager.getSceneGraph().toString() << "\n";
@@ -143,7 +143,7 @@ int main()
 			uint pause = 1;
 			sleep(pause);
 			loopCounter--;
-			clearTerminal();
+			//clearTerminal();
 			cout << sceneManager.getSceneGraph().toString() << "\n";
 			sceneManager.tick(0);
 		}
