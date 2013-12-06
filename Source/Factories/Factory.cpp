@@ -34,9 +34,6 @@ namespace bammm
 		JSON* meleeWeapons = weaponRootChildren->getValue("meleeWeapons");
 		this->parseMeleeWeaponToWeaponData(meleeWeapons, &_meleeWeaponData);
 
-		JSON* rangedWeapons = weaponRootChildren->getValue("rangedWeapons");
-		this->parseRangedWeaponToWeaponData(rangedWeapons, &_rangedWeaponData);
-
 		//Parse craftable item database
 		JSONParser* craftableParser = new JSONParser();
 		string craftableFilename = "JSON/craftables.json";
@@ -82,14 +79,6 @@ namespace bammm
 	{
 		WeaponData weaponData = _meleeWeaponData.getValue(type);
 		MeleeWeapon* newWeapon = new MeleeWeapon(weaponData);
-
-		return newWeapon;
-	}
-
-	RangedWeapon* Factory::getRangedWeapon(string type)
-	{
-		WeaponData weaponData = _rangedWeaponData.getValue(type);
-		RangedWeapon* newWeapon = new RangedWeapon(weaponData);
 
 		return newWeapon;
 	}
@@ -281,29 +270,6 @@ namespace bammm
 			int damage = child->getChild("damage")->getIntValue();
 			WeaponData* weaponData = new WeaponData(0, 0, damage, 0, 0, "",
 					type);
-
-			map->add(type, *weaponData);
-		}
-	}
-
-	void Factory::parseRangedWeaponToWeaponData(JSON* rootNode,
-			HashMap<WeaponData>* map)
-	{
-		int numberOfChildren = rootNode->sizeOfChildren();
-		DynamicArray<JSON*>* rootChildren =
-				rootNode->getAllChildren()->getAllValues();
-
-		for (int i = 0; i < numberOfChildren; i++)
-		{
-			JSON* child = rootChildren->get(i);
-			string type = child->getChild("type")->getStringValue();
-			int range = child->getChild("range")->getIntValue();
-			int clipCapacity = child->getChild("clipCapacity")->getIntValue();
-			int damage = child->getChild("damage")->getIntValue();
-			float reloadSpeed = child->getChild("reloadSpeed")->getFloatValue();
-			uint fireRate = child->getChild("fireRate")->getUIntValue();
-			WeaponData* weaponData = new WeaponData(range, clipCapacity, damage,
-					reloadSpeed, fireRate, "", type);
 
 			map->add(type, *weaponData);
 		}

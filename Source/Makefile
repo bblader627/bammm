@@ -16,7 +16,7 @@ Resources/DynamicArray.h Resources/HashMap.h Resources/HashNode.h \
 Resources/Heap.h Resources/Queue.h Resources/Stack.h Resources/Color.cpp \
 Resources/TreeNode.h Resources/Tree.h \
 \
-Weapons/WeaponData.cpp Weapons/MeleeWeapon.cpp Weapons/RangedWeapon.cpp \
+Weapons/WeaponData.cpp Weapons/MeleeWeapon.cpp \
 Interfaces/IWeaponType.h \
 \
 SceneManager/Vector3D.cpp SceneManager/Grid3D.h SceneManager/SceneManager.cpp  \

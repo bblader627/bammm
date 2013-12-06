@@ -115,11 +115,6 @@ namespace bammm
 		_meleeWeapon = weapon;
 	}
 
-	void Actor::setRangedWeapon(RangedWeapon* weapon)
-	{
-		_rangedWeapon = weapon;
-	}
-
 	void Actor::setRotation(float myRotation)
 	{
 		_rotation = myRotation;
@@ -297,11 +292,6 @@ namespace bammm
 	MeleeWeapon* Actor::getMeleeWeapon()
 	{
 		return _meleeWeapon;
-	}
-
-	RangedWeapon* Actor::getRangedWeapon()
-	{
-		return _rangedWeapon;
 	}
 
 	float Actor::getBAC()
