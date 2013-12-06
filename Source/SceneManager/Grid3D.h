@@ -433,8 +433,6 @@ namespace bammm
 		}
 
 		delete visited;
-		delete mapTree;
-
 
 		return path;
 	}
