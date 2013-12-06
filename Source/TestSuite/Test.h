@@ -25,6 +25,10 @@ namespace bammm
 {
 	class Test
 	{
+		private:
+			Func _function;
+			string _name;
+
 		public:
 			typedef std::function<int(void)> Func;
 			Test();
@@ -44,10 +48,6 @@ namespace bammm
 			 @Post-Condition- Returns _name
 			 */
 			string getName();
-
-		private:
-			Func _function;
-			string _name;
 	};
 }
 

@@ -98,6 +98,7 @@ namespace bammm
 		if (result == -1)
 		{
 			cout << "Result: " << "\e[31m" << "Failed" << "\e[0m" << "\n";
+
 			return false;
 
 		}
@@ -106,6 +107,7 @@ namespace bammm
 			cout << "Number of memory allocations not freed: " << result
 					<< "\n";
 			cout << "Result: " << "\e[32m" << "Success" << "\e[0m" << "\n";
+
 			return true;
 		}
 	}
