@@ -1,0 +1,6 @@
+{
+	"roasted fish" : [
+						{ "name" : "fish", "amount" : 1 },
+						{ "name" : "wood", "amount" : 1 }
+					]
+}

@@ -44,7 +44,14 @@ namespace bammm
 
 		JSON* craftableRoot = craftableParser->getRootNode("root");
 
-		//Parse actors
+		//Parse craftable item database//
+		JSONParser* craftableParser = new JSONParser();
+		string craftableFilename = "JSON/craftables.json";
+		craftableParser->parseFile(craftableFilename);
+
+		_craftables = craftableParser->getRootNode("root");
+
+		//Parse actors info
 		JSONParser* actorParser = new JSONParser();
 		string actorFilename = "JSON/actors.json";
 		actorParser->parseFile(actorFilename);

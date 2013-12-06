@@ -68,11 +68,13 @@ namespace bammm
 			 */
 			string toString();
 
-			void setCraftable(Item* craftableItem);
+			void setCraftable(Item& craftableItem);
 
 			void setAmount(int craftableAmount);
 
 			void craft();
+
+			bool canCraft();
 
 	};
 

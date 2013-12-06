@@ -198,7 +198,7 @@ namespace bammm
 			CraftState* tempState = static_cast<CraftState*>(_states.getValue(
 					newState));
 			tempState->setAmount(numToMake);
-			tempState->setCraftable(itemToMake);
+			tempState->setCraftable(*itemToMake);
 			_stateMachine.addState(tempState);
 		}
 		else if (newState == "inventory")
