@@ -100,25 +100,18 @@ namespace bammm
 			RangedWeapon* getRangedWeapon(string type);
 
 			/*
+			 getCraftables
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns JSON for craftables
+			 */
+			JSON* getCraftables();
+
+			/*
 			 setup
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up factory
 			 */
 			void setup();
-
-			/*
-			 setupArmor
-			 @Pre-Condition- No input
-			 @Post-Condition- Sets up armor
-			 */
-			void setupArmor();
-
-			JSON* getCraftables();
-
-			/*
-			 * Item getItem(string type);
-			 * BehaviorMap getBehavior(string type);
-			 */
 	};
 }
 
