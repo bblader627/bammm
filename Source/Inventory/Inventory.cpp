@@ -72,19 +72,19 @@ namespace bammm
 
 		for (uint i = 0; i < usedSlots; i++)
 		{
-			Item currentItem = *_inventory.get(i);
+			Item* currentItem = _inventory.get(i);
 
-			if (currentItem == item)
+			if (*currentItem == item)
 			{
-				if (currentItem.getAmount() == 1)
+				if (currentItem->getAmount() == 1)
 				{
 					return _inventory.remove(i);
 				}
 				else
 				{
-					int currentAmount = currentItem.getAmount();
-					currentItem.setAmount(currentAmount - 1);
-					return currentItem.getStackableCopy();
+					int currentAmount = currentItem->getAmount();
+					currentItem->setAmount(currentAmount - 1);
+					return currentItem->getStackableCopy();
 				}
 			}
 		}

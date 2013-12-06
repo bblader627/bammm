@@ -50,6 +50,7 @@ namespace bammm
 			cout << _actor->getName() << " cannot craft "
 					<< _craftableItem->getName() << ". \n";
 			switchState("null");
+			return;
 		}
 		else
 		{
