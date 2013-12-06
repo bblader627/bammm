@@ -17,12 +17,6 @@
 
 namespace bammm
 {
-	Actor::~Actor()
-	{
-		delete _location;
-		delete _meleeWeapon;
-		delete _velocity;
-	}
 	Actor::Actor()
 	{
 		_type = "dwarf";
@@ -114,6 +108,13 @@ namespace bammm
 		_level = 1;
 		_experience = 0;
 		_totalExperienceThisLevel = 1;
+	}
+
+	Actor::~Actor()
+	{
+		delete _location;
+		delete _meleeWeapon;
+		delete _velocity;
 	}
 
 	void Actor::setMeleeWeapon(MeleeWeapon* weapon)

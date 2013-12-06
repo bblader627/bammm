@@ -59,12 +59,12 @@ namespace bammm
 			int _totalExperienceThisLevel;
 
 		public:
-			~Actor();
 			Actor();
 			Actor(string name, string type, AllianceType alliance);
 			Actor(string type, string name, int health, int stamina, int attack,
 					int defense, string behavior, AllianceType alliance);
 			Actor(ActorInfo* info);
+			~Actor();
 
 			/**
 			 setMeleeWeapon
