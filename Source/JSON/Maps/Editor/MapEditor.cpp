@@ -56,7 +56,10 @@ namespace bammm
 		_inn.setSymbol("I");
 		_inn.removeColor("green");
 		_inn.addColor("purple");
-
+		
+		_dock.setSymbol("-");
+		_dock.removeColor("green");
+		_dock.addColor("yellow");
 	}
 
 	MapEditor::~MapEditor()
@@ -224,6 +227,10 @@ namespace bammm
 			{
 				addItem(_cursorX, _cursorY, _cursorZ, _inn);
 			}
+			else if (convertedChoice == '8')
+			{
+				addItem(_cursorX, _cursorY, _cursorZ, _dock);
+			}
 		}
 
 		cout << "Thank you for using the BAMMM editor.\n";
@@ -292,6 +299,7 @@ namespace bammm
 		cout << "5. Tree" << "\n";
 		cout << "6. Pub" << "\n";
 		cout << "7. Inn" << "\n";
+		cout << "8. Dock" << "\n";
 		cout << "Placing the same object on the same space will cycle through the types." << "\n";
 		cout << "Press enter to continue" << "\n";
 		cin.ignore();
@@ -418,8 +426,6 @@ namespace bammm
 		jsonString += createMineJSON();
 		jsonString += createTreeJSON();
 		jsonString += createBuildingJSON();
-		//jsonString = jsonString + createMineJSON() + ",\n";
-		//jsonString = jsonString + createBuildingJSON() + "\n";
 		jsonString += "\n}";
 		return jsonString;
 	}

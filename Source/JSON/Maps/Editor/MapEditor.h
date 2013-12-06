@@ -44,6 +44,7 @@ namespace bammm
 			TerrainSquare _mine;
 			TerrainSquare _pub;
 			TerrainSquare _inn;
+			TerrainSquare _dock;
 
 			/**
 			 loadMap

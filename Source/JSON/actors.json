@@ -127,11 +127,11 @@
 		{ "name":"iron5", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":13, "y":5, "z":0, "alliance":0, "color":"white", "symbol":"^", "collision":false }
 	],
 	"dock": [
-		{ "name":"dock1", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":13, "y":4, "z":0, "alliance":0, "color":"brown", "symbol":".", "collision":false },
-		{ "name":"dock2", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":13, "y":5, "z":0, "alliance":0, "color":"brown", "symbol":".", "collision":false },
-		{ "name":"dock3", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":12, "y":5, "z":0, "alliance":0, "color":"brown", "symbol":".", "collision":false },
-		{ "name":"dock4", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":14, "y":4, "z":0, "alliance":0, "color":"brown", "symbol":".", "collision":false },
-		{ "name":"dock5", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":11, "y":6, "z":0, "alliance":0, "color":"brown", "symbol":".", "collision":false }
+		{ "name":"dock1", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":13, "y":4, "z":0, "alliance":0, "color":"yellow", "symbol":"-", "collision":false },
+		{ "name":"dock2", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":13, "y":5, "z":0, "alliance":0, "color":"yellow", "symbol":"-", "collision":false },
+		{ "name":"dock3", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":12, "y":5, "z":0, "alliance":0, "color":"yellow", "symbol":"-", "collision":false },
+		{ "name":"dock4", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":14, "y":4, "z":0, "alliance":0, "color":"yellow", "symbol":"-", "collision":false },
+		{ "name":"dock5", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":11, "y":6, "z":0, "alliance":0, "color":"yellow", "symbol":"-", "collision":false }
 	],
 	"water": [
 		{ "name":"Water1", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":15, "y":0, "z":0, "alliance":0, "color":"blue", "symbol":"~", "collision":true },
