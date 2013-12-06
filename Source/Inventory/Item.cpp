@@ -12,11 +12,8 @@
  *
  */
 
-#include <iostream>
-#include "../Resources/Constant.h"
-//#include "../Actors/Actor.h"
-//#include "../Interfaces/IAction.h"
 #include "Item.h"
+
 using namespace std;
 
 namespace bammm
@@ -56,7 +53,7 @@ namespace bammm
 		_description = "No description";
 		_stackable = stackable;
 	}
-	
+
 	Item::Item(string name, int amount, bool stackable)
 	{
 		_name = name;
@@ -68,11 +65,6 @@ namespace bammm
 	{
 	}
 
-	/*void Item::action(Actor* target, int amount)
-	{
-		_action->action(target, amount);
-	}*/
-	
 	uint Item::getAmount()
 	{
 		return _amount;
@@ -115,7 +107,7 @@ namespace bammm
 
 	bool Item::operator==(const Item& item)
 	{
-		if(_name == item._name)
+		if (_name == item._name)
 		{
 			return true;
 		}
@@ -127,7 +119,7 @@ namespace bammm
 	{
 		return _stackable;
 	}
-	
+
 	void Item::setStackable(bool stackable)
 	{
 		_stackable = stackable;
@@ -137,6 +129,7 @@ namespace bammm
 	{
 		Item* newItem = new Item(_name, 1, _color, _stackable);
 		newItem->setDescription(_description);
+
 		return newItem;
 	}
 }

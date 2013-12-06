@@ -17,8 +17,7 @@
 
 #include <iostream>
 #include "../Resources/Constant.h"
-//#include "../Interfaces/IAction.h"
-//#include "../Actors/Actor.h"
+
 using namespace std;
 
 namespace bammm
@@ -30,23 +29,15 @@ namespace bammm
 			string _color;
 			string _description;
 			bool _stackable;
-			//IAction* _action;
 			uint _amount;
 
 		public:
 			Item();
+			virtual ~Item();
 			Item(string name, bool stackable);
 			Item(string name, string color, bool stackable);
 			Item(string name, int amount, string color, bool stackable);
 			Item(string name, int amount, bool stackable);
-			virtual ~Item();
-
-			/**
-			 action
-			 Pre-Condition- A pointer to an Actor, and an int amount
-			 Post-Condition- Uses the item's action
-			 */
-			//void action(Actor* target, int amount);
 
 			/**
 			 getAmount
@@ -82,49 +73,49 @@ namespace bammm
 			 Post-Condition- Sets the color of the item
 			 */
 			void setColor(string color);
-			
+
 			/**
 			 getColor
 			 Pre-Condition- None
 			 Post-Condition- Gets the color of the item
 			 */
 			string getColor();
-			
+
 			/**
 			 setDescription
 			 Pre-Condition- A string for the new description
 			 Post-Condition- Sets the description of the item
 			 */
 			void setDescription(string description);
-			
+
 			/**
 			 getDescription
 			 Pre-Condition- None
 			 Post-Condition- Gets the description of the item
 			 */
 			string getDescription();
-			
+
 			/**
 			 getDescription
 			 Pre-Condition- None
 			 Post-Condition- Checks if the item is stackable
 			 */
 			bool getStackable();
-			
+
 			/**
 			 setStackable
 			 Pre-Condition- A bool for the new stackable setting
 			 Post-Condition- Sets stackable
 			 */
 			void setStackable(bool stackable);
-			
+
 			/**
 			 setStackable
 			 Pre-Condition- None
 			 Post-Condition- Returns a copy of this item with amount = 1
 			 */
 			Item* getStackableCopy();
-			
+
 			/**
 			 operator==
 			 Pre-Condition- A reference to an Item
