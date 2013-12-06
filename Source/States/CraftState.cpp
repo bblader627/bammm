@@ -14,6 +14,7 @@
 
 #include "CraftState.h"
 #include "../JSON/JSON.h"
+#include "../Factories/Factory.h"
 #include <string>
 
 namespace bammm
@@ -82,40 +83,44 @@ namespace bammm
 	void CraftState::craft()
 	{
 
-		JSON* ingredientMap = factory.getCraftables();
-		for (int i = 0;
-				i
-						< ingredientMap->getChild(_craftableItem->getName())->getSize();
-				i++)
+		extern Factory* factory;
+
+		JSON* ingredientMap = factory->getCraftables();
+		string itemName = _craftableItem->getName();
+
+		for (int i = 0; i < ingredientMap->getChild(itemName)->getSize(); i++)
 		{
-		ingredientMap->getChild(_craftableItem->getName())->get(i)->getChild->("name");
-		ingredientMap->getChild(_craftableItem->getName())->get(i)->getChild->("amount");
+
+			//ingredientMap->getChild(itemName)->get(i)->getChild->("name");
+			//	ingredientMap->getChild(itemName)->get(i)->getChild->("amount");
+		}
+
+		//create new item
+		//remove items from inventory
+		//add new item to inventory
+		//delete items
 	}
-	//create new item
-	//remove items from inventory
-	//add new item to inventory
-	//delete items
-}
 
-bool CraftState::canCraft()
-{
-
-	JSON* ingredientMap = factory.getCraftables();
-
-	for (int i = 0; i < ingredientMap->get(i)->getSize(); i++)
+	bool CraftState::canCraft()
 	{
-		if (_actor->getInventory()->contains(_craftableItem->getName(),
-				ingredientMap->getChild(_craftableItem->getName())->getValue(
-						"amount")))
+		extern Factory* factory;
+
+		JSON* ingredientMap = factory->getCraftables();
+		string itemName = _craftableItem->getName();
+
+		for (int i = 0; i < ingredientMap->get(i)->getSize(); i++)
 		{
-			continue;
+			if (_actor->getInventory().contains(itemName,
+					ingredientMap->getChild(itemName)->getValue("amount")))
+			{
+				continue;
+			}
+			else
+			{
+				return false;
+			}
 		}
-		else
-		{
-			return false;
-		}
+		return true;
 	}
-	return true;
-}
 
 }
