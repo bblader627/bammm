@@ -43,15 +43,15 @@ namespace bammm
 	void JSONParser::printAllRoots()
 	{
 		DynamicArray<string>* keys = _rootMap.getAllKeys();
+
 		for (unsigned int i = 0; i < keys->getSize(); i++)
 		{
 			cout << keys->get(i) << endl;
 		}
 	}
 
-	bool JSONParser::parseFile(string filename)
+	bool JSONParser::JSONParser::parseFile(string filename)
 	{
-
 		ifstream input;
 		char current;
 		bool isKey = false;
@@ -75,24 +75,19 @@ namespace bammm
 			return false;
 		}
 
-		//cout << "File found and opened. Beginning parse. \n";
-		//cout.flush();
-
 		while (!input.eof())
 		{
 			if (!skipGet)
 			{
 				current = (char) input.get();
 			}
+
 			skipGet = false;
 
 			switch (current)
 			{
 
 				case '{':
-					//cout << "\n\nParsing { \n";
-					//cout.flush();
-
 					if (currentNode == NULL)
 					{
 						currentNode = new JSON("root");
@@ -105,24 +100,20 @@ namespace bammm
 						{
 							isNewArrayObject = true;
 						}
-						parentNode = arrayRootNode;	//parent should be dwarves array
-						currentNode = new JSON();//Children will be attributes
-						currentNode->setParent(*parentNode);
 
+						parentNode = arrayRootNode;
+						currentNode = new JSON();
+						currentNode->setParent(*parentNode);
 					}
 
 					isValue = false;
 					isKey = true;
-
 					break;
 
 				case '}':
 					if (parentNode == NULL)
 					{
-						/* This will be the final output of the parser. This should not output before completion. */
-						//cout << "Completed parsing " << filename << ". \n";
 						input.close();
-
 						currentNode = NULL;
 					}
 					else if (isArray)
@@ -135,7 +126,6 @@ namespace bammm
 					{
 						currentNode = currentNode->getParent();
 						parentNode = parentNode->getParent();
-
 						isKey = true;
 					}
 
@@ -143,6 +133,7 @@ namespace bammm
 
 				case '[':
 					isArray = true;
+
 					if (currentNode == NULL)
 					{
 						currentNode = new JSONArray(name);
@@ -154,16 +145,15 @@ namespace bammm
 						currentNode = new JSONArray(name);
 						parentNode->addChild(*currentNode);
 					}
+
 					break;
 
 				case ']':
 					currentNode = arrayRootNode;
 					parentNode = parentNode->getParent();
 					arrayRootNode = parentNode;
-
 					isKey = true;
 					isArray = false;
-
 					break;
 
 				case '"':
@@ -186,20 +176,15 @@ namespace bammm
 					break;
 
 				case ':':
-
 					isKey = false;
 					isValue = true;
-
 					value = "";
-
-					/* check  what comes after colon so we may determine type */
 					current = (char) input.peek();
+
 					while (!input.eof() && current == ' ')
 					{
 						current = (char) input.get();
 					}
-
-					/* Now that we know the value, we may confirm the type of the JSON Node and create it. */
 
 					parentNode = currentNode;
 
@@ -213,6 +198,7 @@ namespace bammm
 						{
 							currentNode = new JSON(name);
 						}
+
 						isKey = true;
 						isValue = false;
 					}
@@ -231,15 +217,14 @@ namespace bammm
 						isArray = true;
 						currentNode->setParent(*parentNode);
 						parentNode->addChild(*currentNode);
-
 						isKey = true;
 						isValue = false;
-
 					}
 					else if (current == '"')
 					{
 						current = (char) input.get();
 						current = (char) input.get();
+
 						while (!input.eof() && current != '"')
 						{
 							value += current;
@@ -251,8 +236,6 @@ namespace bammm
 							currentNode->setName(value);
 							isNewArrayObject = false;
 						}
-
-						//cout << "\nValue:  " << value << "\n";
 
 						if (isArray)
 						{
@@ -270,7 +253,6 @@ namespace bammm
 					}
 					else if (current == 'f' || current == 't')
 					{
-
 						while (!input.eof() && current != ' ')
 						{
 							current = (char) input.get();
@@ -315,8 +297,6 @@ namespace bammm
 							value += current;
 						}
 
-						/* Determine whether value has a decimal. If so, make DOUBLE. Else INT */
-
 						for (unsigned int i; i < value.size(); i++)
 						{
 							if (value[i] == '.')
@@ -360,25 +340,17 @@ namespace bammm
 						parentNode->addChild(*currentNode);
 					}
 
-					//cout << "\tName: " << name << " Value: " << value
-					//		<< " Parent: " << currentNode->getParent()->getName() << endl;
 					break;
 
 				case ',':
-					/* reset node to parent so next key/value may be added as a child to parent */
 					currentNode = currentNode->getParent();
 					parentNode = currentNode->getParent();
-
 					isValue = false;
 					isKey = true;
-
 					break;
 
 			}
 		}
-
-		//cout << "End of file reached \n";
-		//cout.flush();
 
 		currentNode = NULL;
 		parentNode = NULL;

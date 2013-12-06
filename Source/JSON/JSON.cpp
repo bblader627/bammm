@@ -36,7 +36,6 @@ namespace bammm
 
 	JSON::~JSON()
 	{
-		cout << "Deleting JSON \n";
 	}
 
 	string JSON::getName()
@@ -81,8 +80,10 @@ namespace bammm
 		{
 			cout << "Error: Attempting to add NULL as a parent \n";
 			cout.flush();
+
 			return;
 		}
+
 		_parent = &newParent;
 	}
 
@@ -92,8 +93,10 @@ namespace bammm
 		{
 			cout << "Error: Attempting to add NULL as a child \n";
 			cout.flush();
+
 			return;
 		}
+
 		_children.add(newNode.getName(), &newNode);
 	}
 
