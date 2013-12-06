@@ -33,7 +33,6 @@
 #include "../Resources/HashMap.h"
 #include "../Actors/Actor.h"
 #include "../States/StateMachine.h"
-#include "../Weapons/RangedCombat.h"
 #include "../SceneManager/Grid3D.h"
 
 using namespace std;
@@ -47,7 +46,6 @@ namespace bammm
 			Actor* _actor;
 			Grid3D<Actor*>* _sceneGraph;
 			StateMachine _stateMachine;
-			RangedCombat* _rangedCombat;
 
 		public:
 			Controller();
