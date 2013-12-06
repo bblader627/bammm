@@ -47,13 +47,6 @@ namespace bammm
 			TerrainSquare _dock;
 
 			/**
-			 loadMap
-			 @Pre-Condition- Takes in a string filename
-			 @Post-Condition- Loads the map specified by the file
-			 */
-			bool loadMap(string filename);
-
-			/**
 			 saveMap
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns true is the map was saved correctly, false otherwise

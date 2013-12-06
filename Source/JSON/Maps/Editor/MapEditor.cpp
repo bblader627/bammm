@@ -77,14 +77,6 @@ namespace bammm
 		delete[] _grid;
 	}
 
-	bool MapEditor::loadMap(string filename)
-	{
-		cout << "Under construction. Needs JsonParser\n";
-		//cout << filename << "\n";
-		//_parser.parseFile(filename);
-		return true;
-	}
-
 	bool MapEditor::saveMap()
 	{
 		cout << "Save as: \n";
@@ -119,37 +111,24 @@ namespace bammm
 	void MapEditor::startEditor()
 	{
 		cout << "Welcome to BAMMM's Map Editor\n";
-		cout << "Please enter a command.\n";
-		cout << "1. Load existing map.\n";
-		cout << "2. Create new map.\n";
 
 		string choice;
 		int convertedChoice;
+
+		int x = 0;
+		int y = 0;
+		int z = 0;
 		do
 		{
-			getline(cin, choice);
-			convertedChoice = atoi(choice.c_str());
-		} while (convertedChoice != 1 && convertedChoice != 2);
+			cout << "Enter x dimension of map\n";
+			cin >> x;
+			cout << "Enter y dimension of map\n";
+			cin >> y;
+			cout << "Enter z dimension of map\n";
+			cin >> z;
+		} while(x < 1 || y < 1 || z < 1);
 
-		string filename;
-		int x, y, z;
-		switch (convertedChoice)
-		{
-			case 1:
-				cout << "Enter the name of the file\n";
-				getline(cin, filename);
-				loadMap(filename);
-				break;
-			case 2:
-				cout << "Enter x dimension of map\n";
-				cin >> x;
-				cout << "Enter y dimension of map\n";
-				cin >> y;
-				cout << "Enter z dimension of map\n";
-				cin >> z;
-				createMap(x, y, z);
-				break;
-		}
+		createMap(x, y, z);
 
 		while (true)
 		{
@@ -420,13 +399,13 @@ namespace bammm
 	string MapEditor::createJSON()
 	{
 		string jsonString = "{\n";
-		jsonString += createDimensions(_x, _y, _z);
-		jsonString += createWallJSON();
+		jsonString += createDimensions(_x, _y, _z) + "\n";
+		jsonString += createWallJSON() + "\n";
+		jsonString += createBuildingJSON() + "\n";
+		jsonString += createTreeJSON() + "\n";
+		jsonString += createMineJSON() + "\n";
+		jsonString += createDockJSON() + "\n";
 		jsonString += createWaterJSON();
-		jsonString += createMineJSON();
-		jsonString += createTreeJSON();
-		jsonString += createDockJSON();
-		jsonString += createBuildingJSON();
 		jsonString += "\n}";
 		return jsonString;
 	}
@@ -537,7 +516,7 @@ namespace bammm
 			}
 		}
 		
-		string closeValue = "\t],\n";
+		string closeValue = "\t]\n";
 		return sectionValue + content + closeValue;
 	}
 	
