@@ -28,35 +28,35 @@ namespace bammm
 		_water.setSymbol("~");
 		_water.removeColor("green");
 		_water.addColor("blue");
-		
+
 		_tree.setSymbol("+");
 		_tree.addColor("red");
 		_tree.addColor("black");
 		_tree.addColor("blue");
-		
+
 		_wall.setSymbol("#");
 		_wall.removeColor("green");
 		_wall.addColor("black");
 		_wall.addColor("yellow");
-		
+
 		_bridge.setSymbol("=");
 		_bridge.removeColor("green");
 		_bridge.addColor("yellow");
-		
+
 		_mine.setSymbol("^");
 		_mine.removeColor("green");
 		_mine.addColor("white");
 		_mine.addColor("yellow");
 		_mine.addColor("black");
-		
+
 		_pub.setSymbol("P");
 		_pub.removeColor("green");
 		_pub.addColor("purple");
-		
+
 		_inn.setSymbol("I");
 		_inn.removeColor("green");
 		_inn.addColor("purple");
-		
+
 		_dock.setSymbol("-");
 		_dock.removeColor("green");
 		_dock.addColor("yellow");
@@ -84,6 +84,7 @@ namespace bammm
 		_fileOutput.open(_name + ".json");
 		_fileOutput << createJSON();
 		_fileOutput.close();
+
 		return true;
 	}
 
@@ -94,12 +95,15 @@ namespace bammm
 		_z = z;
 
 		_grid = new TerrainSquare**[_y];
+
 		for (int i = 0; i < _y; i++)
 		{
 			_grid[i] = new TerrainSquare*[_x];
+
 			for (int j = 0; j < _x; j++)
 			{
 				_grid[i][j] = new TerrainSquare[_z];
+
 				for (int k = 0; k < _z; k++)
 				{
 					_grid[i][j][k] = _grass;
@@ -114,10 +118,10 @@ namespace bammm
 
 		string choice;
 		int convertedChoice;
-
 		int x = 0;
 		int y = 0;
 		int z = 0;
+
 		do
 		{
 			cout << "Enter x dimension of map\n";
@@ -126,7 +130,7 @@ namespace bammm
 			cin >> y;
 			cout << "Enter z dimension of map\n";
 			cin >> z;
-		} while(x < 1 || y < 1 || z < 1);
+		} while (x < 1 || y < 1 || z < 1);
 
 		createMap(x, y, z);
 
@@ -137,6 +141,7 @@ namespace bammm
 			cout << "Enter a command. Enter h for help:" << "\n";
 			cin >> choice;
 			convertedChoice = choice.at(0);
+
 			if (convertedChoice == 'v')
 			{
 				saveMap();
@@ -222,7 +227,7 @@ namespace bammm
 
 	void MapEditor::addItem(int x, int y, int z, TerrainSquare& item)
 	{
-		if(_grid[y][x][z] == item)
+		if (_grid[y][x][z] == item)
 		{
 			_grid[y][x][z].nextColor();
 		}
@@ -248,8 +253,10 @@ namespace bammm
 					_grid[i][j][_cursorZ].selectSquare(false);
 					cout << _grid[i][j][_cursorZ].toString();
 				}
+
 				cout << " ";
 			}
+
 			cout << "\n";
 		}
 	}
@@ -279,7 +286,9 @@ namespace bammm
 		cout << "6. Pub" << "\n";
 		cout << "7. Inn" << "\n";
 		cout << "8. Dock" << "\n";
-		cout << "Placing the same object on the same space will cycle through the types." << "\n";
+		cout
+				<< "Placing the same object on the same space will cycle through the types."
+				<< "\n";
 		cout << "Press enter to continue" << "\n";
 		cin.ignore();
 		cin.get();
@@ -353,6 +362,7 @@ namespace bammm
 		string yVal = "\"y\": " + to_string(y) + ",\n";
 		string zVal = "\"z\": " + to_string(z) + ",\n";
 		string walkVal = "\"walkable\": " + walkable + "\n";
+
 		return "{\n" + nameVal + xVal + yVal + zVal + walkVal + "}";
 	}
 
@@ -364,10 +374,13 @@ namespace bammm
 		string yValue = "\"y\":" + to_string(y) + ", ";
 		string zValue = "\"z\":" + to_string(z) + " }\n";
 		string closeValue = "\t],\n";
+
 		return sectionValue + xValue + yValue + zValue + closeValue;
 	}
 
-	string MapEditor::createJSONObjectNew(string name, int health, int stamina, int attack, int defense, string behavior, int x, int y, int z, int alliance, string color, string symbol, bool collision)
+	string MapEditor::createJSONObjectNew(string name, int health, int stamina,
+			int attack, int defense, string behavior, int x, int y, int z,
+			int alliance, string color, string symbol, bool collision)
 	{
 		string collisionValue;
 		string startValue = "\t\t{ ";
@@ -383,7 +396,8 @@ namespace bammm
 		string allianceValue = "\"alliance\":" + to_string(alliance) + ", ";
 		string colorValue = "\"color\":\"" + color + "\", ";
 		string symbolValue = "\"symbol\":\"" + symbol + "\", ";
-		if(collision)
+
+		if (collision)
 		{
 			collisionValue = "\"collision\":true";
 		}
@@ -391,9 +405,13 @@ namespace bammm
 		{
 			collisionValue = "\"collision\":false";
 		}
+
 		string endValue = " }";
 
-		return startValue + nameValue + healthValue + staminaValue + attackValue + defenseValue + behaviorValue + xValue + yValue + zValue + allianceValue + colorValue + symbolValue + collisionValue + endValue;
+		return startValue + nameValue + healthValue + staminaValue + attackValue
+				+ defenseValue + behaviorValue + xValue + yValue + zValue
+				+ allianceValue + colorValue + symbolValue + collisionValue
+				+ endValue;
 	}
 
 	string MapEditor::createJSON()
@@ -407,6 +425,7 @@ namespace bammm
 		jsonString += createDockJSON() + "\n";
 		jsonString += createWaterJSON();
 		jsonString += "\n}";
+
 		return jsonString;
 	}
 
@@ -434,15 +453,17 @@ namespace bammm
 				for (int z = 0; z < _z; z++)
 				{
 					TerrainSquare& current = _grid[y][x][z];
+
 					if (current.getSymbol() == symbol)
 					{
 						if (!firstItem)
 						{
 							content += ",\n";
 						}
+
 						firstItem = false;
 
-						if(current.getCurrentColor() == "yellow")
+						if (current.getCurrentColor() == "yellow")
 						{
 							collision = false;
 						}
@@ -451,18 +472,21 @@ namespace bammm
 							collision = true;
 						}
 
-						content += createJSONObjectNew(name + to_string(id), health, stamina, attack, defense, behavior, x, y, z, alliance, current.getCurrentColor(), current.getSymbol(), collision);
-						
+						content += createJSONObjectNew(name + to_string(id),
+								health, stamina, attack, defense, behavior, x,
+								y, z, alliance, current.getCurrentColor(),
+								current.getSymbol(), collision);
 						id++;
 					}
 				}
 			}
 		}
-		
+
 		string closeValue = "\t],\n";
+
 		return sectionValue + content + closeValue;
 	}
-	
+
 	string MapEditor::createWaterJSON()
 	{
 		string sectionName = "water";
@@ -488,9 +512,11 @@ namespace bammm
 				for (int z = 0; z < _z; z++)
 				{
 					TerrainSquare& current = _grid[y][x][z];
-					if (current.getSymbol() == symbol || current.getSymbol() == symbol2)
+
+					if (current.getSymbol() == symbol
+							|| current.getSymbol() == symbol2)
 					{
-						if(current.getSymbol() == symbol)
+						if (current.getSymbol() == symbol)
 						{
 							name = "Water";
 							collision = true;
@@ -505,21 +531,23 @@ namespace bammm
 						{
 							content += ",\n";
 						}
+
 						firstItem = false;
-
-
-						content += createJSONObjectNew(name + to_string(id), health, stamina, attack, defense, behavior, x, y, z, alliance, current.getCurrentColor(), current.getSymbol(), collision);
-						
+						content += createJSONObjectNew(name + to_string(id),
+								health, stamina, attack, defense, behavior, x,
+								y, z, alliance, current.getCurrentColor(),
+								current.getSymbol(), collision);
 						id++;
 					}
 				}
 			}
 		}
-		
+
 		string closeValue = "\t]\n";
+
 		return sectionValue + content + closeValue;
 	}
-	
+
 	string MapEditor::createDockJSON()
 	{
 		string sectionName = "dock";
@@ -544,27 +572,30 @@ namespace bammm
 				for (int z = 0; z < _z; z++)
 				{
 					TerrainSquare& current = _grid[y][x][z];
+
 					if (current.getSymbol() == symbol)
 					{
 						if (!firstItem)
 						{
 							content += ",\n";
 						}
+
 						firstItem = false;
-
-
-						content += createJSONObjectNew(name + to_string(id), health, stamina, attack, defense, behavior, x, y, z, alliance, current.getCurrentColor(), current.getSymbol(), collision);
-						
+						content += createJSONObjectNew(name + to_string(id),
+								health, stamina, attack, defense, behavior, x,
+								y, z, alliance, current.getCurrentColor(),
+								current.getSymbol(), collision);
 						id++;
 					}
 				}
 			}
 		}
-		
+
 		string closeValue = "\t],\n";
+
 		return sectionValue + content + closeValue;
 	}
-	
+
 	string MapEditor::createBuildingJSON()
 	{
 		string sectionName = "buildings";
@@ -590,9 +621,11 @@ namespace bammm
 				for (int z = 0; z < _z; z++)
 				{
 					TerrainSquare& current = _grid[y][x][z];
-					if (current.getSymbol() == symbol || current.getSymbol() == symbol2)
+
+					if (current.getSymbol() == symbol
+							|| current.getSymbol() == symbol2)
 					{
-						if(current.getSymbol() == symbol)
+						if (current.getSymbol() == symbol)
 						{
 							name = "Pub";
 						}
@@ -605,21 +638,23 @@ namespace bammm
 						{
 							content += ",\n";
 						}
+
 						firstItem = false;
-
-
-						content += createJSONObjectNew(name + to_string(id), health, stamina, attack, defense, behavior, x, y, z, alliance, current.getCurrentColor(), current.getSymbol(), collision);
-						
+						content += createJSONObjectNew(name + to_string(id),
+								health, stamina, attack, defense, behavior, x,
+								y, z, alliance, current.getCurrentColor(),
+								current.getSymbol(), collision);
 						id++;
 					}
 				}
 			}
 		}
-		
+
 		string closeValue = "\t],\n";
+
 		return sectionValue + content + closeValue;
 	}
-	
+
 	string MapEditor::createMineJSON()
 	{
 		string sectionName = "ore";
@@ -644,39 +679,44 @@ namespace bammm
 				for (int z = 0; z < _z; z++)
 				{
 					TerrainSquare& current = _grid[y][x][z];
+
 					if (current.getSymbol() == symbol)
 					{
 						if (!firstItem)
 						{
 							content += ",\n";
 						}
+
 						firstItem = false;
 
-						if(current.getCurrentColor() == "yellow")
+						if (current.getCurrentColor() == "yellow")
 						{
 							name = "gold";
 						}
-						else if(current.getCurrentColor() == "white")
+						else if (current.getCurrentColor() == "white")
 						{
 							name = "iron";
 						}
-						else if(current.getCurrentColor() == "black")
+						else if (current.getCurrentColor() == "black")
 						{
 							name = "coal";
 						}
 
-						content += createJSONObjectNew(name + to_string(id), health, stamina, attack, defense, behavior, x, y, z, alliance, current.getCurrentColor(), current.getSymbol(), collision);
-						
+						content += createJSONObjectNew(name + to_string(id),
+								health, stamina, attack, defense, behavior, x,
+								y, z, alliance, current.getCurrentColor(),
+								current.getSymbol(), collision);
 						id++;
 					}
 				}
 			}
 		}
-		
+
 		string closeValue = "\t],\n";
+
 		return sectionValue + content + closeValue;
 	}
-	
+
 	string MapEditor::createTreeJSON()
 	{
 		string sectionName = "trees";
@@ -701,40 +741,45 @@ namespace bammm
 				for (int z = 0; z < _z; z++)
 				{
 					TerrainSquare& current = _grid[y][x][z];
+
 					if (current.getSymbol() == symbol)
 					{
 						if (!firstItem)
 						{
 							content += ",\n";
 						}
+
 						firstItem = false;
 
-						if(current.getCurrentColor() == "red")
+						if (current.getCurrentColor() == "red")
 						{
 							name = "redwood";
 						}
-						else if(current.getCurrentColor() == "black")
+						else if (current.getCurrentColor() == "black")
 						{
 							name = "birch";
 						}
-						else if(current.getCurrentColor() == "green")
+						else if (current.getCurrentColor() == "green")
 						{
 							name = "oak";
 						}
-						else if(current.getCurrentColor() == "blue")
+						else if (current.getCurrentColor() == "blue")
 						{
 							name = "cedar";
 						}
 
-						content += createJSONObjectNew(name + to_string(id), health, stamina, attack, defense, behavior, x, y, z, alliance, current.getCurrentColor(), current.getSymbol(), collision);
-						
+						content += createJSONObjectNew(name + to_string(id),
+								health, stamina, attack, defense, behavior, x,
+								y, z, alliance, current.getCurrentColor(),
+								current.getSymbol(), collision);
 						id++;
 					}
 				}
 			}
 		}
-		
+
 		string closeValue = "\t],\n";
+
 		return sectionValue + content + closeValue;
 	}
 }

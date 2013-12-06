@@ -20,5 +20,6 @@ int main()
 {
 	MapEditor editor;
 	editor.startEditor();
+
 	return 0;
 }

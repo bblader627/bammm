@@ -12,12 +12,7 @@
  *
  */
 
-#include <iostream>
-#include <string>
 #include "TerrainSquare.h"
-#include "../../../Resources/DynamicArray.h"
-#include "../../../Resources/Color.h"
-#include "../../../Resources/Constant.h"
 
 namespace bammm
 {
@@ -65,17 +60,17 @@ namespace bammm
 	{
 		_currentSymbol++;
 
-		if(_currentSymbol >= _colors.getSize())
+		if (_currentSymbol >= _colors.getSize())
 		{
 			_currentSymbol = 0;
 		}
 	}
-			
+
 	string TerrainSquare::getCurrentColor()
 	{
 		return _colors.get(_currentSymbol);
 	}
-			
+
 	void TerrainSquare::selectSquare(bool selected)
 	{
 		_selected = selected;
@@ -85,14 +80,15 @@ namespace bammm
 	{
 		return _colors;
 	}
-			
+
 	string TerrainSquare::toString()
 	{
 		string output;
 
-		if(_selected)
+		if (_selected)
 		{
-			output = Color::colorTextHighlight(_symbol, _colors.get(_currentSymbol));
+			output = Color::colorTextHighlight(_symbol,
+					_colors.get(_currentSymbol));
 		}
 		else
 		{
@@ -109,12 +105,12 @@ namespace bammm
 		_currentSymbol = 0;
 		_selected = true;
 
-		for(uint i = 0; i < terrainSquare.getColors().getSize(); i++)
+		for (uint i = 0; i < terrainSquare.getColors().getSize(); i++)
 		{
 			_colors.add(terrainSquare.getColors().get(i));
 		}
 	}
-	
+
 	bool TerrainSquare::operator==(TerrainSquare& terrainSquare)
 	{
 		return _symbol == terrainSquare._symbol;

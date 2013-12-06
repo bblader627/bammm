@@ -33,7 +33,6 @@ namespace bammm
 			int _cursorZ;
 			string _name;
 			TerrainSquare*** _grid;
-			//JSONParser _parser;
 			ofstream _fileOutput;
 
 			TerrainSquare _grass;
@@ -150,7 +149,10 @@ namespace bammm
 			 @Pre-Condition- Takes in many parameters
 			 @Post-Condition- Returns a JSON object
 			 */
-			string createJSONObjectNew(string name, int health, int stamina, int attack, int defense, string behavior, int x, int y, int z, int alliance, string color, string symbol, bool collision);
+			string createJSONObjectNew(string name, int health, int stamina,
+					int attack, int defense, string behavior, int x, int y,
+					int z, int alliance, string color, string symbol,
+					bool collision);
 
 			/**
 			 createJSON
@@ -158,7 +160,7 @@ namespace bammm
 			 @Post-Condition- Creates and returns our JSON
 			 */
 			string createJSON();
-			
+
 			/**
 			 createDimensions
 			 @Pre-Condition- An integer for x,y,z
@@ -179,14 +181,14 @@ namespace bammm
 			 @Post-Condition- Returns a JSON object for walls
 			 */
 			string createWallJSON();
-			
+
 			/**
 			 createDockJSON
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns a JSON object for docks
 			 */
 			string createDockJSON();
-			
+
 			/**
 			 createTreeJSON
 			 @Pre-Condition- No input
