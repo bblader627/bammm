@@ -417,6 +417,7 @@ namespace bammm
 		jsonString += createWaterJSON();
 		jsonString += createMineJSON();
 		jsonString += createTreeJSON();
+		jsonString += createBuildingJSON();
 		//jsonString = jsonString + createMineJSON() + ",\n";
 		//jsonString = jsonString + createBuildingJSON() + "\n";
 		jsonString += "\n}";
@@ -512,6 +513,61 @@ namespace bammm
 						{
 							name = "Bridge";
 							collision = false;
+						}
+
+						if (!firstItem)
+						{
+							content += ",\n";
+						}
+						firstItem = false;
+
+
+						content += createJSONObjectNew(name + to_string(id), health, stamina, attack, defense, behavior, x, y, z, alliance, current.getCurrentColor(), current.getSymbol(), collision);
+						
+						id++;
+					}
+				}
+			}
+		}
+		
+		string closeValue = "\t],\n";
+		return sectionValue + content + closeValue;
+	}
+	
+	string MapEditor::createBuildingJSON()
+	{
+		string sectionName = "buildings";
+		string symbol = "P";
+		string symbol2 = "I";
+		string sectionValue = "\t\"" + sectionName + "\": [\n";
+		string content = "";
+		string name = "Pub";
+		int health = 100;
+		int stamina = 0;
+		int attack = 0;
+		int defense = 20;
+		string behavior = "block";
+		int alliance = 0;
+		bool collision = false;
+		bool firstItem = true;
+		int id = 1;
+
+		for (int x = 0; x < _x; x++)
+		{
+			for (int y = 0; y < _y; y++)
+			{
+				for (int z = 0; z < _z; z++)
+				{
+					TerrainSquare& current = _grid[y][x][z];
+					if (current.getSymbol() == symbol || current.getSymbol() == symbol2)
+					{
+						if(current.getSymbol() == symbol)
+						{
+							name = "Pub";
+						}
+						else
+						{
+							name = "Inn";
 						}
 
 						if (!firstItem)
@@ -649,63 +705,5 @@ namespace bammm
 		
 		string closeValue = "\t],\n";
 		return sectionValue + content + closeValue;
-	}
-
-	string MapEditor::createBuildingJSON()
-	{
-		string gym = "G";
-		string fire = "F";
-		string smith = "S";
-		string armory = "A";
-		bool matched = false;
-		string buildingName = "";
-		bool firstItem = true;
-		string name = "Building Objects";
-		string jsonString = "\"" + name + "\":\n";
-		jsonString = jsonString + "[\n";
-		for (int x = 0; x < _x; x++)
-		{
-			for (int y = 0; y < _y; y++)
-			{
-				for (int z = 0; z < _z; z++)
-				{
-					if (_grid[y][x][z].getSymbol() == gym)
-					{
-						buildingName = "Gym";
-						matched = true;
-					}
-					if (_grid[y][x][z].getSymbol() == fire)
-					{
-						buildingName = "Fire pit";
-						matched = true;
-					}
-					if (_grid[y][x][z].getSymbol() == smith)
-					{
-						buildingName = "Blacksmith";
-						matched = true;
-					}
-					if (_grid[y][x][z].getSymbol() == armory)
-					{
-						buildingName = "Armory";
-						matched = true;
-					}
-
-					if (matched)
-					{
-						matched = false;
-						if (!firstItem)
-						{
-							jsonString = jsonString + ",\n";
-						}
-						firstItem = false;
-						jsonString = jsonString
-								+ createJSONObject(x, y, z, buildingName,
-										"false") + "";
-					}
-				}
-			}
-		}
-		jsonString = jsonString + "]";
-		return jsonString;
 	}
 }
