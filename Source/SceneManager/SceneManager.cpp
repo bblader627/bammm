@@ -39,15 +39,15 @@ namespace bammm
 		{
 			PlayerController* controller = new PlayerController();
 			controller->setup(*actor, _sceneGraph);
-			this->addTickable(controller);
-			this->addPlayerController(controller);
+			addTickable(controller);
+			addPlayerController(controller);
 		}
 		else if (actor->getType() == "orc")
 		{
 			AiController* controller = new AiController();
 			controller->setup(*actor, _sceneGraph);
-			this->addTickable(controller);
-			this->addAiController(controller);
+			addTickable(controller);
+			addAiController(controller);
 		}
 	}
 
@@ -101,7 +101,7 @@ namespace bammm
 				Actor* removedActor = playerController->getActor();
 				_allPlayerControllers.removeElement(playerController);
 				removeActor(removedActor);
-				removeTickable(tickable);
+				delete removeTickable(tickable);
 				size--;
 				i--;
 			}
@@ -110,7 +110,7 @@ namespace bammm
 				Actor* removedActor = aiController->getActor();
 				_allAiControllers.removeElement(aiController);
 				removeActor(removedActor);
-				removeTickable(tickable);
+				delete removeTickable(tickable);
 				size--;
 				i--;
 			}
