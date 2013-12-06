@@ -84,8 +84,6 @@ namespace bammm
 			 @Post-Condition- Returns the data as a float
 			 */
 			float getData(RecordType type, string targetID);
-
-			//TODO: Add functions that replace records?
 	};
 }
 

@@ -60,6 +60,7 @@ namespace bammm
 							== 0))
 			{
 				_listOfRecords.remove(i);
+
 				return true;
 			}
 		}
@@ -84,7 +85,6 @@ namespace bammm
 
 		for (int i = 0; i < _listOfRecords.getSize(); i++)
 		{
-			//This should just be an int compare, right?
 			if (_listOfRecords.get(i).getRecordType() == type)
 			{
 				count++;
@@ -100,7 +100,6 @@ namespace bammm
 
 		for (int i = 0; i < _listOfRecords.getSize(); i++)
 		{
-			//This should just be an int compare, right?
 			if ((_listOfRecords.get(i).getRecordType() == type)
 					&& (_listOfRecords.get(i).getTargetID().compare(targetID)
 							== 0))
@@ -112,7 +111,6 @@ namespace bammm
 		return count;
 	}
 
-	/* Returns the data at the first found type (To get specific data, use the target specifier function */
 	float Blackboard::getData(RecordType type)
 	{
 		for (int i = 0; i < _listOfRecords.getSize(); i++)
