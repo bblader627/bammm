@@ -12,11 +12,7 @@
  *
  */
 
-#include <sstream>
-#include <iostream>
 #include "JSON.h"
-
-using namespace std;
 
 namespace bammm
 {

@@ -41,14 +41,14 @@ namespace bammm
 			 @Pre-Condition- Takes in a JSON node
 			 @Post-Condition- Adds the node as a root node
 			 */
-			void addRoot(JSON & newNode);
+			void addRoot(JSON& newNode);
 
 			/**
 			 addChild
 			 @Pre-Condition- Takes in a JSON  rootNode and a JSON childNode
 			 @Post-Condition- Adds the child to the specified rootNode
 			 */
-			void addChild(JSON & rootNode, JSON & newNode);
+			void addChild(JSON& rootNode, JSON& newNode);
 
 		public:
 			JSONParser();
@@ -86,7 +86,7 @@ namespace bammm
 			 @Pre-Condition- Takes in const string key
 			 @Post-Condition- Returns JSON *
 			 */
-			JSON * operator[](const string key)
+			JSON* operator[](const string key)
 			{
 				return _rootMap.getValue(key);
 			}

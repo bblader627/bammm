@@ -118,7 +118,7 @@ namespace bammm
 		_value.str = newValue;
 	}
 
-	JSONPrimitive & JSONPrimitive::operator[](const string & rhs)
+	JSONPrimitive& JSONPrimitive::operator[](const string& rhs)
 	{
 		return *this;
 	}
