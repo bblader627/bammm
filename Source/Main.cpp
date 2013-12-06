@@ -26,8 +26,7 @@ int main()
 	bool printMap = true;
 
 	SceneManager sceneManager;
-	extern Factory* factory;
-	factory = new Factory(&sceneManager);
+	Factory* factory = new Factory(&sceneManager);
 	MeleeCombat meleeCombat;
 
 	factory->setup();
