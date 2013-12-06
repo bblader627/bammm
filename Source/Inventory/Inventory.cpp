@@ -190,7 +190,7 @@ namespace bammm
 
 	Item* Inventory::getIndex(uint index)
 	{
-		return _inventory[i];
+		return _inventory[index];
 	}
 
 	string Inventory::toString()
