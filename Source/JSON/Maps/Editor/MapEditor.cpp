@@ -590,13 +590,6 @@ namespace bammm
 		return sectionValue + content + closeValue;
 	}
 	
-	string MapEditor::createWaterJSON()
-	{
-		string sectionName = "water";
-		string symbol = "~";
-		string symbol2 = "=";
-		string sectionValue = "\t\"" + sectionName + "\": [\n";
-
 	string MapEditor::createBarrierJSON()
 	{
 		string item = "#";
