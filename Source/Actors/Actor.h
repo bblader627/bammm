@@ -32,36 +32,30 @@ namespace bammm
 	class Actor
 	{
 		protected:
-			float _rotation;
 			string _name;
 			string _type;
 			string _behavior;
+			float _rotation;
 			Vector3D *_velocity;
 			Vector3D *_location;
-
 			int _health;
 			int _stamina;
 			int _maximumHealth;
 			int _maximumStamina;
-
 			int _attack;
 			int _defense;
-
 			int _gold;
 			int _coal;
 			int _iron;
 			int _wood;
 			float _BAC;
-
 			bool _collision;
 			AllianceType _alliance;
 			string _symbol;
 			string _color;
-
-			MeleeWeapon *_meleeWeapon;
-			RangedWeapon *_rangedWeapon;
+			MeleeWeapon* _meleeWeapon;
+			RangedWeapon* _rangedWeapon;
 			Inventory _inventory;
-
 			int _level;
 			int _experience;
 			int _totalExperienceThisLevel;
