@@ -188,7 +188,7 @@ namespace bammm
 		return _inventory.getSize();
 	}
 
-	uint Inventory::getIndex(uint index)
+	Item* Inventory::getIndex(uint index)
 	{
 		return _inventory[i];
 	}
