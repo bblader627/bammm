@@ -311,4 +311,10 @@ namespace bammm
 			map->add(type, *weaponData);
 		}
 	}
+
+	JSON* Factory::getCraftables()
+	{
+		return _craftables;
+	}
+
 }

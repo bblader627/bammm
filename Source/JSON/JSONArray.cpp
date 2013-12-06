@@ -50,11 +50,11 @@ namespace bammm
 
 	JSON JSONArray::operator[](const unsigned int & rhs)
 	{
-		cout << "returning child of array" << endl;
 		if (_children[rhs].getType() == JSON_NULL)
 		{
 			cout
 					<< "Error: JSONPrimitive Object not initialized to a value or incorrect type :: JSON_NULL \n";
+
 			return *this;
 		}
 
@@ -64,7 +64,6 @@ namespace bammm
 	int JSONArray::getIntValue()
 	{
 		return 0;
-
 	}
 
 	double JSONArray::getDoubleValue()
