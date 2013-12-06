@@ -129,6 +129,7 @@ namespace bammm
 		_numberOfNodes = 0;
 		_mapSize = size;
 		hashMap = new HashNode<T>*[_mapSize];
+
 		for (int i = 0; i < _mapSize; i++)
 		{
 			hashMap[i] = NULL;
@@ -178,9 +179,11 @@ namespace bammm
 		HashNode<T>* node;
 		node = new HashNode<T>(key, value);
 		int bucket = hashString(key);
+
 		node->setNextNode(*hashMap[bucket]);
 		hashMap[bucket] = node;
 		_numberOfNodes++;
+
 		return true;
 	}
 
@@ -199,6 +202,7 @@ namespace bammm
 			hashMap[bucket] = &temporary->getNextNode();
 			delete temporary;
 			_numberOfNodes--;
+
 			return true;
 		}
 		else
@@ -211,8 +215,10 @@ namespace bammm
 					temporary->setNextNode(temporaryNext->getNextNode());
 					delete temporaryNext;
 					_numberOfNodes--;
+
 					return true;
 				}
+
 				temporary = &temporary->getNextNode();
 				temporaryNext = &temporaryNext->getNextNode();
 			}
@@ -228,6 +234,7 @@ namespace bammm
 		{
 			DynamicArray<string>* setOfKeys;
 			setOfKeys = this->getAllKeys();
+
 			for (int i = 0; i <= _numberOfNodes; i++)
 			{
 				remove(setOfKeys->get(i));
@@ -240,15 +247,18 @@ namespace bammm
 	{
 		DynamicArray<string>* keys;
 		keys = new DynamicArray<string>(_numberOfNodes);
+
 		for (int i = 0; i < _mapSize; i++)
 		{
 			HashNode<T>* temporary = hashMap[i];
+
 			while (temporary != NULL)
 			{
 				keys->add(temporary->getKey());
 				temporary = &(temporary->getNextNode());
 			}
 		}
+
 		return keys;
 	}
 
@@ -261,6 +271,7 @@ namespace bammm
 		for (int i = 0; i < _mapSize; i++)
 		{
 			HashNode<T>* temporary = hashMap[i];
+
 			while (temporary != NULL)
 			{
 				values->add(temporary->getValue());
@@ -286,7 +297,9 @@ namespace bammm
 
 			temporary = &(temporary->getNextNode());
 		}
+
 		T *ret = NULL;
+
 		return *ret;
 	}
 

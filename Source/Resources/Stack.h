@@ -129,6 +129,7 @@ namespace bammm
 			errorMessage("Index out of bounds.");
 			assert(0);
 		}
+
 		return _stack->remove(_stack->getSize() - 1);
 	}
 
@@ -136,6 +137,7 @@ namespace bammm
 	T Stack<T>::push(T element)
 	{
 		_stack->add(element);
+
 		return element;
 	}
 

@@ -33,9 +33,8 @@ namespace bammm
 	{
 		private:
 			int _numberOfNodes;
-			//TreeNode<T>** tree;
-			//DynamicArray<TreeNode<T>*>* tree;
-			Queue<TreeNode<T>*>* tree;
+			Queue<TreeNode<T>*>* _tree;
+
 		public:
 			Tree<T>();
 			virtual ~Tree();
@@ -69,20 +68,6 @@ namespace bammm
 			bool add(T value, TreeNode<T>* parent);
 
 			/**
-			 remove
-			 @Pre-Condition- Takes a string key
-			 @Post-Condition- Remove the node that corresponds to the given key and returns true on success
-			 */
-			//bool remove(T& value);
-
-			/**
-			 removeAll
-			 @Pre-Condition- No input
-			 @Post-Condition- Removes all the nodes in the map
-			 */
-			//void removeAll();
-
-			/**
 			 getNode
 			 @Pre-Condition- Takes a string key
 			 @Post-Condition- Finds and returns the node corresponding to the given key
@@ -96,17 +81,25 @@ namespace bammm
 			 */
 			T& getValue(T& value);
 
+			/**
+			 get
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a TreeNode
+			 */
 			TreeNode<T>* get();
 
+			/**
+			 isEmpty
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns true if empty, false otherwise
+			 */
 			bool isEmpty();
-
-			//T getValueAt(int index);
 	};
 
 	template<class T>
 	Tree<T>::Tree()
 	{
-		tree = new Queue<TreeNode<T>*>();
+		_tree = new Queue<TreeNode<T>*>();
 		_numberOfNodes = 0;
 
 	}
@@ -114,14 +107,13 @@ namespace bammm
 	template<class T>
 	Tree<T>::~Tree()
 	{
-		//removeAll();
-		delete[] tree;
+		delete[] _tree;
 	}
 
 	template<class T>
 	int Tree<T>::getSize()
 	{
-			return tree->getSize();
+		return _tree->getSize();
 	}
 
 	template<class T>
@@ -136,92 +128,23 @@ namespace bammm
 		TreeNode<T>* node;
 		node = new TreeNode<T>(value, parent);
 
-		tree->add(node);
+		_tree->add(node);
 
 		_numberOfNodes++;
 		return true;
 	}
 
-	/*
-	template<class T>
-	bool Tree<T>::remove(T& value)
-	{
-		for (int i = 0; i < tree->getSize(); i++)
-		{
-			if (tree->get(i) == value)
-			{
-				tree->remove(i);
-				_numberOfNodes--;
-				return true;
-			}
-		}
-		return false;
-	}
-
-
-	template<class T>
-	void Tree<T>::removeAll()
-	{
-		if (_numberOfNodes != 0)
-		{
-			for (int i = tree->getSize()-1; i >= 0; i++)
-			{
-				tree->remove(i);
-				_numberOfNodes--;
-			}
-		}
-	}
-
-	template<class T>
-	T& Tree<T>::getValue(T& value)
-	{
-		for (int i = 0; i < tree->getSize(); i++)
-		{
-			if (tree->get(i) == value)
-			{
-				return tree->get(i);
-			}
-		}
-
-		T *ret = NULL;
-		return *ret;
-	}
-
-	template<class T>
-	TreeNode<T>* Tree<T>::getNode(T& value)
-	{
-		return NULL;
-	}
-*/
 	template<class T>
 	TreeNode<T>* Tree<T>::get()
 	{
-		/*
-		if (index < tree->getSize())
-		if ((uint)index < tree->getSize())
-		{
-			return tree->get(index);
-		}
-		cout << "RETURNING NULL" << endl;
-		return NULL;
-		*/
-		return tree->remove();
+		return _tree->remove();
 	}
-
-	/*
-	template<class T>
-	T Tree<T>::getValueAt(int index)
-	{
-		return getAt(index)->getValue();
-	}
-	*/
 
 	template<class T>
 	bool Tree<T>::isEmpty()
 	{
-		return tree->isEmpty();
+		return _tree->isEmpty();
 	}
-
 }
 
 #endif
