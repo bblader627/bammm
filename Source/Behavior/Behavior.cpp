@@ -54,5 +54,4 @@ namespace bammm
 	{
 		return _baseBehaviors;
 	}
-
 }
