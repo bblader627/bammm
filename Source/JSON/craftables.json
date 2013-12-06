@@ -1,5 +1,5 @@
 {
-	"coked_fish" : [
+	"cooked_fish" : [
 		{ "name":"fish", "amount":1 },
 		{ "name":"wood", "amount":1 }
 	],
@@ -13,5 +13,17 @@
 	],
 	"necklace" : [
 		{ "name":"gold", "amount":3 }
+	],
+	"armor" : [
+		{ "name":"iron", "amount":4},
+		{ "name":"coal", "amount":2}
+	],
+	"boots" : [
+		{ "name":"iron", "amount":2}
+	],
+	"helmet" : [
+		{ "name":"iron", "amount":4},
+		{ "name":"gold", "amount":1}
 	]
+	
 }
