@@ -40,19 +40,19 @@ namespace bammm
 		bool canStore = _inventory.getSize() < _slots;
 
 		//Can put new item
-		if(canStore && !isStackable)
+		if (canStore && !isStackable)
 		{
 			_inventory.add(item);
 			canAdd = true;
 		}
 		//Can put new stackable
-		else if(isStackable && !containsNewItem && canStore)
+		else if (isStackable && !containsNewItem && canStore)
 		{
 			_inventory.add(item);
 			canAdd = true;
 		}
 		//Add to previous item
-		else if(isStackable && containsNewItem)
+		else if (isStackable && containsNewItem)
 		{
 			int index = getInventoryIndex(*item);
 			Item* foundItem = _inventory.get(index);
@@ -68,13 +68,13 @@ namespace bammm
 	{
 		cout << "Start of removeItem\n";
 		uint usedSlots = _inventory.getSize();
-		for(uint i = 0; i < usedSlots; i++)
+		for (uint i = 0; i < usedSlots; i++)
 		{
 			Item currentItem = *_inventory.get(i);
-			if(currentItem == item)
+			if (currentItem == item)
 			{
 				//Return last stackable/item
-				if(currentItem.getAmount() == 1)
+				if (currentItem.getAmount() == 1)
 				{
 					cout << "End of removeItem amount 1";
 					return _inventory.remove(i);
@@ -88,35 +88,35 @@ namespace bammm
 			}
 		}
 		cout << "End of removeItem";
-		return NULL;
+		return NULL ;
 	}
 
 	bool Inventory::contains(Item& item)
 	{
 		uint usedSlots = _inventory.getSize();
-		
-		for(uint i = 0; i < usedSlots; i++)
+
+		for (uint i = 0; i < usedSlots; i++)
 		{
 			Item currentItem = *_inventory.get(i);
-			if(currentItem == item)
+			if (currentItem == item)
 			{
-				return true;	
+				return true;
 			}
 		}
 
 		return false;
 	}
-	
+
 	int Inventory::getInventoryIndex(Item& item)
 	{
 		uint usedSlots = _inventory.getSize();
-		
-		for(uint i = 0; i < usedSlots; i++)
+
+		for (uint i = 0; i < usedSlots; i++)
 		{
 			Item currentItem = *_inventory.get(i);
-			if(currentItem == item)
+			if (currentItem == item)
 			{
-				return i;	
+				return i;
 			}
 		}
 		return -1;
@@ -126,16 +126,16 @@ namespace bammm
 	{
 		uint count = 0;
 
-		for(uint i = 0; i < amount; i++)
+		for (uint i = 0; i < amount; i++)
 		{
-			if(contains(item))
+			if (contains(item))
 			{
 				int index = getInventoryIndex(item);
 				count += _inventory.get(index)->getAmount();
 			}
 		}
 
-		if(count >= amount)
+		if (count >= amount)
 		{
 			return true;
 		}
@@ -143,44 +143,62 @@ namespace bammm
 		return false;
 	}
 
-	void Inventory::setSlots(uint slots)
+	bool Inventory::contains(string name, uint amount)
 	{
-		_slots = slots;
-	}
+		uint count = 0;
+		string currentName;
+		unint currentAmount;
 
-	uint Inventory::getSlots()
-	{
-		return _slots;
-	}
-
-	uint Inventory::getUsedSlots()
-	{
-		return _inventory.getSize();
-	}
-
-	string Inventory::toString()
-	{
-		string inventory = "Inventory: ";
-		uint usedSlots = getUsedSlots();
-		for(uint i = 0; i < usedSlots; i++)
+		for (uint i = 0; i < amount; i++)
 		{
-			Item* item = _inventory.get(i);
-			string itemName = item->getName();
-			uint amount = _inventory.get(i)->getAmount();
-			string trueName = itemName + " (" + to_string(amount) + ")";
-			string coloredName = Color::colorText(trueName, item->getColor());
-			inventory = inventory + coloredName;
-			
-			if(i < usedSlots - 1)
+			currentName = _inventory.get(i)->getName();
+			currentAmount = _inventory.get(i)->getAmount();
+			if (currentName == name && currentAmount == amount)
 			{
-				inventory = inventory + ", ";
-			}
+			return true
 		}
-
-		return inventory;
 	}
+	return false;
+}
 
-	Inventory::~Inventory()
+void Inventory::setSlots(uint slots)
+{
+	_slots = slots;
+}
+
+uint Inventory::getSlots()
+{
+	return _slots;
+}
+
+uint Inventory::getUsedSlots()
+{
+	return _inventory.getSize();
+}
+
+string Inventory::toString()
+{
+	string inventory = "Inventory: ";
+	uint usedSlots = getUsedSlots();
+	for (uint i = 0; i < usedSlots; i++)
 	{
+		Item* item = _inventory.get(i);
+		string itemName = item->getName();
+		uint amount = _inventory.get(i)->getAmount();
+		string trueName = itemName + " (" + to_string(amount) + ")";
+		string coloredName = Color::colorText(trueName, item->getColor());
+		inventory = inventory + coloredName;
+
+		if (i < usedSlots - 1)
+		{
+			inventory = inventory + ", ";
+		}
 	}
+
+	return inventory;
+}
+
+Inventory::~Inventory()
+{
+}
 }
