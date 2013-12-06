@@ -17,7 +17,6 @@
 
 #include "../Actors/Actor.h"
 
-
 namespace bammm
 {
 	class MeleeCombat
@@ -56,7 +55,6 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns true if you can engage your opponent in combat, false otherwise
 			 */
-			//TODO: Why is this private here but public in RangedCombat? This is inconsistent
 			bool canFight();
 
 		public:

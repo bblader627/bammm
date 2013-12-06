@@ -59,13 +59,13 @@ namespace bammm
 				attacked = _actor1;
 			}
 
-			//Check to see if hit or miss
 			if (inRange())
 			{
 				if (attacker->getMeleeWeapon()->canAttack())
 				{
 					int damage = attacker->getMeleeWeapon()->attack();
 					attacked->reduceHealth(damage);
+
 					cout << attacker->getName() << " hit "
 							<< attacked->getName() << " for " << damage
 							<< " damage.";
@@ -84,10 +84,8 @@ namespace bammm
 			cout << attacked->getName() << " has " << attacked->getHealth()
 					<< " hp left.\n";
 
-			//Change turns
 			_playerTurn = !_playerTurn;
 
-			//Check for end of fight
 			if (attacked->getHealth() <= 0)
 			{
 				_winner = attacker;
@@ -120,8 +118,8 @@ namespace bammm
 
 	void MeleeCombat::victory()
 	{
-		//Play victory sound
 		giveLoot();
+
 		cout << _winner->getName() << " has slain " << _loser->getName()
 				<< ".\n";
 
@@ -139,6 +137,7 @@ namespace bammm
 		{
 			return false;
 		}
+
 		return true;
 	}
 

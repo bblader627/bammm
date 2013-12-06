@@ -23,8 +23,6 @@ namespace bammm
 {
 	class Actor;
 
-	//TODO:This needs to implement IWeaponType
-	//TODO: Why is this so different from RangedWeapon? This (and RangedWeapon) look incomplete. Not consistent with each other.
 	class MeleeWeapon
 	{
 		protected:

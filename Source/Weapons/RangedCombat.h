@@ -58,7 +58,7 @@ namespace bammm
 
 		public:
 			RangedCombat();
-			RangedCombat(Actor& actor1, Actor& actor2 /*,Grid3d<Actor> grid*/);
+			RangedCombat(Actor& actor1, Actor& actor2);
 			~RangedCombat();
 
 			/**
@@ -89,7 +89,6 @@ namespace bammm
 			 */
 			Actor& getLoser();
 
-			//TODO: This function is not implemented right now
 			/**
 			 getOpponent
 			 @Pre-Condition- No input

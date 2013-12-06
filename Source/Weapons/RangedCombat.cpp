@@ -110,7 +110,6 @@ namespace bammm
 
 	void RangedCombat::victory()
 	{
-		//Play victory sound
 		giveLoot();
 		cout << _winner->getName() << " has slain " << _loser->getName()
 				<< ".\n";

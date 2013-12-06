@@ -24,7 +24,7 @@ namespace bammm
 	RangedWeapon::RangedWeapon()
 	{
 	}
-	
+
 	RangedWeapon::~RangedWeapon()
 	{
 	}
