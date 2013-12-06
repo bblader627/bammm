@@ -87,20 +87,15 @@ namespace bammm
 
 		JSON* ingredientMap = factory->getCraftables();
 		JSON* child = ingredientMap->getChild(_craftableItem->getName());
-		DynamicArray<JSON*>* allChildren = child->getAllChildren()->getAllValues();
+		DynamicArray<JSON*>* allChildren =
+				child->getAllChildren()->getAllValues();
 
-		for (unsigned int i = 0;
-				i < allChildren->getSize();
-				i++)
+		for (unsigned int i = 0; i < allChildren->getSize(); i++)
 		{
 			allChildren->get(i)->getChild("name");
 			allChildren->get(i)->getChild("amount");
 
 		}
-		//create new item
-		//remove items from inventory
-		//add new item to inventory
-		//delete items
 	}
 
 	bool CraftState::canCraft()
@@ -109,14 +104,14 @@ namespace bammm
 
 		JSON* ingredientMap = factory->getCraftables();
 		JSON* child = ingredientMap->getChild(_craftableItem->getName());
-		DynamicArray<JSON*>* allChildren = child->getAllChildren()->getAllValues();
+		DynamicArray<JSON*>* allChildren =
+				child->getAllChildren()->getAllValues();
 
 		string craftableItemName = _craftableItem->getName();
 
 		for (unsigned int i = 0; i < allChildren->getSize(); i++)
 		{
 			if (_actor->getInventory().contains(*_craftableItem))
-					//, child->getChild("amount")))
 			{
 				continue;
 			}
@@ -125,6 +120,7 @@ namespace bammm
 				return false;
 			}
 		}
+
 		return true;
 	}
 }
