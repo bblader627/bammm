@@ -82,8 +82,8 @@ namespace bammm
 				}
 				else
 				{
-					currentItem.setAmount(currentItem.getAmount() - 1);
-
+					int currentAmount = currentItem.getAmount();
+					currentItem.setAmount(currentAmount - 1);
 					return currentItem.getStackableCopy();
 				}
 			}

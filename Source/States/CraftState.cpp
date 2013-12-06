@@ -33,7 +33,7 @@ namespace bammm
 
 	void CraftState::setup()
 	{
-
+		cout << "crafting..." << endl;
 	}
 
 	void CraftState::breakdown()
@@ -57,8 +57,7 @@ namespace bammm
 		}
 
 		cout << _craftableItem->getName()
-				<< " has been added to the inventory of " << _actor->getName();
-		switchState("null");
+				<< " has been added to the inventory of " << _actor->getName() << endl;
 	}
 
 	void CraftState::switchState(string nextState)
@@ -87,15 +86,25 @@ namespace bammm
 
 		JSON* ingredientMap = factory->getCraftables();
 		JSON* child = ingredientMap->getChild(_craftableItem->getName());
+
+		//All required items
 		DynamicArray<JSON*>* allChildren =
 				child->getAllChildren()->getAllValues();
 
 		for (unsigned int i = 0; i < allChildren->getSize(); i++)
 		{
-			allChildren->get(i)->getChild("name");
-			allChildren->get(i)->getChild("amount");
+			string name = allChildren->get(i)->getChild("name")->getStringValue();
+			int amount = allChildren->get(i)->getChild("amount")->getIntValue();
 
+			Item* item = new Item(name, true);
+			while (amount > 0)
+			{
+				_actor->getInventory().removeItem(*item);
+				amount--;
+			}
 		}
+
+		_actor->getInventory().addItem(_craftableItem);
 	}
 
 	bool CraftState::canCraft()
@@ -111,7 +120,9 @@ namespace bammm
 
 		for (unsigned int i = 0; i < allChildren->getSize(); i++)
 		{
-			if (_actor->getInventory().contains(*_craftableItem))
+			Item* item = new Item(allChildren->get(i)->getChild("name")->getStringValue(), true);
+			int amount = allChildren->get(i)->getChild("amount")->getIntValue();
+			if (_actor->getInventory().contains(*item, amount))
 			{
 				continue;
 			}
