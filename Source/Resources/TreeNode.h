@@ -87,7 +87,6 @@ namespace bammm
 	template<class T>
 	TreeNode<T>::~TreeNode()
 	{
-
 	}
 
 	template<class T>
