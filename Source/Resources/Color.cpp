@@ -64,7 +64,7 @@ namespace bammm
 
 			return colorString;
 		}
-		
+
 		string colorTextHighlight(string text, string color)
 		{
 			string selectedColor;

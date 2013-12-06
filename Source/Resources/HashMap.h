@@ -15,10 +15,10 @@
 #ifndef HASHMAP_H_
 #define HASHMAP_H_
 
-#include "HashNode.h"
-#include "DynamicArray.h"
 #include <string>
 #include <cmath>
+#include "HashNode.h"
+#include "DynamicArray.h"
 
 #define DEFAULT_MAPSIZE 1000
 
@@ -32,7 +32,7 @@ namespace bammm
 		private:
 			int _mapSize;
 			int _numberOfNodes;
-			HashNode<T>** hashMap;
+			HashNode<T>** _hashMap;
 
 			/**
 			 find
@@ -128,11 +128,11 @@ namespace bammm
 	{
 		_numberOfNodes = 0;
 		_mapSize = size;
-		hashMap = new HashNode<T>*[_mapSize];
+		_hashMap = new HashNode<T>*[_mapSize];
 
 		for (int i = 0; i < _mapSize; i++)
 		{
-			hashMap[i] = NULL;
+			_hashMap[i] = NULL;
 		}
 	}
 
@@ -140,7 +140,7 @@ namespace bammm
 	HashMap<T>::~HashMap()
 	{
 		removeAll();
-		delete[] hashMap;
+		delete[] _hashMap;
 	}
 
 	template<class T>
@@ -180,8 +180,8 @@ namespace bammm
 		node = new HashNode<T>(key, value);
 		int bucket = hashString(key);
 
-		node->setNextNode(*hashMap[bucket]);
-		hashMap[bucket] = node;
+		node->setNextNode(*_hashMap[bucket]);
+		_hashMap[bucket] = node;
 		_numberOfNodes++;
 
 		return true;
@@ -191,7 +191,7 @@ namespace bammm
 	bool HashMap<T>::remove(string key)
 	{
 		int bucket = hashString(key);
-		HashNode<T>* temporary = hashMap[bucket];
+		HashNode<T>* temporary = _hashMap[bucket];
 
 		if (temporary == NULL)
 		{
@@ -199,7 +199,7 @@ namespace bammm
 		}
 		else if (key.compare(temporary->getKey()) == 0)
 		{
-			hashMap[bucket] = &temporary->getNextNode();
+			_hashMap[bucket] = &temporary->getNextNode();
 			delete temporary;
 			_numberOfNodes--;
 
@@ -250,7 +250,7 @@ namespace bammm
 
 		for (int i = 0; i < _mapSize; i++)
 		{
-			HashNode<T>* temporary = hashMap[i];
+			HashNode<T>* temporary = _hashMap[i];
 
 			while (temporary != NULL)
 			{
@@ -270,7 +270,7 @@ namespace bammm
 
 		for (int i = 0; i < _mapSize; i++)
 		{
-			HashNode<T>* temporary = hashMap[i];
+			HashNode<T>* temporary = _hashMap[i];
 
 			while (temporary != NULL)
 			{
@@ -286,7 +286,7 @@ namespace bammm
 	T& HashMap<T>::getValue(string key)
 	{
 		int bucket = hashString(key);
-		HashNode<T>* temporary = hashMap[bucket];
+		HashNode<T>* temporary = _hashMap[bucket];
 
 		while (temporary != NULL)
 		{
@@ -307,7 +307,7 @@ namespace bammm
 	HashNode<T>* HashMap<T>::find(string key)
 	{
 		int bucket = hashString(key);
-		HashNode<T>* temporary = hashMap[bucket];
+		HashNode<T>* temporary = _hashMap[bucket];
 
 		while (temporary != NULL)
 		{

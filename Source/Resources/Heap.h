@@ -51,7 +51,7 @@ namespace bammm
 
 		public:
 			Heap();
-			Heap(bool isMax);
+			Heap(bool isMaximum);
 			~Heap();
 
 			/**
@@ -98,10 +98,10 @@ namespace bammm
 	}
 
 	template<class T>
-	Heap<T>::Heap(bool isMax)
+	Heap<T>::Heap(bool isMaximum)
 	{
 		_heap = new DynamicArray<T>(initialSize);
-		_isMax = isMax;
+		_isMax = isMaximum;
 	}
 
 	template<class T>
@@ -136,6 +136,7 @@ namespace bammm
 		_heap->set(0, _heap->get(_heap->getSize() - 1));
 		_heap->remove(_heap->getSize() - 1);
 		adjustChild(0);
+
 		return removed;
 	}
 
@@ -176,7 +177,6 @@ namespace bammm
 		{
 			if (_heap->get(parent) < _heap->get(index))
 			{
-				//Swap them
 				T temp = _heap->get(parent);
 				_heap->set(parent, _heap->get(index));
 				_heap->set(index, temp);
@@ -188,11 +188,9 @@ namespace bammm
 		{
 			if (_heap->get(parent) > _heap->get(index))
 			{
-				//Swap them
 				T temp = _heap->get(parent);
 				_heap->set(parent, _heap->get(index));
 				_heap->set(index, temp);
-
 				adjustParent(parent);
 			}
 		}
@@ -213,7 +211,6 @@ namespace bammm
 
 		if (_isMax)
 		{
-			//Left is automatically the biggest
 			if (rightChild >= size)
 			{
 				chosenChild = leftChild;
@@ -232,7 +229,6 @@ namespace bammm
 		}
 		else
 		{
-			//Left is automatically the smallest
 			if (rightChild >= size)
 			{
 				chosenChild = leftChild;
@@ -249,6 +245,7 @@ namespace bammm
 				}
 			}
 		}
+
 		T temp = _heap->get(chosenChild);
 		_heap->set(chosenChild, _heap->get(index));
 		_heap->set(index, temp);

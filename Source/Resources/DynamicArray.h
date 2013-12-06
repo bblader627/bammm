@@ -320,6 +320,7 @@ namespace bammm
 			errorMessage("Index out of bounds.");
 			assert(0);
 		}
+
 		T& removedElement = _array[index];
 		shiftElementsLeft(index);
 		_size--;
@@ -341,6 +342,7 @@ namespace bammm
 			if (_array[i] == element)
 			{
 				remove(i);
+
 				return true;
 			}
 		}
@@ -354,6 +356,7 @@ namespace bammm
 		if (_array == NULL)
 		{
 			errorMessage("Array is null");
+
 			return;
 		}
 
@@ -369,6 +372,7 @@ namespace bammm
 		if (_array == NULL)
 		{
 			errorMessage("Array is null.");
+
 			return -1;
 		}
 
@@ -403,6 +407,7 @@ namespace bammm
 		if (_array == NULL)
 		{
 			errorMessage("Array is null");
+
 			return false;
 		}
 
@@ -413,6 +418,7 @@ namespace bammm
 				return true;
 			}
 		}
+
 		return false;
 	}
 
@@ -422,12 +428,14 @@ namespace bammm
 		if (_array == NULL)
 		{
 			errorMessage("Array is null.");
+
 			return;
 		}
 
 		if (_size == 0)
 		{
 			errorMessage("Cannot trim to size 0.");
+
 			return;
 		}
 
@@ -438,10 +446,12 @@ namespace bammm
 
 		T* newArray = new T[_size];
 		_capacity = _size;
+
 		for (uint i = 0; i < _size; i++)
 		{
 			newArray[i] = _array[i];
 		}
+
 		delete[] _array;
 		_array = newArray;
 	}
@@ -486,10 +496,12 @@ namespace bammm
 	void DynamicArray<T>::increaseCapacity(uint newCapacity)
 	{
 		T* tempArray = new T[newCapacity];
+
 		for (uint i = 0; i < _size; i++)
 		{
 			tempArray[i] = _array[i];
 		}
+
 		_capacity = newCapacity;
 		delete[] _array;
 		_array = tempArray;

@@ -41,7 +41,7 @@ namespace bammm
 		 @Post-Condition- A formatted string that uses color
 		 */
 		string colorText(string text, string color);
-		
+
 		/**
 		 colorTextHighlight
 		 @Pre-Condition- Takes text and a color

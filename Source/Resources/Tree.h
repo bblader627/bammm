@@ -101,7 +101,6 @@ namespace bammm
 	{
 		_tree = new Queue<TreeNode<T>*>();
 		_numberOfNodes = 0;
-
 	}
 
 	template<class T>
@@ -129,8 +128,8 @@ namespace bammm
 		node = new TreeNode<T>(value, parent);
 
 		_tree->add(node);
-
 		_numberOfNodes++;
+
 		return true;
 	}
 
