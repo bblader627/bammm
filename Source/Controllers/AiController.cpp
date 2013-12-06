@@ -20,6 +20,10 @@ namespace bammm
 	{
 	}
 
+	AiController::~AiController()
+	{
+	}
+
 	void AiController::setup(Actor& actor, Grid3D<Actor*>& sceneGraph)
 	{
 		_sceneGraph = &sceneGraph;
@@ -47,10 +51,6 @@ namespace bammm
 		_states.add(gatherState->toString(), gatherState);
 
 		_stateMachine.initialState(_states.getValue(idleState->toString()));
-	}
-
-	AiController::~AiController()
-	{
 	}
 
 	bool AiController::canDelete()

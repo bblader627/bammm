@@ -66,9 +66,6 @@ namespace bammm
 		string newState = commandString->get(0);
 		State* stateToAdd;
 
-		/*
-		 * Sanitizes input to avoid segfaults in hashmap->getValue();
-		 */
 		DynamicArray<string>* oreType = new DynamicArray<string>();
 		oreType->add("iron");
 		oreType->add("coal");
@@ -97,7 +94,6 @@ namespace bammm
 		craftableItems->add("boots");
 		craftableItems->add("helmet");
 
-
 		if (newState == "mine" || newState == "chop" || newState == "fish")
 		{
 			int numToGather;
@@ -111,6 +107,7 @@ namespace bammm
 				if (numToGather == 0)
 				{
 					cout << "Invalid argument number \n";
+
 					return;
 				}
 
@@ -145,6 +142,7 @@ namespace bammm
 
 				Actor* target = _sceneGraph->findInGrid(type);
 				stateToAdd = _states.getValue("gather");
+
 				GatherState* tempState = static_cast<GatherState*>(stateToAdd);
 				tempState->setAmount(numToGather);
 				tempState->setTarget(target);
@@ -176,6 +174,7 @@ namespace bammm
 			if (numToEat == 0)
 			{
 				cout << "Invalid argument number \n";
+
 				return;
 			}
 
@@ -184,6 +183,7 @@ namespace bammm
 			if (!(foodTypes->contains(type)))
 			{
 				cout << "Invalid argument number \n";
+
 				return;
 			}
 
@@ -201,13 +201,16 @@ namespace bammm
 			if (numToMake == 0)
 			{
 				cout << "Invalid argument number \n";
+
 				return;
 			}
 
 			string type = commandString->get(2);
+
 			if (!(craftableItems->contains(type)))
 			{
 				cout << type << " is not a craftable item. " << endl;
+
 				return;
 			}
 
@@ -234,7 +237,6 @@ namespace bammm
 		delete foodTypes;
 		delete woodType;
 		delete craftableItems;
-
 	}
 
 	void PlayerController::printOptions()
@@ -242,7 +244,6 @@ namespace bammm
 		cout
 				<< "What would you like your villagers to do?\n  To run the simulation, enter \"wait [number of iterations]\"."
 				<< endl;
-
 	}
 
 	bool PlayerController::canDelete()
