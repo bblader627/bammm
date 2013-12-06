@@ -22,7 +22,6 @@ using namespace std;
 
 namespace bammm
 {
-	//Forward declaration of class State;
 	class State;
 
 	class IStateCallback
@@ -45,6 +44,11 @@ namespace bammm
 			 */
 			virtual void switchState(State* current, string newStateString);
 
+			/**
+			 toString
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a string representation of IStateCallback
+			 */
 			virtual string toString();
 	};
 }

@@ -76,13 +76,6 @@ namespace bammm
 			bool contains(Item& item, uint amount);
 
 			/**
-			 contains
-			 @Pre-Condition- A name of an item, and an amount
-			 @Post-Condition- Returns true if all items are found
-			 */
-			bool contains(string name, uint amount);
-
-			/**
 			 setSlots
 			 @Pre-Condition- A uint for the amount of slots
 			 @Post-Condition- Changes the amount of slots

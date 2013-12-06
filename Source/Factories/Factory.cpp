@@ -23,7 +23,7 @@ namespace bammm
 
 	void Factory::setup()
 	{
-		//Parsing weapon data in
+		//Parse weapons
 		JSONParser* weaponParser = new JSONParser();
 		string weaponFilename = "JSON/weapons.json";
 		weaponParser->parseFile(weaponFilename);
@@ -31,34 +31,31 @@ namespace bammm
 		JSON* weaponRoot = weaponParser->getRootNode("root");
 		HashMap<JSON*>* weaponRootChildren = weaponRoot->getAllChildren();
 
-		//Parse the melee weapons
 		JSON* meleeWeapons = weaponRootChildren->getValue("meleeWeapons");
 		this->parseMeleeWeaponToWeaponData(meleeWeapons, &_meleeWeaponData);
 
-		//Parse the ranged weapons
 		JSON* rangedWeapons = weaponRootChildren->getValue("rangedWeapons");
 		this->parseRangedWeaponToWeaponData(rangedWeapons, &_rangedWeaponData);
 
-		//Parse craftable item database//
+		//Parse craftable item database
 		JSONParser* craftableParser = new JSONParser();
 		string craftableFilename = "JSON/craftables.json";
 		craftableParser->parseFile(craftableFilename);
 
 		_craftables = craftableParser->getRootNode("root");
 
-		//Parse actors info//
+		//Parse actors
 		JSONParser* actorParser = new JSONParser();
 		string actorFilename = "JSON/actors.json";
 		actorParser->parseFile(actorFilename);
 
 		JSON* actorRoot = actorParser->getRootNode("root");
-
 		HashMap<JSON*>* actorRootChildren = actorRoot->getAllChildren();
 
 		JSON* orcs = actorRootChildren->getValue("orcs");
 		this->parseToActorInfo(orcs, "orc", &_actorData);
 
-		//===========MAP=========//
+		//Parse map
 		JSON* wall = actorRootChildren->getValue("wall");
 		this->parseToActorInfo(wall, "wall", &_blockData);
 
@@ -81,17 +78,6 @@ namespace bammm
 		this->parseToActorInfo(dwarves, "dwarf", &_actorData);
 	}
 
-	/*Actor Factory::getActor(string type, string name, int health, int stamina,
-	 int attack, int defense, string behavior, bool collision)
-	 {
-	 Actor* newActor = new Actor(type, name, health, stamina, attack,
-	 defense, behavior, AllianceType::enemy);
-	 newActor->setLocation(new Vector3D(0.0f, 0.0f, 0.0f));
-	 return *newActor;
-	 }*/
-
-	//NOTE: Right now there's no checking, cause of type issues. Have to know it exists.
-	//TODO:^^Make this not the case.
 	MeleeWeapon* Factory::getMeleeWeapon(string type)
 	{
 		WeaponData weaponData = _meleeWeaponData.getValue(type);
@@ -100,8 +86,6 @@ namespace bammm
 		return newWeapon;
 	}
 
-	//NOTE: Right now there's no checking, cause of type issues. Have to know it exists.
-	//TODO:^^Make this not the case.
 	RangedWeapon* Factory::getRangedWeapon(string type)
 	{
 		WeaponData weaponData = _rangedWeaponData.getValue(type);
@@ -143,8 +127,8 @@ namespace bammm
 			int redwood = 100;
 			int wood = 100;
 			int fish = 100;
-
 			AllianceType alliance;
+
 			if (parsedAlliance == 0)
 			{
 				alliance = AllianceType::neutral;
@@ -180,8 +164,7 @@ namespace bammm
 			}
 			else
 			{
-				//TODO: This needs to be redone to use the factory... so we ahve to parse weapon data first?
-				//The Actor JSON needs to specify what weapon it wants..?
+				//Give some default weapon stats
 				WeaponData weaponData(10, 2, "", "");
 				MeleeWeapon* meleeWeapon = new MeleeWeapon(weaponData);
 				myActor->setMeleeWeapon(meleeWeapon);
@@ -191,6 +174,7 @@ namespace bammm
 			{
 				Inventory& inventory = myActor->getInventory();
 				inventory.setSlots(100);
+
 				for (int j = 0; j < iron; j++)
 				{
 					Item* item = new Item("iron", color, true);
@@ -202,6 +186,7 @@ namespace bammm
 			{
 				Inventory& inventory = myActor->getInventory();
 				inventory.setSlots(100);
+
 				for (int j = 0; j < gold; j++)
 				{
 					Item* item = new Item("gold", color, true);
@@ -213,6 +198,7 @@ namespace bammm
 			{
 				Inventory& inventory = myActor->getInventory();
 				inventory.setSlots(100);
+
 				for (int j = 0; j < coal; j++)
 				{
 					Item* item = new Item("coal", color, true);
@@ -224,6 +210,7 @@ namespace bammm
 			{
 				Inventory& inventory = myActor->getInventory();
 				inventory.setSlots(100);
+
 				for (int j = 0; j < birch; j++)
 				{
 					Item* item = new Item("wood", color, true);
@@ -235,6 +222,7 @@ namespace bammm
 			{
 				Inventory& inventory = myActor->getInventory();
 				inventory.setSlots(100);
+
 				for (int j = 0; j < oak; j++)
 				{
 					Item* item = new Item("wood", color, true);
@@ -246,6 +234,7 @@ namespace bammm
 			{
 				Inventory& inventory = myActor->getInventory();
 				inventory.setSlots(100);
+
 				for (int j = 0; j < cedar; j++)
 				{
 					Item* item = new Item("wood", color, true);
@@ -257,6 +246,7 @@ namespace bammm
 			{
 				Inventory& inventory = myActor->getInventory();
 				inventory.setSlots(100);
+
 				for (int j = 0; j < redwood; j++)
 				{
 					Item* item = new Item("wood", color, true);
@@ -268,6 +258,7 @@ namespace bammm
 			{
 				Inventory& inventory = myActor->getInventory();
 				inventory.setSlots(100);
+
 				for (int j = 0; j < fish; j++)
 				{
 					Item* item = new Item("fish", color, true);
@@ -286,19 +277,15 @@ namespace bammm
 		DynamicArray<JSON*>* rootChildren =
 				rootNode->getAllChildren()->getAllValues();
 
-		//Cycle through every weapon type
 		for (int i = 0; i < numberOfChildren; i++)
 		{
 			JSON* child = rootChildren->get(i);
-
 			string type = child->getChild("type")->getStringValue();
 			int damage = child->getChild("damage")->getIntValue();
-
-			//Create the data specifying this melee weapon
 			WeaponData* weaponData = new WeaponData(0, 0, damage, 0, 0, "",
 					type);
 
-			map->add(type, *weaponData); //Save this data in the map.
+			map->add(type, *weaponData);
 		}
 	}
 
@@ -308,7 +295,7 @@ namespace bammm
 		int numberOfChildren = rootNode->sizeOfChildren();
 		DynamicArray<JSON*>* rootChildren =
 				rootNode->getAllChildren()->getAllValues();
-		//Cycle through every weapon type
+
 		for (int i = 0; i < numberOfChildren; i++)
 		{
 			JSON* child = rootChildren->get(i);
@@ -318,17 +305,10 @@ namespace bammm
 			int damage = child->getChild("damage")->getIntValue();
 			float reloadSpeed = child->getChild("reloadSpeed")->getFloatValue();
 			uint fireRate = child->getChild("fireRate")->getUIntValue();
-
-			//Create the data specifying this ranged weapon
 			WeaponData* weaponData = new WeaponData(range, clipCapacity, damage,
 					reloadSpeed, fireRate, "", type);
 
-			map->add(type, *weaponData); //Save this data in the map.
+			map->add(type, *weaponData);
 		}
-	}
-
-	JSON* Factory::getCraftables()
-	{
-		return _craftables;
 	}
 }
