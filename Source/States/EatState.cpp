@@ -50,9 +50,9 @@ namespace bammm
 	{
 		if (canEat())
 		{
-			if (_food == "fish")
+			if (_food == "cooked_fish")
 			{
-				Item fish("fish", true);
+				Item fish("cooked_fish", true);
 				Item* removedItem = _actor->getInventory().removeItem(fish);
 
 				if (removedItem == NULL)
