@@ -1,6 +1,17 @@
 {
-	"roasted fish" : [
-						{ "name" : "fish", "amount" : 1 },
-						{ "name" : "wood", "amount" : 1 }
-					]
+	"coked_fish" : [
+		{ "name":"fish", "amount":1 },
+		{ "name":"wood", "amount":1 }
+	],
+	"sword" : [
+		{ "name":"iron", "amount":2 },
+		{ "name":"wood", "amount":1 }
+	],
+	"axe" : [
+		{ "name":"iron", "amount":1 },
+		{ "name":"wood", "amount":1 }
+	],
+	"necklace" : [
+		{ "name":"gold", "amount":3 }
+	]
 }
