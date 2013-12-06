@@ -55,7 +55,7 @@ namespace bammm
 		_states.add(moveState->toString(), moveState);
 		_states.add(gatherState->toString(), gatherState);
 		_states.add(eatState->toString(), eatState);
-		_states.add(eatState->toString(), craftState);
+		_states.add(craftState->toString(), craftState);
 
 		_stateMachine.initialState(_states.getValue(idleState->toString()));
 	}
