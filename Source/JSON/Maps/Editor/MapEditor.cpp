@@ -416,7 +416,7 @@ namespace bammm
 		jsonString += createWallJSON();
 		jsonString += createWaterJSON();
 		jsonString += createMineJSON();
-		//jsonString = jsonString + createBarrierJSON() + ",\n";
+		jsonString += createTreeJSON();
 		//jsonString = jsonString + createMineJSON() + ",\n";
 		//jsonString = jsonString + createBuildingJSON() + "\n";
 		jsonString += "\n}";
@@ -590,35 +590,65 @@ namespace bammm
 		return sectionValue + content + closeValue;
 	}
 	
-	string MapEditor::createBarrierJSON()
+	string MapEditor::createTreeJSON()
 	{
-		string item = "#";
+		string sectionName = "trees";
+		string symbol = "+";
+		string sectionValue = "\t\"" + sectionName + "\": [\n";
+		string content = "";
+		string name = "birch";
+		int health = 20;
+		int stamina = 0;
+		int attack = 0;
+		int defense = 5;
+		string behavior = "block";
+		int alliance = 0;
+		bool collision = false;
 		bool firstItem = true;
-		string name = "Barrier Objects";
-		string jsonString = "\"" + name + "\":\n";
-		jsonString = jsonString + "[\n";
+		int id = 1;
+
 		for (int x = 0; x < _x; x++)
 		{
 			for (int y = 0; y < _y; y++)
 			{
 				for (int z = 0; z < _z; z++)
 				{
-					if (_grid[y][x][z].getSymbol() == item)
+					TerrainSquare& current = _grid[y][x][z];
+					if (current.getSymbol() == symbol)
 					{
 						if (!firstItem)
 						{
-							jsonString = jsonString + ",\n";
+							content += ",\n";
 						}
 						firstItem = false;
-						jsonString = jsonString
-								+ createJSONObject(x, y, z, "Fortress Wall",
-										"false") + "";
+
+						if(current.getCurrentColor() == "red")
+						{
+							name = "redwood";
+						}
+						else if(current.getCurrentColor() == "black")
+						{
+							name = "birch";
+						}
+						else if(current.getCurrentColor() == "green")
+						{
+							name = "oak";
+						}
+						else if(current.getCurrentColor() == "blue")
+						{
+							name = "cedar";
+						}
+
+						content += createJSONObjectNew(name + to_string(id), health, stamina, attack, defense, behavior, x, y, z, alliance, current.getCurrentColor(), current.getSymbol(), collision);
+						
+						id++;
 					}
 				}
 			}
 		}
-		jsonString = jsonString + "]";
-		return jsonString;
+		
+		string closeValue = "\t],\n";
+		return sectionValue + content + closeValue;
 	}
 
 	string MapEditor::createBuildingJSON()

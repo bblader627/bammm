@@ -151,6 +151,11 @@ namespace bammm
 			string createJSONObject(int x, int y, int z, string name,
 					string walkable);
 
+			/**
+			 createJSONObjectNew
+			 @Pre-Condition- Takes in many parameters
+			 @Post-Condition- Returns a JSON object
+			 */
 			string createJSONObjectNew(string name, int health, int stamina, int attack, int defense, string behavior, int x, int y, int z, int alliance, string color, string symbol, bool collision);
 
 			/**
@@ -182,11 +187,11 @@ namespace bammm
 			string createWallJSON();
 			
 			/**
-			 createBarrierJSON
+			 createTreeJSON
 			 @Pre-Condition- No input
-			 @Post-Condition- Returns a JSON object for barrier
+			 @Post-Condition- Returns a JSON object for trees
 			 */
-			string createBarrierJSON();
+			string createTreeJSON();
 
 			/**
 			 createMineJSON
