@@ -31,16 +31,12 @@ int main()
 	bool printMap = true;
 
 	SceneManager sceneManager;
-	//Factory* factory;
 	bammm::factory = new Factory(&sceneManager);
 	MeleeCombat meleeCombat;
 
 	bammm::factory->setup();
 
 	sceneManager.setMeleeCombat(meleeCombat);
-
-	//Will be deleted; controllers are added for each new actor created in factory
-	//PlayerController controller;
 
 	bool playGame = true;
 	bool doTick = true;
@@ -51,7 +47,6 @@ int main()
 	DynamicArray<string>* input = new DynamicArray<string>();
 
 	DynamicArray<string> validCommands = *(new DynamicArray<string>());
-	//string sleep = "sleep";
 	validCommands.add("mine");
 	validCommands.add("drink");
 	validCommands.add("brawl");
@@ -64,6 +59,7 @@ int main()
 	validCommands.add("craft");
 
 	float deltaTime = 0;
+
 	while (playGame)
 	{
 		command = "";
@@ -76,29 +72,27 @@ int main()
 
 			if (printMap)
 			{
-				if(!justStarted)
+				if (!justStarted)
 				{
 					clearTerminal();
 				}
+
 				cout << sceneManager.getSceneGraph().toString() << "\n";
 			}
 
 			justStarted = false;
 
-			//controller.printOptions();
 			while (command == "")
 			{
 				cout << "What would you like your dwarves to do? ";
 				getline(cin, command);
 			}
+
 			input = parseInput(command);
 			command = input->get(0);
 
-			//Check for valid input
 			if (command == "wait")
 			{
-				//Wait [#]
-
 				if (input->getSize() == 2)
 				{
 					string number_str = input->get(1);
@@ -116,7 +110,6 @@ int main()
 					cout << "Invalid input\n";
 					doTick = false;
 				}
-
 			}
 			else if (command == "exit")
 			{
@@ -128,19 +121,18 @@ int main()
 				doTick = false;
 			}
 
-			//Is game over?
 			if (!playGame)
 			{
 				break;
 			}
 
-			//Was the command valid?
 			if (doTick)
 			{
 				if (doInput)
 				{
 					sceneManager.input(input, deltaTime);
 				}
+
 				sceneManager.tick(0);
 
 				if (loopCounter > 0)
@@ -149,7 +141,7 @@ int main()
 				}
 			}
 		}
-		else	//looping
+		else
 		{
 			uint pause = 1;
 			sleep(pause);
@@ -160,6 +152,7 @@ int main()
 		}
 
 	}
+
 	delete input;
 
 	cout << "Thanks for playing!" << "\n";
@@ -229,5 +222,6 @@ DynamicArray<string>* parseInput(string input)
 			builder += current;
 		}
 	}
+
 	return result;
 }
