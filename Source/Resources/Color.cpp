@@ -21,6 +21,7 @@ namespace bammm
 		string colorText(string text, string color)
 		{
 			string selectedColor;
+
 			if (color == "black")
 			{
 				selectedColor = _blackText;
@@ -60,6 +61,7 @@ namespace bammm
 
 			string colorString = _startColor + selectedColor + text
 					+ _startColor + _defaultText;
+
 			return colorString;
 		}
 	}

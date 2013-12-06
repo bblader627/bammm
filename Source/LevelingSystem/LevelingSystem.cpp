@@ -18,12 +18,10 @@ namespace bammm
 {
 	LevelingSystem::LevelingSystem()
 	{
-
 	}
 
 	LevelingSystem::~LevelingSystem()
 	{
-
 	}
 
 	Actor* LevelingSystem::levelUP(Actor* actor)
@@ -39,8 +37,9 @@ namespace bammm
 
 		cout << "DING! " << actor->getName() << " has reached level "
 				<< actor->getLevel() << "!" << endl;
-		cout << "Their powers have improved: Health: " << actor->getHealth() << " Damage: "
-				<< actor->getAttack() << " Defense: " << actor->getDefense() << endl;
+		cout << "Their powers have improved: Health: " << actor->getHealth()
+				<< " Damage: " << actor->getAttack() << " Defense: "
+				<< actor->getDefense() << endl;
 		cout << actor->getTotalExperienceThisLevel()
 				<< " more kills till next level." << endl;
 
@@ -54,6 +53,7 @@ namespace bammm
 		if (actor->getExperience() == actor->getTotalExperienceThisLevel())
 		{
 			actor = levelUP(actor);
+
 			return actor;
 		}
 
