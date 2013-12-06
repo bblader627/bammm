@@ -122,7 +122,6 @@ namespace bammm
 			 Post-Condition- Returns true if two items have same name
 			 */
 			bool operator==(const Item& item2);
-
 	};
 }
 

@@ -12,13 +12,7 @@
  *
  */
 
-#include <iostream>
-#include "../Resources/Constant.h"
-#include "../Resources/DynamicArray.h"
-#include "../Resources/Color.h"
-#include "Item.h"
 #include "Inventory.h"
-using namespace std;
 
 namespace bammm
 {
@@ -89,7 +83,7 @@ namespace bammm
 			}
 		}
 
-		return NULL ;
+		return NULL;
 	}
 
 	string Inventory::removeItem(string item)

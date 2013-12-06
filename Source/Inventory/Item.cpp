@@ -14,8 +14,6 @@
 
 #include "Item.h"
 
-using namespace std;
-
 namespace bammm
 {
 	Item::Item()
