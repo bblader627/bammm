@@ -49,7 +49,7 @@ namespace bammm
 		{
 			cout << _actor->getName() << " cannot craft "
 					<< _craftableItem->getName() << ". \n";
-			switchState("idle");
+			switchState("null");
 		}
 		else
 		{
@@ -58,6 +58,7 @@ namespace bammm
 
 		cout << _craftableItem->getName()
 				<< " has been added to the inventory of " << _actor->getName();
+		switchState("null");
 	}
 
 	void CraftState::switchState(string nextState)
