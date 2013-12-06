@@ -15,9 +15,9 @@
 #ifndef PLAYERCONTROLLER_H_
 #define PLAYERCONTROLLER_H_
 
+#include <random>
 #include "Controller.h"
 #include "../Resources/Constant.h"
-#include <random>
 using namespace std;
 
 namespace bammm
@@ -80,31 +80,31 @@ namespace bammm
 			virtual string toString();
 
 			/**
-			numberOfStates
-			@Pre-Condition- Takes nothing
-			@Post-Condition- returns number of current running states in _stateMachine
-			*/
+			 numberOfStates
+			 @Pre-Condition- Takes nothing
+			 @Post-Condition- returns number of current running states in _stateMachine
+			 */
 			int numberOfStates();
 
 			/**
-			runningStates
-			@Pre-Condition- Takes nothing
-			@Post-Condition- returns current running states in _stateMachine
-			*/
+			 runningStates
+			 @Pre-Condition- Takes nothing
+			 @Post-Condition- returns current running states in _stateMachine
+			 */
 			DynamicArray<State*>& runningStates();
 
 			/**
-			allStates
-			@Pre-Condition- Takes nothing
-			@Post-Condition- returns current all states in _stateMachine
-			*/
+			 allStates
+			 @Pre-Condition- Takes nothing
+			 @Post-Condition- returns current all states in _stateMachine
+			 */
 			HashMap<State*>& allStates();
-			
+
 			/**
-			getActor
-			@Pre-Condition- Takes nothing
-			@Post-Condition- Returns the actor the controller uses
-			*/
+			 getActor
+			 @Pre-Condition- Takes nothing
+			 @Post-Condition- Returns the actor the controller uses
+			 */
 			virtual Actor* getActor();
 	};
 }
