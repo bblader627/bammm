@@ -16,6 +16,7 @@
 #define GRID3D_H_
 
 #include <iostream>
+#include <math.h>
 #include <string>
 #include "../Resources/DynamicArray.h"
 #include "Vector3D.h"
@@ -25,7 +26,6 @@
 #include "../Resources/Color.h"
 #include "../Resources/Tree.h"
 #include "../Resources/TreeNode.h"
-#include <math.h>
 
 using namespace std;
 
