@@ -83,7 +83,7 @@ namespace bammm
 			}
 		}
 
-		return NULL;
+		return NULL ;
 	}
 
 	string Inventory::removeItem(string item)
