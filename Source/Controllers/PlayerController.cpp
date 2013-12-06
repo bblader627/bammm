@@ -29,18 +29,17 @@ namespace bammm
 	{
 		_meleeCombat = &meleeCombat;
 		_sceneGraph = &sceneGraph;
-
 		_actor = &actor;
 		_stateMachine.setup(actor, _states, _meleeCombat);
 
-		//Create the states
 		DrinkState* drinkState = new DrinkState(actor, &_stateMachine);
 		SingState* singState = new SingState(actor, &_stateMachine);
 		BrawlState* brawlState = new BrawlState(actor, &_stateMachine);
 		SleepState* sleepState = new SleepState(actor, &_stateMachine);
 		IdleState* idleState = new IdleState(actor, &_stateMachine);
 		CombatState* combatState = new CombatState(actor, &_stateMachine);
-		SearchState* searchState = new SearchState(actor, &_stateMachine, *_sceneGraph);
+		SearchState* searchState = new SearchState(actor, &_stateMachine,
+				*_sceneGraph);
 		DamageState* damageState = new DamageState(actor, &_stateMachine);
 		MoveState* moveState = new MoveState(actor, &_stateMachine, sceneGraph);
 		GatherState* gatherState = new GatherState(actor, &_stateMachine);
@@ -60,7 +59,6 @@ namespace bammm
 		_states.add(eatState->toString(), eatState);
 		_states.add(eatState->toString(), craftState);
 
-		//Put actor in default behavior state
 		_stateMachine.initialState(_states.getValue(idleState->toString()));
 	}
 
@@ -68,7 +66,6 @@ namespace bammm
 			float deltaTime)
 	{
 		string newState = commandString->get(0);
-		//bool doTick = true;
 		State* stateToAdd;
 
 		DynamicArray<string>* oreType = new DynamicArray<string>();
@@ -106,24 +103,28 @@ namespace bammm
 				}
 
 				type = commandString->get(2);
-				if ( (newState == "mine" && !(oreType->contains(type))) )
+
+				if ((newState == "mine" && !(oreType->contains(type))))
 				{
 					cout << "Invalid ore type" << endl;
+
 					return;
 				}
-				else if ( (newState == "chop" && !(woodType->contains(type))) )
+				else if ((newState == "chop" && !(woodType->contains(type))))
 				{
 					cout << "Invalid wood type" << endl;
+
 					return;
 				}
-				else if ( (newState == "fish" && !(fishType->contains(type))) )
+				else if ((newState == "fish" && !(fishType->contains(type))))
 				{
-					cout << "Invalid fish type" << endl;	
+					cout << "Invalid fish type" << endl;
+
 					return;
 				}
 
-				cout << _actor->getName() << " has been sent to " << newState << " " << type << "!" << endl;
-
+				cout << _actor->getName() << " has been sent to " << newState
+						<< " " << type << "!" << endl;
 
 				if (newState == "fish")
 				{
@@ -136,20 +137,21 @@ namespace bammm
 				tempState->setAmount(numToGather);
 				tempState->setTarget(target);
 
-				//Add to controllerinput
-				SearchState* search = static_cast<SearchState*>(_states.getValue("search"));
+				SearchState* search =
+						static_cast<SearchState*>(_states.getValue("search"));
 				search->setTarget(type);
 				search->setDestState(tempState);
 				_stateMachine.addState(search);
-
 			}
 		}
 		else if (newState == "drink")
 		{
-			cout << _actor->getName() << " has been sent to drink at the Pub!" << endl;
+			cout << _actor->getName() << " has been sent to drink at the Pub!"
+					<< endl;
 
 			stateToAdd = _states.getValue(newState);
-			SearchState* search = static_cast<SearchState*>(_states.getValue("search"));
+			SearchState* search = static_cast<SearchState*>(_states.getValue(
+					"search"));
 			search->setTarget("Pub");
 			search->setDestState(stateToAdd);
 			_stateMachine.addState(search);
@@ -166,14 +168,15 @@ namespace bammm
 			}
 
 			string type = commandString->get(2);
+
 			if (!(foodTypes->contains(type)))
 			{
 				cout << "Invalid argument number \n";
 				return;
 			}
 
-
-			EatState* tempState = static_cast<EatState*>(_states.getValue(newState));
+			EatState* tempState = static_cast<EatState*>(_states.getValue(
+					newState));
 			tempState->setAmount(numToEat);
 			tempState->setType(type);
 			_stateMachine.addState(tempState);
@@ -192,7 +195,8 @@ namespace bammm
 			string type = commandString->get(2);
 			Item* itemToMake = new Item(type, true);
 
-			CraftState* tempState = static_cast<CraftState*>(_states.getValue(newState));
+			CraftState* tempState = static_cast<CraftState*>(_states.getValue(
+					newState));
 			tempState->setAmount(numToMake);
 			tempState->setCraftable(*itemToMake);
 			_stateMachine.addState(tempState);
@@ -219,8 +223,9 @@ namespace bammm
 
 	void PlayerController::printOptions()
 	{
-		//DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
-		cout << "What would you like your villagers to do?\n  To run the simulation, enter \"wait [number of iterations]\"." << endl;
+		cout
+				<< "What would you like your villagers to do?\n  To run the simulation, enter \"wait [number of iterations]\"."
+				<< endl;
 
 	}
 
@@ -244,7 +249,7 @@ namespace bammm
 		{
 			newState = _states.getValue("damage");
 
-			if(!currentStates.contains(newState))
+			if (!currentStates.contains(newState))
 			{
 				_stateMachine.addState(newState);
 				DamageState* castedState = static_cast<DamageState*>(newState);
@@ -279,5 +284,4 @@ namespace bammm
 	{
 		return _actor;
 	}
-
 }

@@ -28,7 +28,6 @@ namespace bammm
 		_actor = &actor;
 		_stateMachine.setup(actor, _states, _meleeCombat);
 
-		//Create the states
 		DrinkState* drinkState = new DrinkState(actor, &_stateMachine);
 		SingState* singState = new SingState(actor, &_stateMachine);
 		BrawlState* brawlState = new BrawlState(actor, &_stateMachine);
@@ -49,14 +48,11 @@ namespace bammm
 		_states.add(damageState->toString(), damageState);
 		_states.add(gatherState->toString(), gatherState);
 
-		//Put actor in idle state
 		_stateMachine.initialState(_states.getValue(idleState->toString()));
 	}
 
 	AiController::~AiController()
 	{
-		//Prevents deletion of dead units for now
-		//SceneManager::getSceneGraph().remove(_actor->getLocation(), _actor);
 		delete _actor;
 	}
 
@@ -75,15 +71,16 @@ namespace bammm
 		Actor* enemy = _sceneGraph->getEnemy(_actor->getLocation(), _actor);
 		DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
 		State* newState;
+
 		if (enemy)
 		{
-			//_stateMachine.addState(newState, new DynamicArray<string>());
 			newState = _states.getValue("damage");
 
 			if (!currentStates.contains(newState))
 			{
 				_stateMachine.addState(newState);
 			}
+
 			DamageState* castedState = static_cast<DamageState*>(newState);
 			castedState->setTarget(*enemy);
 		}
@@ -91,21 +88,18 @@ namespace bammm
 		{
 			newState = _states.getValue("movement");
 
-			//all currently running states
 			if (!currentStates.contains(newState))
 			{
 				_stateMachine.addState(newState);
 			}
 
-			//Random number generator
 			random_device rd;
 			mt19937 generator(rd());
-
 			uniform_int_distribution<int> randomDistribution(0, 3);
 
-			//Pick a random direction
 			int random = randomDistribution(generator);
 			Vector3D newLocation(0, 0, 0);
+
 			if (random == 0)
 			{
 				newLocation.set(1, 0, 0);
@@ -122,9 +116,11 @@ namespace bammm
 			{
 				newLocation.set(0, -1, 0);
 			}
+
 			MoveState* castedState = static_cast<MoveState*>(newState);
 			castedState->setDirection(newLocation);
 		}
+
 		_stateMachine.tick(deltaTime);
 	}
 

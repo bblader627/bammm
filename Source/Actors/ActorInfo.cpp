@@ -16,7 +16,6 @@
 
 namespace bammm
 {
-
 	ActorInfo::ActorInfo()
 	{
 		_type = "none";
@@ -38,7 +37,8 @@ namespace bammm
 
 	ActorInfo::ActorInfo(string type, string name, int health, int stamina,
 			int attack, int defense, string behavior, bool collision,
-			AllianceType alliance, string symbol, string color, int gold, int coal, int iron, int wood)
+			AllianceType alliance, string symbol, string color, int gold,
+			int coal, int iron, int wood)
 	{
 		_type = type;
 		_name = name;

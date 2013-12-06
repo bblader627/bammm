@@ -22,17 +22,13 @@ namespace bammm
 		_type = "dwarf";
 		_name = "DefaultName";
 		_rotation = 0;
-
 		_velocity = new Vector3D();
 		_location = new Vector3D();
 		_collision = false;
-
 		_maximumHealth = 100;
 		_maximumStamina = 50;
 		_health = _maximumHealth;
 		_stamina = _maximumStamina;
-		_health = 100;
-		_stamina = 50;
 		_attack = 4;
 		_defense = 2;
 		_symbol = "D";
@@ -44,20 +40,16 @@ namespace bammm
 
 	Actor::Actor(string name, string type, AllianceType alliance)
 	{
-		_name = name;
 		_type = type;
+		_name = name;
 		_rotation = 0;
-
 		_velocity = new Vector3D();
 		_location = new Vector3D();
 		_collision = false;
-
 		_maximumHealth = 100;
 		_maximumStamina = 50;
 		_health = _maximumHealth;
 		_stamina = _maximumStamina;
-		_health = 100;
-		_stamina = 50;
 		_attack = 4;
 		_defense = 2;
 		_alliance = alliance;
@@ -71,12 +63,10 @@ namespace bammm
 	{
 		_type = type;
 		_name = name;
-
 		_rotation = 0;
 		_velocity = new Vector3D();
 		_location = new Vector3D();
 		_collision = false;
-
 		_maximumHealth = health;
 		_maximumStamina = stamina;
 		_health = _maximumHealth;
@@ -99,16 +89,12 @@ namespace bammm
 		_rotation = 0;
 		_velocity = new Vector3D();
 		_location = info->getLocation();
-
 		_maximumHealth = info->getHealth();
 		_maximumStamina = info->getStamina();
-		_health = _maximumHealth;
-		_stamina = _maximumStamina;
 		_health = info->getHealth();
 		_stamina = info->getStamina();
 		_attack = info->getAttack();
 		_defense = info->getDefense();
-
 		_behavior = info->getBehavior();
 		_alliance = info->getAlliance();
 		_collision = info->getCollision();
@@ -194,6 +180,7 @@ namespace bammm
 		if (_health >= _maximumHealth)
 		{
 			_health = _maximumHealth;
+
 			return;
 		}
 		else
@@ -207,6 +194,7 @@ namespace bammm
 		if (_stamina >= _maximumStamina)
 		{
 			_stamina = _maximumStamina;
+
 			return;
 		}
 		else
@@ -224,6 +212,7 @@ namespace bammm
 		else
 		{
 			_health = 0;
+
 			return;
 		}
 	}
@@ -255,12 +244,14 @@ namespace bammm
 	void Actor::incrementBAC()
 	{
 		_BAC += .01;
+
 		return;
 	}
 
 	int Actor::addGold(int amount)
 	{
 		_gold += amount;
+
 		return _gold;
 	}
 
@@ -273,6 +264,7 @@ namespace bammm
 		else
 		{
 			_gold -= amount;
+
 			return true;
 		}
 	}

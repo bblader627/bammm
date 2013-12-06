@@ -63,6 +63,11 @@ namespace bammm
 			virtual void setup(Actor& actor, MeleeCombat& meleeCombat,
 					Grid3D<Actor*>& sceneGraph)=0;
 
+			/**
+			 tick
+			 @Pre-Condition- Takes in a float deltaTime
+			 @Post-Condition - Ticks for the deltaTime
+			 */
 			virtual void tick(float deltaTime)=0;
 
 			/**
@@ -71,7 +76,7 @@ namespace bammm
 			 @Post-Condition- Returns a boolean representing fi the Controller can be deleted or not.
 			 */
 			virtual bool canDelete()=0;
-			
+
 			/**
 			 getActor
 			 @Pre-Condition- Takes nothing
