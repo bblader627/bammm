@@ -141,9 +141,6 @@ namespace bammm
 			{
 				alliance = AllianceType::enemy;
 			}
-//
-//			Behavior* behavior = new Behavior();
-//			behavior->addBaseBehavior(behaviorString, behaviorValue);
 
 			ActorInfo* info = new ActorInfo(type, name, health, stamina, attack,
 					defense, behavior, collision, alliance, symbol, color, gold,
