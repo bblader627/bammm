@@ -260,6 +260,7 @@ namespace bammm
 		if (_array == NULL)
 		{
 			errorMessage("Cannot add to null array");
+
 			return false;
 		}
 
@@ -280,6 +281,7 @@ namespace bammm
 		if (_array == NULL)
 		{
 			errorMessage("Cannot add to null array");
+
 			return;
 		}
 
