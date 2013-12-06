@@ -134,7 +134,7 @@ namespace bammm
 			 @Post-Condition- Returns the distance between two vectors
 			 */
 			float getDistance(Vector3D& vector1, Vector3D& vector2);
-			
+
 			/*
 			 toString
 			 @Pre-Condition- No input
@@ -199,9 +199,7 @@ namespace bammm
 		_length = 0;
 		_height = 0;
 		_grid = new DynamicArray<DynamicArray<T>*>();
-
 		setupDirections();
-
 	}
 
 	template<class T>
@@ -237,7 +235,7 @@ namespace bammm
 	{
 		UP = new Vector3D(-1, 0, 0);
 		DOWN = new Vector3D(1, 0, 0);
-		LEFT = new Vector3D(0,-1, 0);
+		LEFT = new Vector3D(0, -1, 0);
 		RIGHT = new Vector3D(0, 1, 0);
 		ZERO = new Vector3D(0, 0, 0);
 	}
@@ -251,6 +249,7 @@ namespace bammm
 		int end = position + radius;
 		DynamicArray<DynamicArray<T>*>*space =
 				new DynamicArray<DynamicArray<T>*>();
+
 		if (start < 0)
 		{
 			start = 0;
@@ -264,6 +263,7 @@ namespace bammm
 			_grid->get(i);
 			space->add(_grid->get(i));
 		}
+
 		return space;
 	}
 
@@ -271,6 +271,7 @@ namespace bammm
 	DynamicArray<T>* Grid3D<T>::access(int x, int y, int z)
 	{
 		int position = x + (y * _width) + (z * _width * _height);
+
 		return _grid->get(position);
 	}
 
@@ -293,6 +294,7 @@ namespace bammm
 	bool Grid3D<T>::remove(Vector3D *vector, T object)
 	{
 		bool deletedValue = access(vector, 0)->get(0)->removeElement(object);
+
 		return deletedValue;
 	}
 
@@ -302,18 +304,21 @@ namespace bammm
 		Vector3D* target = findClosestInGrid(actor, destination)->getLocation();
 		Vector3D* actorLocation = actor->getLocation();
 
-		if(*target == *actorLocation)
+		if (*target == *actorLocation)
 		{
 			return new Queue<Vector3D*>();
 		}
+
 		int actorLocInt = convertToPosition(actorLocation);
 
-		DynamicArray<DynamicArray<bool>*>* visited = new DynamicArray<DynamicArray<bool>*>();
+		DynamicArray<DynamicArray<bool>*>* visited = new DynamicArray<
+				DynamicArray<bool>*>();
 
-		for (uint i = 0; i < (uint)_width; i++)
+		for (uint i = 0; i < (uint) _width; i++)
 		{
 			visited->add(new DynamicArray<bool>());
-			for (uint j= 0; j < (uint)_length; j++)
+
+			for (uint j = 0; j < (uint) _length; j++)
 			{
 				visited->get(i)->add(false);
 			}
@@ -323,7 +328,6 @@ namespace bammm
 		TreeNode<Vector3D*>* rootNode = NULL;
 		mapTree->add(target, rootNode);
 
-
 		TreeNode<Vector3D*>* current;
 		TreeNode<Vector3D*>* foundActor;
 
@@ -332,17 +336,12 @@ namespace bammm
 		while (!mapTree->isEmpty())
 		{
 			current = mapTree->get();
-			//Get location as vector and integer
 			Vector3D* currentLocation = current->getValue();
 			int currentLocInt = convertToPosition(currentLocation);
 
+			visited->get(currentLocation->getX())->get(currentLocation->getY()) =
+					true;
 
-			//cout << currentLocation->getX() << ", " << currentLocation->getY() << endl;
-
-			//Set current location to visited
-			visited->get(currentLocation->getX())->get(currentLocation->getY()) = true;
-
-			//If found
 			if (currentLocInt == actorLocInt)
 			{
 				isFound = true;
@@ -350,67 +349,73 @@ namespace bammm
 				break;
 			}
 
-			//Start adding if possible
 			Vector3D newLoc1;
 			bool hasVisited;
 
-			//add UP to mapTree
 			newLoc1 = *currentLocation + *UP;
-			if (isWalkable(newLoc1))		//If not a ollision object
+			if (isWalkable(newLoc1))
 			{
-				Vector3D* newLocation = new Vector3D(newLoc1.getX(), newLoc1.getY(), newLoc1.getZ());
-				hasVisited = visited->get(newLocation->getX())->get(newLocation->getY());
-				if (!hasVisited)			//If hasn't been visited
+				Vector3D* newLocation = new Vector3D(newLoc1.getX(),
+						newLoc1.getY(), newLoc1.getZ());
+				hasVisited = visited->get(newLocation->getX())->get(
+						newLocation->getY());
+
+				if (!hasVisited)
 				{
-					//cout << newLocation->getX() << ", " << newLocation->getY() << endl;
-					visited->get(newLocation->getX())->get(newLocation->getY()) = true;
+					visited->get(newLocation->getX())->get(newLocation->getY()) =
+							true;
 					mapTree->add(newLocation, current);
 				}
 			}
 
-			//add RIGHT to mapTree
 			Vector3D newLoc2 = *currentLocation + *RIGHT;
-			if (isWalkable(newLoc2))		//If not a ollision object
+			if (isWalkable(newLoc2))
 			{
-				Vector3D* newLocation = new Vector3D(newLoc2.getX(), newLoc2.getY(), newLoc2.getZ());
-				hasVisited = visited->get(newLocation->getX())->get(newLocation->getY());
-				if (!hasVisited)			//If hasn't been visited
+				Vector3D* newLocation = new Vector3D(newLoc2.getX(),
+						newLoc2.getY(), newLoc2.getZ());
+				hasVisited = visited->get(newLocation->getX())->get(
+						newLocation->getY());
+
+				if (!hasVisited)
 				{
-					//cout << newLocation->getX() << ", " << newLocation->getY() << endl;
-					visited->get(newLocation->getX())->get(newLocation->getY()) = true;
+					visited->get(newLocation->getX())->get(newLocation->getY()) =
+							true;
 					mapTree->add(newLocation, current);
 				}
 			}
 
-			//add DOWN to mapTree
 			Vector3D newLoc3 = *currentLocation + *DOWN;
-			if (isWalkable(newLoc3))			//If not a ollision object
+			if (isWalkable(newLoc3))
 			{
-				Vector3D* newLocation = new Vector3D(newLoc3.getX(), newLoc3.getY(), newLoc3.getZ());
-				hasVisited = visited->get(newLocation->getX())->get(newLocation->getY());
-				if (!hasVisited)				//If hasn't been visited
+				Vector3D* newLocation = new Vector3D(newLoc3.getX(),
+						newLoc3.getY(), newLoc3.getZ());
+				hasVisited = visited->get(newLocation->getX())->get(
+						newLocation->getY());
+
+				if (!hasVisited)
 				{
-					//cout << newLocation->getX() << ", " << newLocation->getY() << endl;
-					visited->get(newLocation->getX())->get(newLocation->getY()) = true;
+					visited->get(newLocation->getX())->get(newLocation->getY()) =
+							true;
 					mapTree->add(newLocation, current);
 				}
 			}
 
-			//add LEFT to mapTree
 			Vector3D newLoc4 = *currentLocation + *LEFT;
-			if (isWalkable(newLoc4))			//If not a ollision object
+			if (isWalkable(newLoc4))
 			{
-				Vector3D* newLocation = new Vector3D(newLoc4.getX(), newLoc4.getY(), newLoc4.getZ());
-				hasVisited = visited->get(newLocation->getX())->get(newLocation->getY());
-				if (!hasVisited)				//If hasn't been visited
+				Vector3D* newLocation = new Vector3D(newLoc4.getX(),
+						newLoc4.getY(), newLoc4.getZ());
+				hasVisited = visited->get(newLocation->getX())->get(
+						newLocation->getY());
+				if (!hasVisited)
 				{
 					//cout << newLocation->getX() << ", " << newLocation->getY() << endl;
-					visited->get(newLocation->getX())->get(newLocation->getY()) = true;
+					visited->get(newLocation->getX())->get(newLocation->getY()) =
+							true;
 					mapTree->add(newLocation, current);
 				}
 			}
 		}
-
 
 		//Building Queue---------------------------------------
 
@@ -420,17 +425,16 @@ namespace bammm
 		if (isFound)
 		{
 			Vector3D* currentVector;
-			while(foundActor != NULL)
+			while (foundActor != NULL)
 			{
 				currentVector = foundActor->getValue();
 				path->add(currentVector);
 				foundActor = foundActor->getParent();
-
 			}
 		}
+
 		return path;
 	}
-
 
 	template<class T>
 	T Grid3D<T>::findInGrid(string target)
@@ -441,13 +445,14 @@ namespace bammm
 			for (uint cellIndex = 0; cellIndex < cell->getSize(); cellIndex++)
 			{
 				T actor = cell->get(cellIndex);
-				
-				if (actor->toString().find(target)!=string::npos)
+
+				if (actor->toString().find(target) != string::npos)
 				{
 					return actor;
 				}
 			}
 		}
+
 		return NULL;
 	}
 
@@ -456,16 +461,18 @@ namespace bammm
 	{
 		T closest = NULL;
 		float minDistance = 1000;
+
 		for (uint gridIndex = 0; gridIndex < _grid->getSize(); gridIndex++)
 		{
 			DynamicArray<T>* cell = _grid->get(gridIndex);
 			for (uint cellIndex = 0; cellIndex < cell->getSize(); cellIndex++)
 			{
 				T actor = cell->get(cellIndex);
-				if (actor->toString().find(target)!=string::npos)
+				if (actor->toString().find(target) != string::npos)
 				{
-					float distance = getDistance(*unit->getLocation(), *actor->getLocation());
-					if(distance < minDistance && !(unit == actor))
+					float distance = getDistance(*unit->getLocation(),
+							*actor->getLocation());
+					if (distance < minDistance && !(unit == actor))
 					{
 						minDistance = distance;
 						closest = actor;
@@ -473,6 +480,7 @@ namespace bammm
 				}
 			}
 		}
+
 		return closest;
 	}
 
@@ -483,7 +491,7 @@ namespace bammm
 		float y = pow(vector1.getY() - vector2.getY(), 2);
 		float z = pow(vector1.getZ() - vector2.getZ(), 2);
 
-		return sqrt(x+y+z);
+		return sqrt(x + y + z);
 	}
 
 	template<class T>
@@ -511,6 +519,7 @@ namespace bammm
 							+ " ";
 				}
 			}
+
 			gridString = gridString + "\n";
 		}
 
@@ -547,32 +556,26 @@ namespace bammm
 			delete actor->getLocation();
 			add(newLocation, actor);
 		}
-		else
-		{
-			//delete newLocation;
-		}
 	}
 
 	template<class T>
 	bool Grid3D<T>::isWalkable(Vector3D location)
 	{
-		//Checks for in grid bounds
 		if (location.getX() < 0 || location.getY() < 0 || location.getZ() < 0)
 		{
 			return false;
 		}
 
-		//Checks for in grid bounds
 		if (location.getX() >= _width || location.getY() >= _length
 				|| location.getZ() >= _height)
 		{
 			return false;
 		}
 
-		//int radius = 0;
 		DynamicArray<DynamicArray<T>*>* tiles = access(&location, 0);
 		DynamicArray<T>* allOnTile = tiles->get(0);
 		int size = allOnTile->getSize();
+
 		for (int i = 0; i < size; i++)
 		{
 			if (allOnTile->get(i)->getCollision() == 1)
@@ -596,7 +599,6 @@ namespace bammm
 		bool orderedXGreater = orderedLocation->getX() > targetLocation->getX();
 		bool orderedYLess = orderedLocation->getY() < targetLocation->getY();
 		bool orderedYGreater = orderedLocation->getY() > targetLocation->getY();
-
 		float newX;
 		float newY;
 
@@ -653,6 +655,7 @@ namespace bammm
 				newY = orderedLocation->getY() - 1;
 			}
 		}
+
 		newLocation = new Vector3D(newX, newY, 0);
 		move(ordered, newLocation);
 	}
@@ -685,9 +688,11 @@ namespace bammm
 	template<class T>
 	Vector3D* Grid3D<T>::convertToVector(int position)
 	{
-		int z = (position - (position % (_length * _width)))/(_length * _width);
+		int z = (position - (position % (_length * _width)))
+				/ (_length * _width);
 		int y = position / _length;
 		int x = position % _length;
+
 		return new Vector3D(x, y, z);
 	}
 }

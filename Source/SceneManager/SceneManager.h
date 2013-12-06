@@ -37,7 +37,6 @@ namespace bammm
 			DynamicArray<PlayerController*> _allPlayerControllers;
 			DynamicArray<AiController*> _allAiControllers;
 			PlayerController * _focus;
-
 			static const int SCENE_X = 20;
 			static const int SCENE_Y = 20;
 			static const int SCENE_Z = 20;
@@ -131,7 +130,6 @@ namespace bammm
 			 @Pre-Condition- returns controller with actor of matching name
 			 */
 			PlayerController* getControllerByActor(string name);
-
 	};
 }
 

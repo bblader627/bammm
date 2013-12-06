@@ -83,12 +83,12 @@ namespace bammm
 		return Vector3D((_y * vector.getZ()) - (_z - vector.getY()),
 				(_x * vector.getZ()) - (_z - vector.getX()),
 				(_x * vector.getY()) - (_y - vector.getX()));
-
 	}
 
 	string Vector3D::toString()
 	{
-		return "(" + to_string(_x) + "," + to_string(_y) + "," + to_string(_z) + ")";
+		return "(" + to_string(_x) + "," + to_string(_y) + "," + to_string(_z)
+				+ ")";
 	}
 
 	bool Vector3D::operator==(const Vector3D &vector)
@@ -128,6 +128,7 @@ namespace bammm
 		_x += vector.getX();
 		_y += vector.getY();
 		_z += vector.getZ();
+
 		return *this;
 	}
 
@@ -142,6 +143,7 @@ namespace bammm
 		_x -= vector.getX();
 		_y -= vector.getY();
 		_z -= vector.getZ();
+
 		return *this;
 	}
 
