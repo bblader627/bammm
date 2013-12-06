@@ -15,6 +15,7 @@
 #include "CraftState.h"
 #include "../JSON/JSON.h"
 #include <string>
+#include "../Factories/Factory.h"
 
 namespace bammm
 {
@@ -81,16 +82,20 @@ namespace bammm
 
 	void CraftState::craft()
 	{
+		extern Factory* factory;
 
-		JSON* ingredientMap = factory.getCraftables();
-		for (int i = 0;
-				i
-						< ingredientMap->getChild(_craftableItem->getName())->getSize();
+		JSON* ingredientMap = factory->getCraftables();
+		JSON* child = ingredientMap->getChild(_craftableItem->getName());
+		DynamicArray<JSON*>* allChildren = child->getAllChildren()->getAllValues();
+
+		for (unsigned int i = 0;
+				i < allChildren->getSize();
 				i++)
 		{
-		ingredientMap->getChild(_craftableItem->getName())->get(i)->getChild->("name");
-		ingredientMap->getChild(_craftableItem->getName())->get(i)->getChild->("amount");
-	}
+			allChildren->get(i)->getChild("name");
+			allChildren->get(i)->getChild("amount");
+
+		}
 	//create new item
 	//remove items from inventory
 	//add new item to inventory
@@ -99,14 +104,18 @@ namespace bammm
 
 bool CraftState::canCraft()
 {
+	extern Factory* factory;
 
-	JSON* ingredientMap = factory.getCraftables();
+	JSON* ingredientMap = factory->getCraftables();
+	JSON* child = ingredientMap->getChild(_craftableItem->getName());
+	DynamicArray<JSON*>* allChildren = child->getAllChildren()->getAllValues();
 
-	for (int i = 0; i < ingredientMap->get(i)->getSize(); i++)
+	string craftableItemName = _craftableItem->getName();
+
+	for (unsigned int i = 0; i < allChildren->getSize(); i++)
 	{
-		if (_actor->getInventory()->contains(_craftableItem->getName(),
-				ingredientMap->getChild(_craftableItem->getName())->getValue(
-						"amount")))
+		if (_actor->getInventory().contains(*_craftableItem))
+				//, child->getChild("amount")))
 		{
 			continue;
 		}

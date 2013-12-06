@@ -8,6 +8,11 @@
 #include <random>
 #include "LevelingSystem/LevelingSystem.h"
 
+namespace bammm
+{
+	Factory* factory;
+}
+
 using namespace bammm;
 using namespace std;
 
@@ -26,11 +31,11 @@ int main()
 	bool printMap = true;
 
 	SceneManager sceneManager;
-	extern Factory* factory;
-	factory = new Factory(&sceneManager);
+	//Factory* factory;
+	bammm::factory = new Factory(&sceneManager);
 	MeleeCombat meleeCombat;
 
-	factory->setup();
+	bammm::factory->setup();
 
 	sceneManager.setMeleeCombat(meleeCombat);
 
