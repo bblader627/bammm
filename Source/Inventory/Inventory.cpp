@@ -104,12 +104,12 @@ namespace bammm
 				if (currentItem.getAmount() == 1)
 				{
 					cout << "End of removeItem amount 1";
-					return _inventory.remove(i).getName();
+					return _inventory.remove(i)->getName();
 				}
 				else
 				{
 					currentItem.setAmount(currentItem.getAmount() - 1);
-					return currentItem.getStackableCopy().getName();
+					return currentItem.getStackableCopy()->getName();
 					cout << "End of removeItem copy";
 				}
 			}
@@ -169,11 +169,11 @@ namespace bammm
 		return false;
 	}
 
-	bool Inventory::contains(string name, uint amount)
+/*	bool Inventory::contains(string name, uint amount)
 	{
 		uint count = 0;
 		string currentName;
-		unint currentAmount;
+		uint currentAmount;
 
 		for (uint i = 0; i < amount; i++)
 		{
@@ -185,7 +185,7 @@ namespace bammm
 		}
 	}
 	return false;
-}
+}*/
 
 void Inventory::setSlots(uint slots)
 {

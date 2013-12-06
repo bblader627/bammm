@@ -104,7 +104,7 @@ bool CraftState::canCraft()
 
 	for (int i = 0; i < ingredientMap->get(i)->getSize(); i++)
 	{
-		if (_actor.getInventory.contains(_craftableItem->getName(),
+		if (_actor->getInventory()->contains(_craftableItem->getName(),
 				ingredientMap->getChild(_craftableItem->getName())->getValue(
 						"amount")))
 		{
