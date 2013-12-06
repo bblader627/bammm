@@ -372,7 +372,7 @@ namespace bammm
 	string MapEditor::createDimensions(int x, int y, int z)
 	{
 		string sectionName = "dimensions";
-		string sectionValue = "\t" + sectionName + ": [\n";
+		string sectionValue = "\t\"" + sectionName + "\": [\n";
 		string xValue = "\t\t{ \"x\":" + to_string(x) + ", ";
 		string yValue = "\"y\":" + to_string(y) + ", ";
 		string zValue = "\"z\":" + to_string(z) + " }\n";
@@ -380,11 +380,42 @@ namespace bammm
 		return sectionValue + xValue + yValue + zValue + closeValue;
 	}
 
+	string MapEditor::createJSONObjectNew(string name, int health, int stamina, int attack, int defense, string behavior, int x, int y, int z, int alliance, string color, string symbol, bool collision)
+	{
+		string collisionValue;
+		string startValue = "\t\t{ ";
+		string nameValue = "\"name\":\"" + name + "\", ";
+		string healthValue = "\"health\":" + to_string(health) + ", ";
+		string attackValue = "\"attack\":" + to_string(attack) + ", ";
+		string staminaValue = "\"stamina\":" + to_string(stamina) + ", ";
+		string defenseValue = "\"defense\":" + to_string(defense) + ", ";
+		string behaviorValue = "\"behavior\":\"" + behavior + "\", ";
+		string xValue = "\"x\":" + to_string(x) + ", ";
+		string yValue = "\"y\":" + to_string(y) + ", ";
+		string zValue = "\"z\":" + to_string(z) + ", ";
+		string allianceValue = "\"alliance\":" + to_string(alliance) + ", ";
+		string colorValue = "\"color\":\"" + color + "\", ";
+		string symbolValue = "\"symbol\":\"" + symbol + "\", ";
+		if(collision)
+		{
+			collisionValue = "\"collision\":true";
+		}
+		else
+		{
+			collisionValue = "\"collision\":false";
+		}
+		string endValue = " }";
+
+		return startValue + nameValue + healthValue + staminaValue + attackValue + defenseValue + behaviorValue + xValue + yValue + zValue + allianceValue + colorValue + symbolValue + collisionValue + endValue;
+	}
+
 	string MapEditor::createJSON()
 	{
 		string jsonString = "{\n";
 		jsonString += createDimensions(_x, _y, _z);
-		//jsonString = jsonString + createWaterJSON() + ",\n";
+		jsonString += createWallJSON();
+		jsonString += createWaterJSON();
+		jsonString += createMineJSON();
 		//jsonString = jsonString + createBarrierJSON() + ",\n";
 		//jsonString = jsonString + createMineJSON() + ",\n";
 		//jsonString = jsonString + createBuildingJSON() + "\n";
@@ -392,35 +423,179 @@ namespace bammm
 		return jsonString;
 	}
 
-	string MapEditor::createWaterJSON()
+	string MapEditor::createWallJSON()
 	{
-		string item = "~";
+		string sectionName = "wall";
+		string symbol = "#";
+		string sectionValue = "\t\"" + sectionName + "\": [\n";
+		string content = "";
+		string name = "Wall";
+		int health = 100;
+		int stamina = 0;
+		int attack = 0;
+		int defense = 20;
+		string behavior = "block";
+		int alliance = 0;
+		bool collision = true;
 		bool firstItem = true;
-		string name = "Water Objects";
-		string jsonString = "\"" + name + "\":\n";
-		jsonString = jsonString + "[\n";
+		int id = 1;
+
 		for (int x = 0; x < _x; x++)
 		{
 			for (int y = 0; y < _y; y++)
 			{
 				for (int z = 0; z < _z; z++)
 				{
-					if (_grid[y][x][z].getSymbol() == item)
+					TerrainSquare& current = _grid[y][x][z];
+					if (current.getSymbol() == symbol)
 					{
 						if (!firstItem)
 						{
-							jsonString = jsonString + ",\n";
+							content += ",\n";
 						}
-						jsonString = jsonString
-								+ createJSONObject(x, y, z, "Deep Water",
-										"false") + "\n";
+						firstItem = false;
+
+						if(current.getCurrentColor() == "yellow")
+						{
+							collision = false;
+						}
+						else
+						{
+							collision = true;
+						}
+
+						content += createJSONObjectNew(name + to_string(id), health, stamina, attack, defense, behavior, x, y, z, alliance, current.getCurrentColor(), current.getSymbol(), collision);
+						
+						id++;
 					}
 				}
 			}
 		}
-		jsonString = jsonString + "]";
-		return jsonString;
+		
+		string closeValue = "\t],\n";
+		return sectionValue + content + closeValue;
 	}
+	
+	string MapEditor::createWaterJSON()
+	{
+		string sectionName = "water";
+		string symbol = "~";
+		string symbol2 = "=";
+		string sectionValue = "\t\"" + sectionName + "\": [\n";
+		string content = "";
+		string name = "Water";
+		int health = 100;
+		int stamina = 0;
+		int attack = 0;
+		int defense = 20;
+		string behavior = "block";
+		int alliance = 0;
+		bool collision = true;
+		bool firstItem = true;
+		int id = 1;
+
+		for (int x = 0; x < _x; x++)
+		{
+			for (int y = 0; y < _y; y++)
+			{
+				for (int z = 0; z < _z; z++)
+				{
+					TerrainSquare& current = _grid[y][x][z];
+					if (current.getSymbol() == symbol || current.getSymbol() == symbol2)
+					{
+						if(current.getSymbol() == symbol)
+						{
+							name = "Water";
+							collision = true;
+						}
+						else
+						{
+							name = "Bridge";
+							collision = false;
+						}
+
+						if (!firstItem)
+						{
+							content += ",\n";
+						}
+						firstItem = false;
+
+
+						content += createJSONObjectNew(name + to_string(id), health, stamina, attack, defense, behavior, x, y, z, alliance, current.getCurrentColor(), current.getSymbol(), collision);
+						
+						id++;
+					}
+				}
+			}
+		}
+		
+		string closeValue = "\t],\n";
+		return sectionValue + content + closeValue;
+	}
+	
+	string MapEditor::createMineJSON()
+	{
+		string sectionName = "ore";
+		string symbol = "^";
+		string sectionValue = "\t\"" + sectionName + "\": [\n";
+		string content = "";
+		string name = "iron";
+		int health = 20;
+		int stamina = 0;
+		int attack = 0;
+		int defense = 2;
+		string behavior = "block";
+		int alliance = 0;
+		bool collision = false;
+		bool firstItem = true;
+		int id = 1;
+
+		for (int x = 0; x < _x; x++)
+		{
+			for (int y = 0; y < _y; y++)
+			{
+				for (int z = 0; z < _z; z++)
+				{
+					TerrainSquare& current = _grid[y][x][z];
+					if (current.getSymbol() == symbol)
+					{
+						if (!firstItem)
+						{
+							content += ",\n";
+						}
+						firstItem = false;
+
+						if(current.getCurrentColor() == "yellow")
+						{
+							name = "gold";
+						}
+						else if(current.getCurrentColor() == "white")
+						{
+							name = "iron";
+						}
+						else if(current.getCurrentColor() == "black")
+						{
+							name = "coal";
+						}
+
+						content += createJSONObjectNew(name + to_string(id), health, stamina, attack, defense, behavior, x, y, z, alliance, current.getCurrentColor(), current.getSymbol(), collision);
+						
+						id++;
+					}
+				}
+			}
+		}
+		
+		string closeValue = "\t],\n";
+		return sectionValue + content + closeValue;
+	}
+	
+	string MapEditor::createWaterJSON()
+	{
+		string sectionName = "water";
+		string symbol = "~";
+		string symbol2 = "=";
+		string sectionValue = "\t\"" + sectionName + "\": [\n";
 
 	string MapEditor::createBarrierJSON()
 	{
@@ -445,37 +620,6 @@ namespace bammm
 						jsonString = jsonString
 								+ createJSONObject(x, y, z, "Fortress Wall",
 										"false") + "";
-					}
-				}
-			}
-		}
-		jsonString = jsonString + "]";
-		return jsonString;
-	}
-
-	string MapEditor::createMineJSON()
-	{
-		string item = "^";
-		bool firstItem = true;
-		string name = "Mine Objects";
-		string jsonString = "\"" + name + "\":\n";
-		jsonString = jsonString + "[\n";
-		for (int x = 0; x < _x; x++)
-		{
-			for (int y = 0; y < _y; y++)
-			{
-				for (int z = 0; z < _z; z++)
-				{
-					if (_grid[y][x][z].getSymbol() == item)
-					{
-						if (!firstItem)
-						{
-							jsonString = jsonString + ",\n";
-						}
-						firstItem = false;
-						jsonString = jsonString
-								+ createJSONObject(x, y, z, "Iron ore", "false")
-								+ "";
 					}
 				}
 			}
