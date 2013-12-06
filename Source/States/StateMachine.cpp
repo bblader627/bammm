@@ -65,6 +65,7 @@ namespace bammm
 			removeState(current);
 			return;
 		}
+
 		switchState(current, _allStates->getValue(newStateString));
 	}
 
@@ -74,7 +75,6 @@ namespace bammm
 		{
 			if (newState->toString() == "combat")
 			{
-				//test for fight happening
 				if (!_meleeCombat->fightHappening())
 				{
 					this->removeState(newState);
@@ -87,26 +87,15 @@ namespace bammm
 			}
 			else
 			{
-				//breakdown and setup are not calling the correct functions
 				this->removeState(newState);
 			}
 		}
 		else
 		{
-			//Special case for combat state
-			if (newState->toString() == "combat")
-			{
-				/*Actor* closestEnemy = SceneManager::getSceneGraph().getEnemy(_actor->getLocation(), _actor);
-				 if(closestEnemy)
-				 {
-				 _meleeCombat->setup(*_actor, *closestEnemy);
-				 }*/
-			}
 			newState->setup();
 			currentStates.add(newState);
 		}
 	}
-
 
 	void StateMachine::removeState(State* oldState)
 	{

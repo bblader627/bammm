@@ -44,23 +44,21 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			//virtual void setup(DynamicArray<string>* args);
 			void setup();
-
 
 			/**
 			 setAmount
 			 @Pre-Condition- takes int
 			 @Post-Condition- sets _amount
 			 */
-			 void setAmount(int amount);
+			void setAmount(int amount);
 
 			/**
 			 setTarget
 			 @Pre-Condition- takes Actor
 			 @Post-Condition- assigns _target
 			 */
-			 void setTarget(Actor* target);
+			void setTarget(Actor* target);
 
 			/**
 			 breakdown

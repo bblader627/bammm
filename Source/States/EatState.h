@@ -36,7 +36,6 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Sets up the state
 			 */
-			//void setup(DynamicArray<string>* args);
 			void setup();
 
 			/**
@@ -44,14 +43,14 @@ namespace bammm
 			 @Pre-Condition- takes int
 			 @Post-Condition- sets _amount
 			 */
-			 void setAmount(int amount);
+			void setAmount(int amount);
 
-			 /**
+			/**
 			 setFood
 			 @Pre-Condition- takes string
 			 @Post-Condition- sets _food
 			 */
-			 void setType(string type);
+			void setType(string type);
 
 			/**
 			 breakdown

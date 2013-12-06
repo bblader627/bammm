@@ -27,19 +27,16 @@ namespace bammm
 
 	State::~State()
 	{
-
 	}
 
 	void State::setup()
 	{
-
 	}
 
 	void State::breakdown()
 	{
 		cout << "wrong breakdown" << "\n";
 	}
-
 
 	void State::tick(float deltaTime)
 	{
@@ -53,7 +50,6 @@ namespace bammm
 
 	void State::switchState(string nextState)
 	{
-		//_statemachine->switchState(this, nextState);
 	}
 
 	string State::toString()

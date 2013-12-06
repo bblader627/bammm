@@ -37,7 +37,6 @@ namespace bammm
 		double BAC = _actor->getBAC();
 		if (BAC < 0.1)
 		{
-			//Do nothing
 		}
 		else if (BAC < 0.25)
 		{
@@ -68,10 +67,12 @@ namespace bammm
 		if (_stoutLife == 0)
 		{
 			_stoutLife = 5;
+
 			if (!(_actor->spendGold(3)))
 			{
 				cout << _actor->getName()
 						<< " does not have enough gold to buy alcohol." << "\n";
+
 				return;
 			}
 		}
