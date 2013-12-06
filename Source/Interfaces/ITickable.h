@@ -43,7 +43,7 @@ namespace bammm
 			/**
 			 toString
 			 @Pre-Condition- Takes nothing
-			 @Post-Condition- Returns a string representation of a tickable
+			 @Post-Condition- Returns a string representation of ITickable
 			 */
 			virtual string toString()=0;
 	};
