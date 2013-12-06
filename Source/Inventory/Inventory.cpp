@@ -91,6 +91,32 @@ namespace bammm
 		return NULL ;
 	}
 
+	string Inventory::removeItem(string item)
+	{
+		cout << "Start of removeItem\n";
+		uint usedSlots = _inventory.getSize();
+		for (uint i = 0; i < usedSlots; i++)
+		{
+			Item currentItem = *_inventory.get(i);
+			if (currentItem.getName() == item)
+			{
+				//Return last stackable/item
+				if (currentItem.getAmount() == 1)
+				{
+					cout << "End of removeItem amount 1";
+					return _inventory.remove(i).getName();
+				}
+				else
+				{
+					currentItem.setAmount(currentItem.getAmount() - 1);
+					return currentItem.getStackableCopy().getName();
+					cout << "End of removeItem copy";
+				}
+			}
+		}
+		return "No item removed";
+	}
+
 	bool Inventory::contains(Item& item)
 	{
 		uint usedSlots = _inventory.getSize();

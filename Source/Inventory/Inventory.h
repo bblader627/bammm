@@ -55,6 +55,13 @@ namespace bammm
 			Item* removeItem(Item& item);
 
 			/**
+			 removeItem
+			 @Pre-Condition- A name of an item
+			 @Post-Condition- Returns the removed item if found
+			 */
+			string removeItem(string item);
+
+			/**
 			 contains
 			 @Pre-Condition- A reference to an item
 			 @Post-Condition- Returns true if the item was found
@@ -70,7 +77,7 @@ namespace bammm
 
 			/**
 			 contains
-			 @Pre-Condition- A reference to an item, and an amount
+			 @Pre-Condition- A name of an item, and an amount
 			 @Post-Condition- Returns true if all items are found
 			 */
 			bool contains(string name, uint amount);

@@ -39,6 +39,14 @@ namespace bammm
 		JSON* rangedWeapons = weaponRootChildren->getValue("rangedWeapons");
 		this->parseRangedWeaponToWeaponData(rangedWeapons, &_rangedWeaponData);
 
+		//Parse craftable item database//
+		JSONParser* craftableParser = new JSONParser();
+		string craftableFilename = "JSON/craftables.json";
+		craftableParser->parseFile(craftableFilename);
+
+		_craftables = craftableParser->getRootNode("root");
+
+		//Parse actors info//
 		JSONParser* actorParser = new JSONParser();
 		string actorFilename = "JSON/actors.json";
 		actorParser->parseFile(actorFilename);
@@ -49,13 +57,6 @@ namespace bammm
 
 		JSON* orcs = actorRootChildren->getValue("orcs");
 		this->parseToActorInfo(orcs, "orc", &_actorData);
-
-		//Parse craftable item database//
-		JSONParser* craftableParser = new JSONParser();
-		string craftableFilename = "JSON/craftables.json";
-		craftableParser->parseFile(craftableFilename);
-
-		JSON* craftableRoot = craftableParser->getRootNode("root");
 
 		//===========MAP=========//
 		JSON* wall = actorRootChildren->getValue("wall");
@@ -324,5 +325,10 @@ namespace bammm
 
 			map->add(type, *weaponData); //Save this data in the map.
 		}
+	}
+
+	JSON* Factory::getCraftables()
+	{
+		return _craftables;
 	}
 }

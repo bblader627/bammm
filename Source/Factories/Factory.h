@@ -46,8 +46,9 @@ namespace bammm
 			HashMap<ActorInfo> _mapData;
 			HashMap<WeaponData> _meleeWeaponData;
 			HashMap<WeaponData> _rangedWeaponData;
-			HashMap<Item> _craftableData;
 			SceneManager* _scene;
+
+			JSON* _craftables;
 
 			/*
 			 parseToActorInfo
@@ -111,6 +112,8 @@ namespace bammm
 			 @Post-Condition- Sets up armor
 			 */
 			void setupArmor();
+
+			JSON* getCraftables();
 
 			/*
 			 * Item getItem(string type);
