@@ -89,7 +89,7 @@ namespace bammm
 			}
 		}
 
-		return NULL;
+		return NULL ;
 	}
 
 	string Inventory::removeItem(string item)
@@ -186,6 +186,11 @@ namespace bammm
 	uint Inventory::getUsedSlots()
 	{
 		return _inventory.getSize();
+	}
+
+	uint Inventory::getIndex(uint index)
+	{
+		return _inventory[i];
 	}
 
 	string Inventory::toString()

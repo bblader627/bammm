@@ -83,6 +83,13 @@ namespace bammm
 			void setSlots(uint slots);
 
 			/**
+			 getIndex
+			 @Pre-Condition- A uint for desired index
+			 @Post-Condition- returns item at index
+			 */
+			Item* getIndex(uint index);
+
+			/**
 			 getSlots
 			 @Pre-Condition- None
 			 @Post-Condition- Returns the amount of slots
