@@ -42,16 +42,9 @@ namespace bammm
 		string craftableFilename = "JSON/craftables.json";
 		craftableParser->parseFile(craftableFilename);
 
-		JSON* craftableRoot = craftableParser->getRootNode("root");
-
-		//Parse craftable item database//
-		JSONParser* craftableParser = new JSONParser();
-		string craftableFilename = "JSON/craftables.json";
-		craftableParser->parseFile(craftableFilename);
-
 		_craftables = craftableParser->getRootNode("root");
 
-		//Parse actors info
+		//Parse actors
 		JSONParser* actorParser = new JSONParser();
 		string actorFilename = "JSON/actors.json";
 		actorParser->parseFile(actorFilename);
@@ -62,7 +55,7 @@ namespace bammm
 		JSON* orcs = actorRootChildren->getValue("orcs");
 		this->parseToActorInfo(orcs, "orc", &_actorData);
 
-		//===========MAP=========//
+		//Parse map
 		JSON* wall = actorRootChildren->getValue("wall");
 		this->parseToActorInfo(wall, "wall", &_blockData);
 
@@ -84,15 +77,6 @@ namespace bammm
 		JSON* dwarves = actorRootChildren->getValue("dwarves");
 		this->parseToActorInfo(dwarves, "dwarf", &_actorData);
 	}
-
-	/*Actor Factory::getActor(string type, string name, int health, int stamina,
-	 int attack, int defense, string behavior, bool collision)
-	 {
-	 Actor* newActor = new Actor(type, name, health, stamina, attack,
-	 defense, behavior, AllianceType::enemy);
-	 newActor->setLocation(new Vector3D(0.0f, 0.0f, 0.0f));
-	 return *newActor;
-	 }*/
 
 	MeleeWeapon* Factory::getMeleeWeapon(string type)
 	{
