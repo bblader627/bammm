@@ -15,6 +15,7 @@
 #ifndef JSONARRAY_H_
 #define JSONARRAY_H_
 
+#include <iostream>
 #include "../Resources/DynamicArray.h"
 #include "JSON.h"
 
@@ -28,7 +29,7 @@ namespace bammm
 		public:
 			JSONArray();
 			JSONArray(string name);
-			JSONArray(string name, JSON *parent);
+			JSONArray(string name, JSON* parent);
 			~JSONArray();
 
 			/**
@@ -36,14 +37,14 @@ namespace bammm
 			 @Pre-Condition-  Takes a JSON
 			 @Post-Condition- Adds this argument to the array
 			 */
-			void addChild(JSON & newNode);
+			void addChild(JSON& newNode);
 
 			/**
 			 operator[]
 			 @Pre-Condition-  const unsigned int & rhs
 			 @Post-Condition- Returns a JSON
 			 */
-			JSON operator[](const unsigned int & rhs);
+			JSON operator[](const unsigned int& rhs);
 
 			/**
 			 getIntValue

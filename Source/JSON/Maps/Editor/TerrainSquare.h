@@ -30,7 +30,7 @@ namespace bammm
 			string _symbol;
 			uint _currentSymbol;
 			bool _selected;
-			
+
 		public:
 			TerrainSquare();
 			TerrainSquare(string symbol, string color);
@@ -49,42 +49,42 @@ namespace bammm
 			 @Post-Condition- Removes the color from _colors
 			 */
 			void removeColor(string color);
-			
+
 			/**
 			 setSymbol
 			 @Pre-Condition- The new symbol to use
 			 @Post-Condition- Sets the _symbol
 			 */
 			void setSymbol(string symbol);
-			
+
 			/**
 			 getSymbol
 			 @Pre-Condition- 
 			 @Post-Condition- Sets the _symbol
 			 */
 			string getSymbol();
-			
+
 			/**
 			 nextColor
 			 @Pre-Condition- None
 			 @Post-Condition- Goes to the next color in the list
 			 */
 			void nextColor();
-			
+
 			/**
 			 getCurrentColor
 			 @Pre-Condition- None
 			 @Post-Condition- Returns the current color for the tile
 			 */
 			string getCurrentColor();
-			
+
 			/**
 			 selectSquare
 			 @Pre-Condition- A bool to select the square or not
 			 @Post-Condition- Sets _selected
 			 */
 			void selectSquare(bool selected);
-			
+
 			/**
 			 toString
 			 @Pre-Condition- None
@@ -105,7 +105,7 @@ namespace bammm
 			 @Post-Condition- Makes this TerrainSquare the same as the passed in one
 			 */
 			void operator=(TerrainSquare& terrainSquare);
-			
+
 			/**
 			 operator==
 			 @Pre-Condition- A constant TerrainSquare reference

@@ -20,12 +20,12 @@ namespace bammm
 	{
 	}
 
-	void JSONParser::addRoot(JSON & newNode)
+	void JSONParser::addRoot(JSON& newNode)
 	{
 		_rootMap.add(newNode.getName(), &newNode);
 	}
 
-	void JSONParser::addChild(JSON & rootNode, JSON & newNode)
+	void JSONParser::addChild(JSON& rootNode, JSON& newNode)
 	{
 		rootNode.addChild(newNode);
 	}
@@ -57,9 +57,9 @@ namespace bammm
 		bool isKey = false;
 		bool isValue = false;
 		bool isDouble = false;
-		JSON *currentNode = NULL;
-		JSON *parentNode = NULL;
-		JSON *arrayRootNode = NULL;
+		JSON* currentNode = NULL;
+		JSON* parentNode = NULL;
+		JSON* arrayRootNode = NULL;
 		bool skipGet = false;
 		bool isArray = false;
 		bool isNewArrayObject = false;
@@ -72,6 +72,7 @@ namespace bammm
 		{
 			cout << "Failed to open file: " << filename << " does not exist."
 					<< "\n";
+
 			return false;
 		}
 
@@ -160,6 +161,7 @@ namespace bammm
 					current = (char) input.get();
 					name = "";
 					value = "";
+
 					while (!input.eof() && current != '"')
 					{
 						if (isValue == false && isKey == true)
@@ -170,6 +172,7 @@ namespace bammm
 						{
 							value += current;
 						}
+
 						current = (char) input.get();
 					}
 
@@ -273,6 +276,7 @@ namespace bammm
 						{
 							cout << "Error parsing string or bool value \n";
 							cout.flush();
+
 							return false;
 						}
 
@@ -304,6 +308,7 @@ namespace bammm
 								isDouble = true;
 								break;
 							}
+
 							isDouble = false;
 						}
 
@@ -326,6 +331,7 @@ namespace bammm
 					{
 						cout
 								<< "Error parsing value. Invalid character found. \n";
+
 						return false;
 					}
 
@@ -348,7 +354,6 @@ namespace bammm
 					isValue = false;
 					isKey = true;
 					break;
-
 			}
 		}
 

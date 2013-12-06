@@ -66,37 +66,33 @@ namespace bammm
 		string newState = commandString->get(0);
 		State* stateToAdd;
 
-		/*
-		 * Sanitizes input to avoid segfaults in hashmap->getValue();
-		 */
-		DynamicArray<string> oreType;
-		oreType.add("iron");
-		oreType.add("coal");
-		oreType.add("gold");
+		DynamicArray<string>* oreType = new DynamicArray<string>();
+		oreType->add("iron");
+		oreType->add("coal");
+		oreType->add("gold");
 
-		DynamicArray<string> woodType;
-		woodType.add("redwood");
-		woodType.add("birch");
-		woodType.add("oak");
-		woodType.add("cedar");
+		DynamicArray<string>* woodType = new DynamicArray<string>();
+		woodType->add("redwood");
+		woodType->add("birch");
+		woodType->add("oak");
+		woodType->add("cedar");
 
-		DynamicArray<string> fishType;
-		fishType.add("swordfish");
-		fishType.add("tuna");
-		fishType.add("salmon");
+		DynamicArray<string>* fishType = new DynamicArray<string>();
+		fishType->add("swordfish");
+		fishType->add("tuna");
+		fishType->add("salmon");
 
-		DynamicArray<string> foodTypes;
-		foodTypes.add("cooked_fish");
+		DynamicArray<string>* foodTypes = new DynamicArray<string>();
+		foodTypes->add("cooked_fish");
 
-		DynamicArray<string> craftableItems;
-		craftableItems.add("cooked_fish");
-		craftableItems.add("sword");
-		craftableItems.add("axe");
-		craftableItems.add("necklace");
-		craftableItems.add("armor");
-		craftableItems.add("boots");
-		craftableItems.add("helmet");
-
+		DynamicArray<string>* craftableItems = new DynamicArray<string>();
+		craftableItems->add("cooked_fish");
+		craftableItems->add("sword");
+		craftableItems->add("axe");
+		craftableItems->add("necklace");
+		craftableItems->add("armor");
+		craftableItems->add("boots");
+		craftableItems->add("helmet");
 
 		if (newState == "mine" || newState == "chop" || newState == "fish")
 		{
@@ -111,24 +107,25 @@ namespace bammm
 				if (numToGather == 0)
 				{
 					cout << "Invalid argument number \n";
+
 					return;
 				}
 
 				type = commandString->get(2);
 
-				if ((newState == "mine" && !(oreType.contains(type))))
+				if ((newState == "mine" && !(oreType->contains(type))))
 				{
 					cout << "Invalid ore type" << endl;
 
 					return;
 				}
-				else if ((newState == "chop" && !(woodType.contains(type))))
+				else if ((newState == "chop" && !(woodType->contains(type))))
 				{
 					cout << "Invalid wood type" << endl;
 
 					return;
 				}
-				else if ((newState == "fish" && !(fishType.contains(type))))
+				else if ((newState == "fish" && !(fishType->contains(type))))
 				{
 					cout << "Invalid fish type" << endl;
 
@@ -145,6 +142,7 @@ namespace bammm
 
 				Actor* target = _sceneGraph->findInGrid(type);
 				stateToAdd = _states.getValue("gather");
+
 				GatherState* tempState = static_cast<GatherState*>(stateToAdd);
 				tempState->setAmount(numToGather);
 				tempState->setTarget(target);
@@ -176,14 +174,16 @@ namespace bammm
 			if (numToEat == 0)
 			{
 				cout << "Invalid argument number \n";
+
 				return;
 			}
 
 			string type = commandString->get(2);
 
-			if (!(foodTypes.contains(type)))
+			if (!(foodTypes->contains(type)))
 			{
 				cout << "Invalid argument number \n";
+
 				return;
 			}
 
@@ -201,13 +201,16 @@ namespace bammm
 			if (numToMake == 0)
 			{
 				cout << "Invalid argument number \n";
+
 				return;
 			}
 
 			string type = commandString->get(2);
-			if (!(craftableItems.contains(type)))
+
+			if (!(craftableItems->contains(type)))
 			{
 				cout << type << " is not a craftable item. " << endl;
+
 				return;
 			}
 
@@ -235,7 +238,6 @@ namespace bammm
 		cout
 				<< "What would you like your villagers to do?\n  To run the simulation, enter \"wait [number of iterations]\"."
 				<< endl;
-
 	}
 
 	bool PlayerController::canDelete()

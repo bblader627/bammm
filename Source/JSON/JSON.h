@@ -16,7 +16,11 @@
 #define JSON_H_
 
 #include <string>
+#include <sstream>
+#include <iostream>
 #include "../Resources/HashMap.h"
+
+using namespace std;
 
 namespace bammm
 {

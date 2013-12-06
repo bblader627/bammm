@@ -117,7 +117,7 @@ namespace bammm
 			 @Pre-Condition-  const string & rhs
 			 @Post-Condition- Returns a JSONPrimitive &
 			 */
-			JSONPrimitive & operator[](const string & rhs);
+			JSONPrimitive& operator[](const string& rhs);
 	};
 }
 

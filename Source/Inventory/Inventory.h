@@ -15,10 +15,14 @@
 #ifndef INVENTORY_H_
 #define INVENTORY_H_
 
+#include <iostream>
 #include "../Resources/Constant.h"
-#include "Item.h"
 #include "../Resources/DynamicArray.h"
+#include "../Resources/Color.h"
+#include "Item.h"
+
 using namespace std;
+
 namespace bammm
 {
 	class Inventory

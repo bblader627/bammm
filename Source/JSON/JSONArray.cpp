@@ -12,7 +12,6 @@
  *
  */
 
-#include <iostream>
 #include "JSONArray.h"
 
 namespace bammm
@@ -31,7 +30,7 @@ namespace bammm
 		_parent = NULL;
 	}
 
-	JSONArray::JSONArray(string name, JSON *parent)
+	JSONArray::JSONArray(string name, JSON* parent)
 	{
 		_name = name;
 		_type = JSON_ARRAY;
@@ -43,12 +42,12 @@ namespace bammm
 		cout << "Deleting JSON Array \n";
 	}
 
-	void JSONArray::addChild(JSON & newNode)
+	void JSONArray::addChild(JSON& newNode)
 	{
 		_children.add(newNode);
 	}
 
-	JSON JSONArray::operator[](const unsigned int & rhs)
+	JSON JSONArray::operator[](const unsigned int& rhs)
 	{
 		if (_children[rhs].getType() == JSON_NULL)
 		{
