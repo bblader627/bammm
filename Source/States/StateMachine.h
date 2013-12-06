@@ -21,7 +21,6 @@
 #include "../Interfaces/IStateCallback.h"
 #include "../Interfaces/ITickable.h"
 #include "State.h"
-#include "../Weapons/MeleeCombat.h"
 #include "../Resources/Constant.h"
 
 using namespace std;
@@ -33,7 +32,6 @@ namespace bammm
 		private:
 			DynamicArray<State*> currentStates;
 			HashMap<State*>* _allStates;
-			MeleeCombat* _meleeCombat;
 			Actor* _actor;
 
 		public:
@@ -98,11 +96,10 @@ namespace bammm
 
 			/**
 			 setup
-			 @Pre-Condition- Takes in Actor&, HashMap<State*>& of all the states, and MeleeCombat*
+			 @Pre-Condition- Takes in Actor&, HashMap<State*>& of all the states
 			 @Post-Condition- Sets up the state machine
 			 */
-			void setup(Actor& actor, HashMap<State*>& allStates,
-					MeleeCombat* meleeCombat);
+			void setup(Actor& actor, HashMap<State*>& allStates);
 
 			/**
 			 toString

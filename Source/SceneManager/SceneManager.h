@@ -21,7 +21,6 @@
 #include "../Controllers/AiController.h"
 #include "../Controllers/PlayerController.h"
 #include "../Interfaces/ITickable.h"
-#include "../Weapons/MeleeCombat.h"
 #include "../Controllers/PlayerController.h"
 
 using namespace std;
@@ -32,7 +31,6 @@ namespace bammm
 	{
 		private:
 			DynamicArray<Actor*> _allActors;
-			MeleeCombat* _meleeCombat;
 			DynamicArray<ITickable*> _allTickables;
 			DynamicArray<PlayerController*> _allPlayerControllers;
 			DynamicArray<AiController*> _allAiControllers;
@@ -88,13 +86,6 @@ namespace bammm
 			 @Post-Condition- Removes the given tickable from the scene
 			 */
 			ITickable* removeTickable(ITickable* tickable);
-
-			/**
-			 setMeleeCombat
-			 @Pre-Condition- Takes in an instance of MeleeCombat
-			 @Post-Condition- Sets meleeCombat to the scene
-			 */
-			void setMeleeCombat(MeleeCombat& meleeCombat);
 
 			/**
 			 toString

@@ -30,12 +30,10 @@ namespace bammm
 		_allStates = &allStates;
 	}
 
-	void StateMachine::setup(Actor& actor, HashMap<State*>& allStates,
-			MeleeCombat* meleeCombat)
+	void StateMachine::setup(Actor& actor, HashMap<State*>& allStates)
 	{
 		_actor = &actor;
 		_allStates = &allStates;
-		_meleeCombat = meleeCombat;
 	}
 
 	void StateMachine::initialState(State* initial)
@@ -75,15 +73,6 @@ namespace bammm
 		{
 			if (newState->toString() == "combat")
 			{
-				if (!_meleeCombat->fightHappening())
-				{
-					this->removeState(newState);
-
-				}
-				else
-				{
-					_meleeCombat->useTurn();
-				}
 			}
 			else
 			{

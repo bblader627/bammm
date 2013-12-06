@@ -33,7 +33,6 @@
 #include "../Resources/HashMap.h"
 #include "../Actors/Actor.h"
 #include "../States/StateMachine.h"
-#include "../Weapons/MeleeCombat.h"
 #include "../Weapons/RangedCombat.h"
 #include "../SceneManager/Grid3D.h"
 
@@ -48,7 +47,6 @@ namespace bammm
 			Actor* _actor;
 			Grid3D<Actor*>* _sceneGraph;
 			StateMachine _stateMachine;
-			MeleeCombat* _meleeCombat;
 			RangedCombat* _rangedCombat;
 
 		public:
@@ -57,11 +55,10 @@ namespace bammm
 
 			/**
 			 setup
-			 @Pre-Condition- Takes an Actor, MeleeCombat, and Grid3D as input
-			 @Post-Condition - Sets up the controller with the passed Actor, MeleeCombat, and Grid3D.
+			 @Pre-Condition- Takes an Actor, and Grid3D as input
+			 @Post-Condition - Sets up the controller with the passed Actor, and Grid3D.
 			 */
-			virtual void setup(Actor& actor, MeleeCombat& meleeCombat,
-					Grid3D<Actor*>& sceneGraph)=0;
+			virtual void setup(Actor& actor, Grid3D<Actor*>& sceneGraph)=0;
 
 			/**
 			 tick

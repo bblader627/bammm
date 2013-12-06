@@ -30,7 +30,6 @@
 #include "../Weapons/MeleeWeapon.h"
 #include "../Weapons/RangedWeapon.h"
 #include "../Weapons/WeaponData.h"
-#include "../Behavior/Behavior.h"
 #include "../Inventory/Inventory.h"
 #include "../Inventory/Item.h"
 

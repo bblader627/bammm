@@ -32,11 +32,8 @@ int main()
 
 	SceneManager sceneManager;
 	bammm::factory = new Factory(&sceneManager);
-	MeleeCombat meleeCombat;
 
 	bammm::factory->setup();
-
-	sceneManager.setMeleeCombat(meleeCombat);
 
 	bool playGame = true;
 	bool doTick = true;

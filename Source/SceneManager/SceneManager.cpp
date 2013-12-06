@@ -30,11 +30,6 @@ namespace bammm
 	{
 	}
 
-	void SceneManager::setMeleeCombat(MeleeCombat& meleeCombat)
-	{
-		_meleeCombat = &meleeCombat;
-	}
-
 	void SceneManager::addActor(Actor* actor)
 	{
 		_allActors.add(actor);
@@ -43,14 +38,14 @@ namespace bammm
 		if (actor->getType() == "dwarf")
 		{
 			PlayerController* controller = new PlayerController();
-			controller->setup(*actor, *_meleeCombat, _sceneGraph);
+			controller->setup(*actor, _sceneGraph);
 			this->addTickable(controller);
 			this->addPlayerController(controller);
 		}
 		else if (actor->getType() == "orc")
 		{
 			AiController* controller = new AiController();
-			controller->setup(*actor, *_meleeCombat, _sceneGraph);
+			controller->setup(*actor, _sceneGraph);
 			this->addTickable(controller);
 			this->addAiController(controller);
 		}

@@ -24,13 +24,11 @@ namespace bammm
 	{
 	}
 
-	void PlayerController::setup(Actor& actor, MeleeCombat& meleeCombat,
-			Grid3D<Actor*>& sceneGraph)
+	void PlayerController::setup(Actor& actor, Grid3D<Actor*>& sceneGraph)
 	{
-		_meleeCombat = &meleeCombat;
 		_sceneGraph = &sceneGraph;
 		_actor = &actor;
-		_stateMachine.setup(actor, _states, _meleeCombat);
+		_stateMachine.setup(actor, _states);
 
 		DrinkState* drinkState = new DrinkState(actor, &_stateMachine);
 		SingState* singState = new SingState(actor, &_stateMachine);

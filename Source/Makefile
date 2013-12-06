@@ -17,7 +17,7 @@ Resources/Heap.h Resources/Queue.h Resources/Stack.h Resources/Color.cpp \
 Resources/TreeNode.h Resources/Tree.h \
 \
 Weapons/WeaponData.cpp Weapons/MeleeWeapon.cpp Weapons/RangedWeapon.cpp \
-Interfaces/IWeaponType.h Weapons/MeleeCombat.cpp \
+Interfaces/IWeaponType.h \
 \
 SceneManager/Vector3D.cpp SceneManager/Grid3D.h SceneManager/SceneManager.cpp  \
 Factories/Factory.cpp \
