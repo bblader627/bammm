@@ -33,6 +33,7 @@ namespace bammm
 		static const string _whiteText = "37m";
 		static const string _startColor = "\033[";
 		static const string _defaultText = "0m";
+		static const string HIGHLIGHT = "7;";
 
 		/**
 		 colorText
@@ -40,6 +41,13 @@ namespace bammm
 		 @Post-Condition- A formatted string that uses color
 		 */
 		string colorText(string text, string color);
+		
+		/**
+		 colorTextHighlight
+		 @Pre-Condition- Takes text and a color
+		 @Post-Condition- A formatted string that uses color with a highlight
+		 */
+		string colorTextHighlight(string text, string color);
 	}
 }
 

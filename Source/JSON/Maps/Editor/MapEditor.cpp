@@ -369,20 +369,26 @@ namespace bammm
 		return "{\n" + nameVal + xVal + yVal + zVal + walkVal + "}";
 	}
 
+	string MapEditor::createDimensions(int x, int y, int z)
+	{
+		string sectionName = "dimensions";
+		string sectionValue = "\t" + sectionName + ": [\n";
+		string xValue = "\t\t{ \"x\":" + to_string(x) + ", ";
+		string yValue = "\"y\":" + to_string(y) + ", ";
+		string zValue = "\"z\":" + to_string(z) + " }\n";
+		string closeValue = "\t],\n";
+		return sectionValue + xValue + yValue + zValue + closeValue;
+	}
+
 	string MapEditor::createJSON()
 	{
 		string jsonString = "{\n";
-		jsonString = jsonString + "\"" + _name + "\":\n";
-		jsonString = jsonString + "[\n";
-		jsonString = jsonString + "\"x\": " + to_string(_x) + ",\n";
-		jsonString = jsonString + "\"y\": " + to_string(_y) + ",\n";
-		jsonString = jsonString + "\"z\": " + to_string(_z) + ",\n";
-		jsonString = jsonString + createWaterJSON() + ",\n";
-		jsonString = jsonString + createBarrierJSON() + ",\n";
-		jsonString = jsonString + createMineJSON() + ",\n";
-		jsonString = jsonString + createBuildingJSON() + "\n";
-		jsonString = jsonString + "]\n";
-		jsonString = jsonString + "}";
+		jsonString += createDimensions(_x, _y, _z);
+		//jsonString = jsonString + createWaterJSON() + ",\n";
+		//jsonString = jsonString + createBarrierJSON() + ",\n";
+		//jsonString = jsonString + createMineJSON() + ",\n";
+		//jsonString = jsonString + createBuildingJSON() + "\n";
+		jsonString += "\n}";
 		return jsonString;
 	}
 

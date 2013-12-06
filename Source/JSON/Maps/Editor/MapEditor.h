@@ -157,6 +157,13 @@ namespace bammm
 			 @Post-Condition- Creates and returns our JSON
 			 */
 			string createJSON();
+			
+			/**
+			 createDimensions
+			 @Pre-Condition- An integer for x,y,z
+			 @Post-Condition- Creates dimensions block for JSON
+			 */
+			string createDimensions(int x, int y, int z);
 
 			/**
 			 createWaterJSON
