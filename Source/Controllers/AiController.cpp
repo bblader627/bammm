@@ -51,7 +51,6 @@ namespace bammm
 
 	AiController::~AiController()
 	{
-		delete _actor;
 	}
 
 	bool AiController::canDelete()

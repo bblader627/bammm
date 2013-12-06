@@ -17,6 +17,12 @@
 
 namespace bammm
 {
+	Actor::~Actor()
+	{
+		delete _location;
+		delete _meleeWeapon;
+		delete _velocity;
+	}
 	Actor::Actor()
 	{
 		_type = "dwarf";

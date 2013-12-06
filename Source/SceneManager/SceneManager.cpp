@@ -100,7 +100,7 @@ namespace bammm
 			{
 				Actor* removedActor = playerController->getActor();
 				_allPlayerControllers.removeElement(playerController);
-				removeActor(removedActor);
+				delete removeActor(removedActor);
 				delete removeTickable(tickable);
 				size--;
 				i--;
@@ -109,7 +109,7 @@ namespace bammm
 			{
 				Actor* removedActor = aiController->getActor();
 				_allAiControllers.removeElement(aiController);
-				removeActor(removedActor);
+				delete removeActor(removedActor);
 				delete removeTickable(tickable);
 				size--;
 				i--;
