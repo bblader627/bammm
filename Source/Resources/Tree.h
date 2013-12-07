@@ -106,7 +106,7 @@ namespace bammm
 	template<class T>
 	Tree<T>::~Tree()
 	{
-		delete[] _tree;
+		delete _tree;
 	}
 
 	template<class T>

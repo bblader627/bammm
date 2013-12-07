@@ -323,18 +323,18 @@ namespace bammm
 			}
 		}
 
-		Tree<Vector3D*>* mapTree = new Tree<Vector3D*>();
+		Tree<Vector3D*> mapTree;
 		TreeNode<Vector3D*>* rootNode = NULL;
-		mapTree->add(target, rootNode);
+		mapTree.add(target, rootNode);
 
 		TreeNode<Vector3D*>* current;
 		TreeNode<Vector3D*>* foundActor;
 
 		bool isFound = false;
 
-		while (!mapTree->isEmpty())
+		while (!mapTree.isEmpty())
 		{
-			current = mapTree->get();
+			current = mapTree.get();
 			Vector3D* currentLocation = current->getValue();
 			int currentLocInt = convertToPosition(currentLocation);
 
@@ -363,7 +363,7 @@ namespace bammm
 				{
 					visited.get(newLocation->getX())->get(newLocation->getY()) =
 							true;
-					mapTree->add(newLocation, current);
+					mapTree.add(newLocation, current);
 				}
 			}
 
@@ -379,7 +379,7 @@ namespace bammm
 				{
 					visited.get(newLocation->getX())->get(newLocation->getY()) =
 							true;
-					mapTree->add(newLocation, current);
+					mapTree.add(newLocation, current);
 				}
 			}
 
@@ -395,7 +395,7 @@ namespace bammm
 				{
 					visited.get(newLocation->getX())->get(newLocation->getY()) =
 							true;
-					mapTree->add(newLocation, current);
+					mapTree.add(newLocation, current);
 				}
 			}
 
@@ -410,7 +410,7 @@ namespace bammm
 				{
 					visited.get(newLocation->getX())->get(newLocation->getY()) =
 							true;
-					mapTree->add(newLocation, current);
+					mapTree.add(newLocation, current);
 				}
 			}
 		}
