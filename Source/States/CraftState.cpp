@@ -33,7 +33,7 @@ namespace bammm
 
 	void CraftState::setup()
 	{
-		cout << "crafting..." << endl;
+		cout << _actor->getName() << " is beginning to craft. \n";
 	}
 
 	void CraftState::breakdown()
@@ -43,22 +43,28 @@ namespace bammm
 
 	void CraftState::tick(float deltaTime)
 	{
-		cout << _actor->getName() << " is beginning to craft. \n";
-
-		if (canCraft() == false)
+		if (_craftableAmount > 0)
 		{
-			cout << _actor->getName() << " cannot craft "
-					<< _craftableItem->getName() << ". \n";
-			switchState("null");
-			return;
+			if (canCraft() == false)
+			{
+				cout << _actor->getName() << " cannot craft "
+						<< _craftableItem->getName() << ". \n";
+				switchState("null");
+				return;
+			}
+			else
+			{
+				craft();
+			}
+
+			cout << _craftableItem->getName()
+					<< " has been added to the inventory of " << _actor->getName() << endl;
 		}
 		else
 		{
-			craft();
+			cout << _actor->getName() << " is done crafting!" << endl;
+			switchState("null");
 		}
-
-		cout << _craftableItem->getName()
-				<< " has been added to the inventory of " << _actor->getName() << endl;
 	}
 
 	void CraftState::switchState(string nextState)
