@@ -107,10 +107,16 @@ namespace bammm
 		}
 
 		_actor->getInventory().addItem(_craftableItem);
+		_craftableAmount--;
 	}
 
 	bool CraftState::canCraft()
 	{
+		if (_craftableAmount <= 0)
+		{
+			return false;
+		}
+
 		extern Factory* factory;
 
 		JSON* ingredientMap = factory->getCraftables();
