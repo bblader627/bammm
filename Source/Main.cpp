@@ -21,7 +21,7 @@ void printTutorial();
 void printOptions();
 void printStory();
 void clearTerminal();
-DynamicArray<string>* parseInput(string);
+void parseInput(string, DynamicArray<string>&);
 
 int main()
 {
@@ -41,9 +41,9 @@ int main()
 	string command;
 	uint loopCounter = 0;
 
-	DynamicArray<string>* input = new DynamicArray<string>();
+	DynamicArray<string> input;
 
-	DynamicArray<string> validCommands = *(new DynamicArray<string>());
+	DynamicArray<string> validCommands;
 	validCommands.add("mine");
 	validCommands.add("drink");
 	validCommands.add("brawl");
@@ -65,7 +65,7 @@ int main()
 		if (loopCounter == 0)
 		{
 
-			input->clear();
+			input.clear();
 
 			if (printMap)
 			{
@@ -85,14 +85,14 @@ int main()
 				getline(cin, command);
 			}
 
-			input = parseInput(command);
-			command = input->get(0);
+			parseInput(command, input);
+			command = input.get(0);
 
 			if (command == "wait")
 			{
-				if (input->getSize() == 2)
+				if (input.getSize() == 2)
 				{
-					string number_str = input->get(1);
+					string number_str = input.get(1);
 					loopCounter = atoi(number_str.c_str());
 					doInput = false;
 				}
@@ -127,7 +127,7 @@ int main()
 			{
 				if (doInput)
 				{
-					sceneManager.input(input, deltaTime);
+					sceneManager.input(&input, deltaTime);
 				}
 
 				sceneManager.tick(0);
@@ -149,9 +149,7 @@ int main()
 		}
 
 	}
-
-	delete input;
-
+	
 	cout << "Thanks for playing!" << "\n";
 	exit(1);
 }
@@ -190,14 +188,13 @@ void printStory()
 			<< "You have control over the actions of Bob, Jim, Joe, Phil, and Frank.\n\n";
 }
 
-DynamicArray<string>* parseInput(string input)
+void parseInput(string input, DynamicArray<string>& array)
 {
 	char delimiter = ' ';
 	char current;
 
 	string builder = "";
-	DynamicArray<string>* result = new DynamicArray<string>();
-
+	array.clear();
 	for (uint i = 0; i < input.size(); i++)
 	{
 		current = input[i];
@@ -205,13 +202,13 @@ DynamicArray<string>* parseInput(string input)
 		if (i == input.size() - 1)
 		{
 			builder += current;
-			result->add(builder);
+			array.add(builder);
 			builder = "";
 		}
 
 		if (current == delimiter)
 		{
-			result->add(builder);
+			array.add(builder);
 			builder = "";
 		}
 		else
@@ -219,6 +216,4 @@ DynamicArray<string>* parseInput(string input)
 			builder += current;
 		}
 	}
-
-	return result;
 }
