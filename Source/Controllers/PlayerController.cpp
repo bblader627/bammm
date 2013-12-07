@@ -66,33 +66,33 @@ namespace bammm
 		string newState = commandString->get(0);
 		State* stateToAdd;
 
-		DynamicArray<string>* oreType = new DynamicArray<string>();
-		oreType->add("iron");
-		oreType->add("coal");
-		oreType->add("gold");
+		DynamicArray<string> oreType;
+		oreType.add("iron");
+		oreType.add("coal");
+		oreType.add("gold");
 
-		DynamicArray<string>* woodType = new DynamicArray<string>();
-		woodType->add("redwood");
-		woodType->add("birch");
-		woodType->add("oak");
-		woodType->add("cedar");
+		DynamicArray<string> woodType;
+		woodType.add("redwood");
+		woodType.add("birch");
+		woodType.add("oak");
+		woodType.add("cedar");
 
-		DynamicArray<string>* fishType = new DynamicArray<string>();
-		fishType->add("swordfish");
-		fishType->add("tuna");
-		fishType->add("salmon");
+		DynamicArray<string> fishType;
+		fishType.add("swordfish");
+		fishType.add("tuna");
+		fishType.add("salmon");
 
-		DynamicArray<string>* foodTypes = new DynamicArray<string>();
-		foodTypes->add("cooked_fish");
+		DynamicArray<string> foodTypes;
+		foodTypes.add("cooked_fish");
 
-		DynamicArray<string>* craftableItems = new DynamicArray<string>();
-		craftableItems->add("cooked_fish");
-		craftableItems->add("sword");
-		craftableItems->add("axe");
-		craftableItems->add("necklace");
-		craftableItems->add("armor");
-		craftableItems->add("boots");
-		craftableItems->add("helmet");
+		DynamicArray<string> craftableItems;
+		craftableItems.add("cooked_fish");
+		craftableItems.add("sword");
+		craftableItems.add("axe");
+		craftableItems.add("necklace");
+		craftableItems.add("armor");
+		craftableItems.add("boots");
+		craftableItems.add("helmet");
 
 		if (newState == "mine" || newState == "chop" || newState == "fish")
 		{
@@ -113,19 +113,19 @@ namespace bammm
 
 				type = commandString->get(2);
 
-				if ((newState == "mine" && !(oreType->contains(type))))
+				if ((newState == "mine" && !(oreType.contains(type))))
 				{
 					cout << "Invalid ore type" << endl;
 
 					return;
 				}
-				else if ((newState == "chop" && !(woodType->contains(type))))
+				else if ((newState == "chop" && !(woodType.contains(type))))
 				{
 					cout << "Invalid wood type" << endl;
 
 					return;
 				}
-				else if ((newState == "fish" && !(fishType->contains(type))))
+				else if ((newState == "fish" && !(fishType.contains(type))))
 				{
 					cout << "Invalid fish type" << endl;
 
@@ -180,7 +180,7 @@ namespace bammm
 
 			string type = commandString->get(2);
 
-			if (!(foodTypes->contains(type)))
+			if (!(foodTypes.contains(type)))
 			{
 				cout << "Invalid argument number \n";
 
@@ -207,7 +207,7 @@ namespace bammm
 
 			string type = commandString->get(2);
 
-			if (!(craftableItems->contains(type)))
+			if (!(craftableItems.contains(type)))
 			{
 				cout << type << " is not a craftable item. " << endl;
 
