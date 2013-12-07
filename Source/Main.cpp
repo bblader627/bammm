@@ -160,7 +160,8 @@ void printWelcome()
 	cout << "Welcome to BAMMM - Alpha v0.2.1.1.2.3.400 " << "\n";
 	cout
 			<< "Creators: \tAlvaro Home - Matthew Konstantinou - Matthew Witkowski\n\t\tBradley Crusco - Michael Abramo"
-			<< "\n";
+			<< "\n"
+			<< "For assistance regarding commands, please see README";
 	cout << "================================================" << "\n";
 }
 
