@@ -430,7 +430,7 @@ namespace bammm
 				foundActor = foundActor->getParent();
 			}
 		}
-
+		
 		return path;
 	}
 

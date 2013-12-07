@@ -70,8 +70,8 @@ namespace bammm
 	{
 		if (_path->isEmpty())
 		{
+			delete _path;
 			switchState("null");
-
 		}
 		else
 		{
