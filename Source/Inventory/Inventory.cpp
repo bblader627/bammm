@@ -53,7 +53,6 @@ namespace bammm
 			Item* foundItem = _inventory.get(index);
 
 			foundItem->setAmount(foundItem->getAmount() + item->getAmount());
-			delete item;
 			canAdd = true;
 		}
 

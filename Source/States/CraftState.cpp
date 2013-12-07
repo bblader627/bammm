@@ -102,6 +102,7 @@ namespace bammm
 			{
 				_actor->getInventory().removeItem(item);
 				amount--;
+				_craftableAmount--;
 			}
 		}
 
@@ -123,6 +124,7 @@ namespace bammm
 		{
 			Item item(allChildren->get(i)->getChild("name")->getStringValue(), true);
 			int amount = allChildren->get(i)->getChild("amount")->getIntValue();
+
 			if (_actor->getInventory().contains(item, amount))
 			{
 				continue;
