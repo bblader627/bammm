@@ -1,11 +1,12 @@
 {
 	"meleeWeapons": [
-		{ "type":"Stein", "damage":2 },
-		{ "type":"Great Sword", "damage":10 },
-		{ "type":"Battle Axe", "damage":10 },
-		{ "type":"Chain Saw", "damage":11 },
-		{ "type":"Katana", "damage":10 },
+		{ "type":"Stein", "damage":3 },
+		{ "type":"Great Sword", "damage":15 },
+		{ "type":"Battle Axe", "damage":13 },
+		{ "type":"Chain Saw", "damage":25 },
+		{ "type":"Katana", "damage":11 },
 		{ "type":"Sword of a Thousand Truths", "damage":110 },
-		{ "type":"Practice Sword", "damage":1 }
+		{ "type":"Practice Sword", "damage":1 },
+		{ "type":"Hatchet", "damage":7 }
 	]
 }

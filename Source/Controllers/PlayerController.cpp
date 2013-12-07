@@ -262,6 +262,7 @@ namespace bammm
 
 			if (!currentStates.contains(newState))
 			{
+				_stateMachine.getCurrentStates().clear();
 				_stateMachine.addState(newState);
 				DamageState* castedState = static_cast<DamageState*>(newState);
 				castedState->setTarget(*enemy);

@@ -26,6 +26,7 @@ void parseInput(string, DynamicArray<string>&);
 int main()
 {
 
+	clearTerminal();
 	printWelcome();
 	printStory();
 	bool printMap = true;
@@ -156,12 +157,14 @@ int main()
 
 void printWelcome()
 {
-	cout << "================================================" << "\n";
-	cout << "Welcome to BAMMM - Alpha v0.2.1.1.2.3.400 " << "\n";
+	cout << "===============================================================" << "\n";
+	cout << "Welcome to BAMMM - Alpha v0.2.1.1.2.3.400 Revision 3" << "\n";
 	cout
 			<< "Creators: \tAlvaro Home - Matthew Konstantinou - Matthew Witkowski\n\t\tBradley Crusco - Michael Abramo"
+			<< "\n"
+			<< "For assistance regarding commands, please see README"
 			<< "\n";
-	cout << "================================================" << "\n";
+	cout << "===============================================================" << "\n\n";
 }
 
 void clearTerminal()
@@ -176,7 +179,7 @@ void printTutorial()
 
 void printStory()
 {
-	clearTerminal();
+
 	cout << "The year is 13 of the Third Age. \n\n";
 	cout
 			<< "The realm of Sojo has erupted into turmoil. Orcs of the LA offices are beginning their march upon the Dwarves of New York. \n";
