@@ -5,7 +5,7 @@
 		{ "type":"Battle Axe", "damage":10 },
 		{ "type":"Chain Saw", "damage":11 },
 		{ "type":"Katana", "damage":10 },
-		{ "type":"Sword of a Thousand Truths", "damage":110 },
+		{ "type":"Sword of a Thousand Truths", "damage":30 },
 		{ "type":"Practice Sword", "damage":1 }
 	]
 }
