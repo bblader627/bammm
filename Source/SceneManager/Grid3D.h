@@ -54,11 +54,11 @@ namespace bammm
 			Vector3D* convertToVector(int position);
 
 		public:
-			Vector3D* UP;
-			Vector3D* DOWN;
-			Vector3D* LEFT;
-			Vector3D* RIGHT;
-			Vector3D* ZERO;
+			Vector3D UP;
+			Vector3D DOWN;
+			Vector3D LEFT;
+			Vector3D RIGHT;
+			Vector3D ZERO;
 
 			Grid3D();
 			Grid3D(int width, int length, int height);
@@ -233,11 +233,11 @@ namespace bammm
 	template<class T>
 	void Grid3D<T>::setupDirections()
 	{
-		UP = new Vector3D(-1, 0, 0);
-		DOWN = new Vector3D(1, 0, 0);
-		LEFT = new Vector3D(0, -1, 0);
-		RIGHT = new Vector3D(0, 1, 0);
-		ZERO = new Vector3D(0, 0, 0);
+		UP.set(-1, 0, 0);
+		DOWN.set(1, 0, 0);
+		LEFT.set(0, -1, 0);
+		RIGHT.set(0, 1, 0);
+		ZERO.set(0, 0, 0);
 	}
 
 	template<class T>
@@ -311,15 +311,15 @@ namespace bammm
 
 		int actorLocInt = convertToPosition(actorLocation);
 
-		DynamicArray<DynamicArray<bool>*>* visited = new DynamicArray<DynamicArray<bool>*>();
+		DynamicArray<DynamicArray<bool>*> visited;
 
 		for (uint i = 0; i < (uint) _width; i++)
 		{
-			visited->add(new DynamicArray<bool>());
+			visited.add(new DynamicArray<bool>());
 
 			for (uint j = 0; j < (uint) _length; j++)
 			{
-				visited->get(i)->add(false);
+				visited.get(i)->add(false);
 			}
 		}
 
@@ -338,7 +338,7 @@ namespace bammm
 			Vector3D* currentLocation = current->getValue();
 			int currentLocInt = convertToPosition(currentLocation);
 
-			visited->get(currentLocation->getX())->get(currentLocation->getY()) =
+			visited.get(currentLocation->getX())->get(currentLocation->getY()) =
 					true;
 
 			if (currentLocInt == actorLocInt)
@@ -351,65 +351,64 @@ namespace bammm
 			Vector3D newLoc1;
 			bool hasVisited;
 
-			newLoc1 = *currentLocation + *UP;
+			newLoc1 = *currentLocation + UP;
 			if (isWalkable(newLoc1))
 			{
 				Vector3D* newLocation = new Vector3D(newLoc1.getX(),
 						newLoc1.getY(), newLoc1.getZ());
-				hasVisited = visited->get(newLocation->getX())->get(
+				hasVisited = visited.get(newLocation->getX())->get(
 						newLocation->getY());
 
 				if (!hasVisited)
 				{
-					visited->get(newLocation->getX())->get(newLocation->getY()) =
+					visited.get(newLocation->getX())->get(newLocation->getY()) =
 							true;
 					mapTree->add(newLocation, current);
 				}
 			}
 
-			Vector3D newLoc2 = *currentLocation + *RIGHT;
+			Vector3D newLoc2 = *currentLocation + RIGHT;
 			if (isWalkable(newLoc2))
 			{
 				Vector3D* newLocation = new Vector3D(newLoc2.getX(),
 						newLoc2.getY(), newLoc2.getZ());
-				hasVisited = visited->get(newLocation->getX())->get(
+				hasVisited = visited.get(newLocation->getX())->get(
 						newLocation->getY());
 
 				if (!hasVisited)
 				{
-					visited->get(newLocation->getX())->get(newLocation->getY()) =
+					visited.get(newLocation->getX())->get(newLocation->getY()) =
 							true;
 					mapTree->add(newLocation, current);
 				}
 			}
 
-			Vector3D newLoc3 = *currentLocation + *DOWN;
+			Vector3D newLoc3 = *currentLocation + DOWN;
 			if (isWalkable(newLoc3))
 			{
 				Vector3D* newLocation = new Vector3D(newLoc3.getX(),
 						newLoc3.getY(), newLoc3.getZ());
-				hasVisited = visited->get(newLocation->getX())->get(
+				hasVisited = visited.get(newLocation->getX())->get(
 						newLocation->getY());
 
 				if (!hasVisited)
 				{
-					visited->get(newLocation->getX())->get(newLocation->getY()) =
+					visited.get(newLocation->getX())->get(newLocation->getY()) =
 							true;
 					mapTree->add(newLocation, current);
 				}
 			}
 
-			Vector3D newLoc4 = *currentLocation + *LEFT;
+			Vector3D newLoc4 = *currentLocation + LEFT;
 			if (isWalkable(newLoc4))
 			{
 				Vector3D* newLocation = new Vector3D(newLoc4.getX(),
 						newLoc4.getY(), newLoc4.getZ());
-				hasVisited = visited->get(newLocation->getX())->get(
+				hasVisited = visited.get(newLocation->getX())->get(
 						newLocation->getY());
 				if (!hasVisited)
 				{
-					//cout << newLocation->getX() << ", " << newLocation->getY() << endl;
-					visited->get(newLocation->getX())->get(newLocation->getY()) =
+					visited.get(newLocation->getX())->get(newLocation->getY()) =
 							true;
 					mapTree->add(newLocation, current);
 				}
@@ -431,8 +430,6 @@ namespace bammm
 				foundActor = foundActor->getParent();
 			}
 		}
-
-		delete visited;
 
 		return path;
 	}
