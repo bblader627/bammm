@@ -41,20 +41,20 @@ focus
 	dwarf name is taken as a string with the first letter capitalized.
 	Dwarves: Bob, Jim, Joe, Peter_Dinklage, and Frank.
 	focus allows you to control what one specific dwarf does.
-	
+
 	While focused, you can execute these commands:
 	eat
-		eat [amount] [food]
-		amount is taken as an integer.
-		type is taken as a string.
-		Directs the dwarf to eat the specified food.  Possible food types are fish.
+	eat [amount] [food]
+	amount is taken as an integer.
+	type is taken as a string.
+	Directs the dwarf to eat the specified food.  Possible food types are fish.
 
 	craft
-		
+	
 	inventory
-		inventory
-		Prints the focused actor's inventory
-		
+	        inventory
+	        Prints the focused actor's inventory
+	        
 	lose focus
-		lose focus
-		Returns focus back to the village
+	        lose focus
+	        Returns focus back to the village
