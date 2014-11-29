@@ -43,16 +43,16 @@ focus
 	focus allows you to control what one specific dwarf does.
 
 While focused, you can execute these commands
-	eat
+eat
 	eat [amount] [food]
 	amount is taken as an integer.
 	type is taken as a string.
 	Directs the dwarf to eat the specified food.  Possible food types are fish.
 
-	craft
+craft
 	
+inventory
 	inventory
-	        inventory
 	        Prints the focused actor's inventory
 	        
 	lose focus
