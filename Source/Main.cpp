@@ -180,15 +180,13 @@ void printTutorial()
 void printStory()
 {
 
-	cout << "The year is 13 of the Third Age. \n\n";
+	cout << "The year is 13 of the Third Age.\n\n";
 	cout
-			<< "The realm of Sojo has erupted into turmoil. Orcs of the LA offices are beginning their march upon the Dwarves of New York. \n";
+			<< "The realm of Sojo has erupted into turmoil. Orcs of the Westlands are beginning their march upon the Dwarves of East Yorkshire.\n";
 	cout
-			<< "The Orcs want to implement a new networking system in our fortress, but FUCK THAT! I've seen their code. \n";
+			<< "Here in your dwarf fortress, you must fight off the orc invaders if we are to have any hope of survival.\n";
 	cout
-			<< "Here, in our fortress of New York, we make our final stand against their bullshit... \n\n";
-	cout
-			<< "You have control over the actions of Bob, Jim, Joe, Phil, and Frank.\n\n";
+			<< "You have control over the actions of Bob, Jim, Joe, Peter_Dinklage, and Frank. Our best warriors.\n\n";
 }
 
 void parseInput(string input, DynamicArray<string>& array)

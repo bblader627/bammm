@@ -31,7 +31,7 @@ drink
 focus
 	focus [dwarf name]
 	dwarf name is taken as a string with the first letter capitalized.
-	Dwarves: Bob, Jim, Joe, Phil, and Frank.
+	Dwarves: Bob, Jim, Joe, Peter_Dinklage, and Frank.
 	focus allows you to control what one specific dwarf does.
 	
 	While focused, you can execute these commands:
