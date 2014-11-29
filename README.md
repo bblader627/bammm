@@ -42,7 +42,7 @@ focus
 	Dwarves: Bob, Jim, Joe, Peter_Dinklage, and Frank.
 	focus allows you to control what one specific dwarf does.
 
-	While focused, you can execute these commands:
+While focused, you can execute these commands
 	eat
 	eat [amount] [food]
 	amount is taken as an integer.
